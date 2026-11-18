@@ -22,5 +22,5 @@ One meaning, one color: pink is what waits for you.
 
 ## Related
 
-- [Badge](../../packages/ui/src/components/badge/badge.md)
+- [Badge](../components/badge.md)
 - [States](../foundations/states.md)

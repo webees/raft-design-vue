@@ -15,7 +15,7 @@ Raft uses two typefaces with separate jobs: Space Grotesk for what people say, S
 
 ## Type scale
 
-Each style sets a size and a line height; the bold styles also set their weight. The working styles have two sizes: a phone's, and a desktop's, from 768px (where the desktop layout begins, [Responsive layout](../patterns/responsive.md)) when the main pointer is a mouse or a trackpad. A touch screen keeps the phone's sizes at any width ([Spacing](./spacing.md#hit-targets) says why). The utility is the same on both, so a component never states a breakpoint for its type.
+Each style sets a size and a line height; the bold styles also set their weight. The working styles have two sizes: a phone's, and a desktop's, from 768px (where the desktop layout begins, [Responsive layout](../patterns/responsive.md)) when the main pointer is a mouse or a trackpad. A touch screen keeps the phone's sizes at any width ([Spacing](spacing.md#hit-targets) says why). The utility is the same on both, so a component never states a breakpoint for its type.
 
 | Token | Phone | Desktop | Use for |
 | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ The desktop scale is Feishu's (Lark's) for PC: 16/24 for titles, 14/22 for every
 - **A desktop is read from further away, with more on screen.** A conversation sits beside a sidebar and often a thread, so a line of text holds more words and a screen more messages at 14px. On a phone the screen is closer and one column fills it; 16px reads at the same apparent size.
 - **Judge a size with Chinese, not only with Latin.** Chinese falls back to the system face, whose glyphs fill the em box: at 16px a line of Chinese reads larger than the same line in Space Grotesk, whose lowercase is about half its size. Check a change with a Chinese conversation open as well as an English one.
 - **Body, subhead and callout share 14/22 on a desktop.** Feishu has no 13px or 15px step, and the scale doesn't need one: a name, a message and a preview differ there by weight and color, and a size step on top would make the three differences [Color tiers](#notes-on-deeper-surfaces) rules out. On a phone they stay a step apart.
-- **Notes take an 18px line on a desktop, as footnote does on a phone.** Feishu gives 12px notes a 20px line, but a note here is often two or three lines under a setting or a card, and at 20px those lines sit further apart than the 14/22 text above them, so the note reads looser than what it explains. Footnote, caption and mono meta share 12/18, so a time in Space Mono and a status in Space Grotesk on one line have the same box. The two faces also share a cap height (0.700em), so on one baseline their letters stand the same height ([Text of different sizes on one line](./alignment.md#text-of-different-sizes-on-one-line)).
+- **Notes take an 18px line on a desktop, as footnote does on a phone.** Feishu gives 12px notes a 20px line, but a note here is often two or three lines under a setting or a card, and at 20px those lines sit further apart than the 14/22 text above them, so the note reads looser than what it explains. Footnote, caption and mono meta share 12/18, so a time in Space Mono and a status in Space Grotesk on one line have the same box. The two faces also share a cap height (0.700em), so on one baseline their letters stand the same height ([Text of different sizes on one line](alignment.md#text-of-different-sizes-on-one-line)).
 - **Mono code stays 13/20.** Space Mono is wider than Space Grotesk, so 13px code already sits level with 14px text, and its 20px line fits inside a 22px line of text.
 - **A control's label is 14px on a desktop, 13px on a phone.** Feishu sets button text at 14px; footnote goes down to 12px there, so a 32px control's label has its own style, `text-control`.
 - **Hero, display, title and label don't change.** They set sign-in and setup pages, which are the same on both, and the phone's tab bar.
@@ -67,7 +67,7 @@ The desktop scale is Feishu's (Lark's) for PC: 16/24 for titles, 14/22 for every
 ## Usage
 
 - Pick the weight by purpose from 400, 500, 600 and 700; the scale sets only size and line height for the regular styles.
-- Size the initials in an avatar at 11px, 13px, 15px, 22px or 40px, by avatar size; see [Avatar](../../packages/ui/src/components/avatar/avatar.md).
+- Size the initials in an avatar at 11px, 13px, 15px, 22px or 40px, by avatar size; see [Avatar](../components/avatar.md).
 - Set anything a machine produced in Space Mono, even inside a sentence: `#25`, `10:24`, `Claude Code`, counts, event lines.
 - Set statistics meant for people in Space Grotesk.
 
@@ -75,7 +75,7 @@ The desktop scale is Feishu's (Lark's) for PC: 16/24 for titles, 14/22 for every
 
 | Style | Used for |
 | --- | --- |
-| `text-headline` | Titles, all at 700: panel, thread, dialog, popover (not one about an item, below), drawer, the top of the sidebar. A task's title in its details is the dialog's page-level title, at 600 under the 700 bar that names the dialog ([Visual comfort](./comfort.md#hierarchy-contrast)) |
+| `text-headline` | Titles, all at 700: panel, thread, dialog, popover (not one about an item, below), drawer, the top of the sidebar. A task's title in its details is the dialog's page-level title, at 600 under the 700 bar that names the dialog ([Visual comfort](comfort.md#hierarchy-contrast)) |
 | `text-body` | Message text; card titles at 600 (`card-title-*`); the names on task cards and in search results |
 | `field-*` | The text in a field: Input, Textarea, InputGroup, a Select at `chrome="field"` |
 | `text-subhead` | Senders at 700; the title of a card in a message and of a popover about an item, at 700 like a sender's name ([Cards in messages](../patterns/cards-in-messages.md#title)), so a card never outranks the message it sits in; sidebar rows at 500, the selected one at 700; titles in Activity; dialog body text and descriptions; Buttons at `lg` |
@@ -90,12 +90,12 @@ The desktop scale is Feishu's (Lark's) for PC: 16/24 for titles, 14/22 for every
 | --- | --- |
 | 400 | Reading text: message body, values, field text, mono notes (times, counts) |
 | 500 | Menu items, sidebar rows, description-list terms; `text-caption` sets 500 for the model and an inline status |
-| 600 | Names in list rows, a [Card](../../packages/ui/src/components/card/card.md)'s title on a page (a card in a message has a 700 title, like a sender's name), field labels, tabs and a row swipe's buttons (an icon over one word, like a tab), badges |
+| 600 | Names in list rows, a [Card](../components/card.md)'s title on a page (a card in a message has a 700 title, like a sender's name), field labels, tabs and a row swipe's buttons (an icon over one word, like a tab), badges |
 | 700 | Titles, senders, buttons, group headings, solid badges and unread counts, the selected tab, row or menu item; a textarea's counter when the text is invalid or over the limit |
 
 ## Color tiers
 
-Text has three tiers. The tokens and their contrast are in [Color](./color.md#text-and-icons).
+Text has three tiers. The tokens and their contrast are in [Color](color.md#text-and-icons).
 
 | Tier | Token | Used for |
 | --- | --- | --- |
@@ -145,12 +145,12 @@ card-title
 
 - Use one casing for all text: sentence case, with names keeping their capitals. Long labels such as menu items read awkwardly in Title Case, and one casing is simpler to write, translate and check ([0044](../decisions/0044-sentence-case-for-labels.md)).
 
-- Never set text in all caps, in CSS or in the string. [0002](../decisions/0002-no-all-caps.md) allows one exception, a step label on an onboarding screen; the product's setup writes its step label in sentence case, so nothing in the product is in all caps ([Brand](./brand.md)).
+- Never set text in all caps, in CSS or in the string. [0002](../decisions/0002-no-all-caps.md) allows one exception, a step label on an onboarding screen; the product's setup writes its step label in sentence case, so nothing in the product is in all caps ([Brand](brand.md)).
 - The rules for writing labels, and what counts as a name, are in [Writing](../content/writing.md#casing).
 
 ## Related
 
 - [Writing](../content/writing.md): the words themselves.
-- [Tokens](./tokens.md): every token group and how the names are built.
-- [Accessibility](./accessibility.md#language-and-casing): why there are no all caps.
-- [Alignment](./alignment.md): how text lines up with shapes and edges.
+- [Tokens](tokens.md): every token group and how the names are built.
+- [Accessibility](accessibility.md#language-and-casing): why there are no all caps.
+- [Alignment](alignment.md): how text lines up with shapes and edges.

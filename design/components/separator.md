@@ -10,7 +10,7 @@ related: [dropdown-menu, select, popover, panel, card]
 
 # Separator
 
-A separator is a 1px `line-hairline` between two groups of content in the same region: two groups of settings, or two controls in a row. A horizontal separator can carry a short word in its middle that names the group after it, such as Actions. Lines between regions are not separators; they belong to the regions ([Page structure](../../../../../design/patterns/page-structure.md#one-line-between-two-regions)).
+A separator is a 1px `line-hairline` between two groups of content in the same region: two groups of settings, or two controls in a row. A horizontal separator can carry a short word in its middle that names the group after it, such as Actions. Lines between regions are not separators; they belong to the regions ([Page structure](../patterns/page-structure.md#one-line-between-two-regions)).
 
 ```example
 separator/compositions/horizontal
@@ -24,9 +24,9 @@ separator/compositions/horizontal
 | Two groups of controls in a row of fixed height             | Separator with `orientation="vertical"`                                                         |
 | A named break before a group                                | Separator with a word: Actions                                                                  |
 | Sections of a menu, a select list or a popover              | The component's own separator: `DropdownMenuSeparator`, `SelectSeparator`, `PopoverSeparator`   |
-| Rows of a list                                              | Nothing: the rows of a list have no dividers ([Lists](../../../../../design/patterns/lists.md)) |
-| A header and its content, a rail and a sidebar, two columns | The `line-seam` the region draws ([Color](../../../../../design/foundations/color.md#lines))    |
-| Sections of a large form                                    | [FormSection](../form-section/form-section.md), which draws its own hairline                    |
+| Rows of a list                                              | Nothing: the rows of a list have no dividers ([Lists](../patterns/lists.md)) |
+| A header and its content, a rail and a sidebar, two columns | The `line-seam` the region draws ([Color](../foundations/color.md#lines))    |
+| Sections of a large form                                    | [FormSection](form-section.md), which draws its own hairline                    |
 
 ## Variants
 
@@ -47,5 +47,5 @@ separator/compositions/horizontal
 
 ## Rules
 
-- Use only `line-hairline` in a separator. Don't restyle it as a seam or a strong line: each line means something ([Color](../../../../../design/foundations/color.md#lines)).
-- Never draw a separator next to a region's own edge. Two 1px lines side by side read as one 2px line ([Page structure](../../../../../design/patterns/page-structure.md#one-line-between-two-regions)).
+- Use only `line-hairline` in a separator. Don't restyle it as a seam or a strong line: each line means something ([Color](../foundations/color.md#lines)).
+- Never draw a separator next to a region's own edge. Two 1px lines side by side read as one 2px line ([Page structure](../patterns/page-structure.md#one-line-between-two-regions)).

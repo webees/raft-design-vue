@@ -10,7 +10,7 @@ Raft uses one word for each thing, and the same word on every screen, in every p
 ## How to use a term
 
 - Use the term in this page's first column, spelled the way it is spelled here.
-- Write a term in lowercase inside a sentence and inside a label ("move it to another computer", Add computer). It takes a capital only as the first word of a label or a sentence, as a destination, a view or a status that this page lists (Activity, Active, Backlog), or as a product name (Raft Computer, Artifact). Every other section or settings page is a phrase in sentence case (Direct messages, Server profile); see [Writing](./writing.md#casing).
+- Write a term in lowercase inside a sentence and inside a label ("move it to another computer", Add computer). It takes a capital only as the first word of a label or a sentence, as a destination, a view or a status that this page lists (Activity, Active, Backlog), or as a product name (Raft Computer, Artifact). Every other section or settings page is a phrase in sentence case (Direct messages, Server profile); see [Writing](writing.md#casing).
 - Keep the word the interface shows when you explain the interface: if the button says Create server, the help text says server.
 - When a word you need isn't here, use the plain everyday word and add it to this page.
 
@@ -88,7 +88,7 @@ These words are wrong for Raft even when they are common elsewhere.
 | workspace, for a server | The interface calls it a server | server; see [Server and workspace](#server-and-workspace) |
 | room, conversation, chat | Too vague: Raft has three kinds of conversation | channel, DM or thread |
 | leverage, unlock, supercharge, next-gen | Promotional words describe nothing; the [writing guide](../authoring/writing.md#voice) lists more | Say what the feature does |
-| log in, log out, login as a verb | The sign-in page says Sign in; one pair everywhere ([Writing](./writing.md#signing-in-and-out)) | sign in, sign out |
+| log in, log out, login as a verb | The sign-in page says Sign in; one pair everywhere ([Writing](writing.md#signing-in-and-out)) | sign in, sign out |
 | simply, just, easily | They tell people a step is easy instead of making it easy, and make people who struggle feel worse | Leave them out |
 
 ## Where the product isn't consistent yet
@@ -105,7 +105,7 @@ The web app has strings that don't follow this page. Fix them when you touch the
 
 ## Related
 
-- [Writing](./writing.md): casing, labels, dialogs and errors.
-- [Voice and tone](./voice-and-tone.md): how Raft sounds.
+- [Writing](writing.md): casing, labels, dialogs and errors.
+- [Voice and tone](voice-and-tone.md): how Raft sounds.
 - [Writing about agents](../people-and-agents/writing-about-agents.md): the verbs and states for agents.
 - [Writing guide](../authoring/writing.md#terms): the design system's own terms, for the docs.

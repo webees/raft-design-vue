@@ -10,19 +10,19 @@ related: [status, tasks, sidebar, app-rail, list-row]
 
 # Badge
 
-Badge is a small label. Its main job is the unread count: a pink sticker that says something waits for the person. When someone mentions the person, a yellow @ marker takes its place, because it is more specific. Other appearances of Badge make the soft-tinted and hairline labels that status chips and tags are built from ([Status](../status/status.md)).
+Badge is a small label. Its main job is the unread count: a pink sticker that says something waits for the person. When someone mentions the person, a yellow @ marker takes its place, because it is more specific. Other appearances of Badge make the soft-tinted and hairline labels that status chips and tags are built from ([Status](status.md)).
 
 ## When to use
 
 | Situation                                                                        | Use                                                                                                                                                                                                              |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unread messages on a list row or a sidebar row; new thread replies; new activity | The unread count: `variant="accent"` (the `attention` color). In the sidebar, `SidebarItemCount` ([Sidebar](../sidebar/sidebar.md))                                                                              |
+| Unread messages on a list row or a sidebar row; new thread replies; new activity | The unread count: `variant="accent"` (the `attention` color). In the sidebar, `SidebarItemCount` ([Sidebar](sidebar.md))                                                                              |
 | Someone mentioned the person                                                     | The @ marker: `variant="you"` (the `you` color, yellow in every theme) with the `at-sign` icon. In the sidebar, `SidebarItemIndicator`                                                                           |
 | Unread items in a muted place                                                    | A gray number in Space Mono (`text-mono-meta`, `foreground-hint`), not a badge                                                                                                                                   |
-| Something waits, on a rail icon, a tab bar icon or the bell                      | The attention dot: one pink pixel ([Status](../status/status.md)), never a number                                                                                                                                |
-| Where a task is, or how an agent is                                              | A status chip: `TaskStatusBadge` ([Tasks](../tasks/tasks.md)) or a soft Badge with a pixel ([Status](../status/status.md#agent-state-chips))                                                                     |
-| This is an agent; where it runs                                                  | The `agent` tag and the runtime chip ([Status](../status/status.md#agent-tag))                                                                                                                                   |
-| One option is the one to pick: "Recommended" after its name in a choice          | `appearance="outline"` in the default color, after the name. One option at most, and the recommended row keeps no fill, since a filled row reads as chosen ([ChoiceList](../choice-list/choice-list.md#content)) |
+| Something waits, on a rail icon, a tab bar icon or the bell                      | The attention dot: one pink pixel ([Status](status.md)), never a number                                                                                                                                |
+| Where a task is, or how an agent is                                              | A status chip: `TaskStatusBadge` ([Tasks](tasks.md)) or a soft Badge with a pixel ([Status](status.md#agent-state-chips))                                                                     |
+| This is an agent; where it runs                                                  | The `agent` tag and the runtime chip ([Status](status.md#agent-tag))                                                                                                                                   |
+| One option is the one to pick: "Recommended" after its name in a choice          | `appearance="outline"` in the default color, after the name. One option at most, and the recommended row keeps no fill, since a filled row reads as chosen ([ChoiceList](choice-list.md#content)) |
 
 ## Anatomy
 
@@ -37,17 +37,17 @@ Badge is a small label. Its main job is the unread count: a pink sticker that sa
 | `appearance="soft"`    | A soft-tinted label with no border: status chips of agent states, the runtime chip                                       |
 | `appearance="outline"` | A hairline label in Space Mono: the `agent` tag, a reply count after a task row's title                                  |
 
-`variant` picks the color role. Choose it by what the color means, not by how it looks ([Meanings of color](../../../../../design/foundations/color.md#meanings-of-color)): on a count, `accent` is the pink of "to do" and `you` the yellow of "you".
+`variant` picks the color role. Choose it by what the color means, not by how it looks ([Meanings of color](../foundations/color.md#meanings-of-color)): on a count, `accent` is the pink of "to do" and `you` the yellow of "you".
 
-- `variant="you"` is the @ marker's fill, the `you` signal: it stays yellow in every theme, Boring Gray included ([Themes](../../../../../design/foundations/themes.md#signals)). It is solid only; a soft or outline Badge has no `you` look.
+- `variant="you"` is the @ marker's fill, the `you` signal: it stays yellow in every theme, Boring Gray included ([Themes](../foundations/themes.md#signals)). It is solid only; a soft or outline Badge has no `you` look.
 - `variant="primary"` is the `brand` color, and follows the theme: Boring Gray makes it gray. Don't use it for something addressed to the person, or for a status (use `busy`).
-- `variant="busy"` is the yellow of a working agent, a status, so it stays yellow in every theme ([Status](../status/status.md#agent-state-chips)): soft, it is the Working chip's tint, `presence-busy-soft`; solid, a `presence-busy` sticker. An outline Badge has no `busy` look.
+- `variant="busy"` is the yellow of a working agent, a status, so it stays yellow in every theme ([Status](status.md#agent-state-chips)): soft, it is the Working chip's tint, `presence-busy-soft`; solid, a `presence-busy` sticker. An outline Badge has no `busy` look.
 
 ## States
 
-- A Badge rendered as a button (`render={<button />}`) shows the medium tier on hover and press (`sticker-medium` on a color badge), and the shared disabled look ([States](../../../../../design/foundations/states.md)).
-- A Badge rendered as a button keeps a 44px touch target on a touch screen: a transparent `::after`, anchored to the badge so its label clip doesn't cut it, reaches 44px high and at least 44px wide ([Accessibility](../../../../../design/foundations/accessibility.md)).
-- The selected row never shows a count or an @ marker ([States](../../../../../design/foundations/states.md#usage)).
+- A Badge rendered as a button (`render={<button />}`) shows the medium tier on hover and press (`sticker-medium` on a color badge), and the shared disabled look ([States](../foundations/states.md)).
+- A Badge rendered as a button keeps a 44px touch target on a touch screen: a transparent `::after`, anchored to the badge so its label clip doesn't cut it, reaches 44px high and at least 44px wide ([Accessibility](../foundations/accessibility.md)).
+- The selected row never shows a count or an @ marker ([States](../foundations/states.md#usage)).
 
 ## Content
 
@@ -69,4 +69,4 @@ Badge renders a `<span>` and wraps no Base UI primitive.
 - When a row has both unread messages and a mention, show only the @ marker.
 - Use the gray number for a muted place, never the pink sticker: the person chose not to be called by it.
 - Put only the attention dot on rail and tab bar icons and on the bell, never a number.
-- Color a Badge only through `variant`, with one exception: an app's state on its card in a message, and on the hover card its link opens, may take the app's color, through `AppLinkCardBadge`'s `fill` ([AppLinkCard](../app-link-card/app-link-card.md#the-apps-color)). It changes the fill alone: the shape, size, radius, type and padding stay the Badge's, the type turns black or white, whichever reads better on the fill, and a fill too close to the card gets a hairline ring. A Badge colored by hand, or one Raft draws for itself, would read as a status of Raft's; the app's color stays inside the app's frame, on the app's words.
+- Color a Badge only through `variant`, with one exception: an app's state on its card in a message, and on the hover card its link opens, may take the app's color, through `AppLinkCardBadge`'s `fill` ([AppLinkCard](app-link-card.md#the-apps-color)). It changes the fill alone: the shape, size, radius, type and padding stay the Badge's, the type turns black or white, whichever reads better on the fill, and a fill too close to the card gets a hairline ring. A Badge colored by hand, or one Raft draws for itself, would read as a status of Raft's; the app's color stays inside the app's frame, on the app's words.

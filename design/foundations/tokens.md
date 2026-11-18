@@ -11,7 +11,7 @@ A token is a named value: a color, a shadow, a size. Components and products use
 
 - **One source.** Every token in `tokens.json` is written once there. `foundation.css` is generated from it, and nothing else defines a token value.
 - **Names say the role, not the color.** `attention`, not pink; `layer-canvas`, not white. A token keeps its name when its value changes, and the dark value lives under the same name.
-- **Use the role token before the palette.** Reach for `palette-*` only where no role fits; see [Color](./color.md#palette).
+- **Use the role token before the palette.** Reach for `palette-*` only where no role fits; see [Color](color.md#palette).
 - **A value used three times becomes a token.** A one-off value can stay inline, as an ink step or an `oklch()` literal; on its third use, add a token.
 
 ## Where tokens live
@@ -41,7 +41,7 @@ node packages/ui/scripts/build-tokens.mjs --check   # exit 1 if it is out of dat
 | Field | Meaning |
 | --- | --- |
 | `modes.dark` | The dark-mode value. A token without it has the same value in both modes |
-| `desktop` | The value on a desktop: from 768px, where the desktop layout begins, with a mouse or trackpad ([Spacing](./spacing.md#hit-targets)); the token's own value is then the phone's and a touch screen's. Used by metric tokens such as `field-font-size` |
+| `desktop` | The value on a desktop: from 768px, where the desktop layout begins, with a mouse or trackpad ([Spacing](spacing.md#hit-targets)); the token's own value is then the phone's and a touch screen's. Used by metric tokens such as `field-font-size` |
 | `scope: "root"` | A value that doesn't change with the mode, such as the palette: declared once on `:root` |
 | `scope: "every-mode"` | An alias of a token that changes with the mode: declared again in each mode scope, so it resolves against that mode's value |
 | `css: true` | A value kept as a CSS expression that the format has no type for: `color-mix()`, a shadow with several layers |
@@ -56,7 +56,7 @@ The generated file has, in order:
 5. the aliases declared in every mode, then the deprecated names;
 6. the desktop values, under `@media (width >= 48rem) and (pointer: fine)` (the query of the desktop type in `styles.css` too), on the same selectors as the values they replace.
 
-A `.light` element inside a dark page is a light island, for a preview or a portal; the `dark:` variant in `styles.css` follows the nearest mode class. See [Dark mode](./dark-mode.md).
+A `.light` element inside a dark page is a light island, for a preview or a portal; the `dark:` variant in `styles.css` follows the nearest mode class. See [Dark mode](dark-mode.md).
 
 ## Token grammar
 
@@ -90,15 +90,15 @@ The purpose says where the token is used: `frame`, `sidebar`, `canvas`, `card`, 
 | bare (`info`) | The solid color: a sticker's fill |
 | `-strong` | A deep shade, readable as text |
 | `-muted` | A strong tint |
-| `-soft` | A pale tint, without a border; see [Soft tints](./color.md#soft-tints) |
-| `-graphic` | A chart mark's fill or stroke, 3:1 against the surfaces. Only `warning` has one; see [Warnings in charts](./color.md#warnings-in-charts) |
+| `-soft` | A pale tint, without a border; see [Soft tints](color.md#soft-tints) |
+| `-graphic` | A chart mark's fill or stroke, 3:1 against the surfaces. Only `warning` has one; see [Warnings in charts](color.md#warnings-in-charts) |
 | `-foreground` | Text on the solid color, where a family has its own |
 | `-hover`, `-active` | The pair a solid fill takes on hover and press. A family has both or neither |
 | `-50` to `-950` | The numbered ramp. Only `brand` and `attention` have one |
 
-**Signals.** `you` and `selected` are the yellow of what is addressed to you and of the selected sticker. They hold their own value instead of pointing at `brand`, so no theme grays them ([Themes](./themes.md#signals)).
+**Signals.** `you` and `selected` are the yellow of what is addressed to you and of the selected sticker. They hold their own value instead of pointing at `brand`, so no theme grays them ([Themes](themes.md#signals)).
 
-**Opacity.** Every `layer` token is opaque except the two scrims, `layer-backdrop` and `layer-backdrop-nested`, and the cover over something busy, `layer-veil` ([Surfaces](./color.md#surfaces)). `fill-muted` and `fill-strong` are opaque. `fill-subtle`, `fill-medium`, `fill-frame-medium` and `sticker-medium` are translucent: they are the hover tiers, laid on top of a control or a row ([Hover overlays](./color.md#hover-overlays)).
+**Opacity.** Every `layer` token is opaque except the two scrims, `layer-backdrop` and `layer-backdrop-nested`, and the cover over something busy, `layer-veil` ([Surfaces](color.md#surfaces)). `fill-muted` and `fill-strong` are opaque. `fill-subtle`, `fill-medium`, `fill-frame-medium` and `sticker-medium` are translucent: they are the hover tiers, laid on top of a control or a row ([Hover overlays](color.md#hover-overlays)).
 
 **Utilities.** A Tailwind utility is the property's prefix and the token name: `bg-layer-card`, `text-foreground-muted`, `border-line-strong`. Shadows are named apart: `shadow-float` for `elevation-float`, `shadow-sticker` for `elevation-sticker`, `shadow-focus` for `focus-ring`. The numbered palette steps are only custom properties, not utilities; the bare `bg-palette-yellow` and its siblings are the exception.
 
@@ -108,7 +108,7 @@ Each block below is generated from `tokens.json` and shows the light and dark va
 
 ### Palette
 
-The raw colors the roles point at. The rules for using them directly are in [Color](./color.md#palette).
+The raw colors the roles point at. The rules for using them directly are in [Color](color.md#palette).
 
 ```tokens
 palette
@@ -116,7 +116,7 @@ palette
 
 ### Text and icons
 
-`foreground` and its tiers, and the text colors for the frame and the HUD. Usage and contrast: [Color](./color.md#text-and-icons), [Typography](./typography.md#color-tiers).
+`foreground` and its tiers, and the text colors for the frame and the HUD. Usage and contrast: [Color](color.md#text-and-icons), [Typography](typography.md#color-tiers).
 
 ```tokens
 foreground
@@ -124,7 +124,7 @@ foreground
 
 ### Surfaces
 
-Usage: [Color](./color.md#surfaces).
+Usage: [Color](color.md#surfaces).
 
 ```tokens
 layer
@@ -132,7 +132,7 @@ layer
 
 ### Fills
 
-Usage: [Color](./color.md#surfaces) and [Hover overlays](./color.md#hover-overlays).
+Usage: [Color](color.md#surfaces) and [Hover overlays](color.md#hover-overlays).
 
 ```tokens
 fill
@@ -140,7 +140,7 @@ fill
 
 ### Lines
 
-Usage and widths: [Color](./color.md#lines), [Shape](./shape.md#stroke-widths).
+Usage and widths: [Color](color.md#lines), [Shape](shape.md#stroke-widths).
 
 ```tokens
 line
@@ -156,7 +156,7 @@ ink
 
 ### Color roles
 
-What each color means: [Meanings of color](./color.md#meanings-of-color).
+What each color means: [Meanings of color](color.md#meanings-of-color).
 
 ```tokens
 brand
@@ -188,7 +188,7 @@ inactive
 
 ### Statuses
 
-Task statuses and presence lights: [Statuses](./color.md#statuses).
+Task statuses and presence lights: [Statuses](color.md#statuses).
 
 ```tokens
 task-status
@@ -200,7 +200,7 @@ presence
 
 ### Stickers
 
-Usage: [Stickers](./color.md#stickers).
+Usage: [Stickers](color.md#stickers).
 
 ```tokens
 sticker
@@ -208,7 +208,7 @@ sticker
 
 ### Shadows and the focus ring
 
-Usage: [Elevation](./elevation.md), [Accessibility](./accessibility.md#focus-and-keyboard).
+Usage: [Elevation](elevation.md), [Accessibility](accessibility.md#focus-and-keyboard).
 
 ```tokens
 elevation
@@ -220,7 +220,7 @@ focus
 
 ### Metrics
 
-The type metrics a field and a card title share with the parts laid out beside them. Usage: [Typography](./typography.md#metric-tokens).
+The type metrics a field and a card title share with the parts laid out beside them. Usage: [Typography](typography.md#metric-tokens).
 
 ```tokens
 field
@@ -230,19 +230,19 @@ field
 card-title
 ```
 
-The control metrics: a default control's height, its icon and hit area, and what a control embedded in a frame keeps: `control-embedded-inset`, its distance from the frame's outer edge and from its sibling, and `control-embedded-size`, a chip's or a button's height in a field ([Spacing](./spacing.md#heights), [Shape](./shape.md#inside-a-frame)).
+The control metrics: a default control's height, its icon and hit area, and what a control embedded in a frame keeps: `control-embedded-inset`, its distance from the frame's outer edge and from its sibling, and `control-embedded-size`, a chip's or a button's height in a field ([Spacing](spacing.md#heights), [Shape](shape.md#inside-a-frame)).
 
 ```tokens
 control
 ```
 
-The timeline rhythm: the message step and the section step between the lines of a conversation, and the row inset each row keeps around its text ([Spacing](./spacing.md#timeline-rhythm)).
+The timeline rhythm: the message step and the section step between the lines of a conversation, and the row inset each row keeps around its text ([Spacing](spacing.md#timeline-rhythm)).
 
 ```tokens
 timeline
 ```
 
-The fade lengths: `fade-content` where content is cut across its height, `fade-edge` at the sides of a strip that scrolls ([Edges fade](./spacing.md#edges-fade)). And the dimmed opacity, for something present but not active ([Dimmed](./states.md#dimmed)).
+The fade lengths: `fade-content` where content is cut across its height, `fade-edge` at the sides of a strip that scrolls ([Edges fade](spacing.md#edges-fade)). And the dimmed opacity, for something present but not active ([Dimmed](states.md#dimmed)).
 
 ```tokens
 fade
@@ -258,11 +258,11 @@ These are Tailwind theme values in `styles.css`, not entries in `tokens.json`, s
 
 | Tokens | Owner |
 | --- | --- |
-| `radius-sticker`, `radius-chip`, `radius-control`, `radius-container`, `radius-dialog` | [Shape](./shape.md#radii) |
-| `text-hero` to `text-label`, `text-mono-meta`, `text-mono-code`, `text-control`, each with a phone and a desktop value | [Typography](./typography.md#type-scale) |
-| `ease-slide` | [Motion](./motion.md#easing) |
-| `spacing-timeline-message`, `spacing-timeline-section`, `spacing-timeline-row` (the timeline tokens as spacing utilities) and `spacing-timeline-turn`, `spacing-timeline-lead`, `spacing-timeline-start`, `spacing-timeline-end`, derived from them. Products use only `timeline-start` and `timeline-end` | [Spacing](./spacing.md#timeline-rhythm) |
-| `font-sans`, `font-heading`, `font-mono` | [Typography](./typography.md#font-families) |
+| `radius-sticker`, `radius-chip`, `radius-control`, `radius-container`, `radius-dialog` | [Shape](shape.md#radii) |
+| `text-hero` to `text-label`, `text-mono-meta`, `text-mono-code`, `text-control`, each with a phone and a desktop value | [Typography](typography.md#type-scale) |
+| `ease-slide` | [Motion](motion.md#easing) |
+| `spacing-timeline-message`, `spacing-timeline-section`, `spacing-timeline-row` (the timeline tokens as spacing utilities) and `spacing-timeline-turn`, `spacing-timeline-lead`, `spacing-timeline-start`, `spacing-timeline-end`, derived from them. Products use only `timeline-start` and `timeline-end` | [Spacing](spacing.md#timeline-rhythm) |
+| `font-sans`, `font-heading`, `font-mono` | [Typography](typography.md#font-families) |
 
 ## Former names
 
@@ -308,12 +308,12 @@ node node_modules/@botiverse/raft-ui/codemods/token-names.mjs <dir-or-file>... [
 - Add or change a value only in `tokens.json`, then regenerate `foundation.css` in the same change.
 - Give a new token a name that follows the grammar above, and add its utility to `styles.css` if components need one.
 - Rename a token by keeping the old name in the `deprecated` group, pointing at the new one, and adding the rename to the codemod. Remove aliases only in a release that lists breaking changes (before 1.0, a minor version), once no app uses them.
-- When a text, surface or tint value changes, recheck the contrast guarantees in [Color](./color.md#contrast) for both modes.
+- When a text, surface or tint value changes, recheck the contrast guarantees in [Color](color.md#contrast) for both modes.
 - Update the foundation page that owns the token in the same pull request ([Authoring](../authoring/README.md#changing-the-system)).
 
 ## Related
 
-- [Color](./color.md): what each color token is for, and the contrast it guarantees.
-- [Typography](./typography.md): the type styles and the metric tokens.
-- [Elevation](./elevation.md): shadows and the focus ring.
-- [Dark mode](./dark-mode.md): what changes between the modes.
+- [Color](color.md): what each color token is for, and the contrast it guarantees.
+- [Typography](typography.md): the type styles and the metric tokens.
+- [Elevation](elevation.md): shadows and the focus ring.
+- [Dark mode](dark-mode.md): what changes between the modes.

@@ -10,7 +10,7 @@ related: [fit-toolbar, message-item, text-selection-toolbar, dropdown-menu, butt
 
 # SelectionToolbar
 
-`SelectionToolbar` floats at the bottom of a list or conversation while several items are selected: the count, then the actions on those items, then × to stop selecting. Messages (Forward), tasks (bulk actions) and a computer's agents (Start, Stop) share it, in the BatchBar style (Noel; stdrc, 2026-11-10, #wg-task-v2), so selecting reads the same everywhere. Its rules are in [Toolbar for selected items](../../../../../design/components/overview.md#toolbar-for-selected-items). It is a [FitToolbar](../fit-toolbar/fit-toolbar.md) that never wraps.
+`SelectionToolbar` floats at the bottom of a list or conversation while several items are selected: the count, then the actions on those items, then × to stop selecting. Messages (Forward), tasks (bulk actions) and a computer's agents (Start, Stop) share it, in the BatchBar style (Noel; stdrc, 2026-11-10, #wg-task-v2), so selecting reads the same everywhere. Its rules are in [Toolbar for selected items](overview.md#toolbar-for-selected-items). It is a [FitToolbar](fit-toolbar.md) that never wraps.
 
 ```example
 selection-toolbar/selection-toolbar
@@ -21,9 +21,9 @@ selection-toolbar/selection-toolbar
 | Situation                                             | Use                                                                          |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Actions on several selected messages, tasks or agents | SelectionToolbar                                                             |
-| Actions on text the person selected                   | [TextSelectionToolbar](../text-selection-toolbar/text-selection-toolbar.md)  |
-| Actions on one message under the pointer              | The message's hover toolbar ([MessageItem](../message-item/message-item.md)) |
-| Actions on one row                                    | The row's own menu ([DropdownMenu](../dropdown-menu/dropdown-menu.md))       |
+| Actions on text the person selected                   | [TextSelectionToolbar](text-selection-toolbar.md)  |
+| Actions on one message under the pointer              | The message's hover toolbar ([MessageItem](message-item.md)) |
+| Actions on one row                                    | The row's own menu ([DropdownMenu](dropdown-menu.md))       |
 
 ## Anatomy
 
@@ -45,16 +45,16 @@ message-item/compositions/selection-showcase
 
 ## Look
 
-- A floating panel's frame: `radius-container`, `layer-popover`, a `line-seam` ring and `shadow-float`, as every floating panel ([Elevation](../../../../../design/foundations/elevation.md)). It is as tall as a head with a head's air at its ends (`header-height` and `header-air`): 44px and 5px with a mouse on a desktop, 56px and 6px on a phone and a touch screen. It replaces the composer at the bottom of a column, so it takes a head's measure (Noel). It is one row and never wraps.
+- A floating panel's frame: `radius-container`, `layer-popover`, a `line-seam` ring and `shadow-float`, as every floating panel ([Elevation](../foundations/elevation.md)). It is as tall as a head with a head's air at its ends (`header-height` and `header-air`): 44px and 5px with a mouse on a desktop, 56px and 6px on a phone and a touch screen. It replaces the composer at the bottom of a column, so it takes a head's measure (Noel). It is one row and never wraps.
 - The count is `text-callout` bold, 8px on its left (and its right with a mouse), with the number in Space Mono, as counts are. The hint is `text-caption` in `foreground-hint`.
-- With a mouse every button is an `md` ghost [Button](../button/button.md), 34px, 4px apart, with its label, as the BatchBar spec draws it (Noel); a menu action's 12px chevron follows its label. Its icon is a labelled `md` Button's, 16px, and stays 16px when the label has given way, so it never changes size as the row narrows (Jasper, 2026-11-14, #proj-raft-ui). An action whose label has given way is a 34px square; More and × are too, × with `icon-md`'s 18px icon.
+- With a mouse every button is an `md` ghost [Button](button.md), 34px, 4px apart, with its label, as the BatchBar spec draws it (Noel); a menu action's 12px chevron follows its label. Its icon is a labelled `md` Button's, 16px, and stays 16px when the label has given way, so it never changes size as the row narrows (Jasper, 2026-11-14, #proj-raft-ui). An action whose label has given way is a 34px square; More and × are too, × with `icon-md`'s 18px icon.
 - On a phone and a touch screen the buttons are a head's bar buttons, 44px (`bar-button-size`), side by side, showing their icons alone at a head's icon size, 22px (`control-icon-size`), × included, with no chevrons, as a head's buttons are by touch: at 360px a phone then fits the count, Status, Assignee, Nudge, More and × (Noel, 2026-11-10).
 - There is no primary button, and no pink: while several items are selected, no action outranks the others (stdrc, 2026-11-10).
 
 ## Behavior
 
 - `SelectionToolbarDock` floats it 12px above the bottom of the list or conversation, plus the safe area, as the conversation's other floating controls, so it sits above a phone's bottom navigation, and 20px from the sides, the composer's edge.
-- When its row doesn't fit the width it floats in, measured in that width and never read from the window, things give way one step at a time ([FitToolbar](../fit-toolbar/fit-toolbar.md)): the hint (then read by screen readers only), the `secondary` actions into More from the end, the labels from the end (so the first action's goes last; each then shows its label as a tooltip), then the other actions into More from the end. The count and × never give way. It never wraps, because a second line would cover the items under it ([When a row runs out of room](../../../../../design/patterns/responsive.md#when-a-row-runs-out-of-room)).
+- When its row doesn't fit the width it floats in, measured in that width and never read from the window, things give way one step at a time ([FitToolbar](fit-toolbar.md)): the hint (then read by screen readers only), the `secondary` actions into More from the end, the labels from the end (so the first action's goes last; each then shows its label as a tooltip), then the other actions into More from the end. The count and × never give way. It never wraps, because a second line would cover the items under it ([When a row runs out of room](../patterns/responsive.md#when-a-row-runs-out-of-room)).
 - Open the menus of a menu action and of More upward: `side="top"` on `DropdownMenuContent`.
 - With a mouse each button's hit area reaches only half the 4px gap toward its neighbour, so a click between two lands on the nearer; by touch each 44px button is its own tap.
 - While an image of the selection renders, Generate image shows a spinner and "Rendering…", and pressing it again stops the render and keeps the selection. The render's progress is the hint after the count, the first thing to give way. × always ends the selection, stopping a render first (Kirby, 2026-11-14, #proj-raft-ui:#256).
@@ -62,7 +62,7 @@ message-item/compositions/selection-showcase
 
 ## Content
 
-- The count says what is selected, as a number and a word: "3 selected". In a thread or the Computers page's agent list, which have a select-all checkbox, "All 169 selected" when all are ([Toolbar for selected items](../../../../../design/components/overview.md#toolbar-for-selected-items)).
+- The count says what is selected, as a number and a word: "3 selected". In a thread or the Computers page's agent list, which have a select-all checkbox, "All 169 selected" when all are ([Toolbar for selected items](overview.md#toolbar-for-selected-items)).
 - Keep the hint to a few words about what the actions will do to the selection, such as "1 will be skipped". It is the first to give way, so don't put anything there the person needs.
 - Write labels in sentence case: Forward, Generate image, Copy link, Copy Markdown. Order the actions by why people select the items, the most wanted first: it keeps its label longest. For messages Forward first, Generate image next (it shares them out too), the two copies last, the last three `secondary`. For tasks Status, Assignee, Nudge, then Follow and Delete marked `secondary`: they are the first into More when the row is narrow (Noel, 2026-11-10). For a computer's agents Start, Stop, Restart / reset, then Change model marked `secondary`, the first into More (Jasper, 2026-11-14, slock #14940).
 
@@ -72,4 +72,4 @@ message-item/compositions/selection-showcase
 - `SelectionToolbarCount` is a polite live region: the new count is announced when it changes.
 - An action showing its icon alone keeps its label as its accessible name and shows it as a tooltip.
 - `SelectionToolbarMore` and `SelectionToolbarClose` take an `aria-label`, such as "More actions" and "Cancel".
-- End the selection on Escape, as × does, unless a menu is open; then move the focus back into the conversation: to the composer, or where there is none, to the item the selection started on ([Moving focus](../../../../../design/foundations/accessibility.md#moving-focus)). The toolbar does not do this for you: the selection is yours.
+- End the selection on Escape, as × does, unless a menu is open; then move the focus back into the conversation: to the composer, or where there is none, to the item the selection started on ([Moving focus](../foundations/accessibility.md#moving-focus)). The toolbar does not do this for you: the selection is yours.

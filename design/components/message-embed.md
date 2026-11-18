@@ -18,7 +18,7 @@ related:
 
 # MessageEmbed
 
-The card for something embedded in a message: a link card, or the base that other embedded cards build on. It is the frame every card in a message shares ([Cards in messages](../../../../../design/patterns/cards-in-messages.md)), and sits in `MessageItemEmbedded`, under the message body. [MessageForwardedBundle](../message-forwarded-bundle/message-forwarded-bundle.md), [MessageActionCard](../message-action-card/message-action-card.md) and [AppLinkCard](../app-link-card/app-link-card.md) render on it, and [MessageReplies](../message-replies/message-replies.md) uses its container.
+The card for something embedded in a message: a link card, or the base that other embedded cards build on. It is the frame every card in a message shares ([Cards in messages](../patterns/cards-in-messages.md)), and sits in `MessageItemEmbedded`, under the message body. [MessageForwardedBundle](message-forwarded-bundle.md), [MessageActionCard](message-action-card.md) and [AppLinkCard](app-link-card.md) render on it, and [MessageReplies](message-replies.md) uses its container.
 
 ```example
 message-embed/compositions/link-cards
@@ -28,21 +28,21 @@ message-embed/compositions/link-cards
 
 | Situation                                           | Use                                                                                                                                                                     |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A link an app previews (a pull request, a document) | A reference chip in the text, not a card ([MessageItem](../message-item/message-item.md#app-links))                                                                     |
+| A link an app previews (a pull request, a document) | A reference chip in the text, not a card ([MessageItem](message-item.md#app-links))                                                                     |
 | A link to a page, previewed under the message       | MessageEmbed, as a link card                                                                                                                                            |
-| Messages passed on from another conversation        | [MessageForwardedBundle](../message-forwarded-bundle/message-forwarded-bundle.md)                                                                                       |
-| A link to one message, shown as an excerpt          | [MessageQuotedPreview](../message-quoted-preview/message-quoted-preview.md)                                                                                             |
-| An agent needs a person's approval                  | [MessageActionCard](../message-action-card/message-action-card.md)                                                                                                      |
-| A file, an image or a video                         | [MessageAttachment](../message-attachment/message-attachment.md)                                                                                                        |
-| The replies to a message                            | [MessageReplies](../message-replies/message-replies.md)                                                                                                                 |
-| Code, a diagram or a Markdown table                 | [CodeBlock](../code-block/code-block.md)                                                                                                                                |
-| A new kind of embedded card                         | MessageEmbed as its base, not a new container ([Built from existing parts](../../../../../design/components/overview.md#link-cards-forwarded-messages-quoted-previews)) |
+| Messages passed on from another conversation        | [MessageForwardedBundle](message-forwarded-bundle.md)                                                                                       |
+| A link to one message, shown as an excerpt          | [MessageQuotedPreview](message-quoted-preview.md)                                                                                             |
+| An agent needs a person's approval                  | [MessageActionCard](message-action-card.md)                                                                                                      |
+| A file, an image or a video                         | [MessageAttachment](message-attachment.md)                                                                                                        |
+| The replies to a message                            | [MessageReplies](message-replies.md)                                                                                                                 |
+| Code, a diagram or a Markdown table                 | [CodeBlock](code-block.md)                                                                                                                                |
+| A new kind of embedded card                         | MessageEmbed as its base, not a new container ([Built from existing parts](overview.md#link-cards-forwarded-messages-quoted-previews)) |
 
 ## Anatomy
 
-- `MessageEmbed`: the card, on `layer-card` with a `line-hairline` border and `radius-container`. `size` gives it an item card's or a content card's width ([Two widths](../../../../../design/patterns/cards-in-messages.md#two-widths)). Required.
+- `MessageEmbed`: the card, on `layer-card` with a `line-hairline` border and `radius-container`. `size` gives it an item card's or a content card's width ([Two widths](../patterns/cards-in-messages.md#two-widths)). Required.
 - `MessageEmbedHeader`: the top row, with its own padding. Holds what the card is and where it comes from.
-- `MessageEmbedContent`: the body. It has no padding of its own: the content inside sets it, so an image or a list of items can run to the card's edges. As the card's first or last part, it takes the card's inner corner, `radius-container` less the 1px border, on the two corners it shares with the card, and clips what it holds to them: a cover at the top is round at the top and square at its foot. Square, a cover or an excerpt would cover the border's arc, and the card would look cut at those corners ([Inside a frame](../../../../../design/foundations/shape.md#inside-a-frame)). A frame restyled as a square bar, as MessageQuotedPreview's is, has no corner to follow: its content stays square and clips nothing.
+- `MessageEmbedContent`: the body. It has no padding of its own: the content inside sets it, so an image or a list of items can run to the card's edges. As the card's first or last part, it takes the card's inner corner, `radius-container` less the 1px border, on the two corners it shares with the card, and clips what it holds to them: a cover at the top is round at the top and square at its foot. Square, a cover or an excerpt would cover the border's arc, and the card would look cut at those corners ([Inside a frame](../foundations/shape.md#inside-a-frame)). A frame restyled as a square bar, as MessageQuotedPreview's is, has no corner to follow: its content stays square and clips nothing.
 - `MessageEmbedFooter`: the bottom row, padded like the header. Holds the card's actions.
 
 Only `MessageEmbed` is required; use the parts the content needs.
@@ -50,19 +50,19 @@ Only `MessageEmbed` is required; use the parts the content needs.
 ## Behavior
 
 - The card and its parts can shrink below the width of their content, so long content wraps or truncates inside the card instead of widening the message.
-- A card that opens something as a whole, such as an Artifact card whose title link covers it, takes `interactive`: it hovers with the subtle tier and presses with the medium tier, like a file card ([MessageAttachment](../message-attachment/message-attachment.md#behavior), [Hover and press](../../../../../design/foundations/states.md#hover-and-press)). The hover tells a card that opens from one that doesn't. A card that only shows content, such as an action card or a forwarded bundle, keeps `interactive` off: it opens nothing as a whole, so it doesn't hover. The tier is laid under the content, so a cover image hides it and only the card's rows show it.
-- A card rendered as a link shows the focus ring on keyboard focus ([States](../../../../../design/foundations/states.md#focus)).
-- The card never clips what it holds: only `MessageEmbedContent` at its top or bottom does. A title link that covers the card (its `::after`) draws its focus ring around the whole card, outside the frame, and a card that clipped would cut it off. Something focusable inside an edge part that reaches the card's edge has its ring cut there, so draw that ring inside the element ([Inside a frame](../../../../../design/foundations/shape.md#inside-a-frame)). The card sets the corner and the clip on the part, so a `className` on `MessageEmbedContent` doesn't undo them.
+- A card that opens something as a whole, such as an Artifact card whose title link covers it, takes `interactive`: it hovers with the subtle tier and presses with the medium tier, like a file card ([MessageAttachment](message-attachment.md#behavior), [Hover and press](../foundations/states.md#hover-and-press)). The hover tells a card that opens from one that doesn't. A card that only shows content, such as an action card or a forwarded bundle, keeps `interactive` off: it opens nothing as a whole, so it doesn't hover. The tier is laid under the content, so a cover image hides it and only the card's rows show it.
+- A card rendered as a link shows the focus ring on keyboard focus ([States](../foundations/states.md#focus)).
+- The card never clips what it holds: only `MessageEmbedContent` at its top or bottom does. A title link that covers the card (its `::after`) draws its focus ring around the whole card, outside the frame, and a card that clipped would cut it off. Something focusable inside an edge part that reaches the card's edge has its ring cut there, so draw that ring inside the element ([Inside a frame](../foundations/shape.md#inside-a-frame)). The card sets the corner and the clip on the part, so a `className` on `MessageEmbedContent` doesn't undo them.
 
 ## Accessibility
 
 - `MessageEmbed` and its parts are plain `div` elements built with Base UI `useRender`; use `render` to change the element.
 - When the whole card opens something, render `MessageEmbed` as an `<a>` and give it an accessible name that says what opens.
-- Don't put a button inside a card rendered as a link: each control must be its own element, as in [MessageAttachment](../message-attachment/message-attachment.md#accessibility).
+- Don't put a button inside a card rendered as a link: each control must be its own element, as in [MessageAttachment](message-attachment.md#accessibility).
 
 ## Rules
 
-- Build every embedded card on MessageEmbed, without new colors, shapes or lines ([Built from existing parts](../../../../../design/components/overview.md#built-from-existing-parts)).
+- Build every embedded card on MessageEmbed, without new colors, shapes or lines ([Built from existing parts](overview.md#built-from-existing-parts)).
 - Give the card one of the two widths with `size`: `item` for a card that opens one thing (at most 400px, the message's width on a phone), `content` for a card that shows other messages (at most 560px). Never give it a width of its own (`max-w-[440px]`, `max-w-md`).
-- Take the inset, the source row, the title, the details and the buttons from `messageCard`, exported from `@botiverse/raft-ui` beside MessageEmbed (`messageCard().title()`, `messageCard().meta()`, `messageCard().actions()`), never classes of the card's own: every card in a message and every item popover is drawn from these two, so they change together ([Cards in messages](../../../../../design/patterns/cards-in-messages.md)). A card that is an app's link card can use [AppLinkCard](../app-link-card/app-link-card.md)'s parts instead, which are drawn from it.
+- Take the inset, the source row, the title, the details and the buttons from `messageCard`, exported from `@botiverse/raft-ui` beside MessageEmbed (`messageCard().title()`, `messageCard().meta()`, `messageCard().actions()`), never classes of the card's own: every card in a message and every item popover is drawn from these two, so they change together ([Cards in messages](../patterns/cards-in-messages.md)). A card that is an app's link card can use [AppLinkCard](app-link-card.md)'s parts instead, which are drawn from it.
 - Put the card in `MessageItemEmbedded`, after the body and the attachments.

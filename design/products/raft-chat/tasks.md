@@ -53,4 +53,4 @@ The section follows [Tasks beside a conversation](../../patterns/tasks.md#tasks-
 | A filter that hides everything | No tasks match this filter | Try a different combination or clear the current selection. |
 | A section of Mine with no task | No tasks, one line under its heading, which already names the section (Noel, 2026-11-10, #wg-task-v2:8a7ae237) | None |
 
-- Use the `square-check-big` icon, and no button: New task and Clear all are already in the page's toolbar, and Create task in the section's head ([EmptyState](../../../packages/ui/src/components/empty-state/empty-state.md)).
+- Use the `square-check-big` icon, and no button: New task and Clear all are already in the page's toolbar, and Create task in the section's head ([EmptyState](../../components/empty-state.md)).

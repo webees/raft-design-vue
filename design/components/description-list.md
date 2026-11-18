@@ -21,11 +21,11 @@ description-list/compositions/member-info
 | Situation                                     | Use                                                                                                                                                          |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | A few facts about one item, read side by side | DescriptionList                                                                                                                                              |
-| Change one property of an item in place       | The value in a DescriptionList opens a picker ([Choosing a component](../../../../../design/components/overview.md#picking-something))                       |
-| The properties row of task details            | DescriptionList; see [Built from existing parts](../../../../../design/components/overview.md#task-details)                                                  |
-| The permissions an authorization asks for     | DescriptionList in a dialog ([Built from existing parts](../../../../../design/components/overview.md#authorization-oauth))                                  |
-| Many items with the same columns              | [ListRow](../list-row/list-row.md) rows, or a table when it has to be one ([Built from existing parts](../../../../../design/components/overview.md#tables)) |
-| What happened to the item, in order           | [Timeline](../timeline/timeline.md)                                                                                                                          |
+| Change one property of an item in place       | The value in a DescriptionList opens a picker ([Choosing a component](overview.md#picking-something))                       |
+| The properties row of task details            | DescriptionList; see [Built from existing parts](overview.md#task-details)                                                  |
+| The permissions an authorization asks for     | DescriptionList in a dialog ([Built from existing parts](overview.md#authorization-oauth))                                  |
+| Many items with the same columns              | [ListRow](list-row.md) rows, or a table when it has to be one ([Built from existing parts](overview.md#tables)) |
+| What happened to the item, in order           | [Timeline](timeline.md)                                                                                                                          |
 
 ## Anatomy
 
@@ -48,7 +48,7 @@ description-list/compositions/horizontal
 
 ### Labels go above only when a value doesn't fit
 
-A horizontal list keeps each label beside its value for as long as the values fit there, and puts the labels above their values only when one doesn't. It decides from what it holds, not from a width picked in advance ([When a row runs out of room](../../../../../design/patterns/responsive.md#when-a-row-runs-out-of-room)): an agent's Role, Computer and Model are short enough to stand beside their labels in a 370px profile, where a fixed 384px switch stacked them (Artea, 2026-11-08). The list measures, on every resize and content change:
+A horizontal list keeps each label beside its value for as long as the values fit there, and puts the labels above their values only when one doesn't. It decides from what it holds, not from a width picked in advance ([When a row runs out of room](../patterns/responsive.md#when-a-row-runs-out-of-room)): an agent's Role, Computer and Model are short enough to stand beside their labels in a 370px profile, where a fixed 384px switch stacked them (Artea, 2026-11-08). The list measures, on every resize and content change:
 
 - **The label column:** the widest label, at least 88px and at most 160px (a longer label wraps).
 - **The value column:** the list's width less the label column and the 16px gap.
@@ -61,9 +61,9 @@ Stacked, the value sits 2px under its label (the list's row gap) and 10px above 
 
 `direction="inline"` lays the facts out like a line of text. Every label and value sits on one baseline, so a status chip, a button and plain text read as one line; the label is 12px from its value, the facts 24px apart, and a row that wraps leaves 8px between lines.
 
-Every fact follows the same flow, whatever its value: it wraps to the next line only when it doesn't fit on this one, with the same 24px and 8px gaps as the others. A fact is at most 24rem wide, or the row's width if that is narrower. Put a long value, such as the message a task came from, in an [Ellipsis](../ellipsis/ellipsis.md): it cuts the text at that width and shows the whole of it on hover. The list caps the width but doesn't cut the text, so plain text left outside an Ellipsis wraps inside the 24rem instead. Don't give a long value a line of its own, a full width or other gaps. This is the layout for dense metadata such as a task's properties: a two-column grid (`direction="horizontal"`) gives each fact a line, so a handful of short facts takes a screen's height, and stacks into one column anyway once a value runs out of room beside its label.
+Every fact follows the same flow, whatever its value: it wraps to the next line only when it doesn't fit on this one, with the same 24px and 8px gaps as the others. A fact is at most 24rem wide, or the row's width if that is narrower. Put a long value, such as the message a task came from, in an [Ellipsis](ellipsis.md): it cuts the text at that width and shows the whole of it on hover. The list caps the width but doesn't cut the text, so plain text left outside an Ellipsis wraps inside the 24rem instead. Don't give a long value a line of its own, a full width or other gaps. This is the layout for dense metadata such as a task's properties: a two-column grid (`direction="horizontal"`) gives each fact a line, so a handful of short facts takes a screen's height, and stacks into one column anyway once a value runs out of room beside its label.
 
-A value drawn in a shape hangs its padding into the 12px gap, so its text starts where plain text would and its fill reaches outward ([Alignment](../../../../../design/foundations/alignment.md#a-shape-beside-plain-text)). raft-ui does this for a Badge (6px), a TaskChip or TaskStatusBadge (7px) or a Button that comes first in `DescriptionDetails`; the Button takes the Badge's 6px padding to fit. Any other shape, or one wrapped in another element, needs the same pull from its caller: a negative left margin equal to its left padding, and its `max-width` grown by as much.
+A value drawn in a shape hangs its padding into the 12px gap, so its text starts where plain text would and its fill reaches outward ([Alignment](../foundations/alignment.md#a-shape-beside-plain-text)). raft-ui does this for a Badge (6px), a TaskChip or TaskStatusBadge (7px) or a Button that comes first in `DescriptionDetails`; the Button takes the Badge's 6px padding to fit. Any other shape, or one wrapped in another element, needs the same pull from its caller: a negative left margin equal to its left padding, and its `max-width` grown by as much.
 
 ```example
 description-list/compositions/inline
@@ -71,16 +71,16 @@ description-list/compositions/inline
 
 ## Behavior
 
-- Make a value that can be changed a trigger with no frame: it shows the medium tier on hover and press, and opens the popup of a [Select](../select/select.md) or a combobox.
+- Make a value that can be changed a trigger with no frame: it shows the medium tier on hover and press, and opens the popup of a [Select](select.md) or a combobox.
 - Write an empty value that can be set as the action that sets it: Add to a channel.
 
-raft-ui has no frameless value trigger yet; the member-info composition uses a [Badge](../badge/badge.md) rendered as a button.
+raft-ui has no frameless value trigger yet; the member-info composition uses a [Badge](badge.md) rendered as a button.
 
 ## Content
 
 - Write labels as short nouns in sentence case: Status, Assignee, Created by.
-- Build values from existing parts: a status chip ([Status](../status/status.md)), an avatar and a name ([Avatar](../avatar/avatar.md)), a reference chip, a runtime chip. Set IDs and times in Space Mono ([Typography](../../../../../design/foundations/typography.md#usage)).
-- Name people and agents by their display names ([Writing](../../../../../design/content/writing.md#voice)).
+- Build values from existing parts: a status chip ([Status](status.md)), an avatar and a name ([Avatar](avatar.md)), a reference chip, a runtime chip. Set IDs and times in Space Mono ([Typography](../foundations/typography.md#usage)).
+- Name people and agents by their display names ([Writing](../content/writing.md#voice)).
 
 ## Accessibility
 

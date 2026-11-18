@@ -10,7 +10,7 @@ related: [message-item, file-preview, composer, progress]
 
 # MessageAttachment
 
-What is attached to a message. A file is a card: its name, its size and one or two actions such as Download. Images show inline in a gallery, and a video shows in a player. Attachments sit under the message body, in `MessageItemAttachments` ([MessageItem](../message-item/message-item.md)).
+What is attached to a message. A file is a card: its name, its size and one or two actions such as Download. Images show inline in a gallery, and a video shows in a player. Attachments sit under the message body, in `MessageItemAttachments` ([MessageItem](message-item.md)).
 
 ```example
 message-attachment/compositions/message-attachments-showcase
@@ -23,9 +23,9 @@ message-attachment/compositions/message-attachments-showcase
 | A file attached to a sent message     | `MessageAttachmentCard`, in a `MessageAttachmentGroup`                                                                                |
 | Images attached to a message          | `MessageImageGallery`                                                                                                                 |
 | A video attached to a message         | `MessageVideoPreview`                                                                                                                 |
-| A file waiting to be sent             | A thumbnail in the [Composer](../composer/composer.md)                                                                                |
-| A file's type, as an icon             | [FilePreview](../file-preview/file-preview.md)                                                                                        |
-| A link to a page, a forwarded message | A link card ([Built from existing parts](../../../../../design/components/overview.md#link-cards-forwarded-messages-quoted-previews)) |
+| A file waiting to be sent             | A thumbnail in the [Composer](composer.md)                                                                                |
+| A file's type, as an icon             | [FilePreview](file-preview.md)                                                                                        |
+| A link to a page, a forwarded message | A link card ([Built from existing parts](overview.md#link-cards-forwarded-messages-quoted-previews)) |
 
 ## Anatomy
 
@@ -84,8 +84,8 @@ message-media/compositions/image-gallery-triple
 
 | State                 | Look                                                                                                                                                                                                                                |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Uploading             | The meta line says "Uploading · 64%", and a 4px progress track runs under the file name, inside the card and aligned with the text ([Shape](../../../../../design/foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)) |
-| Opening or processing | `aria-busy` on the card, and a [Spinner](../spinner/spinner.md) in place of the action                                                                                                                                              |
+| Uploading             | The meta line says "Uploading · 64%", and a 4px progress track runs under the file name, inside the card and aligned with the text ([Shape](../foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)) |
+| Opening or processing | `aria-busy` on the card, and a [Spinner](spinner.md) in place of the action                                                                                                                                              |
 | Pending image         | The image under `MessageImageGalleryOverlay`, a `layer-veil` cover with a default-color spinner                                                                                                                                     |
 | Failed                | A `danger-strong` border, a line that says why, and Remove or Retry                                                                                                                                                                 |
 
@@ -104,18 +104,18 @@ message-media/compositions/video-states
 ## Behavior
 
 - The whole card is clickable: the file name is the link, and it covers the card. The action buttons sit above it and work on their own.
-- The card is read, so it hovers with the subtle tier, like a file row or a comment card, and presses with the medium tier; its action buttons hover medium ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).
-- Selecting an image or a file opens it in the file viewer ([Built from existing parts](../../../../../design/components/overview.md#file-viewer)).
-- An image hovers with `ink-8` over the whole picture, the media hover ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).
+- The card is read, so it hovers with the subtle tier, like a file row or a comment card, and presses with the medium tier; its action buttons hover medium ([Hover and press](../foundations/states.md#hover-and-press)).
+- Selecting an image or a file opens it in the file viewer ([Built from existing parts](overview.md#file-viewer)).
+- An image hovers with `ink-8` over the whole picture, the media hover ([Hover and press](../foundations/states.md#hover-and-press)).
 - The gallery's action button shows on hover and on keyboard focus.
-- An action in a card's or a medium's corner (a file card's Download, a video's or an image's action) is a control embedded in its frame: it sits 6px from the corner and wears `radius-chip` ([Shape](../../../../../design/foundations/shape.md#inside-a-frame)).
+- An action in a card's or a medium's corner (a file card's Download, a video's or an image's action) is a control embedded in its frame: it sits 6px from the corner and wears `radius-chip` ([Shape](../foundations/shape.md#inside-a-frame)).
 
 ## Content
 
 - Show the file name as it is, on one line, truncated when it doesn't fit.
 - Write the size and type in Space Mono: "2.4 MB · PDF".
 - In a failure, say why and give the limit: "Larger than 25 MB. Remove it, or compress it and try again." Label the buttons Remove and Retry.
-- Say what is happening while a file is busy, such as "Uploading · 64%"; don't write "Processing…" ([Writing](../../../../../design/content/writing.md#do-and-dont)).
+- Say what is happening while a file is busy, such as "Uploading · 64%"; don't write "Processing…" ([Writing](../content/writing.md#do-and-dont)).
 
 ## Accessibility
 
@@ -128,4 +128,4 @@ message-media/compositions/video-states
 ## Rules
 
 - Keep a file card at most 360px wide.
-- Show images at most 360px wide, with `radius-container` and a `line-hairline` border, and never wider than the column: a gallery and a video are `min(360px, 100%)` of the column, not the window less a guess at the chrome. A gallery's rows are 8rem tall (7rem with three images) below its full 360px and 9rem (8rem) at it, by the gallery's own width, so a thread beside a conversation lays out as a phone does ([Switch on the region's width](../../../../../design/patterns/responsive.md#switch-on-the-regions-width)). A row of three images sits three across at every width, never two over one: two over one laid six images out 2, 1, 2, 1, which reads as an F rather than a set. Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.
+- Show images at most 360px wide, with `radius-container` and a `line-hairline` border, and never wider than the column: a gallery and a video are `min(360px, 100%)` of the column, not the window less a guess at the chrome. A gallery's rows are 8rem tall (7rem with three images) below its full 360px and 9rem (8rem) at it, by the gallery's own width, so a thread beside a conversation lays out as a phone does ([Switch on the region's width](../patterns/responsive.md#switch-on-the-regions-width)). A row of three images sits three across at every width, never two over one: two over one laid six images out 2, 1, 2, 1, which reads as an F rather than a set. Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.

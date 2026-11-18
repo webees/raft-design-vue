@@ -10,7 +10,7 @@ related: [tooltip, text-link, text]
 
 # Ellipsis
 
-Ellipsis cuts a text to one line, or to `lines` lines, and knows whether it did. While the text is cut, hovering it shows the whole text in a [Tooltip](../tooltip/tooltip.md), and an expand control in `after` can show the rest in place. A text that fits gets neither. Use it for names in rows, titles in headers and descriptions under them, anywhere a text can be longer than its room.
+Ellipsis cuts a text to one line, or to `lines` lines, and knows whether it did. While the text is cut, hovering it shows the whole text in a [Tooltip](tooltip.md), and an expand control in `after` can show the rest in place. A text that fits gets neither. Use it for names in rows, titles in headers and descriptions under them, anywhere a text can be longer than its room.
 
 ```example
 ellipsis/compositions/list-row
@@ -22,7 +22,7 @@ ellipsis/compositions/list-row
 | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | A name, a title or a file name in a row or a header, one line                       | Ellipsis                                                                                                         |
 | A description or a summary cut to a few lines, that people may want to read in full | Ellipsis with `lines` and an `EllipsisToggle` in `after`                                                         |
-| The value of a Select, a Combobox or a chip in a form                               | Nothing: the control cuts its own value ([Forms](../../../../../design/patterns/forms.md#long-values-in-fields)) |
+| The value of a Select, a Combobox or a chip in a form                               | Nothing: the control cuts its own value ([Forms](../patterns/forms.md#long-values-in-fields)) |
 | A label, help text or an error                                                      | Wrap it, never cut it: it explains the control                                                                   |
 | The body of a message or a document                                                 | A collapse of its own, not a clamp: a clamp cuts mid-sentence and hides blocks                                   |
 | A file name cut in the middle (`launch-…-final.pdf`)                                | Not Ellipsis: it only cuts at the end                                                                            |
@@ -30,7 +30,7 @@ ellipsis/compositions/list-row
 ## Anatomy
 
 - `Ellipsis`: the text and its room. Its children are the text, inline content only (text, links, inline code, mentions). Required.
-- `EllipsisToggle`: the expand control, for `after`. A [TextLink](../text-link/text-link.md) button with the caller's label. Optional.
+- `EllipsisToggle`: the expand control, for `after`. A [TextLink](text-link.md) button with the caller's label. Optional.
 - `useTruncated(ref)`: the measurement alone, for a text that isn't an Ellipsis. It returns `true` while the element's text is cut, `false` while it fits, and `undefined` before it is measured or while it has no box. It needs no line count: it checks both the inline edges and the bottom edge. raft-ui's fields use the same measurement to give a cut value its `title`.
 
 The text is cut with CSS (`text-overflow: ellipsis`, `line-clamp`) and never rewritten: find in page, copy and screen readers get the whole text, and the cut never splits an emoji or a Chinese character.
@@ -106,10 +106,10 @@ Most texts that don't cut sit in a layout that won't let them shrink:
 - `EllipsisToggle` is a `<button>` with `aria-expanded` and `aria-controls` pointing at the text. It comes before the text in the DOM, because it floats to the end of the last line.
 - With `expandOnClick`, a cut text is `role="button"`, in the tab order, with `aria-expanded` saying whether it is expanded; Enter and Space expand and collapse it, and focus stays on it.
 - A button never contains another: with an `after`, the text stays text.
-- The tooltip is the Base UI Tooltip, through [Tooltip](../tooltip/tooltip.md). A text that isn't a button isn't focusable, so its tooltip opens on hover only; see [Reading the whole text without hover](#reading-the-whole-text-without-hover).
+- The tooltip is the Base UI Tooltip, through [Tooltip](tooltip.md). A text that isn't a button isn't focusable, so its tooltip opens on hover only; see [Reading the whole text without hover](#reading-the-whole-text-without-hover).
 
 ## Rules
 
-- Never cut a label, help text or an error: wrap them ([Forms](../../../../../design/patterns/forms.md#long-values-in-fields)).
+- Never cut a label, help text or an error: wrap them ([Forms](../patterns/forms.md#long-values-in-fields)).
 - Don't add a `title` to an Ellipsis: it shows its own tooltip only when needed, and a `title` shows always and doubles it.
 - Put the expand label in the product's words, in sentence case: Show more, Show less.

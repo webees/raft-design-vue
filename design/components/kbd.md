@@ -21,13 +21,13 @@ kbd/compositions/sizes
 | Situation                                                                                | Use                                                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | A list of shortcuts, where the keys are the content: a shortcuts panel, help, onboarding | `KbdShortcut` at `size="md"`                                                                                     |
-| A shortcut people can change, in a shortcuts panel                                       | `KbdShortcut` at `md` inside a [KbdButton](../kbd-button/kbd-button.md)                                          |
-| The shortcut of an icon button, in its tooltip                                           | `KbdShortcut` at `sm`, inside `TooltipContent` after the text ([Tooltip](../tooltip/tooltip.md))                 |
-| The shortcut that opens search                                                           | `SearchTriggerShortcut` ([Search](../search/search.md))                                                          |
-| The shortcut that focuses an input                                                       | Kbd at `sm` in an `InputGroupAddon` at the end of an [InputGroup](../input-group/input-group.md)                 |
+| A shortcut people can change, in a shortcuts panel                                       | `KbdShortcut` at `md` inside a [KbdButton](kbd-button.md)                                          |
+| The shortcut of an icon button, in its tooltip                                           | `KbdShortcut` at `sm`, inside `TooltipContent` after the text ([Tooltip](tooltip.md))                 |
+| The shortcut that opens search                                                           | `SearchTriggerShortcut` ([Search](search.md))                                                          |
+| The shortcut that focuses an input                                                       | Kbd at `sm` in an `InputGroupAddon` at the end of an [InputGroup](input-group.md)                 |
 | A key or a shortcut named in running text                                                | `KbdShortcut` at `sm`                                                                                            |
-| The shortcut of a menu item                                                              | `DropdownMenuShortcut` or `ContextMenuShortcut`, with no cap ([DropdownMenu](../dropdown-menu/dropdown-menu.md)) |
-| Code, a command or a file name                                                           | [InlineCode](../inline-code/inline-code.md)                                                                      |
+| The shortcut of a menu item                                                              | `DropdownMenuShortcut` or `ContextMenuShortcut`, with no cap ([DropdownMenu](dropdown-menu.md)) |
+| Code, a command or a file name                                                           | [InlineCode](inline-code.md)                                                                      |
 
 ## Anatomy
 
@@ -46,7 +46,7 @@ kbd/compositions/group
 | `size="sm"` (default) | A shortcut beside something else: a tooltip, the search trigger, an input addon, running text. `text-mono-meta` in `foreground-hint`, inside a `line-hairline` with a 3px radius, with no fill. A bare Kbd is as tall as the text's line, 16px on a phone and 18px on a desktop; inside a `KbdShortcut` and a tooltip every cap is 16px. |
 | `size="md"`           | A list of shortcuts, where the keys are what the person reads. A 24px cap in Space Mono at the `text-mono-code` size, `foreground-muted` on `fill-muted` inside a `line-hairline`: 13px mono sits level with a 14px label beside it.                                                                                                     |
 
-`md` uses `radius-sticker`, the radius of inline marks ([Shape](../../../../../design/foundations/shape.md)). `sm` keeps the 3px radius it has always had, so the hints already in menus, tooltips and search don't change. The line is 1px, not the ink border: Kbd is not a control.
+`md` uses `radius-sticker`, the radius of inline marks ([Shape](../foundations/shape.md)). `sm` keeps the 3px radius it has always had, so the hints already in menus, tooltips and search don't change. The line is 1px, not the ink border: Kbd is not a control.
 
 ## Shortcuts from key names
 
@@ -114,7 +114,7 @@ A menu draws its shortcut with no cap, as native menus do: `DropdownMenuShortcut
 
 ## Rules
 
-- Never make Kbd clickable, and never use it as the label of a button. A shortcut people can change goes inside a [KbdButton](../kbd-button/kbd-button.md), which is the control; the caps in it stay Kbd.
+- Never make Kbd clickable, and never use it as the label of a button. A shortcut people can change goes inside a [KbdButton](kbd-button.md), which is the control; the caps in it stay Kbd.
 - Put Kbd at the end of what it belongs to: after a menu item's label, after a tooltip's text.
 - Write key names, never glyphs or "+", when you use `KbdShortcut`: the platform picks the drawing.
 - Use `md` only where the keys are the content. Beside a label in a tooltip, a menu or a field, `md` outweighs the label it serves.

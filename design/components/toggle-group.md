@@ -10,7 +10,7 @@ related: [segmented-control, checkbox, switch, picker-trigger-button]
 
 # ToggleGroup
 
-A toggle group is a row of buttons in a gray track that people press on and off: Bold, Italic and Underline, or a row of filters, each selectable on its own ([Built from existing parts](../../../../../design/components/overview.md#a-row-of-toggle-buttons)). With `multiple`, any number can be on; without it, one or none. A pressed button is a yellow sticker.
+A toggle group is a row of buttons in a gray track that people press on and off: Bold, Italic and Underline, or a row of filters, each selectable on its own ([Built from existing parts](overview.md#a-row-of-toggle-buttons)). With `multiple`, any number can be on; without it, one or none. A pressed button is a yellow sticker.
 
 ```example
 toggle-group/compositions/formatting
@@ -22,12 +22,12 @@ toggle-group/compositions/formatting
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Several options in a compact row, each on or off on its own | ToggleGroup with `multiple`                                                         |
 | One option of a few, or none                                | ToggleGroup                                                                         |
-| One of 2 to 4 views, and one is always selected             | [SegmentedControl](../segmented-control/segmented-control.md)                       |
-| Options that are saved with a form                          | [Checkbox](../checkbox/checkbox.md)                                                 |
-| One setting, applied at once                                | [Switch](../switch/switch.md)                                                       |
-| Filtering a list by one of its values                       | A filter ([PickerTriggerButton](../picker-trigger-button/picker-trigger-button.md)) |
+| One of 2 to 4 views, and one is always selected             | [SegmentedControl](segmented-control.md)                       |
+| Options that are saved with a form                          | [Checkbox](checkbox.md)                                                 |
+| One setting, applied at once                                | [Switch](switch.md)                                                       |
+| Filtering a list by one of its values                       | A filter ([PickerTriggerButton](picker-trigger-button.md)) |
 
-The full table is in [Choosing a component](../../../../../design/components/overview.md#picking-something).
+The full table is in [Choosing a component](overview.md#picking-something).
 
 ## Anatomy
 
@@ -57,8 +57,8 @@ toggle-group/compositions/vertical
 | State                         | Look                                                                                                                                                                                                                                          |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Not pressed                   | `foreground-muted` text on the track; the medium tier on hover and press                                                                                                                                                                      |
-| Pressed                       | A yellow sticker with a bold label ([Color](../../../../../design/foundations/color.md#stickers)). It doesn't change on hover; a press lays `sticker-medium` ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)) |
-| Disabled item, disabled group | `foreground-disabled` text, no reaction to hover or press ([States](../../../../../design/foundations/states.md))                                                                                                                             |
+| Pressed                       | A yellow sticker with a bold label ([Color](../foundations/color.md#stickers)). It doesn't change on hover; a press lays `sticker-medium` ([Hover and press](../foundations/states.md#hover-and-press)) |
+| Disabled item, disabled group | `foreground-disabled` text, no reaction to hover or press ([States](../foundations/states.md))                                                                                                                             |
 
 ```example
 toggle-group/compositions/item-disabled
@@ -72,13 +72,13 @@ toggle-group/compositions/disabled
 
 - A horizontal group wraps its items onto a new row when they don't fit, and never grows wider than its container.
 - Pressing a pressed item turns it off, in both variants.
-- On a touch screen an item toggles when the finger lifts, so a tap that stops a scrolling list still toggles ([Switching on finger lift](../../../../../design/patterns/navigation.md#switching-on-finger-lift)).
-- Items sit 3px inside the track and 3px apart, like the segments of a [SegmentedControl](../segmented-control/segmented-control.md).
-- Items are 32px high (34px with a mouse) and don't extend their hit area to 44px. On touch screens that is below the [hit target](../../../../../design/foundations/spacing.md#hit-targets).
+- On a touch screen an item toggles when the finger lifts, so a tap that stops a scrolling list still toggles ([Switching on finger lift](../patterns/navigation.md#switching-on-finger-lift)).
+- Items sit 3px inside the track and 3px apart, like the segments of a [SegmentedControl](segmented-control.md).
+- Items are 32px high (34px with a mouse) and don't extend their hit area to 44px. On touch screens that is below the [hit target](../foundations/spacing.md#hit-targets).
 
 ## Content
 
-- Label each item with what it turns on, in sentence case: Bold, Numbered list ([Writing](../../../../../design/content/writing.md#casing)).
+- Label each item with what it turns on, in sentence case: Bold, Numbered list ([Writing](../content/writing.md#casing)).
 
 ## Accessibility
 
@@ -88,4 +88,4 @@ toggle-group/compositions/disabled
 
 ## Rules
 
-- Don't use a toggle group to switch views or sections: one view is always shown, and a toggle group can be left with none. Use a [SegmentedControl](../segmented-control/segmented-control.md) or [Tabs](../tabs/tabs.md).
+- Don't use a toggle group to switch views or sections: one view is always shown, and a toggle group can be left with none. Use a [SegmentedControl](segmented-control.md) or [Tabs](tabs.md).

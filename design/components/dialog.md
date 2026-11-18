@@ -10,7 +10,7 @@ related: [alert-dialog, form-section, drawer, banner, toast]
 
 # Dialog
 
-A dialog is a centered overlay on a scrim for something people must finish before they continue: a decision, or a small task of a few fields, such as creating a channel. It has a title, a body and at most two buttons. Its wide size holds a large form filled in one pass. A confirmation is a Dialog too, at `size="sm"`, whether the action can be undone or not; [AlertDialog](../alert-dialog/alert-dialog.md) is only for the few confirmations a product lists ([Choosing a component](../../../../../design/components/overview.md#overlays), 2026-11-03).
+A dialog is a centered overlay on a scrim for something people must finish before they continue: a decision, or a small task of a few fields, such as creating a channel. It has a title, a body and at most two buttons. Its wide size holds a large form filled in one pass. A confirmation is a Dialog too, at `size="sm"`, whether the action can be undone or not; [AlertDialog](alert-dialog.md) is only for the few confirmations a product lists ([Choosing a component](overview.md#overlays), 2026-11-03).
 
 ```example
 dialog/compositions/create-channel
@@ -22,19 +22,19 @@ dialog/compositions/create-channel
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | A small task in 1 to 5 fields (Create channel)                                       | Dialog                                                                                                                                                                                                                                                                                                                                                             |
 | A large form filled in one pass: registering or editing an app, configuring an agent | Dialog with `size="wide"`                                                                                                                                                                                                                                                                                                                                          |
-| Task details                                                                         | A workspace overlay on Dialog, 960px wide and full screen on a phone, outside the four sizes ([Tasks](../../../../../design/patterns/tasks.md))                                                                                                                                                                                                                    |
-| Confirming an action that cannot be undone, or that interrupts                       | Dialog with `size="sm"`, its confirm button colored by the consequence ([Rules](#rules)). [AlertDialog](../alert-dialog/alert-dialog.md) only where the product lists it: in Raft Chat, discarding unsaved edits to an agent's profile and opening a link that hands off to another app ([Raft Chat](../../../../../design/products/raft-chat/README.md#overlays)) |
-| An action that can be reversed in place                                              | No dialog: do it; when a [Toast](../toast/toast.md) offers Undo is in [Feedback](../../../../../design/patterns/feedback.md#confirming)                                                                                                                                                                                                                            |
-| Details or settings people look at and edit for a while                              | [Drawer](../drawer/drawer.md)                                                                                                                                                                                                                                                                                                                                      |
+| Task details                                                                         | A workspace overlay on Dialog, 960px wide and full screen on a phone, outside the four sizes ([Tasks](../patterns/tasks.md))                                                                                                                                                                                                                    |
+| Confirming an action that cannot be undone, or that interrupts                       | Dialog with `size="sm"`, its confirm button colored by the consequence ([Rules](#rules)). [AlertDialog](alert-dialog.md) only where the product lists it: in Raft Chat, discarding unsaved edits to an agent's profile and opening a link that hands off to another app ([Raft Chat](../products/raft-chat/README.md#overlays)) |
+| An action that can be reversed in place                                              | No dialog: do it; when a [Toast](toast.md) offers Undo is in [Feedback](../patterns/feedback.md#confirming)                                                                                                                                                                                                                            |
+| Details or settings people look at and edit for a while                              | [Drawer](drawer.md)                                                                                                                                                                                                                                                                                                                                      |
 
-Which overlay fits which job is in [Choosing a component](../../../../../design/components/overview.md#overlays).
+Which overlay fits which job is in [Choosing a component](overview.md#overlays).
 
 ## Anatomy
 
 - `Dialog`: the root. Owns the open state. Required.
 - `DialogTrigger`: the button that opens it.
 - `DialogContent`: the centered surface, portaled, with the scrim (`DialogOverlay`) behind it. Required. On a desktop and a tablet, `placement="top"` puts its top edge near the top of the window instead of the middle ([At the top](#at-the-top)).
-- `DialogHeader`: the title row, with an optional `DialogClose` at its end. The × is pulled out so its icon box, not the button, ends on the dialog's margin (`--surface-inset`: 20px, 16px with a mouse) ([Alignment](../../../../../design/foundations/alignment.md#the-ends-of-a-header)).
+- `DialogHeader`: the title row, with an optional `DialogClose` at its end. The × is pulled out so its icon box, not the button, ends on the dialog's margin (`--surface-inset`: 20px, 16px with a mouse) ([Alignment](../foundations/alignment.md#the-ends-of-a-header)).
 - `DialogTitle`: the title. Required.
 - `DialogDescription`: a sentence under the title or in the body.
 - `DialogBody`: the content. It scrolls when the dialog reaches the window height, natively, or under raft-ui's scrollbar with `unstable_scrollArea` ([Scrolling in a ScrollArea](#scrolling-in-a-scrollarea)).
@@ -46,7 +46,7 @@ Which overlay fits which job is in [Choosing a component](../../../../../design/
 - `DialogPortal` and `DialogOverlay`: lower-level parts.
 - `DialogSheetContent`: `DialogContent` for a dialog that becomes a sheet on a phone ([On a phone](#on-a-phone)). On a desktop and a tablet it is `DialogContent`, the same markup.
 - `DialogCommit`: the dialog's one commit button, a `Button` written at the end of `DialogFooter`. In a sheet on a phone it is drawn at the end of the head instead.
-- `DialogSheetBack`: Back at the start of a sheet's head, in a later step of a flow. It draws nothing outside a sheet. On a touch screen it goes back when the finger lifts ([Switching on finger lift](../../../../../design/patterns/navigation.md#switching-on-finger-lift)).
+- `DialogSheetBack`: Back at the start of a sheet's head, in a later step of a flow. It draws nothing outside a sheet. On a touch screen it goes back when the finger lifts ([Switching on finger lift](../patterns/navigation.md#switching-on-finger-lift)).
 
 ## Variants
 
@@ -54,33 +54,33 @@ Pick the size by what the dialog holds, not by what looks right. The four sizes 
 
 | Variant               | Width | Use for                                                                                                                                                                                                                                                         |
 | --------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `size="sm"`           | 400px | A decision: every confirmation and acknowledgement, including one with a few options to choose from or a short list of what it affects (Reset agent, Change visibility, the restart options). It is the width of [AlertDialog](../alert-dialog/alert-dialog.md) |
+| `size="sm"`           | 400px | A decision: every confirmation and acknowledgement, including one with a few options to choose from or a short list of what it affects (Reset agent, Change visibility, the restart options). It is the width of [AlertDialog](alert-dialog.md) |
 | `size="md"` (default) | 448px | A small task: 1 to 5 fields, a list to pick from, a short help text that is only read (Create channel, Add members, role help)                                                                                                                                  |
 | `size="lg"`           | 640px | Content that needs width: a list with several columns, a command or code, key-value rows, a long text to read, a flow of steps (Connect computer, a computer's release notes)                                                                                   |
 | `size="wide"`         | 896px | The large form dialog, in sections, with a fixed height of 760px or the window height less 32px, whichever is smaller                                                                                                                                           |
 
 - Every confirmation is one width, 400px, whether it is built on Dialog or AlertDialog. A confirmation whose content no longer fits 400px isn't a confirmation any more: it is a small task, at `md`.
 - `sm`, `md` and `lg` are the small dialog: its height follows its content, up to the window less 32px, and a click on the scrim closes it. `wide` is the large form dialog.
-- Set the width with `size` only. Product code never passes its own `max-w-*` to `DialogContent`. Content that fits none of the four sizes isn't a dialog: make it a page or a [Drawer](../drawer/drawer.md).
+- Set the width with `size` only. Product code never passes its own `max-w-*` to `DialogContent`. Content that fits none of the four sizes isn't a dialog: make it a page or a [Drawer](drawer.md).
 - Only these overlays have a width outside the four sizes, each set by its own rule. Nothing else may add one:
-  - Task details, 960px: a workspace overlay ([Tasks](../../../../../design/patterns/tasks.md)).
-  - Search, 720px, a `DialogContent` with `placement="top"`, its top edge over the top bar's field through `--dialog-top` ([At the top](#at-the-top), [Search](../search/search.md)).
-  - The showcase frame, 720px wide and about 520px high, shared by steps 3 to 5 of onboarding, the Upgrade to Pro dialog and Pro's Add seats dialog (cindyz, 2026-10-26: adding seats is a paywall, like upgrading), and used by nothing else ([Onboarding](../../../../../design/products/raft-chat/onboarding.md)).
-  - [AnnouncementDialog](../announcement-dialog/announcement-dialog.md), 576px: its picture and one-paragraph text read best there; at 640px the text runs past 80 characters a line.
+  - Task details, 960px: a workspace overlay ([Tasks](../patterns/tasks.md)).
+  - Search, 720px, a `DialogContent` with `placement="top"`, its top edge over the top bar's field through `--dialog-top` ([At the top](#at-the-top), [Search](search.md)).
+  - The showcase frame, 720px wide and about 520px high, shared by steps 3 to 5 of onboarding, the Upgrade to Pro dialog and Pro's Add seats dialog (cindyz, 2026-10-26: adding seats is a paywall, like upgrading), and used by nothing else ([Onboarding](../products/raft-chat/onboarding.md)).
+  - [AnnouncementDialog](announcement-dialog.md), 576px: its picture and one-paragraph text read best there; at 640px the text runs past 80 characters a line.
   - An attachment preview, as wide as the file needs, up to 768px.
 - On a narrow screen every size is as wide as itself or the window less 32px, whichever is smaller, so at 390px each one is 358px wide. Its height and the wide dialog's sections are in [Behavior](#behavior).
 
-Deleting something large, such as an agent or a server, also asks for its name to be typed ([Forms](../../../../../design/patterns/forms.md#danger-zone)). It is still a confirmation, at `sm`, with the confirm button red ([AlertDialog](../alert-dialog/alert-dialog.md#variants)):
+Deleting something large, such as an agent or a server, also asks for its name to be typed ([Forms](../patterns/forms.md#danger-zone)). It is still a confirmation, at `sm`, with the confirm button red ([AlertDialog](alert-dialog.md#variants)):
 
 ```example
 dialog/compositions/typed-delete
 ```
 
-The large form dialog uses `bar` on `DialogHeader`, `DialogBody` and `DialogFooter`: the header and footer stay in place and the body scrolls between them. The body holds `DialogNav` on the left, a `line-seam` after it, and one [FormSection](../form-section/form-section.md) per section on the right. Its structure and rules are in [Forms](../../../../../design/patterns/forms.md#the-large-form-dialog).
+The large form dialog uses `bar` on `DialogHeader`, `DialogBody` and `DialogFooter`: the header and footer stay in place and the body scrolls between them. The body holds `DialogNav` on the left, a `line-seam` after it, and one [FormSection](form-section.md) per section on the right. Its structure and rules are in [Forms](../patterns/forms.md#the-large-form-dialog).
 
 ## The footer
 
-Cancel comes first and the commit button last, both at the end of the footer, so the commit button is where the eye ends: bottom right. The start of the footer holds at most one quiet item, never both: a muted [TextLink](../text-link/text-link.md) that leads elsewhere, or a `DialogFooterNote` that says what the commit will do. Either one is safe to miss, because people don't look there first.
+Cancel comes first and the commit button last, both at the end of the footer, so the commit button is where the eye ends: bottom right. The start of the footer holds at most one quiet item, never both: a muted [TextLink](text-link.md) that leads elsewhere, or a `DialogFooterNote` that says what the commit will do. Either one is safe to miss, because people don't look there first.
 
 ```example
 dialog/compositions/footer-note
@@ -108,7 +108,7 @@ When the dialog is a sheet on a phone ([On a phone](#on-a-phone)), it has no foo
 
 ## Behavior
 
-- A centered dialog appears and disappears without animation, always over the scrim ([Motion](../../../../../design/foundations/motion.md#usage)). On a phone a dialog with fields is a sheet that slides up instead ([On a phone](#on-a-phone)).
+- A centered dialog appears and disappears without animation, always over the scrim ([Motion](../foundations/motion.md#usage)). On a phone a dialog with fields is a sheet that slides up instead ([On a phone](#on-a-phone)).
 - Esc, × and Cancel close a dialog. A click on the scrim closes a small dialog, except one drawn as a sheet on a phone ([On a phone](#on-a-phone)).
 - Esc closes only the topmost thing that is open. A Menu or a Select opened from the dialog closes on Esc and the dialog stays open; the next Esc closes the dialog. In a widget of your own that closes on Esc, such as a suggestion list in a text box, call `event.stopPropagation()` in its `onKeyDown`, not only `preventDefault()`: Base UI closes the dialog on every Esc that reaches it, prevented or not. When you can't change the widget, cancel the close in `onOpenChange` on `Dialog` when `details.reason` is `"escape-key"` and `details.event.defaultPrevented` is true.
 - Don't close a large form dialog on a click outside it: pass `disablePointerDismissal` on `Dialog`, so a half-filled form isn't lost to a stray click.
@@ -118,13 +118,13 @@ When the dialog is a sheet on a phone ([On a phone](#on-a-phone)), it has no foo
 - Below 768px the wide dialog hides `DialogNav` and the sections follow one another.
 - `DialogFooter` keeps its buttons in one row at every width. It measures the row laid out as a row, and only when its children run past the footer does it set `data-stacked` and stack them full width, the commit button on top ([The footer](#the-footer)). Content that may shrink, such as a label that truncates or wraps, shrinks first, so only what can't, the buttons, makes the footer stack. It measures again when the dialog resizes, a label changes or a font loads, and not at all while the footer is hidden in a sheet. A button wrapped in another element, such as a tooltip's trigger, fills the width too. `AlertDialogFooter` does the same.
 - A footer that sets its own layout with `className`, such as a checkbox beside the button or a pair of links, is measured the same way and needs nothing more: it keeps that layout while its content fits on one line, and stacks only when it doesn't. Give text that may give way `min-w-0` (and `truncate` to cut it), so it shrinks before the footer stacks.
-- A dialog opened from a dialog or a sheet draws its own, lighter scrim over the one below ([Stacked overlays](../../../../../design/foundations/elevation.md#stacked-overlays)). Render it inside the first one and this happens by itself. `layer={1}` is only for a dialog rendered outside the first one's tree: it lifts the dialog and its scrim above the first. What is lifted is the dialog's portal, to `z-dialog-layer` as a stacking context of its own, so a Select list or a menu opened from the card, which Base UI portals into the same element, is drawn over the card; the scrim follows the card, so a `layer` in `overlay` is ignored there. Before, the card and the scrim were lifted and the list stayed at `z-popup`, under both, and an app had to portal each list into the dialog's body.
-- A Select list, a menu or a popover opened from a dialog is portaled beside its card, inside the dialog, so it is drawn over the card and its head, and focus and a press on it stay inside the dialog. Don't pass it a `container` inside the dialog's scrolling body to get that: a ScrollArea is a stacking context of its own, so a list portaled into one is drawn under the head whenever it reaches it ([ScrollArea](../scroll-area/scroll-area.md#rules)). In a phone sheet the list also stays under the head ([Popups in a sheet](#popups-in-a-sheet)).
-- An app's own modal (its own backdrop, Esc and focus, on `DialogSurface`) joins the same stack with `OverlayLayerProvider` and `useParentOverlayKind` from `@botiverse/raft-ui/wip` ([Stacked overlays](../../../../../design/foundations/elevation.md#stacked-overlays)).
+- A dialog opened from a dialog or a sheet draws its own, lighter scrim over the one below ([Stacked overlays](../foundations/elevation.md#stacked-overlays)). Render it inside the first one and this happens by itself. `layer={1}` is only for a dialog rendered outside the first one's tree: it lifts the dialog and its scrim above the first. What is lifted is the dialog's portal, to `z-dialog-layer` as a stacking context of its own, so a Select list or a menu opened from the card, which Base UI portals into the same element, is drawn over the card; the scrim follows the card, so a `layer` in `overlay` is ignored there. Before, the card and the scrim were lifted and the list stayed at `z-popup`, under both, and an app had to portal each list into the dialog's body.
+- A Select list, a menu or a popover opened from a dialog is portaled beside its card, inside the dialog, so it is drawn over the card and its head, and focus and a press on it stay inside the dialog. Don't pass it a `container` inside the dialog's scrolling body to get that: a ScrollArea is a stacking context of its own, so a list portaled into one is drawn under the head whenever it reaches it ([ScrollArea](scroll-area.md#rules)). In a phone sheet the list also stays under the head ([Popups in a sheet](#popups-in-a-sheet)).
+- An app's own modal (its own backdrop, Esc and focus, on `DialogSurface`) joins the same stack with `OverlayLayerProvider` and `useParentOverlayKind` from `@botiverse/raft-ui/wip` ([Stacked overlays](../foundations/elevation.md#stacked-overlays)).
 
 ### At the top
 
-On a desktop and a tablet, a dialog that grows out of something near the top of the window takes `placement="top"`, so it opens where people were looking. Search is the case today: the panel's top edge covers the top bar's field, so the field seems to grow into it ([Search](../search/search.md)). Centered, it would open somewhere else, and on a tall window far from the field.
+On a desktop and a tablet, a dialog that grows out of something near the top of the window takes `placement="top"`, so it opens where people were looking. Search is the case today: the panel's top edge covers the top bar's field, so the field seems to grow into it ([Search](search.md)). Centered, it would open somewhere else, and on a tall window far from the field.
 
 - The dialog stays centered across. Its top edge sits at `--dialog-top`, 8% of the window's height down when nothing sets it.
 - It never grows past the window's bottom less 16px, so it ends on screen however low its top is; its body scrolls instead. Its width still comes from `size`.
@@ -138,7 +138,7 @@ dialog/compositions/top-placement
 
 ### Scrolling in a ScrollArea
 
-`DialogBody` scrolls natively, so on Windows, and on a Mac set to always show scrollbars, a long body draws the platform's scrollbar, which takes room from the body's width when it appears. With `unstable_scrollArea` the body is a [ScrollArea](../scroll-area/scroll-area.md) instead: it scrolls the same way and draws raft-ui's scrollbar, which takes no room and looks the same on every platform and in both themes.
+`DialogBody` scrolls natively, so on Windows, and on a Mac set to always show scrollbars, a long body draws the platform's scrollbar, which takes room from the body's width when it appears. With `unstable_scrollArea` the body is a [ScrollArea](scroll-area.md) instead: it scrolls the same way and draws raft-ui's scrollbar, which takes no room and looks the same on every platform and in both themes.
 
 ```example
 dialog/compositions/create-agent
@@ -146,12 +146,12 @@ dialog/compositions/create-agent
 
 - It is opt-in for now and becomes the default in a later minor release. Nothing else about the body changes, so when it is the default, delete the prop.
 - Use it for a body that can grow past the window: a form of many fields, a long list, a long text. A body that never scrolls draws no scrollbar either way.
-- The body scrolls sideways too when something in it is wider than it (a wide table, a line that doesn't wrap, a `<pre>`, an image), as the native body does: the dialog keeps its width, and a horizontal scrollbar shows along the body's bottom edge, over the footer. A body with nothing wider than itself scrolls down only and draws no horizontal scrollbar. Sideways, the whole body moves, its fields with the wide part, so for a wide table prefer `TableScroll` ([Table](../table/table.md#wide-tables)) around it: then only the table scrolls. In a body laid out as a grid (`className="grid gap-4"`) one wide child also makes every row as wide as itself, with or without the prop, since the grid's one column takes the width of its widest item; a `TableScroll` around the wide child, or `grid-cols-[minmax(0,1fr)]` on the body, keeps the rows the body's width.
-- The body is still the element with `data-slot="dialog-body"`. It takes `className`, `ref`, the native props and the children as before, so a layout written on it (`className="grid gap-4"`) is unchanged, and nothing is put inside it beside its children. It uses ScrollArea's [absolute gutters](../scroll-area/scroll-area.md#gutters-position): a frame, `data-slot="dialog-body-frame"`, is rendered around the body and holds the scrollbar.
+- The body scrolls sideways too when something in it is wider than it (a wide table, a line that doesn't wrap, a `<pre>`, an image), as the native body does: the dialog keeps its width, and a horizontal scrollbar shows along the body's bottom edge, over the footer. A body with nothing wider than itself scrolls down only and draws no horizontal scrollbar. Sideways, the whole body moves, its fields with the wide part, so for a wide table prefer `TableScroll` ([Table](table.md#wide-tables)) around it: then only the table scrolls. In a body laid out as a grid (`className="grid gap-4"`) one wide child also makes every row as wide as itself, with or without the prop, since the grid's one column takes the width of its widest item; a `TableScroll` around the wide child, or `grid-cols-[minmax(0,1fr)]` on the body, keeps the rows the body's width.
+- The body is still the element with `data-slot="dialog-body"`. It takes `className`, `ref`, the native props and the children as before, so a layout written on it (`className="grid gap-4"`) is unchanged, and nothing is put inside it beside its children. It uses ScrollArea's [absolute gutters](scroll-area.md#gutters-position): a frame, `data-slot="dialog-body-frame"`, is rendered around the body and holds the scrollbar.
 - The frame, not the body, is the child of `DialogContent`. A class that sizes the body in the dialog (`max-h-*`, `h-*`, `flex-*`) goes in `wrapperClassName`, which is the frame's; padding and layout stay in `className`. A selector of your own that reaches the body as a child of the content (`[data-slot=dialog-content] > [data-slot=dialog-body]`) no longer matches: select the frame, or the body as a descendant.
 - The body is a Tab stop only while it overflows and holds nothing that takes focus, as a native scroller is. A form adds no stop: Tab goes from the head to the first field, and the keyboard scrolls the body from whatever inside it has focus. A long text that is only read can be reached with Tab and scrolled with the arrow keys. A `tabIndex` of your own wins.
-- A scroll that reaches the body's end stops there, and a Mac trackpad or iOS still bounces the body (`overscroll="contain"`, as in a [Panel](../panel/panel.md#anatomy)).
-- For a header or a footer stuck inside the body (`position: sticky`), keep the scrollbar clear of it from the frame: `wrapperClassName="[--r-scroll-area-rail-inset-bottom:56px]"` ([Edge state](../scroll-area/scroll-area.md#edge-state)).
+- A scroll that reaches the body's end stops there, and a Mac trackpad or iOS still bounces the body (`overscroll="contain"`, as in a [Panel](panel.md#anatomy)).
+- For a header or a footer stuck inside the body (`position: sticky`), keep the scrollbar clear of it from the frame: `wrapperClassName="[--r-scroll-area-rail-inset-bottom:56px]"` ([Edge state](scroll-area.md#edge-state)).
 - The frame is a stacking context of its own, as every ScrollArea is: a popup given a `container` inside the body is drawn under the dialog's head. Leave popups where raft-ui portals them, beside the card.
 - In a phone sheet ([On a phone](#on-a-phone)) it is the same body: it scrolls under the head on the 16px margin, keeps the home indicator's inset, and holds the footer's note at its end.
 - A `bar` body ignores it. On a desktop a `bar` body doesn't scroll: the sections inside it do, and its `DialogNav` is a ScrollArea already. In a phone sheet a `bar` body still scrolls natively.
@@ -172,13 +172,13 @@ A dialog that stays centered keeps its footer in one row, as on a desktop. It st
 The sheet:
 
 - Rises from the bottom over the scrim, with `radius-dialog` on its top corners. The strip of page left above it shows that it is a layer over the page, not a new page.
-- Its head is a pushed page's head ([Navigation](../../../../../design/patterns/navigation.md)): × at the start, the title, and the dialog's one commit button at the end, at size `md` with the same color and words as on a desktop. It has no footer: × is Cancel. In a flow of steps the button at the end is the step's (Next, then the last step's action).
+- Its head is a pushed page's head ([Navigation](../patterns/navigation.md)): × at the start, the title, and the dialog's one commit button at the end, at size `md` with the same color and words as on a desktop. It has no footer: × is Cancel. In a flow of steps the button at the end is the step's (Next, then the last step's action).
 - From the second step of a flow on, Back takes the place of × at the start of the head, with no × beside it (stdrc, 2026-10-22): the sheet is a stack of steps, and Back undoes one, as on a pushed page. Esc still closes the sheet from any step; on a touch screen, people go Back to the first step and close it with ×.
 - A footer note, or a link written first in the footer, moves to the end of the body, in muted footnote text, left-aligned ([The footer](#the-footer)).
 - The body scrolls under the head and keeps the phone's 16px margin and the home indicator's inset at the bottom.
 - × and Esc close it. A tap on the scrim doesn't, so a half-filled form isn't lost to a stray tap, as with a large form dialog on a desktop. When something has been typed, ask before closing ([Asking before closing](#asking-before-closing)).
 - Dragging the sheet down to close it is planned, for when the sheet moves onto Drawer's drag.
-- It slides up as it opens, like every bottom sheet, and its scrim fades in with it ([Motion](../../../../../design/foundations/motion.md#usage)). With reduced motion it is simply there.
+- It slides up as it opens, like every bottom sheet, and its scrim fades in with it ([Motion](../foundations/motion.md#usage)). With reduced motion it is simply there.
 - With the on-screen keyboard up, the sheet shrinks to the space above it, so the head and its commit button stay in view.
 - An alert or a warning or destructive Banner that appears in the body after it opens, such as the error a failed commit adds, is scrolled into view: the button that caused it is at the top.
 
@@ -230,7 +230,7 @@ In a flow of steps, write each step's button as a `DialogCommit`: Next, then the
 dialog/compositions/sheet-steps
 ```
 
-A dialog or an alert dialog opened from the sheet is centered over it, on its own lighter scrim ([Stacked overlays](../../../../../design/foundations/elevation.md#stacked-overlays)). It keeps its own head, footer and commit button: only the sheet's own parts change.
+A dialog or an alert dialog opened from the sheet is centered over it, on its own lighter scrim ([Stacked overlays](../foundations/elevation.md#stacked-overlays)). It keeps its own head, footer and commit button: only the sheet's own parts change.
 
 #### Asking before closing
 
@@ -260,8 +260,8 @@ A dialog that stays centered on a phone keeps `DialogContent` and `Button`.
 
 ## Content
 
-- Title the dialog with the words of the button that opened it, or Edit and the item's name. A confirmation that only asks whether to go on, with nothing to fill in or choose, adds a question mark (Delete box?); a dialog with something to fill in or choose doesn't (Delete server) ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)). Label its main button with the action it performs, without the object: usually the title's verb (Create channel → Create); an Edit title's button is Save, and the other one Cancel ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)).
-- Set body text in `foreground-muted`, below a title in `foreground`. Their type styles are in [Typography](../../../../../design/foundations/typography.md).
+- Title the dialog with the words of the button that opened it, or Edit and the item's name. A confirmation that only asks whether to go on, with nothing to fill in or choose, adds a question mark (Delete box?); a dialog with something to fill in or choose doesn't (Delete server) ([Writing](../content/writing.md#actions-and-their-dialogs)). Label its main button with the action it performs, without the object: usually the title's verb (Create channel → Create); an Edit title's button is Save, and the other one Cancel ([Writing](../content/writing.md#actions-and-their-dialogs)).
+- Set body text in `foreground-muted`, below a title in `foreground`. Their type styles are in [Typography](../foundations/typography.md).
 
 ## Accessibility
 
@@ -277,11 +277,11 @@ A dialog that stays centered on a phone keeps `DialogContent` and `Button`.
 ## Rules
 
 - Put at most two buttons in the footer: Cancel first (`variant="ghost"`), the confirm button last. They stay one row on a phone; only when they don't fit do they stack, the confirm button on top and Cancel framed.
-- The one exception is the prompt on closing or leaving with unsaved changes that can be saved straight from the prompt. It may have three buttons: Keep editing (`variant="ghost"`, first), Discard changes, then Save (`variant="primary"`, last). With two, someone who wants to save has to keep editing, find Save and close again, and saving and leaving is what most people want there; the channel details do this (Jasper, 2026-11-14). A prompt that can't save directly keeps two buttons. It isn't a general rule: three buttons stack into three rows on a phone, and one exception shouldn't invite a secondary button in every dialog. The color of Discard changes is still open ([Open questions](../../../../../design/decisions/open-questions.md)).
+- The one exception is the prompt on closing or leaving with unsaved changes that can be saved straight from the prompt. It may have three buttons: Keep editing (`variant="ghost"`, first), Discard changes, then Save (`variant="primary"`, last). With two, someone who wants to save has to keep editing, find Save and close again, and saving and leaving is what most people want there; the channel details do this (Jasper, 2026-11-14). A prompt that can't save directly keeps two buttons. It isn't a general rule: three buttons stack into three rows on a phone, and one exception shouldn't invite a secondary button in every dialog. The color of Discard changes is still open ([Open questions](../decisions/open-questions.md)).
 - Put at most one item at the start of the footer: a muted `TextLink` or a `DialogFooterNote`, never both. Never put an action that changes something there, and never something people need to decide; that goes in the body.
 - Use a `DialogFooterNote` only in a `size="lg"` or `size="wide"` dialog, and keep it to 40 characters: it never wraps on a desktop.
 - Build the footer from `DialogFooter`, not a row of your own: it holds the spacing, the order and the stack when the buttons don't fit.
-- Make the confirm button pink (`variant="primary"`) when it does something. Color it by its consequence when it interrupts or can't be undone ([AlertDialog](../alert-dialog/alert-dialog.md#variants)).
-- Put anything people must read before they act in a [Banner](../banner/banner.md) inside the body ([Feedback](../../../../../design/patterns/feedback.md#errors-by-scope)).
+- Make the confirm button pink (`variant="primary"`) when it does something. Color it by its consequence when it interrupts or can't be undone ([AlertDialog](alert-dialog.md#variants)).
+- Put anything people must read before they act in a [Banner](banner.md) inside the body ([Feedback](../patterns/feedback.md#errors-by-scope)).
 - Pad every size by 20px. Its width comes from `size` ([Variants](#variants)), never from a class of your own, except the exceptions listed there.
 - Don't pass `overlay={false}` in product code: every centered dialog has the scrim, without exception.

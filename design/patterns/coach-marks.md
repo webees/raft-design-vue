@@ -11,11 +11,11 @@ A coach mark is one stop of a tour: a bubble that points at one thing on the scr
 
 - A tour of a screen the person enters for the first time, while something else goes on (the first agent at work).
 - Not for what the person meets later: a first task, thread, file or result is explained by Cindy or the agent in the conversation, when it appears. The tour is the product's only scripted guidance, so everything after it can answer what the person is actually doing (stdrc, 2026-11-14).
-- Not for errors, confirmations or anything the person must answer: those follow [Feedback](./feedback.md).
+- Not for errors, confirmations or anything the person must answer: those follow [Feedback](feedback.md).
 
 ## Structure
 
-A [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md), a popover anchored to the target, with its arrow:
+A [CoachMark](../components/coach-mark.md), a popover anchored to the target, with its arrow:
 
 - `PopoverBody`: `PopoverTitle`, the thing's name, and `PopoverDescription`, one sentence about it.
 - Optionally one more action the stop offers, an `outline` button on its own row under the text (`CoachMarkAction`; Turn on notifications): beside Skip and Next it would wrap at 300px.
@@ -27,7 +27,7 @@ A [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md), a popo
 
 - Make it 300px wide, with the popover's surface, shadow and 16px padding, 8px from its target and at least 8px from the window's edge ([Elevation](../foundations/elevation.md)).
 - Write a title and one sentence. A stop that needs two sentences is two stops, or something the agent should say.
-- Make Next, and Done on the last stop, the pink button: at that moment the bubble is the one thing to do (stdrc, 2026-11-14, replacing the earlier `outline`). The composer's send button stays pink under it: this is the one place two pink buttons share a screen, a stated exception to [One pink button](./actions-and-closing.md#one-pink-button), because the tour lies over a live page instead of replacing it. It is also the one popover with a pink button ([Popover](../../packages/ui/src/components/popover/popover.md#rules)).
+- Make Next, and Done on the last stop, the pink button: at that moment the bubble is the one thing to do (stdrc, 2026-11-14, replacing the earlier `outline`). The composer's send button stays pink under it: this is the one place two pink buttons share a screen, a stated exception to [One pink button](actions-and-closing.md#one-pink-button), because the tour lies over a live page instead of replacing it. It is also the one popover with a pink button ([Popover](../components/popover.md#rules)).
 - Count the stops on every bubble, so the person knows how long the tour is. Skip ends the whole tour, not the stop.
 - When a stop's target isn't on screen when its turn comes (the agent's working line has gone), skip that stop and count again without it: "2 of 6" is followed by "3 of 5", not "4 of 6". A missing number reads as a fault; a total that changes once reads as a shorter tour.
 - Let nothing else ask for attention while the tour runs: another card or prompt (How did you hear about Raft?) waits until the tour ends or is skipped. Two popups at once leave the person to work out which comes first.
@@ -54,11 +54,11 @@ A [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md), a popo
 
 ## Built from
 
-raft-ui's [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md) (experimental, from `@botiverse/raft-ui/wip`): `CoachMarkContent` is the 300px bubble with its arrow, the target holds the Located wash through `data-located="held"`, and the bubble is non-modal and focuses `CoachMarkNext` as above. Its text is a [Popover](../../packages/ui/src/components/popover/popover.md)'s `PopoverBody`. Esc calls the stop's `onDismiss`; Skip, Next and Done are the product's own handlers, and the product moves focus to the composer when the tour ends.
+raft-ui's [CoachMark](../components/coach-mark.md) (experimental, from `@botiverse/raft-ui/wip`): `CoachMarkContent` is the 300px bubble with its arrow, the target holds the Located wash through `data-located="held"`, and the bubble is non-modal and focuses `CoachMarkNext` as above. Its text is a [Popover](../components/popover.md)'s `PopoverBody`. Esc calls the stop's `onDismiss`; Skip, Next and Done are the product's own handlers, and the product moves focus to the composer when the tour ends.
 
 ## Related
 
-- [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md): the part.
-- [Popover](../../packages/ui/src/components/popover/popover.md): the panel it is built on.
+- [CoachMark](../components/coach-mark.md): the part.
+- [Popover](../components/popover.md): the panel it is built on.
 - [States](../foundations/states.md#located): the Located wash.
 - [Raft Chat: Onboarding](../products/raft-chat/onboarding.md#the-tour-v3): the tour's stops.

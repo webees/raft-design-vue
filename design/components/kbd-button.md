@@ -21,9 +21,9 @@ kbd-button/compositions/states
 | Situation                                                                      | Use                                                                                                                            |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
 | A shortcut people can change, in a shortcuts panel                             | KbdButton around a `KbdShortcut` at `size="md"`                                                                                |
-| A shortcut people can't change: read-only, set by the app menu, a phone's list | `KbdShortcut` at `md`, with no button ([Kbd](../kbd/kbd.md)); a lock icon before it says why, where it can't be changed yet    |
-| The shortcut of an action, in its tooltip or menu item                         | `KbdShortcut` at `sm` ([Tooltip](../tooltip/tooltip.md), [Kbd](../kbd/kbd.md#menus))                                           |
-| A choice between a few fixed keys, such as Enter or ⌘ Enter to send            | A [SegmentedControl](../segmented-control/segmented-control.md) or a [Select](../select/select.md): there is nothing to record |
+| A shortcut people can't change: read-only, set by the app menu, a phone's list | `KbdShortcut` at `md`, with no button ([Kbd](kbd.md)); a lock icon before it says why, where it can't be changed yet    |
+| The shortcut of an action, in its tooltip or menu item                         | `KbdShortcut` at `sm` ([Tooltip](tooltip.md), [Kbd](kbd.md#menus))                                           |
+| A choice between a few fixed keys, such as Enter or ⌘ Enter to send            | A [SegmentedControl](segmented-control.md) or a [Select](select.md): there is nothing to record |
 
 Use it only where the binding is editable. A button that can't change anything is an enabled control with no effect; a read-only binding stays Kbd, so a list shows at a glance which shortcuts can be changed.
 
@@ -40,19 +40,19 @@ A mark that a shortcut was changed (a yellow dot before the row's label, and its
 | State          | Looks                                                                                                                                                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | At rest        | The caps alone, with no frame: the list reads as the read-only list does.                                                                                                                                                                        |
-| Hover          | The medium tier and a `line-hairline` inside the button's `radius-chip` box, 4px around the caps ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).                                                               |
+| Hover          | The medium tier and a `line-hairline` inside the button's `radius-chip` box, 4px around the caps ([Hover and press](../foundations/states.md#hover-and-press)).                                                               |
 | Keyboard focus | The focus ring around the same box.                                                                                                                                                                                                              |
 | `recording`    | A field: the control height (34px with a mouse, 44px on touch), `layer-card`, a 1.5px `line-field` border, the control radius and, when it was reached from the keyboard, the focus ring; the caps 8px from its start. It sets `data-recording`. |
 | `invalid`      | The caps take `danger-soft` with `danger-strong` text and line, and a recording field a `danger-strong` border. It sets `data-invalid`.                                                                                                          |
 
-Started with a click, the field shows no ring, as a text field clicked with the mouse shows none: its border, the caret and the row's highlight mark it, and the person just pointed there ([Focus](../../../../../design/foundations/states.md#focus)). Started with Enter or Space, it keeps the ring.
+Started with a click, the field shows no ring, as a text field clicked with the mouse shows none: its border, the caret and the row's highlight mark it, and the person just pointed there ([Focus](../foundations/states.md#focus)). Started with Enter or Space, it keeps the ring.
 
-The caret doesn't blink: it marks where the next key lands, and a blink in a list people read is motion that says nothing new ([Motion](../../../../../design/foundations/motion.md)).
+The caret doesn't blink: it marks where the next key lands, and a blink in a list people read is motion that says nothing new ([Motion](../foundations/motion.md)).
 
 ## Sizes
 
-- At rest the button's box reaches 4px past the caps on every side, 32px tall around 24px caps, and a negative margin takes the 4px back, so the caps sit exactly where a read-only `KbdShortcut` sits: on the row's trailing edge, centered on the row, and the row keeps its height. Its hit area reaches 44px ([Accessibility](../../../../../design/foundations/accessibility.md)).
-- Recording, the field is the control height, as tall as the fields and buttons beside it, and its margin takes back what it adds over the caps: (34 − 24) / 2 = 5px with a mouse and 10px on touch. Keep at least that much between the caps and the row's edges: a ListRow's 12px does ([ListRow](../list-row/list-row.md)). The field grows toward the start, so its end stays on the row's trailing edge.
+- At rest the button's box reaches 4px past the caps on every side, 32px tall around 24px caps, and a negative margin takes the 4px back, so the caps sit exactly where a read-only `KbdShortcut` sits: on the row's trailing edge, centered on the row, and the row keeps its height. Its hit area reaches 44px ([Accessibility](../foundations/accessibility.md)).
+- Recording, the field is the control height, as tall as the fields and buttons beside it, and its margin takes back what it adds over the caps: (34 − 24) / 2 = 5px with a mouse and 10px on touch. Keep at least that much between the caps and the row's edges: a ListRow's 12px does ([ListRow](list-row.md)). The field grows toward the start, so its end stays on the row's trailing edge.
 
 ## Behavior
 
@@ -62,7 +62,7 @@ KbdButton draws the states; the product records the keys.
 - Esc, a click elsewhere or leaving the panel cancels, and nothing is saved until a valid shortcut lands.
 - Let Tab with no modifier leave the field and cancel, so recording never traps the keyboard.
 - Keys that can't be used (one the browser or the system keeps, a single key) stay in the field as `invalid`, with the reason on the row's second line, until the next key press; recording stays open.
-- Keys that belong to another command are held, not saved: keep the field, drop the caret and attach a notice under the row with Cancel and the choices ([Banner](../banner/banner.md#attached-to-a-list-row)).
+- Keys that belong to another command are held, not saved: keep the field, drop the caret and attach a notice under the row with Cancel and the choices ([Banner](banner.md#attached-to-a-list-row)).
 
 ```example
 kbd-button/compositions/shortcuts-panel
@@ -79,6 +79,6 @@ kbd-button/compositions/shortcuts-panel
 ## Rules
 
 - Use KbdButton only where the binding can be changed, and never disable it: a shortcut that can't be changed is a `KbdShortcut` with no button.
-- Put one `KbdShortcut` at `md` in each KbdButton. Alternatives ("⌘↑ / ⌘↓") are two KbdButtons with the "/" between them, as in a read-only list ([Kbd](../kbd/kbd.md#spacing-and-shape)): each is its own binding.
+- Put one `KbdShortcut` at `md` in each KbdButton. Alternatives ("⌘↑ / ⌘↓") are two KbdButtons with the "/" between them, as in a read-only list ([Kbd](kbd.md#spacing-and-shape)): each is its own binding.
 - Don't put a label, an icon or "+" in the button: the row's label says what the shortcut does, and the caps are the value.
-- Say why the keys were refused in words, on the row's second line, not only with the danger tint ([Color](../../../../../design/foundations/color.md#meanings-of-color)).
+- Say why the keys were refused in words, on the row's second line, not only with the danger tint ([Color](../foundations/color.md#meanings-of-color)).

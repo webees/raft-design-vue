@@ -10,22 +10,22 @@ related: [task-card, task-list, tasks, segmented-control]
 
 # TaskBoard
 
-A TaskBoard shows tasks in one column per status, from Backlog to Closed. Dragging a card to another column changes its status. It is one of the two views of a page of tasks; the other, and the default, is the page's list. When to show which is in [Tasks](../../../../../design/patterns/tasks.md#rules).
+A TaskBoard shows tasks in one column per status, from Backlog to Closed. Dragging a card to another column changes its status. It is one of the two views of a page of tasks; the other, and the default, is the page's list. When to show which is in [Tasks](../patterns/tasks.md#rules).
 
 ```example
 task-board/compositions/task-board
 ```
 
-Not yet implemented in raft-ui: this example shows the board before [0042](../../../../../design/decisions/0042-tasks-as-a-to-do-list.md), with five columns and no completion control on the cards.
+Not yet implemented in raft-ui: this example shows the board before [0042](../decisions/0042-tasks-as-a-to-do-list.md), with five columns and no completion control on the cards.
 
 ## When to use
 
 | Situation                                   | Use                                                                          |
 | ------------------------------------------- | ---------------------------------------------------------------------------- |
 | Tasks by status, with room for five columns | TaskBoard                                                                    |
-| The default view of a page of tasks         | Its list of rows ([Tasks](../../../../../design/patterns/tasks.md#the-list)) |
-| Tasks by status in one column               | [TaskList](../task-list/task-list.md)                                        |
-| One task                                    | [TaskCard](../task-card/task-card.md)                                        |
+| The default view of a page of tasks         | Its list of rows ([Tasks](../patterns/tasks.md#the-list)) |
+| Tasks by status in one column               | [TaskList](task-list.md)                                        |
+| One task                                    | [TaskCard](task-card.md)                                        |
 
 ## Anatomy
 
@@ -46,7 +46,7 @@ Drag and drop comes from the `TaskDnd` parts (`TaskDndProvider`, `TaskDropZone`,
 | Empty column                   | A dashed `line-seam` box with one line of text in `foreground-hint`                                                                                                                                                                                                                 |
 | A card can be dropped          | The empty box hides and the drop placeholder shows; a collapsed column gets a dashed `line-strong` outline                                                                                                                                                                          |
 | A card is over a column        | Where its cards are drop targets, the column keeps its fill; only the drop placeholder marks where the card lands, so one signal says where, not two                                                                                                                                |
-| A card is over a sorted column | The whole column takes `fill-subtle`, with no placeholder between its cards: dropped, the card goes where the sort puts it, so the column is the place (`dragInto` on its `TaskDropZone`, [Where it will land](../../../../../design/patterns/drag-and-drop.md#where-it-will-land)) |
+| A card is over a sorted column | The whole column takes `fill-subtle`, with no placeholder between its cards: dropped, the card goes where the sort puts it, so the column is the place (`dragInto` on its `TaskDropZone`, [Where it will land](../patterns/drag-and-drop.md#where-it-will-land)) |
 | A card can't be dropped        | No fill; the empty box says why, in `foreground-muted`                                                                                                                                                                                                                              |
 
 ```example
@@ -55,9 +55,9 @@ task-board/compositions/task-board-empty-columns
 
 ## Behavior
 
-- Order the columns Backlog, Todo, In progress, Done, Closed, and start only Closed collapsed ([Tasks](../../../../../design/patterns/tasks.md#rules)).
-- Don't refuse a drop because of the status a card has or would get: any status can be set from any status ([Tasks](../../../../../design/patterns/tasks.md#rules)). A column refuses a card only for a reason outside the statuses, such as a task the person may not change.
-- Switch between the list and the board with List / Board near the end of the page's toolbar ([Tasks](../../../../../design/patterns/tasks.md#structure)), and remember the person's choice.
+- Order the columns Backlog, Todo, In progress, Done, Closed, and start only Closed collapsed ([Tasks](../patterns/tasks.md#rules)).
+- Don't refuse a drop because of the status a card has or would get: any status can be set from any status ([Tasks](../patterns/tasks.md#rules)). A column refuses a card only for a reason outside the statuses, such as a task the person may not change.
+- Switch between the list and the board with List / Board near the end of the page's toolbar ([Tasks](../patterns/tasks.md#structure)), and remember the person's choice.
 - Scroll the whole board in one viewport, both ways. Columns keep their width and never scroll on their own.
 - Mount only the visible cards of a tall column with a virtualizer of your own that reads the board's scroll position, as below.
 
@@ -67,14 +67,14 @@ task-board/compositions/task-board-virtualization
 
 ## Content
 
-- Write the empty text the same way as an empty group in a list ([TaskList](../task-list/task-list.md#content)).
+- Write the empty text the same way as an empty group in a list ([TaskList](task-list.md#content)).
 - While a card is dragged over an empty column, name the status it would get, or, when the column refuses it, why ("You can't change this task's status").
 
 ## Accessibility
 
 - Each column is a Base UI `Collapsible` rendered as a `section`; its trigger is a button with `aria-expanded`.
 - Give each column an accessible name: the status name in the trigger, or `aria-label` on the section.
-- Cards can be moved with the keyboard: Space picks a card up, Left and Right move it between columns (Up and Down move it within a column only where the column is in the person's own order), Space drops it and Escape puts it back. Enter opens the card ([Drag and drop](../../../../../design/patterns/drag-and-drop.md#keyboard)).
+- Cards can be moved with the keyboard: Space picks a card up, Left and Right move it between columns (Up and Down move it within a column only where the column is in the person's own order), Space drops it and Escape puts it back. Enter opens the card ([Drag and drop](../patterns/drag-and-drop.md#keyboard)).
 - Announce each step by name: "Picked up Task #25. Over Todo." "Dropped Task #25 in In progress." Pass the card's and the status's names to `TaskDndProvider`'s `describe`; the board composition shows how. The board doesn't announce on its own, and without `describe` nothing is announced.
 
 ## Rules

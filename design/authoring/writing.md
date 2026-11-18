@@ -38,7 +38,7 @@ Most of these docs are rules. A rule is something a reviewer can check.
 
 - **Lead with the answer.** The paragraph under the title says what the thing is and when to use it. Someone who reads only that paragraph should choose correctly.
 - **Use a table for any choice between options**: situation on the left, what to use on the right.
-- **Follow the template** for the page type ([templates](./templates/)). Readers and agents rely on finding the same sections in the same order.
+- **Follow the template** for the page type ([templates](templates)). Readers and agents rely on finding the same sections in the same order.
 - **Make each page stand alone.** Don't write "as above" or "see the previous page" without a link. Don't rely on an image or an example to carry a rule; state the rule in words.
 - **Keep component docs short.** A component doc over about 150 lines is usually two things; move the shared part into a pattern.
 

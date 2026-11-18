@@ -10,7 +10,7 @@ related: [select, combobox, combobox-select, button]
 
 # PickerTriggerButton
 
-PickerTriggerButton is the button of a filter: a compact 32px trigger (34px with a mouse, the control height) that opens the list of a [Select](../select/select.md) or a [Combobox](../combobox/combobox.md) above the list it filters. It has no state of its own. It is rendered as the select's or combobox's trigger, which keeps opening, focus, keyboard navigation and selection.
+PickerTriggerButton is the button of a filter: a compact 32px trigger (34px with a mouse, the control height) that opens the list of a [Select](select.md) or a [Combobox](combobox.md) above the list it filters. It has no state of its own. It is rendered as the select's or combobox's trigger, which keeps opening, focus, keyboard navigation and selection.
 
 ```example
 picker-trigger-button/compositions/select-filter
@@ -21,13 +21,13 @@ picker-trigger-button/compositions/select-filter
 | Situation                                                          | Use                                                                                                                                            |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Filtering a list by one value or a few values                      | PickerTriggerButton, rendered as a `SelectTrigger` or `ComboboxTrigger`                                                                        |
-| A filter people set seldom, by habit, that the button doesn't name | PickerTriggerButton that always says Filter, rendered as a `DropdownMenuTrigger`, with a [FilterChip](../filter-chip/filter-chip.md) beside it |
-| Picking a value in a form                                          | The select's own field ([Select](../select/select.md))                                                                                         |
-| A list of actions                                                  | A menu ([DropdownMenu](../dropdown-menu/dropdown-menu.md))                                                                                     |
-| A row of options, each on or off on its own                        | [ToggleGroup](../toggle-group/toggle-group.md)                                                                                                 |
+| A filter people set seldom, by habit, that the button doesn't name | PickerTriggerButton that always says Filter, rendered as a `DropdownMenuTrigger`, with a [FilterChip](filter-chip.md) beside it |
+| Picking a value in a form                                          | The select's own field ([Select](select.md))                                                                                         |
+| A list of actions                                                  | A menu ([DropdownMenu](dropdown-menu.md))                                                                                     |
+| A row of options, each on or off on its own                        | [ToggleGroup](toggle-group.md)                                                                                                 |
 | One on/off filter among the filters above a list (Relevant to me)  | PickerTriggerButton on its own, as a toggle (below)                                                                                            |
 
-The full choice between pickers is in [Choosing a component](../../../../../design/components/overview.md#picking-something). How a filter looks, how many values it shows and where Clear all goes are in [Select › Filters](../select/select.md#filters).
+The full choice between pickers is in [Choosing a component](overview.md#picking-something). How a filter looks, how many values it shows and where Clear all goes are in [Select › Filters](select.md#filters).
 
 ## Anatomy
 
@@ -49,23 +49,23 @@ A filter that is only on or off (Relevant to me) is a PickerTriggerButton on its
 | State                      | Look                                                                                                                                                |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Not applied                | `foreground-muted` text inside a `line-seam` outline                                                                                                |
-| Applied (`data-has-value`) | `info-soft` fill, `foreground` text, no outline ([States](../../../../../design/foundations/states.md#usage): an active filter is selected content) |
+| Applied (`data-has-value`) | `info-soft` fill, `foreground` text, no outline ([States](../foundations/states.md#usage): an active filter is selected content) |
 | Invalid (`data-invalid`)   | A `danger-strong` outline                                                                                                                           |
-| Disabled                   | Follows [States](../../../../../design/foundations/states.md#usage): `fill-muted`, `foreground-disabled` text                                       |
+| Disabled                   | Follows [States](../foundations/states.md#usage): `fill-muted`, `foreground-disabled` text                                       |
 
 - A toggle sets `data-has-value` while it is on, so it looks like any applied filter.
 - `ComboboxTrigger` sets `data-has-value` when the combobox has a value. A `SelectTrigger` always holds a value, so it never sets it: pass `data-has-value` yourself when the filter differs from its default.
 
 ## Behavior
 
-- The list opens next to the trigger, as every popup does ([Elevation](../../../../../design/foundations/elevation.md#popups)); its width and alignment are in [Select › Behavior](../select/select.md#behavior).
+- The list opens next to the trigger, as every popup does ([Elevation](../foundations/elevation.md#popups)); its width and alignment are in [Select › Behavior](select.md#behavior).
 - The trigger keeps its height and doesn't wrap or truncate: a long value makes it wider.
 
 ## Content
 
 - Show the current value, not the filter's name, once a value is chosen: Relevance, #launch-week. Before that, show the filter's name: Channel, Assignee.
-- The exception is the Filter button: for a filter people set seldom and by habit, the button always says Filter and a [FilterChip](../filter-chip/filter-chip.md) beside it names the active filter. Which of the two a filter takes is in [Select › Filters](../select/select.md#which-filter-button).
-- The general rules for labels are in [Writing](../../../../../design/content/writing.md#casing).
+- The exception is the Filter button: for a filter people set seldom and by habit, the button always says Filter and a [FilterChip](filter-chip.md) beside it names the active filter. Which of the two a filter takes is in [Select › Filters](select.md#which-filter-button).
+- The general rules for labels are in [Writing](../content/writing.md#casing).
 
 ## Accessibility
 

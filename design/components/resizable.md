@@ -10,7 +10,7 @@ related: [app-shell, sidebar, panel, thread-panel]
 
 # Resizable
 
-Resizable lets people drag the boundary between two regions to change how much room each one gets: the sidebar and the main area, or a conversation and its thread. The seam between the two columns is the only line, and the drag handle sits on it ([Built from existing parts](../../../../../design/components/overview.md#resizable-columns)). Cards laid out in a panel have no seam, so their handle is the gap between them ([The gap handle](#the-gap-handle)).
+Resizable lets people drag the boundary between two regions to change how much room each one gets: the sidebar and the main area, or a conversation and its thread. The seam between the two columns is the only line, and the drag handle sits on it ([Built from existing parts](overview.md#resizable-columns)). Cards laid out in a panel have no seam, so their handle is the gap between them ([The gap handle](#the-gap-handle)).
 
 ```example
 app-shell/compositions/collapsible-sidebar
@@ -21,9 +21,9 @@ app-shell/compositions/collapsible-sidebar
 | Situation                                               | Use                                                                 |
 | ------------------------------------------------------- | ------------------------------------------------------------------- |
 | A split people adjust: the sidebar, the thread panel    | Resizable                                                           |
-| Widths fixed by the design                              | The slots of [AppShell](../app-shell/app-shell.md), or plain layout |
-| A side panel that opens and closes beside the main area | A [Panel](../panel/panel.md) in the shell                           |
-| Details that cover the page for a while                 | [Drawer](../drawer/drawer.md)                                       |
+| Widths fixed by the design                              | The slots of [AppShell](app-shell.md), or plain layout |
+| A side panel that opens and closes beside the main area | A [Panel](panel.md) in the shell                           |
+| Details that cover the page for a while                 | [Drawer](drawer.md)                                       |
 
 ## Anatomy
 
@@ -31,14 +31,14 @@ app-shell/compositions/collapsible-sidebar
 - `ResizablePanel`: one region, with its default, minimum and maximum size. At least 2.
 - `ResizableHandle`: the drag handle between two panels. Required between every adjacent pair: a group without handles is plain layout.
 
-The panels draw no surface, edge or padding. The region inside each panel draws its own, including the one seam between the two ([Page structure](../../../../../design/patterns/page-structure.md#one-line-between-two-regions)).
+The panels draw no surface, edge or padding. The region inside each panel draws its own, including the one seam between the two ([Page structure](../patterns/page-structure.md#one-line-between-two-regions)).
 
 ## Variants
 
 | Variant   | Use for                                                                                                                                                                                                                                                                             |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | On a seam | Columns that meet at a seam: the sidebar and the main area, a conversation and its thread, a channel's side columns and the sections stacked in them. The default, drawn by `ResizableHandle`                                                                                       |
-| In a gap  | Cards laid out in a panel with a 12px gap around them. No layout uses it today: the channel's side cards it was made for are now side sections in columns that meet at seams ([The channel's side columns](../../../../../design/patterns/responsive.md#the-channels-side-columns)) |
+| In a gap  | Cards laid out in a panel with a 12px gap around them. No layout uses it today: the channel's side cards it was made for are now side sections in columns that meet at seams ([The channel's side columns](../patterns/responsive.md#the-channels-side-columns)) |
 
 ### The gap handle
 
@@ -47,7 +47,7 @@ Cards laid out in a panel have no seam to drag: each card draws its own edge, an
 | State          | Look                                                                                                                                                                                                                                                                                                           |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | At rest        | Nothing                                                                                                                                                                                                                                                                                                        |
-| Hover          | A 56 × 4px bar along the gap, its center following the pointer and kept half a bar inside each end, `line-seam`, with round ends (`rounded-full`) like the [Drawer](../drawer/drawer.md)'s grab handle, after a 150ms pause so a pointer passing over doesn't flash it; a Resize tooltip and the resize cursor |
+| Hover          | A 56 × 4px bar along the gap, its center following the pointer and kept half a bar inside each end, `line-seam`, with round ends (`rounded-full`) like the [Drawer](drawer.md)'s grab handle, after a 150ms pause so a pointer passing over doesn't flash it; a Resize tooltip and the resize cursor |
 | Dragging       | The bar in `foreground-muted`, staying where the drag started                                                                                                                                                                                                                                                  |
 | Keyboard focus | The bar in `foreground`, in the middle of the gap                                                                                                                                                                                                                                                              |
 
@@ -71,17 +71,17 @@ These are the states of the handle on a seam; the gap handle's are in [The gap h
 - The handle is 12px wide and lies over the start of the panel after the boundary (to its right, or below it), so it takes no room from either panel; its line is still drawn on the seam. Under a coarse pointer (a finger on a tablet) it is 24px wide.
   - Why after the boundary, not centered on it: a panel's scrollbar runs along its end edge, the seam's other side. Centered, the handle covered the scrollbar's last 6px, where the thumb is, and took its drag: on the Raft app's Activity list the thumb couldn't be dragged (InNOut, 2026-11-09, #proj-raft-ui:21bae128). The start of the panel after a seam never has a scrollbar.
 - A double click on the handle puts the column back to its default width.
-- Use the widths in [Spacing](../../../../../design/foundations/spacing.md#layout-widths) for the default, minimum and maximum: every column has its own range, and the sidebar keeps one width on every page ([Resizing columns](../../../../../design/foundations/spacing.md#resizing-columns)).
+- Use the widths in [Spacing](../foundations/spacing.md#layout-widths) for the default, minimum and maximum: every column has its own range, and the sidebar keeps one width on every page ([Resizing columns](../foundations/spacing.md#resizing-columns)).
 - Pass `groupResizeBehavior="preserve-pixel-size"` on the sidebar's panel, so the sidebar keeps its width when the window changes and the main area takes up the difference.
-- In a conversation's row every seam trades width between its two neighbours, and once the shrinking one is down to 160px the drag goes on taking from the next column further out on that side (the cascade); a column's content keeps its own minimum and is clipped under it. What a release shows is what is saved ([The channel's side columns](../../../../../design/patterns/responsive.md#the-channels-side-columns)).
-- Below 768px there are no side-by-side columns to resize in Raft Chat; a server's public page keeps its columns from 640px ([Responsive layout](../../../../../design/patterns/responsive.md)).
+- In a conversation's row every seam trades width between its two neighbours, and once the shrinking one is down to 160px the drag goes on taking from the next column further out on that side (the cascade); a column's content keeps its own minimum and is clipped under it. What a release shows is what is saved ([The channel's side columns](../patterns/responsive.md#the-channels-side-columns)).
+- Below 768px there are no side-by-side columns to resize in Raft Chat; a server's public page keeps its columns from 640px ([Responsive layout](../patterns/responsive.md)).
 
 ### Dragging past the end
 
 A drag that reaches the end of the sidebar's range and keeps going changes the layout's state instead of stopping: the sidebar snaps to its next state, and that jump is how people know they went past the end (stdrc, 2026-10-23).
 
 - **The sidebar collapses.** Drag it to its minimum and 40px further toward the edge: it collapses at once, while the drag is still held.
-- **Nothing else snaps.** A seam in a conversation's row doesn't stop at a minimum: it carries on into the next column, each down to 160px ([Behavior](#behavior)). A thread is expanded by the Expand in its head, as every column is, not by a drag past the end ([Panel](../panel/panel.md#rules); stdrc, 2026-11-03 and 2026-11-04, #proj-raft-ui:#189).
+- **Nothing else snaps.** A seam in a conversation's row doesn't stop at a minimum: it carries on into the next column, each down to 160px ([Behavior](#behavior)). A thread is expanded by the Expand in its head, as every column is, not by a drag past the end ([Panel](panel.md#rules); stdrc, 2026-11-03 and 2026-11-04, #proj-raft-ui:#189).
 - **It switches during the drag, not on release.** Dragging back across the line, still held, undoes it; releasing keeps whichever state is showing. A preview that only switches on release has no jump, and the jump is the point: VS Code's sidebar and macOS split views snap the same way.
 - **40px, not a touch.** The extra 40px keeps a drag that just reaches the end from snapping by accident.
 - **The width comes back.** The width the sidebar had before it snapped is remembered, and expanding the sidebar brings it back. A double click on the handle still resets to the default width.

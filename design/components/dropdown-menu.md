@@ -10,7 +10,7 @@ related: [context-menu, select, popover, dialog, alert-dialog, drawer]
 
 # DropdownMenu
 
-A dropdown menu is a list of actions on one thing (a message, a channel, a task, an agent), opened from a More button (⋮ for one thing's menu, ⋯ at the end of a row of actions; [Iconography](../../../../../design/foundations/iconography.md#meanings)). It can also hold a setting-style choice, such as sort order or status, with a check mark on the current value. Right-click on desktop and press and hold on a phone open the same menu as a [ContextMenu](../context-menu/context-menu.md).
+A dropdown menu is a list of actions on one thing (a message, a channel, a task, an agent), opened from a More button (⋮ for one thing's menu, ⋯ at the end of a row of actions; [Iconography](../foundations/iconography.md#meanings)). It can also hold a setting-style choice, such as sort order or status, with a check mark on the current value. Right-click on desktop and press and hold on a phone open the same menu as a [ContextMenu](context-menu.md).
 
 ```example
 dropdown-menu/compositions/sidebar-section-header-menu
@@ -21,13 +21,13 @@ dropdown-menu/compositions/sidebar-section-header-menu
 | Situation                                                  | Use                                                                 |
 | ---------------------------------------------------------- | ------------------------------------------------------------------- |
 | Act on one thing, from a button                            | DropdownMenu                                                        |
-| The same actions, on right-click or press and hold         | [ContextMenu](../context-menu/context-menu.md), with the same items |
+| The same actions, on right-click or press and hold         | [ContextMenu](context-menu.md), with the same items |
 | A setting-style choice that applies at once (sort, status) | DropdownMenu with radio items                                       |
-| A value submitted with a form                              | [Select](../select/select.md)                                       |
-| A little input on click (snooze, rename)                   | [Popover](../popover/popover.md)                                    |
-| A place to go, on a phone                                  | A bottom sheet ([Drawer](../drawer/drawer.md))                      |
+| A value submitted with a form                              | [Select](select.md)                                       |
+| A little input on click (snooze, rename)                   | [Popover](popover.md)                                    |
+| A place to go, on a phone                                  | A bottom sheet ([Drawer](drawer.md))                      |
 
-Which overlay fits which job is in [Choosing a component](../../../../../design/components/overview.md#overlays).
+Which overlay fits which job is in [Choosing a component](overview.md#overlays).
 
 ## Anatomy
 
@@ -48,24 +48,24 @@ Which overlay fits which job is in [Choosing a component](../../../../../design/
 
 ## States
 
-Hover, keyboard highlight, the current value and disabled items follow [States](../../../../../design/foundations/states.md#usage). In a menu:
+Hover, keyboard highlight, the current value and disabled items follow [States](../foundations/states.md#usage). In a menu:
 
 - Keep the highlight and the current value apart. The `brand-soft` highlight shows where the pointer or keyboard is; the check mark and bold text show which value is chosen. Never use the highlight to mark the current value.
-- Show a disabled item with `foreground-disabled` text and icon, and nothing else. The one exception is an item an app has disabled in an item card's More menu: it shows the app's reason as a second line, because a menu item has no tooltip and the app's reason is the only way to learn why ([PreviewCard](../preview-card/preview-card.md#item-card)).
+- Show a disabled item with `foreground-disabled` text and icon, and nothing else. The one exception is an item an app has disabled in an item card's More menu: it shows the app's reason as a second line, because a menu item has no tooltip and the app's reason is the only way to learn why ([PreviewCard](preview-card.md#item-card)).
 
 ## Behavior
 
-- The menu opens below its trigger, aligned to the trigger's start edge, and moves or flips when it meets the window edge ([Elevation](../../../../../design/foundations/elevation.md#popups)).
-- The menu keeps clear of the frame insets: where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), it stops 8px from that part, not from the window's edge ([Page structure](../../../../../design/patterns/page-structure.md#frame-insets)). The web sets none.
+- The menu opens below its trigger, aligned to the trigger's start edge, and moves or flips when it meets the window edge ([Elevation](../foundations/elevation.md#popups)).
+- The menu keeps clear of the frame insets: where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), it stops 8px from that part, not from the window's edge ([Page structure](../patterns/page-structure.md#frame-insets)). The web sets none.
 - Choosing an action or a radio item closes the menu. A radio item is one value of a set, so one pick completes the choice, and the open menu would only cover what it changed. Its check mark shows the current value the next time the menu opens. Keep the menu open after a radio pick (`closeOnClick={false}`) only when the menu itself shows the result, such as a warning that appears under the new value.
 - Choosing a checkbox item leaves the menu open: each item turns one thing on or off, and people often change several at once.
 - Esc and a click outside close the menu.
-- An item is as tall as its content: one line is 36px, and a second line, such as a description under the label, adds only its own height, with the same space above and below the text ([Forms](../../../../../design/patterns/forms.md#option-height)). This holds for radio and checkbox items too.
+- An item is as tall as its content: one line is 36px, and a second line, such as a description under the label, adds only its own height, with the same space above and below the text ([Forms](../patterns/forms.md#option-height)). This holds for radio and checkbox items too.
 
 ## Content
 
-- Write item labels in sentence case: Copy link, Reply in thread ([Writing](../../../../../design/content/writing.md#casing)).
-- Make the label of an item that opens a dialog the dialog's action. In an item's own menu, leave the item out: Rename opens Rename Artifact, whose title names it ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)).
+- Write item labels in sentence case: Copy link, Reply in thread ([Writing](../content/writing.md#casing)).
+- Make the label of an item that opens a dialog the dialog's action. In an item's own menu, leave the item out: Rename opens Rename Artifact, whose title names it ([Writing](../content/writing.md#actions-and-their-dialogs)).
 
 ## Accessibility
 
@@ -77,13 +77,13 @@ Hover, keyboard highlight, the current value and disabled items follow [States](
 
 ## Rules
 
-- Don't color destructive items such as Delete or Stop. They open a confirmation, a [Dialog](../dialog/dialog.md#variants) at `size="sm"`, whose orange or red button carries the consequence ([Feedback](../../../../../design/patterns/feedback.md#confirming)). The warning comes once, where the person decides, and the menu stays one quiet list. iOS, Material and many web apps color such an item red instead, and macOS doesn't; Raft keeps it uncolored (stdrc, 2026-11-12, #proj-raft-ui:95c3f384).
+- Don't color destructive items such as Delete or Stop. They open a confirmation, a [Dialog](dialog.md#variants) at `size="sm"`, whose orange or red button carries the consequence ([Feedback](../patterns/feedback.md#confirming)). The warning comes once, where the person decides, and the menu stays one quiet list. iOS, Material and many web apps color such an item red instead, and macOS doesn't; Raft keeps it uncolored (stdrc, 2026-11-12, #proj-raft-ui:95c3f384).
 - Use the same separator between every two sections of a menu.
-- Don't put a control that submits a form value in a menu; use a [Select](../select/select.md).
+- Don't put a control that submits a form value in a menu; use a [Select](select.md).
 
 ### The message menu
 
-The message menu starts with the quick reactions ([Conversation](../../../../../design/patterns/conversation.md#actions); sizes in [Brand](../../../../../design/foundations/brand.md#reactions)).
+The message menu starts with the quick reactions ([Conversation](../patterns/conversation.md#actions); sizes in [Brand](../foundations/brand.md#reactions)).
 
 - The 7 quick reactions at 22px, each a `MessageReactionQuickButton` that is a menu item, so the arrow keys reach it. End the row with a `smile-plus` icon button that opens every emoji. That is 8 buttons of 36px, so the menu is as wide as the row (316px), wider than its 240px minimum; the actions take the same width.
 - Line the reactions up with the actions: `MessageReactionQuickRow` keeps 3px at each side, so the first drawing starts where the items' icons do (10px in), and the column the eye follows down the menu doesn't step out by 3px at the top.

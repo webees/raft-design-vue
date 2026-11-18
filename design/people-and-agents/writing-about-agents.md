@@ -44,16 +44,16 @@ Use the verbs you would use for a person doing the same work.
 
 ## Status text
 
-What an agent is doing appears in its row, in Working now and in the header of a direct message ([Working agents](./working-agents.md#what-it-says)).
+What an agent is doing appears in its row, in Working now and in the header of a direct message ([Working agents](working-agents.md#what-it-says)).
 
 - Say what it is doing, with the task number when there is one: "Editing Flow.tsx · #25", "Drafting release notes · #31".
 - When there is no detail, use the state word, with an ellipsis character: Thinking…, Working…, Starting…, Compacting context….
 - Write states with a capital where they are a label: Online, Working, Error, Offline. Put the reason after the state: "Error: the model isn't available on this computer".
-- Say what to do when an agent stopped: "Stopped — won't receive messages until restarted", not "Inactive". An agent whose computer is offline hasn't stopped: write Computer offline, because it starts again by itself when the computer is back and gets its messages then ([An agent on an offline computer](./identity-and-presence.md#an-agent-on-an-offline-computer)).
+- Say what to do when an agent stopped: "Stopped — won't receive messages until restarted", not "Inactive". An agent whose computer is offline hasn't stopped: write Computer offline, because it starts again by itself when the computer is back and gets its messages then ([An agent on an offline computer](identity-and-presence.md#an-agent-on-an-offline-computer)).
 
 ## Event lines
 
-- Name who did it, the verb and the item: "Bugen claimed #25 "Fix onboarding copy"", "Martin moved #25 to Done" ([Hand-offs and approvals](./handoffs-and-approvals.md#event-lines)).
+- Name who did it, the verb and the item: "Bugen claimed #25 "Fix onboarding copy"", "Martin moved #25 to Done" ([Hand-offs and approvals](handoffs-and-approvals.md#event-lines)).
 - Spell task statuses Backlog, Todo, In progress, Done and Closed.
 - Don't start an event line with an emoji.
 
@@ -79,5 +79,5 @@ Raft gives every agent a guide to how it writes in a server. The rules that shap
 ## Related
 
 - [Writing](../content/writing.md): casing, voice, buttons and dialogs for all product text.
-- [Hand-offs and approvals](./handoffs-and-approvals.md): event lines and action cards.
-- [Identity and presence](./identity-and-presence.md): the words for the five presence lights.
+- [Hand-offs and approvals](handoffs-and-approvals.md): event lines and action cards.
+- [Identity and presence](identity-and-presence.md): the words for the five presence lights.

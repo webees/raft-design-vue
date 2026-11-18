@@ -6,19 +6,19 @@ redirectFrom: [products/raft-chat/desktop]
 
 # Raft Chat
 
-Raft Chat is Raft's first product: channels, direct messages, agents and tasks in one conversation. These pages describe only its own structure: its destinations, what each screen shows and where things go. The reusable rules, and why they hold, are in the [patterns](../../patterns/); colors, type and spacing are in the [foundations](../../foundations/); each part is in its component doc. Where a page here needs one of those rules, it links to it rather than repeating it. The pages describe what Raft Chat's web app ships.
+Raft Chat is Raft's first product: channels, direct messages, agents and tasks in one conversation. These pages describe only its own structure: its destinations, what each screen shows and where things go. The reusable rules, and why they hold, are in the [patterns](../../patterns); colors, type and spacing are in the [foundations](../../foundations); each part is in its component doc. Where a page here needs one of those rules, it links to it rather than repeating it. The pages describe what Raft Chat's web app ships.
 
 | Page | Covers |
 | --- | --- |
-| [Home](./home.md) | The phone's Home screen |
-| [Channel](./channel.md) | A channel: its header and details, its Tasks and Files sections, its composer, tasks inside it, threads |
-| [Tasks](./tasks.md) | The Tasks destination (Mine and All, its filters, sort and selection) and a channel's Tasks section |
-| [Members](./members.md) | The Members destination: its tabs, people as tiles and agents as a list |
-| [Computers](./computers.md) | The Computers destination: search and filters, grouping, sorting by remaining usage, offline computers folded at the end |
-| [Agent profile](./agent-profile.md) | An agent's profile and its page |
-| [Settings](./settings.md) | The Settings destination and its pages |
-| [Onboarding](./onboarding.md) | The first run: onboarding v3's split pages, the first channel and the tour, and the setup dialog that ships until v3 does |
-| [Getting the app](./getting-the-app.md) | The public download page and the app sections of Settings → About: the visitor's own device first, every other platform one row |
+| [Home](home.md) | The phone's Home screen |
+| [Channel](channel.md) | A channel: its header and details, its Tasks and Files sections, its composer, tasks inside it, threads |
+| [Tasks](tasks.md) | The Tasks destination (Mine and All, its filters, sort and selection) and a channel's Tasks section |
+| [Members](members.md) | The Members destination: its tabs, people as tiles and agents as a list |
+| [Computers](computers.md) | The Computers destination: search and filters, grouping, sorting by remaining usage, offline computers folded at the end |
+| [Agent profile](agent-profile.md) | An agent's profile and its page |
+| [Settings](settings.md) | The Settings destination and its pages |
+| [Onboarding](onboarding.md) | The first run: onboarding v3's split pages, the first channel and the tour, and the setup dialog that ships until v3 does |
+| [Getting the app](getting-the-app.md) | The public download page and the app sections of Settings → About: the visitor's own device first, every other platform one row |
 
 ## Structure
 
@@ -26,13 +26,13 @@ Raft Chat is Raft's first product: channels, direct messages, agents and tasks i
 
 | Where | Destinations |
 | --- | --- |
-| Phone tab bar | Home (`house`), Activity (`activity`, as on the desktop rail), Tasks (`square-check-big`), Search (`search`), and the current server, its avatar and its name, on the edge bar ([MobileNav](../../../packages/ui/src/components/mobile-nav/mobile-nav.md#search-and-the-server-tab)). The order is fixed. Search is a tab, the only way in to searching everything: no Back on its page, the bar stays with Search selected, and it keeps its query, filters, results and scroll position across tabs ([Navigation](../../patterns/navigation.md#search-on-a-phone)). The same in the mobile app and on the phone web |
+| Phone tab bar | Home (`house`), Activity (`activity`, as on the desktop rail), Tasks (`square-check-big`), Search (`search`), and the current server, its avatar and its name, on the edge bar ([MobileNav](../../components/mobile-nav.md#search-and-the-server-tab)). The order is fixed. Search is a tab, the only way in to searching everything: no Back on its page, the bar stays with Search selected, and it keeps its query, filters, results and scroll position across tabs ([Navigation](../../patterns/navigation.md#search-on-a-phone)). The same in the mobile app and on the phone web |
 | Phone server tab | Opens a popover, not a page: the server list, its footer actions and, at the bottom, the server's pages ([The server tab](#the-server-tab)). Each of the server's pages opens a pushed page, with Back. Switching keeps the current tab ([Navigation](../../patterns/navigation.md#the-server-tab-on-a-phone)) |
-| The first rows of phone Home | Saved, then Drafts, each with a gray count and its only entry point on a phone; see [Home](./home.md) |
+| The first rows of phone Home | Saved, then Drafts, each with a gray count and its only entry point on a phone; see [Home](home.md) |
 | Web top bar (from 768px, and the desktop app's title bar) | As in [Page structure](../../patterns/page-structure.md#the-web-top-bar); the search field opens search |
 | Desktop rail (the web and the desktop app) | Chat, Activity, Tasks, Artifacts (where the server has Artifacts on), Members, Computers, Apps (`blocks`); at the bottom Help (`circle-help`) and Settings. Guests don't have Members, Computers or Apps; they keep Artifacts |
 | The apps' rail in desktop mode (from 840dp) | Computers isn't on it: it is in Settings ([The server tab](#the-server-tab)) |
-| Only in [Settings](./settings.md) | Sign out, at the end of Account |
+| Only in [Settings](settings.md) | Sign out, at the end of Account |
 
 Without the web top bar (an older desktop build, a server's public page), the rail shows the workspace tile at its top, Search before Chat, and the bell above Help.
 
@@ -76,7 +76,7 @@ The server tab and the workspace tile follow [Navigation](../../patterns/navigat
 
 - The server tab takes the slot More had, so the bar keeps 5 tabs.
 - The popover's footer actions are Join community (until the person has joined it), Switch or create server and Invite human. Invite human stays here and not in the row of pages: it opens a dialog rather than a place.
-- The buttons at the very bottom hold the server's own pages: Artifacts first, where the server has Artifacts on, then Members, Computers, Apps and [Settings](./settings.md). Members, Computers and Settings used to be in More. They are places in the same server, so they sit together and cost a line or two instead of one each; at the bottom they are nearest the thumb and the tab bar, where More was. Five of them take 3 columns, Artifacts, Members and Computers over Apps and Settings: more than 4 always do, so every label stays whole in every language (Remy and Kirby, 2026-11-06, #proj-workspace:#203; [Navigation](../../patterns/navigation.md#the-server-tab-on-a-phone)). Without Artifacts the 4 stay in one row.
+- The buttons at the very bottom hold the server's own pages: Artifacts first, where the server has Artifacts on, then Members, Computers, Apps and [Settings](settings.md). Members, Computers and Settings used to be in More. They are places in the same server, so they sit together and cost a line or two instead of one each; at the bottom they are nearest the thumb and the tab bar, where More was. Five of them take 3 columns, Artifacts, Members and Computers over Apps and Settings: more than 4 always do, so every label stays whole in every language (Remy and Kirby, 2026-11-06, #proj-workspace:#203; [Navigation](../../patterns/navigation.md#the-server-tab-on-a-phone)). Without Artifacts the 4 stay in one row.
 - A guest, who has no Members, Computers or Apps, gets Artifacts, as the rail shows it to them, and Settings, in one row; without Artifacts, Settings alone. Settings holds their account and Sign out, and on a phone the popover is its only way in.
 - In the apps' desktop mode (from 840dp; Jasper, 2026-10-23, task #8; the row dropped by artin, 2026-10-29) there is no server tab: the rail header's workspace tile opens the popover without the row of pages ([Navigation](../../patterns/navigation.md#the-server-in-the-apps-desktop-mode)). Every one of those pages already has a way in that stays on screen: Artifacts (where the server has it on), Members and Apps are on the rail, Settings at the rail's bottom, and Computers in Settings. Unlike the web's rail, this rail has no Computers button, so both dots are on the rail's Settings: a feedback reply's, and a computer's that needs attention, since Computers is reached from there.
 
@@ -86,14 +86,14 @@ Each follows [Page structure](../../patterns/page-structure.md#phone). What thei
 
 | Page | In the row | Subtitle |
 | --- | --- | --- |
-| Home | The server switcher, then the working summary and the bell at the end ([Home](./home.md)) | None |
+| Home | The server switcher, then the working summary and the bell at the end ([Home](home.md)) | None |
 | Activity | Activity; the filters in the filter row under it | "3 in progress · 5 unread", in Space Mono |
-| Tasks | Tasks; the toolbar under it, with the search field in it ([Tasks](./tasks.md)) | The count, "12", or "3 / 12" while a filter or the search narrows the list, in Space Mono |
+| Tasks | Tasks; the toolbar under it, with the search field in it ([Tasks](tasks.md)) | The count, "12", or "3 / 12" while a filter or the search narrows the list, in Space Mono |
 | Search | The search field; the filters in the filter row under it | None |
 
 ### The desktop layout
 
-A channel on desktop, under the web top bar, from left to right: the rail; the Chat sidebar; the main area with the channel ([Channel](./channel.md)) and, when open, its Tasks and Files sections; and a side panel when a thread or a profile is open. The regions and their lines follow [Page structure](../../patterns/page-structure.md#desktop).
+A channel on desktop, under the web top bar, from left to right: the rail; the Chat sidebar; the main area with the channel ([Channel](channel.md)) and, when open, its Tasks and Files sections; and a side panel when a thread or a profile is open. The regions and their lines follow [Page structure](../../patterns/page-structure.md#desktop).
 
 ```example
 sidebar/sidebar
@@ -104,9 +104,9 @@ sidebar/sidebar
 | Destination | The sidebar lists |
 | --- | --- |
 | Chat | Saved and Drafts, then the sections Pinned, the person's own sections, Joint channels, Channels and Direct messages. People can reorder the sections by dragging. Agents are listed among the direct messages |
-| Members | No sidebar: the directory fills the page beside the rail, under its toolbar of tabs, search and its two add buttons; a member opens in the side panel beside it ([Members](./members.md)) |
+| Members | No sidebar: the directory fills the page beside the rail, under its toolbar of tabs, search and its two add buttons; a member opens in the side panel beside it ([Members](members.md)) |
 | Computers | No sidebar: the computers fill the page beside the rail as a wall of cards, or a list, with an add button at its toolbar's end. A computer opens in the side panel beside them, selected on the wall ([Navigation](../../patterns/navigation.md#opening-an-item)) |
-| Settings | The settings groups ([Settings](./settings.md)) |
+| Settings | The settings groups ([Settings](settings.md)) |
 | Tasks | No sidebar: the list (or the board) fills the page beside the rail, and a task opens in a column beside it |
 | Search, Activity | No sidebar at first: the page fills the width. After a result is selected, the results list takes the sidebar's place, and the result opens next to it |
 
@@ -122,15 +122,15 @@ Tasks, Artifacts, Members, Computers, Apps and Activity are pages of a list: a h
 
 | Page | Scope, at the start | Then | At the end |
 | --- | --- | --- | --- |
-| Tasks | Mine / All | The search, Channel, Status, Creator, Assignee ([Tasks](./tasks.md)) | The sort, List / Board, New task |
+| Tasks | Mine / All | The search, Channel, Status, Creator, Assignee ([Tasks](tasks.md)) | The sort, List / Board, New task |
 | Artifacts | None | The search, its filters | The sort, the view switch |
-| Members | All / Humans / Agents | The search ([Members](./members.md)) | Group (on the Agents tab), Invite human, Create agent |
-| Computers | None | The search, Status, Runtime ([Computers](./computers.md)) | Group, Sort, Cards / List, Add computer |
+| Members | All / Humans / Agents | The search ([Members](members.md)) | Group (on the Agents tab), Invite human, Create agent |
+| Computers | None | The search, Status, Runtime ([Computers](computers.md)) | Group, Sort, Cards / List, Add computer |
 | Apps | Installed / Marketplace / Developer | The search, its filters | The view switch, Add app |
 | Activity | None | The Filter button and its chip, filling the line; no search | Mark all read |
 
 - Make Apps' Installed, Marketplace and Developer the toolbar's scope, not a row of tabs above it. All three list apps as the same cards with the same filters, so they are a scope like Mine / All, and the toolbar's start saves the line a row of tabs takes, as Polaris puts its view tabs at the start of the same row (stdrc asked Jasper to decide from research, #proj-raft-ui:f9756e85, 2026-11-10).
-- Keep Activity's one Filter button with a chip as the exception to a button per filter: its filters, Unread, Mentions, Pinned, Saved and Artifacts besides All, are more than a few, and people mostly leave them at All ([Select › Filters](../../../packages/ui/src/components/select/select.md#which-filter-button)). With no search, its toolbar is one line that never wraps.
+- Keep Activity's one Filter button with a chip as the exception to a button per filter: its filters, Unread, Mentions, Pinned, Saved and Artifacts besides All, are more than a few, and people mostly leave them at All ([Select › Filters](../../components/select.md#which-filter-button)). With no search, its toolbar is one line that never wraps.
 
 ### The desktop app
 
@@ -161,12 +161,12 @@ The shared rules are in [Working agents](../../people-and-agents/working-agents.
 | --- | --- |
 | Popover | Working now, the notifications, the server list, Help & resources (opened on hover from the rail) |
 | Bottom sheet with a short explanation (phone) | Add Raft to your Home Screen, opened from the notification center's Install Raft or the Add button in Settings › Notifications (button: Got it) |
-| Confirmation ([Overlays](../../components/overview.md#overlays)) | A Dialog, except two that use [AlertDialog](../../../packages/ui/src/components/alert-dialog/alert-dialog.md): discarding unsaved edits to an agent's profile, and opening a link that hands off to another app |
+| Confirmation ([Overlays](../../components/overview.md#overlays)) | A Dialog, except two that use [AlertDialog](../../components/alert-dialog.md): discarding unsaved edits to an agent's profile, and opening a link that hands off to another app |
 | Small form dialog ([Forms](../../patterns/forms.md#forms-in-a-dialog)) | Create channel, Create task, Create agent |
 | Wide form dialog ([Forms](../../patterns/forms.md#the-large-form-dialog)) | Register app, editing an app (Edit Release Bot) |
 | Profile card on a person or agent, on hover | A 51px avatar; the name with the light and what it is doing; the handle; Computer, Runtime, Model and Reasoning; the description on one line; for people who manage the agent, its recent activity. It has no buttons |
 
-Side panels that stay open beside the conversation (a thread, a profile, the channel details) are side panels, not drawers, and have no scrim ([Channel](./channel.md#the-channel-details)).
+Side panels that stay open beside the conversation (a thread, a profile, the channel details) are side panels, not drawers, and have no scrim ([Channel](channel.md#the-channel-details)).
 
 ## Rules
 

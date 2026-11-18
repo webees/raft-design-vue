@@ -12,9 +12,9 @@ Start every new screen, panel or flow from what the system already has: answer s
 
 Answer these before you draw or write anything. Each answer decides something specific.
 
-1. **Does every product need this, or only one?** Something every product needs follows the [patterns](../patterns/) and, if it is new, becomes one. Something only one product needs goes on that product's page under [Products](../products/). Either way, look first at how the product already does it: the shipped product is the reference for structure.
-2. **Is it content, a region or a control?** That decides its surface and its line: content sits on paper and is divided by hairlines; a region is separated from its neighbors by one seam; a control has an ink border ([Principles](./principles.md#2-three-lines-three-meanings)).
-3. **Which is the screen's primary action?** Only that one is pink, and a screen may have none. If more than one action could be the primary one, the hierarchy is wrong: decide which action the screen exists for ([Button](../../packages/ui/src/components/button/button.md)).
+1. **Does every product need this, or only one?** Something every product needs follows the [patterns](../patterns) and, if it is new, becomes one. Something only one product needs goes on that product's page under [Products](../products). Either way, look first at how the product already does it: the shipped product is the reference for structure.
+2. **Is it content, a region or a control?** That decides its surface and its line: content sits on paper and is divided by hairlines; a region is separated from its neighbors by one seam; a control has an ink border ([Principles](principles.md#2-three-lines-three-meanings)).
+3. **Which is the screen's primary action?** Only that one is pink, and a screen may have none. If more than one action could be the primary one, the hierarchy is wrong: decide which action the screen exists for ([Button](../components/button.md)).
 4. **What does each color mean?** Every color is an identity, a status, a signal (you, to do, this item) or a consequence (interrupts, irreversible). If a color is none of these, remove it ([Color](../foundations/color.md#meanings-of-color)).
 5. **Does it work in dark mode, at 320px wide, and with the keyboard alone?** Design for 390px and make everything fit at 320px ([Responsive layout](../patterns/responsive.md)). Every element people can reach with the keyboard shows the focus ring ([Elevation](../foundations/elevation.md#focus-ring)). Every new component is checked in both modes ([Dark mode](../foundations/dark-mode.md)).
 6. **Will it tire someone who looks at it for hours?** If so, remove color first, then lines, then motion. Nothing that shows status may loop or blink ([Motion](../foundations/motion.md)).
@@ -82,9 +82,9 @@ Go through this list before you ask for review. Each item is something a reviewe
 - [ ] Everything fits at 320px wide, and touch targets are at least 44px.
 - [ ] Everything works with the keyboard alone and shows the focus ring. Anything clickable is a `<button>` or an `<a>` with an `href`, and every icon-only button has an `aria-label`.
 - [ ] Every piece that raft-ui has comes from raft-ui; anything hand-built is named in the pull request.
-- [ ] Which existing screen does this behave like? It opens, selects and closes the same way ([Principles](./principles.md#8-familiar-over-new-the-same-job-the-same-form-a-different-meaning-a-different-form)).
+- [ ] Which existing screen does this behave like? It opens, selects and closes the same way ([Principles](principles.md#8-familiar-over-new-the-same-job-the-same-form-a-different-meaning-a-different-form)).
 - [ ] Every form reused here (a color, a light, an icon) means here what it means everywhere else; a new meaning has a form of its own.
-- [ ] Am I adding a component or pattern the system doesn't have? Then its rule, saying why the existing ones don't fit, comes first ([Principles](./principles.md#9-existing-parts-and-patterns-first)).
+- [ ] Am I adding a component or pattern the system doesn't have? Then its rule, saying why the existing ones don't fit, comes first ([Principles](principles.md#9-existing-parts-and-patterns-first)).
 - [ ] Every value is a semantic token.
 - [ ] Every new rule is written in the foundation, pattern, component doc or product page where it belongs.
 
@@ -100,7 +100,7 @@ How the docs are organized and written is in [Authoring](../authoring/README.md)
 
 ## Related
 
-- [Principles](./principles.md): the rules the questions and the checklist come from.
-- [Why Raft looks this way](./why-raft-looks-this-way.md): the reasoning behind them.
+- [Principles](principles.md): the rules the questions and the checklist come from.
+- [Why Raft looks this way](why-raft-looks-this-way.md): the reasoning behind them.
 - [Choosing a component](../components/overview.md): one component per situation.
-- [Decisions](../decisions/): the major choices already made, and the alternatives they were weighed against.
+- [Decisions](../decisions): the major choices already made, and the alternatives they were weighed against.

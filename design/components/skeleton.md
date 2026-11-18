@@ -10,7 +10,7 @@ related: [spinner, progress, empty-state]
 
 # Skeleton
 
-A skeleton holds the place of content that is still loading: square blocks where avatars and tiles will be, bars where text will be. Use it when a list, card or panel loads for the first time and its layout is known. Which loading indicator fits which wait is in [Choosing a component](../../../../../design/components/overview.md#waiting).
+A skeleton holds the place of content that is still loading: square blocks where avatars and tiles will be, bars where text will be. Use it when a list, card or panel loads for the first time and its layout is known. Which loading indicator fits which wait is in [Choosing a component](overview.md#waiting).
 
 ```example
 skeleton/compositions/preview
@@ -21,10 +21,10 @@ skeleton/compositions/preview
 | Situation                                                  | Use                                                                                            |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | The layout of what is loading is known                     | Skeleton                                                                                       |
-| The wait has no layout to hold, or happens in a small area | [Spinner](../spinner/spinner.md)                                                               |
-| The percentage is known                                    | [Progress](../progress/progress.md)                                                            |
-| Loading finished and there is nothing                      | [EmptyState](../empty-state/empty-state.md)                                                    |
-| Loading failed                                             | An error at its scope ([Feedback](../../../../../design/patterns/feedback.md#errors-by-scope)) |
+| The wait has no layout to hold, or happens in a small area | [Spinner](spinner.md)                                                               |
+| The percentage is known                                    | [Progress](progress.md)                                                            |
+| Loading finished and there is nothing                      | [EmptyState](empty-state.md)                                                    |
+| Loading failed                                             | An error at its scope ([Feedback](../patterns/feedback.md#errors-by-scope)) |
 
 ## Variants
 
@@ -44,5 +44,5 @@ skeleton/compositions/basic
 
 ## Rules
 
-- Give the skeleton the shape of the content it stands for: square for avatars and tiles, bars for text. Keep it rough: the layout and the common sizes, never details only the data knows. The size rule, the 1-second wait before it shows and the rule against swapping placeholders are in [Feedback](../../../../../design/patterns/feedback.md#empty-loading-and-failed).
-- For the rows of a list, use the row's own skeleton rather than arranging `Skeleton`s by hand: `InboxItemSkeleton` ([InboxItem](../inbox-item/inbox-item.md#loading)) and `ListRowSkeleton` ([ListRow](../list-row/list-row.md#loading)) are built from the row's parts, so they keep its size, and stay flat like it.
+- Give the skeleton the shape of the content it stands for: square for avatars and tiles, bars for text. Keep it rough: the layout and the common sizes, never details only the data knows. The size rule, the 1-second wait before it shows and the rule against swapping placeholders are in [Feedback](../patterns/feedback.md#empty-loading-and-failed).
+- For the rows of a list, use the row's own skeleton rather than arranging `Skeleton`s by hand: `InboxItemSkeleton` ([InboxItem](inbox-item.md#loading)) and `ListRowSkeleton` ([ListRow](list-row.md#loading)) are built from the row's parts, so they keep its size, and stay flat like it.

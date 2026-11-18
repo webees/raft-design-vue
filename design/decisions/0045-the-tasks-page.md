@@ -10,7 +10,7 @@ date: 2026-11-10
 
 ## Context
 
-Raft Chat's Tasks page listed every channel task in the server as a board by status on desktop and a list by status on a phone, under three filters, with task details in a centered dialog. The design system said the page had no create button, since a task belongs to a place, and [decision 0042](./0042-tasks-as-a-to-do-list.md) put a round completion control at the start of every task row and card.
+Raft Chat's Tasks page listed every channel task in the server as a board by status on desktop and a list by status on a phone, under three filters, with task details in a centered dialog. The design system said the page had no create button, since a task belongs to a place, and [decision 0042](0042-tasks-as-a-to-do-list.md) put a round completion control at the start of every task row and card.
 
 With task conversations, most of the work is done by agents, and people mostly hand work out, decide and accept it. Someone who opens the page asks, in this order: is anything waiting on me, how is the work I handed out going, and what is everyone else's work. A status answers none of these well: who has a task and whether it moved say more.
 
@@ -49,5 +49,5 @@ stdrc approved the design on 2026-11-10 ("follow the design") and gave the rules
 ## Related
 
 - [Tasks](../patterns/tasks.md)
-- [0042](./0042-tasks-as-a-to-do-list.md)
+- [0042](0042-tasks-as-a-to-do-list.md)
 - [Raft Chat — Tasks](../products/raft-chat/tasks.md)

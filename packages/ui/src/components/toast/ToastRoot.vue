@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed, inject, provide, ref, useAttrs, watch } from "vue";
 import { ToastRoot, useToastManager } from "reka-ui";
-import type { ToastObject } from "reka-ui";
 
 import { usePresenceStyle } from "../../lib/presence-style";
 import { toast as toastStyles } from "./toast.recipe";
-import type { ToastIntent } from "./toast";
+import type { ToastIntent, ToastObject } from "./toast";
 import {
   TOAST_ITEM_CONTEXT_KEY,
   TOAST_PROVIDER_CONFIG_KEY,
@@ -19,7 +18,7 @@ const emit = defineEmits<{ "update:open": [open: boolean] }>();
 
 const props = withDefaults(
   defineProps<{
-    toast: ToastObject<any>;
+    toast: ToastObject;
     layout?: ToastLayout;
     swipeDirection?: "up" | "down" | "left" | "right";
     class?: string;

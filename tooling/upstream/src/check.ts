@@ -1,11 +1,13 @@
 import { existsSync } from "node:fs";
 import {
   LOCK_PATH,
+  MANIFEST_PATH,
   UPSTREAM_REPO,
   parseArgs,
   readJson,
   resolveCommit,
   upstreamHeaders,
+  type ComponentManifest,
   type UpstreamLock,
 } from "./shared";
 
@@ -47,6 +49,7 @@ const watched = (data.files ?? []).filter((file) =>
     file.filename,
   ),
 );
+const known = new Set(Object.keys(readJson<ComponentManifest>(MANIFEST_PATH).components));
 const addedComponents = [
   ...new Set(
     watched
@@ -56,7 +59,7 @@ const addedComponents = [
           file.filename.startsWith("packages/ui/src/components/"),
       )
       .map((file) => file.filename.split("/")[4])
-      .filter((name): name is string => Boolean(name)),
+      .filter((name): name is string => typeof name === "string" && !known.has(name)),
   ),
 ];
 

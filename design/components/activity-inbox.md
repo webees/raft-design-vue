@@ -10,7 +10,7 @@ related: [inbox-item, notification-center, panel, sidebar, empty-state]
 
 # ActivityInbox
 
-ActivityInbox lays out Activity: the panel that lists what happened elsewhere and waits for the person, as [InboxItem](../inbox-item/inbox-item.md) rows. Selecting an item opens it beside the list. The panel has views (Active, Saved, Done) and filters. Activity has no multi-select today; if it gets one, it uses the toolbar for selected items ([SelectionToolbar](../selection-toolbar/selection-toolbar.md)).
+ActivityInbox lays out Activity: the panel that lists what happened elsewhere and waits for the person, as [InboxItem](inbox-item.md) rows. Selecting an item opens it beside the list. The panel has views (Active, Saved, Done) and filters. Activity has no multi-select today; if it gets one, it uses the toolbar for selected items ([SelectionToolbar](selection-toolbar.md)).
 
 ```example
 activity/compositions/activity-inbox
@@ -21,26 +21,26 @@ activity/compositions/activity-inbox
 | Situation                                                        | Use                                                                 |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------- |
 | Mentions, approvals, hand-offs and replies the person should see | ActivityInbox                                                       |
-| The state of the whole server                                    | [NotificationCenter](../notification-center/notification-center.md) |
-| The result of an action the person took                          | [Toast](../toast/toast.md)                                          |
+| The state of the whole server                                    | [NotificationCenter](notification-center.md) |
+| The result of an action the person took                          | [Toast](toast.md)                                          |
 
 Where a product puts the way into Activity is on the product's own page.
 
 ## Anatomy
 
-- `ActivityInboxPanel`: the panel. It holds a [Panel](../panel/panel.md) header with the title Activity. Required. It is a column of list cells, so it sets the column's margin to its rows' content line: the title, the controls' first button and the rows' leading content start on one line, 20px in on a phone and a touch screen and 16px in with a mouse ([Lists](../../../../../design/patterns/lists.md#one-edge)).
-- `ActivityInboxSidebar`: the column of views and filters on the left, as sidebar rows ([Sidebar](../sidebar/sidebar.md)). Hidden on a phone.
-- `ActivityInboxControls`: the row above the list, padded by the column's margin: the filters (All, Unread and Mentions) and Mark all read. It has no search field: searching is the job of [Search](../search/search.md), and a field here would be a second way in.
-- `ActivityInboxViewport`: the scrolling list of [InboxItem](../inbox-item/inbox-item.md) rows.
+- `ActivityInboxPanel`: the panel. It holds a [Panel](panel.md) header with the title Activity. Required. It is a column of list cells, so it sets the column's margin to its rows' content line: the title, the controls' first button and the rows' leading content start on one line, 20px in on a phone and a touch screen and 16px in with a mouse ([Lists](../patterns/lists.md#one-edge)).
+- `ActivityInboxSidebar`: the column of views and filters on the left, as sidebar rows ([Sidebar](sidebar.md)). Hidden on a phone.
+- `ActivityInboxControls`: the row above the list, padded by the column's margin: the filters (All, Unread and Mentions) and Mark all read. It has no search field: searching is the job of [Search](search.md), and a field here would be a second way in.
+- `ActivityInboxViewport`: the scrolling list of [InboxItem](inbox-item.md) rows.
 - `ActivityInboxLoadingMore`: one line at the end of the list while more items load.
 
 ## States
 
 | State        | Use for                                                                                                                                         |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Loading      | Flat `InboxItemSkeleton` rows in the shape of the inbox items, in an `InboxItemSkeletonList` ([InboxItem](../inbox-item/inbox-item.md#loading)) |
+| Loading      | Flat `InboxItemSkeleton` rows in the shape of the inbox items, in an `InboxItemSkeletonList` ([InboxItem](inbox-item.md#loading)) |
 | Loading more | `ActivityInboxLoadingMore` under the last item                                                                                                  |
-| Empty        | An [EmptyState](../empty-state/empty-state.md) that says what will appear here                                                                  |
+| Empty        | An [EmptyState](empty-state.md) that says what will appear here                                                                  |
 
 ```example
 activity/compositions/loading-activity
@@ -62,7 +62,7 @@ activity/compositions/empty-activity
 
 ## Accessibility
 
-- The parts are plain layout elements; raft-ui adds no Base UI primitive. The views and filters are sidebar rows, and the read filter is [Tabs](../tabs/tabs.md).
+- The parts are plain layout elements; raft-ui adds no Base UI primitive. The views and filters are sidebar rows, and the read filter is [Tabs](tabs.md).
 - Give the panel title a heading level (`render={<h2 />}`).
 - Mark the current view with `aria-current="page"` and a pressed filter with `aria-pressed`.
 - Set `aria-busy` on `ActivityInboxPanel` while it loads.

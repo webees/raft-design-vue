@@ -10,7 +10,7 @@ related: [drawer, composer, avatar, card, message-item]
 
 # Comment
 
-The parts for comments on a document: `CommentMargin` lays out a column of `CommentCard`s beside the document, each level with the passage it is about; `CommentEntry` is one comment in a card; `CommentMarker` replaces the margin where it doesn't fit. When and how a product shows comments is in [Comments](../../../../../design/patterns/comments.md); this page covers the parts.
+The parts for comments on a document: `CommentMargin` lays out a column of `CommentCard`s beside the document, each level with the passage it is about; `CommentEntry` is one comment in a card; `CommentMarker` replaces the margin where it doesn't fit. When and how a product shows comments is in [Comments](../patterns/comments.md); this page covers the parts.
 
 ```example
 comment/compositions/margin
@@ -21,28 +21,28 @@ comment/compositions/margin
 | Situation                                                                       | Use                                                                                                  |
 | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | Comments on a document or on passages of it, in a viewer with room for a margin | `CommentMargin` with a `CommentCard` per discussion                                                  |
-| The same comments where the margin doesn't fit                                  | A `CommentMarker` beside each passage, opening a bottom sheet ([Drawer](../drawer/drawer.md))        |
-| A reply to a message in a conversation                                          | A thread ([ThreadPanel](../thread-panel/thread-panel.md)), not a comment                             |
-| The number of comments on a file, on its card in a message                      | `MessageAttachmentCommentSummary` ([MessageAttachment](../message-attachment/message-attachment.md)) |
+| The same comments where the margin doesn't fit                                  | A `CommentMarker` beside each passage, opening a bottom sheet ([Drawer](drawer.md))        |
+| A reply to a message in a conversation                                          | A thread ([ThreadPanel](thread-panel.md)), not a comment                             |
+| The number of comments on a file, on its card in a message                      | `MessageAttachmentCommentSummary` ([MessageAttachment](message-attachment.md)) |
 
 ## Anatomy
 
 - `CommentMargin`: the column beside the document, `position: relative`, as tall as its lowest card. Required for the margin.
   - `CommentMarginItem`: one card's place. `top` is where its anchor is, in px from the margin's top; `active` pins it there. Required for each card.
 - `CommentCard`: one discussion, on `layer-card` with a `line-hairline` border and `radius-container`. `active` marks the open one.
-  - `CommentCardMeta`: a line in `text-caption` and `foreground-hint` with the caller's words: "2 replies", "On the whole document", "Position not found". Optional. When choosing it does something, such as making this the discussion being read and its passage the active highlight, render it as a button (`render={<button type="button" />}`): it underlines on hover, as clickable text does, and takes the focus ring ([States](../../../../../design/foundations/states.md#clickable-text)).
+  - `CommentCardMeta`: a line in `text-caption` and `foreground-hint` with the caller's words: "2 replies", "On the whole document", "Position not found". Optional. When choosing it does something, such as making this the discussion being read and its passage the active highlight, render it as a button (`render={<button type="button" />}`): it underlines on hover, as clickable text does, and takes the focus ring ([States](../foundations/states.md#clickable-text)).
   - `CommentEntry`: one comment. At least one.
-    - `CommentEntryHeader`: the author's [Avatar](../avatar/avatar.md) at `size="xs"`, `CommentEntryAuthor` (`text-subhead`, bold) and `CommentEntryTime` (Space Mono, `text-mono-meta`, `foreground-hint`), a `<time>`.
+    - `CommentEntryHeader`: the author's [Avatar](avatar.md) at `size="xs"`, `CommentEntryAuthor` (`text-subhead`, bold) and `CommentEntryTime` (Space Mono, `text-mono-meta`, `foreground-hint`), a `<time>`.
     - `CommentEntryBody`: the text, in `text-callout`. `clamp` cuts it to 2 lines.
   - `CommentCardQuote`: the passage the discussion is about, in the caller's words, visually hidden (`sr-only`). Point the trigger's or the marker's `aria-describedby` at it. Optional, but give every anchored discussion one.
   - `CommentCardTrigger`: a button over the whole card that opens it. Optional; only on a collapsed card.
-  - The reply box is a [Composer](../composer/composer.md) (`ComposerRoot`, `Composer`, `ComposerInput`, `ComposerSubmit`), not a part of its own.
+  - The reply box is a [Composer](composer.md) (`ComposerRoot`, `Composer`, `ComposerInput`, `ComposerSubmit`), not a part of its own.
 - `CommentMarker`: the button beside a passage on a narrow screen, with an `AvatarGroup` of up to 3 `size="2xs"` avatars and the count.
 - `useCommentMarginFits(viewer, { minWidth })`: whether the viewer has room for the margin ([Wide and narrow](#wide-and-narrow)).
 - `setCommentHighlights`, `COMMENT_HIGHLIGHT`, `COMMENT_HIGHLIGHT_ACTIVE`: highlight the passages ([Highlights](#highlights)).
 - `resolveCommentMarginLayout`: the layout `CommentMargin` uses, for a caller that places cards itself.
 
-The body is `text-callout`, not `text-body`: a comment is an aside to the document, and the document's own text is `text-body`. On a desktop both are 14/22, so they read the same; on a phone a card is a step smaller (14/20) than the document (16/24), the step between a message and its preview ([Typography](../../../../../design/foundations/typography.md#type-scale)). The header uses a message's styles ([MessageItem](../message-item/message-item.md)): bold name, then the time in Space Mono.
+The body is `text-callout`, not `text-body`: a comment is an aside to the document, and the document's own text is `text-body`. On a desktop both are 14/22, so they read the same; on a phone a card is a step smaller (14/20) than the document (16/24), the step between a message and its preview ([Typography](../foundations/typography.md#type-scale)). The header uses a message's styles ([MessageItem](message-item.md)): bold name, then the time in Space Mono.
 
 ## States
 
@@ -53,7 +53,7 @@ comment/compositions/card-states
 | State                 | Look                                                                                                                                                                                                                                                                                                             |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Collapsed             | The first comment, its text cut to 2 lines (`clamp`), and the number of replies in `CommentCardMeta`. `CommentCardTrigger` opens it                                                                                                                                                                              |
-| Hovered               | `CommentCardTrigger` lays `fill-subtle` over the collapsed card, the subtle tier of a row: the card is read while the pointer rests on it, so the hover is a small step and leaves the text as it was ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)). A press is `fill-medium` |
+| Hovered               | `CommentCardTrigger` lays `fill-subtle` over the collapsed card, the subtle tier of a row: the card is read while the pointer rests on it, so the hover is a small step and leaves the text as it was ([Hover and press](../foundations/states.md#hover-and-press)). A press is `fill-medium` |
 | Active                | `active`: a 1.5px `line-strong` border and `shadow-float`, lifted off the margin. Every comment, and the reply box when the person can reply                                                                                                                                                                     |
 | On the whole document | `CommentCardMeta` first, saying so. Its `CommentMarginItem` has `top={0}`                                                                                                                                                                                                                                        |
 | Position not found    | `CommentCardMeta` first, saying the passage can no longer be found. Its `CommentMarginItem` has `top={0}`, after the whole document's                                                                                                                                                                            |
@@ -66,7 +66,7 @@ Which parts a card holds is the caller's choice: raft-ui has no `collapsed` or `
 - The active card stays at its `top`, and the cards above it move up to make room, never above the margin's top; the cards below it move down. When the cards above don't fit, they stack from the top and the active card follows them. This is Google Docs' behavior: the discussion people are reading stays beside its passage.
 - The margin measures its cards with one `ResizeObserver`, so a card that opens or gets a reply moves the ones below it. The resolved top is the item's `data-top`, applied as `transform: translateY()`, so a move doesn't lay the margin out again; it takes 150ms after the first placement, and none under reduced motion. The transform makes the item the containing block of anything `position: fixed` inside it: portal popups out of the card.
 - `top` is the caller's measurement: the top of the passage's first line box (`range.getClientRects()[0].top`) minus the margin's top. Measure again when the document or the margin changes size, since the text rewraps.
-- Show a discussion whose passage can't be found in the document any more at the top, with the comments on the whole document, and say so in `CommentCardMeta`; never drop it ([Comments](../../../../../design/patterns/comments.md#rules)).
+- Show a discussion whose passage can't be found in the document any more at the top, with the comments on the whole document, and say so in `CommentCardMeta`; never drop it ([Comments](../patterns/comments.md#rules)).
 - A reply is one more `CommentEntry` after the comment it answers, in the card's own column: the card is the discussion, so replies get no indent, rail or box of their own. Each `CommentEntry` sets its own space from the entry before it, so put the entries straight in the card, never in a wrapper of their own.
 - Where a card's `CommentCardMeta` names its passage and choosing it makes this the discussion being read, render the meta as a button. It underlines on hover and takes the focus ring; the card shows `active`.
 
@@ -82,7 +82,7 @@ Cards in a margin and markers with a bottom sheet are different trees, so the sw
 comment/compositions/viewer
 ```
 
-- Where it returns false, put a `CommentMarker` beside each passage instead, in a 72px `CommentMargin` (room for three avatars and the count) so markers don't overlap either, and open the discussion in a bottom sheet ([Drawer](../drawer/drawer.md)). The marker at the top holds the comments on the whole document and those whose position is lost.
+- Where it returns false, put a `CommentMarker` beside each passage instead, in a 72px `CommentMargin` (room for three avatars and the count) so markers don't overlap either, and open the discussion in a bottom sheet ([Drawer](drawer.md)). The marker at the top holds the comments on the whole document and those whose position is lost.
 
 ```example
 comment/compositions/marker-sheet
@@ -92,15 +92,15 @@ comment/compositions/marker-sheet
 
 The passages are highlighted with the CSS Custom Highlight API: `setCommentHighlights(name, ranges)` registers `Range`s under a highlight name, and styles.css paints them. It never wraps the document's text in an element, so the document's DOM, its selection and its find in page stay as they were.
 
-- Register every passage with comments under `COMMENT_HIGHLIGHT` (`raft-comment`): `brand` over the page (`color-mix`), 35% in light mode and 22% in dark (the `selection` token, so the dark wash is kept in one place: [Color](../../../../../design/foundations/color.md#text-selection)), with a 2px `brand` underline. The two amounts are measured, not picked by eye: the passage has to stand out from the page, and the text on it has to stay easy to read for a long stretch (APCA Lc 75 or more, the level for body text). In light mode 35% keeps the text at Lc 96 (16.5:1). In dark mode `brand-soft`, a 16% wash meant for a menu row, left the passage almost the same as the page (1.18:1 between them); 35% made it stand out (2.6:1) but dropped the text to Lc 68; 22% keeps both, 1.8:1 against the page and Lc 77 (6.9:1) for the text.
-- Register the active one under `COMMENT_HIGHLIGHT_ACTIVE` (`raft-comment-active`) instead: `you` with ink type, in both modes, like a search hit. The wash under every passage is `brand` and grays with Boring Gray; the open passage is addressed to you, so it stays yellow in every theme ([Themes](../../../../../design/foundations/themes.md#signals)).
+- Register every passage with comments under `COMMENT_HIGHLIGHT` (`raft-comment`): `brand` over the page (`color-mix`), 35% in light mode and 22% in dark (the `selection` token, so the dark wash is kept in one place: [Color](../foundations/color.md#text-selection)), with a 2px `brand` underline. The two amounts are measured, not picked by eye: the passage has to stand out from the page, and the text on it has to stay easy to read for a long stretch (APCA Lc 75 or more, the level for body text). In light mode 35% keeps the text at Lc 96 (16.5:1). In dark mode `brand-soft`, a 16% wash meant for a menu row, left the passage almost the same as the page (1.18:1 between them); 35% made it stand out (2.6:1) but dropped the text to Lc 68; 22% keeps both, 1.8:1 against the page and Lc 77 (6.9:1) for the text.
+- Register the active one under `COMMENT_HIGHLIGHT_ACTIVE` (`raft-comment-active`) instead: `you` with ink type, in both modes, like a search hit. The wash under every passage is `brand` and grays with Boring Gray; the open passage is addressed to you, so it stays yellow in every theme ([Themes](../foundations/themes.md#signals)).
 - Call the function it returns to clear the highlight. In a browser without `CSS.highlights` it does nothing, and the cards still sit beside their passages.
 - The names are global to the page: registering a name replaces what was registered under it. Let one viewer at a time own them, the one on screen, and clear them when it closes.
 
 ## Content
 
 - Write `CommentCardMeta` in sentence case, as a fact: "2 replies", "On the whole document", "Position not found".
-- Write the time as in a message header, in the person's 12-hour or 24-hour choice: 11:02 today, Yesterday 17:20 before that ([Writing](../../../../../design/content/writing.md#times)).
+- Write the time as in a message header, in the person's 12-hour or 24-hour choice: 11:02 today, Yesterday 17:20 before that ([Writing](../content/writing.md#times)).
 
 ## Accessibility
 
@@ -118,5 +118,5 @@ The parts are plain elements built with Base UI `useRender`; `CommentMarker` wra
 
 - Show nothing where there are no comments: no empty margin, no marker.
 - Put each card level with its passage; never list anchored comments in a column of their own order.
-- Open one discussion at a time; only the active card shows the reply box, so its send button is the one pink button ([Button](../button/button.md#which-color)).
-- Use the Composer for the reply box ([Composer](../composer/composer.md)); don't build another input.
+- Open one discussion at a time; only the active card shows the reply box, so its send button is the one pink button ([Button](button.md#which-color)).
+- Use the Composer for the reply box ([Composer](composer.md)); don't build another input.

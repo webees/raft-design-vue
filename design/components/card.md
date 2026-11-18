@@ -21,13 +21,13 @@ card/compositions/project-summary
 | Situation                                                            | Use                                                                                                                                                                                                    |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | One subject on a page, with a title and its own content or controls  | Card                                                                                                                                                                                                   |
-| A setting that turns a feature on, with its configuration under it   | Card with `variant="inset"`: a switch when the feature works without the fields, a checkbox and one Save when it needs them ([Forms](../../../../../design/patterns/forms.md#settings-saved-together)) |
-| A choice among a few options in a form, where each option is a block | Card with `variant="option"`, holding a [Checkbox](../checkbox/checkbox.md) or a radio                                                                                                                 |
-| A group of rows: settings, members, agents                           | `ListRowGroup` ([ListRow](../list-row/list-row.md))                                                                                                                                                    |
-| Properties of one item, label and value                              | [DescriptionList](../description-list/description-list.md)                                                                                                                                             |
-| A part of a large form                                               | [FormSection](../form-section/form-section.md)                                                                                                                                                         |
-| A column of the main area                                            | [Panel](../panel/panel.md)                                                                                                                                                                             |
-| A task, a file on a message, a person or an app's item on hover      | [TaskCard](../task-card/task-card.md), [MessageAttachment](../message-attachment/message-attachment.md), [PreviewCard](../preview-card/preview-card.md)                                                |
+| A setting that turns a feature on, with its configuration under it   | Card with `variant="inset"`: a switch when the feature works without the fields, a checkbox and one Save when it needs them ([Forms](../patterns/forms.md#settings-saved-together)) |
+| A choice among a few options in a form, where each option is a block | Card with `variant="option"`, holding a [Checkbox](checkbox.md) or a radio                                                                                                                 |
+| A group of rows: settings, members, agents                           | `ListRowGroup` ([ListRow](list-row.md))                                                                                                                                                    |
+| Properties of one item, label and value                              | [DescriptionList](description-list.md)                                                                                                                                             |
+| A part of a large form                                               | [FormSection](form-section.md)                                                                                                                                                         |
+| A column of the main area                                            | [Panel](panel.md)                                                                                                                                                                             |
+| A task, a file on a message, a person or an app's item on hover      | [TaskCard](task-card.md), [MessageAttachment](message-attachment.md), [PreviewCard](preview-card.md)                                                |
 
 ## Anatomy
 
@@ -62,7 +62,7 @@ checkbox/compositions/selection
 
 ## Content
 
-- Write the title in sentence case: Release readiness ([Writing](../../../../../design/content/writing.md#casing)).
+- Write the title in sentence case: Release readiness ([Writing](../content/writing.md#casing)).
 - Write the description as one line on what the card is for or where it stands.
 - Use the footer for a note about the whole card, such as where to read more. Put a card-level action at the end of `CardContent` instead.
 
@@ -76,8 +76,8 @@ Card renders a `div` and adds no semantics.
 
 ## Rules
 
-- Keep cards flat. Only things that float cast a shadow ([Elevation](../../../../../design/foundations/elevation.md)); the open comment card is lifted ([Comment](../comment/comment.md)).
-- Don't put a card inside a card. An action inside a section is an ordinary row, with the description on the left and the button on the right ([Forms](../../../../../design/patterns/forms.md#the-large-form-dialog)).
-- Use `line-hairline` for every line inside a card; it is content, not a region ([Color](../../../../../design/foundations/color.md#lines)).
-- Don't attach a progress bar or a colored band to a card's edge ([Shape](../../../../../design/foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)).
-- Apply a switch in a card at once, without a Save button ([Forms](../../../../../design/patterns/forms.md#settings-that-apply-at-once)).
+- Keep cards flat. Only things that float cast a shadow ([Elevation](../foundations/elevation.md)); the open comment card is lifted ([Comment](comment.md)).
+- Don't put a card inside a card. An action inside a section is an ordinary row, with the description on the left and the button on the right ([Forms](../patterns/forms.md#the-large-form-dialog)).
+- Use `line-hairline` for every line inside a card; it is content, not a region ([Color](../foundations/color.md#lines)).
+- Don't attach a progress bar or a colored band to a card's edge ([Shape](../foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)).
+- Apply a switch in a card at once, without a Save button ([Forms](../patterns/forms.md#settings-that-apply-at-once)).

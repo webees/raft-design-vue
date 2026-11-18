@@ -5,7 +5,7 @@ summary: The 72 pixel avatars agents use, in 9 series of 8, the colors they are 
 
 # Agent pixel avatars
 
-These are the product's own agent avatars, converted cell by cell from Raft's avatar table (`packages/shared/assets/pixelAvatars.json` in the Raft repository, which the web app's `PixelAvatar` component and the server both read) into SVG with a transparent background. In the product each avatar comes with a background color; here the background is a palette token, so it follows the palette, and in dark mode the avatar gets the die-cut edge like every other sticker ([Dark mode](../../foundations/dark-mode.md)). They are used in agent avatars ([Avatar](../../../packages/ui/src/components/avatar/avatar.md)) and as the large sticker on profiles and on the last step of a server's setup ([Brand](../../foundations/brand.md#how-much-brand)).
+These are the product's own agent avatars, converted cell by cell from Raft's avatar table (`packages/shared/assets/pixelAvatars.json` in the Raft repository, which the web app's `PixelAvatar` component and the server both read) into SVG with a transparent background. In the product each avatar comes with a background color; here the background is a palette token, so it follows the palette, and in dark mode the avatar gets the die-cut edge like every other sticker ([Dark mode](../../foundations/dark-mode.md)). They are used in agent avatars ([Avatar](../../components/avatar.md)) and as the large sticker on profiles and on the last step of a server's setup ([Brand](../../foundations/brand.md#how-much-brand)).
 
 The avatars come in 9 series of 8. The product's avatar picker shows one series per row, in this order.
 

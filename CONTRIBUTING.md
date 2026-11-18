@@ -39,8 +39,9 @@ tooling/upstream          Sync, lockfile, drift report, parity manifest
 bun run verify
 ```
 
-This runs component parity, ESLint, `vue-tsc`, Vitest and a full production
-build. Pull requests must be green.
+This runs component parity, the docs drift audit, the Markdown link check,
+ESLint, `vue-tsc`, Vitest and a full production build. Pull requests must be
+green.
 
 ## Upstream sync workflow
 
@@ -51,9 +52,10 @@ bun run sync:upstream --ref main
 ```
 
 The command updates `tooling/upstream/upstream.lock.json`, regenerates CSS,
-refreshes the docs mirror and prints a changelog of upstream additions. Review
-the generated diff, port anything new, then commit. Never hand-edit synced
-files.
+refreshes the docs mirror, rewrites its internal links and prints a changelog
+of upstream additions. Review the generated diff, port anything new, then
+commit. Never hand-edit synced files; `bun run check:docs-links` guards the
+links those files point at.
 
 ## Commits and releases
 

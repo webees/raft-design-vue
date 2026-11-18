@@ -23,10 +23,10 @@ system-message/compositions/preview
 | A date in the timeline                                                                       | SystemMessage                                  |
 | An action: someone claimed, handed off, finished or moved a task; joined or archived a place | SystemMessage                                  |
 | Several event lines in a row                                                                 | `SystemMessageGroup`, collapsed to one summary |
-| Something a person or an agent said                                                          | [MessageItem](../message-item/message-item.md) |
-| An agent's full history of actions                                                           | [Timeline](../timeline/timeline.md)            |
+| Something a person or an agent said                                                          | [MessageItem](message-item.md) |
+| An agent's full history of actions                                                           | [Timeline](timeline.md)            |
 
-Agents write their actions as event lines, not messages; see [Hand-offs and approvals](../../../../../design/people-and-agents/handoffs-and-approvals.md#event-lines).
+Agents write their actions as event lines, not messages; see [Hand-offs and approvals](../people-and-agents/handoffs-and-approvals.md#event-lines).
 
 ## Anatomy
 
@@ -59,14 +59,14 @@ system-message/compositions/grouped-generic
 ## Behavior
 
 - A line keeps one line: its content truncates, and the full text is in its `title`.
-- A single line is a turn of its own: it sits the message step, 16px, from the text above and below it, like a new sender line ([Timeline rhythm](../../../../../design/foundations/spacing.md#timeline-rhythm)). It keeps 12px above its text and 4px under it, the lead and row inset of a message row, so the next row's lead makes up the rest. A collapsed group's header keeps the same distances around its disclosure's text. Lines inside an open group sit closer together.
+- A single line is a turn of its own: it sits the message step, 16px, from the text above and below it, like a new sender line ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)). It keeps 12px above its text and 4px under it, the lead and row inset of a message row, so the next row's lead makes up the rest. A collapsed group's header keeps the same distances around its disclosure's text. Lines inside an open group sit closer together.
 - The group's chevron turns when the group opens.
 
 ## Content
 
 - Name who did it, the verb and the item: "Bugen claimed #25", "Wug → Martin · review #25", "Martin moved #25 to Done".
-- Use teammate verbs and display names ([Writing](../../../../../design/content/writing.md#voice)).
-- Don't start a line with an emoji: emoji are content, not icons ([Iconography](../../../../../design/foundations/iconography.md)).
+- Use teammate verbs and display names ([Writing](../content/writing.md#voice)).
+- Don't start a line with an emoji: emoji are content, not icons ([Iconography](../foundations/iconography.md)).
 - Summarize a group by count and kind, in sentence case: "3 updates: 2 task updates, 1 system message".
 
 ## Accessibility
@@ -77,4 +77,4 @@ system-message/compositions/grouped-generic
 
 ## Rules
 
-- Set event lines in Space Mono, `text-mono-meta`, in `foreground-hint`, centered between two `line-hairline` rules. Machines write them ([Typography](../../../../../design/foundations/typography.md)).
+- Set event lines in Space Mono, `text-mono-meta`, in `foreground-hint`, centered between two `line-hairline` rules. Machines write them ([Typography](../foundations/typography.md)).

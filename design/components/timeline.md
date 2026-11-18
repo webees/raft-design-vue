@@ -20,11 +20,11 @@ timeline/compositions/preview
 
 | Situation                                                                                                                              | Use                                                                                                                                       |
 | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| A task's History, collapsed under its properties in task details                                                                       | Timeline ([Built from existing parts](../../../../../design/components/overview.md#task-details))                                         |
-| What an agent did ([Hand-offs and approvals](../../../../../design/people-and-agents/handoffs-and-approvals.md#the-record-afterwards)) | Timeline, as an activity log                                                                                                              |
-| The steps of a flow the person goes through                                                                                            | [Steps](../steps/steps.md)                                                                                                                |
-| Facts about an item, not events                                                                                                        | [DescriptionList](../description-list/description-list.md)                                                                                |
-| Messages and event lines in a conversation                                                                                             | [SystemMessage](../system-message/system-message.md) in the conversation ([Conversation](../../../../../design/patterns/conversation.md)) |
+| A task's History, collapsed under its properties in task details                                                                       | Timeline ([Built from existing parts](overview.md#task-details))                                         |
+| What an agent did ([Hand-offs and approvals](../people-and-agents/handoffs-and-approvals.md#the-record-afterwards)) | Timeline, as an activity log                                                                                                              |
+| The steps of a flow the person goes through                                                                                            | [Steps](steps.md)                                                                                                                |
+| Facts about an item, not events                                                                                                        | [DescriptionList](description-list.md)                                                                                |
+| Messages and event lines in a conversation                                                                                             | [SystemMessage](system-message.md) in the conversation ([Conversation](../patterns/conversation.md)) |
 
 ## Anatomy
 
@@ -69,7 +69,7 @@ timeline/compositions/horizontal
 
 ### Activity log
 
-- Set the title and the detail in Space Mono: the log is what a machine wrote ([Typography](../../../../../design/foundations/typography.md#principles)).
+- Set the title and the detail in Space Mono: the log is what a machine wrote ([Typography](../foundations/typography.md#principles)).
 - Mark a step done by a subagent with a `subagent` tag.
 - Write only what the agent did. Don't show its prompts or its output.
 
@@ -81,4 +81,4 @@ timeline/compositions/horizontal
 ## Rules
 
 - Don't make a timeline clickable. To go to the object of a step, link that object in the title: the task, the commit, the file.
-- Mark a step that failed in orange (`warning`, or `presence-error` in a log), not `danger`: red is only for consequences that cannot be undone ([Color](../../../../../design/foundations/color.md#meanings-of-color)).
+- Mark a step that failed in orange (`warning`, or `presence-error` in a log), not `danger`: red is only for consequences that cannot be undone ([Color](../foundations/color.md#meanings-of-color)).

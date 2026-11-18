@@ -27,7 +27,7 @@ Boring Gray is the one theme that also changes the brand. Besides its gray frame
 
 ## Signals
 
-Yellow carries two meanings in Raft, and both are information, not decoration ([Meanings of color](./color.md#meanings-of-color)). They have their own tokens, which point at the raw yellow instead of `brand`, so no theme reaches them:
+Yellow carries two meanings in Raft, and both are information, not decoration ([Meanings of color](color.md#meanings-of-color)). They have their own tokens, which point at the raw yellow instead of `brand`, so no theme reaches them:
 
 | Token | Means | Use for |
 |---|---|---|
@@ -39,7 +39,7 @@ Yellow carries two meanings in Raft, and both are information, not decoration ([
 - Gray can't stand in for them. When Boring Gray painted them with its gray `brand`, a selected segment was ΔE 1.4 (OKLab × 100) from a hovered one in light mode, under the 2 a person can notice; the selected sidebar row was 5.0 from the sidebar and a mention of you 7.5 from the page. The yellow is 16.5 to 20. A gray dark enough to match it is a mid-gray slab, heavier than the yellow it replaces. `themes.contrast.test.ts` holds every theme to ΔE 10.
 - Paint a new "you" signal or a selected sticker with these tokens, not with `brand`: `brand` is the environment and follows the theme.
 
-Status lights are information too, and keep their color in every theme by the same rule. The yellow of a working agent is `presence-busy`, and the tint of its Working chip `presence-busy-soft`: the values of `brand` and `brand-soft` in Raft Yellow, but their own, so Boring Gray doesn't gray them. `Status variant="primary"` and the pixel of a `MessageActionCardStatus` with `variant="primary"` are the same `presence-busy`, and a soft `Badge variant="busy"` the same tint ([Status](../../packages/ui/src/components/status/status.md#agent-state-chips)). When the Working light and chip followed `brand`, Boring Gray turned them gray, and a working agent looked offline. `themes.status.test.tsx` holds both to the same color in every theme. Paint a status with a `presence-*` or `task-status-*` token, never with `brand`.
+Status lights are information too, and keep their color in every theme by the same rule. The yellow of a working agent is `presence-busy`, and the tint of its Working chip `presence-busy-soft`: the values of `brand` and `brand-soft` in Raft Yellow, but their own, so Boring Gray doesn't gray them. `Status variant="primary"` and the pixel of a `MessageActionCardStatus` with `variant="primary"` are the same `presence-busy`, and a soft `Badge variant="busy"` the same tint ([Status](../components/status.md#agent-state-chips)). When the Working light and chip followed `brand`, Boring Gray turned them gray, and a working agent looked offline. `themes.status.test.tsx` holds both to the same color in every theme. Paint a status with a `presence-*` or `task-status-*` token, never with `brand`.
 
 ## What a theme may change
 
@@ -69,5 +69,5 @@ Never put a sprite where it could be mistaken for a control, an avatar or a stat
 
 ## Related
 
-- [Color](./color.md): the tokens a theme overrides.
-- [Dark mode](./dark-mode.md): what changes in dark mode, which every theme follows.
+- [Color](color.md): the tokens a theme overrides.
+- [Dark mode](dark-mode.md): what changes in dark mode, which every theme follows.

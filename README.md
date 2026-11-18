@@ -25,7 +25,7 @@ inventing a new visual language.
 bun install
 bun run dev          # docs at http://localhost:3000
 bun run build        # tokens + library + docs
-bun run verify       # parity + lint + types + tests + build
+bun run verify       # parity + docs links + lint + types + tests + build
 ```
 
 Requirements: Bun >= 1.4, Node >= 22.

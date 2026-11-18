@@ -10,7 +10,7 @@ related: [sidebar, inbox-item, search, avatar, icon-tile, badge, switch]
 
 # ListRow
 
-A ListRow is one row of a list: a person, an agent, a setting or a shortcut into another page. The whole row is the target. Use it for the agents and people on a detail or profile page, and for settings. Raft Chat's phone lists of places (Home, Members, the Settings list) use the sidebar row instead ([Choosing a component](../../../../../design/components/overview.md#rows)).
+A ListRow is one row of a list: a person, an agent, a setting or a shortcut into another page. The whole row is the target. Use it for the agents and people on a detail or profile page, and for settings. Raft Chat's phone lists of places (Home, Members, the Settings list) use the sidebar row instead ([Choosing a component](overview.md#rows)).
 
 ```example
 list-row/compositions/conversations
@@ -20,28 +20,28 @@ list-row/compositions/conversations
 
 | Situation                                                                   | Use                                                                                                                                        |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Channels, direct messages and members in a phone list                       | The sidebar row ([Sidebar](../sidebar/sidebar.md)), as in Raft Chat                                                                        |
-| Channels and people among search results                                    | ListRow, through the search result row ([Search](../search/search.md))                                                                     |
-| Agents and people on a profile or detail page, such as a computer's details | ListRow in a `ListRowGroup` ([Identity and presence](../../../../../design/people-and-agents/identity-and-presence.md#the-same-as-people)) |
-| A row of the desktop sidebar                                                | The sidebar row ([Sidebar](../sidebar/sidebar.md))                                                                                         |
-| Activity and notifications                                                  | [InboxItem](../inbox-item/inbox-item.md)                                                                                                   |
-| A task                                                                      | [TaskCard](../task-card/task-card.md)                                                                                                      |
+| Channels, direct messages and members in a phone list                       | The sidebar row ([Sidebar](sidebar.md)), as in Raft Chat                                                                        |
+| Channels and people among search results                                    | ListRow, through the search result row ([Search](search.md))                                                                     |
+| Agents and people on a profile or detail page, such as a computer's details | ListRow in a `ListRowGroup` ([Identity and presence](../people-and-agents/identity-and-presence.md#the-same-as-people)) |
+| A row of the desktop sidebar                                                | The sidebar row ([Sidebar](sidebar.md))                                                                                         |
+| Activity and notifications                                                  | [InboxItem](inbox-item.md)                                                                                                   |
+| A task                                                                      | [TaskCard](task-card.md)                                                                                                      |
 
 ## Anatomy
 
 - `ListRow`: the row. A `button` by default; render a link for a row that goes somewhere.
-- Leading block: an [Avatar](../avatar/avatar.md), a channel tile ([IconTile](../icon-tile/icon-tile.md)) or a 20px `ListRowIcon` (18px on an action row: [An action's risk](#an-actions-risk)). Optional.
+- Leading block: an [Avatar](avatar.md), a channel tile ([IconTile](icon-tile.md)) or a 20px `ListRowIcon` (18px on an action row: [An action's risk](#an-actions-risk)). Optional.
 - `ListRowBody`: the text column. Required.
   - `ListRowTop`: `ListRowTitle`, then the time in `ListRowMeta`.
   - `ListRowSubtitle`: data about the row's subject, under the title: an agent's description, a person's role, a channel's topic, an app's byline. Optional.
   - `ListRowBottom`: the preview in `ListRowDescription`, then at most one badge.
-- Trailing: a setting's `ListRowValue` and `ListRowChevron`, or a [Switch](../switch/switch.md). Optional.
+- Trailing: a setting's `ListRowValue` and `ListRowChevron`, or a [Switch](switch.md). Optional.
 - `ListRowGroup`: an inset group that wraps rows in a card. Optional. A section can hold more than one ([More than one group in a section](#more-than-one-group-in-a-section)).
 - `ListRowSkeleton`: a row that stands in for a `ListRow` while the list loads ([Loading](#loading)). Optional; experimental, from `@botiverse/raft-ui/wip`.
 
-In a `plain` row, both ends center on the whole row, with or without a description: the leading icon, avatar or tile, and the trailing value, chevron, switch, checkbox, radio or button. A setting reads as one unit, and its controls belong to the whole row, not to the title. Each keeps its size, and the row is its padding and its tallest part: 54px on a phone with a switch and a title alone ([Alignment](../../../../../design/foundations/alignment.md#a-control-and-its-label)).
+In a `plain` row, both ends center on the whole row, with or without a description: the leading icon, avatar or tile, and the trailing value, chevron, switch, checkbox, radio or button. A setting reads as one unit, and its controls belong to the whole row, not to the title. Each keeps its size, and the row is its padding and its tallest part: 54px on a phone with a switch and a title alone ([Alignment](../foundations/alignment.md#a-control-and-its-label)).
 
-A setting that applies at once ends its `ListRowBody` with a [SaveStatus](../save-status/save-status.md) line, which takes no room until a change fails: the row is as tall as without it, and its ends center on the whole row. When a change fails, the error appears 4px under the description, the row grows by that line, and the ends, still centered on the whole row, move down by half of it.
+A setting that applies at once ends its `ListRowBody` with a [SaveStatus](save-status.md) line, which takes no room until a change fails: the row is as tall as without it, and its ends center on the whole row. When a change fails, the error appears 4px under the description, the row grows by that line, and the ends, still centered on the whole row, move down by half of it.
 
 ## Variants
 
@@ -59,7 +59,7 @@ list-row/compositions/settings
 
 What a setting opens, such as quiet hours' start and end times or a server's channels that have their own notification level, is a row of its own right under the setting, in the same group. Pass it `attached`: it draws no hairline above it and, as a `plain` row, has no top padding, so the only space between the two is the setting's own 12px bottom inset. A hairline says "another setting", so between a setting and what belongs to it, it would split one thing in two (cindyz, 2026-11-10, #proj-raft-ui:4ae1a74e). The setting's row keeps its height, and its switch stays centered on its own title and description. The row after the attached one is the next setting and draws its hairline as usual. A setting can open several attached rows, such as one row per channel with its own level: none of them draws a hairline, so they read as one list under the setting.
 
-An attached row that is itself a target, a row with a chevron or one that opens a menu, keeps the control height as its least: 44px on a phone and a touch screen, where it would be 36px without its top padding, and 34px with a mouse on a desktop, which it already is ([Hit targets](../../../../../design/foundations/accessibility.md#hit-targets)). Its text then sits a few pixels lower by touch; only the hairline is gone.
+An attached row that is itself a target, a row with a chevron or one that opens a menu, keeps the control height as its least: 44px on a phone and a touch screen, where it would be 36px without its top padding, and 34px with a mouse on a desktop, which it already is ([Hit targets](../foundations/accessibility.md#hit-targets)). Its text then sits a few pixels lower by touch; only the hairline is gone.
 
 A display-only attached row right under a row that is a target, such as the pinned announcement that opens it with Remove and Replace under it, keeps its hairline and, as a `plain` row, its top inset. Drop them there and the target's hover and press fill ends on an edge you cannot see, right against the attached row's own controls (stdrc, 2026-11-12, #proj-raft-ui:95c3f384). The line gives the fill its edge and the inset keeps the controls off it; `ListRow` does this by itself from the row above (`data-interactive`), when the two are sibling rows; rows wrapped one by one in `li` aren't matched (a selector reaching into the previous `li` would need `:has()` on an ancestor, which the package does not use), so keep such a pair as siblings. Attached rows that are targets themselves, such as a level's per-channel rows, stay tight: each is a row with a fill of its own, so the fills meet as in any list. Draw the whole group as one target instead, with one hover, only when what is attached is part of the same target, such as the members card's faces, which open the same list: never when it holds actions of its own.
 
@@ -86,11 +86,11 @@ list-row/compositions/entries
 
 ## States
 
-`tone` says what the place is to the person, or what an action risks ([An action's risk](#an-actions-risk)). The shared states are in [States](../../../../../design/foundations/states.md).
+`tone` says what the place is to the person, or what an action risks ([An action's risk](#an-actions-risk)). The shared states are in [States](../foundations/states.md).
 
 | State           | Use for                                                                                                                                                                                                   |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tone="unread"` | Something waits here: bold title, the preview in `foreground`, and a pink count in `ListRowBottom`. When someone mentions the person, the yellow @ marker replaces the count ([Badge](../badge/badge.md)) |
+| `tone="unread"` | Something waits here: bold title, the preview in `foreground`, and a pink count in `ListRowBottom`. When someone mentions the person, the yellow @ marker replaces the count ([Badge](badge.md)) |
 | `tone="muted"`  | The person muted it: the title and a subtitle in `foreground-muted`. Add a `bell-off` icon after the title, and show unread as a gray count in `ListRowMeta` instead of a pink badge                      |
 | `tone="away"`   | The person hasn't joined yet: title, subtitle and preview in `foreground-hint`                                                                                                                            |
 | `selected`      | The item open beside the list: an `info-soft` wash, and no hover                                                                                                                                          |
@@ -102,20 +102,20 @@ list-row/compositions/tones
 
 ### An action's risk
 
-A row can be an action rather than a place: the actions at the end of a details page or panel, such as Archive channel, Leave channel and Delete channel at the end of a channel's details. These are the page's danger zone ([Forms](../../../../../design/patterns/forms.md#danger-zone)), and `tone` says what the action risks, with Button's names and meanings ([Which color](../button/button.md#which-color)):
+A row can be an action rather than a place: the actions at the end of a details page or panel, such as Archive channel, Leave channel and Delete channel at the end of a channel's details. These are the page's danger zone ([Forms](../patterns/forms.md#danger-zone)), and `tone` says what the action risks, with Button's names and meanings ([Which color](button.md#which-color)):
 
 | Tone             | Use for                                                                                                 | Examples                                        |
 | ---------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | `tone="warning"` | An action that interrupts but can be undone: the title and the leading icon in `warning-strong`, orange | Archive channel, Leave channel, Stop all agents |
 | `tone="danger"`  | An action that cannot be undone: the title and the leading icon in `danger-strong`, red                 | Delete channel, Delete server                   |
 
-- The leading `ListRowIcon` is 18px, not a list row's 20px. A row that does one thing is a button with a label at `lg` ([Sizes](../button/button.md#sizes)), and it takes that button's icon: at 20px, Leave channel's icon was the largest thing beside any label on the page, a size up from the 16px of the sidebar and the 18px of every large button (cindyz/Jasper, 2026-11-16, #triage:925e747a). It stays 18px when the row is disabled, so nothing shifts.
-- Only the title and the leading `ListRowIcon` take the color. A description, a value, the chevron and the hover and press fills stay as on any row: the color names the risky action, and a red fill or a red explanation would read as an error ([Feedback](../../../../../design/patterns/feedback.md)).
+- The leading `ListRowIcon` is 18px, not a list row's 20px. A row that does one thing is a button with a label at `lg` ([Sizes](button.md#sizes)), and it takes that button's icon: at 20px, Leave channel's icon was the largest thing beside any label on the page, a size up from the 16px of the sidebar and the 18px of every large button (cindyz/Jasper, 2026-11-16, #triage:925e747a). It stays 18px when the row is disabled, so nothing shifts.
+- Only the title and the leading `ListRowIcon` take the color. A description, a value, the chevron and the hover and press fills stay as on any row: the color names the risky action, and a red fill or a red explanation would read as an error ([Feedback](../patterns/feedback.md)).
 - The color is the strong one text can take, never the sticker `warning` or `danger`, which are fills under ink type and 2:1 to 3:1 on paper. `warning-strong` and `danger-strong` keep at least 4.5:1 on the canvas, a card, a popover and the sidebar, at rest, hovered and pressed, in both modes and every theme (`list-row.risk-contrast.test.ts`).
-- A risk tone needs an interactive row (a `button`, or the link you pass with `render`). A display-only row (`interactive={false}`) ignores it: only an action has a risk, and orange or red on a row that does nothing is color without a consequence ([Color](../../../../../design/foundations/color.md#meanings-of-color)). A disabled row ignores it too, as it does every tone: everything is `foreground-disabled`.
+- A risk tone needs an interactive row (a `button`, or the link you pass with `render`). A display-only row (`interactive={false}`) ignores it: only an action has a risk, and orange or red on a row that does nothing is color without a consequence ([Color](../foundations/color.md#meanings-of-color)). A disabled row ignores it too, as it does every tone: everything is `foreground-disabled`.
 - A row is a place or an action, so the two kinds of tone never meet on one row, and `tone` takes either.
-- The row still opens its confirmation ([Confirming](../../../../../design/patterns/feedback.md#confirming)): the color warns before the click, and the dialog, with its orange or red button, is where the person commits.
-- Don't color an action in a menu ([DropdownMenu](../dropdown-menu/dropdown-menu.md#rules)). A menu is a short-lived list of choices people scan; a danger zone is a fixed place at the end of a page, set apart from the settings people change often, where the color tells them what each action costs before they reach for it.
+- The row still opens its confirmation ([Confirming](../patterns/feedback.md#confirming)): the color warns before the click, and the dialog, with its orange or red button, is where the person commits.
+- Don't color an action in a menu ([DropdownMenu](dropdown-menu.md#rules)). A menu is a short-lived list of choices people scan; a danger zone is a fixed place at the end of a page, set apart from the settings people change often, where the color tells them what each action costs before they reach for it.
 
 Why: slock's channel details panel puts its actions in a card of rows, and colored the titles itself (`text-warning-strong` and `text-danger-strong` on the row and `text-current` on the title and icon), so the color, its contrast and the disabled state were each product's to get right (slock channel details, stdrc/Jasper, 2026-11-10, #proj-raft-ui:dae8db07).
 
@@ -125,7 +125,7 @@ list-row/compositions/actions
 
 ### Loading
 
-While the list loads, show `ListRowSkeleton` rows where the rows will be, in the same `ListRowGroup` if they have one, and mark the list `aria-busy`. Each one is a display-only `ListRow` of the same `variant`, with a bar in its title, time and description, so it has the loaded row's height and dividers ([Feedback](../../../../../design/patterns/feedback.md#empty-loading-and-failed)). A `default` row has a 35px leading block and a description; turn them on or off with `leading` and `description` to match the rows. Show them only once the wait passes 1 second ([Feedback](../../../../../design/patterns/feedback.md#empty-loading-and-failed)); `ListRowSkeleton` doesn't delay itself.
+While the list loads, show `ListRowSkeleton` rows where the rows will be, in the same `ListRowGroup` if they have one, and mark the list `aria-busy`. Each one is a display-only `ListRow` of the same `variant`, with a bar in its title, time and description, so it has the loaded row's height and dividers ([Feedback](../patterns/feedback.md#empty-loading-and-failed)). A `default` row has a 35px leading block and a description; turn them on or off with `leading` and `description` to match the rows. Show them only once the wait passes 1 second ([Feedback](../patterns/feedback.md#empty-loading-and-failed)); `ListRowSkeleton` doesn't delay itself.
 
 ```example
 list-row/compositions/loading
@@ -134,10 +134,10 @@ list-row/compositions/loading
 ## Behavior
 
 - Divide rows with `line-hairline`. In the default variant the line starts where the text starts; in a settings list it starts at the row's edge (16px); entry rows have no lines between them, because they are a set of buttons, not a list of content. An `attached` row has no line above it: it belongs to the row above ([A row that belongs to the setting above](#a-row-that-belongs-to-the-setting-above)).
-- The whole row is the target: hover lays the subtle tier, `fill-subtle`, over all of it and press the medium tier ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)). While a menu it opened is up (`data-popup-open`: a context menu, or press and hold on a phone), it lays `fill-subtle` too, hovered or not; a selected row keeps its selection.
-- A list of places or people on a phone (conversations, members, the entries into other pages) passes `cell`: each row is a list cell ([Lists](../../../../../design/patterns/lists.md)). It draws no line, and hover (`fill-cell-hover`), press (`fill-cell-press`), selection (`fill-cell-selected`), menu open and keyboard focus are drawn on one rounded shape, as tall as the row and inset 8px at the sides. Put the rows in a `flex flex-col gap-0.5 py-2` column, so they sit 2px apart and the first and last shapes 8px from the list's ends. A cell's content is padded from its shape, not from the list: 12px inside it at the start and at the end (20px from the list's edges; with a mouse on a desktop 8px inside it, 16px from the edges), so the icon, the avatar, the time and a badge never touch the shape ([Lists](../../../../../design/patterns/lists.md#rules)). A settings row (no `cell`) keeps its 16px from the card's edges. A column of `cell` rows of your own sets `[--column-margin:20px]` on its root, so its head and toolbar start on the rows' content line on a phone too ([Lists](../../../../../design/patterns/lists.md#one-edge)).
+- The whole row is the target: hover lays the subtle tier, `fill-subtle`, over all of it and press the medium tier ([Hover and press](../foundations/states.md#hover-and-press)). While a menu it opened is up (`data-popup-open`: a context menu, or press and hold on a phone), it lays `fill-subtle` too, hovered or not; a selected row keeps its selection.
+- A list of places or people on a phone (conversations, members, the entries into other pages) passes `cell`: each row is a list cell ([Lists](../patterns/lists.md)). It draws no line, and hover (`fill-cell-hover`), press (`fill-cell-press`), selection (`fill-cell-selected`), menu open and keyboard focus are drawn on one rounded shape, as tall as the row and inset 8px at the sides. Put the rows in a `flex flex-col gap-0.5 py-2` column, so they sit 2px apart and the first and last shapes 8px from the list's ends. A cell's content is padded from its shape, not from the list: 12px inside it at the start and at the end (20px from the list's edges; with a mouse on a desktop 8px inside it, 16px from the edges), so the icon, the avatar, the time and a badge never touch the shape ([Lists](../patterns/lists.md#rules)). A settings row (no `cell`) keeps its 16px from the card's edges. A column of `cell` rows of your own sets `[--column-margin:20px]` on its root, so its head and toolbar start on the rows' content line on a phone too ([Lists](../patterns/lists.md#one-edge)).
 - A settings card (`ListRowGroup`, `variant="plain"`) keeps the look above: lines between rows and the row-wide fills. Its rows are a fixed form read as one card, where the line ties each setting to the next; an inset shape inside the card's own border would draw a third edge.
-- A row whose only targets are its own controls (a setting with a switch) takes `interactive={false}`: it renders a plain element with no hover or press. See [States](../../../../../design/foundations/states.md).
+- A row whose only targets are its own controls (a setting with a switch) takes `interactive={false}`: it renders a plain element with no hover or press. See [States](../foundations/states.md).
 
 ## Content
 
@@ -148,9 +148,9 @@ list-row/compositions/loading
 
 ### Data and explanation
 
-A row's text is data (what the row is there to show) or an explanation you write. Each has its own part, so grey text means the same thing on every row ([Color tiers](../../../../../design/foundations/typography.md#color-tiers)).
+A row's text is data (what the row is there to show) or an explanation you write. Each has its own part, so grey text means the same thing on every row ([Color tiers](../foundations/typography.md#color-tiers)).
 
-- Put data about the row's subject in `ListRowSubtitle`: an agent's or a channel's description, a channel's topic, a person's role, an app's byline ("Developer tools · by Linear"). It is primary data, so it is in the title's ink at weight 400 and a size down (`text-footnote`): size and weight set it apart from the title, and a third difference, colour, would be one too many ([Notes on deeper surfaces](../../../../../design/foundations/typography.md#notes-on-deeper-surfaces)). It follows a place's tone and the disabled state with the title, and is cut to one line. A risk tone colors the title alone ([An action's risk](#an-actions-risk)).
+- Put data about the row's subject in `ListRowSubtitle`: an agent's or a channel's description, a channel's topic, a person's role, an app's byline ("Developer tools · by Linear"). It is primary data, so it is in the title's ink at weight 400 and a size down (`text-footnote`): size and weight set it apart from the title, and a third difference, colour, would be one too many ([Notes on deeper surfaces](../foundations/typography.md#notes-on-deeper-surfaces)). It follows a place's tone and the disabled state with the title, and is cut to one line. A risk tone colors the title alone ([An action's risk](#an-actions-risk)).
 - Put a time, a date or a gray count in `ListRowMeta`: the row's secondary data, at the hint tier in Space Mono. A row has no other grey part for data, so a fact that isn't one of these goes in `ListRowSubtitle`, never in a grey class of your own.
 - Put a sentence you write to explain a setting in `ListRowDescription`: what turning it on does, who can see it, what is lost. Don't put data there: the description is the row's explanation part.
 - A conversation's preview stays in `ListRowDescription`, in `ListRowBottom` with its badge: its ink is how `tone="unread"` marks the row.
@@ -163,10 +163,10 @@ list-row/compositions/people
 
 A group of rows can have a heading above it, such as Channels.
 
-- Write it in sentence case, in `text-footnote` at weight 700 and `foreground-hint` ([Typography](../../../../../design/foundations/typography.md#casing)).
-- Add no hint beside or under it that only restates its name: Your preferences, not Your preferences with "Only for you". A hint goes there only when it tells people something the name doesn't, such as a limit ("Up to 30") ([Writing](../../../../../design/content/writing.md#principles)).
+- Write it in sentence case, in `text-footnote` at weight 700 and `foreground-hint` ([Typography](../foundations/typography.md#casing)).
+- Add no hint beside or under it that only restates its name: Your preferences, not Your preferences with "Only for you". A hint goes there only when it tells people something the name doesn't, such as a limit ("Up to 30") ([Writing](../content/writing.md#principles)).
 - Make the heading a button with `aria-expanded` when the group can collapse, and show the number of rows when it is collapsed.
-- Put the group's action on the right as an ink text button that underlines on hover ([TextLink](../text-link/text-link.md)): Browse.
+- Put the group's action on the right as an ink text button that underlines on hover ([TextLink](text-link.md)): Browse.
 
 raft-ui has no exported heading part for these lists yet.
 
@@ -181,5 +181,5 @@ raft-ui has no exported heading part for these lists yet.
 
 ## Rules
 
-- Don't add an ink border or a shadow to a row or a group: a list is content, and an ink border means a control ([Color](../../../../../design/foundations/color.md#lines)).
+- Don't add an ink border or a shadow to a row or a group: a list is content, and an ink border means a control ([Color](../foundations/color.md#lines)).
 - Don't color a row's text with a class of your own: an action's risk is `tone="warning"` or `tone="danger"`, which colors the title and the leading icon, keeps their contrast and greys them when the row is disabled ([An action's risk](#an-actions-risk)).

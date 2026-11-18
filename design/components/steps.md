@@ -22,15 +22,15 @@ steps/compositions/preview
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | A flow of 3 to 5 steps taken in order                     | Steps                                                                                                                            |
 | A flow of more than 5 steps                               | Split it into 2 flows, each with its own Steps                                                                                   |
-| How far one operation has got                             | [Progress](../progress/progress.md)                                                                                              |
-| Sections people visit in any order                        | [Tabs](../tabs/tabs.md)                                                                                                          |
-| The step label of a server's setup ("Set up your server") | A line of Space Mono in the dialog's header, not Steps; see [Onboarding](../../../../../design/products/raft-chat/onboarding.md) |
+| How far one operation has got                             | [Progress](progress.md)                                                                                              |
+| Sections people visit in any order                        | [Tabs](tabs.md)                                                                                                          |
+| The step label of a server's setup ("Set up your server") | A line of Space Mono in the dialog's header, not Steps; see [Onboarding](../products/raft-chat/onboarding.md) |
 
 ## Anatomy
 
 - `Steps`: the ordered list. `current` sets the current step, counted from 1.
 - `Step`: one step: a 20px square marker with its number in Space Mono, a title, and an optional description. A short `line-seam` connects it to the next step.
-- `OtterIndicator`: the Ottie illustration with one pose per status, at 40px or larger. It is decorative; put the status in nearby text. Resting and quiet typing loop, while a puzzled head tilt and a celebratory hop play once. This is a narrow illustration exception to the [motion rule](../../../../../design/foundations/motion.md); presence lights remain still.
+- `OtterIndicator`: the Ottie illustration with one pose per status, at 40px or larger. It is decorative; put the status in nearby text. Resting and quiet typing loop, while a puzzled head tilt and a celebratory hop play once. This is a narrow illustration exception to the [motion rule](../foundations/motion.md); presence lights remain still.
 
 ## Variants
 
@@ -60,7 +60,7 @@ steps/compositions/icon
 | `wait`    | Ahead: a `line-seam` outline on paper, the title in `foreground-hint`                                                                                   |
 | `process` | Current: a yellow sticker with an ink number                                                                                                            |
 | `finish`  | Finished: solid ink with a check                                                                                                                        |
-| `error`   | Failed: an orange sticker with a cross, because something going wrong is orange ([Color](../../../../../design/foundations/color.md#meanings-of-color)) |
+| `error`   | Failed: an orange sticker with a cross, because something going wrong is orange ([Color](../foundations/color.md#meanings-of-color)) |
 
 ```example
 steps/compositions/status
@@ -68,12 +68,12 @@ steps/compositions/status
 
 ## Behavior
 
-- A row of steps fills its row and switches on its own width, not the window's ([Switch on the region's width](../../../../../design/patterns/responsive.md#switch-on-the-regions-width)). Below 40rem (640px) of its own width each step stacks its text under its marker and the steps share the width, the titles wrapping; so it does in a dialog or a 400px panel on a wide window as on a phone. From 40rem the titles sit beside their markers, and a row too long for its width wraps onto a second line. Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.
+- A row of steps fills its row and switches on its own width, not the window's ([Switch on the region's width](../patterns/responsive.md#switch-on-the-regions-width)). Below 40rem (640px) of its own width each step stacks its text under its marker and the steps share the width, the titles wrapping; so it does in a dialog or a 400px panel on a wide window as on a phone. From 40rem the titles sit beside their markers, and a row too long for its width wraps onto a second line. Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.
 - Where the row is too narrow for every title, show only the current step's title.
 
 ## Content
 
-- Title each step with a short noun phrase: Your team, Computer, First agent. Use sentence case, whether or not the steps are clickable ([Typography](../../../../../design/foundations/typography.md#casing)).
+- Title each step with a short noun phrase: Your team, Computer, First agent. Use sentence case, whether or not the steps are clickable ([Typography](../foundations/typography.md#casing)).
 
 ## Accessibility
 

@@ -17,11 +17,11 @@ The NotificationCenter is the list that opens from the bell. It holds the state 
 | Situation                                               | Use                                                               |
 | ------------------------------------------------------- | ----------------------------------------------------------------- |
 | A problem or a change that affects the whole server     | NotificationCenter                                                |
-| Something happened elsewhere that the person should see | Activity ([ActivityInbox](../activity-inbox/activity-inbox.md))   |
-| Something in one panel failed                           | `PanelNotice` under the panel header ([Panel](../panel/panel.md)) |
-| The result of an action the person took                 | [Toast](../toast/toast.md)                                        |
+| Something happened elsewhere that the person should see | Activity ([ActivityInbox](activity-inbox.md))   |
+| Something in one panel failed                           | `PanelNotice` under the panel header ([Panel](panel.md)) |
+| The result of an action the person took                 | [Toast](toast.md)                                        |
 
-Errors by scope are in [Feedback](../../../../../design/patterns/feedback.md#errors-by-scope). Where a product puts the bell is on the product's own page.
+Errors by scope are in [Feedback](../patterns/feedback.md#errors-by-scope). Where a product puts the bell is on the product's own page.
 
 ## Anatomy
 
@@ -30,9 +30,9 @@ Errors by scope are in [Feedback](../../../../../design/patterns/feedback.md#err
 - `NotificationCenterPopup`: the list's popup, next to the bell.
   - `NotificationCenterHeader`: `NotificationCenterTitle` (Notifications) and `NotificationCenterCount`.
   - `NotificationCenterScroller` and `NotificationCenterList`: the notices.
-  - `NotificationCenterEmptyState`: what the list says when it is empty ([EmptyState](../empty-state/empty-state.md)).
+  - `NotificationCenterEmptyState`: what the list says when it is empty ([EmptyState](empty-state.md)).
 - `NotificationCenterItem`: one notice, in a `NotificationCenterItemRow`:
-  - `NotificationCenterItemIcon`: a tile with an icon. A notice from the system has no who, so a tile stands where an avatar would ([InboxItem](../inbox-item/inbox-item.md#rules)).
+  - `NotificationCenterItemIcon`: a tile with an icon. A notice from the system has no who, so a tile stands where an avatar would ([InboxItem](inbox-item.md#rules)).
   - `NotificationCenterItemContent`: `NotificationCenterItemTitle`, `NotificationCenterItemBody` and `NotificationCenterItemActions` with `NotificationCenterActionButton`s.
 
 ## Variants
@@ -57,13 +57,13 @@ Errors by scope are in [Feedback](../../../../../design/patterns/feedback.md#err
 - Sort notices by severity: errors first, then warnings, then information.
 - When the person dismisses a notice, don't show it again until the situation changes.
 - Show the attention dot on the bell only while a notice is unread. The default trigger always draws the dot, so pass the bell alone as the trigger's children when nothing is unread.
-- Float the popup next to the bell; it doesn't take space in the layout ([Elevation](../../../../../design/foundations/elevation.md#popups)).
-- On a phone (`viewport="mobile"`), the popup is 8px from each screen edge, the same as the server list under the same top bar: it is as wide as the positioner's `--available-width` (the screen less both 8px paddings), at most 480px, which only a phone on its side reaches, and its collision padding is 8px, so it sits 8px from both edges although it hangs from a bell at the right ([Elevation](../../../../../design/foundations/elevation.md#popups)). Pass `collisionPadding` to change it. On desktop it is 380px with Base UI's default collision padding.
-- Where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), such as a foldable phone's system column, the popup keeps its 8px from that part, not from the screen's edge, and is narrower by it ([Page structure](../../../../../design/patterns/page-structure.md#frame-insets)). The web sets none.
+- Float the popup next to the bell; it doesn't take space in the layout ([Elevation](../foundations/elevation.md#popups)).
+- On a phone (`viewport="mobile"`), the popup is 8px from each screen edge, the same as the server list under the same top bar: it is as wide as the positioner's `--available-width` (the screen less both 8px paddings), at most 480px, which only a phone on its side reaches, and its collision padding is 8px, so it sits 8px from both edges although it hangs from a bell at the right ([Elevation](../foundations/elevation.md#popups)). Pass `collisionPadding` to change it. On desktop it is 380px with Base UI's default collision padding.
+- Where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), such as a foldable phone's system column, the popup keeps its 8px from that part, not from the screen's edge, and is narrower by it ([Page structure](../patterns/page-structure.md#frame-insets)). The web sets none.
 
 ## Content
 
-- Write the notice in the same order as an inbox item: where (the computer, the server), then what happened, then at most 2 lines of detail ([InboxItem](../inbox-item/inbox-item.md#content)).
+- Write the notice in the same order as an inbox item: where (the computer, the server), then what happened, then at most 2 lines of detail ([InboxItem](inbox-item.md#content)).
 
 ## Accessibility
 
@@ -74,5 +74,5 @@ Errors by scope are in [Feedback](../../../../../design/patterns/feedback.md#err
 
 ## Rules
 
-- Make the actions in a notice ink-outline small buttons, never pink; `NotificationCenterActionButton` does this ([InboxItem](../inbox-item/inbox-item.md#rules)).
-- Use orange tiles for errors and warnings, not red ([Color](../../../../../design/foundations/color.md#soft-tints)).
+- Make the actions in a notice ink-outline small buttons, never pink; `NotificationCenterActionButton` does this ([InboxItem](inbox-item.md#rules)).
+- Use orange tiles for errors and warnings, not red ([Color](../foundations/color.md#soft-tints)).

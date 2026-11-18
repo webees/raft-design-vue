@@ -10,7 +10,7 @@ related: [task-card, task-board, tasks]
 
 # TaskList
 
-A TaskList groups tasks by status, one collapsible group per status, in the same order as the columns of a [TaskBoard](../task-board/task-board.md). A page of tasks doesn't use it for its list: that list is grouped by the person's relation to each task and made of rows ([Tasks](../../../../../design/patterns/tasks.md#the-list)). When to show which view, and which groups start collapsed, is in [Tasks](../../../../../design/patterns/tasks.md#rules).
+A TaskList groups tasks by status, one collapsible group per status, in the same order as the columns of a [TaskBoard](task-board.md). A page of tasks doesn't use it for its list: that list is grouped by the person's relation to each task and made of rows ([Tasks](../patterns/tasks.md#the-list)). When to show which view, and which groups start collapsed, is in [Tasks](../patterns/tasks.md#rules).
 
 ```example
 task-list/compositions/task-list
@@ -21,9 +21,9 @@ task-list/compositions/task-list
 | Situation                                   | Use                                                                               |
 | ------------------------------------------- | --------------------------------------------------------------------------------- |
 | Tasks by status in one column               | TaskList                                                                          |
-| The list of a page of tasks                 | Its rows, by relation ([Tasks](../../../../../design/patterns/tasks.md#the-list)) |
-| Tasks by status, with room for five columns | [TaskBoard](../task-board/task-board.md)                                          |
-| One task                                    | [TaskCard](../task-card/task-card.md)                                             |
+| The list of a page of tasks                 | Its rows, by relation ([Tasks](../patterns/tasks.md#the-list)) |
+| Tasks by status, with room for five columns | [TaskBoard](task-board.md)                                          |
+| One task                                    | [TaskCard](task-card.md)                                             |
 
 ## Anatomy
 
@@ -49,11 +49,11 @@ task-list/compositions/task-list-empty-sections
 ## Behavior
 
 - Scroll every group in one viewport. Groups don't scroll on their own.
-- Mount only the visible cards of a tall group: make [VirtualList](../virtual-list/virtual-list.md) the viewport, with the group headers and cards as its rows, or use a virtualizer of your own.
+- Mount only the visible cards of a tall group: make [VirtualList](virtual-list.md) the viewport, with the group headers and cards as its rows, or use a virtualizer of your own.
 
 ## Content
 
-- Write an empty group as "No", the status and "tasks", with the status spelled as on its chip ([Writing](../../../../../design/content/writing.md#voice)): "No Backlog tasks."
+- Write an empty group as "No", the status and "tasks", with the status spelled as on its chip ([Writing](../content/writing.md#voice)): "No Backlog tasks."
 
 ## Accessibility
 

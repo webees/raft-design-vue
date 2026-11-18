@@ -21,9 +21,9 @@ code-block/compositions/shiki
 | Situation                          | Use                                                                                                                         |
 | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | Several lines of code, or a log    | CodeBlock                                                                                                                   |
-| One command people copy and run    | [CopyableCode](../copyable-code/copyable-code.md)                                                                           |
-| A name from code inside a sentence | [InlineCode](../inline-code/inline-code.md)                                                                                 |
-| A diagram or a Markdown table      | The same container ([Built from existing parts](../../../../../design/components/overview.md#diagrams-and-markdown-tables)) |
+| One command people copy and run    | [CopyableCode](copyable-code.md)                                                                           |
+| A name from code inside a sentence | [InlineCode](inline-code.md)                                                                                 |
+| A diagram or a Markdown table      | The same container ([Built from existing parts](overview.md#diagrams-and-markdown-tables)) |
 
 ## Anatomy
 
@@ -59,7 +59,7 @@ code-block/compositions/animated-copy
 ## Behavior
 
 - Long lines scroll sideways inside the body. The code doesn't wrap.
-- After a copy, the copy icon turns into a check, then back after a moment, as in [CopyableCode](../copyable-code/copyable-code.md).
+- After a copy, the copy icon turns into a check, then back after a moment, as in [CopyableCode](copyable-code.md).
 
 ## Content
 
@@ -77,4 +77,4 @@ code-block/compositions/animated-copy
 
 - Set code in Space Mono, `text-mono-code`.
 - Put the block on `layer-code`, with a `line-hairline` border and `radius-container`.
-- Put the actions 6px from the block's corner, 4px apart. Without a header they sit in a column of their own beside the code, as wide as the actions, so no line runs under them however many there are, and the block is at least tall enough to keep 6px under them. In a header they are centered in its 40px and 6px from its end ([Shape](../../../../../design/foundations/shape.md#inside-a-frame)).
+- Put the actions 6px from the block's corner, 4px apart. Without a header they sit in a column of their own beside the code, as wide as the actions, so no line runs under them however many there are, and the block is at least tall enough to keep 6px under them. In a header they are centered in its 40px and 6px from its end ([Shape](../foundations/shape.md#inside-a-frame)).

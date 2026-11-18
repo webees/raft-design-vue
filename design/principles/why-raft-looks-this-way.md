@@ -6,7 +6,7 @@ order: 1
 
 # Why Raft looks this way
 
-Raft is a workspace where people and agents chat, hand off work, write, meet and ship in the same place, and people keep it open for most of their working day. Its look starts from the brutal style of the Raft website and keeps the same materials, but uses them as quietly as an all-day tool needs: brand color only where it carries a meaning, and white paper wherever people read. This page explains that reasoning, so that a new screen or a new product can follow it without a rule for every case. The rules themselves are in [Principles](./principles.md).
+Raft is a workspace where people and agents chat, hand off work, write, meet and ship in the same place, and people keep it open for most of their working day. Its look starts from the brutal style of the Raft website and keeps the same materials, but uses them as quietly as an all-day tool needs: brand color only where it carries a meaning, and white paper wherever people read. This page explains that reasoning, so that a new screen or a new product can follow it without a rule for every case. The rules themselves are in [Principles](principles.md).
 
 ## Where it comes from
 
@@ -67,14 +67,14 @@ Raft Chat is the first product; Tasks, Calendar, Artifacts, Sites, Meeting and C
 - the shapes, the type roles, the states, the motion rules and the voice of the words;
 - the components: a menu, a dialog, a status chip or an avatar is the raft-ui one in every product.
 
-What each product decides for itself is its structure: which destinations it has, what each screen shows and what goes where. That lives on the product's own page under [Products](../products/), not in the shared rules.
+What each product decides for itself is its structure: which destinations it has, what each screen shows and what goes where. That lives on the product's own page under [Products](../products), not in the shared rules.
 
 So a new product doesn't get its own accent color, its own button style, its own dark theme or its own way of showing that an agent is working. It gets its own destinations and screens, built from the same materials. A fair test: put a screen of the new product next to a screen of Raft Chat. The frame, the paper, the stickers and the meaning of each color should match; only the content and the structure should differ.
 
 ## Related
 
-- [Principles](./principles.md): the rules this reasoning leads to.
-- [Designing a new feature](./designing-a-new-feature.md): how to apply them to new work.
+- [Principles](principles.md): the rules this reasoning leads to.
+- [Designing a new feature](designing-a-new-feature.md): how to apply them to new work.
 - [Brand](../foundations/brand.md): how much brand each kind of page may use.
 - [Page structure](../patterns/page-structure.md): where the frame, sidebar and paper are on each screen.
-- [Decisions](../decisions/): the major choices, and the alternatives they were weighed against.
+- [Decisions](../decisions): the major choices, and the alternatives they were weighed against.

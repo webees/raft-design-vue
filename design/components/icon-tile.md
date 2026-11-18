@@ -21,16 +21,16 @@ icon-tile/compositions/sizes
 | Situation                                                            | Use                                                                                                                                                                                                                  |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A channel in a list, a search result or a reference                  | IconTile with the `hash` icon                                                                                                                                                                                        |
-| A thread or task in a channel, leading an Activity row               | IconTile with `ThreadIcon` or Lucide's `list-todo`, and the channel's own icon in the badge ([InboxItem](../inbox-item/inbox-item.md#the-leading-image)); a thread in a direct message leads with the avatar instead |
+| A thread or task in a channel, leading an Activity row               | IconTile with `ThreadIcon` or Lucide's `list-todo`, and the channel's own icon in the badge ([InboxItem](inbox-item.md#the-leading-image)); a thread in a direct message leads with the avatar instead |
 | A system notice, a file, an app, a computer, a kind of search result | IconTile with its icon                                                                                                                                                                                               |
 | An error, a warning or a message in the notification center          | IconTile with `variant="warning"` or `variant="information"`                                                                                                                                                         |
-| The place the person is in, beside its title                         | The yellow location tile, `PanelHeaderIcon` ([Panel](../panel/panel.md))                                                                                                                                             |
-| A channel in a desktop sidebar row                                   | The bare icon, `SidebarItemChannelIcon` ([Sidebar](../sidebar/sidebar.md)), without a tile                                                                                                                           |
-| An agent or a person                                                 | [Avatar](../avatar/avatar.md)                                                                                                                                                                                        |
+| The place the person is in, beside its title                         | The yellow location tile, `PanelHeaderIcon` ([Panel](panel.md))                                                                                                                                             |
+| A channel in a desktop sidebar row                                   | The bare icon, `SidebarItemChannelIcon` ([Sidebar](sidebar.md)), without a tile                                                                                                                           |
+| An agent or a person                                                 | [Avatar](avatar.md)                                                                                                                                                                                        |
 
 ## Anatomy
 
-- `IconTile`: the square. It holds one icon, Lucide's or one of Raft's own from `@botiverse/ricons` such as `ThreadIcon` ([Icons](../../../../icons/src/icons.md)), and sizes the icon to fit ([Iconography](../../../../../design/foundations/iconography.md#sizes)).
+- `IconTile`: the square. It holds one icon, Lucide's or one of Raft's own from `@botiverse/ricons` such as `ThreadIcon` ([Icons](../foundations/iconography.md)), and sizes the icon to fit ([Iconography](../foundations/iconography.md#sizes)).
 
 ## Variants
 
@@ -61,6 +61,6 @@ IconTile renders a `<span>` and wraps no Base UI primitive.
 ## Rules
 
 - Don't give a channel a color: a channel is a place, not an identity.
-- Show at most one yellow location tile per screen, beside the title of the place the person is in. In a list, the current item is the selected row, not a yellow tile ([States](../../../../../design/foundations/states.md#usage)).
+- Show at most one yellow location tile per screen, beside the title of the place the person is in. In a list, the current item is the selected row, not a yellow tile ([States](../foundations/states.md#usage)).
 - Use `warning` and `information` only for system notices. Everywhere else the tile is neutral.
-- Put the tile where an avatar would go in the same row, at the same size, so tiles and avatars line up in one column. It takes its corner by its size (27 `radius-chip`, 35 `radius-control`, 51 `radius-container`), as the controls do; an avatar stays a `radius-sticker` sticker at every size ([Shape](../../../../../design/foundations/shape.md#radii)).
+- Put the tile where an avatar would go in the same row, at the same size, so tiles and avatars line up in one column. It takes its corner by its size (27 `radius-chip`, 35 `radius-control`, 51 `radius-container`), as the controls do; an avatar stays a `radius-sticker` sticker at every size ([Shape](../foundations/shape.md#radii)).

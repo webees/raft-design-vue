@@ -2,11 +2,11 @@
 
 ## Code and documentation
 
-The code and documentation in this repository are licensed under the MIT License. See [`LICENSE`](./LICENSE).
+The code and documentation in this repository are licensed under the MIT License. See [`LICENSE`](./UPSTREAM-LICENSE).
 
 ## Fonts
 
-`design/fonts/` contains Space Grotesk and Space Mono. Both are licensed under the SIL Open Font License, Version 1.1, not under the MIT License. The copyright notices and the license text are in [`design/fonts/OFL.txt`](./design/fonts/OFL.txt).
+`design/fonts/` contains Space Grotesk and Space Mono. Both are licensed under the SIL Open Font License, Version 1.1, not under the MIT License. The copyright notices and the license text are in [`design/fonts/OFL.txt`](../../design/fonts/OFL.txt).
 
 The `raft-ui` npm package does not include these font files; its `fonts.css` loads the fonts from Google Fonts.
 

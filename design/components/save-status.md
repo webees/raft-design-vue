@@ -21,12 +21,12 @@ save-status/compositions/preview
 | Situation                                                           | Use                                                                                                                                                    |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | A setting that applies at once failed to save                       | SaveStatus                                                                                                                                             |
-| A value that is wrong before it is saved: a missing name, a bad URL | `FieldError` ([Field](../field/field.md))                                                                                                              |
-| The result of a card saved with Save                                | The Save button, which reads "Saved" with a check for a moment ([Forms](../../../../../design/patterns/forms.md#settings-saved-together))              |
-| Where a section's settings are stored ("Saved on this device")      | One line for the section, under its header or its group, not SaveStatus ([Forms](../../../../../design/patterns/forms.md#settings-that-apply-at-once)) |
-| A failure that is about more than one setting                       | Where its scope puts it ([Feedback](../../../../../design/patterns/feedback.md#errors-by-scope))                                                       |
+| A value that is wrong before it is saved: a missing name, a bad URL | `FieldError` ([Field](field.md))                                                                                                              |
+| The result of a card saved with Save                                | The Save button, which reads "Saved" with a check for a moment ([Forms](../patterns/forms.md#settings-saved-together))              |
+| Where a section's settings are stored ("Saved on this device")      | One line for the section, under its header or its group, not SaveStatus ([Forms](../patterns/forms.md#settings-that-apply-at-once)) |
+| A failure that is about more than one setting                       | Where its scope puts it ([Feedback](../patterns/feedback.md#errors-by-scope))                                                       |
 
-Which settings apply at once is in [Forms](../../../../../design/patterns/forms.md#when-a-change-takes-effect).
+Which settings apply at once is in [Forms](../patterns/forms.md#when-a-change-takes-effect).
 
 ## Anatomy
 
@@ -51,8 +51,8 @@ save-status/compositions/failed
 
 ## Content
 
-- Write a failure as what didn't happen and what to do: Couldn't mute this server. Try again. When the request comes back with a reason, show that reason ([Writing](../../../../../design/content/writing.md)).
-- Don't write "Saved", and don't say where a setting is stored on its row. "Saved on this device" is said once for a section ([Forms](../../../../../design/patterns/forms.md#settings-that-apply-at-once)).
+- Write a failure as what didn't happen and what to do: Couldn't mute this server. Try again. When the request comes back with a reason, show that reason ([Writing](../content/writing.md)).
+- Don't write "Saved", and don't say where a setting is stored on its row. "Saved on this device" is said once for a section ([Forms](../patterns/forms.md#settings-that-apply-at-once)).
 
 ## Accessibility
 

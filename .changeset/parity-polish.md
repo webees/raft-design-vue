@@ -48,3 +48,11 @@ slot names and caller attribute forwarding, `ToastAction` caller slot overrides,
 Round six closes the last deep parity gaps: frame popups now use the upstream
 rect collision boundary as well as padding, and `VirtualList` uses one shared
 ResizeObserver delegate that batches callbacks after a browser entry batch.
+
+Round seven repairs the docs mirror: `sync:upstream` now rewrites every
+upstream-relative Markdown link into this repo's layout, drops anchors the
+target document cannot satisfy, and `check:docs-links` fails CI on any broken
+file or heading link. The docs viewer follows relative `.md` links in-app and
+emits GitHub-compatible heading ids, so cross-document anchors work. Toast
+components lost their last `any`, sharing the exported `ToastObject<ToastData>`
+type with the rest of the package.

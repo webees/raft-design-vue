@@ -19,7 +19,7 @@ A task is claimed by whoever takes it, person or agent, with the same action and
 system-message/compositions/task-thread
 ```
 
-- Record a claim, a release, an assignment and a status change as an event line ([SystemMessage](../../packages/ui/src/components/system-message/system-message.md)): who did it, the verb and the task. "Bugen claimed #25 "Fix onboarding copy"". The completion control writes its own verbs: completed and reopened; a move to Backlog carries its reason ([Tasks](../patterns/tasks.md#tasks-in-a-conversation)).
+- Record a claim, a release, an assignment and a status change as an event line ([SystemMessage](../components/system-message.md)): who did it, the verb and the task. "Bugen claimed #25 "Fix onboarding copy"". The completion control writes its own verbs: completed and reopened; a move to Backlog carries its reason ([Tasks](../patterns/tasks.md#tasks-in-a-conversation)).
 - Post those event lines, and the line that records the task's creation, in the task's own discussion: not in the channel the task belongs to, and not in the thread of the message it came from. The channel stays readable, the message's replies stay about the message, and the people who follow the task see its history.
 - Show the task's current state on the message it came from, in the list of its tasks under it: the number, the title, the assignee and the status chip ([Tasks](../patterns/tasks.md#tasks-in-a-conversation)).
 - Fold 2 or more event lines in a row into one line with a disclosure ("There are 3 task updates"), as in any conversation ([Conversation](../patterns/conversation.md#dates-and-grouping)).
@@ -64,13 +64,13 @@ A task's discussion is followed exactly as a thread is. Following is what puts i
 
 ## Finishing work
 
-- When an agent finishes, it posts a message that leads with the outcome and links its proof: a pull request, a commit, a file ([Writing about agents](./writing-about-agents.md#evidence)).
+- When an agent finishes, it posts a message that leads with the outcome and links its proof: a pull request, a commit, a file ([Writing about agents](writing-about-agents.md#evidence)).
 - Link the proof as a link in the message, not as a pasted log. A long report goes into an attached file, with a short summary in the message.
 - Then move the task to Done. The event line follows the message in the task's discussion.
 
 ## Approvals: the agent prepares, a person confirms
 
-An action card is a request for an action the agent may not take alone. The agent fills in the action and attaches the card to its message; a person checks the values and confirms ([MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md)).
+An action card is a request for an action the agent may not take alone. The agent fills in the action and attaches the card to its message; a person checks the values and confirms ([MessageActionCard](../components/message-action-card.md)).
 
 ```example
 message-action-card/compositions/agent-request
@@ -118,7 +118,7 @@ Nothing about a hand-off is lost when it is over.
 
 | What happened | Where it is kept |
 | --- | --- |
-| A claim, an assignment, a status change | The event lines in the task's discussion, and the task's History in its details ([Timeline](../../packages/ui/src/components/timeline/timeline.md)) |
+| A claim, an assignment, a status change | The event lines in the task's discussion, and the task's History in its details ([Timeline](../components/timeline.md)) |
 | A change to a task's title or description | The task's History, with the text before and after |
 | An approved action | The folded card in the conversation, with who confirmed it, when, and a link to the result |
 | What an agent did, step by step | The Activity tab on its page: an overview of each turn (what woke it, what it did, how it ended) and the raw log in Space Mono |
@@ -135,7 +135,7 @@ Say what failed at the scope it affects, and say it once ([Feedback](../patterns
 | --- | --- |
 | An agent's runtime stopped with an error | The orange light on its avatar everywhere. On its profile, a notice under the header (`PanelNotice`, [Feedback](../patterns/feedback.md#errors-by-scope)) led by a `TriangleAlert` icon (the orange light stays on the avatar: it is the agent's state, not the notice's), the reason, a button that copies the diagnostic info, and a View logs link that opens its Activity tab |
 | An agent couldn't start | A notice under the header of its profile, with the reason, that the person can close |
-| An agent's computer is offline | Not this notice: the profile shows its offline card in Start's place, and its status says Computer offline, never Stopped ([An agent on an offline computer](./identity-and-presence.md#an-agent-on-an-offline-computer)) |
+| An agent's computer is offline | Not this notice: the profile shows its offline card in Start's place, and its status says Computer offline, never Stopped ([An agent on an offline computer](identity-and-presence.md#an-agent-on-an-offline-computer)) |
 | A confirmed action on a card | An orange banner inside the card, with the reason. The card stays as it was, so the person can try again |
 | A computer went offline, or another problem for the whole server | The notification center |
 
@@ -145,7 +145,7 @@ Say what failed at the scope it affects, and say it once ([Feedback](../patterns
 
 ## What the product doesn't do yet
 
-The component doc for [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md) describes a few things Raft Chat doesn't ship:
+The component doc for [MessageActionCard](../components/message-action-card.md) describes a few things Raft Chat doesn't ship:
 
 - A ghost Edit first button beside the confirm button, and a Decline button with a Declined state. In the product, the creation actions open their dialog from the confirm button, and a card nobody acts on stays waiting, except a person's seat or upgrade request, which expires after 7 days.
 - A "Needs an admin" status, with a pink pixel, on a waiting card. The product shows no status until something changes.
@@ -157,4 +157,4 @@ The component doc for [MessageActionCard](../../packages/ui/src/components/messa
 - [Tasks](../patterns/tasks.md): the five statuses, task details and tasks in a conversation.
 - [Conversation](../patterns/conversation.md): the timeline, grouping and threads.
 - [Questions](../patterns/questions.md): how an agent asks for a decision and how the answer is shown.
-- [Writing about agents](./writing-about-agents.md): how event lines and agents' messages are worded.
+- [Writing about agents](writing-about-agents.md): how event lines and agents' messages are worded.

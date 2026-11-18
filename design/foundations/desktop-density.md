@@ -25,7 +25,7 @@ A sidebar row, a menu or context-menu option, a field, a select, a Button, a tab
 
 Every head (a panel, a sidebar, a thread, a drawer, a dialog's bar, a side section) is one line: the title, then its meta on the same baseline. It is the control height and the header air above and below: 34 + 2 × 5 = 44.
 
-By touch from 768px a head is one line too, at the touch header height; only a phone puts the meta under the title ([Panel](../../packages/ui/src/components/panel/panel.md#anatomy); xxchan, Kirby, 2026-11-09).
+By touch from 768px a head is one line too, at the touch header height; only a phone puts the meta under the title ([Panel](../components/panel.md#anatomy); xxchan, Kirby, 2026-11-09).
 
 - **Why:** two-line heads made each column's seam a different height and pushed content down.
 - **Enforced by:** `header-height` (`control-height` + 2 × `header-air`); `PanelHeaderContent` lays the title and `PanelMeta` on one baseline.
@@ -43,14 +43,14 @@ A section's header, a group label and a container's edge stand further out than 
 The gap inside a group is smaller than the gap between groups, and both are smaller than the container's padding.
 
 - **Why:** people read nearness as belonging. When the space under a setting's control equals the space to the next setting, the setting falls apart.
-- **Enforced by:** `field-gap` inside a group, `section-gap` between sections, `page-inset` (16px) around them, the one content edge of heads, toolbars, rows, sections, drawers and dialogs; `page-top` (12px) from a head's seam to the first thing under it. A lone control that belongs to the content under a head (a segmented control, rule 7) has the content's 12px top inset above it and 8px below it, so it reads as one unit with its content ([SegmentedControl](../../packages/ui/src/components/segmented-control/segmented-control.md#behavior)). A settings card of stacked settings is 20px inside and 16px between settings, with 4px from a title to its description and 8px to its control (4 and 8 < 16 < 20).
+- **Enforced by:** `field-gap` inside a group, `section-gap` between sections, `page-inset` (16px) around them, the one content edge of heads, toolbars, rows, sections, drawers and dialogs; `page-top` (12px) from a head's seam to the first thing under it. A lone control that belongs to the content under a head (a segmented control, rule 7) has the content's 12px top inset above it and 8px below it, so it reads as one unit with its content ([SegmentedControl](../components/segmented-control.md#behavior)). A settings card of stacked settings is 20px inside and 16px between settings, with 4px from a title to its description and 8px to its control (4 and 8 < 16 < 20).
 
 ### 5. Reserve no room for what isn't there
 
 Don't keep empty space for something that is usually absent: an idle "Saved" line, a column of read receipts, an empty slot.
 
 - **Why:** empty reserved space reads as a gap someone forgot to fill, and it costs room on every row for an element most rows don't have.
-- **Enforced by:** a setting that applies at once shows no "Saved" and keeps no line for it: its result line ([SaveStatus](../../packages/ui/src/components/save-status/save-status.md)) takes no room until a change fails, and only then appears under the control, saying what failed (cindyz, 2026-11-10, #proj-raft-ui:4ae1a74e).
+- **Enforced by:** a setting that applies at once shows no "Saved" and keeps no line for it: its result line ([SaveStatus](../components/save-status.md)) takes no room until a change fails, and only then appears under the control, saying what failed (cindyz, 2026-11-10, #proj-raft-ui:4ae1a74e).
 
 ### 6. Line things up on their optical centre
 
@@ -64,11 +64,11 @@ In one line, text of different sizes shares a baseline; an icon, a tile or an av
 A control belongs to the content it controls. A segmented control or a lone filter sits on the page's background with its content right under it: no bar of its own with lines above and below.
 
 - **Why:** a line between a switch and what it switches cuts them apart and adds a band of chrome that carries nothing.
-- **Enforced by:** a row that holds only a segmented control draws no seam, and its spacing joins it to the content below (rule 4) ([SegmentedControl](../../packages/ui/src/components/segmented-control/segmented-control.md#behavior)); toolbars with several tools keep theirs.
+- **Enforced by:** a row that holds only a segmented control draws no seam, and its spacing joins it to the content below (rule 4) ([SegmentedControl](../components/segmented-control.md#behavior)); toolbars with several tools keep theirs.
 
 ### 8. Start at the start; identities keep their shape
 
 Align to the start of the row by default. Put a control at the end only when it is grouped there with other tools on purpose. In a choice (a segmented control, tabs, a radio group, a sort or filter menu), the default option comes first (stdrc, 2026-11-05). An avatar keeps its sticker shape at every size: an identity doesn't change form.
 
 - **Why:** a lone control at the far end is hard to find on a wide screen, and a face whose corners change with its size stops reading as the same person.
-- **Enforced by:** a lone segmented control is left-aligned, its default option first ([SegmentedControl](../../packages/ui/src/components/segmented-control/segmented-control.md#content)); Avatar is `radius-sticker` at every size ([Shape](shape.md)).
+- **Enforced by:** a lone segmented control is left-aligned, its default option first ([SegmentedControl](../components/segmented-control.md#content)); Avatar is `radius-sticker` at every size ([Shape](shape.md)).

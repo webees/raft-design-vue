@@ -10,7 +10,7 @@ Treat the numbers as the floor a change must not drop below.
 | Repository | `botiverse/raft-design` |
 | Ref | `main` |
 | Commit | `d98cae8c225ce19584bf27445b65ec943f82cd62` |
-| Synced inputs | 193 files (`tooling/upstream/upstream.lock.json`) |
+| Synced inputs | 194 files (`tooling/upstream/upstream.lock.json`) |
 
 ## Covered surface
 
@@ -30,8 +30,8 @@ Treat the numbers as the floor a change must not drop below.
 PATH="$HOME/.bun/bin:$PATH" bun run verify
 ```
 
-Runs, in order: `check:parity → lint → typecheck → check:api → test → build →
-check:consumer-types`.
+Runs, in order: `check:parity → check:audit → check:docs-links → lint →
+typecheck → check:api → test → build → check:consumer-types`.
 
 Measured on 2026-11-19:
 
@@ -41,7 +41,7 @@ Measured on 2026-11-19:
 | Tests | 375 |
 | Type check | clean (`vue-tsc --noEmit`) |
 | API surface | 960 / 960 |
-| Docs bundle | 4201.1 kB total, 1607.4 kB gzip |
+| Docs bundle | 4159.3 kB total, 1604.6 kB gzip |
 
 ## Static audit
 
@@ -57,6 +57,8 @@ These checks are cheap and are expected to stay clean:
 - caller `class` reaches a component's root exactly once
 - caller `data-slot` wins over a component's default slot name
 - every `defineEmits` entry is emitted, every declared prop is read
+- every `design/**/*.md` link resolves to an existing file and heading
+  (`check:docs-links`)
 
 ## Intentional differences
 

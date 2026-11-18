@@ -21,8 +21,8 @@ message-replies/compositions/default
 | Situation                              | Use                                                                                                                                                                                           |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A message has replies in a thread      | MessageReplies, under the message's body                                                                                                                                                      |
-| A link to a thread inside running text | A reference chip ([MessageItem](../message-item/message-item.md#in-the-body))                                                                                                                 |
-| The thread itself                      | [ThreadPanel](../thread-panel/thread-panel.md): beside the conversation on desktop, covering it with Back on a phone ([Conversation](../../../../../design/patterns/conversation.md#threads)) |
+| A link to a thread inside running text | A reference chip ([MessageItem](message-item.md#in-the-body))                                                                                                                 |
+| The thread itself                      | [ThreadPanel](thread-panel.md): beside the conversation on desktop, covering it with Back on a phone ([Conversation](../patterns/conversation.md#threads)) |
 
 ## Anatomy
 
@@ -30,7 +30,7 @@ message-replies/compositions/default
 - `MessageRepliesSummary`: the first line. Required.
   - `MessageRepliesSummaryItem`: one fact in it: "4 replies", "1 new", "Draft". Rendered as `strong`, it becomes the pink count of new replies.
 - `MessageRepliesItem`: one reply preview, up to 3:
-  - a small [Avatar](../avatar/avatar.md);
+  - a small [Avatar](avatar.md);
   - `MessageRepliesItemSender`: the name;
   - `MessageRepliesItemContent`: the start of the reply;
   - `MessageRepliesItemTime`: when it was sent, in Space Mono.
@@ -53,15 +53,15 @@ message-replies/compositions/unread-draft
 
 ## Behavior
 
-- Selecting anywhere on the block opens the thread. The block is read, so it hovers with the subtle tier and presses with the medium tier ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).
-- The block lines up with the message text and is at most 560px wide, a content card's width ([Cards in messages](../../../../../design/patterns/cards-in-messages.md#two-widths)). It is not a framed card: a filled, borderless summary, 10px from its sides and 8px from its top and bottom, so a message with replies doesn't look as if it carried a second card ([Cards in messages](../../../../../design/patterns/cards-in-messages.md#when-it-applies)).
+- Selecting anywhere on the block opens the thread. The block is read, so it hovers with the subtle tier and presses with the medium tier ([Hover and press](../foundations/states.md#hover-and-press)).
+- The block lines up with the message text and is at most 560px wide, a content card's width ([Cards in messages](../patterns/cards-in-messages.md#two-widths)). It is not a framed card: a filled, borderless summary, 10px from its sides and 8px from its top and bottom, so a message with replies doesn't look as if it carried a second card ([Cards in messages](../patterns/cards-in-messages.md#when-it-applies)).
 - Each preview keeps to one line: the content truncates, the name and the time stay.
 
 ## Content
 
 - Write the count as "1 reply" or "4 replies", and the new count as "1 new".
 - Separate the summary items with a middle dot.
-- Show the latest replies, at most 3 ([Conversation](../../../../../design/patterns/conversation.md#structure)).
+- Show the latest replies, at most 3 ([Conversation](../patterns/conversation.md#structure)).
 
 ## Accessibility
 
@@ -73,4 +73,4 @@ message-replies/compositions/unread-draft
 ## Rules
 
 - Put the block on `fill-muted`, without a border: it is part of the message, not a card.
-- Show new replies as a pink count with ink type, like every unread count ([States](../../../../../design/foundations/states.md)). Don't use another color for thread replies.
+- Show new replies as a pink count with ink type, like every unread count ([States](../foundations/states.md)). Don't use another color for thread replies.

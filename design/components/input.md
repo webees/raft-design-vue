@@ -10,7 +10,7 @@ related: [field, input-group, textarea, select]
 
 # Input
 
-An input takes one line of text. It is as high as a default control, 44px on a phone and 34px on a desktop ([Spacing](../../../../../design/foundations/spacing.md#heights)), with a 1.5px ink border (`line-field`, as wide as a button's) on `layer-card`, and it always sits in a [Field](../field/field.md) that gives it a label above and help text below. Inputs with a prefix or suffix, multi-line fields and search fields use the same box.
+An input takes one line of text. It is as high as a default control, 44px on a phone and 34px on a desktop ([Spacing](../foundations/spacing.md#heights)), with a 1.5px ink border (`line-field`, as wide as a button's) on `layer-card`, and it always sits in a [Field](field.md) that gives it a label above and help text below. Inputs with a prefix or suffix, multi-line fields and search fields use the same box.
 
 ```example
 input/compositions/preview
@@ -21,16 +21,16 @@ input/compositions/preview
 | Situation                                                                         | Use                                         |
 | --------------------------------------------------------------------------------- | ------------------------------------------- |
 | One line of text: a name, an email, a URL                                         | Input                                       |
-| One line with a fixed prefix or suffix (a domain, `#`, a unit), or a search field | [InputGroup](../input-group/input-group.md) |
-| Several lines of text in a form                                                   | [Textarea](../textarea/textarea.md)         |
-| A message to send                                                                 | [Composer](../composer/composer.md)         |
-| One value from a list                                                             | [Select](../select/select.md)               |
+| One line with a fixed prefix or suffix (a domain, `#`, a unit), or a search field | [InputGroup](input-group.md) |
+| Several lines of text in a form                                                   | [Textarea](textarea.md)         |
+| A message to send                                                                 | [Composer](composer.md)         |
+| One value from a list                                                             | [Select](select.md)               |
 
 ## States
 
-States follow [States](../../../../../design/foundations/states.md).
+States follow [States](../foundations/states.md).
 
-- **Invalid:** `data-invalid` gives the input a `danger-strong` border. The message goes in the field ([Field](../field/field.md)).
+- **Invalid:** `data-invalid` gives the input a `danger-strong` border. The message goes in the field ([Field](field.md)).
 - **Disabled:** disabled wins over invalid. A disabled input keeps the disabled border, because nobody can fix it.
 
 ## Content
@@ -41,12 +41,12 @@ States follow [States](../../../../../design/foundations/states.md).
 
 Input wraps Base UI Input and renders a native `<input>`.
 
-- Name it with a `FieldLabel` ([Field](../field/field.md)). Use `aria-label` only where no visible label fits, such as a compact toolbar.
+- Name it with a `FieldLabel` ([Field](field.md)). Use `aria-label` only where no visible label fits, such as a compact toolbar.
 - `data-invalid` also sets `aria-invalid`.
 - Set `suppressPasswordManager` only on fields that are not credentials, where a password manager's overlay would cover the UI. Leave it off email and password fields.
 
 ## Rules
 
-- Always draw the ink border. Don't make an input a filled gray box without one: the ink border is what marks it as a control ([Color](../../../../../design/foundations/color.md#lines)).
-- Set input text with the field tokens (`text-field`, `font-field`), never a size of your own: they keep it at 16px on a phone and a touch screen, where iOS zooms the page into a field with smaller text, and at the body size, 14px, on a desktop (from 768px with a mouse or trackpad; [Typography](../../../../../design/foundations/typography.md#metric-tokens)).
-- Check the value when focus leaves the input or the form is submitted ([Forms](../../../../../design/patterns/forms.md#validation)).
+- Always draw the ink border. Don't make an input a filled gray box without one: the ink border is what marks it as a control ([Color](../foundations/color.md#lines)).
+- Set input text with the field tokens (`text-field`, `font-field`), never a size of your own: they keep it at 16px on a phone and a touch screen, where iOS zooms the page into a field with smaller text, and at the body size, 14px, on a desktop (from 768px with a mouse or trackpad; [Typography](../foundations/typography.md#metric-tokens)).
+- Check the value when focus leaves the input or the form is submitted ([Forms](../patterns/forms.md#validation)).

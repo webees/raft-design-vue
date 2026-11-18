@@ -8,6 +8,7 @@
     "check": "bun run src/check.ts",
     "audit": "bun run src/audit.ts",
     "parity": "bun run src/parity.ts",
+    "docs-links": "bun run src/docs-links.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   }
 }

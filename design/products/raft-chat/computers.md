@@ -17,7 +17,7 @@ From top to bottom:
 
 ## The toolbar
 
-The filters are buttons that show their value ([Select › Filters](../../../packages/ui/src/components/select/select.md#filters)): outlined at their default, filled `info-soft` once changed, each opening a Select list. Don't make any of them segments ([SegmentedControl](../../../packages/ui/src/components/segmented-control/segmented-control.md)).
+The filters are buttons that show their value ([Select › Filters](../../components/select.md#filters)): outlined at their default, filled `info-soft` once changed, each opening a Select list. Don't make any of them segments ([SegmentedControl](../../components/segmented-control.md)).
 
 | Filter | Values | Default |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ Only the runtimes that report their account's usage get a sort item: Claude Code
 The verdicts, words and colors here are [Status](../../patterns/status.md)'s. Each usage column (List view) and each runtime's line (Cards view) is one cell: a bar and a value, the number in Space Mono.
 
 - **One line for the account, one for a model.** The first line is the tightest account-wide window. When the account also reports a window for one model, a second line shows it, named: "Fable · 40%", or "Fable · 6d" with a full orange bar when it is used up. Every such account shows both lines, whether or not an agent on the computer uses that model: Raft doesn't guess which window matters to whom, and the reader sees both (xxchan, 2026-11-12, #triage:45a94e57). An account with no window for one model has one line.
-- **States**, the same in a cell, a card line and the agent profile's Usage row ([Agent profile](./agent-profile.md)):
+- **States**, the same in a cell, a card line and the agent profile's Usage row ([Agent profile](agent-profile.md)):
 
 | The account | The cell |
 | --- | --- |

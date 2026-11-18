@@ -10,7 +10,7 @@ related: [avatar, icon-tile]
 
 # RaftLogo
 
-raft-ui exports the Raft logo as three inline SVGs: `RaftLogo` (the mark), `RaftWordmark` (the word RAFT) and `RaftLogoLockup` (the two together). They are the website's artwork, copied exactly. Where the logo may appear, and which colors go on which background, is in [Brand](../../../../../design/foundations/brand.md#logo); the source files and their colors are in [Logos](../../../../../design/assets/Logos/README.md).
+raft-ui exports the Raft logo as three inline SVGs: `RaftLogo` (the mark), `RaftWordmark` (the word RAFT) and `RaftLogoLockup` (the two together). They are the website's artwork, copied exactly. Where the logo may appear, and which colors go on which background, is in [Brand](../foundations/brand.md#logo); the source files and their colors are in [Logos](../assets/Logos/README.md).
 
 ```example
 logo/logo
@@ -18,14 +18,14 @@ logo/logo
 
 ## When to use
 
-Where the logo may appear is in [Brand](../../../../../design/foundations/brand.md#logo) and [Logos](../../../../../design/assets/Logos/README.md#rules). Once it may appear, pick the export by what it shows:
+Where the logo may appear is in [Brand](../foundations/brand.md#logo) and [Logos](../assets/Logos/README.md#rules). Once it may appear, pick the export by what it shows:
 
 | Situation                      | Use                                                                                                                              |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | The mark alone                 | `RaftLogo`                                                                                                                       |
 | The word alone                 | `RaftWordmark`                                                                                                                   |
 | The mark and the word together | `RaftLogoLockup`                                                                                                                 |
-| The frame of a working page    | Not the logo: the workspace button or the rail's workspace tile ([Brand](../../../../../design/foundations/brand.md#principles)) |
+| The frame of a working page    | Not the logo: the workspace button or the rail's workspace tile ([Brand](../foundations/brand.md#principles)) |
 
 ## Anatomy
 

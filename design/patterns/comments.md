@@ -9,7 +9,7 @@ People comment on a document to discuss one passage of it, so a comment belongs 
 
 ## When it applies
 
-Comments on a document Raft renders itself: a Markdown, text or code file in the file viewer ([Built from existing parts](../components/overview.md#file-viewer)), and any later document surface. It doesn't cover replies to a message, which are a thread ([Conversation](./conversation.md#threads)), or a file whose content Raft can't measure, such as a page in a sandboxed frame. An Artifact's HTML page is such a frame, but its markers are drawn inside it, so it has rules of its own: [Commenting on an Artifact](#commenting-on-an-artifact).
+Comments on a document Raft renders itself: a Markdown, text or code file in the file viewer ([Built from existing parts](../components/overview.md#file-viewer)), and any later document surface. It doesn't cover replies to a message, which are a thread ([Conversation](conversation.md#threads)), or a file whose content Raft can't measure, such as a page in a sandboxed frame. An Artifact's HTML page is such a frame, but its markers are drawn inside it, so it has rules of its own: [Commenting on an Artifact](#commenting-on-an-artifact).
 
 ## Structure
 
@@ -17,9 +17,9 @@ Comments on a document Raft renders itself: a Markdown, text or code file in the
 comment/compositions/margin
 ```
 
-- The document, then the margin to its right: a [CommentMargin](../../packages/ui/src/components/comment/comment.md) of `CommentCard`s, each `CommentMarginItem` placed at the top of its passage.
-- In each card, the comments ([CommentEntry](../../packages/ui/src/components/comment/comment.md#anatomy)), a line with the number of replies when collapsed, and the reply box ([Composer](../../packages/ui/src/components/composer/composer.md)) when open.
-- In the document, the commented passages, highlighted without changing the document's DOM ([Highlights](../../packages/ui/src/components/comment/comment.md#highlights)).
+- The document, then the margin to its right: a [CommentMargin](../components/comment.md) of `CommentCard`s, each `CommentMarginItem` placed at the top of its passage.
+- In each card, the comments ([CommentEntry](../components/comment.md#anatomy)), a line with the number of replies when collapsed, and the reply box ([Composer](../components/composer.md)) when open.
+- In the document, the commented passages, highlighted without changing the document's DOM ([Highlights](../components/comment.md#highlights)).
 
 ## Rules
 
@@ -30,7 +30,7 @@ comment/compositions/margin
 - Show a collapsed card as its first comment, cut to 2 lines, and the number of replies. Opening it shows every comment and the reply box. A margin of full discussions would push every card far from its passage.
 - Put the comments on the whole document once, at the top of the margin, with a line that says so. Don't repeat the file's name on each card: the viewer already shows it.
 - Put a comment whose passage can no longer be found (the document changed under it) at the top of the margin too, with a line that says so ("Position not found"). Never drop it, and never attach it to whatever text is there now: the comment is still part of the discussion, and a wrong anchor says something nobody said.
-- Reply in the [Composer](../../packages/ui/src/components/composer/composer.md) inside the open card, with the pink send button: only the open card has one, so it is the screen's one pink button.
+- Reply in the [Composer](../components/composer.md) inside the open card, with the pink send button: only the open card has one, so it is the screen's one pink button.
 - Close the open card with Esc, or by opening another one.
 
 ## Starting a comment
@@ -50,14 +50,14 @@ Comments take one of three forms, by the room the document can give: cards in a 
 
 The margin needs 304px beside the document: a 280px column of cards and 24px between it and the document. Show it only while the document keeps at least 480px, about 60 characters of text per line, so from a viewer 784px wide, and only on a desktop: from 768px with a mouse or a trackpad, the condition of every desktop metric ([Spacing](../foundations/spacing.md#hit-targets)). A tablet used by touch gets the markers at any width, like a phone.
 
-Measure the viewer, not the window: the viewer can sit beside a sidebar or a thread ([Responsive layout](./responsive.md#when-a-row-runs-out-of-room)). Cards and markers are different structures, not one structure restyled, so the viewer measures its own width in JavaScript, with [`useCommentMarginFits`](../../packages/ui/src/components/comment/comment.md#wide-and-narrow), rather than with a container query.
+Measure the viewer, not the window: the viewer can sit beside a sidebar or a thread ([Responsive layout](responsive.md#when-a-row-runs-out-of-room)). Cards and markers are different structures, not one structure restyled, so the viewer measures its own width in JavaScript, with [`useCommentMarginFits`](../components/comment.md#wide-and-narrow), rather than with a container query.
 
 ```example
 comment/compositions/viewer
 ```
 
 - Where the margin doesn't fit, replace the cards with a `CommentMarker` beside each commented passage: the authors' avatars (up to 3) and the count. A card squeezed under 280px wraps every line, and cards over the document would hide the text they are about.
-- Tapping a marker opens the discussion in a bottom sheet ([Drawer](../../packages/ui/src/components/drawer/drawer.md)): its comments, the reply box, and a button that closes it. The passage stays highlighted while the sheet is open.
+- Tapping a marker opens the discussion in a bottom sheet ([Drawer](../components/drawer.md)): its comments, the reply box, and a button that closes it. The passage stays highlighted while the sheet is open.
 - Keep the passage highlights, the comments on the whole document (a marker at the top) and the comments whose position is lost (in the sheet of that top marker, under a line that says so) in the narrow layout too.
 - A new card at a selection or a picked block follows what it comments on, as a thread's card follows its passage: it stays beside the target as the page scrolls or reflows, and flips where it doesn't fit, inside the document rather than over the app's own chrome. When the target scrolls out of view, hide the card without losing the words or the focus, and leave a dashed marker at the document's top or bottom edge, level with the target across; pressing the marker shows the card there again. On a phone the card is the bottom sheet, the picked block stays highlighted, and the page is lifted just enough for the target to sit above the sheet.
 
@@ -89,10 +89,10 @@ The Artifact viewer shows two kinds of page: an HTML page, which fills the viewe
 - On an HTML page, show a posted discussion as a marker at the end of its paragraph, with its authors' avatars and the count, drawn in the page ([A page that can't give up any width](#a-page-that-cant-give-up-any-width)), and a draft as a small dashed pin, whose text shows only when it is opened. The page fills the viewer, so nothing of Raft's stands beside it: no column of cards, no card with a draft's text hung beside its element.
 - In a Markdown document, put discussions and drafts in the right-hand margin rail, each card level with its passage ([Rules](#rules)), and a draft's card says it is a draft only its author sees. Where the margin doesn't fit, it gives way to markers ([Wide and narrow](#wide-and-narrow)).
 - A text or CSV file is neither kind of page: Raft draws it, and its comments are always markers beside it, never cards. Show a draft there as a `CommentMarker` of its own, level with the first line of its lines or rows: dashed and empty, with no avatars and no count, like a draft's pin on an HTML page, so a draft shows where it was written on every kind of file. Pressing it opens the draft beside it, or in a bottom sheet on a phone; while the list of comments is open, it goes to the draft's card there instead. Its lines or rows aren't highlighted. A reply draft has no marker: it shows under the replies in its discussion.
-- Deleting a draft from the list of comments or from under the replies in a discussion takes no confirmation: only its author sees it, and the toast ("Draft deleted") has Undo, as anything taken out of a list does ([Confirming](./feedback.md#confirming)). Undo brings back that draft alone, where it was, whatever changed since; after the toast has gone, ⌘Z still brings it back, and so does the bottom bar's Undo while the bar is shown, until the viewer closes or Send N or Discard clears the history. Three deletes ask first: a draft with images, whose uploads go with it, so it can't be brought back; Delete in a draft's own view, the one its marker, pin or card opens, because the same view also opens from an HTML page's pin, which a page can trigger itself, and the view deletes the same way wherever it is opened from; and a posted comment, which is deleted for everyone.
+- Deleting a draft from the list of comments or from under the replies in a discussion takes no confirmation: only its author sees it, and the toast ("Draft deleted") has Undo, as anything taken out of a list does ([Confirming](feedback.md#confirming)). Undo brings back that draft alone, where it was, whatever changed since; after the toast has gone, ⌘Z still brings it back, and so does the bottom bar's Undo while the bar is shown, until the viewer closes or Send N or Discard clears the history. Three deletes ask first: a draft with images, whose uploads go with it, so it can't be brought back; Delete in a draft's own view, the one its marker, pin or card opens, because the same view also opens from an HTML page's pin, which a page can trigger itself, and the view deletes the same way wherever it is opened from; and a posted comment, which is deleted for everyone.
 
 ## Related
 
-- [Comment](../../packages/ui/src/components/comment/comment.md): the parts, the layout and its accessibility.
-- [Conversation](./conversation.md): messages and threads, which are not comments.
+- [Comment](../components/comment.md): the parts, the layout and its accessibility.
+- [Conversation](conversation.md): messages and threads, which are not comments.
 - [Built from existing parts](../components/overview.md#file-viewer): the file viewer and its Comments action.

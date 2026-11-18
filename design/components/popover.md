@@ -16,14 +16,14 @@ A popover is a small panel that opens next to the element people click and holds
 
 | Situation                                               | Use                                                                                                    |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| One sentence about something, on hover                  | [Tooltip](../tooltip/tooltip.md)                                                                       |
-| A summary of a person or an agent, on hover, with links | [PreviewCard](../preview-card/preview-card.md)                                                         |
-| The details of an item an app links to, on hover        | An item card ([PreviewCard](../preview-card/preview-card.md#item-card))                                |
-| A little choice or input, on click (snooze, rename)     | Popover, with a [RadioGroup](../radio-group/radio-group.md), an [Input](../input/input.md) and buttons |
-| A list of actions                                       | [DropdownMenu](../dropdown-menu/dropdown-menu.md)                                                      |
-| Something that stays open and scrolls                   | [Drawer](../drawer/drawer.md)                                                                          |
+| One sentence about something, on hover                  | [Tooltip](tooltip.md)                                                                       |
+| A summary of a person or an agent, on hover, with links | [PreviewCard](preview-card.md)                                                         |
+| The details of an item an app links to, on hover        | An item card ([PreviewCard](preview-card.md#item-card))                                |
+| A little choice or input, on click (snooze, rename)     | Popover, with a [RadioGroup](radio-group.md), an [Input](input.md) and buttons |
+| A list of actions                                       | [DropdownMenu](dropdown-menu.md)                                                      |
+| Something that stays open and scrolls                   | [Drawer](drawer.md)                                                                          |
 
-Which overlay fits which job is in [Choosing a component](../../../../../design/components/overview.md#overlays).
+Which overlay fits which job is in [Choosing a component](overview.md#overlays).
 
 ## Anatomy
 
@@ -36,17 +36,17 @@ Which overlay fits which job is in [Choosing a component](../../../../../design/
 - `PopoverActions`: the panel's buttons at its end, under `PopoverBody`: the way out first, then the confirm button. Experimental, from `@botiverse/raft-ui/wip`.
 - `PopoverSeparator`: a hairline between parts of the panel.
 - `PopoverClose`: a button that closes the popover.
-- `PopoverArrow`: an optional pointer toward the trigger, on whichever side the panel opens (`inline-start` and `inline-end` follow the direction Base UI placed the panel by, its `DirectionProvider`, `ltr` without one; a right-to-left page sets it, as for every Base UI part). The panel clips what overflows it, so a panel with an arrow lets it overflow (`overflow-visible`), as [CoachMark](../coach-mark/coach-mark.md) does.
+- `PopoverArrow`: an optional pointer toward the trigger, on whichever side the panel opens (`inline-start` and `inline-end` follow the direction Base UI placed the panel by, its `DirectionProvider`, `ltr` without one; a right-to-left page sets it, as for every Base UI part). The panel clips what overflows it, so a panel with an arrow lets it overflow (`overflow-visible`), as [CoachMark](coach-mark.md) does.
 - `PopoverBackdrop`: a transparent layer behind the panel that catches clicks outside it.
 - `PopoverPortal`, `PopoverViewport` and `PopoverPopup`: lower-level parts. `PopoverPopup` is the panel surface without positioning.
 - `isInsideOverlay(node)`: whether a node is inside a raft-ui overlay, this popover or any other; `closestOverlay(node)`: that overlay's portal container ([Inside an overlay](#inside-an-overlay)).
 
 ## Behavior
 
-- The popover opens below its trigger, aligned to its start edge, and moves or flips when it meets the window edge ([Elevation](../../../../../design/foundations/elevation.md#popups)).
-- In a phone sheet or a drawer it stays under the sheet's head, unless its trigger is in the head; `collisionBoundary="clipping-ancestors"` opts it out ([Dialog](../dialog/dialog.md#popups-in-a-sheet)).
-- The popover keeps clear of the frame insets: where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), it stops 8px from that part, not from the window's edge ([Page structure](../../../../../design/patterns/page-structure.md#frame-insets)). The web sets none.
-- A click outside and Esc close it. A Cancel button closes it too. A tour's [CoachMark](../coach-mark/coach-mark.md), built on these parts, is the exception: a click outside leaves it open ([Coach marks](../../../../../design/patterns/coach-marks.md#focus-and-keys)).
+- The popover opens below its trigger, aligned to its start edge, and moves or flips when it meets the window edge ([Elevation](../foundations/elevation.md#popups)).
+- In a phone sheet or a drawer it stays under the sheet's head, unless its trigger is in the head; `collisionBoundary="clipping-ancestors"` opts it out ([Dialog](dialog.md#popups-in-a-sheet)).
+- The popover keeps clear of the frame insets: where a shell keeps part of the window for itself (`--raft-frame-inset-top`, `--raft-frame-inset-start`, `--raft-frame-inset-end`), it stops 8px from that part, not from the window's edge ([Page structure](../patterns/page-structure.md#frame-insets)). The web sets none.
+- A click outside and Esc close it. A Cancel button closes it too. A tour's [CoachMark](coach-mark.md), built on these parts, is the exception: a click outside leaves it open ([Coach marks](../patterns/coach-marks.md#focus-and-keys)).
 - It has no scrim; the page behind it stays as it is.
 
 ### Inside an overlay
@@ -59,7 +59,7 @@ The panel is portaled out of the tree it was opened from, so `region.contains(ev
 
 ## Content
 
-- Write button labels in sentence case, with the confirm button repeating the verb: Snooze, Rename ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)).
+- Write button labels in sentence case, with the confirm button repeating the verb: Snooze, Rename ([Writing](../content/writing.md#actions-and-their-dialogs)).
 
 ## Accessibility
 
@@ -70,8 +70,8 @@ The panel is portaled out of the tree it was opened from, so `region.contains(ev
 ## Rules
 
 - Make a popover 300px wide, with 16px padding. A popover about an app's item is the exception (`size="item"`, [About an item](#about-an-item)).
-- Don't put a pink button in a popover. Confirm with an ink-border button (`variant="outline"`) and cancel with `variant="ghost"`: a popover is a small step, not the screen's primary action. The one exception is a tour's [CoachMark](../coach-mark/coach-mark.md), whose Next and Done are pink: at that moment it is the one thing to do ([Coach marks](../../../../../design/patterns/coach-marks.md#the-bubble)).
+- Don't put a pink button in a popover. Confirm with an ink-border button (`variant="outline"`) and cancel with `variant="ghost"`: a popover is a small step, not the screen's primary action. The one exception is a tour's [CoachMark](coach-mark.md), whose Next and Done are pink: at that moment it is the one thing to do ([Coach marks](../patterns/coach-marks.md#the-bubble)).
 
 ## About an item
 
-A popover about an app's item, such as the question an app's link asks before it shows its previews ([PreviewCard](../preview-card/preview-card.md#item-card)), takes `size="item"`: it is 400px wide, and `PopoverBody`, `PopoverTitle` and `PopoverActions` take the parts of a card in a message, with its 12px inset and `text-subhead` title. It stands in for the item card the chip opens once the reader allows the app, so it looks like that card, not like the other popovers (stdrc, 2026-11-10): a popover belongs to the family of what it is about ([Cards in messages](../../../../../design/patterns/cards-in-messages.md#popovers)). Every other popover, one with a field, a choice or a short confirmation, keeps 300px and 16px: it is a small step of its own, not an item.
+A popover about an app's item, such as the question an app's link asks before it shows its previews ([PreviewCard](preview-card.md#item-card)), takes `size="item"`: it is 400px wide, and `PopoverBody`, `PopoverTitle` and `PopoverActions` take the parts of a card in a message, with its 12px inset and `text-subhead` title. It stands in for the item card the chip opens once the reader allows the app, so it looks like that card, not like the other popovers (stdrc, 2026-11-10): a popover belongs to the family of what it is about ([Cards in messages](../patterns/cards-in-messages.md#popovers)). Every other popover, one with a field, a choice or a short confirmation, keeps 300px and 16px: it is a small step of its own, not an item.

@@ -10,7 +10,7 @@ related: [dialog, drawer, field, badge]
 
 # FormSection
 
-A form section is one part of a large form: a small heading, an optional status chip, one line on what the part is for, then its fields. A large form is a stack of them, in the wide [Dialog](../dialog/dialog.md) or in a [Drawer](../drawer/drawer.md); the two use the same section.
+A form section is one part of a large form: a small heading, an optional status chip, one line on what the part is for, then its fields. A large form is a stack of them, in the wide [Dialog](dialog.md) or in a [Drawer](drawer.md); the two use the same section.
 
 ## When to use
 
@@ -18,18 +18,18 @@ A form section is one part of a large form: a small heading, an optional status 
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | A part of the large form dialog, listed in its `DialogNav` | FormSection                                                                  |
 | A part of a form in a drawer                               | FormSection                                                                  |
-| A form of 2 or 3 fields                                    | No sections: put the fields in the body of the [Dialog](../dialog/dialog.md) |
+| A form of 2 or 3 fields                                    | No sections: put the fields in the body of the [Dialog](dialog.md) |
 
-How the large form dialog is built around its sections is in [Forms](../../../../../design/patterns/forms.md#the-large-form-dialog).
+How the large form dialog is built around its sections is in [Forms](../patterns/forms.md#the-large-form-dialog).
 
 ## Anatomy
 
 FormSection is one part. It renders, in order:
 
 - The heading: `text-footnote`, bold, in `foreground-muted`. Required.
-- The status, at the end of the heading row: a soft, muted [Badge](../badge/badge.md). Optional.
+- The status, at the end of the heading row: a soft, muted [Badge](badge.md). Optional.
 - The description, under the heading: `text-footnote` in `foreground-hint`. Optional.
-- Its children: the fields ([Field](../field/field.md)), and any action rows.
+- Its children: the fields ([Field](field.md)), and any action rows.
 
 ## Behavior
 
@@ -39,7 +39,7 @@ FormSection is one part. It renders, in order:
 ## Content
 
 - Write the status as one quiet word on where the section stands: Complete, Optional, Off, Private.
-- Write the description as one line on what the section is for: "Public identity and Marketplace-facing metadata." Leave it out where it would only restate the heading ([Writing](../../../../../design/content/writing.md#principles)).
+- Write the description as one line on what the section is for: "Public identity and Marketplace-facing metadata." Leave it out where it would only restate the heading ([Writing](../content/writing.md#principles)).
 
 ## Accessibility
 
@@ -48,4 +48,4 @@ FormSection is one part. It renders, in order:
 
 ## Rules
 
-- Write actions inside a section as ordinary rows, and show only the sections that can be filled in before an item is saved, as in [Forms](../../../../../design/patterns/forms.md#the-large-form-dialog).
+- Write actions inside a section as ordinary rows, and show only the sections that can be filled in before an item is saved, as in [Forms](../patterns/forms.md#the-large-form-dialog).

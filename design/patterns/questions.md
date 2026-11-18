@@ -11,7 +11,7 @@ Two shapes carry a question, and the card's own data picks between them: the for
 
 ## When it applies
 
-A question an agent asks through `question:ask` and the person answers in Raft. It doesn't cover a dialog a person opens (that is [Dialog](../../packages/ui/src/components/dialog/dialog.md)) or a message where only the reply matters (that is [Conversation](./conversation.md)).
+A question an agent asks through `question:ask` and the person answers in Raft. It doesn't cover a dialog a person opens (that is [Dialog](../components/dialog.md)) or a message where only the reply matters (that is [Conversation](conversation.md)).
 
 ## The two shapes
 
@@ -27,7 +27,7 @@ A question an agent asks through `question:ask` and the person answers in Raft. 
 
 - No head icon, and no "Answer question(s)" line: the card is the question. With one question the title is that question; with several it is "Fixer has 3 questions".
 - Under the title, one description line: "Fixer is asking you · 7 days left"; for someone else, "Waiting for Maya · 7 days left".
-- The options sit directly in the card, not inside a box of their own, and no question gets an asterisk: a question that may be left unanswered says "(optional)", as an optional field does ([Forms](./forms.md#fields)).
+- The options sit directly in the card, not inside a box of their own, and no question gets an asterisk: a question that may be left unanswered says "(optional)", as an optional field does ([Forms](forms.md#fields)).
 - "Choose an option first." appears only after the person presses submit without choosing. It is a correction, not an instruction: showing it before anyone has tried turns a question into a form that opens in a warning.
 
 ## Rules
@@ -51,4 +51,4 @@ A question can end without an answer, and the card says which happened, in one l
 
 ## Built from
 
-Both shapes are the message's own parts, not a new component: a [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md) in a message, its answer control a [ChoiceList](../../packages/ui/src/components/choice-list/choice-list.md) for B and a row of `default` [Button](../../packages/ui/src/components/button/button.md) for C. An answered, expired or withdrawn question is the same card with its controls taken away and the line above in their place.
+Both shapes are the message's own parts, not a new component: a [MessageActionCard](../components/message-action-card.md) in a message, its answer control a [ChoiceList](../components/choice-list.md) for B and a row of `default` [Button](../components/button.md) for C. An answered, expired or withdrawn question is the same card with its controls taken away and the line above in their place.

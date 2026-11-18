@@ -18,7 +18,7 @@ Use this pattern for account verification, password recovery, invitations, secur
 | Account, invitation, security, or lifecycle notification | Small centered brand lockup on a column-wide yellow area, unboxed heading and body, at most 1 primary action, required footer |
 | Personal onboarding letter | Greeting, paragraphs, signature, required footer; no decorative card or added action button |
 
-Use the roles from [Color](../foundations/color.md), [Typography](../foundations/typography.md), [Shape](../foundations/shape.md), and [Button](../../packages/ui/src/components/button/button.md). The brand lockup identifies the sender; it is not a large promotional hero.
+Use the roles from [Color](../foundations/color.md), [Typography](../foundations/typography.md), [Shape](../foundations/shape.md), and [Button](../components/button.md). The brand lockup identifies the sender; it is not a large promotional hero.
 
 ## Rules
 

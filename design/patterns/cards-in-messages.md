@@ -7,15 +7,15 @@ summary: How every card in a message and every item popover is drawn from one se
 
 A message can carry many kinds of card: an app link's block card, an Artifact, an action card waiting for approval, a forwarded bundle, the replies to it. Read one after another in a conversation, they are one family: the same frame, the same inset, the same title, the same place for the state and the buttons. A reader who has learned one reads the next without looking for where things are, and a card from an app can't stand out from Raft's own by its shape.
 
-They stay one family because they are drawn from one place. The frame and its two widths are [MessageEmbed](../../packages/ui/src/components/message-embed/message-embed.md)'s recipe, and the parts inside, the source row, the title, the details, the buttons and the inset, are the `messageCard` recipe beside it (`packages/ui/src/components/message-embed/message-embed.recipe.ts`). A card component takes its styles from them and writes none of its own, and a test fails on a card that does ([One place for the styles](#one-place-for-the-styles)). Change a value there, and every card and every item popover follows.
+They stay one family because they are drawn from one place. The frame and its two widths are [MessageEmbed](../components/message-embed.md)'s recipe, and the parts inside, the source row, the title, the details, the buttons and the inset, are the `messageCard` recipe beside it (`packages/ui/src/components/message-embed/message-embed.recipe.ts`). A card component takes its styles from them and writes none of its own, and a test fails on a card that does ([One place for the styles](#one-place-for-the-styles)). Change a value there, and every card and every item popover follows.
 
 ## When it applies
 
-Every card drawn in a message, under its text: [AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md), [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md), [MessageForwardedBundle](../../packages/ui/src/components/message-forwarded-bundle/message-forwarded-bundle.md), a link card or an Artifact card on [MessageEmbed](../../packages/ui/src/components/message-embed/message-embed.md), and a new kind of card. And the popovers about an item ([Popovers](#popovers)): the item card a link opens on hover ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card) `size="item"`) and the question an app's link asks before it shows previews ([Popover](../../packages/ui/src/components/popover/popover.md) `size="item"`), which draw the same parts in their own popover frame.
+Every card drawn in a message, under its text: [AppLinkCard](../components/app-link-card.md), [MessageActionCard](../components/message-action-card.md), [MessageForwardedBundle](../components/message-forwarded-bundle.md), a link card or an Artifact card on [MessageEmbed](../components/message-embed.md), and a new kind of card. And the popovers about an item ([Popovers](#popovers)): the item card a link opens on hover ([PreviewCard](../components/preview-card.md#item-card) `size="item"`) and the question an app's link asks before it shows previews ([Popover](../components/popover.md) `size="item"`), which draw the same parts in their own popover frame.
 
-[MessageReplies](../../packages/ui/src/components/message-replies/message-replies.md) takes a content card's width but not its frame: it is a filled, borderless block, 10px from its sides and 8px from its top and bottom, not a framed card with a 12px inset. It is a summary of the thread under the message, read as part of the message, not an item of its own: a hairline and a card's inset would make every message with replies look as if it carried a second card, and the fill alone already sets it apart and shows that it opens (stdrc, 2026-11-10).
+[MessageReplies](../components/message-replies.md) takes a content card's width but not its frame: it is a filled, borderless block, 10px from its sides and 8px from its top and bottom, not a framed card with a 12px inset. It is a summary of the thread under the message, read as part of the message, not an item of its own: a hairline and a card's inset would make every message with replies look as if it carried a second card, and the fill alone already sets it apart and shows that it opens (stdrc, 2026-11-10).
 
-It doesn't cover a file or an image ([MessageAttachment](../../packages/ui/src/components/message-attachment/message-attachment.md)): a file is a tile with its name, not a card with a title, and media keep the gallery's sizes. A quoted message is a bar beside the text, not a card ([MessageQuotedPreview](../../packages/ui/src/components/message-quoted-preview/message-quoted-preview.md)). A profile card is about a person, not an item, and keeps its own layout. A [Card](../../packages/ui/src/components/card/card.md) on a page is not a card in a message: don't put one in a message.
+It doesn't cover a file or an image ([MessageAttachment](../components/message-attachment.md)): a file is a tile with its name, not a card with a title, and media keep the gallery's sizes. A quoted message is a bar beside the text, not a card ([MessageQuotedPreview](../components/message-quoted-preview.md)). A profile card is about a person, not an item, and keeps its own layout. A [Card](../components/card.md) on a page is not a card in a message: don't put one in a message.
 
 ## Structure
 
@@ -34,7 +34,7 @@ app-link-card/compositions/in-message
 
 ### One frame, one inset
 
-- Build every card on `MessageEmbed`: its frame is the only one a card in a message has. Not a [Card](../../packages/ui/src/components/card/card.md), and no frame of a card's own: a second frame would differ in a pixel of radius or a shade of line, and the family would come apart.
+- Build every card on `MessageEmbed`: its frame is the only one a card in a message has. Not a [Card](../components/card.md), and no frame of a card's own: a second frame would differ in a pixel of radius or a shade of line, and the family would come apart.
 - Keep 12px between the frame's sides and everything in it, and 12px above and below the body and the buttons (`messageCard`'s `body`, `actions` and `inset`). The source row and a card's header and footer rows keep 12px at the sides and 8px above and below: they are one line of caption, not a block. A card that sets 16px on the same frame looks emptier than the one above it for no reason; 12px is what the action cards and forwarded bundles already had, and the tightest that still lets a two-line title breathe.
 - Don't put a card inside a card. A card that needs to ask a question in a popover draws its question in the popover, with the same parts.
 
@@ -48,12 +48,12 @@ A card has one of two widths, set with `MessageEmbed`'s `size`, and never a widt
 | Shows other messages: a forwarded bundle, the replies | `content` | As wide as the message's text, at most 560px |
 
 - An item card is as wide as the item popover, so the same item reads the same in the message and on hover. It doesn't grow with the window: a two-line title stretched across a wide message reads as one long line, and the buttons drift away from it.
-- On a phone an item card takes the message's whole width, so its buttons get the room a finger needs. It switches at the page shell's 768px, not on a container query: below 768px the shell lays out the phone's conversation, whose message column is the window less its gutters, so there the window's width is the column's ([Switch on the region's width](./responsive.md#switch-on-the-regions-width)). It doesn't switch on touch: a tablet over 768px is touch, but its message column is a desktop's, where a 400px card already leaves its buttons the 44px target every button has.
+- On a phone an item card takes the message's whole width, so its buttons get the room a finger needs. It switches at the page shell's 768px, not on a container query: below 768px the shell lays out the phone's conversation, whose message column is the window less its gutters, so there the window's width is the column's ([Switch on the region's width](responsive.md#switch-on-the-regions-width)). It doesn't switch on touch: a tablet over 768px is touch, but its message column is a desktop's, where a 400px card already leaves its buttons the 44px target every button has.
 - A content card holds text, so it runs with the text it sits under, and stops at 560px, where a line of 14px text reaches about 70 characters: past that a line gets too long to read, and the eye loses the start of the next one.
 
 ### Source
 
-- Give a card that shows another party's content a source row: the app's registered icon and name, then the host. Raft draws it from what it stores for the app, never from the card's content, so an app's card can't pass for a person's words or for Raft's own ([Block cards](./navigation.md#block-cards)).
+- Give a card that shows another party's content a source row: the app's registered icon and name, then the host. Raft draws it from what it stores for the app, never from the card's content, so an app's card can't pass for a person's words or for Raft's own ([Block cards](navigation.md#block-cards)).
 - The host loses its start when it doesn't fit, never its end: the end says where the link goes.
 - A card Raft draws itself, such as an action card, has no source row.
 
@@ -65,14 +65,14 @@ A card has one of two widths, set with `MessageEmbed`'s `size`, and never a widt
 
 ### State and details
 
-- Put the state under the title, in a neutral soft [Badge](../../packages/ui/src/components/badge/badge.md), then the details in `foreground-muted`, wrapping when they run out of room (`messageCard`'s `meta`). The state is the app's word for where the item stands, not one of Raft's status colors. One exception: on an app's link card, in a message or on hover, the badge's fill is the app's own color when the app sends one, and nothing else on the card is ([AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md#the-apps-color)).
-- [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md) keeps its state at the end of its header, its status pixel and word: the card folds to its header once it is resolved, and the state has to stay in view then.
+- Put the state under the title, in a neutral soft [Badge](../components/badge.md), then the details in `foreground-muted`, wrapping when they run out of room (`messageCard`'s `meta`). The state is the app's word for where the item stands, not one of Raft's status colors. One exception: on an app's link card, in a message or on hover, the badge's fill is the app's own color when the app sends one, and nothing else on the card is ([AppLinkCard](../components/app-link-card.md#the-apps-color)).
+- [MessageActionCard](../components/message-action-card.md) keeps its state at the end of its header, its status pixel and word: the card folds to its header once it is resolved, and the state has to stay in view then.
 
 ### Buttons
 
-- Put the buttons on one row at the bottom end of the card (`messageCard`'s `actions`), at most two: the frameless one first, the bordered one last. A third action and every further one go in a More menu (⋯) to the left of the two; the card's author supplies that menu (a [DropdownMenu](../../packages/ui/src/components/dropdown-menu/dropdown-menu.md) on an icon button), and the row draws none of its own. Three buttons side by side don't fit a 400px card in most languages, and a second row of buttons reads as a second card.
+- Put the buttons on one row at the bottom end of the card (`messageCard`'s `actions`), at most two: the frameless one first, the bordered one last. A third action and every further one go in a More menu (⋯) to the left of the two; the card's author supplies that menu (a [DropdownMenu](../components/dropdown-menu.md) on an icon button), and the row draws none of its own. Three buttons side by side don't fit a 400px card in most languages, and a second row of buttons reads as a second card.
 - An action card's note (`MessageActionCardActionsNote`) is always a line of its own above the buttons, not beside them: in a 400px card a note beside two buttons had about 150px and pushed the confirm button onto a line of its own.
-- When the row runs out of room, things give way in this order: a status line beside the buttons, such as an app's "Working…", goes onto a line of its own first; the buttons stay on one line whenever the card has room for them; only in a column narrower than the two buttons does the bordered one go under the frameless one, whole. A button is never truncated: at the narrowest the buttons wrap whole, as in a dialog's footer ([When a row runs out of room](./responsive.md#when-a-row-runs-out-of-room)), because a cut label can't be read. Put a status line beside the buttons in `messageCard`'s `actionGroup` around the buttons, so it is the line that wraps.
+- When the row runs out of room, things give way in this order: a status line beside the buttons, such as an app's "Working…", goes onto a line of its own first; the buttons stay on one line whenever the card has room for them; only in a column narrower than the two buttons does the bordered one go under the frameless one, whole. A button is never truncated: at the narrowest the buttons wrap whole, as in a dialog's footer ([When a row runs out of room](responsive.md#when-a-row-runs-out-of-room)), because a cut label can't be read. Put a status line beside the buttons in `messageCard`'s `actionGroup` around the buttons, so it is the line that wraps.
 - Don't use the brand's primary button on a card: a card sits among people's words, and a pink button there shouts over them. The one that confirms is the bordered one.
 
 ### Web preview
@@ -104,10 +104,10 @@ The page runs in a sandboxed frame with only what an ordinary page needs (script
 
 A popover belongs to the family of what it is about, not to the family of popovers. A popover about an app's item is the same card, floating: its own popover frame and shadow, the item card's 400px, and inside it the same parts from `messageCard`, the body, the title, the details and the buttons, with the same 12px inset. A reader who hovers a link and then sees its block card in a later message reads the same thing twice. Two popovers are about an item:
 
-- the item card a link opens on hover ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card) `size="item"`);
-- the question the same link asks, before the reader has allowed the app, whether to show its previews ([Popover](../../packages/ui/src/components/popover/popover.md) `size="item"`). It stands in for the item card the chip will open once allowed, so it looks like it, not like the other popovers (stdrc, 2026-11-10).
+- the item card a link opens on hover ([PreviewCard](../components/preview-card.md#item-card) `size="item"`);
+- the question the same link asks, before the reader has allowed the app, whether to show its previews ([Popover](../components/popover.md) `size="item"`). It stands in for the item card the chip will open once allowed, so it looks like it, not like the other popovers (stdrc, 2026-11-10).
 
-The trade-off is that these two sit 4px tighter than every other popover, which keeps 16px ([Popover](../../packages/ui/src/components/popover/popover.md#rules)): a popover with a field or a choice is a small step of its own, and a profile card is about a person, not an item, so both keep the popover's inset. One thing differs from a card in a message: a popover puts its source, the app and the host, in a caption under a hairline at the bottom (`messageCard`'s `sourceFooter`, PreviewCardFooter), not in a row at the top, so the title is the first thing under the pointer.
+The trade-off is that these two sit 4px tighter than every other popover, which keeps 16px ([Popover](../components/popover.md#rules)): a popover with a field or a choice is a small step of its own, and a profile card is about a person, not an item, so both keep the popover's inset. One thing differs from a card in a message: a popover puts its source, the app and the host, in a caption under a hairline at the bottom (`messageCard`'s `sourceFooter`, PreviewCardFooter), not in a row at the top, so the title is the first thing under the pointer.
 
 ## One place for the styles
 
@@ -123,10 +123,10 @@ Both are exported from `@botiverse/raft-ui`, beside MessageEmbed, so an app's ow
 ## Wide and narrow
 
 - Below 768px an item card takes the message's full width. A content card is already as wide as the text.
-- An item popover doesn't open on a phone: a tap opens the link ([App links](./navigation.md#app-links)).
+- An item popover doesn't open on a phone: a tap opens the link ([App links](navigation.md#app-links)).
 
 ## Related
 
-- [MessageEmbed](../../packages/ui/src/components/message-embed/message-embed.md), [AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md), [PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md), [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md), [MessageForwardedBundle](../../packages/ui/src/components/message-forwarded-bundle/message-forwarded-bundle.md), [MessageReplies](../../packages/ui/src/components/message-replies/message-replies.md)
-- [Navigation: app links and block cards](./navigation.md#app-links)
+- [MessageEmbed](../components/message-embed.md), [AppLinkCard](../components/app-link-card.md), [PreviewCard](../components/preview-card.md), [MessageActionCard](../components/message-action-card.md), [MessageForwardedBundle](../components/message-forwarded-bundle.md), [MessageReplies](../components/message-replies.md)
+- [Navigation: app links and block cards](navigation.md#app-links)
 - [Built from existing parts](../components/overview.md#built-from-existing-parts)

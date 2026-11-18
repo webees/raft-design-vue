@@ -19,7 +19,7 @@ related: [conversation-panel, thread-panel, message-item, system-message, scroll
 
 # MessageList
 
-MessageList is the scroll container of a conversation: it holds the messages, event lines and dates in one column, newest at the bottom ([Conversation](../../../../../design/patterns/conversation.md#structure)). It sits in the body of a [ConversationPanel](../conversation-panel/conversation-panel.md) or a [ThreadPanel](../thread-panel/thread-panel.md) and is the only part of the panel that scrolls.
+MessageList is the scroll container of a conversation: it holds the messages, event lines and dates in one column, newest at the bottom ([Conversation](../patterns/conversation.md#structure)). It sits in the body of a [ConversationPanel](conversation-panel.md) or a [ThreadPanel](thread-panel.md) and is the only part of the panel that scrolls.
 
 ```example
 conversation-panel/compositions/conversation-panel
@@ -30,17 +30,17 @@ conversation-panel/compositions/conversation-panel
 | Situation                                             | Use                                                                                          |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | The messages of a conversation or a thread            | MessageList                                                                                  |
-| One message                                           | [MessageItem](../message-item/message-item.md)                                               |
-| An action that happened: a claim, a hand-off          | [SystemMessage](../system-message/system-message.md), inside the list                        |
-| An agent's history of actions, outside a conversation | [Timeline](../timeline/timeline.md)                                                          |
-| Any other region that scrolls                         | [ScrollArea](../scroll-area/scroll-area.md); in a panel, `PanelScrollViewport`, which is one |
+| One message                                           | [MessageItem](message-item.md)                                               |
+| An action that happened: a claim, a hand-off          | [SystemMessage](system-message.md), inside the list                        |
+| An agent's history of actions, outside a conversation | [Timeline](timeline.md)                                                          |
+| Any other region that scrolls                         | [ScrollArea](scroll-area.md); in a panel, `PanelScrollViewport`, which is one |
 
 ## Anatomy
 
 - `MessageList`: the scroll container. Its props and `ref` go to the element that scrolls, so the caller can read and set the scroll position; `rootClassName` styles the outer element.
 - `MessageListNotice`: a centered line in Space Mono at the start of the history, such as "Beginning of messages". `tone="faint"` (the default) sets it in `foreground-hint`, `tone="muted"` in `foreground-muted`.
 - `MessageListHistoryLimited`: a small chip with a `line-hairline` outline, in Space Mono, for a history that doesn't go back to the start.
-- `MessageListDateDivider`: the date between two `line-hairline` rules, in `text-mono-meta` and `foreground-hint`, drawn like an event line ([SystemMessage](../system-message/system-message.md#rules)). It is a boundary: its rule sits the section step, 24px, from the text above and below it ([Timeline rhythm](../../../../../design/foundations/spacing.md#timeline-rhythm)).
+- `MessageListDateDivider`: the date between two `line-hairline` rules, in `text-mono-meta` and `foreground-hint`, drawn like an event line ([SystemMessage](system-message.md#rules)). It is a boundary: its rule sits the section step, 24px, from the text above and below it ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)).
 - `MessageListEndFade`: the fade over the list's bottom edge, the panel's color to transparent upward over the section step, 24px. Put it beside `MessageList`, in the same positioned parent (`ConversationPanelBody` is one), like the jump controls; it lies under them and takes no pointer events.
 - The jump controls ([Jump controls](#jump-controls)), experimental, exported from `@botiverse/raft-ui/wip`:
   - `MessageListJumpControls`: where the pills float, centered on the list's bottom edge, or its top with `side="top"`. Put it beside `MessageList`, in the same positioned parent (`ConversationPanelBody` is one).
@@ -50,10 +50,10 @@ conversation-panel/compositions/conversation-panel
 ## Behavior
 
 - The list only scrolls up and down. Wide content, such as a long line of code or a row of tabs, scrolls inside its own container and never widens the messages.
-- On desktop the list is a [ScrollArea](../scroll-area/scroll-area.md): its thin scrollbar shows only while the list scrolls.
-- Below 768px it scrolls natively, with the phone's own scrollbar and without the drawn one, an exception to [Native scrolling](../scroll-area/scroll-area.md#native-scrolling) ([Responsive layout](../../../../../design/patterns/responsive.md)).
+- On desktop the list is a [ScrollArea](scroll-area.md): its thin scrollbar shows only while the list scrolls.
+- Below 768px it scrolls natively, with the phone's own scrollbar and without the drawn one, an exception to [Native scrolling](scroll-area.md#native-scrolling) ([Responsive layout](../patterns/responsive.md)).
 - Scrolling reaches the end of the list and stops; it doesn't scroll the page behind it.
-- MessageList renders every message it is given and doesn't load older ones. For a history too long to keep in the DOM, use [VirtualList](../virtual-list/virtual-list.md), which renders the rows in view and keeps them still while older rows load above; loading them stays in the product.
+- MessageList renders every message it is given and doesn't load older ones. For a history too long to keep in the DOM, use [VirtualList](virtual-list.md), which renders the rows in view and keeps them still while older rows load above; loading them stays in the product.
 
 ## Jump controls
 
@@ -85,11 +85,11 @@ message-list/compositions/phone
 
 ### How they look
 
-A pill is one action, so it is a Button, at the size of the ordinary buttons around Raft (Save in a settings row): `outline` at `md`, with the label in `text-control` at 700, a 16px icon and a 32px height ([Button](../button/button.md#sizes)). It is built from the Button recipe, so it can't drift from it. How it sits with the other controls that float in a conversation is in [Conversation](../../../../../design/patterns/conversation.md#floating-controls).
+A pill is one action, so it is a Button, at the size of the ordinary buttons around Raft (Save in a settings row): `outline` at `md`, with the label in `text-control` at 700, a 16px icon and a 32px height ([Button](button.md#sizes)). It is built from the Button recipe, so it can't drift from it. How it sits with the other controls that float in a conversation is in [Conversation](../patterns/conversation.md#floating-controls).
 
-- Float the controls 12px from the edge of the list, centered, with 8px between pills. At the bottom they rise by `--message-list-bottom-inset`, which the product sets to the height of whatever else floats on that edge (the line of who is working or about to post, [Working agents](../../../../../design/people-and-agents/working-agents.md#who-is-working-here)), so a pill never covers it.
-- Draw no shadow. A pill is a control, marked by its ink edge on `layer-card`, and the opaque card keeps it readable over the messages that pass under it ([Elevation](../../../../../design/foundations/elevation.md#floating-controls)).
-- Make a pill appear and disappear without animation, and replace its count without rolling the digits ([Motion](../../../../../design/foundations/motion.md)): it doesn't come from anywhere, and a pill that slides draws the eye from the messages each time someone scrolls.
+- Float the controls 12px from the edge of the list, centered, with 8px between pills. At the bottom they rise by `--message-list-bottom-inset`, which the product sets to the height of whatever else floats on that edge (the line of who is working or about to post, [Working agents](../people-and-agents/working-agents.md#who-is-working-here)), so a pill never covers it.
+- Draw no shadow. A pill is a control, marked by its ink edge on `layer-card`, and the opaque card keeps it readable over the messages that pass under it ([Elevation](../foundations/elevation.md#floating-controls)).
+- Make a pill appear and disappear without animation, and replace its count without rolling the digits ([Motion](../foundations/motion.md)): it doesn't come from anywhere, and a pill that slides draws the eye from the messages each time someone scrolls.
 - Keep `MessageListJumpControls` mounted and change only what is in it, or hide it with `hidden`. Adding and removing the list's sibling while someone scrolls makes WebKit restyle the whole list.
 - Every pill and the dismiss button keep a 44px hit area, which reaches past the 12px edge only by 6px.
 
@@ -99,16 +99,16 @@ A pill is one action, so it is a Button, at the size of the ordinary buttons aro
 
 ## Accessibility
 
-- MessageList renders plain elements and adds no role or live region. Name the panel around it after the conversation ([ConversationPanel](../conversation-panel/conversation-panel.md#accessibility)).
+- MessageList renders plain elements and adds no role or live region. Name the panel around it after the conversation ([ConversationPanel](conversation-panel.md#accessibility)).
 - The notice, the date lines and the history marker are text, not controls.
-- Put the date in `MessageListDateDivider` in a `<time>` element with `dateTime`, as for an event line's time ([SystemMessage](../system-message/system-message.md#accessibility)).
+- Put the date in `MessageListDateDivider` in a `<time>` element with `dateTime`, as for an event line's time ([SystemMessage](system-message.md#accessibility)).
 - The jump pills are native buttons; their label is their name. Give `MessageListJumpPillDismiss` an `aria-label` in sentence case that says what it dismisses when there is more than one: "Dismiss unread threads".
 - The pills come after the list in the DOM, so Tab reaches them after the messages, and they are not announced when they appear: they repeat what scrolling shows.
 
 ## Rules
 
-- Leave room above the first message for its hover toolbar ([MessageItem](../message-item/message-item.md#behavior)). A list that opens with a date line already has it.
-- Start the list a section step, 24px, above its first line (`pt-timeline-start` over the first row; the notice brings a row's lead like a message, so the step holds whichever comes first), and end it so the composer's frame sits a section step under the last line (`pb-timeline-end` under the last row, when the composer adds no space of its own). MessageList leaves both to the product, which knows what sits above and below the list ([Timeline rhythm](../../../../../design/foundations/spacing.md#timeline-rhythm)).
-- Fade the list's bottom edge with `MessageListEndFade` whenever a composer or anything else sits under the list: a message scrolled under the edge softens instead of being cut, and at the end of the list the fade lies over the empty end ([Timeline rhythm](../../../../../design/foundations/spacing.md#timeline-rhythm)). Don't give a floating line its own fade over it.
+- Leave room above the first message for its hover toolbar ([MessageItem](message-item.md#behavior)). A list that opens with a date line already has it.
+- Start the list a section step, 24px, above its first line (`pt-timeline-start` over the first row; the notice brings a row's lead like a message, so the step holds whichever comes first), and end it so the composer's frame sits a section step under the last line (`pb-timeline-end` under the last row, when the composer adds no space of its own). MessageList leaves both to the product, which knows what sits above and below the list ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)).
+- Fade the list's bottom edge with `MessageListEndFade` whenever a composer or anything else sits under the list: a message scrolled under the edge softens instead of being cut, and at the end of the list the fade lies over the empty end ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)). Don't give a floating line its own fade over it.
 - Give any other line that marks a boundary in the list, such as a new-messages line, the section step on both sides, like the date line.
-- Show one thing above the oldest loaded message: a notice while older messages load, the history marker when the history is cut short, or "Beginning of messages" once the start is reached. Where a plan cuts the history, a product may put a paywall there instead of the marker ([Raft Chat: History behind the plan's window](../../../../../design/products/raft-chat/channel.md#history-behind-the-plans-window)).
+- Show one thing above the oldest loaded message: a notice while older messages load, the history marker when the history is cut short, or "Beginning of messages" once the start is reached. Where a plan cuts the history, a product may put a paywall there instead of the marker ([Raft Chat: History behind the plan's window](../products/raft-chat/channel.md#history-behind-the-plans-window)).

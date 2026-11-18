@@ -10,7 +10,7 @@ related: [button]
 
 # TextLink
 
-TextLink is text that does something or goes somewhere, with no underline until the pointer is over it. It is the bottom step of the emphasis ladder, below a frameless button ([Button](../button/button.md#which-color)): use it where even a frameless button would be too much weight, such as Forgot password on a sign-in page, Sign out under a server list, or a See all beside a section title.
+TextLink is text that does something or goes somewhere, with no underline until the pointer is over it. It is the bottom step of the emphasis ladder, below a frameless button ([Button](button.md#which-color)): use it where even a frameless button would be too much weight, such as Forgot password on a sign-in page, Sign out under a server list, or a See all beside a section title.
 
 ```example
 text-link/compositions/preview
@@ -21,9 +21,9 @@ text-link/compositions/preview
 | Situation                                                              | Use                                                                       |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | The quietest control on a screen, alone or inside a sentence           | TextLink                                                                  |
-| Cancel or a minor action inside a dialog, sheet, menu, popover or card | [Button](../button/button.md) `variant="ghost"`                           |
-| Cancel or a minor action on a page                                     | [Button](../button/button.md) `variant="default"`                         |
-| A link inside rendered message or document content                     | The Markdown link, in the link blue ([Markdown](../markdown/markdown.md)) |
+| Cancel or a minor action inside a dialog, sheet, menu, popover or card | [Button](button.md) `variant="ghost"`                           |
+| Cancel or a minor action on a page                                     | [Button](button.md) `variant="default"`                         |
+| A link inside rendered message or document content                     | The Markdown link, in the link blue ([Markdown](markdown.md)) |
 
 ## Variants
 
@@ -36,7 +36,7 @@ The variant follows where the link sits, not how important the action is.
 
 **Why the position decides.** On its own, a TextLink is the quietest control on the screen, so it is muted: it must not compete with the screen's text or its buttons. Inside a sentence, the same muted grey would sit lighter than the words around it and read as disabled, so there it takes the ink of body text and stands out by weight instead. Neither variant is pink, at rest or on hover: pink belongs to the one primary button.
 
-**Why the underline comes on hover.** The underline is the hover signal for every piece of clickable text in raft-ui, so people learn it once ([Clickable text](../../../../../design/foundations/states.md#clickable-text)). At rest, the weight and color above and where the link sits say it can be clicked; an underline on every quiet control would add a line under each of them on a screen that is read for hours.
+**Why the underline comes on hover.** The underline is the hover signal for every piece of clickable text in raft-ui, so people learn it once ([Clickable text](../foundations/states.md#clickable-text)). At rest, the weight and color above and where the link sits say it can be clicked; an underline on every quiet control would add a line under each of them on a screen that is read for hours.
 
 ## States
 
@@ -47,12 +47,12 @@ The variant follows where the link sits, not how important the action is.
 text-link/compositions/disabled
 ```
 
-- **Focus:** the shared focus ring ([States](../../../../../design/foundations/states.md)), on a 2px radius.
+- **Focus:** the shared focus ring ([States](../foundations/states.md)), on a 2px radius.
 
 ## Behavior
 
 - TextLink has no size of its own: it takes the size and line height of the text around it, so it sits on the baseline inside a sentence and cannot make the line taller. Standing alone, give its container the text size.
-- It has no box, padding or minimum height. Don't put it where it is the only thing a finger must hit on a phone; that needs a [Button](../button/button.md).
+- It has no box, padding or minimum height. Don't put it where it is the only thing a finger must hit on a phone; that needs a [Button](button.md).
 
 ## In a sentence
 
@@ -70,11 +70,11 @@ A way somewhere is a real link, `render={<a href="…" />}`, which is inline tex
 ## Content
 
 - Start with a verb, or name the place: Forgot password, Sign out, See all.
-- Use sentence case, like every button label ([Writing](../../../../../design/content/writing.md#casing)).
+- Use sentence case, like every button label ([Writing](../content/writing.md#casing)).
 
 ## Leaving Raft
 
-A TextLink that goes to another site ends in `TextLinkExternalIcon`: Lucide's `ArrowUpRight` at 0.857em of the text (12px at 14px, like the icons in a reference chip), 2px after the text, in the text's color, centered on the letters' cap height at every size ([A mark that leads text](../../../../../design/foundations/alignment.md#a-mark-that-leads-text)). It sits in an inline-flex box, so the underline on hover stops at the text and never runs under the arrow. Pass `label` for a screen reader, "(opens in a new tab)"; it is product copy, so raft-ui doesn't write it. The rule for every control that leaves Raft is in [Navigation](../../../../../design/patterns/navigation.md#links-that-leave-raft).
+A TextLink that goes to another site ends in `TextLinkExternalIcon`: Lucide's `ArrowUpRight` at 0.857em of the text (12px at 14px, like the icons in a reference chip), 2px after the text, in the text's color, centered on the letters' cap height at every size ([A mark that leads text](../foundations/alignment.md#a-mark-that-leads-text)). It sits in an inline-flex box, so the underline on hover stops at the text and never runs under the arrow. Pass `label` for a screen reader, "(opens in a new tab)"; it is product copy, so raft-ui doesn't write it. The rule for every control that leaves Raft is in [Navigation](../patterns/navigation.md#links-that-leave-raft).
 
 ```example
 text-link/compositions/leaving-raft
@@ -82,7 +82,7 @@ text-link/compositions/leaving-raft
 
 ## Downloads
 
-A TextLink that downloads a file ends in `TextLinkDownloadIcon`: Lucide's `Download`, in the same box as the ↗ (0.857em of the text, 2px after it, centered on the cap height, the underline stopping at the text). A download doesn't leave the page, so the link stays in the same tab and takes no ↗ ([Navigation](../../../../../design/patterns/navigation.md#links-that-leave-raft)). Render a real link with `download`, and pass `label` for a screen reader, "(downloads a file)"; like the ↗'s, it is product copy.
+A TextLink that downloads a file ends in `TextLinkDownloadIcon`: Lucide's `Download`, in the same box as the ↗ (0.857em of the text, 2px after it, centered on the cap height, the underline stopping at the text). A download doesn't leave the page, so the link stays in the same tab and takes no ↗ ([Navigation](../patterns/navigation.md#links-that-leave-raft)). Render a real link with `download`, and pass `label` for a screen reader, "(downloads a file)"; like the ↗'s, it is product copy.
 
 ```example
 text-link/compositions/downloads
@@ -93,7 +93,7 @@ text-link/compositions/downloads
 TextLink renders a native `button type="button"`, or, in a sentence, a span with the button's role ([In a sentence](#in-a-sentence)). For a way somewhere, render a real link so it opens in a new tab and announces as a link: `render={<a href="…" />}`.
 
 - The in-sentence form is a span that acts as the button: `role="button"`, in the tab order, pressed with Enter or Space. When disabled it takes `aria-disabled`, leaves the tab order and takes the disabled look, like the button.
-- `disabled` is the native attribute on the button form: the button leaves the tab order and takes the disabled look. A link has no `disabled`. When a way somewhere is unavailable, don't render the link; when the reader can do something about it, say that one step in the text ([Writing](../../../../../design/content/writing.md#principles)).
+- `disabled` is the native attribute on the button form: the button leaves the tab order and takes the disabled look. A link has no `disabled`. When a way somewhere is unavailable, don't render the link; when the reader can do something about it, say that one step in the text ([Writing](../content/writing.md#principles)).
 
 ## Rules
 

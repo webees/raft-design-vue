@@ -8,11 +8,11 @@ date: 2026-11-05
 
 # 0044. Sentence case for everything people click
 
-This replaces the Title Case part of [decision 0002](./0002-no-all-caps.md). Its rule against all caps stands.
+This replaces the Title Case part of [decision 0002](0002-no-all-caps.md). Its rule against all caps stands.
 
 ## Context
 
-[Decision 0002](./0002-no-all-caps.md) put every text in sentence case except clickable text, which kept the product's Title Case: Create Task, Mark All Read, Sign Out. Title Case came with a list of short words to keep lowercase (a, the, to, in, from…) and exceptions to that list (Sign In, Turn On), so a label took a rule to write and another to check. Menu items have grown long, such as Create Task from Message, and long labels in Title Case read awkwardly. Chinese has no case, so translators had one more thing to carry over. The lead (stdrc) decided to change the system on 2026-11-05 in #proj-raft-ui:10ce032d.
+[Decision 0002](0002-no-all-caps.md) put every text in sentence case except clickable text, which kept the product's Title Case: Create Task, Mark All Read, Sign Out. Title Case came with a list of short words to keep lowercase (a, the, to, in, from…) and exceptions to that list (Sign In, Turn On), so a label took a rule to write and another to check. Menu items have grown long, such as Create Task from Message, and long labels in Title Case read awkwardly. Chinese has no case, so translators had one more thing to carry over. The lead (stdrc) decided to change the system on 2026-11-05 in #proj-raft-ui:10ce032d.
 
 ## Decision
 
@@ -42,4 +42,4 @@ This replaces the Title Case part of [decision 0002](./0002-no-all-caps.md). Its
 
 - [Writing](../content/writing.md#casing)
 - [Typography](../foundations/typography.md#casing)
-- [Decision 0002](./0002-no-all-caps.md)
+- [Decision 0002](0002-no-all-caps.md)

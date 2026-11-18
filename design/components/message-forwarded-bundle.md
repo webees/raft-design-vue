@@ -10,7 +10,7 @@ related: [message-embed, message-item, message-quoted-preview, message-attachmen
 
 # MessageForwardedBundle
 
-A card with the messages someone forwarded: a Forwarded header with the count and where they came from, then each message with its author, time, text and attachments. It is built on [MessageEmbed](../message-embed/message-embed.md) and sits in `MessageItemEmbedded`, under the body of the message that forwarded it ([MessageItem](../message-item/message-item.md)). Long bundles fold on their own.
+A card with the messages someone forwarded: a Forwarded header with the count and where they came from, then each message with its author, time, text and attachments. It is built on [MessageEmbed](message-embed.md) and sits in `MessageItemEmbedded`, under the body of the message that forwarded it ([MessageItem](message-item.md)). Long bundles fold on their own.
 
 ```example
 message-forwarded-bundle/compositions/forwarded-bundle
@@ -21,9 +21,9 @@ message-forwarded-bundle/compositions/forwarded-bundle
 | Situation                                                | Use                                                                                |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | One or more messages passed on from another conversation | MessageForwardedBundle                                                             |
-| A link to one message, shown as an excerpt               | [MessageQuotedPreview](../message-quoted-preview/message-quoted-preview.md)        |
-| A link to a message or a channel, inline in the text     | A reference chip ([MessageItem](../message-item/message-item.md#in-the-body))      |
-| A quote typed into the message                           | A Markdown blockquote ([MessageItem](../message-item/message-item.md#in-the-body)) |
+| A link to one message, shown as an excerpt               | [MessageQuotedPreview](message-quoted-preview.md)        |
+| A link to a message or a channel, inline in the text     | A reference chip ([MessageItem](message-item.md#in-the-body))      |
+| A quote typed into the message                           | A Markdown blockquote ([MessageItem](message-item.md#in-the-body)) |
 
 ## Anatomy
 
@@ -66,23 +66,23 @@ message-forwarded-bundle/compositions/forwarded-bundle-static-source
 
 ## Behavior
 
-- The card is a content card (`MessageEmbed size="content"`): at most 560px wide, and narrower when the column is ([Cards in messages](../../../../../design/patterns/cards-in-messages.md#two-widths)).
-- By default the bundle folds itself: when the text of all items together runs past `foldLineLimit` lines (8), the list is cut at that height and fades out at the bottom over the content fade, 48px, as a mask (`mask-fade-b`), so a row's fill fades with it; a fold under 60px fades over the edge fade, 24px, so one line stays readable ([Edges fade](../../../../../design/foundations/spacing.md#edges-fade)).
+- The card is a content card (`MessageEmbed size="content"`): at most 560px wide, and narrower when the column is ([Cards in messages](../patterns/cards-in-messages.md#two-widths)).
+- By default the bundle folds itself: when the text of all items together runs past `foldLineLimit` lines (8), the list is cut at that height and fades out at the bottom over the content fade, 48px, as a mask (`mask-fade-b`), so a row's fill fades with it; a fold under 60px fades over the edge fade, 24px, so one line stays readable ([Edges fade](../foundations/spacing.md#edges-fade)).
 - The footer shows only while the list is folded. Its action unfolds the list and folds it again; `expandedContent` is its label while unfolded.
 - The bundle measures again when content arrives or the width changes. Once the person has folded or unfolded it, it stays as they left it, unless the content no longer needs folding.
 - Pass `collapsed` to `MessageForwardedBundleItems` to control the fold yourself, as a detail view that shows everything does. The footer then always renders, and you label it.
 - To make the footer action open a detail view instead of unfolding, call `preventDefault` in its `onClick`.
-- `MessageForwardedBundleGallery` lays images in rows of 3, and 4 images as 2 rows of 2, at the sizes of a message's own gallery ([MessageAttachment](../message-attachment/message-attachment.md)). Below 360px of the gallery's own width a row of 3 is 2 across, by the card's width rather than the window's ([Switch on the region's width](../../../../../design/patterns/responsive.md#switch-on-the-regions-width)). Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.
+- `MessageForwardedBundleGallery` lays images in rows of 3, and 4 images as 2 rows of 2, at the sizes of a message's own gallery ([MessageAttachment](message-attachment.md)). Below 360px of the gallery's own width a row of 3 is 2 across, by the card's width rather than the window's ([Switch on the region's width](../patterns/responsive.md#switch-on-the-regions-width)). Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.
 
 ## Content
 
 - Label the header Forwarded, and give the count in Space Mono: "3 messages".
 - Write the source as "from #launch-week", with "· thread" when it is a thread.
 - Show a source only when the person may see it; leave it out for a direct message, a private channel or a missing source.
-- Name each author by their display name, not a handle ([Writing](../../../../../design/content/writing.md#voice)).
+- Name each author by their display name, not a handle ([Writing](../content/writing.md#voice)).
 - Label the footer action with what it does, in sentence case: Show all 6 messages, then Collapse.
 - Give each attachment chip its file name and type: "release-notes.md · markdown".
-- An attachment chip takes 5.5px before its icon and 6.5px after its text, 12px in all as before: a file icon is drawn 1.75px inside its box, so its ink and the last letter both sit about 7.2px from the edges ([Alignment](../../../../../design/foundations/alignment.md#chips)).
+- An attachment chip takes 5.5px before its icon and 6.5px after its text, 12px in all as before: a file icon is drawn 1.75px inside its box, so its ink and the last letter both sit about 7.2px from the edges ([Alignment](../foundations/alignment.md#chips)).
 
 ## Accessibility
 
@@ -91,7 +91,7 @@ message-forwarded-bundle/compositions/forwarded-bundle-static-source
 - While the bundle owns the fold, `MessageForwardedBundleFooterAction` sets `aria-expanded`. With `collapsed`, set it yourself.
 - Put each item's time in a `<time>` element with its `dateTime`.
 - `interactive` on `MessageForwardedBundleAttachment` only adds the hover and focus look. Render the chip as a `<button>` or `<a>` that opens the file, with an `aria-label` such as "Open release-notes.md".
-- Give gallery images an `alt` as in [MessageAttachment](../message-attachment/message-attachment.md#accessibility).
+- Give gallery images an `alt` as in [MessageAttachment](message-attachment.md#accessibility).
 
 ## Rules
 

@@ -22,11 +22,11 @@ tabs/compositions/placement
 | Situation                                       | Use                                                                          |
 | ----------------------------------------------- | ---------------------------------------------------------------------------- |
 | Sections of one page, each with its own content | Tabs                                                                         |
-| Another view of the same content                | [SegmentedControl](../segmented-control/segmented-control.md)                |
-| The steps of a flow, in order                   | [Steps](../steps/steps.md)                                                   |
-| A product's destinations                        | [AppRail](../app-rail/app-rail.md), [MobileNav](../mobile-nav/mobile-nav.md) |
+| Another view of the same content                | [SegmentedControl](segmented-control.md)                |
+| The steps of a flow, in order                   | [Steps](steps.md)                                                   |
+| A product's destinations                        | [AppRail](app-rail.md), [MobileNav](mobile-nav.md) |
 
-A place with several kinds of content, such as an agent, shows them as one row of sticker tabs under its header ([Navigation](../../../../../design/patterns/navigation.md#several-views-of-one-place)). A channel's tasks and files are not tabs: they are side sections beside the conversation. Only where a column is too short for two stacked sections, or the sections cover the panel on a phone, does a Tasks / Files row of tabs switch between them. Where a conversation's row can't give every column 160px, the rightmost columns become tabs in their left neighbour's head, in place of its title ([The channel's side columns](../../../../../design/patterns/responsive.md#the-channels-side-columns)).
+A place with several kinds of content, such as an agent, shows them as one row of sticker tabs under its header ([Navigation](../patterns/navigation.md#several-views-of-one-place)). A channel's tasks and files are not tabs: they are side sections beside the conversation. Only where a column is too short for two stacked sections, or the sections cover the panel on a phone, does a Tasks / Files row of tabs switch between them. Where a conversation's row can't give every column 160px, the rightmost columns become tabs in their left neighbour's head, in place of its title ([The channel's side columns](../patterns/responsive.md#the-channels-side-columns)).
 
 ## Anatomy
 
@@ -43,16 +43,16 @@ A place with several kinds of content, such as an agent, shows them as one row o
 | `variant="default"`   | The sticker tab: the selected tab is a yellow sticker. The default                                                               |
 | `variant="underline"` | Many tabs, or a place that already has a lot of color: the selected tab is ink text with a 2px ink line on the row's bottom edge |
 
-The sticker tab is the default, and the one the product ships: a selected tab says "you are here", like a selected sidebar row or segment, so it takes the same yellow sticker ([Navigation](../../../../../design/patterns/navigation.md#where-you-are)). The underline stays a variant. `placement` puts the row on the top (the default), bottom, left or right of the panels.
+The sticker tab is the default, and the one the product ships: a selected tab says "you are here", like a selected sidebar row or segment, so it takes the same yellow sticker ([Navigation](../patterns/navigation.md#where-you-are)). The underline stays a variant. `placement` puts the row on the top (the default), bottom, left or right of the panels.
 
 ## Behavior
 
 - When the tabs don't fit, the row scrolls on its own. Tabs never wrap onto a second line and never shrink their text.
 - The row shows no scrollbar, and a vertical mouse wheel scrolls it sideways.
-- The side that hides tabs fades out over the edge fade, 24px (`mask-fade-x`, [Edges fade](../../../../../design/foundations/spacing.md#edges-fade)). It was 32px; it now matches every strip that scrolls sideways.
+- The side that hides tabs fades out over the edge fade, 24px (`mask-fade-x`, [Edges fade](../foundations/spacing.md#edges-fade)). It was 32px; it now matches every strip that scrolls sideways.
 - The selected tab always scrolls into view.
-- On a touch screen a tab switches when the finger lifts, so a tap that stops a scrolling list still switches ([Switching on finger lift](../../../../../design/patterns/navigation.md#switching-on-finger-lift)).
-- In a `SortableTabsList`, dragging a tab follows [Drag and drop](../../../../../design/patterns/drag-and-drop.md): a lifted copy of the tab follows the hand, the tab stays at 40% until it moves, its slot becomes the dashed place and the other tabs slide apart, and a drop or a cancel glides in 160ms. A mouse picks a tab up after 6px; a finger after a 500ms hold. The lifted copy renders in `document.body` (`container` to change it), so a drawer's or a dialog's transform doesn't offset it.
+- On a touch screen a tab switches when the finger lifts, so a tap that stops a scrolling list still switches ([Switching on finger lift](../patterns/navigation.md#switching-on-finger-lift)).
+- In a `SortableTabsList`, dragging a tab follows [Drag and drop](../patterns/drag-and-drop.md): a lifted copy of the tab follows the hand, the tab stays at 40% until it moves, its slot becomes the dashed place and the other tabs slide apart, and a drop or a cancel glides in 160ms. A mouse picks a tab up after 6px; a finger after a 500ms hold. The lifted copy renders in `document.body` (`container` to change it), so a drawer's or a dialog's transform doesn't offset it.
 
 ```example
 tabs/compositions/sortable
@@ -60,15 +60,15 @@ tabs/compositions/sortable
 
 ## A tab's own controls
 
-When a tab's content has controls of its own (a view switch, filters, search, a sort), they go in one toolbar row at the top of the tab's content, under the tabs. Every tab with controls uses the same row, the one the Tasks page draws ([TasksPanelToolbar](../tasks/tasks.md)), so a person who has learned one tab knows where to look in the next:
+When a tab's content has controls of its own (a view switch, filters, search, a sort), they go in one toolbar row at the top of the tab's content, under the tabs. Every tab with controls uses the same row, the one the Tasks page draws ([TasksPanelToolbar](tasks.md)), so a person who has learned one tab knows where to look in the next:
 
 - The row has its own height and padding, the content margin at its sides and a `line-seam` below it, and it stays pinned while the content scrolls under it. Content never starts flush under the row, and never scrolls up against the tabs.
-- The search starts at the row's left and fills the line, the filters after it; a [SegmentedControl](../segmented-control/segmented-control.md) that switches the view goes at its right end. A view switch on the left would sit right under the selected tab, and two yellow stickers stacked one above the other read as the same level. The row gives way as the toolbar over a list does, in at most two lines ([Responsive layout](../../../../../design/patterns/responsive.md#the-toolbar-over-a-list)).
+- The search starts at the row's left and fills the line, the filters after it; a [SegmentedControl](segmented-control.md) that switches the view goes at its right end. A view switch on the left would sit right under the selected tab, and two yellow stickers stacked one above the other read as the same level. The row gives way as the toolbar over a list does, in at most two lines ([Responsive layout](../patterns/responsive.md#the-toolbar-over-a-list)).
 - A tab with no controls has no row.
 
 ## Content
 
-- Label tabs with 1 or 2 words in sentence case: Profile, Activity, Workspace ([Typography](../../../../../design/foundations/typography.md#casing)).
+- Label tabs with 1 or 2 words in sentence case: Profile, Activity, Workspace ([Typography](../foundations/typography.md#casing)).
 - Put a count in its own Space Mono element after the label, never in the label's text.
 
 ## Accessibility
@@ -76,7 +76,7 @@ When a tab's content has controls of its own (a view switch, filters, search, a 
 - `Tabs` wraps the Base UI Tabs, which provides the tab list, tab and panel semantics and the arrow keys.
 - Name the `TabsList` after the place it belongs to: `aria-label="launch-week"`.
 - Give every icon-only tab an `aria-label`.
-- Sortable tabs are reordered with a pointer, by touch or with the keyboard: Space picks the focused tab up, ArrowLeft and ArrowRight (ArrowUp and ArrowDown on a vertical row) move it, Space drops it and Escape puts it back. Enter selects the focused tab; in a sortable row Space doesn't, it picks the tab up. While a tab is lifted, the arrow keys move it instead of the focus ([Drag and drop](../../../../../design/patterns/drag-and-drop.md#keyboard)).
+- Sortable tabs are reordered with a pointer, by touch or with the keyboard: Space picks the focused tab up, ArrowLeft and ArrowRight (ArrowUp and ArrowDown on a vertical row) move it, Space drops it and Escape puts it back. Enter selects the focused tab; in a sortable row Space doesn't, it picks the tab up. While a tab is lifted, the arrow keys move it instead of the focus ([Drag and drop](../patterns/drag-and-drop.md#keyboard)).
 - Each step of a tab's drag is announced by the tab's name (its `aria-label` or its text) and its position in the row, named after the `TabsList`'s `aria-label`; never by its value. Pass your translations as `messages`.
 
 ## Rules
@@ -85,4 +85,4 @@ When a tab's content has controls of its own (a view switch, filters, search, a 
 - Make a sticker tab 32px high (34px with a mouse, the control height), with a 44px hit area and 8px of row above and below it, so the selected sticker sits as far from the line above as from the line below. Its width follows its label, and it has no track behind it.
 - Make an underline tab 44px high, 20px from the next, with text only.
 - Draw a `line-seam` under the row in both variants. When you change the size of the text or the row, check that the selected tab's space above and below is still equal.
-- Start the first sticker on the content's edge, the same margin as the panel header's first element ([Page structure](../../../../../design/patterns/page-structure.md#one-edge-per-column)). In dark mode the selected sticker has the die-cut edge like every sticker, so it lines up with the avatar in the header ([Dark mode](../../../../../design/foundations/dark-mode.md#the-die-cut-edge)).
+- Start the first sticker on the content's edge, the same margin as the panel header's first element ([Page structure](../patterns/page-structure.md#one-edge-per-column)). In dark mode the selected sticker has the die-cut edge like every sticker, so it lines up with the avatar in the header ([Dark mode](../foundations/dark-mode.md#the-die-cut-edge)).

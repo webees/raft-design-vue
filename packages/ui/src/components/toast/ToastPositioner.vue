@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
 import { ToastPositioner } from "reka-ui";
-import type { ToastObject } from "reka-ui";
 
+import type { ToastObject } from "./toast";
 import { toast as toastStyles } from "./toast.recipe";
 
 defineOptions({ name: "RaftToastPositioner", inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<{
-    toast: ToastObject<any>;
+    toast: ToastObject;
     class?: string;
   }>(),
   {},

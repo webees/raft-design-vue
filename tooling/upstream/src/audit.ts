@@ -1,13 +1,20 @@
 import { existsSync, readFileSync } from "node:fs";
 import { basename, join, relative } from "node:path";
 
-import { SPEC_DIR, WORK_DIR, LOCK_PATH, readJson, rel, walk, type UpstreamLock } from "./shared";
+import { SPEC_DIR, WORK_DIR, LOCK_PATH, ROOT, readJson, rel, walk, type UpstreamLock } from "./shared";
 
 const upstreamRoot = join(
   WORK_DIR,
   `raft-design-${readJson<UpstreamLock>(LOCK_PATH).commit}/packages/ui/src`,
 );
 const upstreamComponents = join(upstreamRoot, "components");
+
+if (!existsSync(upstreamRoot)) {
+  console.log(
+    `check:audit skipped: ${relative(ROOT, upstreamRoot)} is missing; run \`bun run sync:upstream\`.`,
+  );
+  process.exit(0);
+}
 
 const isTest = (file: string) => /\.(?:test|spec)[^/]*\.(?:[cm]?[jt]sx?)$/.test(file);
 const isDoc = (file: string) => file.endsWith(".md") || file.endsWith(".css");

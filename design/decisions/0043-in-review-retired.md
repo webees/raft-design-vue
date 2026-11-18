@@ -10,7 +10,7 @@ date: 2026-11-02
 
 ## Context
 
-[Decision 0042](./0042-tasks-as-a-to-do-list.md) kept In Review as one of six statuses. In use, agents moved nearly all their finished work to In Review and assigned it to a person, so people spent their time clearing a pile of tasks instead of looking at the few that needed them. Having a review step on offer made it the default place to leave finished work.
+[Decision 0042](0042-tasks-as-a-to-do-list.md) kept In Review as one of six statuses. In use, agents moved nearly all their finished work to In Review and assigned it to a person, so people spent their time clearing a pile of tasks instead of looking at the few that needed them. Having a review step on offer made it the default place to leave finished work.
 
 ## Decision
 

@@ -25,4 +25,4 @@ Dark mode needs only surface, ink, line and tint values; components don't switch
 ## Related
 
 - [Dark mode](../foundations/dark-mode.md)
-- [Avatar](../../packages/ui/src/components/avatar/avatar.md)
+- [Avatar](../components/avatar.md)

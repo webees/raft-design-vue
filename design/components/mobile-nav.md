@@ -11,7 +11,7 @@ redirectFrom: [decisions/0003-tab-bar-icon-sticker]
 
 # MobileNav
 
-MobileNav is the phone web's tab bar: a row of a product's destinations at the bottom of every top-level page. The selected destination's icon sits in a yellow sticker. Pushed pages cover it. Its last tab can be the current server, which opens a popover instead of a page. The iOS and Android apps draw the same destinations with their own system tab bar instead ([Navigation](../../../../../design/patterns/navigation.md#what-each-platform-draws)).
+MobileNav is the phone web's tab bar: a row of a product's destinations at the bottom of every top-level page. The selected destination's icon sits in a yellow sticker. Pushed pages cover it. Its last tab can be the current server, which opens a popover instead of a page. The iOS and Android apps draw the same destinations with their own system tab bar instead ([Navigation](../patterns/navigation.md#what-each-platform-draws)).
 
 ```example
 mobile-nav/compositions/mobile-nav
@@ -22,11 +22,11 @@ mobile-nav/compositions/mobile-nav
 | Situation                           | Use                                                           |
 | ----------------------------------- | ------------------------------------------------------------- |
 | A product's destinations on a phone | MobileNav                                                     |
-| The same destinations on desktop    | [AppRail](../app-rail/app-rail.md)                            |
-| Sections of one page                | [Tabs](../tabs/tabs.md)                                       |
-| Another view of the same content    | [SegmentedControl](../segmented-control/segmented-control.md) |
+| The same destinations on desktop    | [AppRail](app-rail.md)                            |
+| Sections of one page                | [Tabs](tabs.md)                                       |
+| Another view of the same content    | [SegmentedControl](segmented-control.md) |
 
-How the tab bar works with Back and pushed pages, and how many destinations it holds, is in [Navigation](../../../../../design/patterns/navigation.md). Nothing is attached above the tab bar; where working agents appear instead is in [Working agents](../../../../../design/people-and-agents/working-agents.md#where-working-shows). Which destinations a product has is on its own page ([Raft Chat](../../../../../design/products/raft-chat/README.md)).
+How the tab bar works with Back and pushed pages, and how many destinations it holds, is in [Navigation](../patterns/navigation.md). Nothing is attached above the tab bar; where working agents appear instead is in [Working agents](../people-and-agents/working-agents.md#where-working-shows). Which destinations a product has is on its own page ([Raft Chat](../products/raft-chat/README.md)).
 
 ## Anatomy
 
@@ -38,39 +38,39 @@ How the tab bar works with Back and pushed pages, and how many destinations it h
 
 A product can give one of the tab bar's slots to Search and make its last tab the current server. Raft Chat does both, in its mobile app and on the phone web.
 
-- Make Search a tab like the others: its page is a top-level page, with no Back, and the bar stays with Search `selected`. Search never shows an attention dot. How its page and its results behave is in [Navigation](../../../../../design/patterns/navigation.md#search-on-a-phone).
+- Make Search a tab like the others: its page is a top-level page, with no Back, and the bar stays with Search `selected`. Search never shows an attention dot. How its page and its results behave is in [Navigation](../patterns/navigation.md#search-on-a-phone).
 - Make the last tab the current server when the product has servers and more destinations than fit: the server's own pages go into its popover ([The server tab](#the-server-tab)). It replaces the More tab, a page that listed the remaining destinations, which Raft Chat had until 2026-10-22.
 
 raft-ui draws Search with `MobileNavItem` and the server tab with `MobileNavServerItem`. Separate parts for a floating pill and a Search button (`MobileNavPill`, `MobileNavSearch`) are no longer planned.
 
 ## The server tab
 
-The last tab is the current server: its avatar where the other tabs have an icon, its name as the label. It is the one tab that opens a popover, not a page ([Navigation](../../../../../design/patterns/navigation.md#the-server-tab-on-a-phone)). Experimental: its parts are exported from `@botiverse/raft-ui/wip`, and their API can change in any release.
+The last tab is the current server: its avatar where the other tabs have an icon, its name as the label. It is the one tab that opens a popover, not a page ([Navigation](../patterns/navigation.md#the-server-tab-on-a-phone)). Experimental: its parts are exported from `@botiverse/raft-ui/wip`, and their API can change in any release.
 
 ```example
 mobile-nav/compositions/server-tab
 ```
 
 - `MobileNavServerPopover`: the root, a Base UI Popover root. It owns the open state (`open`, `defaultOpen`, `onOpenChange`). Put it inside `MobileNavRoot`, as the last item; it renders nothing of its own.
-- `MobileNavServerItem`: the tab, a `MobileNavItem` that opens the popover. Children are the server's [Avatar](../avatar/avatar.md) (`type="server"`, drawn at 22px, the size of the other tabs' icons) and its name in `MobileNavLabel`, which truncates. It takes no `selected`: it holds no page, so it is never selected. While the popover is open, it shows the press fill under its avatar.
-- `MobileNavServerPopoverContent`: the popover, a [Popover](../popover/popover.md) panel that rises above the tab bar, 8px from each side and 8px above it, as tall as its content and at most 60% of the screen (`60dvh`). The one exception: the list always keeps one whole two-line server row, so where the parts after it leave less, the popover grows past 60% as far as that row needs, and no further; where the screen is too short even for that, the whole popover scrolls, the footer actions and the pages with it. The exception is Jasper's call (2026-11-10), after Lagoon saw the list squeezed to a sliver: the current row must stay visible, which can be measured, so it is not a different design choice. It is a column of the parts below, with a `PopoverSeparator` between them.
+- `MobileNavServerItem`: the tab, a `MobileNavItem` that opens the popover. Children are the server's [Avatar](avatar.md) (`type="server"`, drawn at 22px, the size of the other tabs' icons) and its name in `MobileNavLabel`, which truncates. It takes no `selected`: it holds no page, so it is never selected. While the popover is open, it shows the press fill under its avatar.
+- `MobileNavServerPopoverContent`: the popover, a [Popover](popover.md) panel that rises above the tab bar, 8px from each side and 8px above it, as tall as its content and at most 60% of the screen (`60dvh`). The one exception: the list always keeps one whole two-line server row, so where the parts after it leave less, the popover grows past 60% as far as that row needs, and no further; where the screen is too short even for that, the whole popover scrolls, the footer actions and the pages with it. The exception is Jasper's call (2026-11-10), after Lagoon saw the list squeezed to a sliver: the current row must stay visible, which can be measured, so it is not a different design choice. It is a column of the parts below, with a `PopoverSeparator` between them.
 - `MobileNavServerPopoverList`: the server list. It takes the room left in the popover, never less than one whole two-line row, and scrolls inside it, so the parts after it stay in view. It opens already scrolled to the current server's row (`aria-current="true"`), with no animation.
-- `MobileNavServerPopoverRow`: a row with the option padding of every popup list, 36px for one line, a second line adding only its own height ([Forms](../../../../../design/patterns/forms.md#option-height)): a 20px avatar or a 16px icon, `MobileNavServerPopoverRowLabel`, which truncates, then a check, a [Badge](../badge/badge.md) or a gray count. `aria-current="true"` sets the current server in bold.
+- `MobileNavServerPopoverRow`: a row with the option padding of every popup list, 36px for one line, a second line adding only its own height ([Forms](../patterns/forms.md#option-height)): a 20px avatar or a 16px icon, `MobileNavServerPopoverRowLabel`, which truncates, then a check, a [Badge](badge.md) or a gray count. `aria-current="true"` sets the current server in bold.
 - `MobileNavServerPopoverRowBody` and `MobileNavServerPopoverRowDescription`: a server's name over its slug (`/raft-hq`), in muted Space Mono, as the switcher shows it. The avatar and the trailing check or count center on both lines.
 - `MobileNavServerPopoverDestinations` and `MobileNavServerPopoverDestination`: the server's own pages in equal buttons, each a 20px icon over its label in a `span`. Up to 4 sit in one row (`data-layout="row"`); more than 4 take 3 columns, rows of 3 with the last row from the start (`data-layout="grid"`), at the same height, so every label keeps a third of the popover and stays whole in every language: "Computadoras" fits at 360px wide. raft-ui counts the buttons, looking inside fragments, so the pages a guest lacks can sit in one. The buttons are a `group`; name it with `aria-label`, such as the server's name.
 - `MobileNavServerPopoverGroup`: rows that always stay in view, such as the footer actions.
 
-The popover's rows are the product's: the server list as the switcher has it ([Switching servers](../../../../../design/components/overview.md#switching-servers)), then the switcher's footer actions, then the server's own pages in `MobileNavServerPopoverDestinations` at the very bottom, nearest the tab bar. Raft Chat's are in [Raft Chat](../../../../../design/products/raft-chat/README.md#the-server-tab).
+The popover's rows are the product's: the server list as the switcher has it ([Switching servers](overview.md#switching-servers)), then the switcher's footer actions, then the server's own pages in `MobileNavServerPopoverDestinations` at the very bottom, nearest the tab bar. Raft Chat's are in [Raft Chat](../products/raft-chat/README.md#the-server-tab).
 
 - A press opens the popover, and a second press closes it.
-- A long press, 500ms holding still, opens it too, the same moment raft-ui's other long-press menus open ([States](../../../../../design/foundations/states.md)). Lifting the finger leaves it open, and a long press while it is open leaves it as it is. A finger that moves more than 10px is a scroll, not a hold. The tab blocks the system's own long-press popover and text selection.
+- A long press, 500ms holding still, opens it too, the same moment raft-ui's other long-press menus open ([States](../foundations/states.md)). Lifting the finger leaves it open, and a long press while it is open leaves it as it is. A finger that moves more than 10px is a scroll, not a hold. The tab blocks the system's own long-press popover and text selection.
 - Opening it moves focus to the current server's row, which the list already shows, so focus never scrolls the list back to the top. A touch puts focus on the popover itself instead, which scrolls nothing and brings up no keyboard. `initialFocus` on `MobileNavServerPopoverContent` overrides this.
 - Esc, a press outside the popover and choosing a row close it; focus goes back to the tab. When a row opens a pushed page, the product gives focus back to the tab when people come back from it, as the example does.
 - It is a popover (a `dialog`), not an ARIA menu: its rows are buttons, reached with Tab, without arrow-key navigation.
 
 ## The vertical tab bar
 
-On a foldable phone's outer screen, the tab bar stands at the bottom of the system's column, on the side of the screen ([Page structure](../../../../../design/patterns/page-structure.md#foldable-phones)). The iOS app's is the system's own tab bar, turned upright by the system; these rules hold for any tab bar drawn there.
+On a foldable phone's outer screen, the tab bar stands at the bottom of the system's column, on the side of the screen ([Page structure](../patterns/page-structure.md#foldable-phones)). The iOS app's is the system's own tab bar, turned upright by the system; these rules hold for any tab bar drawn there.
 
 - Keep the order, first at the top: in Raft Chat, Home, Activity, Tasks, Search, then the server.
 - Show the icons only: the column has no room for labels. Keep each label as the item's accessible name, the server tab's server name included, with the dot when there is one ("Raft HQ, another server has unread items").
@@ -82,10 +82,10 @@ On a foldable phone's outer screen, the tab bar stands at the bottom of the syst
 ## Behavior
 
 - Hide the bar while the on-screen keyboard is open. Pinned above the keyboard, it would cover the field being typed in and the composer. When the keyboard closes, bring the bar back with the platform's default transition, not an instant jump, so people can see the navigation return rather than wonder where it went.
-- Show the bar only on top-level pages: a page with Back never shows it ([Navigation](../../../../../design/patterns/navigation.md#going-back)). Pushed pages cover it; menus, dialogs and bottom sheets leave it as it is.
+- Show the bar only on top-level pages: a page with Back never shows it ([Navigation](../patterns/navigation.md#going-back)). Pushed pages cover it; menus, dialogs and bottom sheets leave it as it is.
 - Keep the bar in place while a page scrolls. Don't hide it on scroll: it is how people know where they are.
-- An item switches when the finger lifts, so a tap while the page is still momentum-scrolling switches tabs at once ([Switching on finger lift](../../../../../design/patterns/navigation.md#switching-on-finger-lift)).
-- Tapping the selected item scrolls its page to the top, and on Search focuses the field. Each tab keeps its page's scroll position and filters while another tab is open ([Navigation](../../../../../design/patterns/navigation.md#going-back)).
+- An item switches when the finger lifts, so a tap while the page is still momentum-scrolling switches tabs at once ([Switching on finger lift](../patterns/navigation.md#switching-on-finger-lift)).
+- Tapping the selected item scrolls its page to the top, and on Search focuses the field. Each tab keeps its page's scroll position and filters while another tab is open ([Navigation](../patterns/navigation.md#going-back)).
 
 ## States
 
@@ -93,16 +93,16 @@ On a foldable phone's outer screen, the tab bar stands at the bottom of the syst
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Not selected          | Icon and label in `foreground-hint`                                                                                                                                                                                                                                                                                                                         |
 | Selected (`selected`) | The icon in a 56×30px yellow sticker; the label in `foreground`, bold                                                                                                                                                                                                                                                                                       |
-| Attention             | One pink pixel at the top right of the icon; on the server tab, at the top right of its avatar (`AvatarBadge` with `offset={["100%", 0]}` and an `accent` [Status](../status/status.md)), and only for another server's unread items ([States](../../../../../design/foundations/states.md)), never a number. Never on the selected item, with no exception |
+| Attention             | One pink pixel at the top right of the icon; on the server tab, at the top right of its avatar (`AvatarBadge` with `offset={["100%", 0]}` and an `accent` [Status](status.md)), and only for another server's unread items ([States](../foundations/states.md)), never a number. Never on the selected item, with no exception |
 
-The sticker wraps only the icon, not the whole item: a yellow item adds another strip of frame at the bottom of the screen, and wrapping only the icon halves the color while the selection still reads at a glance ([Navigation](../../../../../design/patterns/navigation.md#where-you-are)).
+The sticker wraps only the icon, not the whole item: a yellow item adds another strip of frame at the bottom of the screen, and wrapping only the icon halves the color while the selection still reads at a glance ([Navigation](../patterns/navigation.md#where-you-are)).
 
 ## Content
 
-- Label every item, in sentence case ([Typography](../../../../../design/foundations/typography.md#casing)). Keep a label to at most 8 Latin letters or 4 Chinese characters, so 5 items fit at 320px; a longer one truncates. The server tab's label is the server's name, which people choose: it truncates, and the avatar beside it still tells servers apart.
+- Label every item, in sentence case ([Typography](../foundations/typography.md#casing)). Keep a label to at most 8 Latin letters or 4 Chinese characters, so 5 items fit at 320px; a longer one truncates. The server tab's label is the server's name, which people choose: it truncates, and the avatar beside it still tells servers apart.
 - Which items can show an attention dot is the product's choice. Say other news inside the page instead.
 - Show a dot, never a count, on the tab bar: the count belongs inside the page, next to what it counts.
-- Dot the server tab only when another server has unread items, the one meaning the same avatar and dot have on Home's [WorkspaceButton](../workspace-button/workspace-button.md). Something new on one of the server's pages gets its dot on that page's button in the popover, an `accent` `Status` inside `MobileNavServerPopoverDestination`, never on the avatar.
+- Dot the server tab only when another server has unread items, the one meaning the same avatar and dot have on Home's [WorkspaceButton](workspace-button.md). Something new on one of the server's pages gets its dot on that page's button in the popover, an `accent` `Status` inside `MobileNavServerPopoverDestination`, never on the avatar.
 
 ## Accessibility
 

@@ -21,8 +21,8 @@ meter/compositions/preview
 | Situation                                                               | Use                                                                                  |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | How much of an allowance or a capacity is used                          | Meter                                                                                |
-| How far a task with a known percentage has got: an upload, a conversion | [Progress](../progress/progress.md)                                                  |
-| An amount with no limit, such as spend or tokens so far                 | Numbers in a [DescriptionList](../description-list/description-list.md), with no bar |
+| How far a task with a known percentage has got: an upload, a conversion | [Progress](progress.md)                                                  |
+| An amount with no limit, such as spend or tokens so far                 | Numbers in a [DescriptionList](description-list.md), with no bar |
 
 Meter vs Progress: a meter is a quantity within a range that rises and falls; a progress bar is a task that only moves forward and is done at 100%. A full progress bar turns `success`, so a used-up allowance drawn as progress would read as finished.
 
@@ -61,7 +61,7 @@ meter/compositions/states
 ```
 
 - `warnAt` is the share of `max` used, from 0 to 1, and means at or above: with the default, 80% used is already orange. It is the old "20% or less left" said the other way round, so the same data takes the same color as before.
-- Don't use `danger` for a nearly used-up or used-up allowance: it comes back at the reset, so it interrupts work but isn't irreversible ([Color](../../../../../design/foundations/color.md#meanings-of-color)).
+- Don't use `danger` for a nearly used-up or used-up allowance: it comes back at the reset, so it interrupts work but isn't irreversible ([Color](../foundations/color.md#meanings-of-color)).
 - Keep the fill `info`, the color of Progress, so a meter and a progress bar read as one family, and let it turn orange only near the end: the color changes when there is something to act on.
 - Don't turn a full meter lime or red: a used-up allowance isn't finished, and it isn't lost. It stays orange, with the words "Used up".
 - Keep the default `warnAt` unless an allowance needs another: the same share used should look the same on every screen. A disk that warns only under 10% free is `warnAt={0.9}`.
@@ -73,7 +73,7 @@ meter/compositions/states
 - Keep the reset time next to the value, in the same `valueText`, not in a tooltip or a second line: it is the other half of the answer.
 - When all of it is used, say so in place of the percentage: "Used up · resets in 3h".
 - When the reset time is unknown, leave the second half out: "62% used".
-- What is left, in absolute units, may go in a [Tooltip](../tooltip/tooltip.md) on the meter: "378 GB free of 994 GB". Don't put it in `valueText` next to a percentage used: two numbers in opposite directions side by side read as a contradiction.
+- What is left, in absolute units, may go in a [Tooltip](tooltip.md) on the meter: "378 GB free of 994 GB". Don't put it in `valueText` next to a percentage used: two numbers in opposite directions side by side read as a contradiction.
 
 ## Accessibility
 
@@ -85,7 +85,7 @@ Meter wraps Base UI's Meter, which gives it `role="meter"`. Its `aria-valuenow` 
 ## Rules
 
 - Pass `used` as the provider reports it. When the provider reports what is left or free, pass `used={max - left}`; Meter clamps it to 0 to `max`, so the bar, the color and the spoken value can't disagree.
-- Put the meter inside its container on its own track, never along an edge ([Shape](../../../../../design/foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)).
+- Put the meter inside its container on its own track, never along an edge ([Shape](../foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)).
 
 ## Migrating from the draining meter
 

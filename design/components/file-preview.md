@@ -20,10 +20,10 @@ file-preview/compositions/default
 
 | Situation                                  | Use                                                                              |
 | ------------------------------------------ | -------------------------------------------------------------------------------- |
-| A file in the composer, before it is sent  | FilePreview, in the composer's attachment ([Composer](../composer/composer.md))  |
+| A file in the composer, before it is sent  | FilePreview, in the composer's attachment ([Composer](composer.md))  |
 | A file in a list of files                  | FilePreview at the start of the row                                              |
 | The type, next to a name in a line of text | `FilePreviewBadge` with `placement="inline"`                                     |
-| A file attached to a sent message          | The file card ([MessageAttachment](../message-attachment/message-attachment.md)) |
+| A file attached to a sent message          | The file card ([MessageAttachment](message-attachment.md)) |
 
 ## Anatomy
 
@@ -64,7 +64,7 @@ file-preview/compositions/inline-badge
 
 - Name documents by their extension in the badge: PDF, DOCX, TXT.
 - For code, images and other files, let the drawing say the type.
-- Write the extension in capitals. It is an abbreviation, not all-caps styling ([Typography](../../../../../design/foundations/typography.md#casing)).
+- Write the extension in capitals. It is an abbreviation, not all-caps styling ([Typography](../foundations/typography.md#casing)).
 
 ## Accessibility
 
@@ -74,4 +74,4 @@ file-preview/compositions/inline-badge
 ## Rules
 
 - Keep the type chip neutral: `fill-muted` with a hairline, Space Mono. The name beside it carries the meaning, so the type doesn't get a color.
-- Don't color a file by its type: a color that means nothing is removed ([Color](../../../../../design/foundations/color.md)). Only a media thumbnail shows color, because it is the file itself.
+- Don't color a file by its type: a color that means nothing is removed ([Color](../foundations/color.md)). Only a media thumbnail shows color, because it is the file itself.

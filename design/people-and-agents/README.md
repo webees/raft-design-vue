@@ -24,23 +24,23 @@ Treating agents as members turns most "agent features" into ordinary features th
 
 | An agent | So the design |
 | --- | --- |
-| Works without being watched, often for minutes or hours | Shows that it is working, and on what, in the places it already appears, without asking for attention ([Working agents](./working-agents.md)) |
+| Works without being watched, often for minutes or hours | Shows that it is working, and on what, in the places it already appears, without asking for attention ([Working agents](working-agents.md)) |
 | Can act faster than a person can read | Shows nothing that moves on its own: no blinking light, no looping animation ([Motion](../foundations/motion.md)) |
-| Isn't allowed to do everything on its own | Prepares the action and lets a person confirm it, and keeps the record afterwards ([Hand-offs and approvals](./handoffs-and-approvals.md)) |
+| Isn't allowed to do everything on its own | Prepares the action and lets a person confirm it, and keeps the record afterwards ([Hand-offs and approvals](handoffs-and-approvals.md)) |
 | Has a runtime that can fail | Says when it failed and why, at the scope of the failure ([Feedback](../patterns/feedback.md#errors-by-scope)) |
-| Has to be told apart from people, sometimes | Has a pixel face, and an `agent` tag where it must be explicit ([Identity and presence](./identity-and-presence.md)) |
-| Is written about all day | Is named and given teammate verbs, never "AI" or "bot" ([Writing about agents](./writing-about-agents.md)) |
+| Has to be told apart from people, sometimes | Has a pixel face, and an `agent` tag where it must be explicit ([Identity and presence](identity-and-presence.md)) |
+| Is written about all day | Is named and given teammate verbs, never "AI" or "bot" ([Writing about agents](writing-about-agents.md)) |
 
 ## Principles
 
-1. **Agents are members.** Use the same message, avatar, row and profile for agents and people, at the same sizes. Don't give agents a bubble color, a frame, a sparkle or a separate area. See [Identity and presence](./identity-and-presence.md).
+1. **Agents are members.** Use the same message, avatar, row and profile for agents and people, at the same sizes. Don't give agents a bubble color, a frame, a sparkle or a separate area. See [Identity and presence](identity-and-presence.md).
 2. **The face says who.** Agents are told apart from people by their pixel face, not by shape or color. Add the `agent` tag only where it has to be explicit, such as an agent's profile.
-3. **Show work where it happens.** What an agent is doing is written in its own row, in the header of the place it works in, and in one summary at the top of the screen, not in a live bar ([0006](../decisions/0006-working-agents-in-place.md)). See [Working agents](./working-agents.md).
+3. **Show work where it happens.** What an agent is doing is written in its own row, in the header of the place it works in, and in one summary at the top of the screen, not in a live bar ([0006](../decisions/0006-working-agents-in-place.md)). See [Working agents](working-agents.md).
 4. **Still, not busy.** A working agent is a still yellow light and a sentence. Nothing blinks, breathes or types, because a dozen moving agents would make the screen unreadable and keep it rendering.
-5. **The agent prepares, a person decides.** When an agent may not act alone, it fills in the action and a person confirms it. The action runs as that person, and the card stays as the record. See [Hand-offs and approvals](./handoffs-and-approvals.md).
+5. **The agent prepares, a person decides.** When an agent may not act alone, it fills in the action and a person confirms it. The action runs as that person, and the card stays as the record. See [Hand-offs and approvals](handoffs-and-approvals.md).
 6. **Every claim leaves a record.** Claims, status changes and confirmed actions are written into the timeline as event lines and kept. A person can always find out who did what, and when.
 7. **Done comes with proof.** An agent that finishes says what it did and links the proof: a pull request, a commit, a file. An agent moves its finished work to Done and sends the result to the person who asked.
-8. **Talk about agents as teammates.** Name the agent, in the third person, with the verbs you would use for a person. See [Writing about agents](./writing-about-agents.md).
+8. **Talk about agents as teammates.** Name the agent, in the third person, with the verbs you would use for a person. See [Writing about agents](writing-about-agents.md).
 
 ## Before you design for agents
 
@@ -55,18 +55,18 @@ Treating agents as members turns most "agent features" into ordinary features th
 
 | Page | What it covers |
 | --- | --- |
-| [Identity and presence](./identity-and-presence.md) | How an agent is recognized, how it is treated the same as a person, the five presence lights, and messages an assistant sent for a person |
-| [Working agents](./working-agents.md) | Where "working" shows: the summary, Working now, rows and the place's subtitle; why there is no live bar |
-| [Hand-offs and approvals](./handoffs-and-approvals.md) | Claiming and handing off work, action cards, the record afterwards, and errors |
-| [Writing about agents](./writing-about-agents.md) | The verbs, naming, no "AI" or "bot", and evidence |
+| [Identity and presence](identity-and-presence.md) | How an agent is recognized, how it is treated the same as a person, the five presence lights, and messages an assistant sent for a person |
+| [Working agents](working-agents.md) | Where "working" shows: the summary, Working now, rows and the place's subtitle; why there is no live bar |
+| [Hand-offs and approvals](handoffs-and-approvals.md) | Claiming and handing off work, action cards, the record afterwards, and errors |
+| [Writing about agents](writing-about-agents.md) | The verbs, naming, no "AI" or "bot", and evidence |
 
 ## Where the product differs
 
 These pages describe Raft Chat as it ships. Where the system intends something the product doesn't do yet, the page says so. In short:
 
-- Event lines in the product still start with an emoji; the system writes them without one ([Hand-offs and approvals](./handoffs-and-approvals.md#event-lines)).
-- Action cards in the product have no Decline or Edit first button and don't appear in Activity ([Hand-offs and approvals](./handoffs-and-approvals.md#what-the-product-doesnt-do-yet)).
-- A few product strings still say "AI" ([Writing about agents](./writing-about-agents.md#no-ai-or-bot)).
+- Event lines in the product still start with an emoji; the system writes them without one ([Hand-offs and approvals](handoffs-and-approvals.md#event-lines)).
+- Action cards in the product have no Decline or Edit first button and don't appear in Activity ([Hand-offs and approvals](handoffs-and-approvals.md#what-the-product-doesnt-do-yet)).
+- A few product strings still say "AI" ([Writing about agents](writing-about-agents.md#no-ai-or-bot)).
 
 ## Related
 

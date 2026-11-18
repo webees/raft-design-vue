@@ -6,7 +6,7 @@ order: 2
 
 # Principles
 
-Nine rules hold on every screen of every Raft product. Each one is short enough to check in review, and each comes with its reason, because a rule without a reason gets broken the first time it is inconvenient. When a case isn't covered anywhere in the docs, the reasons decide it. Where the look comes from is in [Why Raft looks this way](./why-raft-looks-this-way.md); how to use these rules on new work is in [Designing a new feature](./designing-a-new-feature.md).
+Nine rules hold on every screen of every Raft product. Each one is short enough to check in review, and each comes with its reason, because a rule without a reason gets broken the first time it is inconvenient. When a case isn't covered anywhere in the docs, the reasons decide it. Where the look comes from is in [Why Raft looks this way](why-raft-looks-this-way.md); how to use these rules on new work is in [Designing a new feature](designing-a-new-feature.md).
 
 The numbers are stable: other pages refer to a principle by its number.
 
@@ -36,7 +36,7 @@ Every block of brand color has a 1.5px ink edge and ink type, and doesn't invert
 
 **Why.** Sticker colors are only 1.4:1 to 2.8:1 apart from paper, so without an edge a block of color doesn't hold its shape. Ink type on a sticker reaches at least 6.8:1, where white type on pink reaches 2.4:1 ([0014](../decisions/0014-pink-unread-with-ink.md)). A sticker stays the same in both modes, so a pink button or an avatar is one thing everywhere; dark mode adds a die-cut edge instead of changing the sticker, and components never switch styles ([0023](../decisions/0023-stickers-in-dark-mode.md)). Soft tints exist for the opposite case: a screen can hold a dozen status chips, and a tint with one saturated pixel keeps that screen quiet ([Color](../foundations/color.md#soft-tints)). Controls have no shadow because "press here" is already said by the ink border, the pink and the one-per-screen rule; a shadow is a fourth signal, doesn't show in dark mode, and a press that moves the control shakes what is next to it ([0009](../decisions/0009-seams-and-no-control-shadows.md)).
 
-To apply it, decide whether the color is a thing (a sticker: edge, ink type, same in both modes) or a highlight behind a thing (a soft tint: no edge). An inline highlight behind words that says "you" (a search hit, the passage of the comment you opened) is the one highlight in full `you` yellow, still with no edge: a soft tint of it disappears on a selected row and in dark mode ([Search](../../packages/ui/src/components/search/search.md#content)). Only things that float above the page cast a shadow, and all of them cast the same soft one.
+To apply it, decide whether the color is a thing (a sticker: edge, ink type, same in both modes) or a highlight behind a thing (a soft tint: no edge). An inline highlight behind words that says "you" (a search hit, the passage of the comment you opened) is the one highlight in full `you` yellow, still with no edge: a soft tint of it disappears on a selected row and in dark mode ([Search](../components/search.md#content)). Only things that float above the page cast a shadow, and all of them cast the same soft one.
 
 Applied in: [Color](../foundations/color.md#stickers), [Dark mode](../foundations/dark-mode.md#the-die-cut-edge), [Elevation](../foundations/elevation.md#principles).
 
@@ -46,14 +46,14 @@ Yellow is where you are, what you selected, what calls you and what you searched
 
 **Why.** When each color has one meaning, a color on screen always tells the person something, and they learn it once for every product. The meanings are chosen so they never compete:
 
-- Selection has three meanings, so it has three looks: where you are in navigation is yellow, the item singled out in content is cyan, and a chosen value is ink. If all three were yellow, opening a list would fill it with yellow ([0011](../decisions/0011-yellow-navigation-selection.md), [RadioGroup](../../packages/ui/src/components/radio-group/radio-group.md#states)).
+- Selection has three meanings, so it has three looks: where you are in navigation is yellow, the item singled out in content is cyan, and a chosen value is ink. If all three were yellow, opening a list would fill it with yellow ([0011](../decisions/0011-yellow-navigation-selection.md), [RadioGroup](../components/radio-group.md#states)).
 - Pink marks one primary action, so a second pink button removes the primary action instead of adding one. Unread is pink, not yellow, because yellow is also the busy light of a working agent ([0014](../decisions/0014-pink-unread-with-ink.md)).
 - A notice is an aside. A yellow toast would compete with selection, so toasts and tooltips are neutral, and no button is yellow ([Color](../foundations/color.md#principles)).
 - Meaning wins over placement: in dark mode the frame is neutral, but the selected rail item is still a yellow sticker, because "you are here" is not part of the frame ([0012](../decisions/0012-yellow-rail-selection-in-dark-mode.md)).
 
 To apply it, say which meaning a new use of color has: you, to do, this item, interrupts or irreversible, or an identity or a status. If it has none of them, remove the color.
 
-Applied in: [Color](../foundations/color.md#meanings-of-color), [States](../foundations/states.md#usage), [Button](../../packages/ui/src/components/button/button.md).
+Applied in: [Color](../foundations/color.md#meanings-of-color), [States](../foundations/states.md#usage), [Button](../components/button.md).
 
 ## 5. Status colors have fixed meanings
 
@@ -69,11 +69,11 @@ Applied in: [Color](../foundations/color.md#statuses), [Motion](../foundations/m
 
 Every identity is a square sticker, and every dot is a square pixel. Round is only for switches, radios and grab handles, which follow platform convention, and for two exceptions: a task's completion control and the Android pull-to-refresh disc.
 
-**Why.** The square pixel is the brand's own shape, from the website's pixel grid to the agents' 8×8 faces, and it is what makes a Raft screen recognizable when the color is turned down. People and agents both have square avatars: the face already says who it is, so the shape doesn't need to say it again ([0023](../decisions/0023-stickers-in-dark-mode.md)). Dots and the spinner are square for the same reason ([Shape](../foundations/shape.md#principles)). Pixels are hard and containers are soft: cards, menus and dialogs have radii, because they hold content rather than stand for something. Switches, radios and grab handles are round because people recognize them by their round shape; a square switch isn't read as a switch ([Switch](../../packages/ui/src/components/switch/switch.md#rules)). A task's completion control is round for a related reason: a square box at the start of a row reads as "select this row", and the circle reads as "done", as in a to-do list ([Shape](../foundations/shape.md#principles)).
+**Why.** The square pixel is the brand's own shape, from the website's pixel grid to the agents' 8×8 faces, and it is what makes a Raft screen recognizable when the color is turned down. People and agents both have square avatars: the face already says who it is, so the shape doesn't need to say it again ([0023](../decisions/0023-stickers-in-dark-mode.md)). Dots and the spinner are square for the same reason ([Shape](../foundations/shape.md#principles)). Pixels are hard and containers are soft: cards, menus and dialogs have radii, because they hold content rather than stand for something. Switches, radios and grab handles are round because people recognize them by their round shape; a square switch isn't read as a switch ([Switch](../components/switch.md#rules)). A task's completion control is round for a related reason: a square box at the start of a row reads as "select this row", and the circle reads as "done", as in a to-do list ([Shape](../foundations/shape.md#principles)).
 
 To apply it, ask whether the new element stands for someone or something (square, from the pixel family), holds content (a soft container radius), or is one of the round shapes listed in [Shape](../foundations/shape.md#principles) (round).
 
-Applied in: [Shape](../foundations/shape.md#radii), [Avatar](../../packages/ui/src/components/avatar/avatar.md), [Spinner](../../packages/ui/src/components/spinner/spinner.md).
+Applied in: [Shape](../foundations/shape.md#radii), [Avatar](../components/avatar.md), [Spinner](../components/spinner.md).
 
 ## 7. No all caps
 
@@ -101,9 +101,9 @@ Build a new screen from raft-ui components and the patterns these docs describe.
 
 **Why.** Each part and pattern carries decisions already made and tested: its states, its sizes, its dark mode, its keyboard behavior, its place on a phone. A hand-built piece starts without them and drifts from the original the first time either changes. A new kind of thing also asks people to learn it (principle 8). The breadcrumb on a computer's page was one: raft-ui had none and no rule described one, so it shipped as a local invention, put a second "where am I" on a page that already had one, and pushed the computer's icon away from its name; the side panel every profile already used did the job ([Navigation](../patterns/navigation.md#opening-an-item)). Writing the rule first makes the case for the new piece in the open, where it can be weighed against the parts that exist.
 
-To apply it, find the closest pattern and the components for it before you design ([Designing a new feature](./designing-a-new-feature.md#the-process)). If nothing fits, write the rule for the new piece, with its reason, in the same pull request as the work, and propose the piece to raft-ui.
+To apply it, find the closest pattern and the components for it before you design ([Designing a new feature](designing-a-new-feature.md#the-process)). If nothing fits, write the rule for the new piece, with its reason, in the same pull request as the work, and propose the piece to raft-ui.
 
-Applied in: [Designing a new feature](./designing-a-new-feature.md#2-choose-the-components), [Components overview](../components/overview.md).
+Applied in: [Designing a new feature](designing-a-new-feature.md#2-choose-the-components), [Components overview](../components/overview.md).
 
 ## When principles pull apart
 
@@ -115,6 +115,6 @@ The principles rarely conflict, and when they seem to, the system resolves them 
 
 ## Related
 
-- [Why Raft looks this way](./why-raft-looks-this-way.md): the character these rules come from.
-- [Designing a new feature](./designing-a-new-feature.md): the questions and the checklist built on these rules.
-- [Decisions](../decisions/): the major choices, and the alternatives they were weighed against.
+- [Why Raft looks this way](why-raft-looks-this-way.md): the character these rules come from.
+- [Designing a new feature](designing-a-new-feature.md): the questions and the checklist built on these rules.
+- [Decisions](../decisions): the major choices, and the alternatives they were weighed against.

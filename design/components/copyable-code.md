@@ -21,14 +21,14 @@ copyable-code/compositions/compact-detail-command
 | Situation                          | Use                                         |
 | ---------------------------------- | ------------------------------------------- |
 | One command people copy and run    | CopyableCode                                |
-| A name from code inside a sentence | [InlineCode](../inline-code/inline-code.md) |
-| Several lines of code, or a log    | [CodeBlock](../code-block/code-block.md)    |
+| A name from code inside a sentence | [InlineCode](inline-code.md) |
+| Several lines of code, or a log    | [CodeBlock](code-block.md)    |
 
 ## Anatomy
 
 - `CopyableCodeRoot`: holds the command and the button, and handles the copy. Required.
 - `CopyableCode`: the command. Its text is what gets copied. Required.
-- `CopyableCodeAction`: the copy button, an icon [Button](../button/button.md). Required.
+- `CopyableCodeAction`: the copy button, an icon [Button](button.md). Required.
 
 ## Variants
 
@@ -65,7 +65,7 @@ copyable-code/compositions/copy-error-toast
 ## Accessibility
 
 - `CopyableCodeAction` is labeled "Copy code" and "Copied code" by default, and announces the change (`aria-live="polite"`). Give it an `aria-label` that names what is copied: "Copy login command".
-- Tell the person about a failed copy in words, through `onError` (a [Toast](../toast/toast.md) or a status line). The icon alone doesn't say it failed.
+- Tell the person about a failed copy in words, through `onError` (a [Toast](toast.md) or a status line). The icon alone doesn't say it failed.
 - The command is a `code` element, so screen readers read it as text.
 
 ## Rules

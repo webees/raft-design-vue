@@ -8,7 +8,7 @@ date: 2026-10-18
 
 # 0002. No all caps, including group headings and dialog titles
 
-Superseded in part: clickable text has since moved from Title Case to sentence case ([decision 0044](./0044-sentence-case-for-labels.md)). The rest of this record, no all caps, stands.
+Superseded in part: clickable text has since moved from Title Case to sentence case ([decision 0044](0044-sentence-case-for-labels.md)). The rest of this record, no all caps, stands.
 
 ## Context
 
@@ -24,7 +24,7 @@ This overrides a decision the product's owner recorded in code. To return to the
 
 ## Superseded by
 
-- [0044. Sentence case for everything people click](./0044-sentence-case-for-labels.md), for clickable text. The rule against all caps stands.
+- [0044. Sentence case for everything people click](0044-sentence-case-for-labels.md), for clickable text. The rule against all caps stands.
 
 ## Related
 

@@ -10,7 +10,7 @@ related: [dialog, button, banner, dropdown-menu, toast]
 
 # AlertDialog
 
-An alert dialog asks people to confirm an action before it happens, with the `alertdialog` role, so a screen reader announces it as an interruption. Most confirmations aren't built on it: a confirmation is a [Dialog](../dialog/dialog.md#variants) at `size="sm"`, deleting and stopping included, and a product lists the few that use AlertDialog instead ([Choosing a component](../../../../../design/components/overview.md#overlays), 2026-11-03). In Raft Chat there are two: discarding unsaved edits to an agent's profile, and opening a link that hands off to another app ([Raft Chat](../../../../../design/products/raft-chat/README.md#overlays)). It is a 400px dialog on a scrim, the width of every confirmation, with a title, a sentence on what will happen, Cancel and a confirm button whose color states the consequence.
+An alert dialog asks people to confirm an action before it happens, with the `alertdialog` role, so a screen reader announces it as an interruption. Most confirmations aren't built on it: a confirmation is a [Dialog](dialog.md#variants) at `size="sm"`, deleting and stopping included, and a product lists the few that use AlertDialog instead ([Choosing a component](overview.md#overlays), 2026-11-03). In Raft Chat there are two: discarding unsaved edits to an agent's profile, and opening a link that hands off to another app ([Raft Chat](../products/raft-chat/README.md#overlays)). It is a 400px dialog on a scrim, the width of every confirmation, with a title, a sentence on what will happen, Cancel and a confirm button whose color states the consequence.
 
 ```example
 alert-dialog/compositions/confirm-action
@@ -21,19 +21,19 @@ alert-dialog/compositions/confirm-action
 | Situation                                                                                                                                                                                          | Use                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | A confirmation the product lists as an AlertDialog: in Raft Chat, discarding unsaved edits to an agent's profile, opening a link that hands off to another app                                     | AlertDialog, its confirm button colored by the consequence ([Variants](#variants))                                                      |
-| Any other confirmation, including an action that cannot be undone (delete a message, an agent, a server) or that interrupts but can be recovered (stop an agent, reset a session, leave a channel) | A [Dialog](../dialog/dialog.md#variants) at `size="sm"`, its confirm button red or orange by the same table ([Variants](#variants))     |
-| An action that can be reversed in place                                                                                                                                                            | No dialog: do it; when a [Toast](../toast/toast.md) offers Undo is in [Feedback](../../../../../design/patterns/feedback.md#confirming) |
-| A decision that needs more than the name typed                                                                                                                                                     | [Dialog](../dialog/dialog.md)                                                                                                           |
+| Any other confirmation, including an action that cannot be undone (delete a message, an agent, a server) or that interrupts but can be recovered (stop an agent, reset a session, leave a channel) | A [Dialog](dialog.md#variants) at `size="sm"`, its confirm button red or orange by the same table ([Variants](#variants))     |
+| An action that can be reversed in place                                                                                                                                                            | No dialog: do it; when a [Toast](toast.md) offers Undo is in [Feedback](../patterns/feedback.md#confirming) |
+| A decision that needs more than the name typed                                                                                                                                                     | [Dialog](dialog.md)                                                                                                           |
 
 ## Anatomy
 
 - `AlertDialog`: the root. Required.
 - `AlertDialogTrigger`: the button that opens it. Usually the dialog is opened from a menu item instead.
-- `AlertDialogContent`: the centered surface, at most 400px wide, the width of a `size="sm"` [Dialog](../dialog/dialog.md#variants), so every confirmation is one width, with the scrim (`AlertDialogOverlay`) behind it. Required.
+- `AlertDialogContent`: the centered surface, at most 400px wide, the width of a `size="sm"` [Dialog](dialog.md#variants), so every confirmation is one width, with the scrim (`AlertDialogOverlay`) behind it. Required.
 - `AlertDialogHeader`: the title row, with an optional `AlertDialogClose` (×).
 - `AlertDialogTitle`: the title. Required.
 - `AlertDialogBody` and `AlertDialogDescription`: what will happen.
-- `AlertDialogFooter`: the buttons in one row at the end, Cancel then the commit button, on a phone as on a desktop. Only when they don't fit on one line do they stack full width, the commit button on top and Cancel framed, as in [Dialog](../dialog/dialog.md#the-footer).
+- `AlertDialogFooter`: the buttons in one row at the end, Cancel then the commit button, on a phone as on a desktop. Only when they don't fit on one line do they stack full width, the commit button on top and Cancel framed, as in [Dialog](dialog.md#the-footer).
 - `AlertDialogCancel`: a ghost button that closes the dialog; framed when the buttons stack. Required.
 - `AlertDialogAction`: the confirm button. It is a Button and doesn't close the dialog by itself: close it when the action finishes.
 - `AlertDialogPortal`: a lower-level part.
@@ -46,20 +46,20 @@ The confirm button's color says what happens, the same in a confirmation built o
 | -------------------------------- | ----------------------------------------------------------------------------------------------- | ------------ |
 | Does something                   | `variant="primary"`                                                                             | Make public  |
 | Interrupts, but can be recovered | `variant="warning"`                                                                             | Stop         |
-| Cannot be undone                 | `variant="danger"`, and a [Banner](../banner/banner.md) with `status="destructive"` in the body | Delete agent |
+| Cannot be undone                 | `variant="danger"`, and a [Banner](banner.md) with `status="destructive"` in the body | Delete agent |
 
-Deleting something large, such as an agent or a server, also asks for its name to be typed ([Forms](../../../../../design/patterns/forms.md#danger-zone)). That confirmation is a `size="sm"` Dialog, not an AlertDialog: its example is in [Dialog](../dialog/dialog.md#variants).
+Deleting something large, such as an agent or a server, also asks for its name to be typed ([Forms](../patterns/forms.md#danger-zone)). That confirmation is a `size="sm"` Dialog, not an AlertDialog: its example is in [Dialog](dialog.md#variants).
 
 ## Behavior
 
-- It appears and disappears without animation, over the scrim, like every centered dialog ([Dialog](../dialog/dialog.md#behavior)).
+- It appears and disappears without animation, over the scrim, like every centered dialog ([Dialog](dialog.md#behavior)).
 - Esc and Cancel close it without acting.
 
 ## Content
 
-- Title it with the words of the button that opened it and a question mark, since it only asks whether to go on: Delete box opens Delete box? ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)).
+- Title it with the words of the button that opened it and a question mark, since it only asks whether to go on: Delete box opens Delete box? ([Writing](../content/writing.md#actions-and-their-dialogs)).
 - Say in one or two sentences what happens, in plain words: "Box leaves every channel."
-- Label the confirm button with the title's verb: Stop for Stop Wug?. Keep the object when it can't be undone, on the red button: Delete agent. Label the other button Cancel ([Writing](../../../../../design/content/writing.md#actions-and-their-dialogs)).
+- Label the confirm button with the title's verb: Stop for Stop Wug?. Keep the object when it can't be undone, on the red button: Delete agent. Label the other button Cancel ([Writing](../content/writing.md#actions-and-their-dialogs)).
 
 ## Accessibility
 
@@ -70,4 +70,4 @@ Deleting something large, such as an agent or a server, also asks for its name t
 ## Rules
 
 - Put Cancel on the left and the confirm button on the right, and no other buttons.
-- Don't color the menu item that opens the dialog: the confirm button carries the color ([Feedback](../../../../../design/patterns/feedback.md#confirming)).
+- Don't color the menu item that opens the dialog: the confirm button carries the color ([Feedback](../patterns/feedback.md#confirming)).

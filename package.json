@@ -28,10 +28,11 @@
     "check:upstream": "bun run --cwd tooling/upstream check",
     "check:parity": "bun run --cwd tooling/upstream parity",
     "check:audit": "bun run --cwd tooling/upstream audit --check",
+    "check:docs-links": "bun run --cwd tooling/upstream docs-links --check",
     "check:api": "bun run --cwd packages/ui check:api",
     "check:consumer-types": "cd tests/type-consumer && tsc -p tsconfig.json",
     "changeset": "changeset",
-    "verify": "bun run check:parity && bun run check:audit && bun run lint && bun run typecheck && bun run check:api && bun run test && bun run build && bun run check:consumer-types"
+    "verify": "bun run check:parity && bun run check:audit && bun run check:docs-links && bun run lint && bun run typecheck && bun run check:api && bun run test && bun run build && bun run check:consumer-types"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

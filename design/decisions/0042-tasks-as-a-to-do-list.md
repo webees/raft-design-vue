@@ -8,7 +8,7 @@ date: 2026-10-31
 
 # 0042. Tasks work as a to-do list, with six statuses and no transition limits
 
-Superseded in part: In Review has since been retired, which leaves five statuses ([decision 0043](./0043-in-review-retired.md)), and the Tasks page's rows and cards have no completion control ([decision 0045](./0045-the-tasks-page.md)): there a row starts with its selection box. The rest of this record stands, the completion control included for a place's views.
+Superseded in part: In Review has since been retired, which leaves five statuses ([decision 0043](0043-in-review-retired.md)), and the Tasks page's rows and cards have no completion control ([decision 0045](0045-the-tasks-page.md)): there a row starts with its selection box. The rest of this record stands, the completion control included for a place's views.
 
 ## Context
 
@@ -31,8 +31,8 @@ The lead (stdrc) approved the hi-fi mockup, built with raft-ui 0.55.0, on 2026-1
 
 - The rules live in [Tasks](../patterns/tasks.md), [Color](../foundations/color.md#statuses), [Shape](../foundations/shape.md#principles) and the task component docs. Every "five statuses" in the docs now says six.
 - The order of agents' work, In Review before Done, is guidance in the Raft agent guide, not a limit the product enforces ([Hand-offs and approvals](../people-and-agents/handoffs-and-approvals.md#handing-off)). Who moved a task, and when, stays in its event lines and History.
-- raft-ui draws Backlog in `TASK_STATUS_IDS`, `TaskStatusIcon` (`TaskBacklogIcon`), `TaskChip` and the Timeline, and has the completion control as [TaskCompletionControl](../../packages/ui/src/components/task-completion-control/task-completion-control.md). Not yet implemented: the docs' examples (the tasks panel, the task card, the board, Create Task) show the tasks before this decision.
-- The round completion control is an exception to "round only for switches, radios and grab handles", as the Android pull-to-refresh disc is, recorded in [Shape](../foundations/shape.md#principles) and [Checkbox](../../packages/ui/src/components/checkbox/checkbox.md#rules).
+- raft-ui draws Backlog in `TASK_STATUS_IDS`, `TaskStatusIcon` (`TaskBacklogIcon`), `TaskChip` and the Timeline, and has the completion control as [TaskCompletionControl](../components/task-completion-control.md). Not yet implemented: the docs' examples (the tasks panel, the task card, the board, Create Task) show the tasks before this decision.
+- The round completion control is an exception to "round only for switches, radios and grab handles", as the Android pull-to-refresh disc is, recorded in [Shape](../foundations/shape.md#principles) and [Checkbox](../components/checkbox.md#rules).
 - To undo it: remove Backlog from the status lists and orders, put back the allowed-moves menu, and drop the completion control and the quick add. Nothing else depends on them.
 
 ## Alternatives considered
@@ -44,8 +44,8 @@ The lead (stdrc) approved the hi-fi mockup, built with raft-ui 0.55.0, on 2026-1
 
 ## Superseded by
 
-- [0043. In Review is retired for tasks with their own conversation](./0043-in-review-retired.md), for In Review.
-- [0045. The Tasks page lists the person's own work first, opens a task beside the list and creates tasks with a place](./0045-the-tasks-page.md), for the completion control on the Tasks page.
+- [0043. In Review is retired for tasks with their own conversation](0043-in-review-retired.md), for In Review.
+- [0045. The Tasks page lists the person's own work first, opens a task beside the list and creates tasks with a place](0045-the-tasks-page.md), for the completion control on the Tasks page.
 
 The rest of this record stands.
 

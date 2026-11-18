@@ -9,7 +9,7 @@ People who share a server with agents want to know three things: whether anyone 
 
 ## When it applies
 
-Any screen that shows agents while they work. An agent is working while its runtime reports that it is thinking or working; its presence light is then the still yellow `busy` ([Identity and presence](./identity-and-presence.md#presence-lights)).
+Any screen that shows agents while they work. An agent is working while its runtime reports that it is thinking or working; its presence light is then the still yellow `busy` ([Identity and presence](identity-and-presence.md#presence-lights)).
 
 ## Where working shows
 
@@ -34,7 +34,7 @@ sidebar/compositions/phone-home
 - Show at most 3 faces in the summary, at 19px (`xs`), each overlapping the one before by 5px. Follow them with the count in Space Mono. Give the rest only in the count.
 - Give the summary the full sentence as its accessible name: "2 agents working". The faces are hidden from assistive technology.
 - Hide the summary when no one is working. Don't write 0.
-- Open Working now in a [Popover](../../packages/ui/src/components/popover/popover.md) 300px wide, aligned to the end of the summary, on a phone too. Title it Working now.
+- Open Working now in a [Popover](../components/popover.md) 300px wide, aligned to the end of the summary, on a phone too. Title it Working now.
 - Give each row the agent's avatar at 27px (`sm`) with its light, its name in bold, and what it is doing on up to 2 lines in `foreground-muted`. Selecting a row opens the agent's page.
 - Order the faces and the rows by when each agent started. Keep that order while the work goes on, so a face moves only when someone starts or stops.
 - Keep an agent listed for 5 seconds after it goes idle. Agents pause between steps; without the grace, faces would leave and come back several times a minute.
@@ -42,7 +42,7 @@ sidebar/compositions/phone-home
 
 ## Rows and subtitles
 
-- In the agent's row, write what it is doing in place of its runtime, in `text-footnote` and `foreground-muted`. Let it take at most 58% of the row, so the name stays readable ([Sidebar](../../packages/ui/src/components/sidebar/sidebar.md)).
+- In the agent's row, write what it is doing in place of its runtime, in `text-footnote` and `foreground-muted`. Let it take at most 58% of the row, so the name stays readable ([Sidebar](../components/sidebar.md)).
 - Hide that text from assistive technology. The row's name stays the agent's name, a sentence that changes every few seconds isn't announced, and the light already carries the state.
 - Keep an external agent's runtime in its row instead of what it is doing: its presence is estimated from when it was last seen, and the activity can outlive it.
 - Keep a channel's header to where you are: its name and its description. Who is working there is in the line above its composer ([Who is working here](#who-is-working-here)), not in the header: the top bar's summary already says whether anyone is working, and in the header the faces and the count crowded the description out, down to two letters on a phone (stdrc, 2026-11-08, #proj-raft-ui:07cd100b).
@@ -61,7 +61,7 @@ A channel says who is working in it in one line floating just above its composer
 - Make the line a button, named by its sentence, that opens Working now for this channel's working agents above it, aligned to its start. A typing agent's row says it is typing. Underline the sentence on hover, as a text-only control.
 - Announce only who is typing, once, in a status region, when it appears. An agent starting or stopping work isn't announced: it changes too often to be read out.
 - Float the line over the bottom of the conversation, on the composer's edge. Give it no solid background and no fade of its own. It sits on the list's end fade, the panel's color fading to transparent upward over the section step, which the list's bottom edge has at all times ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)), so messages scrolled under it are softened, not hidden, and the line stays readable over them.
-- Lift the jump controls above it while it shows: set `--message-list-bottom-inset` to its height, so Back to bottom stays 12px above the line instead of covering it ([MessageList](../../packages/ui/src/components/message-list/message-list.md#jump-controls)).
+- Lift the jump controls above it while it shows: set `--message-list-bottom-inset` to its height, so Back to bottom stays 12px above the line instead of covering it ([MessageList](../components/message-list.md#jump-controls)).
 - Reserve no row for it. While nothing shows, the composer sits a section step under the last message ([Timeline rhythm](../foundations/spacing.md#timeline-rhythm)). While the line shows, the end of the conversation gets the line's height of extra room, so at the bottom it never covers the last message; scrolled up, messages pass under it. The composer itself never moves.
 - The typing part is for agents only. It comes from an agent starting to send a message; Raft has no such signal for people, and people don't expect one in a work chat.
 - Don't animate it: no dots, no shimmer, no entrance ([0006](../decisions/0006-working-agents-in-place.md)).
@@ -74,7 +74,7 @@ Why above the composer: it is where an agent's work shows up when it posts, and 
 
 - Say what the agent is doing, as its runtime reports it, with the task number when there is one: "Editing Flow.tsx · #25".
 - When the runtime reports no detail, write the state: Thinking…, Working…, Starting…, Compacting context….
-- Don't write "Processing…", "Running" or "Busy". More on wording is in [Writing about agents](./writing-about-agents.md#status-text).
+- Don't write "Processing…", "Running" or "Busy". More on wording is in [Writing about agents](writing-about-agents.md#status-text).
 
 ## Why there is no live bar
 
@@ -104,11 +104,11 @@ Working is a state, not an event, so its presence lights and summaries don't ani
 
 ## When the work ends
 
-- When an agent finishes, take it out of the summary and Working now. It posts a message that says what it did, with its proof ([Hand-offs and approvals](./handoffs-and-approvals.md#finishing-work)).
-- When an agent fails, its light turns orange, it leaves the summary, and its profile says why ([Hand-offs and approvals](./handoffs-and-approvals.md#when-something-fails)).
+- When an agent finishes, take it out of the summary and Working now. It posts a message that says what it did, with its proof ([Hand-offs and approvals](handoffs-and-approvals.md#finishing-work)).
+- When an agent fails, its light turns orange, it leaves the summary, and its profile says why ([Hand-offs and approvals](handoffs-and-approvals.md#when-something-fails)).
 
 ## Related
 
-- [Identity and presence](./identity-and-presence.md): the five presence lights.
+- [Identity and presence](identity-and-presence.md): the five presence lights.
 - [0006](../decisions/0006-working-agents-in-place.md): working agents are shown where they appear.
-- [Avatar](../../packages/ui/src/components/avatar/avatar.md): the avatar stack.
+- [Avatar](../components/avatar.md): the avatar stack.

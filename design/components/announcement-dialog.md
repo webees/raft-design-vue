@@ -10,7 +10,7 @@ related: [dialog, notification-center, toast, banner, button]
 
 # AnnouncementDialog
 
-An announcement dialog tells people about something new in the product once: a small label, a title, an optional picture, a few lines of text and one action that takes them to it. It is a [Dialog](../dialog/dialog.md) with a fixed layout, so it has the dialog's scrim, Esc and focus handling. It is exported from `@botiverse/raft-ui/wip`, and its API can change in any release.
+An announcement dialog tells people about something new in the product once: a small label, a title, an optional picture, a few lines of text and one action that takes them to it. It is a [Dialog](dialog.md) with a fixed layout, so it has the dialog's scrim, Esc and focus handling. It is exported from `@botiverse/raft-ui/wip`, and its API can change in any release.
 
 ```example
 dialog/compositions/announcement
@@ -21,12 +21,12 @@ dialog/compositions/announcement
 | Situation                                                             | Use                                                                                                                      |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | A new feature people should hear about once, with an action to try it | AnnouncementDialog                                                                                                       |
-| The state of the whole server: a computer offline, a quota, an update | The notification center ([NotificationCenter](../notification-center/notification-center.md))                            |
-| The result of something the person just did                           | [Toast](../toast/toast.md)                                                                                               |
-| A decision people must make before they continue                      | [Dialog](../dialog/dialog.md); [AlertDialog](../alert-dialog/alert-dialog.md) only for the confirmations a product lists |
-| Something people must read before they act, inside a dialog or form   | [Banner](../banner/banner.md)                                                                                            |
+| The state of the whole server: a computer offline, a quota, an update | The notification center ([NotificationCenter](notification-center.md))                            |
+| The result of something the person just did                           | [Toast](toast.md)                                                                                               |
+| A decision people must make before they continue                      | [Dialog](dialog.md); [AlertDialog](alert-dialog.md) only for the confirmations a product lists |
+| Something people must read before they act, inside a dialog or form   | [Banner](banner.md)                                                                                            |
 
-The full choice of how to tell people something is in [Choosing a component](../../../../../design/components/overview.md#telling-people-something).
+The full choice of how to tell people something is in [Choosing a component](overview.md#telling-people-something).
 
 ## Anatomy
 
@@ -41,7 +41,7 @@ The full choice of how to tell people something is in [Choosing a component](../
   - `AnnouncementDialogPicture`: a picture of the feature on `fill-muted`, with a hairline and `radius-container`. The image inside is contained, not cropped. Optional.
   - `AnnouncementDialogText`: the text, in `text-subhead` and `foreground-muted`. It takes paragraphs, lists and headings.
 - `AnnouncementDialogFooter`: the actions, with no line above it.
-  - `AnnouncementDialogSecondaryAction`: a frameless button that dismisses the announcement, because the dialog draws its own edge ([Button](../button/button.md#which-color)). Optional, and rarely needed: × already dismisses ([Rules](#rules)).
+  - `AnnouncementDialogSecondaryAction`: a frameless button that dismisses the announcement, because the dialog draws its own edge ([Button](button.md#which-color)). Optional, and rarely needed: × already dismisses ([Rules](#rules)).
   - `AnnouncementDialogAction`: the pink action, at the end of the footer. Required.
 
 ## Behavior
@@ -55,12 +55,12 @@ The full choice of how to tell people something is in [Choosing a component](../
 
 - Write the label as the kind of announcement, in sentence case: What's new.
 - Write the title as what people can now do, in sentence case: Work together across servers.
-- Make the action say where it goes, in sentence case: Create joint channel ([Writing](../../../../../design/content/writing.md#casing)).
+- Make the action say where it goes, in sentence case: Create joint channel ([Writing](../content/writing.md#casing)).
 - When there is nothing to try, the one action is the acknowledgment: Got it.
 
 ## Accessibility
 
-- AnnouncementDialog is the Base UI Dialog, through [Dialog](../dialog/dialog.md#accessibility). It provides the `dialog` role, the focus trap, Esc and focus return.
+- AnnouncementDialog is the Base UI Dialog, through [Dialog](dialog.md#accessibility). It provides the `dialog` role, the focus trap, Esc and focus return.
 - `AnnouncementDialogTitle` names the dialog. Every announcement needs one.
 - Give `AnnouncementDialogClose` an `aria-label` that says what it closes: Close update.
 - The attention dot in the label is hidden from assistive technology.
@@ -68,7 +68,7 @@ The full choice of how to tell people something is in [Choosing a component](../
 
 ## Rules
 
-- Use exactly one `AnnouncementDialogAction`. It is the screen's one pink button ([Button](../button/button.md#which-color)).
+- Use exactly one `AnnouncementDialogAction`. It is the screen's one pink button ([Button](button.md#which-color)).
 - With an action that takes people to the feature, show it alone: no Got it beside it. × already dismisses the announcement, so a Got it there would be a second button that does what × does.
 - With nothing to try, keep the pink action as Got it, and keep ×. The dialog still has one clear button to end on, even when all it does is close.
 - Don't put a form in it. When the feature needs input, open its form from the action.

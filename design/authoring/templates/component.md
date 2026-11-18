@@ -32,7 +32,7 @@ this is the wrong choice. -->
 | Situation | Use |
 | --- | --- |
 | … | ComponentName |
-| … | [OtherComponent](../other-component/other-component.md) |
+| … | [OtherComponent](../../components/overview.md) |
 
 ## Anatomy
 

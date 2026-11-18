@@ -10,7 +10,7 @@ related: [message-item, message-embed, message-forwarded-bundle, skeleton, badge
 
 # MessageQuotedPreview
 
-When a message links to another message, the quoted preview shows what that message says: its author, where it was posted, when, and the first 2 lines of its text. It sits in `MessageItemEmbedded`, under the body that holds the link ([MessageItem](../message-item/message-item.md)), and opens the quoted message.
+When a message links to another message, the quoted preview shows what that message says: its author, where it was posted, when, and the first 2 lines of its text. It sits in `MessageItemEmbedded`, under the body that holds the link ([MessageItem](message-item.md)), and opens the quoted message.
 
 ```example
 message-quoted-preview/compositions/quoted-preview
@@ -21,17 +21,17 @@ message-quoted-preview/compositions/quoted-preview
 | Situation                          | Use                                                                                     |
 | ---------------------------------- | --------------------------------------------------------------------------------------- |
 | A message links to another message | MessageQuotedPreview, under the reference chip                                          |
-| Several messages passed on in full | [MessageForwardedBundle](../message-forwarded-bundle/message-forwarded-bundle.md)       |
-| A link an app previews             | A reference chip in the text ([MessageItem](../message-item/message-item.md#app-links)) |
-| A link to a page outside Raft      | A link card ([MessageEmbed](../message-embed/message-embed.md))                         |
-| A quote typed into the message     | A Markdown blockquote ([MessageItem](../message-item/message-item.md#in-the-body))      |
-| The replies to a message           | [MessageReplies](../message-replies/message-replies.md)                                 |
+| Several messages passed on in full | [MessageForwardedBundle](message-forwarded-bundle.md)       |
+| A link an app previews             | A reference chip in the text ([MessageItem](message-item.md#app-links)) |
+| A link to a page outside Raft      | A link card ([MessageEmbed](message-embed.md))                         |
+| A quote typed into the message     | A Markdown blockquote ([MessageItem](message-item.md#in-the-body))      |
+| The replies to a message           | [MessageReplies](message-replies.md)                                 |
 
 ## Anatomy
 
 - `MessageQuotedPreview`: the preview: a 2px `line-seam` bar on the left, no fill, `foreground-muted` text. Required.
 - `MessageQuotedPreviewHeader`: one line. Required.
-  - `MessageQuotedPreviewAuthor`: an `xs` [Avatar](../avatar/avatar.md), `MessageQuotedPreviewAuthorName` and an optional `MessageQuotedPreviewAuthorMeta` (a role). `MessageQuotedPreviewAuthorDelegatedBy` follows the name when an assistant sent the quoted message for its author: "(sent by Friday)". It is experimental, exported from `@botiverse/raft-ui/wip`.
+  - `MessageQuotedPreviewAuthor`: an `xs` [Avatar](avatar.md), `MessageQuotedPreviewAuthorName` and an optional `MessageQuotedPreviewAuthorMeta` (a role). `MessageQuotedPreviewAuthorDelegatedBy` follows the name when an assistant sent the quoted message for its author: "(sent by Friday)". It is experimental, exported from `@botiverse/raft-ui/wip`.
   - `MessageQuotedPreviewChannel`: where it was posted.
   - `MessageQuotedPreviewThread`: a thread marker. Optional.
   - `MessageQuotedPreviewTimestamp`: at the end of the line, in Space Mono.
@@ -40,7 +40,7 @@ message-quoted-preview/compositions/quoted-preview
   - `MessageQuotedPreviewAttachments` with `MessageQuotedPreviewAttachment` chips. Optional.
 - `MessageQuotedPreviewLoading` and `MessageQuotedPreviewUnavailable`: used in place of the preview while it loads, or when it can't be shown.
 
-The bar is the same mark as a quote in a message ([Shape](../../../../../design/foundations/shape.md#stroke-widths)).
+The bar is the same mark as a quote in a message ([Shape](../foundations/shape.md#stroke-widths)).
 
 ## Variants
 
@@ -48,7 +48,7 @@ The bar is the same mark as a quote in a message ([Shape](../../../../../design/
 | ---------------- | ----------------------------------------------------------------------------------------------- |
 | Channel message  | A message in a channel, with `MessageQuotedPreviewThread` when it is a reply in a thread        |
 | Direct message   | A message in a direct message, with the thread marker when it is a reply in a thread            |
-| Archived channel | A message in an archived channel: an Archived [Badge](../badge/badge.md) after the channel name |
+| Archived channel | A message in an archived channel: an Archived [Badge](badge.md) after the channel name |
 | With attachments | A message with files: a chip with the count stays visible under the 2 lines of text             |
 
 ```example
@@ -75,7 +75,7 @@ message-quoted-preview/compositions/quoted-preview-long-content
 
 | State       | Look                                                                                                                                               |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Loading     | `MessageQuotedPreviewLoading`, pulsing, with a [Skeleton](../skeleton/skeleton.md) of the header and 2 lines of text                               |
+| Loading     | `MessageQuotedPreviewLoading`, pulsing, with a [Skeleton](skeleton.md) of the header and 2 lines of text                               |
 | Unavailable | `MessageQuotedPreviewUnavailable`: the bar and one line in `foreground-hint` that says why, when the message is deleted or the person can't see it |
 
 ```example
@@ -90,7 +90,7 @@ message-quoted-preview/compositions/quoted-preview-unavailable
 
 - The preview fills the width of the message column.
 - Text past 2 lines is cut with an ellipsis; the attachment chips stay below it.
-- "(sent by Friday)" never truncates; the author's name truncates instead. When the author and the label fill the line, as on a phone, the place and the time move to a second line: the words are what says the author didn't write it, so they can't be cut, and the face that says it in the timeline is too small to show on a 19px avatar ([Identity and presence](../../../../../design/people-and-agents/identity-and-presence.md#sent-by-an-assistant)).
+- "(sent by Friday)" never truncates; the author's name truncates instead. When the author and the label fill the line, as on a phone, the place and the time move to a second line: the words are what says the author didn't write it, so they can't be cut, and the face that says it in the timeline is too small to show on a 19px avatar ([Identity and presence](../people-and-agents/identity-and-presence.md#sent-by-an-assistant)).
 
 ```example
 message-quoted-preview/compositions/quoted-preview-delegated
@@ -105,7 +105,7 @@ message-quoted-preview/compositions/quoted-preview-delegated
 - Label the thread marker Thread.
 - Write the time in Space Mono, with the day: "Today · 8:24 AM", "May 4 · 3:16 PM".
 - Give the number of attachments in the chip: "2 files".
-- Say why the message can't be shown: "Message unavailable" ([Feedback](../../../../../design/patterns/feedback.md#empty-loading-and-failed)).
+- Say why the message can't be shown: "Message unavailable" ([Feedback](../patterns/feedback.md#empty-loading-and-failed)).
 
 ## Accessibility
 
@@ -118,4 +118,4 @@ message-quoted-preview/compositions/quoted-preview-delegated
 ## Rules
 
 - Render only the parts the quoted message has data for: leave out the thread marker, the role and the attachments when there are none.
-- Give the loading skeleton the shape of the preview, so nothing jumps when it loads ([Feedback](../../../../../design/patterns/feedback.md#empty-loading-and-failed)).
+- Give the loading skeleton the shape of the preview, so nothing jumps when it loads ([Feedback](../patterns/feedback.md#empty-loading-and-failed)).

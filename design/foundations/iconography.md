@@ -9,9 +9,9 @@ Raft's icons are Lucide icons, from `lucide-react`, at a stroke of 2. An icon in
 
 ## Principles
 
-- **Lucide only.** When you need a new icon, take the Lucide icon of that name. Raft draws a few of its own, for kinds of conversation and for following, joining, adding and reopening, where Lucide has none; they follow Lucide's grid and weight. Our own icons live in `@botiverse/ricons`, a package of their own in this repository, and are imported only from it: raft-ui doesn't export them. Its `ArtifactIcon` is Lucide's `file-code` with its page drawn wider, so it reads as the size of the icons beside it ([Icons](../../packages/icons/src/icons.md)).
-- **Pixel avatars are not icons.** They stand only for agents; see [Avatar](../../packages/ui/src/components/avatar/avatar.md).
-- **Emoji are content, not icons.** Don't use an emoji as an icon. Emoji in reactions are content; see [Brand](./brand.md#reactions).
+- **Lucide only.** When you need a new icon, take the Lucide icon of that name. Raft draws a few of its own, for kinds of conversation and for following, joining, adding and reopening, where Lucide has none; they follow Lucide's grid and weight. Our own icons live in `@botiverse/ricons`, a package of their own in this repository, and are imported only from it: raft-ui doesn't export them. Its `ArtifactIcon` is Lucide's `file-code` with its page drawn wider, so it reads as the size of the icons beside it ([Icons](iconography.md)).
+- **Pixel avatars are not icons.** They stand only for agents; see [Avatar](../components/avatar.md).
+- **Emoji are content, not icons.** Don't use an emoji as an icon. Emoji in reactions are content; see [Brand](brand.md#reactions).
 - **No sparkles.** Don't use sparkles, stars or similar icons to mark agents or AI; see [Identity and presence](../people-and-agents/identity-and-presence.md#rules).
 
 ## Meanings
@@ -19,9 +19,9 @@ Raft's icons are Lucide icons, from `lucide-react`, at a stroke of 2. An icon in
 - **One meaning per icon on a screen.** Two different things or actions on one screen never share an icon. When a new one would take an icon already there, give one of them another.
 - **One icon per concept.** Take one Lucide drawing for a concept and use it everywhere, not its variants: `clock`, not `clock-3`; `settings`, not `settings-2`; `lock`, not `lock-keyhole`.
 - **More is `ellipsis` in a row of actions, `ellipsis-vertical` for an object's menu.** The horizontal ⋯ ends a horizontal toolbar or action row, its dots carrying on the row of actions beside it: the message hover toolbar, a selection toolbar. The vertical ⋮ opens one object's menu, at the trailing end of a panel header, a card or a list row.
-- **Back is `arrow-left`, not a chevron**, and Forward `arrow-right` ([Alignment](./alignment.md#the-ends-of-a-header)). A chevron pages through a set, such as the previous and next image, or opens and closes a section.
-- **Success is `circle-check`; an error or a warning is `triangle-alert`**, as [Banner](../../packages/ui/src/components/banner/banner.md) and [Toast](../../packages/ui/src/components/toast/toast.md) draw them. Not `circle-check-big` or `circle-alert`.
-- **Reopen is not restart.** `rotate-ccw` means restart or reset, so Reopen task has its own icon, `ReopenTaskIcon` ([Icons](../../packages/icons/src/icons.md#action-icons)).
+- **Back is `arrow-left`, not a chevron**, and Forward `arrow-right` ([Alignment](alignment.md#the-ends-of-a-header)). A chevron pages through a set, such as the previous and next image, or opens and closes a section.
+- **Success is `circle-check`; an error or a warning is `triangle-alert`**, as [Banner](../components/banner.md) and [Toast](../components/toast.md) draw them. Not `circle-check-big` or `circle-alert`.
+- **Reopen is not restart.** `rotate-ccw` means restart or reset, so Reopen task has its own icon, `ReopenTaskIcon` ([Icons](iconography.md)).
 - **Outline only.** Don't fill an icon to show a state, such as saved: a toggle shows the action it offers (`bookmark-minus` to remove from Saved). A media player's Play and Pause are the exception.
 
 ## Sizes
@@ -31,16 +31,16 @@ Raft's icons are Lucide icons, from `lucide-react`, at a stroke of 2. An icon in
 | 36px | Empty states |
 | 22px | Top bars and their bar buttons by touch, the toolbar for selected items' buttons among them; the tab bar; icon buttons at `icon-lg` on a phone (44px) |
 | 20px | The rail, list rows, banners, rows in a sheet |
-| 18px | Icon-only square buttons: 32px (`icon-md`) and 34px on a desktop (`icon-md` and `icon-lg`); buttons with a label at `lg`, and the rows that are one action, which count as one (Leave channel, Archive channel, Delete channel: [ListRow](../../packages/ui/src/components/list-row/list-row.md#an-actions-risk)); channel tiles |
+| 18px | Icon-only square buttons: 32px (`icon-md`) and 34px on a desktop (`icon-md` and `icon-lg`); buttons with a label at `lg`, and the rows that are one action, which count as one (Leave channel, Archive channel, Delete channel: [ListRow](../components/list-row.md#an-actions-risk)); channel tiles |
 | 16px | Buttons with a label at `md`, and with a mouse the toolbar for selected items' actions, whether the label shows or has given way (Jasper, 2026-11-14, #proj-raft-ui); small buttons, the message hover toolbar, segmented controls, menus, tabs |
 | 14px | Chips, reference chips, filters, value chips |
 | 11px to 12px | Small channel tiles, event lines, badges, the arrow inside a status chip |
 
 ### A mark at small sizes
 
-One drawing serves every size: Lucide draws none twice. A drawn icon whose mark gets lost at 16px and under may carry a second mark for small sizes, drawn on the same grid and swapped in below 18px by a container query on the icon (`data-icon-sizes`, in `@botiverse/ricons/styles.css`, which raft-ui's stylesheet imports). The rest of the drawing doesn't change, and from 18px up the icon is the one drawing. Only `UnfollowArtifactIcon` has one: at 16px its minus is heavier, so it reads as a mark rather than one more piece of the page's outline ([Icons](../../packages/icons/src/icons.md#action-icons)). Add one only when a mark is lost at the size the icon is used, not to tune an icon that reads.
+One drawing serves every size: Lucide draws none twice. A drawn icon whose mark gets lost at 16px and under may carry a second mark for small sizes, drawn on the same grid and swapped in below 18px by a container query on the icon (`data-icon-sizes`, in `@botiverse/ricons/styles.css`, which raft-ui's stylesheet imports). The rest of the drawing doesn't change, and from 18px up the icon is the one drawing. Only `UnfollowArtifactIcon` has one: at 16px its minus is heavier, so it reads as a mark rather than one more piece of the page's outline ([Icons](iconography.md)). Add one only when a mark is lost at the size the icon is used, not to tune an icon that reads.
 
 ## Related
 
-- [Button](../../packages/ui/src/components/button/button.md): icon buttons and their sizes.
-- [Brand](./brand.md): logos and reactions.
+- [Button](../components/button.md): icon buttons and their sizes.
+- [Brand](brand.md): logos and reactions.

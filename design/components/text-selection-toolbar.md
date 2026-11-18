@@ -21,9 +21,9 @@ text-selection-toolbar/text-selection-toolbar
 | Situation                                     | Use                                                                          |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
 | Actions on text the person selected           | TextSelectionToolbar                                                         |
-| Actions on a message under the pointer        | The message's hover toolbar ([MessageItem](../message-item/message-item.md)) |
-| Actions on several selected messages or tasks | [SelectionToolbar](../selection-toolbar/selection-toolbar.md)                |
-| A list of choices that opens from a control   | [DropdownMenu](../dropdown-menu/dropdown-menu.md)                            |
+| Actions on a message under the pointer        | The message's hover toolbar ([MessageItem](message-item.md)) |
+| Actions on several selected messages or tasks | [SelectionToolbar](selection-toolbar.md)                |
+| A list of choices that opens from a control   | [DropdownMenu](dropdown-menu.md)                            |
 
 ## Anatomy
 
@@ -37,7 +37,7 @@ text-selection-toolbar/text-selection-toolbar
 It is built like a message's hover toolbar, so the two read as one kind of thing. The one difference is that its buttons have text labels, where the hover toolbar's are icons alone:
 
 - It is 36px high on a touch screen, around 28px buttons with `radius-chip`, and 42px with a mouse, around buttons at the control height (34px) with `radius-control` (stdrc, 2026-11-05): `radius-container` with its hairline drawn inside (`ring-inset`), the buttons 4px from the frame and 4px apart.
-- Its buttons have text labels after 16px icons in `foreground-muted`. On hover they take the medium tier, `fill-medium`, not the `brand-soft` of a menu row: a toolbar's actions are buttons, not menu rows ([States](../../../../../design/foundations/states.md)).
+- Its buttons have text labels after 16px icons in `foreground-muted`. On hover they take the medium tier, `fill-medium`, not the `brand-soft` of a menu row: a toolbar's actions are buttons, not menu rows ([States](../foundations/states.md)).
 - `TextSelectionToolbarSeparator` is 20px high, with the toolbar's 4px on each side.
 
 ## Behavior

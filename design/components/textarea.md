@@ -10,7 +10,7 @@ related: [input, field, composer, scroll-area]
 
 # Textarea
 
-A textarea takes several lines of text in a form: a description, a note, instructions for an agent. It has the same ink border and states as an [Input](../input/input.md), is at least three lines of field text high (96px on a phone, 90px on a desktop), and people can drag it taller.
+A textarea takes several lines of text in a form: a description, a note, instructions for an agent. It has the same ink border and states as an [Input](input.md), is at least three lines of field text high (96px on a phone, 90px on a desktop), and people can drag it taller.
 
 ```example
 textarea/compositions/with-field
@@ -21,8 +21,8 @@ textarea/compositions/with-field
 | Situation                                        | Use                                 |
 | ------------------------------------------------ | ----------------------------------- |
 | Several lines of text that are saved with a form | Textarea                            |
-| One line of text                                 | [Input](../input/input.md)          |
-| A message that is sent                           | [Composer](../composer/composer.md) |
+| One line of text                                 | [Input](input.md)          |
+| A message that is sent                           | [Composer](composer.md) |
 
 ## Anatomy
 
@@ -32,9 +32,9 @@ textarea/compositions/with-field
 
 ## States
 
-- **Invalid:** `data-invalid` gives the textarea a `danger-strong` border; the message goes in the field ([Field](../field/field.md)).
+- **Invalid:** `data-invalid` gives the textarea a `danger-strong` border; the message goes in the field ([Field](field.md)).
 - **Over the limit:** the counter turns bold `danger-strong` once the count passes the limit.
-- **Disabled:** the shared disabled look ([States](../../../../../design/foundations/states.md)), and it can no longer be resized. Disabled wins over invalid.
+- **Disabled:** the shared disabled look ([States](../foundations/states.md)), and it can no longer be resized. Disabled wins over invalid.
 
 ## Behavior
 
@@ -45,7 +45,7 @@ textarea/compositions/with-field
 
 ## A field that scrolls
 
-`Textarea` is a native `<textarea>`, and a native textarea that scrolls shows the platform's scrollbar: on Windows, or on a Mac set to always show scrollbars, a classic bar that takes room from the text when it appears and is drawn in the platform's colors. Most textareas are a few lines and never scroll, so `Textarea` stays native. When a field is meant to scroll, because its height is capped (`max-h-*`) or its `rows` are fixed and the text is long, such as instructions for an agent, use [`ScrollAreaTextarea`](../scroll-area/scroll-area.md#textarea) drawn as the field. A textarea can't hold raft-ui's scrollbar, so `ScrollAreaTextarea` draws it over a frame around the textarea.
+`Textarea` is a native `<textarea>`, and a native textarea that scrolls shows the platform's scrollbar: on Windows, or on a Mac set to always show scrollbars, a classic bar that takes room from the text when it appears and is drawn in the platform's colors. Most textareas are a few lines and never scroll, so `Textarea` stays native. When a field is meant to scroll, because its height is capped (`max-h-*`) or its `rows` are fixed and the text is long, such as instructions for an agent, use [`ScrollAreaTextarea`](scroll-area.md#textarea) drawn as the field. A textarea can't hold raft-ui's scrollbar, so `ScrollAreaTextarea` draws it over a frame around the textarea.
 
 ```example
 textarea/compositions/scrolling
@@ -61,6 +61,6 @@ textarea/compositions/scrolling
 
 Textarea renders a native `<textarea>`; it is not a Base UI control.
 
-- Name it with a `FieldLabel` whose `htmlFor` matches the textarea's `id` ([Field](../field/field.md)).
+- Name it with a `FieldLabel` whose `htmlFor` matches the textarea's `id` ([Field](field.md)).
 - `data-invalid` also sets `aria-invalid`.
 - Reference the counter from `aria-describedby` when the limit matters, so it is read with the field.

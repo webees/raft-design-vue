@@ -8,7 +8,8 @@ code. Key rules:
 - Never edit `packages/ui/src/foundation.css`, `themes.css`, `upstream-styles.css`,
   `tokens.json`, `themes.json`, `design/` or `packages/ui/src/fonts/` by hand.
   They are generated or synced by `bun run sync:upstream` and
-  `bun run build:tokens`.
+  `bun run build:tokens`. `design/**/*.md` internal links are rewritten during
+  sync, so `bun run check:docs-links` must stay green.
 - Every new component needs: Vue SFC, recipe module, `index.ts`, tests, docs
   entry, and an entry in `tooling/upstream/component-manifest.json`.
 - Prefer semantic tokens (`bg-layer-card`, `text-foreground`,

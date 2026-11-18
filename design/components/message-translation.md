@@ -10,7 +10,7 @@ related: [message-item, progress]
 
 # MessageItemTranslation
 
-A translated message shows the translation in its body and one short line of Space Mono text under it, which says it was translated and switches to the original. The same line says when a translation is on its way or failed. When both languages should stay visible, the original sits under the translation. These parts go inside `MessageItemContent` ([MessageItem](../message-item/message-item.md)).
+A translated message shows the translation in its body and one short line of Space Mono text under it, which says it was translated and switches to the original. The same line says when a translation is on its way or failed. When both languages should stay visible, the original sits under the translation. These parts go inside `MessageItemContent` ([MessageItem](message-item.md)).
 
 ```example
 message-translation/compositions/translation-showcase
@@ -24,14 +24,14 @@ message-translation/compositions/translation-showcase
 | Both languages stay visible     | `MessageItemTranslationOriginal` under the body, and the status line                                                                |
 | A translation is on its way     | `MessageItemTranslationProgressTrack` in the body, and a status line that says so                                                   |
 | A translation failed            | `MessageItemTranslationFailedStatus` with `MessageItemTranslationRetryAction`                                                       |
-| A message is saved, or was read | `MessageItemSavedIndicator` or `MessageItemReadReceipt`, in the footer row ([MessageItem](../message-item/message-item.md#anatomy)) |
+| A message is saved, or was read | `MessageItemSavedIndicator` or `MessageItemReadReceipt`, in the footer row ([MessageItem](message-item.md#anatomy)) |
 
 ## Anatomy
 
 - `MessageItemTranslationStatus`: one line in `text-mono-meta`, `foreground-hint`, under the body: an icon, then the words or the action.
 - `MessageItemTranslationAction`: the text button in the status line that switches between translation and original.
 - `MessageItemTranslationOriginal`: the original text, drawn as a quote in the message, with `MessageItemTranslationOriginalLabel` above it.
-- `MessageItemTranslationProgressTrack`: a 4px track inside a [Progress](../progress/progress.md), in the body while the translation is on its way.
+- `MessageItemTranslationProgressTrack`: a 4px track inside a [Progress](progress.md), in the body while the translation is on its way.
 - `MessageItemTranslationFailedStatus`: the status line in `warning-strong`, for a failure.
 - `MessageItemTranslationRetryAction`: the text button in the failed line.
 
@@ -82,5 +82,5 @@ message-translation/compositions/translation-states
 
 ## Rules
 
-- Keep the status to one short line of Space Mono text under the message, and don't add a color for it ([Built from existing parts](../../../../../design/components/overview.md#translation-read-and-saved-markers)).
-- Use orange for a failed translation, as for any failure ([Feedback](../../../../../design/patterns/feedback.md#errors-by-scope)).
+- Keep the status to one short line of Space Mono text under the message, and don't add a color for it ([Built from existing parts](overview.md#translation-read-and-saved-markers)).
+- Use orange for a failed translation, as for any failure ([Feedback](../patterns/feedback.md#errors-by-scope)).

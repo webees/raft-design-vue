@@ -28,10 +28,14 @@ jobs:
           node-version: 22
       - run: bun install --frozen-lockfile
       - run: bun run check:parity
+      - run: bun run check:audit
+      - run: bun run check:docs-links
       - run: bun run lint
       - run: bun run typecheck
+      - run: bun run check:api
       - run: bun run test -- --coverage
       - run: bun run build
+      - run: bun run check:consumer-types
       - uses: actions/upload-artifact@v4
         if: always()
         with:

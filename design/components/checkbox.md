@@ -21,19 +21,19 @@ checkbox/compositions/preview
 | Situation                                                                     | Use                                                                                                                   |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | A yes or no in a form that is saved: a dialog, a drawer, the wide form dialog | Checkbox                                                                                                              |
-| A feature that can't be on until fields are filled: an address, a text        | Checkbox, its fields under it and one Save ([Forms](../../../../../design/patterns/forms.md#settings-saved-together)) |
-| An option attached to an action, next to the button that runs it              | Checkbox in the action's toolbar (`ComposerToolbarLabel`, [Composer](../composer/composer.md))                        |
+| A feature that can't be on until fields are filled: an address, a text        | Checkbox, its fields under it and one Save ([Forms](../patterns/forms.md#settings-saved-together)) |
+| An option attached to an action, next to the button that runs it              | Checkbox in the action's toolbar (`ComposerToolbarLabel`, [Composer](composer.md))                        |
 | Choosing several items in a list or a multi-select                            | Checkbox, or `CheckboxIndicator` in a row that owns the semantics                                                     |
-| A yes or no that applies at once                                              | [Switch](../switch/switch.md)                                                                                         |
-| Marking a task done, at the start of its row or card                          | [TaskCompletionControl](../task-completion-control/task-completion-control.md)                                        |
-| One of several answers                                                        | [RadioGroup](../radio-group/radio-group.md)                                                                           |
+| A yes or no that applies at once                                              | [Switch](switch.md)                                                                                         |
+| Marking a task done, at the start of its row or card                          | [TaskCompletionControl](task-completion-control.md)                                        |
+| One of several answers                                                        | [RadioGroup](radio-group.md)                                                                           |
 
-Which controls apply at once and which are saved is in [Forms](../../../../../design/patterns/forms.md).
+Which controls apply at once and which are saved is in [Forms](../patterns/forms.md).
 
 ## Anatomy
 
 - `Checkbox`: the 20px box, with a hidden native input that holds the state. Required.
-- A label: wrap the checkbox and its text in a `<label>` (`Label`, or `FieldItem` with `FieldLabel` in a [Field](../field/field.md)). Make the `<label>` a flex row with `gap-2` and the label's type: the box takes a box one line of the label tall, so it centers on the text's line by itself, on the first line with `items-start` (use it when the label can wrap) and on the one line with `items-center` at any min-height. Don't add a `margin-top` ([Alignment](../../../../../design/foundations/alignment.md#a-control-and-its-label)).
+- A label: wrap the checkbox and its text in a `<label>` (`Label`, or `FieldItem` with `FieldLabel` in a [Field](field.md)). Make the `<label>` a flex row with `gap-2` and the label's type: the box takes a box one line of the label tall, so it centers on the text's line by itself, on the first line with `items-start` (use it when the label can wrap) and on the one line with `items-center` at any min-height. Don't add a `margin-top` ([Alignment](../foundations/alignment.md#a-control-and-its-label)).
 - `CheckboxIndicator`: the box drawn on its own, with no input or role, for a row or menu item that already has checkbox semantics.
 
 ```example
@@ -42,7 +42,7 @@ checkbox/compositions/settings-group
 
 ## States
 
-The checked, disabled and focus looks follow [States](../../../../../design/foundations/states.md).
+The checked, disabled and focus looks follow [States](../foundations/states.md).
 
 - **Unchecked:** an empty box with an ink border.
 - **Checked:** an ink block with the check mark knocked out.
@@ -63,11 +63,11 @@ checkbox/compositions/indicator
 
 ## Accessibility
 
-Checkbox wraps Base UI Checkbox. Its hidden native input drives the checked, disabled and focus state, and the focus ring is drawn on the box ([States](../../../../../design/foundations/states.md#focus)).
+Checkbox wraps Base UI Checkbox. Its hidden native input drives the checked, disabled and focus state, and the focus ring is drawn on the box ([States](../foundations/states.md#focus)).
 
 - Give every checkbox a name: a wrapping `<label>`, a `FieldLabel`, or `aria-label` when there is no visible text (selecting a row).
 - `CheckboxIndicator` is `aria-hidden`. The element that holds it must carry the role and the checked state.
 
 ## Rules
 
-- Keep the box square. Don't use `shape="circle"`: round is only for switches, radios and grab handles, and for two exceptions ([Shape](../../../../../design/foundations/shape.md#principles)). The one round `CheckboxIndicator` is a task's completion control, one of those exceptions ([Completing a task](../../../../../design/patterns/tasks.md#completing-a-task)).
+- Keep the box square. Don't use `shape="circle"`: round is only for switches, radios and grab handles, and for two exceptions ([Shape](../foundations/shape.md#principles)). The one round `CheckboxIndicator` is a task's completion control, one of those exceptions ([Completing a task](../patterns/tasks.md#completing-a-task)).

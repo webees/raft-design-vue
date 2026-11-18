@@ -10,16 +10,16 @@ related: [copyable-code, code-block, message-item]
 
 # InlineCode
 
-A piece of code inside running text: a variable, a key or a file name, such as `RAFT_TOKEN` or `raft.config.ts`. It stays part of the sentence. For a command people copy, use [CopyableCode](../copyable-code/copyable-code.md); for several lines, use [CodeBlock](../code-block/code-block.md).
+A piece of code inside running text: a variable, a key or a file name, such as `RAFT_TOKEN` or `raft.config.ts`. It stays part of the sentence. For a command people copy, use [CopyableCode](copyable-code.md); for several lines, use [CodeBlock](code-block.md).
 
 ## When to use
 
 | Situation                                                                            | Use                                                                                                     |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
 | A variable, key or file name in a sentence                                           | InlineCode                                                                                              |
-| One command people copy and run, such as connecting a computer or installing the CLI | [CopyableCode](../copyable-code/copyable-code.md)                                                       |
-| Several lines of code, or a log                                                      | [CodeBlock](../code-block/code-block.md)                                                                |
-| A task number or another ID in text                                                  | Space Mono text, without the fill ([Typography](../../../../../design/foundations/typography.md#usage)) |
+| One command people copy and run, such as connecting a computer or installing the CLI | [CopyableCode](copyable-code.md)                                                       |
+| Several lines of code, or a log                                                      | [CodeBlock](code-block.md)                                                                |
+| A task number or another ID in text                                                  | Space Mono text, without the fill ([Typography](../foundations/typography.md#usage)) |
 
 ## Anatomy
 
@@ -35,7 +35,7 @@ A piece of code inside running text: a variable, a key or a file name, such as `
 ## Content
 
 - Write the code exactly as it is typed, with its own casing.
-- Don't put a whole command in it. A command people run goes in [CopyableCode](../copyable-code/copyable-code.md).
+- Don't put a whole command in it. A command people run goes in [CopyableCode](copyable-code.md).
 
 ## Rules
 

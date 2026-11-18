@@ -46,7 +46,7 @@ Collaboration is grouped by concept:
 
 - **Core can be reused anywhere.** Every Raft product (Raft Chat today; Tasks, Calendar and the others next) and any internal tool can take a core part without taking Raft's data model with it. raft-ui keeps this true in code: a core component never imports a collaboration one, while collaboration components are built on core ones.
 - **Each rule lives in one place.** A rule about color, lines, shape or states belongs to a core part, and every product inherits it. A rule about a product concept (how many reply previews a thread shows, the order of the task statuses) belongs to the collaboration part that carries the concept, so changing the concept changes one component, not every screen that shows it.
-- **It tells you where to look.** When you build something about messages, tasks, agents, Activity or notifications, start in collaboration: the part you need, or most of it, probably exists, and it already follows the product's rules. When you build something generic, stay in core, and don't borrow a collaboration part because it looks right. An InboxItem is the row for something that happened elsewhere; a list of settings uses [ListRow](../../packages/ui/src/components/list-row/list-row.md), even though both are rows with an icon and a title.
+- **It tells you where to look.** When you build something about messages, tasks, agents, Activity or notifications, start in collaboration: the part you need, or most of it, probably exists, and it already follows the product's rules. When you build something generic, stay in core, and don't borrow a collaboration part because it looks right. An InboxItem is the row for something that happened elsewhere; a list of settings uses [ListRow](list-row.md), even though both are rows with an icon and a title.
 
 ### Which layer a new component belongs to
 
@@ -67,21 +67,21 @@ Two questions decide a picker: when the choice takes effect, and how many values
 
 | You need | Use |
 | --- | --- |
-| To act on one thing | A menu ([DropdownMenu](../../packages/ui/src/components/dropdown-menu/dropdown-menu.md)); press and hold on a phone opens the same menu ([ContextMenu](../../packages/ui/src/components/context-menu/context-menu.md)) |
-| Yes or no, applied at once | [Switch](../../packages/ui/src/components/switch/switch.md) |
-| Yes or no saved with a form, or turning on a feature whose fields are saved with it | [Checkbox](../../packages/ui/src/components/checkbox/checkbox.md) |
-| One of 2 to 5 answers, submitted with a form | [RadioGroup](../../packages/ui/src/components/radio-group/radio-group.md) |
-| One or several of any number of choices, when choosing is the dialog's main content | An open list of rows, with a filter field for things found by name, or from 6 choices ([ChoiceList](../../packages/ui/src/components/choice-list/choice-list.md); its rows follow [RadioGroup](../../packages/ui/src/components/radio-group/radio-group.md#content)) |
-| One of many in an open list, when choosing a row starts work (asks the server about it) | An open list whose arrow keys only highlight, and Enter or a click chooses ([Combobox](../../packages/ui/src/components/combobox/combobox.md#inline-list) with `inline open`). A ChoiceList chooses every row the arrow keys reach |
-| Another view of the same content | [SegmentedControl](../../packages/ui/src/components/segmented-control/segmented-control.md) |
-| The same page in another language | A menu of the languages, each in its own name ([DropdownMenu](../../packages/ui/src/components/dropdown-menu/dropdown-menu.md) whose items are links) |
-| Sections of one page, each with its own content | [Tabs](../../packages/ui/src/components/tabs/tabs.md) |
-| One of up to 10 values | [Select](../../packages/ui/src/components/select/select.md) |
-| One of many values | A field people type into to filter the list, on a phone too ([ComboboxSelect](../../packages/ui/src/components/combobox-select/combobox-select.md)). When people only pick and never type, a [Select](../../packages/ui/src/components/select/select.md): ComboboxSelect always brings up a phone's keyboard |
-| A few of several values | A multi-select: a box before each item, and the field shows the chosen values ([Select](../../packages/ui/src/components/select/select.md) with `multiple`) |
-| A few of many values (people, agents, labels) | A multi-select with search: chosen values become chips in the field, and typing continues after them ([ComboboxSelect](../../packages/ui/src/components/combobox-select/combobox-select.md) with `multiple`, or [Combobox](../../packages/ui/src/components/combobox/combobox.md) with its chips) |
-| To filter a list | A filter: a select or combobox opened from a [PickerTriggerButton](../../packages/ui/src/components/picker-trigger-button/picker-trigger-button.md) that shows the current value. For a filter people set seldom and by habit, a button that always says Filter with a [FilterChip](../../packages/ui/src/components/filter-chip/filter-chip.md) beside it ([Select › Filters](../../packages/ui/src/components/select/select.md#which-filter-button)) |
-| To change one property of an item in place | The value in a [DescriptionList](../../packages/ui/src/components/description-list/description-list.md) opens a picker |
+| To act on one thing | A menu ([DropdownMenu](dropdown-menu.md)); press and hold on a phone opens the same menu ([ContextMenu](context-menu.md)) |
+| Yes or no, applied at once | [Switch](switch.md) |
+| Yes or no saved with a form, or turning on a feature whose fields are saved with it | [Checkbox](checkbox.md) |
+| One of 2 to 5 answers, submitted with a form | [RadioGroup](radio-group.md) |
+| One or several of any number of choices, when choosing is the dialog's main content | An open list of rows, with a filter field for things found by name, or from 6 choices ([ChoiceList](choice-list.md); its rows follow [RadioGroup](radio-group.md#content)) |
+| One of many in an open list, when choosing a row starts work (asks the server about it) | An open list whose arrow keys only highlight, and Enter or a click chooses ([Combobox](combobox.md#inline-list) with `inline open`). A ChoiceList chooses every row the arrow keys reach |
+| Another view of the same content | [SegmentedControl](segmented-control.md) |
+| The same page in another language | A menu of the languages, each in its own name ([DropdownMenu](dropdown-menu.md) whose items are links) |
+| Sections of one page, each with its own content | [Tabs](tabs.md) |
+| One of up to 10 values | [Select](select.md) |
+| One of many values | A field people type into to filter the list, on a phone too ([ComboboxSelect](combobox-select.md)). When people only pick and never type, a [Select](select.md): ComboboxSelect always brings up a phone's keyboard |
+| A few of several values | A multi-select: a box before each item, and the field shows the chosen values ([Select](select.md) with `multiple`) |
+| A few of many values (people, agents, labels) | A multi-select with search: chosen values become chips in the field, and typing continues after them ([ComboboxSelect](combobox-select.md) with `multiple`, or [Combobox](combobox.md) with its chips) |
+| To filter a list | A filter: a select or combobox opened from a [PickerTriggerButton](picker-trigger-button.md) that shows the current value. For a filter people set seldom and by habit, a button that always says Filter with a [FilterChip](filter-chip.md) beside it ([Select › Filters](select.md#which-filter-button)) |
+| To change one property of an item in place | The value in a [DescriptionList](description-list.md) opens a picker |
 
 SegmentedControl and Tabs look alike, and the content decides between them: a segmented control shows the same content another way (Board or List), tabs switch to different content.
 
@@ -91,16 +91,16 @@ The scope of a message decides where it goes, and how long the situation lasts d
 
 | Situation | Use | Stays |
 | --- | --- | --- |
-| Something the person just did has a result | [Toast](../../packages/ui/src/components/toast/toast.md) | A few seconds |
-| They need to know it before acting | [Banner](../../packages/ui/src/components/banner/banner.md), inside a dialog or form | Always |
-| Something in one panel failed: an agent won't start, a setting of the conversation didn't save | A full-width notice under the panel header (`PanelNotice`, [Panel](../../packages/ui/src/components/panel/panel.md)) | Until it is fixed or dismissed |
+| Something the person just did has a result | [Toast](toast.md) | A few seconds |
+| They need to know it before acting | [Banner](banner.md), inside a dialog or form | Always |
+| Something in one panel failed: an agent won't start, a setting of the conversation didn't save | A full-width notice under the panel header (`PanelNotice`, [Panel](panel.md)) | Until it is fixed or dismissed |
 | They are commenting on an Artifact, or have drafts on it | A bar along the bottom of the Artifact viewer with Pick elements, Undo and Redo, Discard and Send N ([Comments](../patterns/comments.md#commenting-on-an-artifact)) | While they comment or there are drafts |
-| The state of the whole server: a computer offline, a quota nearly full, an update | The notification center ([NotificationCenter](../../packages/ui/src/components/notification-center/notification-center.md)), with an attention dot on the bell | Until it changes |
-| Something happened elsewhere that the person should see | Activity ([ActivityInbox](../../packages/ui/src/components/activity-inbox/activity-inbox.md)); its entry point shows an attention dot or a count | Until it is read |
-| An agent needs approval | An action card in the conversation ([MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md)) | Until it is handled |
-| The person must decide now | [Dialog](../../packages/ui/src/components/dialog/dialog.md) | Until they decide |
-| An input is invalid | The input's error state ([Field](../../packages/ui/src/components/field/field.md)) | Until it is fixed |
-| What an icon means | [Tooltip](../../packages/ui/src/components/tooltip/tooltip.md) | While hovered |
+| The state of the whole server: a computer offline, a quota nearly full, an update | The notification center ([NotificationCenter](notification-center.md)), with an attention dot on the bell | Until it changes |
+| Something happened elsewhere that the person should see | Activity ([ActivityInbox](activity-inbox.md)); its entry point shows an attention dot or a count | Until it is read |
+| An agent needs approval | An action card in the conversation ([MessageActionCard](message-action-card.md)) | Until it is handled |
+| The person must decide now | [Dialog](dialog.md) | Until they decide |
+| An input is invalid | The input's error state ([Field](field.md)) | Until it is fixed |
+| What an icon means | [Tooltip](tooltip.md) | While hovered |
 
 - Never put anything in a toast that would confuse people if they missed it. A toast disappears on its own, so it can only confirm what the person already expects.
 
@@ -110,21 +110,21 @@ The more an overlay asks of people, the more of the screen it takes. What only i
 
 | Situation | Use |
 | --- | --- |
-| One sentence on hover | [Tooltip](../../packages/ui/src/components/tooltip/tooltip.md) |
-| A person or agent, on hover | A profile card ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md)) |
-| An item an app links to, on hover over its chip | An item card ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card)) |
-| A list of actions, on click or press and hold | [DropdownMenu](../../packages/ui/src/components/dropdown-menu/dropdown-menu.md) |
-| One value, on click | [Select](../../packages/ui/src/components/select/select.md), with search when there are many values |
+| One sentence on hover | [Tooltip](tooltip.md) |
+| A person or agent, on hover | A profile card ([PreviewCard](preview-card.md)) |
+| An item an app links to, on hover over its chip | An item card ([PreviewCard](preview-card.md#item-card)) |
+| A list of actions, on click or press and hold | [DropdownMenu](dropdown-menu.md) |
+| One value, on click | [Select](select.md), with search when there are many values |
 | Several values, on click | A multi-select, with search when there are many values. Choosing a value doesn't close the list |
-| A little input, on click | [Popover](../../packages/ui/src/components/popover/popover.md) |
-| A tour of a screen entered for the first time, one stop at a time | [CoachMark](../../packages/ui/src/components/coach-mark/coach-mark.md): a popover anchored to its target, with no scrim ([Coach marks](../patterns/coach-marks.md)) |
-| Details and settings people look at for a while | [Drawer](../../packages/ui/src/components/drawer/drawer.md) |
-| A large form filled in one pass | The wide [Dialog](../../packages/ui/src/components/dialog/dialog.md); see [Forms](../patterns/forms.md#the-large-form-dialog) |
-| A short list opened from a top bar: Working now, the notifications, the server list | [Popover](../../packages/ui/src/components/popover/popover.md), on a phone too. On a phone the server list is anchored under the top bar ([Navigation](../patterns/navigation.md#servers)) |
-| A short explanation, on a phone | A bottom sheet ([Drawer](../../packages/ui/src/components/drawer/drawer.md)) |
-| A dialog with several fields, a long list or steps, on a phone | A sheet 90% of the screen tall; a decision, content that is only read, or a single input stays the centered dialog ([Dialog](../../packages/ui/src/components/dialog/dialog.md#on-a-phone)) |
-| A confirmation | A [Dialog](../../packages/ui/src/components/dialog/dialog.md#variants) at `size="sm"`, 400px, the width of AlertDialog, with Cancel and the confirm button; see [Feedback](../patterns/feedback.md#confirming). The places where Raft Chat uses [AlertDialog](../../packages/ui/src/components/alert-dialog/alert-dialog.md) instead are listed in [Raft Chat](../products/raft-chat/README.md#overlays) |
-| Task details | A centered dialog, 960px wide, full screen on a phone: a workspace overlay outside the four Dialog sizes ([Tasks](../patterns/tasks.md), [Dialog](../../packages/ui/src/components/dialog/dialog.md#variants)); on the Tasks page a column of the page's row instead ([The open task](../patterns/tasks.md#the-open-task)) |
+| A little input, on click | [Popover](popover.md) |
+| A tour of a screen entered for the first time, one stop at a time | [CoachMark](coach-mark.md): a popover anchored to its target, with no scrim ([Coach marks](../patterns/coach-marks.md)) |
+| Details and settings people look at for a while | [Drawer](drawer.md) |
+| A large form filled in one pass | The wide [Dialog](dialog.md); see [Forms](../patterns/forms.md#the-large-form-dialog) |
+| A short list opened from a top bar: Working now, the notifications, the server list | [Popover](popover.md), on a phone too. On a phone the server list is anchored under the top bar ([Navigation](../patterns/navigation.md#servers)) |
+| A short explanation, on a phone | A bottom sheet ([Drawer](drawer.md)) |
+| A dialog with several fields, a long list or steps, on a phone | A sheet 90% of the screen tall; a decision, content that is only read, or a single input stays the centered dialog ([Dialog](dialog.md#on-a-phone)) |
+| A confirmation | A [Dialog](dialog.md#variants) at `size="sm"`, 400px, the width of AlertDialog, with Cancel and the confirm button; see [Feedback](../patterns/feedback.md#confirming). The places where Raft Chat uses [AlertDialog](alert-dialog.md) instead are listed in [Raft Chat](../products/raft-chat/README.md#overlays) |
+| Task details | A centered dialog, 960px wide, full screen on a phone: a workspace overlay outside the four Dialog sizes ([Tasks](../patterns/tasks.md), [Dialog](dialog.md#variants)); on the Tasks page a column of the page's row instead ([The open task](../patterns/tasks.md#the-open-task)) |
 
 - Put a scrim behind every centered overlay: dialogs, confirmations, search, task details, large forms. How overlays move is in [Motion](../foundations/motion.md#usage).
 
@@ -134,13 +134,13 @@ The more you know about a wait, the more specific its indicator. A known layout 
 
 | Situation | Use |
 | --- | --- |
-| The layout is known | [Skeleton](../../packages/ui/src/components/skeleton/skeleton.md) |
-| The duration is unknown, and there is no layout to hold | The pixel spinner ([Spinner](../../packages/ui/src/components/spinner/spinner.md)) |
-| The percentage is known | [Progress](../../packages/ui/src/components/progress/progress.md) |
-| A button started the wait | The button's loading state ([Button](../../packages/ui/src/components/button/button.md)) |
+| The layout is known | [Skeleton](skeleton.md) |
+| The duration is unknown, and there is no layout to hold | The pixel spinner ([Spinner](spinner.md)) |
+| The percentage is known | [Progress](progress.md) |
+| A button started the wait | The button's loading state ([Button](button.md)) |
 
 - Don't use pink for any of these. They are passive, and pink means something waits for the person.
-- A usage limit isn't a wait: show how much of it is used with a [Meter](../../packages/ui/src/components/meter/meter.md), not a progress bar, which turns `success` when full. Every usage bar fills with what is used, never what is left (stdrc, 2026-10-29).
+- A usage limit isn't a wait: show how much of it is used with a [Meter](meter.md), not a progress bar, which turns `success` when full. Every usage bar fills with what is used, never what is left (stdrc, 2026-10-29).
 
 ### Rows
 
@@ -148,12 +148,12 @@ A row follows what it stands for, not where it appears: a place looks the same i
 
 | Where | Use |
 | --- | --- |
-| The desktop sidebar | The sidebar row ([Sidebar](../../packages/ui/src/components/sidebar/sidebar.md)) |
-| A phone list of places: Home's channels and direct messages, Members, the Settings list | The same sidebar row, 44px high on a phone ([Sidebar](../../packages/ui/src/components/sidebar/sidebar.md)) |
-| Agents, people and apps on a detail or profile page, such as a computer's agents | [ListRow](../../packages/ui/src/components/list-row/list-row.md), in an inset group. The product draws this row with its own copy (`AvatarListRow`) |
-| Activity and notifications | [InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md) |
-| A message found by search | The search result row ([Search](../../packages/ui/src/components/search/search.md)) |
-| A task | [TaskCard](../../packages/ui/src/components/task-card/task-card.md), on a board or in a list |
+| The desktop sidebar | The sidebar row ([Sidebar](sidebar.md)) |
+| A phone list of places: Home's channels and direct messages, Members, the Settings list | The same sidebar row, 44px high on a phone ([Sidebar](sidebar.md)) |
+| Agents, people and apps on a detail or profile page, such as a computer's agents | [ListRow](list-row.md), in an inset group. The product draws this row with its own copy (`AvatarListRow`) |
+| Activity and notifications | [InboxItem](inbox-item.md) |
+| A message found by search | The search result row ([Search](search.md)) |
+| A task | [TaskCard](task-card.md), on a board or in a list |
 
 ### Scrolling
 
@@ -161,15 +161,15 @@ One question decides it: who renders the element that scrolls. When you do, it i
 
 | Situation | Use |
 | --- | --- |
-| A list, a pane or a strip that scrolls inside a fixed frame | [ScrollArea](../../packages/ui/src/components/scroll-area/scroll-area.md): its size on `className`, its grid, flex, gap and padding on `contentClassName` ([Replacing a native scroller](../../packages/ui/src/components/scroll-area/scroll-area.md#replacing-a-native-scroller)) |
-| The content of a panel under its header | `PanelScrollViewport` ([Panel](../../packages/ui/src/components/panel/panel.md#anatomy)): a ScrollArea with the panel's sizing |
+| A list, a pane or a strip that scrolls inside a fixed frame | [ScrollArea](scroll-area.md): its size on `className`, its grid, flex, gap and padding on `contentClassName` ([Replacing a native scroller](scroll-area.md#replacing-a-native-scroller)) |
+| The content of a panel under its header | `PanelScrollViewport` ([Panel](panel.md#anatomy)): a ScrollArea with the panel's sizing |
 | A row wider than its frame | ScrollArea with `orientation="horizontal"`; `orientation="both"` when it is also taller |
-| A table wider than its container | `TableScroll` around it ([Table › Wide tables](../../packages/ui/src/components/table/table.md#wide-tables)) |
-| A `<textarea>` | `ScrollAreaTextarea`; in a form, with the field's look ([Textarea › A field that scrolls](../../packages/ui/src/components/textarea/textarea.md#a-field-that-scrolls)) |
-| An element another component renders, such as a virtual list's own scroller | `useScrollAreaContainer` and `ScrollAreaGutters` ([Your own container](../../packages/ui/src/components/scroll-area/scroll-area.md#your-own-container)) |
-| The messages of a conversation or a thread | [MessageList](../../packages/ui/src/components/message-list/message-list.md): a ScrollArea from 768px, and below that the phone's own scrolling, one of the allowed native cases ([Behavior](../../packages/ui/src/components/message-list/message-list.md#behavior)) |
+| A table wider than its container | `TableScroll` around it ([Table › Wide tables](table.md#wide-tables)) |
+| A `<textarea>` | `ScrollAreaTextarea`; in a form, with the field's look ([Textarea › A field that scrolls](textarea.md#a-field-that-scrolls)) |
+| An element another component renders, such as a virtual list's own scroller | `useScrollAreaContainer` and `ScrollAreaGutters` ([Your own container](scroll-area.md#your-own-container)) |
+| The messages of a conversation or a thread | [MessageList](message-list.md): a ScrollArea from 768px, and below that the phone's own scrolling, one of the allowed native cases ([Behavior](message-list.md#behavior)) |
 
-- Keep a native scroller only for the cases [ScrollArea](../../packages/ui/src/components/scroll-area/scroll-area.md#native-scrolling) lists, such as a `<pre>` of code, and say which one in a `// raft-ui: native-scroll <reason>` comment on the line above: the lint rule `raft-ui/prefer-scroll-area` reports every other one ([Lint rules](../about/use-raft-ui.md#lint-rules)).
+- Keep a native scroller only for the cases [ScrollArea](scroll-area.md#native-scrolling) lists, such as a `<pre>` of code, and say which one in a `// raft-ui: native-scroll <reason>` comment on the line above: the lint rule `raft-ui/prefer-scroll-area` reports every other one ([Lint rules](../about/use-raft-ui.md#lint-rules)).
 
 ## Built from existing parts
 
@@ -179,16 +179,16 @@ If what you need isn't here and no component fits, follow the six questions in t
 
 ### Task details
 
-A centered [Dialog](../../packages/ui/src/components/dialog/dialog.md), 960px wide, a workspace overlay outside Dialog's four sizes: a bar with the place and the task number, the title and the description, one row of properties (Status, Assignee, Created by) in a [DescriptionList](../../packages/ui/src/components/description-list/description-list.md), for a task created from a message its Source, the History in a collapsed [Timeline](../../packages/ui/src/components/timeline/timeline.md), then the task's discussion and a [Composer](../../packages/ui/src/components/composer/composer.md). Its size and its bar are in [Tasks](../patterns/tasks.md#structure). Opened from the Tasks page, the same parts stand in a column of the page's row instead of a dialog, with Expand in the bar ([The open task](../patterns/tasks.md#the-open-task)).
+A centered [Dialog](dialog.md), 960px wide, a workspace overlay outside Dialog's four sizes: a bar with the place and the task number, the title and the description, one row of properties (Status, Assignee, Created by) in a [DescriptionList](description-list.md), for a task created from a message its Source, the History in a collapsed [Timeline](timeline.md), then the task's discussion and a [Composer](composer.md). Its size and its bar are in [Tasks](../patterns/tasks.md#structure). Opened from the Tasks page, the same parts stand in a column of the page's row instead of a dialog, with Expand in the bar ([The open task](../patterns/tasks.md#the-open-task)).
 
 ### File viewer
 
-Every file someone opens from a message, whether an image, a PDF, text, Markdown, a table, a web page, a video or audio, opens in the same viewer: a [Lightbox](../../packages/ui/src/components/lightbox/lightbox.md) with a `LightboxToolbar` on top and the file's own body below. Only the body changes with the type. People learn where a file's actions are once, and it holds for every file.
+Every file someone opens from a message, whether an image, a PDF, text, Markdown, a table, a web page, a video or audio, opens in the same viewer: a [Lightbox](lightbox.md) with a `LightboxToolbar` on top and the file's own body below. Only the body changes with the type. People learn where a file's actions are once, and it holds for every file.
 
 - **The toolbar is the same for every type:** the type badge, the file name, then the actions in a fixed order (Comments, Copy, Download, then Close last). An action that doesn't apply to a file is left out; the rest keep their order.
 - **On a phone** the toolbar keeps the file name, one More menu and Close. Comments, Copy and Download move into the menu; when Download is the only action, it stays as its own button. The type badge and the gallery count drop out, because the name needs the room and the thumbnails already show the position.
 - **Comments** on a document the viewer renders sit in a margin beside it, level with their passages; on a narrow viewer, markers beside the passages open them in a bottom sheet ([Comments](../patterns/comments.md)).
-- **Plain text** sits in the [CodeBlock](../../packages/ui/src/components/code-block/code-block.md) frame, but its lines wrap. A file in the viewer is read top to bottom, and find in page has to reach every line. A snippet in a message still scrolls sideways.
+- **Plain text** sits in the [CodeBlock](code-block.md) frame, but its lines wrap. A file in the viewer is read top to bottom, and find in page has to reach every line. A snippet in a message still scrolls sideways.
 - **Images** keep the stage, previous and next, and the thumbnails below the toolbar.
 
 ```example
@@ -197,7 +197,7 @@ lightbox/compositions/attachment-preview-shell
 
 ### Link cards, forwarded messages, quoted previews
 
-Cards in a message share one frame, one inset, two widths and one title, from the recipes beside [MessageEmbed](../../packages/ui/src/components/message-embed/message-embed.md) ([Cards in messages](../patterns/cards-in-messages.md)): [MessageEmbed](../../packages/ui/src/components/message-embed/message-embed.md), [MessageForwardedBundle](../../packages/ui/src/components/message-forwarded-bundle/message-forwarded-bundle.md). A file card ([MessageAttachment](../../packages/ui/src/components/message-attachment/message-attachment.md)) is a tile with its name, not one of these cards, and a quoted message ([MessageQuotedPreview](../../packages/ui/src/components/message-quoted-preview/message-quoted-preview.md)) is a bar beside the text, with the header of a message ([MessageItem](../../packages/ui/src/components/message-item/message-item.md)). A link that an app previews is not one of them: it is a reference chip in the text, with its details in a hover card ([App links](../patterns/navigation.md#app-links)).
+Cards in a message share one frame, one inset, two widths and one title, from the recipes beside [MessageEmbed](message-embed.md) ([Cards in messages](../patterns/cards-in-messages.md)): [MessageEmbed](message-embed.md), [MessageForwardedBundle](message-forwarded-bundle.md). A file card ([MessageAttachment](message-attachment.md)) is a tile with its name, not one of these cards, and a quoted message ([MessageQuotedPreview](message-quoted-preview.md)) is a bar beside the text, with the header of a message ([MessageItem](message-item.md)). A link that an app previews is not one of them: it is a reference chip in the text, with its details in a hover card ([App links](../patterns/navigation.md#app-links)).
 
 ```example
 message-forwarded-bundle/compositions/forwarded-bundle
@@ -209,11 +209,11 @@ message-quoted-preview/compositions/quoted-preview
 
 ### Diagrams and Markdown tables
 
-The same container as a code block ([CodeBlock](../../packages/ui/src/components/code-block/code-block.md)): `layer-code`, a hairline border, `radius-container`.
+The same container as a code block ([CodeBlock](code-block.md)): `layer-code`, a hairline border, `radius-container`.
 
 ### Translation, read and saved markers
 
-One more small chip in the row under the message (Saved), or a short line of text: a translation's status under the original in Space Mono, and "Read" as one status line under the last message of a direct message in `text-caption`, a sentence ([MessageTranslation](../../packages/ui/src/components/message-translation/message-translation.md)). Don't add a color for them.
+One more small chip in the row under the message (Saved), or a short line of text: a translation's status under the original in Space Mono, and "Read" as one status line under the last message of a direct message in `text-caption`, a sentence ([MessageTranslation](message-translation.md)). Don't add a color for them.
 
 ```example
 message-translation/compositions/translation-showcase
@@ -221,9 +221,9 @@ message-translation/compositions/translation-showcase
 
 ### Toolbar for selected items
 
-While items are selected (messages to forward, tasks to change in bulk, a computer's agents to start or stop), one toolbar floats at the bottom of the list or conversation, centered, in one row at any width: [SelectionToolbar](../../packages/ui/src/components/selection-toolbar/selection-toolbar.md), in the BatchBar style (Noel; stdrc, 2026-11-10, #wg-task-v2). Messages, tasks and agents share it, so selecting reads the same everywhere. In order: the count ("3 selected"), an optional hint ("1 will be skipped"), the surface's actions, More while some actions are in it, then × to stop selecting. For messages the actions go in the order of why people select messages: Forward first, then Generate image (also a way to share them out), then the two copies, Copy link and Copy Markdown (Noel, stdrc, 2026-11-10). The last three are secondary: they are the first to move into More (cindyz, 2026-10-28, task #173). For tasks: Status, Assignee, Nudge, then Follow and Delete, which are secondary and the first into More when the row is narrow (Noel, 2026-11-10). For a computer's agents on the Computers page: Start, Stop, Restart / reset, then Change model, which is secondary and the first into More (Jasper, 2026-11-14, slock #14940).
+While items are selected (messages to forward, tasks to change in bulk, a computer's agents to start or stop), one toolbar floats at the bottom of the list or conversation, centered, in one row at any width: [SelectionToolbar](selection-toolbar.md), in the BatchBar style (Noel; stdrc, 2026-11-10, #wg-task-v2). Messages, tasks and agents share it, so selecting reads the same everywhere. In order: the count ("3 selected"), an optional hint ("1 will be skipped"), the surface's actions, More while some actions are in it, then × to stop selecting. For messages the actions go in the order of why people select messages: Forward first, then Generate image (also a way to share them out), then the two copies, Copy link and Copy Markdown (Noel, stdrc, 2026-11-10). The last three are secondary: they are the first to move into More (cindyz, 2026-10-28, task #173). For tasks: Status, Assignee, Nudge, then Follow and Delete, which are secondary and the first into More when the row is narrow (Noel, 2026-11-10). For a computer's agents on the Computers page: Start, Stop, Restart / reset, then Change model, which is secondary and the first into More (Jasper, 2026-11-14, slock #14940).
 
-In a thread and in the Computers page's agent list, a select-all checkbox comes before the count, and the count says what it shows: partly selected is "−" and "3 selected", none is empty and "0 selected", all is "✓" and "All 169 selected". Clicking it selects all from none, and clears from partly or all, so it never swaps a partial selection for everything by surprise; at 0 the toolbar stays, with the actions disabled, until × ends the selection (cindyz, 2026-11-03, #triage:#175). Only a thread and the Computers page's agent list have it: in a thread people collect a whole discussion, and a computer's agents are a bounded list where "all" has a clear meaning, while a channel is too long for "all" to mean something. The checkbox is read with the count beside it, the words saying the state the box shows, because in a floating bar it has no column of checkboxes under it to explain it, as the select-all box of a list header has. It is one of the toolbar's controls, so the arrow keys reach it. Select message in the message menu starts the selection; each message gets a checkbox ([MessageItem](../../packages/ui/src/components/message-item/message-item.md)).
+In a thread and in the Computers page's agent list, a select-all checkbox comes before the count, and the count says what it shows: partly selected is "−" and "3 selected", none is empty and "0 selected", all is "✓" and "All 169 selected". Clicking it selects all from none, and clears from partly or all, so it never swaps a partial selection for everything by surprise; at 0 the toolbar stays, with the actions disabled, until × ends the selection (cindyz, 2026-11-03, #triage:#175). Only a thread and the Computers page's agent list have it: in a thread people collect a whole discussion, and a computer's agents are a bounded list where "all" has a clear meaning, while a channel is too long for "all" to mean something. The checkbox is read with the count beside it, the words saying the state the box shows, because in a floating bar it has no column of checkboxes under it to explain it, as the select-all box of a list header has. It is one of the toolbar's controls, so the arrow keys reach it. Select message in the message menu starts the selection; each message gets a checkbox ([MessageItem](message-item.md)).
 
 - It is a floating panel, framed as every floating panel is: `radius-container`, `layer-popover`, a `line-seam` ring and `shadow-float` ([Elevation](../foundations/elevation.md)). It is as tall as a head and keeps a head's air at its ends (`header-height` and `header-air`): 44px with a mouse on a desktop, 56px on a phone and a touch screen. It takes the place of the composer at the bottom of a column, so it takes a head's measure (Noel). It floats 12px above the bottom of the list or conversation (plus the safe area), as the conversation's other floating controls, above a phone's bottom navigation, and keeps the composer's 20px from the sides, so it is never wider than the composer it replaces ([Page structure](../patterns/page-structure.md#one-edge-per-column)).
 - The count leads, in `text-callout` bold with the number in Space Mono, as counts are: it says what the actions act on, and it is announced when it changes. The toolbar's accessible name stays fixed ("Selected message actions").
@@ -242,25 +242,25 @@ message-item/compositions/selection-showcase
 
 ### Resizable columns
 
-The seam between two columns is the only line, and the drag handle sits on it ([Resizable](../../packages/ui/src/components/resizable/resizable.md)).
+The seam between two columns is the only line, and the drag handle sits on it ([Resizable](resizable.md)).
 
 ### Tables
 
-Prefer a [DescriptionList](../../packages/ui/src/components/description-list/description-list.md) or [ListRow](../../packages/ui/src/components/list-row/list-row.md) rows. When it has to be a table, such as usage or billing ([Table](../../packages/ui/src/components/table/table.md)):
+Prefer a [DescriptionList](description-list.md) or [ListRow](list-row.md) rows. When it has to be a table, such as usage or billing ([Table](table.md)):
 
 - Set the header in `text-footnote`, `foreground-hint`.
 - Divide rows with `line-hairline`.
 - Set numbers in Space Mono, right-aligned.
-- Let a column that people would reorder sort the rows from its heading ([Table › Sorting](../../packages/ui/src/components/table/table.md#sorting)).
-- Let a table wider than its container scroll sideways in a `TableScroll`, never the page ([Table › Wide tables](../../packages/ui/src/components/table/table.md#wide-tables)).
+- Let a column that people would reorder sort the rows from its heading ([Table › Sorting](table.md#sorting)).
+- Let a table wider than its container scroll sideways in a `TableScroll`, never the page ([Table › Wide tables](table.md#wide-tables)).
 
 ### Picking a date
 
-A column of dates inside the popup of a [Select](../../packages/ui/src/components/select/select.md), with the dates in Space Mono.
+A column of dates inside the popup of a [Select](select.md), with the dates in Space Mono.
 
 ### A row of toggle buttons
 
-A row of filters ([ToggleGroup](../../packages/ui/src/components/toggle-group/toggle-group.md)), each one selectable on its own.
+A row of filters ([ToggleGroup](toggle-group.md)), each one selectable on its own.
 
 ```example
 toggle-group/compositions/formatting
@@ -268,20 +268,20 @@ toggle-group/compositions/formatting
 
 ### Authorization (OAuth)
 
-The structure of a [Dialog](../../packages/ui/src/components/dialog/dialog.md), with the requested permissions listed in a [DescriptionList](../../packages/ui/src/components/description-list/description-list.md).
+The structure of a [Dialog](dialog.md), with the requested permissions listed in a [DescriptionList](description-list.md).
 
 ### Switching servers
 
-- The trigger is the [WorkspaceButton](../../packages/ui/src/components/workspace-button/workspace-button.md) on every surface: the server's avatar, its name and a chevron.
-- On desktop, the workspace button at the left of the web top bar opens the list as a menu under it, 256px wide ([Popover](../../packages/ui/src/components/popover/popover.md)). The strip of server avatars beside the button switches with one click.
-- On a phone, the server tab, the last tab of the tab bar, opens the same list as a popover above the tab bar, 8px from each side, with the server's own pages in one row under its footer, at the very bottom ([MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md#the-server-tab), `MobileNavServerPopoverContent`). The workspace button on Home opens the list alone, as a popover anchored under the top bar, 8px from each side ([Popover](../../packages/ui/src/components/popover/popover.md), [Navigation](../patterns/navigation.md#the-server-tab-on-a-phone)).
+- The trigger is the [WorkspaceButton](workspace-button.md) on every surface: the server's avatar, its name and a chevron.
+- On desktop, the workspace button at the left of the web top bar opens the list as a menu under it, 256px wide ([Popover](popover.md)). The strip of server avatars beside the button switches with one click.
+- On a phone, the server tab, the last tab of the tab bar, opens the same list as a popover above the tab bar, 8px from each side, with the server's own pages in one row under its footer, at the very bottom ([MobileNav](mobile-nav.md#the-server-tab), `MobileNavServerPopoverContent`). The workspace button on Home opens the list alone, as a popover anchored under the top bar, 8px from each side ([Popover](popover.md), [Navigation](../patterns/navigation.md#the-server-tab-on-a-phone)).
 - Make each row the workspace tile, its name and its slug in Space Mono (`/launch`). Mark the current server with a check and a bold name; show the unread count of the others as a pink count, or a gray count when the server is muted.
 - Give each row a drag handle, so people can reorder the list. The strip follows the same order.
 - End the list, after a separator, with Join community (until the person has joined it), Switch or create server and Invite human.
 
 ## Every component
 
-The [component index](../../packages/ui/src/components/) lists every component raft-ui exports, grouped by layer and then by category, with its summary and status. Deprecated components keep their docs but are left out of the navigation. The same list, for agents, is in `components.json` and `llms.txt`.
+The [component index](../../packages/ui/src/components) lists every component raft-ui exports, grouped by layer and then by category, with its summary and status. Deprecated components keep their docs but are left out of the navigation. The same list, for agents, is in `components.json` and `llms.txt`.
 
 ## Related
 

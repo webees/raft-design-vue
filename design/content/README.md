@@ -18,15 +18,15 @@ Words are half of how a product feels. Two Raft products can share every color a
 
 | Page | Covers |
 | --- | --- |
-| [Voice and tone](./voice-and-tone.md) | How Raft sounds, and how the tone changes from setup to errors |
-| [Writing](./writing.md) | The rules for UI copy: casing, labels, dialogs, errors and empty states |
-| [Terminology](./terminology.md) | The product's words, how to write each one, and the words to avoid |
+| [Voice and tone](voice-and-tone.md) | How Raft sounds, and how the tone changes from setup to errors |
+| [Writing](writing.md) | The rules for UI copy: casing, labels, dialogs, errors and empty states |
+| [Terminology](terminology.md) | The product's words, how to write each one, and the words to avoid |
 
 How to write about agents (their names, verbs and states) is in [Writing about agents](../people-and-agents/writing-about-agents.md). How to write these docs is in the [writing guide](../authoring/writing.md).
 
 ## Using this section
 
-- Write new UI copy against [Writing](./writing.md) and [Terminology](./terminology.md); a reviewer can check both.
-- Read [Voice and tone](./voice-and-tone.md) before writing a new kind of message: an onboarding flow, an error family, an empty state.
-- When the product needs a word this section doesn't have, add it to [Terminology](./terminology.md) in the same pull request as the feature.
-- Product copy and its translations live in each product's own repository, not in raft-ui ([packages/ui/AGENTS.md](../../packages/ui/AGENTS.md)). These pages are the rules that copy follows.
+- Write new UI copy against [Writing](writing.md) and [Terminology](terminology.md); a reviewer can check both.
+- Read [Voice and tone](voice-and-tone.md) before writing a new kind of message: an onboarding flow, an error family, an empty state.
+- When the product needs a word this section doesn't have, add it to [Terminology](terminology.md) in the same pull request as the feature.
+- Product copy and its translations live in each product's own repository, not in raft-ui ([packages/ui/AGENTS.md](https://github.com/botiverse/raft-design/blob/d98cae8c225ce19584bf27445b65ec943f82cd62/packages/ui/AGENTS.md)). These pages are the rules that copy follows.

@@ -5,6 +5,7 @@ import {
   DESIGN_DIR,
   LOCK_PATH,
   MANIFEST_PATH,
+  ROOT,
   SPEC_DIR,
   TOOLING_DIR,
   UPSTREAM_REPO,
@@ -21,6 +22,7 @@ import {
   type ComponentManifest,
   type UpstreamLock,
 } from "./shared";
+import { rewriteDesignLinks } from "./docs-links";
 
 const args = parseArgs(process.argv.slice(2));
 const ref = typeof args.ref === "string" ? args.ref : "main";
@@ -59,7 +61,7 @@ async function copyFile(from: string, to: string): Promise<void> {
 
 // Design documentation and fonts. Brand artwork is deliberately excluded.
 for (const file of walk(join(sourceDir, "design"), (path) =>
-  path.endsWith(".md") || path.endsWith(".woff2"),
+  path.endsWith(".md") || path.endsWith(".woff2") || path.endsWith("OFL.txt"),
 )) {
   const relativePath = file.slice(join(sourceDir, "design").length + 1);
   await copyFile(file, join(DESIGN_DIR, relativePath));
@@ -113,6 +115,21 @@ for (const { name, file } of componentDocs(upstreamComponents)) {
 
 await copyFile(join(sourceDir, "LICENSE"), join(TOOLING_DIR, "UPSTREAM-LICENSE"));
 await copyFile(join(sourceDir, "NOTICE.md"), join(TOOLING_DIR, "UPSTREAM-NOTICE.md"));
+const notice = join(TOOLING_DIR, "UPSTREAM-NOTICE.md");
+if (existsSync(notice)) {
+  const text = (await Bun.file(notice).text())
+    .replace("](./LICENSE)", "](./UPSTREAM-LICENSE)")
+    .replace("](./design/fonts/OFL.txt)", "](../../design/fonts/OFL.txt)");
+  await Bun.write(notice, text);
+  synced.set(rel(notice), sha256(text));
+}
+
+const links = rewriteDesignLinks();
+if (links.broken > 0) throw new Error(`Upstream docs have ${links.broken} broken link(s)`);
+for (const path of synced.keys()) {
+  if (path.startsWith("design/"))
+    synced.set(path, sha256(await Bun.file(join(ROOT, path)).bytes()));
+}
 
 const lock: UpstreamLock = {
   repository: UPSTREAM_REPO,

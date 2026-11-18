@@ -10,7 +10,7 @@ related: [tasks, task-card, task-list, task-board, checkbox]
 
 # TaskCompletionControl
 
-TaskCompletionControl is how a list of tasks is worked through as a to-do list: one press marks the task Done, and a press on a done task reopens it. It is a round check at the start of every task row and card, beside a conversation, under a message, on a board and in a list. When it shows and what a press does to the task are in [Completing a task](../../../../../design/patterns/tasks.md#completing-a-task).
+TaskCompletionControl is how a list of tasks is worked through as a to-do list: one press marks the task Done, and a press on a done task reopens it. It is a round check at the start of every task row and card, beside a conversation, under a message, on a board and in a list. When it shows and what a press does to the task are in [Completing a task](../patterns/tasks.md#completing-a-task).
 
 ```example
 task-completion-control/compositions/preview
@@ -21,9 +21,9 @@ task-completion-control/compositions/preview
 | Situation                                                       | Use                                                                                          |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Completing or reopening a task, at the start of its row or card | TaskCompletionControl                                                                        |
-| Selecting a row, to act on several at once                      | [Checkbox](../checkbox/checkbox.md), or `CheckboxIndicator` in a row that owns the semantics |
-| Changing a task to any other status                             | The status chip's menu ([TaskCard](../task-card/task-card.md))                               |
-| A yes or no that is saved with a form                           | [Checkbox](../checkbox/checkbox.md)                                                          |
+| Selecting a row, to act on several at once                      | [Checkbox](checkbox.md), or `CheckboxIndicator` in a row that owns the semantics |
+| Changing a task to any other status                             | The status chip's menu ([TaskCard](task-card.md))                               |
+| A yes or no that is saved with a form                           | [Checkbox](checkbox.md)                                                          |
 
 ## Anatomy
 
@@ -42,15 +42,15 @@ task-completion-control/compositions/states
 
 ## Behavior
 
-- Pass `checked` from the task's status and change the task in `onCheckedChange`: it is called with `true` to complete the task and `false` to reopen it. The control keeps no state of its own; what completing does (the Toast, the pause before the task moves to Done, Undo) is the caller's ([Completing a task](../../../../../design/patterns/tasks.md#completing-a-task)).
-- A press stops at the control: its click, Space and Enter never reach the row or card it sits on, so it never also opens the task, and on a [TaskBoard](../task-board/task-board.md) card Space completes the task instead of picking the card up. Arrow keys still reach the list, for moving between rows.
+- Pass `checked` from the task's status and change the task in `onCheckedChange`: it is called with `true` to complete the task and `false` to reopen it. The control keeps no state of its own; what completing does (the Toast, the pause before the task moves to Done, Undo) is the caller's ([Completing a task](../patterns/tasks.md#completing-a-task)).
+- A press stops at the control: its click, Space and Enter never reach the row or card it sits on, so it never also opens the task, and on a [TaskBoard](task-board.md) card Space completes the task instead of picking the card up. Arrow keys still reach the list, for moving between rows.
 - An `onClick` that calls `event.preventDefault()` keeps `onCheckedChange` from being called.
-- Its hit area reaches 8px past the 20px circle with a mouse (36px) and 12px on a touch screen (44px) ([Accessibility](../../../../../design/foundations/accessibility.md#hit-targets)). With a mouse it reaches less far sideways than a Checkbox's 12px, which would cover the task number beside it.
+- Its hit area reaches 8px past the 20px circle with a mouse (36px) and 12px on a touch screen (44px) ([Accessibility](../foundations/accessibility.md#hit-targets)). With a mouse it reaches less far sideways than a Checkbox's 12px, which would cover the task number beside it.
 
 ## Content
 
 - Name it by the task: its number, then its title, "#25 Fix onboarding copy".
-- Put the action in its tooltip if the product shows one: Complete, Reopen on a done one ([Tooltip](../tooltip/tooltip.md)).
+- Put the action in its tooltip if the product shows one: Complete, Reopen on a done one ([Tooltip](tooltip.md)).
 
 ## Accessibility
 
@@ -63,7 +63,7 @@ TaskCompletionControl renders a native `button` with `role="checkbox"` and wraps
 
 ## Rules
 
-- Keep it round. A square box at the start of a row reads as "select this row", which is what a Checkbox there means; the circle reads as "done", as in a to-do list. Round is otherwise only for switches, radios and grab handles; this control is one of the two exceptions, with the Android pull-to-refresh disc ([Shape](../../../../../design/foundations/shape.md#principles)).
-- Use it only for completing a task. Don't use a round `CheckboxIndicator` or a round Checkbox for anything else ([Checkbox](../checkbox/checkbox.md#rules)).
+- Keep it round. A square box at the start of a row reads as "select this row", which is what a Checkbox there means; the circle reads as "done", as in a to-do list. Round is otherwise only for switches, radios and grab handles; this control is one of the two exceptions, with the Android pull-to-refresh disc ([Shape](../foundations/shape.md#principles)).
+- Use it only for completing a task. Don't use a round `CheckboxIndicator` or a round Checkbox for anything else ([Checkbox](checkbox.md#rules)).
 - Show it checked only on a Done task. A press on any other status, Backlog and Closed included, completes the task.
 - Make it the first thing on a task row or card, and its own button on top of the row or card: pressing the rest still opens the task.

@@ -10,7 +10,7 @@ import type {
 
 export type ToastIntent = "info" | "success" | "warning" | "error";
 
-export interface ToastData {
+export interface ToastData extends Record<string, unknown> {
   intent?: ToastIntent;
   hasClose?: boolean;
   hasIcon?: boolean;

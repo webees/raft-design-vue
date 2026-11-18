@@ -21,7 +21,7 @@ v3 ships behind its feature flag. Until it ships, the product's first run is the
 | Put a computer to work | "Your agent team will work on this Mac" ("this PC" on Windows, "this computer" on Linux): the computer, Cindy's model, Keep Raft running in the background, Start. The server is already created at sign-up, so there is no create-server step | First Get the Raft app (or install Raft Computer yourself), then Open Raft, which continues in the app at this step | Open raft.build/go on a computer and type the code it shows into the phone (Continue); the computer signs in, then Start there. A text link, Email me the link, sends a plain email pointing to raft.build/go |
 | Cindy | The same page: the computer is added, Cindy starts | In the app | Follows the computer's progress |
 | Talk to Cindy | A split page: the DM with Cindy on the left (real messages). She restates the request, looks at the computer reading only, and proposes an agent and a channel in a create-agent card | In the app | Cindy's DM, full screen, with no tab bar |
-| Create the agent | The Create agent dialog, with one more field, New channel | The same | The same form in a bottom sheet ([Drawer](../../../packages/ui/src/components/drawer/drawer.md)) |
+| Create the agent | The Create agent dialog, with one more field, New channel | The same | The same form in a bottom sheet ([Drawer](../../components/drawer.md)) |
 | The server | Cindy's DM and the new channel; the [tour](#the-tour-v3) runs over the agent at work | The same | Home, with a 3-stop tour; Done opens the channel |
 | First result | Cindy says in her DM that it arrived and how to answer it | The same | The same |
 
@@ -31,7 +31,7 @@ Invited people take a short line: sign up, confirm identity, then land where the
 
 - Ask one question, as the title: "What should your agent team work on?". The answer comes first: the text box, focused on open, empty, with Continue disabled until it has words (stdrc, 2026-11-14).
 - Put the examples under the box, as `outline` buttons; one fills the box, and the person can edit it. The last is "Not sure yet, show me what you can do", which Cindy answers with three things that role often does.
-- Put the role on the examples' own line, at its start: "Examples for" and a small [Select](../../../packages/ui/src/components/select/select.md), "Any kind of work" by default. Changing it changes the examples. It is optional, so it is a way to change the examples, not a question of its own; it is the field the old survey's role question filled, and Cindy reads it.
+- Put the role on the examples' own line, at its start: "Examples for" and a small [Select](../../components/select.md), "Any kind of work" by default. Changing it changes the examples. It is optional, so it is a way to change the examples, not a question of its own; it is the field the old survey's role question filled, and Cindy reads it.
 - Continue is the pink button, full width. The line under it is "Already have an account? Sign in".
 
 ### Split pages
@@ -158,11 +158,11 @@ The steps, in order:
 4. **Choose your display style**.
 5. **The handoff**: the agent takes it from here.
 
-Steps 3 to 5 share one frame, 720px wide and about 520px high, so the dialog doesn't change size between them. It is the showcase frame, which only these steps, the Upgrade to Pro dialog and Pro's Add seats dialog use, outside the four Dialog sizes ([Dialog](../../../packages/ui/src/components/dialog/dialog.md#variants)). Every step has:
+Steps 3 to 5 share one frame, 720px wide and about 520px high, so the dialog doesn't change size between them. It is the showcase frame, which only these steps, the Upgrade to Pro dialog and Pro's Add seats dialog use, outside the four Dialog sizes ([Dialog](../../components/dialog.md#variants)). Every step has:
 
 - **A header**: the step label "Set up your server" in Space Mono, the title in `text-title` and one line of explanation.
 - **A body** that scrolls inside the frame.
-- **A footer** with muted text links ([TextLink](../../../packages/ui/src/components/text-link/text-link.md)) on the left (Switch server, and on the first two steps Server settings) and the pink button on the right (Next, Continue, Let's Go). On a narrow screen the pink button spans the width.
+- **A footer** with muted text links ([TextLink](../../components/text-link.md)) on the left (Switch server, and on the first two steps Server settings) and the pink button on the right (Next, Continue, Let's Go). On a narrow screen the pink button spans the width.
 
 ```example
 dialog/compositions/server-setup-step
