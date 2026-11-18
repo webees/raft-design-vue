@@ -1,0 +1,109 @@
+# Parity baseline
+
+**English** | [简体中文](../zh/parity.md)
+
+What this port is measured against, how it is audited, and the floor a change
+must not drop below. This file merges the former baseline and per-component
+audit notes.
+
+## Upstream
+
+|               |                                            |
+| ------------- | ------------------------------------------ |
+| Repository    | `botiverse/raft-design`                    |
+| Commit        | `7d280d65142bf924190f068735c246c155c45089` |
+| Synced inputs | 194 files (`tooling/upstream/upstream.lock.json`) |
+
+## Covered surface
+
+| Check                                   | Result                                    |
+| --------------------------------------- | ----------------------------------------- |
+| Upstream component directories ported   | 102 / 102                                 |
+| Upstream public types exported          | 960 / 960                                 |
+| Ported `index.ts` entry points          | 102 / 102                                 |
+| Untracked local component folders       | 0                                         |
+| Recipe slots missing vs upstream        | 0                                         |
+| Recipe class tokens missing vs upstream | 0 (multiset audit, per component)         |
+| Local-only (Reka-equivalent) selectors  | documented in [Upstream sync](./upstream-sync.md) |
+
+## Verification
+
+```bash
+bun run verify
+```
+
+Order: `check:parity → check:audit → check:docs-links → lint → typecheck →
+check:api → check:props → test → build → check:consumer-types`.
+
+Measured on 2026-11-19 with Bun 1.4.4 / Node 22:
+
+|             |                                      |
+| ----------- | ------------------------------------ |
+| Test files  | 104                                  |
+| Tests       | 375                                  |
+| Type check  | clean (`vue-tsc --noEmit`)           |
+| API surface | 960 / 960                            |
+| Library     | 2005.1 kB raw, 287.6 kB gzip         |
+| Docs bundle | 4163.3 kB total, 1605.1 kB gzip      |
+
+## Audit method
+
+Every component under `packages/ui/src/components` is checked on four axes:
+
+```bash
+bun run tooling/upstream/src/audit.ts          # exports, data-slots, literal classes
+bun run tooling/upstream/src/audit-recipes.ts  # recipe class-string multisets
+bun run check:parity                           # 102/102 directories present
+bun run check:api                              # upstream types resolvable
+```
+
+`audit.ts` reports `missingSlots`, `missingExports`, `missingClasses` and
+`missingProps`; `--json` prints the machine-readable form. Only three kinds of
+divergence are accepted:
+
+1. **Headless attribute names** — Reka exposes `data-state` where Base UI uses
+   `data-open` / `data-checked` / `data-pressed`. Recipes keep the upstream
+   selector and add the Reka equivalent.
+2. **CSS variables** — Reka's `--reka-*` variables are aliased to upstream
+   names at the component boundary.
+3. **Composition helpers** — where Reka merges positioner and popup, the
+   positioner class goes on the outer element and the popup class on the inner
+   `data-slot` element.
+
+Anything else is a defect: a missing export, a missing `data-slot`, a utility
+the theme never generated, or a drifted recipe string.
+
+## Static audit
+
+These checks are cheap and must stay clean:
+
+- every `v-for` has a `:key`
+- no `as any`, `as never`, `@ts-ignore`, `TODO`, `FIXME`
+- no `v-html`, `JSON.parse`, `localStorage` or `Math.random` in components
+- every per-component `addEventListener` has a matching removal path
+- no prop is mutated; no props destructured out of reactivity
+- caller `class` reaches a component root exactly once
+- caller `data-slot` wins over a component default
+- every `defineEmits` entry is emitted, every declared prop is read
+- every Markdown link resolves to an existing file and heading
+  (`check:docs-links`)
+- every tracked file is Biome-formatted (`bun run lint`)
+
+## Component inventory
+
+| Group          | Families                                                                 |
+| -------------- | ------------------------------------------------------------------------ |
+| Actions        | `Button`, `TextLink`, `KbdButton`, `IconTile`, `ToggleGroup`             |
+| Display        | `Badge`, `Card`, `Avatar`, `Kbd`, `Status`, `Progress`, `Spinner`, `Skeleton`, `Separator`, `Text`, `InlineCode`, `Meter`, `FilterChip`, `SaveStatus` |
+| Forms          | `Input`, `Label`, `Field`, `Checkbox`, `Switch`, `RadioGroup`, `Textarea`, `FormSection`, `InputGroup`, `SegmentedControl`, `Select`, `ChoiceList` |
+| Content        | `CodeBlock`, `CopyableCode`, `Banner`, `EmptyState`, `Timeline`, `Markdown`, `FilePreview`, `Files` |
+| Navigation     | `Tabs`, `Steps`, `AppRail`, `MobileNav`, `SearchTrigger`, `SearchShell`  |
+| Overlays       | `Tooltip`, `Popover`, `DropdownMenu`, `ContextMenu`, `Dialog`, `AlertDialog`, `Drawer`, `Lightbox`, `Toast`, `NotificationCenter`, `AnnouncementDialog`, `PreviewCard`, `CoachMark`, `SelectionToolbar` |
+| Data           | `Table`, `DescriptionList`, `ListRow`                                    |
+| Layout         | `Resizable`, `ScrollArea`, `Panel`, `ConversationPanel`, `ProfilePanel`, `ThreadPanel`, `AppShell`, `WebTopBar` |
+| Tasks          | `TasksPanel`, `TaskCard`, `TaskList`, `TaskBoard`, `TaskDnd*`, `TaskCompletionControl`, `TaskDrag*` |
+| Messages       | `MessageItem`, `MessageList`, `MessageReplies`, `MessageEmbed`, `SystemMessage`, `MessageActionCard`, `MessageForwardedBundle`, `ActivityInbox`, `InboxItem`, `Composer` |
+| Collaboration  | `CommentMargin`, `CommentCard`, `CommentEntry`, `CommentMarker`, `DragScope`, `Draggable`, `Droppable`, `DragLift`, `DropPlaceholder`, `PullToRefresh` |
+| Identity       | `RaftLogo`, `RaftWordmark`, `RaftLogoLockup`                             |
+
+The machine-readable list is `tooling/upstream/component-manifest.json`.

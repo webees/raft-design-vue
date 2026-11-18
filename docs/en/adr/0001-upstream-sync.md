@@ -1,5 +1,7 @@
 # ADR 0001: Pin upstream and sync canonical inputs
 
+**English** | [简体中文](../../zh/adr/0001-upstream-sync.md)
+
 - Status: accepted
 - Date: 2026-11-17
 

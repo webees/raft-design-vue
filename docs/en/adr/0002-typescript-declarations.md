@@ -1,8 +1,9 @@
 # ADR 0002: Normalize Vue declaration output for strict consumers
 
-## Status
+**English** | [简体中文](../../zh/adr/0002-typescript-declarations.md)
 
-Accepted
+- Status: accepted
+- Date: 2026-11-17
 
 ## Context
 
