@@ -26,19 +26,12 @@
 @source "./**/*.{ts,vue}";
 
 @layer base {
-  html {
-    font-family: var(--sans-font);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   body {
-    background: var(--layer-page);
-    color: var(--foreground-default);
+    background: var(--layer-canvas);
+    color: var(--foreground);
   }
 
   ::selection {
-    background: var(--layer-selected);
-    color: var(--foreground-default);
+    background: var(--selection);
   }
 }

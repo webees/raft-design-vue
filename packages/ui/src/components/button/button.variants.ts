@@ -1,5 +1,6 @@
 import { tv } from "../../lib/tv";
 import type { VariantProps } from "../../lib/tv";
+import { controlIconInset } from "../../lib/head-edges";
 
 const sticker = (fill: string) => [
   `border-sticker-ink ${fill} text-sticker-ink ring-[1.5px] ring-sticker-edge`,
@@ -137,7 +138,7 @@ export const buttonVariants = tv({
       variant: ["ghost", "on-frame"],
       size: "icon-lg",
       class: {
-        root: ["[--icon-inset:calc((var(--control-height)-var(--control-icon))/2)]"],
+        root: [controlIconInset],
       },
     },
     {
