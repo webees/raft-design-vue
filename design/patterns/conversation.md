@@ -1,0 +1,141 @@
+---
+title: Conversation
+summary: The timeline of messages and event lines, what a message can hold, its actions, mentions, the composer, threads and search in a conversation.
+---
+
+# Conversation
+
+A conversation is one timeline of messages, event lines and dates, with the newest at the bottom. People and agents post the same kind of message, because in Raft they do the same work in the same place; an agent is told apart by its avatar, not by a different kind of message.
+
+## When it applies
+
+Any place people and agents talk: a channel, a direct message, a thread, a task's discussion. The message itself is in [MessageItem](../../packages/ui/src/components/message-item/message-item.md). Which places a product has, and what their headers hold, is on the product's own page ([Raft Chat — Channel](../products/raft-chat/channel.md)).
+
+## Structure
+
+```example
+conversation-panel/compositions/conversation-panel
+```
+
+- At the top, under the header and any `PanelNotice`: what the place keeps for everyone to read, such as a channel's announcement, as a strip on paper with a seam under it. It is content, so it never takes a notice's tone or icon, and it opens what it points to in the side column. A second product with a page pinned to a place makes the same choice ([Raft Chat — Channel](../products/raft-chat/channel.md#the-announcement)).
+- The timeline: messages, event lines ([SystemMessage](../../packages/ui/src/components/system-message/system-message.md)) and date lines, newest at the bottom.
+- Inside a message: mentions, reference chips, blue links, inline code, code blocks, quotes, attachments and action cards.
+- Under a message: the list of tasks created from it ([Tasks](./tasks.md#tasks-in-a-conversation)), then one row with the Saved marker and the reactions, and under it the thread replies, with at most 3 shown as a preview ([MessageReplies](../../packages/ui/src/components/message-replies/message-replies.md)).
+- At the bottom: the [Composer](../../packages/ui/src/components/composer/composer.md), with the attach buttons on the left of its toolbar and the send button on the right.
+
+## Rules
+
+### Dates and grouping
+
+- Put a date line before the first message of the timeline and before the first message of each new day: Today, Yesterday, or the weekday and date.
+- Merge consecutive messages from the same sender on the same day, with no time limit: a run of messages from one sender reads as one turn.
+- Don't merge a message that carries a task or a thread, and don't merge event lines into messages.
+- Treat a message a person's assistant sent for them as a different sender: it doesn't merge into the person's own messages, and theirs don't merge into it. Only the first row of a group shows the avatar and the name line, so a message merged under the person's own header would look as if they wrote it. Consecutive messages the same assistant sent for the same person merge like any others, and each continuation ends with "(sent by Friday)" ([Identity and presence](../people-and-agents/identity-and-presence.md#sent-by-an-assistant)).
+- Put a message's time right after its sender, never across the row from it: who said it and when read as one ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#behavior)). The one exception is the touch reveal below, which shows only while a finger holds the list.
+- On hover, show the time of a merged message in the empty space on its left, without animation.
+- On a touch screen, don't show the time of a merged message at rest: a time beside every message repeats the header and makes the list busy, and a tap on a message already does other things. Drag the conversation left to see it instead (below).
+- On a touch screen, dragging the conversation left reveals every message's time, as in iMessage (artin, 2026-11-04, #triage:530f8c36). Every message row slides left together, and the avatar may leave the screen. Each message's time waits 20px outside its row's original right edge and comes into view as the row slides left: the hour and minute in the merged message's format and the person's 12-hour or 24-hour setting (6:35, 18:35), in `text-mono-meta` and `foreground-hint`. The rows follow the finger and spring back on release. With reduced motion nothing slides, and each merged message's time fades in in its empty left gutter instead, where the hover time goes, so nothing lands on text. The distances and timings are in [Motion](../foundations/motion.md#usage). Putting the time across the row from the sender is right for this case: the reveal shows only while the finger holds it, and it lines every time up in one column, which is what someone looking for when a message was sent wants to scan. Every touch screen has it, tablets included; a mouse and a trackpad keep the hover time. Which drags it claims and what it leaves alone is in [Touch screens](./responsive.md#touch-screens).
+- Hide the revealed time from screen readers: each message is already an article named by its sender and its time, merged ones by their time ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#accessibility)). On a touch screen, someone who can't drag has no other way to see a merged message's own time; that gap is known and kept for now ([Accessibility](../foundations/accessibility.md#touch)).
+- Don't give a message a swipe of its own, to reply or anything else: a drag left is the conversation's, for the times, and one sideways drag with two meanings would make each a guess.
+- Fold 2 or more event lines in a row into one line with a disclosure ("There are 3 task updates"), so a busy agent doesn't push the messages out of view.
+
+### Mentions
+
+- Set a mention of someone else in bold ink, underlined in ink only on hover, like all clickable text ([Clickable text](../foundations/states.md#clickable-text)).
+- Show a mention of the person reading as a small yellow sticker: yellow is "you" ([Color](../foundations/color.md#meanings-of-color)).
+- Group the @ suggestions by whether people and agents are in the place: those in it first, people and agents together, then those who aren't, dimmed. In a thread, rank the people who replied first.
+- After a message mentions someone who isn't in the place, offer to add or notify them in a strip above the composer. Otherwise the mention reaches no one, and nothing says so.
+
+### Actions
+
+- On desktop, show a small toolbar on the top edge of the hovered message: the quick reaction, Reply in thread, Forward, Save message and More actions (⋯), which opens the message's menu. Inside a thread, leave out Reply in thread.
+- The toolbar's reaction button is a shortcut: it shows the person's most-used emoji (👍 until they have one) and a click adds that reaction, or removes it when they already gave it. Resting the pointer on it for 500ms opens the full emoji picker. With the keyboard, Enter or Space reacts, and the picker opens from More actions, with the + at the end of the menu's quick reactions, since resting needs a pointer. A touch screen shows no hover toolbar, so it keeps its own ways: a double tap for the quick reactions, press and hold for the menu (Cindy, 2026-11-10, from user feedback: a like took two clicks). The button shows the emoji itself, so what it shows is what a click does. The emoji is chosen each time the toolbar appears and doesn't change while it shows, so the button never changes under a pointer about to click it, and a reaction just given counts from the next toolbar on (Cindy, 2026-11-10). It is counted per device for now, so the same person may see a different emoji on another device until the count is kept on the server ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#accessibility)).
+- Put every other action in the message menu. Right-click on desktop and press and hold on a touch screen open the same menu, so an action is in one place on every device.
+- Make the quick reactions the menu's first row, with a separator between them and the actions. The menu has no date-and-time line (artin, 2026-11-04, #triage:530f8c36).
+- Don't show the hover toolbar on a touch screen: there is no hover, and press and hold opens the menu instead.
+- On a touch screen, a tap on a message opens its thread, and a double tap opens the quick reactions as a bar ([Taps on a touch screen](../foundations/states.md#taps-on-a-touch-screen)). Inside a thread a tap does nothing; the double tap and the menu stay. On desktop a click or double click on a message does nothing (a double click selects a word): the toolbar and the reply count open the thread. Decided on 2026-10-29 (stdrc): a tap is how Slack and Raft's phone web already open a thread, and double tap means "react" in Telegram, iMessage and Messenger; opening the bar instead of reacting keeps a stray double tap from sending anything. While messages are being selected, a tap or a click on a message toggles its selection instead of opening the thread ([Toolbar for selected items](../components/overview.md#toolbar-for-selected-items)).
+- Let hover never move the message: the toolbar floats over the row's top right corner, the header keeps no room for it, and nothing reflows. In a narrow column the end of a long sender line fades out under it while it shows; at rest the whole line is there ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#behavior)).
+- To act on several messages (forward, copy), choose Select message in the menu; the toolbar for selected items appears at the bottom of the conversation ([Built from existing parts](../components/overview.md#toolbar-for-selected-items)).
+
+```example
+message-item/compositions/context-menu-showcase
+```
+
+### The composer
+
+- Make the send button the conversation's one pink button: sending is what the screen exists for ([Color](../foundations/color.md#meanings-of-color)).
+- Name the place in the placeholder: "Message #launch-week", "Message @Martin".
+- On a touch screen held upright, make Return insert a new line and send with the send button, because there is no Shift key to reach for. Elsewhere Return sends and Shift+Return inserts a new line.
+- In a product with tasks, offer As task in the composer of a place's conversation, never in a thread's: a task is created by sending a message, and the message stays an ordinary one, with the task under it ([As task in the composer](./tasks.md#as-task-in-the-composer)).
+
+### Threads
+
+```example
+thread-panel/thread-panel
+```
+
+- Open a thread in the side panel ([ThreadPanel](../../packages/ui/src/components/thread-panel/thread-panel.md)), so the conversation it came from stays in view. It sits beside the conversation or folds over it, depending on the room ([Responsive layout](./responsive.md#the-channels-side-columns)); on a phone it always covers the conversation, with Back.
+- Title it Thread, with the place and the number of replies as its subtitle: "#launch-week · 4 replies". Selecting the title scrolls to the top of the thread.
+- Once the message the thread started from scrolls out of view, put it in the title: the sender and its first line, "Juno: Can we ship the new header on Friday?", on one line, cut with an ellipsis. Scrolled back to it, the title is Thread again. A message with no text names what it holds ("Juno: Image", "Juno: File"). Only the words change: the header keeps its height and its subtitle, so the place stays named, and the title fades from one to the other, or swaps at once when the system asks for reduced motion. Decided on 2026-11-17 (stdrc): a strip pinned under the header for the message took a row where height is shortest, on a phone, and covered the replies; the title already says where you are, and once you have scrolled away, the message is what you need named.
+- Selecting the title, either one, scrolls the thread back to that message. Going to the message in its place is the subtitle's place name and View in channel in the header's menu: both open the place scrolled to the message, highlighted. In a window of its own the place opens in that window; in a focus layout the layout is restored first.
+- Give the title an accessible name that follows the words shown, with Thread before them ("Thread: Juno: Can we ship the new header on Friday?"), so a person using voice control can say what they see (WCAG 2.5.3). Don't make the header a live region: a changed name isn't announced unless focus is on it, and while the thread scrolls focus is in the replies.
+- When the message was deleted, keep Thread as the title; its accessible name says "Thread: original message deleted", and the place name and View in channel only open the place. When the person can't see the place (a private channel they aren't in), the place name is plain text that can't be selected, View in channel isn't in the menu, and the accessible name says "Thread: can't view the original message": nothing offers a way into what they can't open. A message older than the plan's window is neither: the title names it as usual, and the place name opens the place at its history paywall ([Raft Chat — Channel](../products/raft-chat/channel.md#history-behind-the-plans-window)).
+- Show the message the thread started from at the top, then the replies, then the composer. A thread has no tabs.
+- When the person isn't in the place the thread belongs to, replace the composer with a pink Join button ("Join channel to reply" in Raft Chat), so the reason they can't reply is also the way to fix it.
+- Put the agents that follow the thread at the right of its header, as an avatar stack and a count.
+- Put Follow thread and Unfollow thread in the More menu at the right of the thread's header, not in a toggle of its own: following is a command, not a setting. A task's details put Follow task in the same place ([Tasks](./tasks.md)), so following works the same for both.
+
+### Who has read it
+
+In a channel or a thread, each agent's face stops on the last message it has read, at the end of that message's last line ([MessageItemTrailing](../../packages/ui/src/components/message-item/message-item.md#trailing)). The faces say who read what: an agent whose face is on your message has read it, one whose face is above it hasn't yet, and a reply shows up as a message.
+
+- Change the faces in place, without animation. When an agent reads on, its face leaves the message it was on and appears on the one it reached in the same frame: it doesn't slide between them, fade or change size, and a face that stays takes any new place in the row at once, without moving there. A slide from the row a face left read as a strange jump, worst when several agents read at once (Artea, 2026-11-08, #proj-raft-ui).
+- Don't add a line of text under your message that repeats the faces ("Kirby read", "Lagoon replied"). It said again, in words, what the faces already show (stdrc, 2026-11-08, #proj-raft-ui:0c3f4e06). That an agent is working shows where [Working agents](../people-and-agents/working-agents.md) puts it.
+- Write a line under your latest message only for an agent that won't see it: one that stopped following the thread ("Stopped following: Kirby") or muted the channel ("Muted: Kirby"), with how to reach it: mention it. Its face can't say this, since it no longer moves, and the person writing needs to know before waiting on a reply (artin, 2026-11-08).
+- When the line doesn't fit, shorten the names first, down to a count of the rest ("Kirby +2"). When not one name fits, write the total instead ("Muted: 4 agents"): a bare "+4" reads as "four more" (Kirby, 2026-11-08). Keep the state ("Muted:") and the count whole, since without them the line no longer says what happened; cut the end of the hint ("mention it") only when no name is left. The full sentence stays in the tooltip and the accessible name (Remy, 2026-11-08, #proj-raft-ui:0c3f4e06).
+- Set the line in `text-caption` and `foreground-hint`, as a direct message's Read line (both are `MessageReadStatusLine`): it is a sentence, so sans, not Space Mono ([Typography](../foundations/typography.md#usage)).
+
+### A thread's timeline
+
+A long thread is mostly agents at work, and the few messages people wrote, the ones that say what the thread is for, get buried under it. The timeline lists those, so a person can find what they asked and go back to it (Artea, 2026-11-06, #proj-raft-ui:#206).
+
+- List the message the thread started from, whoever wrote it, then every message a person wrote in the thread, oldest first. Leave out agents' messages, event lines and what an assistant sent for its owner: the timeline is the people's side of the thread. A retracted message leaves it.
+- Give a thread a timeline once people have written four messages in it. Three or fewer are found by scrolling a screen or two, and a rail of three ticks says little (Jasper, 2026-11-08).
+- Mark where the reader is: the item at or before the top message in view is current. After a jump, the message jumped to stays current until it scrolls out of view.
+- With a mouse, show the timeline as a rail of ticks at the right edge of the list, one tick per item, at most 240px tall and centered on the list's height; it scrolls with the reader so the current tick stays in its middle. The current tick is longer and in `foreground`, the reader's own messages darker than other people's. Pointing at the rail, or a Tab onto it, opens a card with a line for each item, and a line's [Tooltip](../../packages/ui/src/components/tooltip/tooltip.md) shows the rest of its text. The rail is the mouse's alone: a 10px tick is no target for a finger, and a strip at the screen's edge competes with the system's edge swipes.
+- Put Timeline in the thread's More menu, after Search, on every device. It is the timeline's one entry that works everywhere: a touch screen has no rail, and a thread narrower than 360px has no room for one.
+- Open Timeline from the menu as a bottom sheet on a phone and as a popover under the More button on a wider screen: a place to go ([Drawer](../../packages/ui/src/components/drawer/drawer.md#when-to-use)). The sheet opens at half the screen, with the thread still in sight above it, and drags up to its full height, as a sheet does on iOS. Wider than a phone the popover opens where it was asked for and leaves the rest of the screen in view, as iPadOS does with a list opened from a button; in a wide window iPadOS shows a sheet centered, not rising from the bottom, and only the narrow side of a split screen gets a bottom sheet (Artea, 2026-11-08, #proj-raft-ui:10ed1ba5).
+- In the list, give each item its text in up to two lines, then the sender and the time: a touch screen has no tooltip to show the rest (Artea, 2026-11-08). The list opens with the current item near the top, so it is in view in a half-open sheet.
+- Mark the items as a popup's, in the card and the list alike: the item under the pointer or the keyboard fills with `brand-soft`, as a menu item does, and the current item is marked as a menu's current value is, with its text at 600 and its tick long and in ink, and no fill of its own ([States](../foundations/states.md#usage)).
+- Selecting an item, in the card or the list, jumps to the message and marks it as in [Going somewhere](./navigation.md#going-somewhere), and closes the list. Each item is a link, so it can open in a new tab.
+- The phone layout runs below 768px, so a phone held sideways (844px wide) gets the popover, where iOS would still raise a sheet. A phone is rarely turned for a thread; it stays a known difference.
+
+### Following the newest
+
+A conversation grows at its bottom while people read it, and so does every other timeline with the newest at the bottom, such as an agent's Activity log ([Agent profile](../products/raft-chat/agent-profile.md)). What arrives must never take away what the person is reading: a log that jumped back to its top on each new step, so the reader had to scroll down again for the newest, was reported on the web and in the app (artin, 2026-11-09, #triage:44ed2937).
+
+- Open the timeline at its newest entry, unless the person comes to a given entry, which opens in view ([Navigation](./navigation.md#going-somewhere)).
+- While the end is in view, keep it in view as entries arrive: the timeline follows the newest.
+- Once the person has scrolled up, keep what they are reading where it is: a new entry adds below and moves nothing in view. Say how many arrived in the Back to bottom pill, in the timeline's own word: "3 new messages", "3 new steps" ([MessageList](../../packages/ui/src/components/message-list/message-list.md#jump-controls)), and follow again once the end is back in view.
+- Keep each entry the same element across updates, keyed by the entry and never by its place in the list, so a timeline that drops its oldest entries to stay within a limit leaves the rest of it, and the reader's place, alone. Follow on the newest entry changing, not on the count: at the limit the count stays the same while entries keep arriving.
+
+### Floating controls
+
+Three kinds of control float over a conversation: the jump pills over the list (Back to bottom, "3 new messages", "Next unread thread (3)", [MessageList](../../packages/ui/src/components/message-list/message-list.md#jump-controls)), the hover toolbar on a message, and the toolbar over selected text ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#behavior)). They are one family and share one set of metrics: a label in `text-control` at 700 (13/18 on a phone, 14/22 on a desktop), 16px icons, and the control size: a pill is 32px from edge to edge on a touch screen and 34px with a mouse, the size of an ordinary button such as Save in a settings row ([Button](../../packages/ui/src/components/button/button.md#sizes)), and a toolbar's buttons are 28px inside a 36px toolbar on a touch screen and 34px inside a 42px toolbar with a mouse.
+
+- Make a single action a Button at `outline` and `md`: the jump pills. It stands alone, so its own ink edge marks it as a control, and it is built from the Button recipe, so it can't drift from the buttons around Raft.
+- Make a group of actions on one message or one selection a toolbar: buttons 4px inside the frame and 4px apart, 28px on a touch screen and the control height (34px) with a mouse, so the toolbar is 36px or 42px tall (stdrc, 2026-11-05), on `layer-popover` with a seam ring and the soft shadow. It is a popup over the content it acts on, appearing on hover or on selection ([Elevation](../foundations/elevation.md#tokens)); the frame is the edge, so its buttons have none of their own, and it stays compact, so it covers as little of the sender line as it can.
+- Don't give a pill the toolbar's frame or shadow, and don't make a toolbar's buttons Buttons: a pill is a control that stays in place while the list scrolls; a toolbar comes and goes with the content under it.
+
+### Search
+
+- Group results by kind: places and people first, then messages. Group hits in one thread under that thread.
+- Show matched words on a yellow fill, in the text's own weight and with no edge ([Search](../../packages/ui/src/components/search/search.md)).
+- Highlight the message a result jumps to as in [Navigation](./navigation.md#going-somewhere).
+
+## Related
+
+- [Hand-offs and approvals](../people-and-agents/handoffs-and-approvals.md): event lines, status and action cards.
+- [Navigation](./navigation.md): reference chips and links.
+- [Comments](./comments.md): comments on a document, beside the passage they are about; they are not messages.
+- [Built from existing parts](../components/overview.md#built-from-existing-parts): link cards, forwarded messages, translations and multi-select.

@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a rendering, API or accessibility defect.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please include a minimal reproduction.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: "@webees/raft-design-vue 0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: StackBlitz, repository or minimal code.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true

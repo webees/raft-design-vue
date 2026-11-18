@@ -1,0 +1,41 @@
+/*
+ * Local font stack. Upstream ships woff2 files under design/fonts and a
+ * Google Fonts import; this port uses @fontsource so consuming apps get a
+ * pinned, offline-capable font payload with no third-party request.
+ */
+:where(:root) {
+  --heading-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  --sans-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  --mono-font: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:where(:root:lang(zh-TW), :root:lang(zh-HK), :root:lang(zh-MO), :root:lang(zh-Hant)) {
+  --heading-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei UI",
+    "Microsoft JhengHei", "Noto Sans TC", "Noto Sans CJK TC", system-ui, sans-serif;
+  --sans-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei UI",
+    "Microsoft JhengHei", "Noto Sans TC", "Noto Sans CJK TC", system-ui, sans-serif;
+}
+
+:where(:root:lang(ja)) {
+  --heading-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic UI", Meiryo, "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+  --sans-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic UI", Meiryo, "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+}
+
+:where(:root:lang(ko)) {
+  --heading-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --sans-font:
+    "Space Grotesk", Arial, "Helvetica Neue", "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+}

@@ -1,0 +1,138 @@
+---
+title: Lists
+summary: How the rows of a list are drawn — no dividers, one inset rounded shape for hover, press, menu open, selection and focus, the content padded 12px inside that shape, rows spaced 2px apart by the list's gap, a scroller that keeps the shape even, where a row's time and hover actions go, and rows grouped by day.
+---
+
+# Lists
+
+A row of a list is a cell. The row runs the full width of its list, and its states are drawn on one rounded shape inside the row, as tall as the row and inset 8px from each side. The list spaces its rows 2px apart with its `gap` and pads its top and bottom by 8px, as far as the shape sits from its sides, so two filled rows show 2px of the list between them, which separates them without a line: lists have no dividers. The row's content is padded from the shape, 12px inside it at both ends, so nothing in a row touches its shape.
+
+## When it applies
+
+Every list of rows in which each row is one thing to open or pick:
+
+- Activity and notifications: [InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md).
+- The sidebar, and the phone lists of places drawn with the sidebar row: [Sidebar](../../packages/ui/src/components/sidebar/sidebar.md).
+- Search results: [Search](../../packages/ui/src/components/search/search.md) (`SearchEntityResult`, `SearchMessageResult`).
+- Phone lists of places and people, and the entries into other pages: [ListRow](../../packages/ui/src/components/list-row/list-row.md) with `cell`.
+
+It doesn't cover:
+
+- Tables, which keep a hairline between rows because their columns are read across ([Table](../../packages/ui/src/components/table/table.md)).
+- Settings lists: the rows of a settings card (`ListRowGroup` with `plain` ListRows) keep their dividers and row-wide fills. A settings card is one form read top to bottom, and the line ties each setting to the next; an inset rounded shape inside the card's own rounded border would draw a third edge for no gain (design review, 2026-10-26).
+- The compact task and file rows under a message and in a side card, and the task rows of a page of tasks, which keep their lines for now ([Comfort](../foundations/comfort.md#separators); [Tasks](./tasks.md#the-list)).
+- Popup menus and option lists, whose rows follow [Spacing](../foundations/spacing.md).
+- Lists of cards (task cards, the files panel's cards): each card is an object with its own edge, the whole card is the target, and the gap between cards stays.
+
+## Structure
+
+```example
+activity/compositions/activity-inbox
+```
+
+```example
+list-row/compositions/conversations
+```
+
+The four row components share one recipe fragment, `listCell` (`packages/ui/src/lib/list-cell.ts`), so they can't drift apart, and the containers of rows share one gap and one padding:
+
+| Part | Value |
+| --- | --- |
+| Row | Full width, no margin, no border, transparent. The whole row is the target. Its height doesn't change: a sidebar row is `row-height`, 34px on a desktop (38px on a touch screen from 768px, 44px on a phone). |
+| State shape | The row's `::before`: as tall as the row, 8px from the start and end, `radius-control` (8px), under the row's content |
+| Gap between two rows | 2px, the list's `gap` (`gap-0.5`), never a margin or an inset of the shape. At 4px the gap between two conversation rows read too big (design review, 2026-10-26). |
+| The list's ends | 8px of padding at the top and bottom (`py-2`), so the first shape sits 8px below the list's top edge and the last 8px above its bottom, as far as every shape sits from the sides: a rounded shape is measured on all four sides, not only left and right (design review, 2026-10-26). |
+| Containers | `SidebarList`, `SearchResultsList` and a search thread's messages are `flex flex-col gap-0.5 py-2`; `ActivityInboxViewport` is the same column, its bottom padding adding the safe area; `DialogNav` too. Any other list of cells is a `flex flex-col gap-0.5 py-2` column. |
+| Heading → first row | 8px from the bottom of a heading's words to the first shape, in every list: a heading (a sidebar section header or group label, a search section heading, a search thread's header) has no bottom padding, and the list's own 8px is the whole space. A section's empty line (`SidebarSectionEmpty`) sits the same 8px under it. |
+| Content | Padded from the shape, not from the list: 12px inside the shape at the start and at the end (`--cell-pad-x`), so 20px from the list's edges (8px inset + 12px) on a phone and a touch screen; with a mouse on a desktop 8px inside the shape, so 16px from the list's edges, the page inset the heads start on (stdrc, 2026-11-05). Leading avatars, icons and checkboxes start at the shape's inner start; trailing times, counts, the @ sticker, the muted mark and hover-revealed buttons (Mark as Done) end at its inner end. Top and bottom keep the row's own padding: 12px (`py-3`) for InboxItem, search results and ListRow; 8px with a mouse on a desktop for InboxItem and search results, so Activity and search read at the desktop's density; and 8px with a 56px minimum height on a touch screen for InboxItem, search results and a default ListRow; a sidebar row is the row height, 34px with a mouse and 38px on a touch screen from 768px, and centers its 20px line (7px, 9px). `listCell` sets the inline padding, so a row recipe sets none of its own. |
+
+## One edge
+
+A list sits in a column with a head over it, often a toolbar (Filter, Mark all as read, the search filters), and section headings. All of them start on one line, the line the rows' content starts on: **20px from the column's edge on a phone and a touch screen, 16px with a mouse on a desktop**. The rows put their content 8px (the shape) + 12px in, 8px + 8px with a mouse; the column's margin follows them.
+
+| Part | From the column's edge |
+| --- | --- |
+| The head's title, or the shape at its start (the workspace button's avatar, the search field) | 20px (16px with a mouse) |
+| A toolbar's first control, by its shape (the outlined Filter button), and its last, by its words or icon box | 20px (16px with a mouse) |
+| Section headings, the summary, a section's empty line, a banner in the list | 20px (16px with a mouse) |
+| A row's state shape | 8px |
+| A row's leading avatar, tile or checkbox, and its trailing time, counts and buttons | 20px, 12px inside the shape (16px, 8px inside it, with a mouse) |
+
+A phone's other columns keep their 16px ([Alignment](../foundations/alignment.md#usage)). The column's margin is the `--column-margin` variable, which every head, panel notice and footer pads by: 16px on a phone and 20px from 768px, and a column of list cells sets it to the rows' content edge: 20px on a phone and a touch screen, 16px (`--page-inset`) with a mouse on a desktop (`ActivityInboxPanel`, `SidebarRoot`, `SearchShellRoot`). A toolbar or banner of the app's own in such a column pads by `px-(--column-margin)`; an app's own column of cells sets `[--column-margin:20px] md:pointer-fine:[--column-margin:var(--page-inset)]` on its root, the value raft-ui's own columns set; a fixed `[--column-margin:20px]` would put its heads at 20 and its rows at 16 with a mouse.
+
+Why not keep 16px on a phone: the rows would then need their content 8px inside the shape (it touches the shape when filled, the problem this page exists to fix), or the shape 4px from the screen's edge, where it reads as a misplaced full-width band. One margin for the whole column keeps the 8px shape and the 12px inside it at every width (design review, 2026-10-27).
+
+## Times in list rows
+
+A row that says when something happened puts its time at the end of its first line, the title's line, and nowhere else; the lines under it run to the row's end. In a list grouped by day, only today's rows, and any row less than 1 hour old, show their time at rest. These rules come from Activity, where the times and task numbers took so much of the row's width that the content was squeezed (stdrc, 2026-11-05, #proj-raft-ui:e09717fb: "the time shouldn't squeeze the content").
+
+- **Put the time on the first line only.** A trailing column that holds the time over the marks is as wide as its widest part on every line, so a time like "2 hours ago" took its width from the preview as well as the title. On the first line the time costs only the title its width; the second line keeps the row's full width, less its own marks.
+- **Put the row's status marks at the end of the second line**: a task's status chip, the draft mark, the @ sticker, the muted mark, the unread count. The first line holds the title and the time.
+- **In a list grouped by day, show the time at rest only on today's rows, and on any row less than 1 hour old**, short and relative, in Space Mono, `text-mono-meta` and `foreground-hint` ([Typography](../foundations/typography.md#type-scale)). Within today the gap is what people read (how long it has waited), and the day heading already says Today. The format, in full:
+
+  | Time since | Shows |
+  | --- | --- |
+  | Under 1 minute, on any day | now |
+  | 1 to 59 minutes, on any day | 3m, the minutes |
+  | 1 hour or more, still today | 2h, the whole hours |
+
+  No "ago" and no space between the number and its unit, so a time is 2 to 3 characters. Another language uses its own shortest words for the same three steps; the Chinese ones are in its translation of this page.
+- **Show the time of a row less than 1 hour old even under Yesterday.** Just after midnight a row from 6 minutes ago falls under Yesterday, and with no time it would look as old as yesterday morning's rows; it shows 6m until it is 1 hour old, and only then follows the rule for older rows (Jasper, 2026-11-05, #proj-raft-ui:#196).
+- **Show an older row's time only on hover or keyboard focus.** A row from before today that is 1 hour old or more shows no time at rest: its day heading says when. While the pointer is on the row, or the row or a control in it holds keyboard focus, its time appears in the same place, without animation: the clock time, in the person's 12-hour or 24-hour choice (17:20, 5:20 PM; [Writing](../content/writing.md#times)). The heading gives the day, so the clock is enough. A time on every older row would put back the width the grouping saves.
+- **On a touch screen an older row's time isn't on the row.** Nothing hovers there, so the day heading is the row's date, and the conversation the row opens shows each message's time. The press-and-hold menu holds the row's actions and no time, as a message's menu has no date line ([Accessibility](../foundations/accessibility.md#touch)).
+- **Say the time in words in the row's accessible name**, on every row, shown or not: "2 hours ago", "yesterday at 17:20", "Tuesday at 9:05". Read aloud, "2h" is a letter, and a hidden time must still reach someone who can't see the heading.
+- **Keep the time in view when the hover actions appear.** They take the row's end, and the time and the marks move left by their width plus 8px; they don't fade or hide (stdrc, 2026-11-05). The pointer is on the row when people check how old it is before clearing it. In InboxItem this holds for rows built from `InboxItemLine`s; a row that still uses `InboxItemTrailing` keeps fading the time and the marks out while the actions show, until it moves to the line layout ([InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md#rules)).
+- **On a touch screen, leave 12px between an action shown at rest and the time.** There Done shows at rest, as an ink-outline small button, and the time and the marks sit 12px from it, not 8px: the button's 44px target reaches 6px past each edge of its 32px box, so at 8px only 2px would separate the target from the time's text, which opens the row when tapped. 12px is also the space between two actions on a touch screen ([InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md#behavior); Jasper, 2026-11-05, #proj-raft-ui:#196).
+
+## Rows grouped by day
+
+A list ordered by time that people work through, such as Activity ([Raft Chat](../products/raft-chat/README.md#the-bell-and-activity)), groups its rows by day, newest first, under a heading for each day (stdrc, 2026-11-05, #proj-raft-ui:e09717fb, option C1).
+
+- **Name the day as a conversation's date line does**: Today, Yesterday, then the weekday and date, Tuesday, October 20 ([Conversation](./conversation.md#dates-and-grouping)), with the year for an earlier year: Tuesday, October 20, 2025. Count days in the person's own time zone, by the time the row shows.
+- **Draw the heading as a section heading, not a row**: `text-footnote` at weight 700, as every group heading ([Typography](../foundations/typography.md#sizes-by-use)), starting on the rows' content line, 20px from the list's edge (16px with a mouse) ([One edge](#one-edge)), with 8px from its words to the first row's shape ([Structure](#structure)). It has no hover, press or target.
+- **Keep the current day's heading stuck to the top of the list while its rows scroll under it**, on the list's own surface so no row shows through it; the next day's heading pushes it up and out as it reaches the top. Make each day its own group, one wrapper holding its heading and its rows, and stick the heading inside it: a sticky heading stays only within its own group, so when the group's end reaches the top the heading leaves with it, and the next day's heading takes its place instead of stacking on top of it, as headings stuck in one shared list do. An older row shows no time at rest, so its heading is the only thing on screen that says which day it is from; scrolled out of view, the rows would have no date.
+- **Show a heading only for a day that has rows** in the current view: under a filter, a day with nothing left has no heading.
+- **Mark the heading up as a heading one level under the list's title** (an `h3` under Activity's `h2`), so a screen reader can move from day to day.
+
+## Rules
+
+- **Draw no line between two rows of a list.** The 2px between two rows, the leading tiles and avatars, and the space under a section heading separate the rows. A line through a list also cuts through every rounded shape on it.
+- **Split groups with a section heading and space**, never with a line. A heading starts where the row's content starts (20px from the list's edge, 16px with a mouse), not at the shape's edge.
+- **Make the whole row the target.** A row's open button covers the row (`InboxItemTrigger`), or the row is the button itself, so every point of a row, up to its edges, lands on it. The 2px gap between two rows belongs to no row: a click there lands on the list. It is the price of spacing rows with the list's `gap` rather than inside the rows, and it is too narrow to aim at.
+- **Space the rows with the list's gap, and pad its ends by 8px.** Put the rows straight in a column with `gap-0.5 py-2`. A margin on a row, or a shape inset from the row's top and bottom, would make each row draw its own share of the space. In a virtualized list, whose rows are placed one by one, add the 2px to the virtualizer's item spacing instead, since a `gap` doesn't reach rows positioned on their own.
+- **Pad the content from the shape, never from the list.** A shape inset 8px with the content still 16px from the list's edge leaves 8px, or none once an app insets the shape further, and the trailing marks and the Mark as Done button sit on the shape's edge (design review, 2026-10-27: "the check icon and the unread count touch the edge on hover"). Inside the shape the content keeps 12px on both sides (8px with a mouse on a desktop), the same at the start and at the end, in every state: at rest, hovered (with the actions revealed), pressed, selected, located and focused. Nothing inside a row may reach into that 12px, except a ring a part draws outside its own box: a sticker's 1.5px outer edge (a count, the @ sticker) leaves 10.5px between it and the shape. Give a part a slot as wide as its contents (the 20px selection checkbox has a 20px slot). A text that runs long truncates at the inner padding. The value matches the web sidebar's row, the reference the design review named: its shape sits 8px from the sidebar's sides and its trailing count 11.5px inside it (now 12, the same at the start, where it was 9.5).
+- **Start the head, the toolbar and the headings on the rows' content line.** 20px from the column's edge at every width on a touch screen, 16px with a mouse ([One edge](#one-edge)). A toolbar at 16px over rows at 20px leaves two edges 4px apart, which reads as a mistake.
+- **Don't move the shape or the content from outside.** An app that adds side padding to the scroller (`px-2`), or moves the shape's end (`before:right-4`), or sets a row's padding (`px-2.5`), undoes the rule: the shape no longer sits 8px from the list, or the content no longer 12px inside it.
+- **Draw every state on the same shape.** The row stays transparent; hover, press, menu open, selection, the located highlight and keyboard focus fill or ring the shape, never the row's full rectangle:
+
+  | State | Fill on the shape |
+  | --- | --- |
+  | Hover | `fill-cell-hover` |
+  | Press | `fill-cell-press`, at once, with no fade in |
+  | Menu open (a context menu, a long press) | `fill-cell-hover` |
+  | Selected, open beside the list (an active InboxItem, a selected ListRow), located | `fill-cell-selected` |
+  | Keyboard highlight in search | `brand-soft` |
+  | Selected sidebar row | The yellow sticker: `selected`, its 1.5px ink edge inside the shape and the sticker edge around it |
+  | Keyboard focus | The 2px inset ring in `foreground`, inside the shape (inside the sticker's ink edge on a selected sidebar row) |
+
+- **Step the row states up in dark mode, rows only.** In light, `fill-cell-hover`, `fill-cell-press` and `fill-cell-selected` are `fill-subtle`, `fill-medium` and `info-soft`. In dark they are stronger (7.5% and 12% ink, the cyan at 38%), because a 3% fill on a small rounded shape barely shows on a dark surface. The global tiers don't change: other hover and press states keep them ([States](../foundations/states.md#hover-and-press)).
+- **Press the same on a touch screen as with a mouse.** A finger's press shows `fill-cell-press` on the shape as soon as the browser marks the row pressed (`:active`), the same shape and color as a mouse; only hover is gated to devices that hover. A long press that opens the row's menu leaves `fill-cell-hover` while the menu is open.
+- **Don't let a selected or disabled row answer hover or press.** Its own fill stays.
+- **Keep the shape 8px from both edges of the list, whatever the scrollbar: make the scroller of list cells a [ScrollArea](../../packages/ui/src/components/scroll-area/scroll-area.md).** Its overlay scrollbar takes no room, so the shape sits 8px from the scroller's outer edge with the scrollbar showing and without it, on every platform. `ActivityInboxViewport`, `SearchShellViewport` and the Sidebar's `SidebarContent` are ScrollAreas; on a phone the Sidebar scrolls natively, where the platform's scrollbar overlays too. While the scrollbar shows, its thumb covers the last 2px of a row's shape (5px while the pointer is on it and it widens): the medium thumb rests 3px from the edge and is 7px wide, 10px when pointed at, so it reaches 10px and then 13px into the list, against the shape's 8px. That is intended: the thumb shows only while scrolling or pointed at, is translucent and moves nothing, and the Sidebar's medium thumb already sits so; don't give lists the small thumb to avoid it (Jasper, 2026-11-08, #proj-raft-ui:#209). A native classic scrollbar takes its width from the list when it appears, and the shape's end moves in by that much. For a native scroller you can't make a ScrollArea, the 8px list scrollbar (`scrollbar-list`) and `useScrollbarSize` keep the inset: the hook publishes the width the bar takes as `--scrollbar-size`, and the shape gives that much back from its end inset.
+- **Put a list of cells straight in its scroller, with no side padding.** The row brings its own inset. Side padding on the scroller would add to it, and leave a strip at each side that belongs to no row.
+- **Make a row's hover-revealed actions ghost buttons** (`variant="ghost"`; `InboxItemActions` with `reveal="hover"`), in every list of rows. They appear on a row that already shows the hover fill, and an ink border on top of that fill is one more edge in two lines of text; frameless, the button reads as part of the row (stdrc, 2026-11-05, #proj-raft-ui:e09717fb: "Done can become a ghost button"). Its box ends 12px inside the shape like every trailing part: its padding doesn't hang outward as a frameless button's does at the end of a bar ([Comfort](../foundations/comfort.md#edges)), since in a row it would reach into the 12px.
+- **Center the hover-revealed actions on the row's height**, not on its first line: they act on the whole row (stdrc, 2026-11-05: "on hover the Done button must be vertically centered"). The lines beside them make room for them while they show ([Times in list rows](#times-in-list-rows)).
+- **Keep actions shown at rest ink-outline small buttons**: on a touch screen, where `reveal="hover"` shows them at rest, and in rows that wait on the person, such as a notice in [NotificationCenter](../../packages/ui/src/components/notification-center/notification-center.md). With no hover fill around it, a frameless icon at rest reads as a mark, not a button (Jasper, 2026-11-05, #proj-raft-ui:b4d8d24f).
+
+## Wide and narrow
+
+The shape, the content's 12px inside it, and the column's 20px margin are the same at every width on a touch screen; with a mouse on a desktop the content is 8px inside the shape and the margin 16px ([One edge](#one-edge)). On a phone the sidebar row grows to 44px for a finger, and its shape with it; the 2px between two rows stays. On a phone, too, the shape is 8px from both edges of the screen: the scrollbar overlays the list and takes no room ([Rules](#rules)).
+
+- **In a row narrower than 360px, show a status by its color mark only.** A status chip keeps its pixel, in the status's color, and drops its word; the word goes to a tooltip on the pixel and into the row's accessible name. At that width the word ("In progress") takes about a third of a second line already shortened by its marks (stdrc, 2026-11-05, #proj-raft-ui:e09717fb). Measure the row, not the window: Activity's column narrows to 320px on any screen ([Switch on the region's width](./responsive.md#switch-on-the-regions-width)). A tooltip doesn't open on touch; there the word is still in the row's name and in what the row opens.
+
+## Related
+
+- [States](../foundations/states.md#hover-and-press): the hover and press tiers, and the located highlight.
+- [Shape](../foundations/shape.md#radii): `radius-control`.
+- [Comfort](../foundations/comfort.md#separators): where lines are still drawn.
+- [InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md), [ListRow](../../packages/ui/src/components/list-row/list-row.md), [Sidebar](../../packages/ui/src/components/sidebar/sidebar.md), [Search](../../packages/ui/src/components/search/search.md).

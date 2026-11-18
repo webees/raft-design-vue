@@ -1,0 +1,20 @@
+name: Feature or component request
+description: Propose a new component port or capability.
+labels: ["enhancement", "triage"]
+body:
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream component or doc
+      description: Link to the component in botiverse/raft-design.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: Include Vue-specific differences from the React API.

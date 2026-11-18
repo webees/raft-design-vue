@@ -1,0 +1,44 @@
+name: Upstream drift
+
+on:
+  schedule:
+    - cron: "17 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: bun install --frozen-lockfile
+      - name: Check for upstream drift
+        id: drift
+        run: |
+          set +e
+          bun run check:upstream --json > upstream-report.json
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+      - name: Sync upstream
+        if: steps.drift.outputs.status != '0'
+        run: bun run sync:upstream --ref main
+      - name: Rebuild generated artifacts
+        if: steps.drift.outputs.status != '0'
+        run: bun run build:tokens
+      - name: Open pull request
+        if: steps.drift.outputs.status != '0'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/upstream-sync
+          title: "chore: sync upstream raft-design"
+          commit-message: "chore: sync upstream raft-design"
+          body-path: upstream-report.json
+          labels: upstream
+          delete-branch: true

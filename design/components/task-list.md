@@ -1,0 +1,61 @@
+---
+title: TaskList
+summary: The list view of tasks — one collapsible group per status, in status order, each holding task cards.
+status: stable
+aliases: []
+layer: collaboration
+category: tasks
+related: [task-card, task-board, tasks]
+---
+
+# TaskList
+
+A TaskList groups tasks by status, one collapsible group per status, in the same order as the columns of a [TaskBoard](../task-board/task-board.md). A page of tasks doesn't use it for its list: that list is grouped by the person's relation to each task and made of rows ([Tasks](../../../../../design/patterns/tasks.md#the-list)). When to show which view, and which groups start collapsed, is in [Tasks](../../../../../design/patterns/tasks.md#rules).
+
+```example
+task-list/compositions/task-list
+```
+
+## When to use
+
+| Situation                                   | Use                                                                               |
+| ------------------------------------------- | --------------------------------------------------------------------------------- |
+| Tasks by status in one column               | TaskList                                                                          |
+| The list of a page of tasks                 | Its rows, by relation ([Tasks](../../../../../design/patterns/tasks.md#the-list)) |
+| Tasks by status, with room for five columns | [TaskBoard](../task-board/task-board.md)                                          |
+| One task                                    | [TaskCard](../task-card/task-card.md)                                             |
+
+## Anatomy
+
+- `TaskListRoot`: the stack of groups. Required.
+- `TaskSection`: one status. A collapsible section. Required, one per status.
+  - `TaskSectionTrigger`: the group heading, which collapses the group.
+    - `TaskSectionChevron`: the arrow before the heading.
+    - `TaskSectionHeading`: `TaskSectionBadge` (the status pixel and name) and `TaskSectionCount`.
+  - `TaskSectionPanel` and `TaskSectionItems`: the cards.
+  - `TaskSectionEmpty`: what an empty group says.
+
+## States
+
+| State       | Look                                                                |
+| ----------- | ------------------------------------------------------------------- |
+| Collapsed   | Only the heading and its count show                                 |
+| Empty group | A dashed `line-seam` box with one line of text in `foreground-hint` |
+
+```example
+task-list/compositions/task-list-empty-sections
+```
+
+## Behavior
+
+- Scroll every group in one viewport. Groups don't scroll on their own.
+- Mount only the visible cards of a tall group: make [VirtualList](../virtual-list/virtual-list.md) the viewport, with the group headers and cards as its rows, or use a virtualizer of your own.
+
+## Content
+
+- Write an empty group as "No", the status and "tasks", with the status spelled as on its chip ([Writing](../../../../../design/content/writing.md#voice)): "No Backlog tasks."
+
+## Accessibility
+
+- Each group is a Base UI `Collapsible` rendered as a `section`; its trigger is a button with `aria-expanded`, named by the status and count it contains.
+- Show the count in the heading also when the group is collapsed, so the trigger still says how many tasks it hides.

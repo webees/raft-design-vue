@@ -1,0 +1,13 @@
+{
+  "name": "@webees/upstream-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "bun run src/sync.ts",
+    "check": "bun run src/check.ts",
+    "audit": "bun run src/audit.ts",
+    "parity": "bun run src/parity.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

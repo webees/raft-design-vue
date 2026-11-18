@@ -1,0 +1,173 @@
+import { listCell, listCellStates } from "../../lib/list-cell";
+import { tv } from "../../lib/tv";
+
+export const inboxItemRecipe = tv({
+  slots: {
+    item: [
+      "relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-3 text-left",
+      "has-data-[slot=inbox-item-selection]:grid-cols-[auto_minmax(0,1fr)_auto]",
+      "has-data-[slot=inbox-item-leading]:grid-cols-[auto_minmax(0,1fr)_auto]",
+      "has-data-[slot=inbox-item-selection]:has-data-[slot=inbox-item-leading]:grid-cols-[auto_auto_minmax(0,1fr)_auto]",
+      "gap-x-3 gap-y-0 rounded-none border-0 py-3",
+      "md:pointer-fine:py-2",
+      "pointer-coarse:min-h-14 pointer-coarse:py-2",
+      listCell,
+      listCellStates,
+      "data-[active=true]:before:bg-fill-cell-selected",
+      "data-disabled:pointer-events-none",
+      "has-[[data-slot=inbox-item-open]:focus-visible]:keyboard:before:inset-ring-2 has-[[data-slot=inbox-item-open]:focus-visible]:keyboard:before:inset-ring-foreground",
+      "not-data-[density=compact]:has-data-[slot=inbox-item-trailing]:[--inbox-item-content-display:grid] not-data-[density=compact]:has-data-[slot=inbox-item-trailing]:[--inbox-item-content-end:-1]",
+    ],
+    itemTrigger: ["absolute inset-0 z-base outline-none"],
+    itemLeading: [
+      "pointer-events-none relative z-raised flex size-9 shrink-0 items-center justify-center",
+    ],
+    itemLeadingBadge: [
+      "absolute -right-0.5 -bottom-0.5 z-raised inline-flex size-3.5 items-center justify-center",
+      "rounded-[3px] border border-sticker-ink outline-2 outline-layer-canvas outline-solid",
+      "bg-layer-canvas bg-[linear-gradient(var(--info-soft),var(--info-soft))] text-foreground",
+      "[&_svg]:size-2.5 [&_svg]:shrink-0",
+    ],
+    itemSelection: ["relative z-raised flex size-5 shrink-0 items-center justify-center"],
+    itemContent: [
+      "pointer-events-none relative z-raised min-w-0 flex-1 text-left",
+      "-col-start-3 col-end-(--inbox-item-content-end) row-start-1",
+      "[display:var(--inbox-item-content-display,block)] grid-cols-subgrid",
+    ],
+    itemContext: [
+      "col-span-full nth-[-n+2]:col-[1/2]",
+      "flex min-w-0 items-center",
+      "mb-0.5 gap-1.5 py-0",
+      "text-caption text-foreground-hint",
+    ],
+    itemSubtitle: [
+      "col-span-full nth-[-n+2]:col-[1/2]",
+      "min-w-0",
+      "mt-0.5 mb-0 py-0",
+      "text-caption text-foreground-hint",
+    ],
+    itemHeading: ["col-span-full nth-[-n+2]:col-[1/2]", "flex min-w-0 items-start gap-2", "mb-0"],
+    itemTitle: [
+      "relative line-clamp-2 min-w-0 flex-1 pl-[18px]",
+      "[&>svg]:absolute [&>svg]:top-[calc((1lh-14px)/2)] [&>svg]:left-0 [&>svg]:size-3.5",
+      "font-sans text-subhead font-semibold text-foreground-muted",
+      "group-data-[unread=true]/inbox-item:font-bold group-data-[unread=true]/inbox-item:text-foreground",
+      "[&>svg]:text-foreground-hint",
+    ],
+    itemTrailing: [
+      "pointer-events-none relative z-raised col-[-2/-1] row-start-1",
+      "flex shrink-0",
+      "mt-0 flex-col items-end gap-2 pt-px",
+      "max-md:flex-col max-md:items-end max-md:gap-2",
+      "after:hidden after:size-2.5 after:-mb-px after:shrink-0 after:rounded-[2px] after:border-[1.5px] after:border-sticker-ink after:bg-attention-400",
+      "group-data-[unread=true]/inbox-item:after:block",
+      "*:not-data-[reveal=hover]:opacity-[calc(1-var(--inbox-item-reveal-aside,0)*var(--inbox-item-revealed,0))] after:opacity-[calc(1-var(--inbox-item-reveal-aside,0)*var(--inbox-item-revealed,0))]",
+      "*:not-data-[reveal=hover]:mr-(--inbox-item-aside-room,0px) after:mr-(--inbox-item-aside-room,0px)",
+      "*:not-data-[reveal=hover]:transition-opacity after:transition-opacity",
+      "pointer-fine:has-[>[data-reveal=hover]]:[--inbox-item-reveal-aside:1]",
+      "pointer-coarse:has-[>[data-reveal=hover]]:[--inbox-item-aside-room:--spacing(11)]",
+      "group-hover/inbox-item:[--inbox-item-revealed:1] group-focus-within/inbox-item:[--inbox-item-revealed:1]",
+      "group-data-[active=true]/inbox-item:[--inbox-item-revealed:1] group-data-popup-open/inbox-item:[--inbox-item-revealed:1]",
+      "has-[>[data-reveal=hover]_[data-popup-open]]:[--inbox-item-revealed:1]",
+    ],
+    itemStatusWord: ["shrink-0 @max-[320px]/inbox-item-row:hidden"],
+    itemStatusPixel: ["hidden items-center @max-[320px]/inbox-item-row:inline-flex"],
+    itemListGroup: ["flex flex-col gap-0.5", "mt-1.5 first:mt-0"],
+    itemListHeading: [
+      "mb-0.5 px-(--surface-inset) py-1",
+      "font-sans text-footnote font-bold text-foreground-hint",
+    ],
+    itemMarks: ["flex h-5 shrink-0 items-center justify-end gap-1.5", "text-foreground-hint"],
+    itemHoverTarget: ["pointer-events-auto"],
+    itemTimestamp: [
+      "shrink-0 whitespace-nowrap text-right tabular-nums",
+      "font-mono text-mono-meta text-foreground-hint",
+    ],
+    itemLine: [
+      "flex h-(--text-callout--line-height) min-w-0 items-center gap-2",
+      "*:not-data-[slot=inbox-item-marks]:min-w-0 *:not-data-[slot=inbox-item-marks]:flex-1",
+      "*:data-[slot=inbox-item-marks]:empty:hidden",
+    ],
+    itemBody: [
+      "col-span-full nth-[-n+2]:col-[1/2]",
+      "line-clamp-2",
+      "mt-0.5 text-callout text-foreground-muted",
+    ],
+    itemMessage: [
+      "col-span-full nth-[-n+2]:col-[1/2]",
+      "min-w-0",
+      "mt-0.5 line-clamp-2 text-callout text-foreground-muted",
+    ],
+    itemSender: ["font-semibold text-foreground"],
+    itemMetadata: [
+      "col-span-full nth-[-n+2]:col-[1/2]",
+      "flex min-h-5 flex-wrap items-center gap-1.5",
+      "mt-2",
+    ],
+    itemActions: [
+      "pointer-events-auto flex shrink-0 items-center",
+      "order-last gap-0.5",
+      "*:data-[slot=panel-action]:h-8 *:data-[slot=panel-action]:min-w-8 [&>[data-slot=panel-action]>svg]:size-[18px]",
+      "*:data-[slot=panel-toggle-action]:h-8 *:data-[slot=panel-toggle-action]:min-w-8 [&>[data-slot=panel-toggle-action]>svg]:size-[18px]",
+      "[&>[data-slot=panel-toggle-action][data-pressed]]:border-transparent",
+      "[&>[data-slot=panel-toggle-action][data-pressed]]:bg-transparent",
+      "[&>[data-slot=panel-toggle-action][data-pressed]]:text-foreground",
+      "[&>[data-slot=panel-toggle-action][data-pressed]]:hover:bg-fill-medium [&>[data-slot=panel-toggle-action][data-pressed]]:active:bg-fill-medium",
+      "pointer-coarse:gap-3",
+      "pointer-coarse:*:data-[slot=panel-action]:after:absolute pointer-coarse:*:data-[slot=panel-action]:after:-inset-1.5",
+      "pointer-coarse:*:data-[slot=panel-toggle-action]:after:absolute pointer-coarse:*:data-[slot=panel-toggle-action]:after:-inset-1.5",
+    ],
+  },
+  variants: {
+    density: {
+      compact: {
+        item: [
+          "items-center",
+          "has-data-[slot=inbox-item-line]:@container/inbox-item-row",
+          "has-data-[slot=inbox-item-line]:[--inbox-item-content-end:-1]",
+          "has-data-[slot=inbox-item-line]:pointer-fine:hover:[--inbox-item-actions-room:--spacing(10)] has-data-[slot=inbox-item-line]:pointer-fine:[:focus-within,[data-active=true],[data-popup-open],:has([data-popup-open])]:[--inbox-item-actions-room:--spacing(10)]",
+          "has-data-[slot=inbox-item-line]:pointer-coarse:[--inbox-item-actions-room:--spacing(11)]",
+          "has-data-[slot=inbox-item-line]:hover:[--inbox-item-time-display:inline] has-data-[slot=inbox-item-line]:keyboard:focus-within:[--inbox-item-time-display:inline]",
+        ],
+        itemContent: [
+          "has-[>[data-slot=inbox-item-line]]:has-[>[data-reveal=hover]]:pr-(--inbox-item-actions-room,0px)",
+        ],
+        itemHeading: [
+          "has-[>[data-inbox-item-time]]:h-(--text-subhead--line-height) has-[>[data-inbox-item-time]]:items-baseline",
+          "*:data-inbox-item-time:pointer-events-auto *:data-inbox-item-time:cursor-default",
+        ],
+        itemTitle: ["line-clamp-1", "pl-0 has-[>svg]:pl-[18px]"],
+        itemTrailing: [
+          "gap-0 pt-0",
+          "max-md:gap-0",
+          "group-data-[unread=true]/inbox-item:after:hidden",
+        ],
+        itemTimestamp: ["leading-5"],
+        itemBody: ["line-clamp-1", "mt-0"],
+        itemMessage: ["line-clamp-1", "mt-0"],
+      },
+    },
+    reveal: {
+      hover: {
+        itemActions: [
+          "absolute top-0 right-0 z-raised",
+          "pointer-events-none opacity-0 transition-opacity",
+          "group-hover/inbox-item:pointer-events-auto group-hover/inbox-item:opacity-100",
+          "group-focus-within/inbox-item:pointer-events-auto group-focus-within/inbox-item:opacity-100",
+          "group-data-[active=true]/inbox-item:pointer-events-auto group-data-[active=true]/inbox-item:opacity-100",
+          "group-data-popup-open/inbox-item:pointer-events-auto group-data-popup-open/inbox-item:opacity-100",
+          "has-data-popup-open:pointer-events-auto has-data-popup-open:opacity-100",
+          "pointer-coarse:pointer-events-auto pointer-coarse:opacity-100 pointer-coarse:only:static",
+        ],
+        itemTimestamp: ["[display:var(--inbox-item-time-display,none)]"],
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      density: "compact",
+      reveal: "hover",
+      class: { itemActions: ["top-1/2 -translate-y-1/2", "pointer-coarse:only:translate-y-0"] },
+    },
+  ],
+});

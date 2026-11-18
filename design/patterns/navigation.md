@@ -1,0 +1,306 @@
+---
+title: Navigation
+summary: How people reach destinations, see where they are, follow links, go back, close things, switch servers and switch between the views of one place.
+redirectFrom: [decisions/0007-workspace-switcher-sheet]
+---
+
+# Navigation
+
+A product's destinations are on the tab bar on a phone and on the rail on desktop. Where you are on paper is always yellow, in every theme (`selected`: [Themes](../foundations/themes.md#signals)); on the frame, the rail's selected item takes the theme's frame colors ([Where you are](#where-you-are)). Going back follows the history; a popup closes with ×, Esc or a press outside it. People move between many places and many servers in a day, so every product puts these in the same spots and marks them the same way.
+
+## Principles
+
+Every navigation rule on this page and on the pages that link to it follows from these three. Decided on 2026-10-21 by stdrc; Lagoon owns the navigation spec they come from.
+
+1. **One structure, each platform's own look.** Phone web, iOS and Android have the same destinations, in the same order, at the same levels, with the same attention-dot rules; only three things look native: the tab bar, the system Back gesture and the page transitions ([What each platform draws](#what-each-platform-draws)). People carry where things are from one device to another, not how a bar is drawn, and each platform's own tab bar and gestures are what its people already know.
+2. **One "where am I" per page.** A tab's top-level page says where you are with the tab bar; a pushed page says it with Back. A page never shows both, because the tab bar says which part of the product you are in and Back says where you came from: shown together, they give two ways out that lead to different places.
+3. **Pages of the same kind look the same.** Every top-level page has one kind of top, and every pushed page has one kind of top ([Page structure](./page-structure.md#phone)). A change to one of them changes the whole kind, so people never have to relearn a page of a kind they already know.
+
+## When it applies
+
+Every Raft product. Which destinations a product has and in which order is on its own page ([Raft Chat](../products/raft-chat/README.md#destinations)).
+
+## Structure
+
+| Need | Phone | Desktop |
+| --- | --- | --- |
+| Destinations | The tab bar at the bottom, at most 5 slots, on top-level pages only ([MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md)) | The rail, icons only, with Help and Settings at its bottom, and the bell above them when there is no web top bar ([AppRail](../../packages/ui/src/components/app-rail/app-rail.md)) |
+| Server | The last tab of the tab bar is the current server; it opens the server list and the server's own pages as a popover above the bar. The first top-level page's top bar has the server switcher too ([Servers](#servers)) | The workspace button and the strip of server avatars at the left of the web top bar ([Page structure](./page-structure.md#the-web-top-bar)) |
+| Search | The Search tab on the tab bar, a top-level page like the others (no Back, the bar stays). It is the only way in to searching everything ([Search on a phone](#search-on-a-phone)) | The search field in the center of the web top bar |
+| Notifications | The bell at the right of the first top-level page's top bar, and on no other top-level page | The bell at the right of the web top bar; without the top bar, at the bottom of the rail, above Help |
+| Open an item from a destination's list (an agent, a person, a computer) | A pushed page with Back | The side panel beside the list, the item selected in the list ([Opening an item](#opening-an-item)) |
+| Close a side panel (a thread, a profile) | Back: on a phone a thread is a pushed page, and a profile covers the page like one | × beside the main area, Back when it covers it ([Closing](#closing)) |
+
+In Raft Chat the first top-level page is Home ([Raft Chat — Home](../products/raft-chat/home.md)).
+
+## Rules
+
+### What each platform draws
+
+Principle 1 keeps three things native: the tab bar, system Back and the page transitions. Pull to refresh is the platform's own in the iOS and Android apps and drawn by raft-ui on phone web, where the browser has none ([Refreshing](#refreshing)). Everything else is drawn by Raft and is the same on phone web, iOS and Android.
+
+- Keep the destinations, their order, their levels and the attention-dot rules the same on phone web and in the iOS and Android apps.
+- Draw the tab bar in each platform's own way: phone web uses raft-ui's [MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md) edge bar, iOS the system tab bar, Android its bottom navigation bar. Don't imitate one platform's look on another, such as a floating glass bar on web or a floating pill anywhere.
+- Use the platform's own system Back: the edge swipe on iOS, the system Back button on Android, the browser's Back on the web. What each one does is in [Going back](#going-back).
+- Use the platform's default transition when a page is pushed or popped ([Motion](../foundations/motion.md#usage)).
+- Use the platform's own pull to refresh in the iOS and Android apps, and raft-ui's [PullToRefresh](../../packages/ui/src/components/pull-to-refresh/pull-to-refresh.md) on phone web, on the pages that have one ([Refreshing](#refreshing)).
+- Draw the top bars, Back, the titles and the filter rows with Raft's own parts ([Page structure](./page-structure.md#phone)), never with a platform's navigation bar. Their rules, such as no large title, are Raft's own and don't change with a platform's default.
+
+### Refreshing
+
+Decided on 2026-10-23 by stdrc. A page that updates by itself never asks people to refresh it: if a pull were needed to see what is new, people could never trust that what they see is current, and would pull every page to be sure. So a page fed by realtime updates stays current on its own, and pull to refresh is only for pages that load a snapshot and have no other way to catch up.
+
+- On a phone, put pull to refresh only on pages that load a snapshot when they open and don't update themselves. Which pages these are in Raft Chat is in [Raft Chat](../products/raft-chat/README.md#pull-to-refresh).
+- Never put it on a page fed by realtime updates, such as messages and threads. These stay current on their own, and catch up when the app comes back to the foreground or reconnects; a page that falls behind is a bug in its updates.
+- In the iOS and Android apps, use the platform's own pull to refresh control, in Raft's look.
+- On phone web, and in the installed web app, use raft-ui's [PullToRefresh](../../packages/ui/src/components/pull-to-refresh/pull-to-refresh.md): the browser has no pull to refresh inside a page's scroll container, nor any in standalone mode.
+- Make a pull feel the same everywhere, with the numbers the mobile team set for the iOS app (mobile #3553), approved by the product lead: a release refreshes once the pull, damped by a 0.55 rubber band, has passed 100px; the indicator holds at 60px while refreshing and never goes past 140px, so a long drag can't push the list off a small screen. Except on Android, the threshold latches, as with iOS's `UIRefreshControl`: once passed, a release refreshes even if the finger moved back up, so someone who eases off still gets the refresh they asked for. After the release, and when the refresh ends, the indicator goes back in 300ms with an ease-out and no overshoot or bounce, which would read as a second pull; with reduced motion, at once.
+- On Android, follow Material 3: the indicator travels down over the content, which stays still, and the phone ticks once (a 10ms vibration) when the pull passes the threshold. There is no latch: moving back above the threshold before release disarms the pull, and the release doesn't refresh. Material 3 lets a pull be taken back; iOS commits once armed. Other platforms don't vibrate.
+- On Android web, the indicator is Android's own: Material 3's progress arc on a small disc, which grows with the pull, is faint until the pull is armed and again once it is disarmed, turns while refreshing and scales away when the refresh ends (decided by stdrc on 2026-10-23, overriding for Android the earlier rule of the Spinner on every platform). On Android a pull is known by that arc, in Chrome and in every app, so phone web draws the same one ([PullToRefresh](../../packages/ui/src/components/pull-to-refresh/pull-to-refresh.md#on-android)).
+- Everywhere else, iOS included, the indicator is the design system's loading icon, the [Spinner](../../packages/ui/src/components/spinner/spinner.md), never a platform's own spinner (decided by artin). While pulling it stands still and shows how far the pull has come; while refreshing it spins.
+- Don't put a Refresh button on a phone: pulling is the one way to refresh there. A Retry button in a failed load's error state stays, because it recovers from the failure rather than refreshing content ([Feedback](./feedback.md#empty-loading-and-failed)).
+- When a refresh fails, keep the content on screen and show a `warning` toast with the same message as a failed first load, not a banner: what is on screen is still useful, only not the newest.
+
+### Where you are
+
+- Mark the current place with a yellow sticker on paper: sidebar rows, segmented controls, tabs. Yellow means "you" everywhere, so where you are and what calls you share one color ([0011](../decisions/0011-yellow-navigation-selection.md)).
+- On the tab bar, the sticker wraps only the icon: a whole yellow cell at the bottom of the screen would read as a second frame ([MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md#states)).
+- On the rail, the selected item is a white sticker on the yellow frame in light mode and a yellow sticker in dark mode, where the frame is neutral ([0012](../decisions/0012-yellow-rail-selection-in-dark-mode.md)). The rail is part of the frame, so in another theme its selected item takes that theme's frame colors (`layer-frame-active`), gray in Boring Gray ([Themes](../foundations/themes.md#signals)).
+- Put a yellow location tile beside the title of the place the person is in, such as a channel ([IconTile](../../packages/ui/src/components/icon-tile/icon-tile.md)).
+- Name a rail item in a tooltip to its right. The rail shows no labels, so that it stays narrow: 48px with a mouse, 56px on a touch screen, plus its seam ([Spacing](../foundations/spacing.md#heights)).
+- Show an attention dot on a destination when something in it waits for the person ([States](../foundations/states.md)). Which destinations carry one is on the product's page.
+- Never show the dot on the selected destination, with no exception for any destination or product: the person is already there, and fewer rules are easier to keep.
+- Put only the dot on a destination's icon, never a number ([Badge](../../packages/ui/src/components/badge/badge.md#rules)): the count belongs inside the page, next to what it counts.
+
+### Collapsing the sidebar
+
+On desktop, people can hide the sidebar to give the main area the whole width, and bring it back the same way.
+
+- Put the toggle in the rail, as the first item of its footer, above Help and Settings. It belongs to the frame rather than to a page, so it stays in one spot whatever the main area shows ([AppShell](../../packages/ui/src/components/app-shell/app-shell.md#variants)).
+- Show `panel-left-close` while the sidebar is shown and `panel-left-open` while it is hidden: the icon shows what pressing it does.
+- Name it in a tooltip to its right, like every rail item: Collapse sidebar or Expand sidebar, then the shortcut as a `KbdShortcut` with the keys `mod` and `\` ([Kbd](../../packages/ui/src/components/kbd/kbd.md)): two caps, ⌘ \ on macOS and Ctrl \ elsewhere, never Ctrl+\ in one cap. The shortcut works anywhere in the app, also while focus is in a text field.
+- Remember the state on the device, like the sidebar's width: the sidebar comes back the way it was left, after a reload too.
+- Show the toggle, and accept the shortcut, only where the sidebar is the navigation column beside the main area. A phone has no sidebar beside the main area, and on a page without a sidebar there is nothing to hide; the remembered state waits for the next page that has one.
+
+### Going somewhere
+
+- Link to places and items in running text with reference chips: a soft pink chip for a channel, a soft cyan chip for a thread, a computer or another piece of content. A link that an app previews is a piece of content too, a cyan chip ([App links](#app-links)). Link to the rest of the web with a blue link.
+- Mark the message someone jumped to as located: `info-soft` at once, fading out by 2 seconds, long enough to find it and short enough not to look selected ([Located](../foundations/states.md#located)). The same goes for every jump: to a reply in a thread, to a file comment's passage, to an Activity item.
+
+#### App links
+
+An app connected to a server, such as Stamp for code review, can preview its own links: when someone posts the address of a pull request, a document or a run, the app supplies a title and details for it. The link stays where it was written, in the sentence, as a cyan reference chip with the app's icon and the app's title; the details open on hover. Which of these the app wants, a chip, its hover card or a card in the message, it lists in its answer ([What an app's answer lists](#what-an-apps-answer-lists)).
+
+```example
+message-reference/compositions/app-links
+```
+
+- Draw an app link as the app's answer lists it ([What an app's answer lists](#what-an-apps-answer-lists)): a chip in the text (`MessageReferenceChip variant="info"`) when it lists `inline`, a card after the paragraph only when it lists a block card, and the author's plain link otherwise. Raft doesn't decide on its own to draw a card: a card moves the link out of its sentence to the bottom of the message, so it appears only where the app asks for one.
+- Draw a message that is only a link the same way: one link is one item whether or not words surround it.
+- Write the app's `title` in the chip exactly as the app sends it. Don't compose a format of Raft's own, such as "repo#number · title": the title says what the app wants to say, in its own product's terms, and Raft doesn't interpret what an app's item is.
+- Cap the chip and truncate a long title at the end, so each link takes at most one line ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#app-links)).
+- Lead the chip with the app's registered icon, the image Raft stores for the app and serves itself. Never show an image from an address the app sends with the preview: an image fetched from the app on every view tells the app who read the message and when, and an app could draw an icon that passes for one of Raft's own.
+- Show no state on the chip, in its icon or its color. Which states an item has is the app's concept, not Raft's, and the status colors mean task and presence states: a lime "done" on a merged pull request would read the opposite of what developers know from GitHub, where merged is purple and green is open. The state is in the app's words, on the hover card.
+- While the preview loads (it is fetched for each reader after the message appears), show the link as `MessageReferencePending`: a gray chip with the address shortened to its host and path, capped at the same width. When the preview arrives only the icon and the words change, so the text around the chip moves as little as it can.
+
+```example
+message-reference/compositions/app-link-pending
+```
+
+- When the reader hasn't allowed the app yet and the server asks whether to show its previews, keep the gray chip with the shortened address (`MessageReferenceChip variant="muted"`), as a button, not a link: a link would open the address at the same click and skip the question. It opens no card. Clicking, tapping or pressing Enter on it asks first, the same on every device, in a [Popover](../../packages/ui/src/components/popover/popover.md): Open link goes without previews, Show previews allows them. A card can't ask: it is read-only, and its buttons can't be reached by keyboard or touch.
+- On desktop, when the answer lists a hover card, hovering or focusing the chip opens the app's item card with the details: the id, the title, a state and a line of details in the app's words, its actions, and the app's name and host ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card)). Raft puts no colors of the app's on it.
+- On a phone, tapping the chip opens the link. A preview card doesn't open on touch, so make the chip a real link (`render={<a href="…" target="_blank" rel="noopener noreferrer" />}`) that opens in a new tab, leaving the conversation where it was.
+
+#### What an app's answer lists
+
+An app answers for a link with a list of `items` (protocol version 3), and Raft draws them in the list's order. The app states every way its link is drawn, and Raft infers none: an item it doesn't list is not drawn.
+
+```json
+{
+  "version": 3,
+  "title": "PR 123: Fix sign-in",
+  "items": [
+    { "type": "inline", "title": "PR 123", "badge": { "text": "Review", "tone": "review" } },
+    { "type": "card", "placement": "block", "title": "…", "card_revision": "r1", "business_revision": "b1", "card": {} },
+    { "type": "connect_account", "connect_url": "…" }
+  ]
+}
+```
+
+- `inline`: the link is drawn as the chip, with the item's `title`. Its `badge` is never drawn on the chip, which shows no state (above); a state is drawn on the cards.
+- `card` with `placement: "hover"`: the chip's hover card ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card)).
+- `card` with `placement: "block"`: the card drawn in the message, after the link's paragraph ([Block cards](#block-cards)). The link itself is never replaced.
+- `connect_account`: the reader connects an account to the app first. Raft draws it as before: the chip's card says so in Raft's own words, with one button to the app's `connect_url`.
+- A `badge`, on an `inline` item or in a card, has the state's `text` and a `tone`, which says what the state means. A card's badge may also have a `color`, `#RRGGBB`, the app's color for it. The server drops a color that is invalid or that the app didn't declare, so a client gets a valid color or none. Raft draws it only as the fill of the state's badge, in a block card ([Block cards](#block-cards)) and in the hover card the chip opens ([PreviewCard](../../packages/ui/src/components/preview-card/preview-card.md#item-card)): the same badge on both, since many apps, Stamp among them, send only hover cards (the hover card was added on 2026-11-14, when no Stamp link on production showed its color). An `inline` badge has no `color`: the chip shows no state (above), and a field nothing draws would only be dropped.
+
+| The answer lists | Raft draws |
+| --- | --- |
+| `inline` | The chip, with no hover card |
+| `inline` and hover card | The chip, with its hover card |
+| Block card | The author's plain link, and the card after its paragraph |
+| `inline` and block card | The chip, with no hover card, and the card after its paragraph |
+| `connect_account` | The chip's card asking the reader to connect, as before |
+| Nothing (`[]`) | The author's plain link |
+
+- An answer lists at most one item of each kind for now: one chip and one card. The server refuses an answer with two of a kind (two `inline`, two cards, or a card beside `connect_account`) and the link stays plain (RFC 076 §14), so a client never has to choose between them.
+- Skip an item whose `type` Raft doesn't know. Raft passes a client only the types it declares it can draw: a block card only to a client that declares `block.v1`.
+- A client that reads only version 2 draws an `inline`-only answer as a plain link. A hover card, `connect_account` and an empty list look as they did. A block card is drawn as above where the client declares `block.v1`; elsewhere the link is a chip with the card on hover, the chip taking the card's title when the answer has no `inline`. The phone app reads only version 1 and is not affected.
+
+#### Block cards
+
+A `card` with `placement: "block"` is drawn in the message itself, after the link's paragraph, such as Stamp's approval card, whose buttons have to be pressed where the reader is: a hover card opens only on hover, its buttons can't be reached by keyboard or touch, and on a phone a tap opens the link instead. Raft draws it as an [AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md): the item, under Raft's header naming the app, with buttons that work by mouse, keyboard and touch. A block is the app's request, not a promise: in every case below Raft draws no card, and the design system may add cases without changing the protocol.
+
+```example
+app-link-card/compositions/in-message
+```
+
+- Leave the link where the author put it, and never replace it with the card, whether it is inside a sentence or alone in its paragraph. Taking a link out of a sentence leaves the sentence a word short, and a link that turned into a card only when it stood alone would make the same answer look different by where it was written.
+- Draw the link as its answer lists it. With `inline`, it is the chip, and the card is drawn after its paragraph: both. Without `inline`, it stays the author's plain link, with the card after its paragraph: the app asked only for the card, and a chip of Raft's own guessing would put words in the app's mouth.
+- A link alone on its line whose answer lists `inline` and a block card shows the chip right above the card, so the title is there twice. That is accepted: the app chose both, and an app that doesn't want it leaves out `inline`, so the author's plain link stays above the card.
+- A chip opens a hover card only when the answer lists one. A chip whose card is drawn below it has none, since an answer holds one card: a second copy floating over the first would only cover the message. Clicking the chip still opens the link.
+- Add the card right after the link's paragraph, never gathered at the bottom of the message: a card at the bottom is the matching back the rules above avoid. The message keeps its order.
+- When several links in a paragraph have a block card, put their cards after it in the links' order, so they read in the order the sentence names them.
+- In a list item, put the card inside the item, after its text: it belongs to that item, not to the list. In a table cell, a heading or a quote the author wrote, draw no card and leave the link as it would be without one: a card can't fit in a cell, would turn a heading into a block, or would break up the quoted words.
+- Draw at most 3 block cards in a message, counted in the message's order; later links get no card. A message with more would be a column of cards with the words lost between them.
+- When the same address is in a message more than once, give only the first a card; the others don't count toward the 3. The same card twice says nothing new.
+- Show the card only in the message itself. Quotes, forwards, notifications, search results and Activity show the link as they would without a block card: they are about the message, and a card's buttons there would act on the item from somewhere it isn't.
+- A reader who hasn't allowed the app sees the gray chip and its question, never the card: a block card doesn't decide for the reader whether to show the app's previews. A failed, slow, limited or invalid answer falls back to the chip or the plain link, as any app link does.
+- A link the author gave words to (`[text](url)`) stays the author's link, card or no card.
+- While the answer loads, draw the link as for any app link: Raft knows a link has a block card only from its answer. When the answer lists one, add the card after the paragraph; the link doesn't move. When Raft already holds an answer for the same address that listed a block card, draw a placeholder of the card's size there at once (`AppLinkCardPlaceholder`), with the app's header in it, so the text under the paragraph moves as little as it can.
+- Always show the app's icon and name in Raft's header on the card, drawn by Raft from what it stores for the app, never taken from the card's content. The card sits beside people's own words and its buttons work there: without Raft's frame it could pass for a system message or for someone's words.
+- Put at most two buttons on the card, with ⋯ for the rest ([AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md#content)). The card's title opens the item, so a plain Open link, such as Stamp's Open in Stamp, goes in ⋯ and leaves the two places to the app's other buttons, the first two in its order, links such as View changes included.
+- Make the card 400px wide, the hover card's width, and never wider than the message. On a phone it takes the message's width, so its buttons have the room a finger needs. Its frame, widths, inset and title are every card's in a message ([Cards in messages](./cards-in-messages.md)).
+- Draw the state's badge in the app's color when its answer has one (`AppLinkCardBadge fill`), and color nothing else: not the frame, the app's name, the title or Raft's own marks. Only the fill is the app's: the type is black or white, whichever has the higher WCAG 2 contrast with it; the fill is the same in light and dark mode; it gets a hairline ring where it is below 1.5:1 against the card; and in forced colors, or with no color, the badge is its tone's ([AppLinkCard](../../packages/ui/src/components/app-link-card/app-link-card.md#the-apps-color)). A state is the app's own word, and a reader who knows the app reads it faster in the app's color, such as its green for merged; Raft's frame around it stays Raft's, so the card still can't pass for one of Raft's own. A card that an app sends as a message of its own (RFC 082) keeps its badges neutral. Decided on 2026-11-06 in #proj-apps:#51.
+
+### Links that leave Raft
+
+A control that takes someone to another site ends in ↗, so they know before they press it that they will leave Raft. Docs, pricing, terms and privacy, an app's homepage, TestFlight, Stripe and GitHub all count.
+
+- Use one mark: Lucide's `ArrowUpRight`, never the box with an arrow (`ExternalLink`, `SquareArrowOutUpRight`). It is in the text's color.
+- Put it at the end:
+  - TextLink: `TextLinkExternalIcon`, 0.857em of the text (12px at 14px), 2px after the text, centered on the cap height; the underline stops at the text ([TextLink](../../packages/ui/src/components/text-link/text-link.md#leaving-raft)).
+  - Button: in the trailing icon's place, at the button's icon size.
+  - Menu item: where the shortcut goes, so it lines up with the other items' shortcuts.
+  - Sidebar row: in the row's trailing slot, in `foreground-hint`.
+- Open it in a new tab (`target="_blank" rel="noopener noreferrer"`), and give the mark a label a screen reader reads after the text, "(opens in a new tab)". On desktop the same link opens in the system browser and looks the same.
+- Stripe checkout and the billing portal stay in the same tab, because they come back to Raft by themselves when payment is done. They still end in ↗; the label says where they go ("(goes to Stripe)").
+- No ↗ on:
+  - sign-in round trips (Google, GitHub, an app's sign-in): they come back by themselves, and nobody needs to know they changed sites;
+  - downloads: they take the download icon and don't leave the page (a TextLink ends in `TextLinkDownloadIcon`, [TextLink](../../packages/ui/src/components/text-link/text-link.md#downloads));
+  - links people write in messages: they are already visibly links, show their address on hover, and an arrow on every one would be noise (app link chips follow [MessageItem](../../packages/ui/src/components/message-item/message-item.md#app-links));
+  - anything inside Raft. To open a Raft place in a new tab, people use the browser's own gestures; never mark an internal link with ↗.
+
+### Opening an item
+
+- Open an item listed on a destination's page (an agent, a person, a computer) in the side panel beside the list, as a profile opens: the item's icon or avatar and its name in the panel's header, and × to close it ([Closing](#closing)). Opening another item swaps the panel.
+- Keep the list, with the open item selected (`info-soft`: [Selected: content](../foundations/states.md#usage)), so people see where they are and open the next one without going back.
+- Where the panel covers the page (a phone, a narrow window), give it Back, as a pushed page has.
+- Give the open item an address, so a link to it opens the list with the item open beside it.
+- When an item has more to read than a panel shows at once, such as an app with its accounts, tools, privacy and information sections, it still opens in the panel, its sections stacked in the panel's one column, and the panel's head offers Expand (cindyz, 2026-11-17, #wg-apps-ux msg 391bcc37). It is the same window control as a column's Expand in a conversation's row, and behaves the same way ([Panel](../../packages/ui/src/components/panel/panel.md#rules)):
+  - Expand and its Restore are `maximize-2` / `minimize-2`, a `PanelToggleAction`, pressed while expanded, as its own button right before ×, never in ⋯.
+  - Expanded, the panel fills the page's row and the list beside it stays in view as a 160px strip, clipped, as the other columns of an expanded row do. Its content lays itself out for the wider region ([Responsive layout](./responsive.md#switch-on-the-regions-width)). × stays.
+  - Expand again, or Escape while focus is in the panel, puts the list and the panel back at the exact widths they had. The list keeps its scope, filters, search and scroll position throughout, because it never left.
+  - Expanding changes the view, not the place: the address stays the open item's, and Back and the browser's Back go where they went before.
+  - Where the panel can't sit beside the list and covers it instead (a phone, a narrow window: [Responsive layout](./responsive.md#structure)), there is nothing to expand into: leave Expand out, as on a phone ([Panel](../../packages/ui/src/components/panel/panel.md#rules)).
+  - Agents, people and computers stay in the panel without Expand: a panel shows them whole, and the list beside them is how people reach the next one.
+- Don't use breadcrumbs: Raft has none. A page is at most two levels deep, a destination and an item in it: the rail says the first and the selected item says the second, so a trail would be a third "where am I" (principle 2).
+  - One exception: two-level navigation with a tab list on the left (Settings, a server's administration): a page opened from a row inside a tab, such as Account › Delete account, shows "<tab> › <page>" in its header on desktop. The tab name is muted and links back to the tab; the page name is the current page. The list beside it keeps the tab selected, but the page's content is a different task from the tab's, so the trail says where the page sits and how to get back (artin, 2026-11-04, #triage:d10ace06 and #proj-raft-ui:002c3b02). On a phone it stays a pushed page with Back and its own title.
+
+### Going back
+
+- Show either Back or the tab bar, never both (principle 2). A page with Back at its top was entered from somewhere, so it covers the tab bar; a page without Back is a tab's top-level page, so it shows the tab bar. The mobile app and the phone web follow this one test on every page.
+- Make every page a top-level page or a pushed page; there is no third kind. Which pages are which is in [Page structure](./page-structure.md#phone).
+- Give every pushed page Back, including a gate page in front of a feature, a page while it loads and a page that failed to load: without it a page covered by nothing but itself is a dead end.
+- Put Back (`arrow-left`) at the top left of every pushed page. On a foldable phone's outer screen, it is first in the system column instead, and the edge swipe still goes back ([Page structure](./page-structure.md#foldable-phones)).
+- Treat the iOS edge swipe and the Android system Back button as a press on Back. On Android, system Back on a pushed page returns to the page before it; on a top-level page other than the first, it opens the first top-level page; on the first, it leaves the app.
+- On the web, the browser's Back follows the browser's history, on top-level pages too; it doesn't go to the first top-level page the way Android's does. The browser's Back is the web's system Back, which belongs to each platform (principle 1).
+- A link opened directly goes back one level at a time, up to the top-level page, so a shared link never leaves the person without a way out.
+- Give a thing opened over a page its own address, the same address a link to it is, and push it, so the browser's Back closes it and returns to the page under it as it was (scroll and filters). Close it with that Back, not by swapping the address, and keep the address while it is open: a refresh, a copied address and a new tab all show the same thing. Only parameters that record where the opening came from may be dropped once recorded. An Artifact opened over the Artifacts page left no trace in the address, so a refresh lost it, Back left the whole page and a copied address opened the list (xxchan, 2026-11-09, #proj-workspace:83a2d78a). A dialog that asks for a decision is not such a thing: it has no address and closes with ×, Esc or a press outside it.
+- Keep each top-level page's own state when people switch to another tab and back: its scroll position and its filters (what Search keeps is in [Search on a phone](#search-on-a-phone)). Don't keep pushed pages: a tab always reopens on its top-level page, because a pushed page hides the tab bar and would leave no way back.
+- Tapping the selected tab scrolls its top-level page to the top. At the top it does nothing else and resets nothing. On Search it also focuses the search field.
+- Raft Chat's Activity is the one exception, the list people work through ([Raft Chat](../products/raft-chat/README.md#the-bell-and-activity)). Don't give any other tab a meaning of its own: the gesture should mean the same everywhere else.
+- Open the server's own pages from the server tab's popover (in Raft Chat Artifacts, Members, Computers, Apps and Settings) as pushed pages: they cover the tab bar and Back returns to the page the popover was opened on. A link opened directly to one of them goes back to the first top-level page. They belong to no tab, because the server tab holds no page of its own ([Servers](#servers)).
+
+### Search on a phone
+
+- Reach search over everything only from the Search tab. Don't add a Search button or a Search row on another top-level page: one way in is easier to find and to remember.
+- Make Search a tab like the others: its page has no Back, and the bar stays with Search selected (stdrc, 2026-10-21; as in Slack). Its top is in [Page structure](./page-structure.md#phone).
+- Don't open the keyboard when people switch to Search: the tab bar and the selected tab stay in view. The keyboard opens when they tap the field, or when they tap Search again on the tab bar, which focuses the field.
+- Show the recent searches while the field is empty.
+- Keep the query, the filters, the results and their scroll position when people switch to another tab and back.
+- Opening a result is entering a page: it has Back and covers the bar, whatever the result opens. Back returns to the results at the same scroll position and marks the result just opened as located, as for a jump ([Located](../foundations/states.md#located)), so people see where they came from. On a desktop the results stay beside what they opened, and the open result is selected, so it needs no located highlight.
+- A search started inside a place, such as a channel's Search button, searches only that place. It opens as a pushed page that says its scope ("In #launch-week") and offers to search everything. Searching everything switches to the Search tab with the same query; the scoped page doesn't turn into the Search tab. A search keeps the scope of the place it starts from, and searching everything has its own tab.
+
+### Closing
+
+- Give a dialog a × at its top right. Esc closes it too.
+- On a phone, a dialog drawn as a sheet has its × at the top left, where a pushed page has Back. From the second step of a flow on, Back takes that place and the × goes: the sheet is a stack of steps, and Back undoes one ([Dialog](../../packages/ui/src/components/dialog/dialog.md#on-a-phone)).
+- Close a menu, a popover or a drawer with Esc or a press outside it. A drawer on a phone has Back instead.
+- Give a desktop side panel a × while it sits beside the main area, and Back when it covers it: what covers the page behaves like a pushed page.
+- Give a full-screen page only Back.
+
+### Servers
+
+- On every surface the server switcher is the workspace button: the server's avatar, its name and a chevron ([WorkspaceButton](../../packages/ui/src/components/workspace-button/workspace-button.md)). It keeps that shape whatever sits beside it. The phone's server tab is the one exception, below: it is a tab, so it looks like the tabs beside it.
+- On desktop, open the server list as a menu under the workspace button of the top bar. The strip beside the button switches with one click; it shows as many server avatars as fit, at least 2, and marks the current one with a bar under its avatar.
+- Show an attention dot on the workspace button's avatar and on a server's avatar in the strip when another server has unread items. How the list is built is in [Built from existing parts](../components/overview.md#switching-servers).
+
+#### The server tab on a phone
+
+Decided on 2026-10-22 by stdrc (D1a, task #152).
+
+- Make the last tab the current server: its avatar where the other tabs have an icon, and its name as the label, truncated ([MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md#the-server-tab)). Every top-level page then says which server it shows, under the thumb.
+- Make it the one tab that opens a popover, not a page. It is never selected: a server is where you are, not a place to go, so it has no page of its own to mark.
+- Open the popover on a press and on a long press alike. A press is how every tab works, and a long press is how people switch accounts from a tab in other apps (Instagram); one tab should never do two different things.
+- Open it as a popover that rises above the tab bar, 8px from each side and 8px above the bar: it comes out of the tab that opened it, as the Home switcher's list comes out of the top bar. It is a popover, not a bottom sheet (stdrc, 2026-10-21).
+- Keep the popover compact, at most 60% of the screen's height, so the page it opened over stays in view and the popover reads as a quick switch, not a page of its own (artin, 2026-10-22). The one exception: when the footer actions and the pages leave the list less than one whole server row, the popover grows past 60% as far as one whole row needs, and no further; if the screen is too short even for that, the whole popover scrolls, and the footer actions and the pages scroll with it. A list squeezed to a sliver can't show where you are (Lagoon, 2026-11-10, mobile #4500).
+- Put the server list first, as the switcher's list has it: each server's name with its slug under it (`/launch`) in muted Space Mono, so two servers with similar names can be told apart, as the switcher shows them. The row keeps the option padding of every popup list, and the slug adds only its own line ([Forms](./forms.md#option-height)); the 20px avatar centers on both lines. The current one is bold and checked and the others with their unread counts, in the order people dragged them into: press and hold a row, then drag it, here too, and the order is the one the Home switcher and the desktop strip show. The row is picked up after the long press (500ms, raft-ui's touch-drag hold, as for the sidebar's rows), so a tap still switches and scrolling the list never moves a server; a hold let go without moving switches nothing. Dragging is a shortcut, never the only way ([Accessibility](../foundations/accessibility.md)): in every one of these lists, the strip included, Space picks up the focused row, the arrow keys move it, Space drops it and Escape puts it back, as for task cards; Enter stays the row's own action and switches to that server. The list scrolls inside the popover; the rest stays in view. When the popover opens, the list is already scrolled to the current server's row, with no animation: the first thing it answers is where you are. Focus goes to that row too, so moving focus into the popover never scrolls the list back to the top; a touch puts focus on the popover itself, which scrolls nothing and brings up no keyboard. Opening the popover is the person's own action, so moving focus into it is allowed ([Accessibility](../foundations/accessibility.md)).
+- Then the switcher's footer actions, one line each, the same actions as the Home switcher's, so the two lists match.
+- Last, at the very bottom, the server's own pages, side by side in one row of equal buttons, each an icon over its label. They are places in the same server, so one row says they belong together and costs one line instead of one each; at the bottom they are nearest the thumb and the tab bar (stdrc, 2026-10-22). The row and the footer actions stay in view while the list scrolls; only when the whole popover scrolls (above) do they scroll with it.
+- With more than 4 pages, lay them out in 3 columns, rows of 3 with the last row from the start, each button as tall as in one row. Five in a row leave each label about 56px on a 360px phone, and "Computadoras" or "Configuración" would truncate; a third of the popover keeps every label whole in every language. 4 or fewer keep the one row (Remy and Kirby, 2026-11-06, #proj-workspace:#203).
+- What belongs to the server sits under the server, so one popover answers both "which server" and "what in this server".
+- Raft Chat's footer actions and pages, and what a guest gets, are in [Raft Chat](../products/raft-chat/README.md#the-server-tab).
+- Open each of the server's pages as a pushed page, with Back ([Going back](#going-back)).
+- Keep the current tab when people switch servers: switching from Activity shows the new server's Activity. People switch to do the same thing in another server, and taking them Home would make them find their way back.
+- Show the attention dot on the server tab's avatar only when another server has unread items, as on Home's workspace button. One mark has one meaning: the same avatar with the same dot can't mean more on the tab bar than in the top bar. The server tab is on every top-level page, so news in another server is seen from anywhere, not only from Home. In the popover, each server's row shows its unread count, as the switcher's list does.
+- Mark something new on one of the server's own pages (a feedback reply, a computer that needs attention) with an attention dot on that page's button in the popover, never on the avatar. Raft Chat's are in [Raft Chat](../products/raft-chat/README.md#attention-dots).
+- When people come back from one of the server's pages, give focus back to the server tab, so a keyboard or a screen reader picks up where it left off.
+- Keep the workspace button in Home's top bar. It opens the same server list and footer actions, without the server's pages, as a popover anchored under the top bar, 8px from each side. It names the server at the top of the page people land on, so one switcher appears in two places, with one list.
+
+#### The server in the apps' desktop mode
+
+Decided on 2026-10-23 by Jasper, on sindresorhus's proposal (task #8). The row of the server's pages was dropped on 2026-10-29 by artin (mobile #3975).
+
+- From 840dp, where the apps show the rail ([Responsive layout](./responsive.md#structure)), the server is the workspace tile in the rail's header and nowhere else: the rail has no server tab. Two entries to the same server side by side make people wonder whether they do different things. The web has one, the workspace button at the top left.
+- The tile opens the server tab's popover next to it: the server list and the footer actions, without the row of the server's pages. Every one of those pages already has a way in that stays on screen ([Raft Chat](../products/raft-chat/README.md#the-server-tab)). One place has one button, so a second copy in the popover would only make people wonder whether it leads somewhere else.
+- Put each page's attention dot on the rail button that leads to it: the page's own button, or, for a page reached from inside another page, the button of the page that holds it. In the Raft Chat apps' desktop mode, Computers is reached from Settings, so a computer that needs attention marks Settings there ([Raft Chat](../products/raft-chat/README.md#attention-dots)).
+- On a phone the popover keeps its row ([The server tab on a phone](#the-server-tab-on-a-phone)): the tab bar has no room for the server's pages, so the popover is their only way in.
+- Show the attention dot on the tile's avatar only when another server has unread items, the same rule as the server tab's.
+
+### Several views of one place
+
+A place can hold several kinds of content, such as an agent's profile and its activity, or a channel's chat, tasks and files.
+
+- Show content that people check while they talk, such as a channel's tasks and files, as side sections beside the conversation rather than as tabs, so the conversation stays in view ([Page structure](./page-structure.md#sidebar-and-side-panel)). Where a column is too short for two stacked sections, or the sections cover the panel on a phone, they show one at a time under a Tasks / Files row of tabs; where the row can't give every column 160px, the rightmost columns become tabs in their left neighbour's head ([The channel's side columns](./responsive.md#the-channels-side-columns)).
+- Switch between the other views with one row of sticker tabs under the panel header ([Tabs](../../packages/ui/src/components/tabs/tabs.md#variants), in `ConversationPanelTabs`). Give each tab an icon and a one-word label, without a count.
+- Let people reorder the tabs by dragging, and keep their order. The first tab in their order is the one a place opens on.
+- Hide the row when a place has only one view, such as a thread.
+- Use the same row in every place of a product, so a view is in the same spot wherever people open it. Raft Chat's channel views are in [Channel](../products/raft-chat/channel.md#tasks-and-files).
+- The same page in another language is not a view of it: switch to it from a menu that lists each language in its own name (English, Español), as a [DropdownMenu](../../packages/ui/src/components/dropdown-menu/dropdown-menu.md) whose items are links (`DropdownMenuLinkItem`), so each one can be opened in a new tab and shared. In a web top bar it sits at the right end; on a phone, where the top bar has no room for it, it goes in the menu.
+
+### Switching on finger lift
+
+On a phone, a tap that lands while a list is still momentum-scrolling only stops the scroll: the browser sends no click, so a control that switches on click needed a second tap. Navigation controls switch when the finger lifts instead (`touchend`), so the first tap both stops the list and switches (Artea, 2026-10-27, after testing on a phone).
+
+- A touch counts as a tap when it is one finger, moves no more than 10px from where it landed, lifts inside the control, and lasts less than 500ms. More than 10px is a scroll (the same tolerance as a touch drag, [States](../foundations/states.md#dragging-on-a-touch-screen)); sliding off the control is how people cancel; at 500ms a long press opens a menu or arms a drag, and a tap must not race them.
+- The control then activates once: the lift cancels the browser's own click, so nothing activates twice and no ghost click lands on what appears under the finger. When the browser won't let the lift be cancelled, the control waits for its click as before.
+- A mouse, a pen and the keyboard are unchanged: they activate on click. A disabled control does nothing.
+- It applies to [Tabs](../../packages/ui/src/components/tabs/tabs.md), [SegmentedControl](../../packages/ui/src/components/segmented-control/segmented-control.md), [ToggleGroup](../../packages/ui/src/components/toggle-group/toggle-group.md), the [MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md) tab bar, and Back ([Panel](../../packages/ui/src/components/panel/panel.md)'s `PanelAction` with `activateOnTouchEnd`, which `DialogSheetBack` sets). raft-ui does it with `useTapActivation` (`lib/tap-activation.ts`).
+- Rows, list items and menu items keep switching on click. They sit in the list that scrolls, so a finger that stops the list on a row would open it by accident.
+
+## Related
+
+- [Page structure](./page-structure.md): the regions.
+- [States](../foundations/states.md): selected and unread.
+- [Responsive layout](./responsive.md): what becomes a pushed page on a phone.
+- [MobileNav](../../packages/ui/src/components/mobile-nav/mobile-nav.md): the phone web's tab bar.

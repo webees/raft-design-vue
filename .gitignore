@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.rsbuild/
+.cache/
+.upstream/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+apps/docs/src/generated/
+tooling/upstream/.work/
+work/

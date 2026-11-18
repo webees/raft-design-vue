@@ -1,0 +1,101 @@
+---
+title: TextLink
+summary: Text that underlines on hover, for the quietest control on a screen, an action or a way somewhere; the bottom step of the button ladder.
+status: stable
+aliases: [Link button, Text button]
+layer: core
+category: actions
+related: [button]
+---
+
+# TextLink
+
+TextLink is text that does something or goes somewhere, with no underline until the pointer is over it. It is the bottom step of the emphasis ladder, below a frameless button ([Button](../button/button.md#which-color)): use it where even a frameless button would be too much weight, such as Forgot password on a sign-in page, Sign out under a server list, or a See all beside a section title.
+
+```example
+text-link/compositions/preview
+```
+
+## When to use
+
+| Situation                                                              | Use                                                                       |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| The quietest control on a screen, alone or inside a sentence           | TextLink                                                                  |
+| Cancel or a minor action inside a dialog, sheet, menu, popover or card | [Button](../button/button.md) `variant="ghost"`                           |
+| Cancel or a minor action on a page                                     | [Button](../button/button.md) `variant="default"`                         |
+| A link inside rendered message or document content                     | The Markdown link, in the link blue ([Markdown](../markdown/markdown.md)) |
+
+## Variants
+
+The variant follows where the link sits, not how important the action is.
+
+| Variant                     | Use for                                                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `variant="muted"` (default) | A link that stands on its own: Forgot password, Sign out, See all. `foreground-muted`, 500; on hover, ink and underlined.           |
+| `variant="strong"`          | A link inside a sentence: "Don't have an account? Create one", a banner's "Manage machines". Ink, 600; on hover, underlined in ink. |
+
+**Why the position decides.** On its own, a TextLink is the quietest control on the screen, so it is muted: it must not compete with the screen's text or its buttons. Inside a sentence, the same muted grey would sit lighter than the words around it and read as disabled, so there it takes the ink of body text and stands out by weight instead. Neither variant is pink, at rest or on hover: pink belongs to the one primary button.
+
+**Why the underline comes on hover.** The underline is the hover signal for every piece of clickable text in raft-ui, so people learn it once ([Clickable text](../../../../../design/foundations/states.md#clickable-text)). At rest, the weight and color above and where the link sits say it can be clicked; an underline on every quiet control would add a line under each of them on a screen that is read for hours.
+
+## States
+
+- **Hover:** the text underlines in its own color, 1.5px thick, 3px below the baseline; a muted link also turns ink.
+- **Disabled:** the text turns `foreground-disabled` and nothing changes on hover, so it no longer reads as something to press.
+
+```example
+text-link/compositions/disabled
+```
+
+- **Focus:** the shared focus ring ([States](../../../../../design/foundations/states.md)), on a 2px radius.
+
+## Behavior
+
+- TextLink has no size of its own: it takes the size and line height of the text around it, so it sits on the baseline inside a sentence and cannot make the line taller. Standing alone, give its container the text size.
+- It has no box, padding or minimum height. Don't put it where it is the only thing a finger must hit on a phone; that needs a [Button](../button/button.md).
+
+## In a sentence
+
+A button is one box in the line, so it can't break: when it doesn't fit at the end of a line, the whole link moves to the next line and leaves the words before it short, or a lone "Or" at the end of a line. Whether a link wraps can't be known when writing it, since another language or a narrower phone wraps a line that fit. So the form follows the link's place, as its variant does ([Variants](#variants)):
+
+- **In a sentence**, with words before it, the `variant="strong"` place, a sentence's last words included ("Don't have an account? Create one"): always `nativeButton={false}`. It renders as inline text (a span) that wraps with the words around it, each line with its own focus ring and rounded corners, and the hover underline on every line.
+- **On its own line** (Sign out, See all): the default button.
+
+```example
+text-link/compositions/in-a-sentence
+```
+
+A way somewhere is a real link, `render={<a href="…" />}`, which is inline text already and wraps in a sentence as it is.
+
+## Content
+
+- Start with a verb, or name the place: Forgot password, Sign out, See all.
+- Use sentence case, like every button label ([Writing](../../../../../design/content/writing.md#casing)).
+
+## Leaving Raft
+
+A TextLink that goes to another site ends in `TextLinkExternalIcon`: Lucide's `ArrowUpRight` at 0.857em of the text (12px at 14px, like the icons in a reference chip), 2px after the text, in the text's color, centered on the letters' cap height at every size ([A mark that leads text](../../../../../design/foundations/alignment.md#a-mark-that-leads-text)). It sits in an inline-flex box, so the underline on hover stops at the text and never runs under the arrow. Pass `label` for a screen reader, "(opens in a new tab)"; it is product copy, so raft-ui doesn't write it. The rule for every control that leaves Raft is in [Navigation](../../../../../design/patterns/navigation.md#links-that-leave-raft).
+
+```example
+text-link/compositions/leaving-raft
+```
+
+## Downloads
+
+A TextLink that downloads a file ends in `TextLinkDownloadIcon`: Lucide's `Download`, in the same box as the ↗ (0.857em of the text, 2px after it, centered on the cap height, the underline stopping at the text). A download doesn't leave the page, so the link stays in the same tab and takes no ↗ ([Navigation](../../../../../design/patterns/navigation.md#links-that-leave-raft)). Render a real link with `download`, and pass `label` for a screen reader, "(downloads a file)"; like the ↗'s, it is product copy.
+
+```example
+text-link/compositions/downloads
+```
+
+## Accessibility
+
+TextLink renders a native `button type="button"`, or, in a sentence, a span with the button's role ([In a sentence](#in-a-sentence)). For a way somewhere, render a real link so it opens in a new tab and announces as a link: `render={<a href="…" />}`.
+
+- The in-sentence form is a span that acts as the button: `role="button"`, in the tab order, pressed with Enter or Space. When disabled it takes `aria-disabled`, leaves the tab order and takes the disabled look, like the button.
+- `disabled` is the native attribute on the button form: the button leaves the tab order and takes the disabled look. A link has no `disabled`. When a way somewhere is unavailable, don't render the link; when the reader can do something about it, say that one step in the text ([Writing](../../../../../design/content/writing.md#principles)).
+
+## Rules
+
+- Don't use TextLink to fit one more action into a crowded row. It is the quietest control on a screen, not a smaller button.
+- Don't color it, and don't underline it at rest. Emphasis comes from weight and ink, so pink stays with the one primary button, and the underline stays the hover signal.

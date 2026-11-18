@@ -1,0 +1,156 @@
+---
+title: Typography
+summary: The two typefaces, the type scale and where each size and weight is used, the three text color tiers, the metric tokens, and the casing rules.
+---
+
+# Typography
+
+Raft uses two typefaces with separate jobs: Space Grotesk for what people say, Space Mono for what machines write. Hierarchy comes from size, weight and color, never from capitals.
+
+## Principles
+
+- **Space Grotesk is people; Space Mono is machines.** Space Grotesk (variable, weights 300 to 700) sets messages, labels and titles. Space Mono (400 and 700) sets IDs, times, counts, runtimes, event lines, shortcuts and code.
+- **CJK falls back to the system face**: PingFang SC, then Source Han Sans, for Chinese. A page in Traditional Chinese, Japanese or Korean (`<html lang="zh-TW">` / `"ja"` / `"ko"`) falls back to its own faces first, because the Simplified Chinese faces draw characters with mainland glyph shapes and have no Hangul. Mixed CJK and English text keeps the numbers, IDs and times in Space Mono.
+- **No all caps, and sentence case everywhere.** Write every label, title and line in sentence case, with capitals only for the first word and for names; see [Casing](#casing).
+
+## Type scale
+
+Each style sets a size and a line height; the bold styles also set their weight. The working styles have two sizes: a phone's, and a desktop's, from 768px (where the desktop layout begins, [Responsive layout](../patterns/responsive.md)) when the main pointer is a mouse or a trackpad. A touch screen keeps the phone's sizes at any width ([Spacing](./spacing.md#hit-targets) says why). The utility is the same on both, so a component never states a breakpoint for its type.
+
+| Token | Phone | Desktop | Use for |
+| --- | --- | --- | --- |
+| `text-hero` | 40/44 | 40/44 | The name of the service on the Login with Raft page, from 640px |
+| `text-display` | 34/40 | 34/40 | The title of the page that creates a server, from 640px |
+| `text-title` | 22/28 | 22/28 | The title of a sign-in page and of a setup step |
+| `text-headline` | 17/22 | 16/24 | Top bar titles (a top-level page's name, a pushed page's title), panel headers, sidebar headers, dialog and sheet titles, the name on a profile |
+| `text-body` | 16/24 | 14/22 | Message text; list and task titles at weight 600 |
+| `text-subhead` | 15/20 | 14/22 | Buttons at `lg`, names, radio labels, dialog body text |
+| `text-callout` | 14/20 | 14/22 | Previews, menu items, banners, excerpts |
+| `text-control` | 13/18 | 14/22 | The label of a 32px or 28px control: a Button at `md`, a jump pill over a conversation, a panel action, a filter trigger, the text selection toolbar |
+| `text-footnote` | 13/18 | 12/18 | Group headings, field labels, tooltips |
+| `text-caption` | 12/16 | 12/18 | Subtitles, status chips, help text |
+| `text-label` | 11/13 | 11/13 | Tab bar labels and the labels of the labeled rail |
+| `text-mono-meta` | 12/16 | 12/18 | IDs, times, counts, runtimes, event lines, shortcuts (in Space Mono) |
+| `text-mono-code` | 13/20 | 13/20 | Code and commands (in Space Mono) |
+
+Field text and card titles have their own tokens, with the same two sizes ([Metric tokens](#metric-tokens)).
+
+### Desktop and phone
+
+The desktop scale is Feishu's (Lark's) for PC: 16/24 for titles, 14/22 for everything people read, 12px for notes. The phone scale is Feishu's for mobile, where message text is 16/24 as well. People compare Raft with the chat tools they use all day, and on a desktop those set message text at 14px.
+
+- **A desktop is a wide screen with a mouse or a trackpad.** The sizes switch on `(width >= 48rem) and (pointer: fine)`, the same query as the control heights, so a field's text and its height change together. A tablet used by touch keeps the phone's sizes: 16px field text stops iOS and iPadOS from zooming into a field on focus.
+- **A desktop is read from further away, with more on screen.** A conversation sits beside a sidebar and often a thread, so a line of text holds more words and a screen more messages at 14px. On a phone the screen is closer and one column fills it; 16px reads at the same apparent size.
+- **Judge a size with Chinese, not only with Latin.** Chinese falls back to the system face, whose glyphs fill the em box: at 16px a line of Chinese reads larger than the same line in Space Grotesk, whose lowercase is about half its size. Check a change with a Chinese conversation open as well as an English one.
+- **Body, subhead and callout share 14/22 on a desktop.** Feishu has no 13px or 15px step, and the scale doesn't need one: a name, a message and a preview differ there by weight and color, and a size step on top would make the three differences [Color tiers](#notes-on-deeper-surfaces) rules out. On a phone they stay a step apart.
+- **Notes take an 18px line on a desktop, as footnote does on a phone.** Feishu gives 12px notes a 20px line, but a note here is often two or three lines under a setting or a card, and at 20px those lines sit further apart than the 14/22 text above them, so the note reads looser than what it explains. Footnote, caption and mono meta share 12/18, so a time in Space Mono and a status in Space Grotesk on one line have the same box. The two faces also share a cap height (0.700em), so on one baseline their letters stand the same height ([Text of different sizes on one line](./alignment.md#text-of-different-sizes-on-one-line)).
+- **Mono code stays 13/20.** Space Mono is wider than Space Grotesk, so 13px code already sits level with 14px text, and its 20px line fits inside a 22px line of text.
+- **A control's label is 14px on a desktop, 13px on a phone.** Feishu sets button text at 14px; footnote goes down to 12px there, so a 32px control's label has its own style, `text-control`.
+- **Hero, display, title and label don't change.** They set sign-in and setup pages, which are the same on both, and the phone's tab bar.
+- **Density is the person's choice, not the default's.** Someone who wants more on screen picks Small in the message-size setting. Don't make the default smaller to fit more.
+
+## Font families
+
+`fonts.css` defines three families. Use them through the Tailwind utilities.
+
+| Utility | Face | Sets |
+| --- | --- | --- |
+| `font-sans` | Space Grotesk | Everything people say: titles, messages, lists, settings, buttons, status words, the content of a profile |
+| `font-heading` | Space Grotesk | Field text (Input, Textarea, InputGroup) and `Text.Heading`, the names on a profile. Titles in recipes use `font-sans`, the same face |
+| `font-mono` | Space Mono | What machines write: IDs, hostnames, versions, OS strings, commands, environment variables, URLs, code and credential blocks, times and dates, counts, file metadata, `@handle` |
+
+- Decide by who wrote it: text that is copied character for character, a time, a count or an identity marker is mono; anything a person says is sans.
+- The trailing `#channel-name` of a thread's title is sans, in `text-headline` at weight 400 and `foreground-hint`: it belongs to the title.
+- For scripts missing from Space Grotesk, the sans families try Arial and Helvetica Neue before the CJK faces. This keeps Cyrillic text out of CJK fonts with wide letter advances. Keep `system-ui` after the language-specific CJK families so the operating system does not replace their glyph choices.
+- The sans families fall back to PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans SC and Noto Sans CJK SC (the name Linux distributions install it under) for Chinese, then the system face. Under `lang="zh-TW"` (also `zh-HK`, `zh-MO` and `zh-Hant`) they fall back to PingFang TC, Microsoft JhengHei and Noto Sans TC; under `lang="ja"` to Hiragino Sans, Yu Gothic UI, Meiryo and Noto Sans JP; under `lang="ko"` to Apple SD Gothic Neo, Malgun Gothic and Noto Sans KR.
+
+## Usage
+
+- Pick the weight by purpose from 400, 500, 600 and 700; the scale sets only size and line height for the regular styles.
+- Size the initials in an avatar at 11px, 13px, 15px, 22px or 40px, by avatar size; see [Avatar](../../packages/ui/src/components/avatar/avatar.md).
+- Set anything a machine produced in Space Mono, even inside a sentence: `#25`, `10:24`, `Claude Code`, counts, event lines.
+- Set statistics meant for people in Space Grotesk.
+
+### Sizes by use
+
+| Style | Used for |
+| --- | --- |
+| `text-headline` | Titles, all at 700: panel, thread, dialog, popover (not one about an item, below), drawer, the top of the sidebar. A task's title in its details is the dialog's page-level title, at 600 under the 700 bar that names the dialog ([Visual comfort](./comfort.md#hierarchy-contrast)) |
+| `text-body` | Message text; card titles at 600 (`card-title-*`); the names on task cards and in search results |
+| `field-*` | The text in a field: Input, Textarea, InputGroup, a Select at `chrome="field"` |
+| `text-subhead` | Senders at 700; the title of a card in a message and of a popover about an item, at 700 like a sender's name ([Cards in messages](../patterns/cards-in-messages.md#title)), so a card never outranks the message it sits in; sidebar rows at 500, the selected one at 700; titles in Activity; dialog body text and descriptions; Buttons at `lg` |
+| `text-callout` | Values in a description list, menu items, card descriptions, file names, the text of a quoted message |
+| `text-control` | The labels of 32px controls: Button at `md`, panel actions, filter triggers |
+| `text-footnote` | Field labels at 600; description-list terms at 500, in a label column of `minmax(88px, max-content)`; group headings at 700 |
+| `text-caption`, `text-mono-meta` | The notes on a message (the time in mono, the model and an inline status), the time of a reply preview, counts in mono, list metadata, badges |
+
+### Weights by use
+
+| Weight | Used for |
+| --- | --- |
+| 400 | Reading text: message body, values, field text, mono notes (times, counts) |
+| 500 | Menu items, sidebar rows, description-list terms; `text-caption` sets 500 for the model and an inline status |
+| 600 | Names in list rows, a [Card](../../packages/ui/src/components/card/card.md)'s title on a page (a card in a message has a 700 title, like a sender's name), field labels, tabs and a row swipe's buttons (an icon over one word, like a tab), badges |
+| 700 | Titles, senders, buttons, group headings, solid badges and unread counts, the selected tab, row or menu item; a textarea's counter when the text is invalid or over the limit |
+
+## Color tiers
+
+Text has three tiers. The tokens and their contrast are in [Color](./color.md#text-and-icons).
+
+| Tier | Token | Used for |
+| --- | --- | --- |
+| Base | `foreground` | Titles (panel, sidebar, thread, dialog), senders and message text, values, names in list rows and the data under them (`ListRowSubtitle`), menu items, the selected underline tab, ghost buttons |
+| Muted | `foreground-muted` | Descriptions (dialog, card, popover), the facts a choice row is compared by (a ChoiceList item's `meta`), field labels, unselected tabs, the text of a quoted message, sidebar subtitles, icons |
+| Hint | `foreground-hint` | Notes: times, the model, an inline status, description-list terms, group headings, counts, list metadata (`ListRowMeta`, an action card's time), placeholders, empty values |
+
+- Read titles, the top of the sidebar, senders and names in list rows at the base tier. Let weight make the difference between them: titles and senders at 700, list rows at 600.
+- Give a message two layers: its content (sender and text, at the base tier) and its notes (time, model, inline status, at the hint tier).
+- Keep data and explanation in different parts. Data people read as the content, such as an agent's description or a channel's topic under a row's name, is at the base tier, in the component's data part (`ListRowSubtitle`). A component's notes on its data (times, counts, IDs) are at the hint tier, in its meta part (`ListRowMeta`, `MessageActionCardHeaderMeta`). Of text people read, the muted tier holds the sentences written to explain something (a description, a setting's consequence) and the facts a choice row is compared by (a ChoiceList item's `meta`, after its description): people choose by those, so they are never lighter than the description beside them. It also holds the labels, tabs and quoted text the table lists. Don't set data grey with a class of your own: through the component's part, a grey line means the same thing on every screen.
+- Use the tier tokens for text, never an alpha variant such as `text-foreground-muted/70`: the contrast guarantee holds only for the tiers. Alpha is for decorative glyphs, such as the separator in a message footer.
+
+### Notes on deeper surfaces
+
+- How heavy a note looks depends on more than contrast. In a compact row, the closer a note is in size to the text it annotates, the further apart their colors must be.
+- When a note sits on a card or popup that is deeper than the canvas, check it once by eye. If it reads heavy, move it half a tier lighter.
+- Separate two levels of text by at most two of size, weight and color.
+- Fix one case in place, with a class. Turn it into a shared token only after two or three similar cases. APCA (Lc), which accounts for polarity and size, is a better check than the WCAG ratio in dark mode when a case is in doubt.
+
+## Metric tokens
+
+A field and a card title each have tokens for their type metrics, so that the parts laid out with them use the same values. Like the scale, each has a phone value and a desktop value, under the same query.
+
+```tokens
+field
+```
+
+- `field-*` sets the text of Input, Textarea, the field variant of SelectTrigger and the options of a Select list (utilities `text-field`, `font-field`). An option shares the field's type, so a value doesn't change size when the list opens; its height and padding stay its own, because a list row is not a control.
+- Never set field text below 16px on a phone: iOS zooms the page into a field whose text is smaller. A desktop has no such zoom, so field text follows the desktop body size there.
+
+```tokens
+card-title
+```
+
+- `card-title-*` sets CardTitle (utilities `text-card-title`, `font-card-title`). A radio or checkbox laid beside a card title uses its line height to line up with it.
+
+## Casing
+
+| Text | Case | Example |
+| --- | --- | --- |
+| Anything people can click or that names an action: buttons, menu items, tabs, tab bar items, segmented controls, text links, tooltips and the accessible names of icon buttons | Sentence case | Create task, Mark all read, Sign out, Add reaction |
+| Task status names | Sentence case | Backlog, Todo, In progress, Done, Closed |
+| Titles, group headings, descriptions, empty states | Sentence case | No tasks match these filters |
+| A dialog or sheet title that repeats its button's label | Sentence case, as the button | Create channel |
+| Names, as [Writing](../content/writing.md#casing) lists them: Raft's products and features, the destinations, views and statuses Terminology lists, people, agents, servers, channels, third-party names, acronyms | As the name is written | Agent Lounge, Remove from Saved, Move to Backlog, GitHub, #launch-week |
+| Every other section, group heading and settings page | Sentence case | Direct messages, Plan & billing |
+
+- Use one casing for all text: sentence case, with names keeping their capitals. Long labels such as menu items read awkwardly in Title Case, and one casing is simpler to write, translate and check ([0044](../decisions/0044-sentence-case-for-labels.md)).
+
+- Never set text in all caps, in CSS or in the string. [0002](../decisions/0002-no-all-caps.md) allows one exception, a step label on an onboarding screen; the product's setup writes its step label in sentence case, so nothing in the product is in all caps ([Brand](./brand.md)).
+- The rules for writing labels, and what counts as a name, are in [Writing](../content/writing.md#casing).
+
+## Related
+
+- [Writing](../content/writing.md): the words themselves.
+- [Tokens](./tokens.md): every token group and how the names are built.
+- [Accessibility](./accessibility.md#language-and-casing): why there are no all caps.
+- [Alignment](./alignment.md): how text lines up with shapes and edges.

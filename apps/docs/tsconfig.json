@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "paths": {
+      "@webees/raft-design-vue": ["../../packages/ui/src/index.ts"],
+      "@webees/raft-design-vue/styles.css": ["../../packages/ui/src/styles.css"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "rsbuild.config.ts", "src/generated/*.json"]
+}

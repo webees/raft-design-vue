@@ -1,0 +1,26 @@
+{
+  "name": "@webees/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run manifest && rsbuild dev",
+    "build": "bun run manifest && rsbuild build",
+    "preview": "rsbuild preview",
+    "manifest": "node scripts/build-docs-manifest.mjs",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@webees/raft-design-vue": "workspace:*",
+    "markdown-it": "^14.1.0",
+    "vue": "^3.5.24"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^2.3.3",
+    "@rsbuild/plugin-vue": "^2.0.1",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/markdown-it": "^14.1.2",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.2.4"
+  }
+}

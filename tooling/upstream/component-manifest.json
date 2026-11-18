@@ -1,0 +1,517 @@
+{
+  "repository": "botiverse/raft-design",
+  "commit": "d98cae8c225ce19584bf27445b65ec943f82cd62",
+  "generatedAt": "2026-11-17T19:59:13.216Z",
+  "components": {
+    "activity-inbox": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/activity-inbox",
+      "localPath": "packages/ui/src/components/activity-inbox"
+    },
+    "alert-dialog": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/alert-dialog",
+      "localPath": "packages/ui/src/components/alert-dialog"
+    },
+    "announcement-dialog": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/announcement-dialog",
+      "localPath": "packages/ui/src/components/announcement-dialog"
+    },
+    "app-link-card": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/app-link-card",
+      "localPath": "packages/ui/src/components/app-link-card"
+    },
+    "app-rail": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/app-rail",
+      "localPath": "packages/ui/src/components/app-rail"
+    },
+    "app-shell": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/app-shell",
+      "localPath": "packages/ui/src/components/app-shell"
+    },
+    "avatar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/avatar",
+      "localPath": "packages/ui/src/components/avatar"
+    },
+    "badge": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/badge",
+      "localPath": "packages/ui/src/components/badge"
+    },
+    "banner": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/banner",
+      "localPath": "packages/ui/src/components/banner"
+    },
+    "button": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/button",
+      "localPath": "packages/ui/src/components/button"
+    },
+    "card": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/card",
+      "localPath": "packages/ui/src/components/card"
+    },
+    "checkbox": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/checkbox",
+      "localPath": "packages/ui/src/components/checkbox"
+    },
+    "choice-list": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/choice-list",
+      "localPath": "packages/ui/src/components/choice-list"
+    },
+    "coach-mark": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/coach-mark",
+      "localPath": "packages/ui/src/components/coach-mark"
+    },
+    "code-block": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/code-block",
+      "localPath": "packages/ui/src/components/code-block"
+    },
+    "combobox": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/combobox",
+      "localPath": "packages/ui/src/components/combobox"
+    },
+    "combobox-select": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/combobox-select",
+      "localPath": "packages/ui/src/components/combobox-select"
+    },
+    "comment": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/comment",
+      "localPath": "packages/ui/src/components/comment"
+    },
+    "composer": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/composer",
+      "localPath": "packages/ui/src/components/composer"
+    },
+    "context-menu": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/context-menu",
+      "localPath": "packages/ui/src/components/context-menu"
+    },
+    "conversation-panel": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/conversation-panel",
+      "localPath": "packages/ui/src/components/conversation-panel"
+    },
+    "copyable-code": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/copyable-code",
+      "localPath": "packages/ui/src/components/copyable-code"
+    },
+    "description-list": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/description-list",
+      "localPath": "packages/ui/src/components/description-list"
+    },
+    "dialog": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/dialog",
+      "localPath": "packages/ui/src/components/dialog"
+    },
+    "drag": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/drag",
+      "localPath": "packages/ui/src/components/drag"
+    },
+    "drawer": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/drawer",
+      "localPath": "packages/ui/src/components/drawer"
+    },
+    "dropdown-menu": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/dropdown-menu",
+      "localPath": "packages/ui/src/components/dropdown-menu"
+    },
+    "ellipsis": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/ellipsis",
+      "localPath": "packages/ui/src/components/ellipsis"
+    },
+    "empty-state": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/empty-state",
+      "localPath": "packages/ui/src/components/empty-state"
+    },
+    "field": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/field",
+      "localPath": "packages/ui/src/components/field"
+    },
+    "file-preview": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/file-preview",
+      "localPath": "packages/ui/src/components/file-preview"
+    },
+    "files": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/files",
+      "localPath": "packages/ui/src/components/files"
+    },
+    "filter-chip": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/filter-chip",
+      "localPath": "packages/ui/src/components/filter-chip"
+    },
+    "fit-toolbar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/fit-toolbar",
+      "localPath": "packages/ui/src/components/fit-toolbar"
+    },
+    "form-section": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/form-section",
+      "localPath": "packages/ui/src/components/form-section"
+    },
+    "icon-tile": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/icon-tile",
+      "localPath": "packages/ui/src/components/icon-tile"
+    },
+    "inbox-item": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/inbox-item",
+      "localPath": "packages/ui/src/components/inbox-item"
+    },
+    "inline-code": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/inline-code",
+      "localPath": "packages/ui/src/components/inline-code"
+    },
+    "input": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/input",
+      "localPath": "packages/ui/src/components/input"
+    },
+    "input-group": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/input-group",
+      "localPath": "packages/ui/src/components/input-group"
+    },
+    "kbd": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/kbd",
+      "localPath": "packages/ui/src/components/kbd"
+    },
+    "kbd-button": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/kbd-button",
+      "localPath": "packages/ui/src/components/kbd-button"
+    },
+    "label": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/label",
+      "localPath": "packages/ui/src/components/label"
+    },
+    "lightbox": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/lightbox",
+      "localPath": "packages/ui/src/components/lightbox"
+    },
+    "list-row": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/list-row",
+      "localPath": "packages/ui/src/components/list-row"
+    },
+    "logo": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/logo",
+      "localPath": "packages/ui/src/components/logo"
+    },
+    "markdown": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/markdown",
+      "localPath": "packages/ui/src/components/markdown"
+    },
+    "message-action-card": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-action-card",
+      "localPath": "packages/ui/src/components/message-action-card"
+    },
+    "message-attachment": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-attachment",
+      "localPath": "packages/ui/src/components/message-attachment"
+    },
+    "message-embed": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-embed",
+      "localPath": "packages/ui/src/components/message-embed"
+    },
+    "message-forwarded-bundle": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-forwarded-bundle",
+      "localPath": "packages/ui/src/components/message-forwarded-bundle"
+    },
+    "message-item": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-item",
+      "localPath": "packages/ui/src/components/message-item"
+    },
+    "message-list": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-list",
+      "localPath": "packages/ui/src/components/message-list"
+    },
+    "message-quoted-preview": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-quoted-preview",
+      "localPath": "packages/ui/src/components/message-quoted-preview"
+    },
+    "message-replies": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-replies",
+      "localPath": "packages/ui/src/components/message-replies"
+    },
+    "message-translation": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/message-translation",
+      "localPath": "packages/ui/src/components/message-translation"
+    },
+    "meter": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/meter",
+      "localPath": "packages/ui/src/components/meter"
+    },
+    "mobile-nav": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/mobile-nav",
+      "localPath": "packages/ui/src/components/mobile-nav"
+    },
+    "notification-center": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/notification-center",
+      "localPath": "packages/ui/src/components/notification-center"
+    },
+    "panel": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/panel",
+      "localPath": "packages/ui/src/components/panel"
+    },
+    "picker-trigger-button": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/picker-trigger-button",
+      "localPath": "packages/ui/src/components/picker-trigger-button"
+    },
+    "popover": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/popover",
+      "localPath": "packages/ui/src/components/popover"
+    },
+    "preview-card": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/preview-card",
+      "localPath": "packages/ui/src/components/preview-card"
+    },
+    "profile-panel": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/profile-panel",
+      "localPath": "packages/ui/src/components/profile-panel"
+    },
+    "progress": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/progress",
+      "localPath": "packages/ui/src/components/progress"
+    },
+    "pull-to-refresh": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/pull-to-refresh",
+      "localPath": "packages/ui/src/components/pull-to-refresh"
+    },
+    "radio-group": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/radio-group",
+      "localPath": "packages/ui/src/components/radio-group"
+    },
+    "resizable": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/resizable",
+      "localPath": "packages/ui/src/components/resizable"
+    },
+    "save-status": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/save-status",
+      "localPath": "packages/ui/src/components/save-status"
+    },
+    "scroll-area": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/scroll-area",
+      "localPath": "packages/ui/src/components/scroll-area"
+    },
+    "search": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/search",
+      "localPath": "packages/ui/src/components/search"
+    },
+    "segmented-control": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/segmented-control",
+      "localPath": "packages/ui/src/components/segmented-control"
+    },
+    "select": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/select",
+      "localPath": "packages/ui/src/components/select"
+    },
+    "selection-toolbar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/selection-toolbar",
+      "localPath": "packages/ui/src/components/selection-toolbar"
+    },
+    "separator": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/separator",
+      "localPath": "packages/ui/src/components/separator"
+    },
+    "sidebar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/sidebar",
+      "localPath": "packages/ui/src/components/sidebar"
+    },
+    "skeleton": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/skeleton",
+      "localPath": "packages/ui/src/components/skeleton"
+    },
+    "spinner": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/spinner",
+      "localPath": "packages/ui/src/components/spinner"
+    },
+    "status": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/status",
+      "localPath": "packages/ui/src/components/status"
+    },
+    "steps": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/steps",
+      "localPath": "packages/ui/src/components/steps"
+    },
+    "switch": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/switch",
+      "localPath": "packages/ui/src/components/switch"
+    },
+    "system-message": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/system-message",
+      "localPath": "packages/ui/src/components/system-message"
+    },
+    "table": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/table",
+      "localPath": "packages/ui/src/components/table"
+    },
+    "tabs": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/tabs",
+      "localPath": "packages/ui/src/components/tabs"
+    },
+    "task-board": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/task-board",
+      "localPath": "packages/ui/src/components/task-board"
+    },
+    "task-card": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/task-card",
+      "localPath": "packages/ui/src/components/task-card"
+    },
+    "task-completion-control": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/task-completion-control",
+      "localPath": "packages/ui/src/components/task-completion-control"
+    },
+    "task-dnd": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/task-dnd",
+      "localPath": "packages/ui/src/components/task-dnd"
+    },
+    "task-list": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/task-list",
+      "localPath": "packages/ui/src/components/task-list"
+    },
+    "tasks": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/tasks",
+      "localPath": "packages/ui/src/components/tasks"
+    },
+    "text": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/text",
+      "localPath": "packages/ui/src/components/text"
+    },
+    "text-link": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/text-link",
+      "localPath": "packages/ui/src/components/text-link"
+    },
+    "text-selection-toolbar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/text-selection-toolbar",
+      "localPath": "packages/ui/src/components/text-selection-toolbar"
+    },
+    "textarea": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/textarea",
+      "localPath": "packages/ui/src/components/textarea"
+    },
+    "thread-panel": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/thread-panel",
+      "localPath": "packages/ui/src/components/thread-panel"
+    },
+    "timeline": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/timeline",
+      "localPath": "packages/ui/src/components/timeline"
+    },
+    "toast": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/toast",
+      "localPath": "packages/ui/src/components/toast"
+    },
+    "toggle-group": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/toggle-group",
+      "localPath": "packages/ui/src/components/toggle-group"
+    },
+    "tooltip": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/tooltip",
+      "localPath": "packages/ui/src/components/tooltip"
+    },
+    "virtual-list": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/virtual-list",
+      "localPath": "packages/ui/src/components/virtual-list"
+    },
+    "web-top-bar": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/web-top-bar",
+      "localPath": "packages/ui/src/components/web-top-bar"
+    },
+    "workspace-button": {
+      "status": "ported",
+      "upstreamPath": "packages/ui/src/components/workspace-button",
+      "localPath": "packages/ui/src/components/workspace-button"
+    }
+  }
+}

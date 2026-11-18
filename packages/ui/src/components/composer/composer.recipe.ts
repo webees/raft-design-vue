@@ -1,0 +1,42 @@
+import { barButtonDesktop } from "../../lib/head-edges";
+import { tv } from "../../lib/tv";
+
+export const composer = tv({
+  slots: {
+    root: [
+      "flex w-full flex-col gap-2 p-2",
+      "rounded-container border-[1.5px] px-3 pt-3 pb-[calc(var(--control-embedded-inset)-1px)]",
+      "border-line-field bg-layer-card text-foreground shadow-none",
+      "has-focus-visible:shadow-focus",
+    ],
+    inputFrame: ["w-full min-w-0", "[--r-scroll-area-resize-grip-size:0px]"],
+    input: [
+      "max-h-32 w-full resize-none bg-transparent outline-none",
+      "field-sizing-content",
+      "min-h-6 px-0.5",
+      "font-sans text-body font-normal text-foreground",
+      "placeholder:text-foreground-hint",
+    ],
+    toolbar: [
+      "flex items-center justify-between",
+      "mx-[calc(var(--control-embedded-inset)-0.75rem-1px)] gap-embedded-inset",
+      "md:pointer-fine:mx-[calc((var(--control-icon-size)-var(--bar-button-size))/2)]",
+    ],
+    actions: ["flex items-center gap-embedded-inset"],
+    meta: ["flex items-center", "gap-embedded-inset"],
+    iconButton: [
+      "size-8 rounded-chip text-foreground-muted",
+      barButtonDesktop,
+      "disabled:border-transparent disabled:bg-transparent",
+      "aria-disabled:border-transparent aria-disabled:bg-transparent",
+      "[&_svg:not([class*='size-'])]:size-4.5",
+    ],
+    submit: ["rounded-chip"],
+  },
+  variants: {
+    icon: {
+      true: { submit: barButtonDesktop },
+      false: {},
+    },
+  },
+});

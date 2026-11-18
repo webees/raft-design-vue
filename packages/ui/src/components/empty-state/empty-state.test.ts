@@ -1,0 +1,34 @@
+import { mount } from "@vue/test-utils";
+import { describe, expect, it } from "vitest";
+import EmptyState from "./EmptyState.vue";
+import EmptyStateContent from "./EmptyStateContent.vue";
+import EmptyStateDescription from "./EmptyStateDescription.vue";
+import EmptyStateIcon from "./EmptyStateIcon.vue";
+import EmptyStateTitle from "./EmptyStateTitle.vue";
+
+describe("EmptyState", () => {
+  it("renders a composed empty state", () => {
+    const wrapper = mount({
+      components: {
+        EmptyState,
+        EmptyStateContent,
+        EmptyStateIcon,
+        EmptyStateTitle,
+        EmptyStateDescription,
+      },
+      template: `
+        <EmptyState>
+          <EmptyStateContent>
+            <EmptyStateIcon>icon</EmptyStateIcon>
+            <EmptyStateTitle>No projects yet</EmptyStateTitle>
+            <EmptyStateDescription>Create your first project.</EmptyStateDescription>
+          </EmptyStateContent>
+        </EmptyState>
+      `,
+    });
+
+    expect(wrapper.attributes("data-slot")).toBe("empty-state");
+    expect(wrapper.text()).toContain("No projects yet");
+    expect(wrapper.find("[data-slot=empty-state-icon]").attributes("aria-hidden")).toBe("true");
+  });
+});

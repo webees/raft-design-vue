@@ -1,0 +1,93 @@
+---
+title: Raft Chat — Computers
+summary: The Computers destination — its header, the toolbar of search and filters, grouping by name prefix or provider, sorting by a runtime's remaining usage, offline computers folded at the end, and its rows on a phone.
+---
+
+# Raft Chat — Computers
+
+Computers is the server's list of the machines its agents run on. People come to it to see which computers are up, which need something (an upgrade, a sign-in, a restart), and which still have room to take more work: today that is mostly how much of a runtime's usage limit is left, Claude Code's above all, and later it may be something else (Artea, 2026-11-09, #proj-raft-ui:c1fde219). A computer opens in the side panel beside the list.
+
+## Structure
+
+From top to bottom:
+
+1. **The header:** the title Computers and its count in Space Mono ("25 computers · 11 online · 47 agents").
+2. **The toolbar:** the search field, filling the line, then the filters Status and Runtime, then Clear all while the search, Status or Runtime differs from its default; at its end Group and Sort (they don't bring Clear all, as it doesn't reset them), the Cards / List view switch and Add computer (`primary`). The view switch and Add computer moved here from the header, and Group and Sort to the end, as on every page of a list: what is shown first, how it is shown at the end ([A page of a list](../../patterns/page-structure.md#a-page-of-a-list)). It stays above the list while the list scrolls.
+3. **The computers:** cards or list rows, in groups when a grouping is chosen, and the offline computers in one folded group at the end.
+
+## The toolbar
+
+The filters are buttons that show their value ([Select › Filters](../../../packages/ui/src/components/select/select.md#filters)): outlined at their default, filled `info-soft` once changed, each opening a Select list. Don't make any of them segments ([SegmentedControl](../../../packages/ui/src/components/segmented-control/segmented-control.md)).
+
+| Filter | Values | Default |
+| --- | --- | --- |
+| Status | All statuses, Online, Offline, Needs attention | All statuses |
+| Runtime | The runtimes on the server's computers, any number at once | None (every runtime) |
+| Group | No grouping, Name prefix, Provider | No grouping |
+| Sort | Mine first; Name; one "remaining" item per runtime that reports usage; Disk used, Memory used; and the direction after a separator | Mine first |
+
+- Search matches a computer's name, its host name and its owner.
+- Clear all resets Status and Runtime and the search; it leaves Group and Sort, which are how people like to see the list, not what they are looking for.
+- Remember Group, Sort and the view on the device, as the other view choices are.
+
+## Grouping
+
+- Group by nothing by default. Most computers don't report a provider: on staging 1 of a server's 36 did, so grouping by it would put almost every computer in one group (InNOut, 2026-11-09).
+- Name prefix groups a computer by the longest start of its name it shares with at least one other computer, cut at `-`, `_` or `.`: `hetzner-ex63-3`, `-4` and `-6` are hetzner-ex63; `armbian-1`, `armbian-jojo` and `armbian-jzm` are armbian; `artin-fluence-claude` and `-root` are artin-fluence. No group holds one computer: a computer that would be alone moves up to the next shorter prefix it shares, and the computers under that prefix join it there (with `artin-hostinger-root` beside the two artin-fluence computers, all three are artin). Only a computer that shares no start with any other goes in Other, last. Trimming a trailing number alone left 23 of a server's 26 computers in Other: hand-named computers share a word, not a number (xxchan, 2026-11-10, #triage:9d93272b).
+- Provider groups by what the computer reports (Hetzner Cloud, AWS, Google Cloud…); computers that report none go in Personal computers, last.
+- A group's header is its name and how many computers it holds, in Space Mono. Nothing else: a summary of usage in every header repeats what the rows already show.
+- This device (the computer the Raft Desktop app runs on, or the offer to connect it) stays first, above any group: it is where people start, whatever the grouping or the sort.
+
+## Mine first
+
+The default sort puts the person's own computers first: this device, then the computers that are theirs, then everyone else's, each part by name. A computer is theirs when they connected it or own it; a public computer, with no owner, is nobody's. People come to the page mostly to look at or act on their own computers, and every other list of computers already put them first (the sidebar, choosing a computer for a new agent, moving an agent, Members grouped by computer), so the page sorting by name alone hid them among a server's other computers (artin, 2026-11-12, #triage:93bf5c5e).
+
+- Every list of computers uses the same "mine" and puts them first while no other sort is chosen.
+- Mine first has no direction; choosing Name or a "remaining" item sorts by it instead, and the choice is remembered on the device.
+- With a grouping on, the groups that hold one of the person's computers come first, then the others, each by name.
+
+## Sorting by what is left
+
+Only the runtimes that report their account's usage get a sort item: Claude Code, Codex, Kimi and Grok today, read through OAR (Otter, 2026-11-09). Each reports its own windows, with their own names and number, so the page never names a time window (not "5 hours", not "week") and never adds windows of different runtimes together; a window for one model is named by its model ("Fable"), below.
+
+- A computer's remaining amount for a runtime is its tightest account-wide window: 1 minus the highest used share among the windows that cover every model and report one (`ok` or `limit_reached`). A window at its limit with no share counts as fully used. A window for one model (OAR's `scope` names it: Claude's Fable today) doesn't count: when it runs out, only the agents on that model stop, and the computer can still take work.
+- An account that is rate limited has nothing left. An account that needs signing in again, is unsupported or errors has no value.
+- When a runtime's usage is used up, its cell says when it comes back, not that it is used up: the full orange bar already says that, and the time is what people need to plan (xxchan, 2026-11-10, #triage:3cf4951e). Write "Back in 3h" in English, which says what returns and when; each usage column is 96px so the longest, "Back in 47h" (80.8px) beside the attention dot, never cuts (xxchan and Scout, 2026-11-10, #triage:3cf4951e). The full sentence is in the accessible name and the tooltip; minutes under an hour ("45m"), hours under two days ("47h") and days after that ("Back in 3d"), never a weekday or a date: windows reset within a week, so one short relative form covers them all (xxchan, 2026-11-10), the number in Space Mono as the cell's percentages are. When several windows are used up, give the latest reset: the account can't be used until the last one comes back, so the earliest would mislead (Scout, 2026-11-10). With no reset time, say used up. The cell's accessible name says both ("Used up, resets in 3 hours"), so the state never rests on the color; its tooltip gives the full date and time.
+- A computer with no value, offline or without that runtime among them, sorts last in either direction: an empty value is not the most or the least of anything.
+- The directions are Most remaining first (the default, to find a computer to give work to) and Least remaining first. For Name they are A to Z and Z to A.
+- When a grouping is on, groups follow the sort too: the group whose best computer comes first comes first. Under Name, groups go A to Z.
+- In List view a runtime's column heading sorts by that runtime's remaining amount, and it is the same choice as the Sort filter: changing one changes the other. In Cards view the sorted runtime's line moves to the top of each card's meters, in bold.
+
+## A runtime's usage cell
+
+The verdicts, words and colors here are [Status](../../patterns/status.md)'s. Each usage column (List view) and each runtime's line (Cards view) is one cell: a bar and a value, the number in Space Mono.
+
+- **One line for the account, one for a model.** The first line is the tightest account-wide window. When the account also reports a window for one model, a second line shows it, named: "Fable · 40%", or "Fable · 6d" with a full orange bar when it is used up. Every such account shows both lines, whether or not an agent on the computer uses that model: Raft doesn't guess which window matters to whom, and the reader sees both (xxchan, 2026-11-12, #triage:45a94e57). An account with no window for one model has one line.
+- **States**, the same in a cell, a card line and the agent profile's Usage row ([Agent profile](./agent-profile.md)):
+
+| The account | The cell |
+| --- | --- |
+| Reports its usage | "60% used", the bar turning orange from 80% |
+| Used up, reset known | "Back in 6d", a full orange bar (above) |
+| Used up, no reset time | "Used up", a full orange bar |
+| Signed out, and an agent on the computer uses this runtime | "Sign in" in `warning-strong`, no bar: the one step, and the computer counts as needing attention |
+| Its account needs verifying, and an agent on the computer uses this runtime | "Verify" in `warning-strong`, no bar, as Sign in above |
+| Signed out, and no agent here uses it | "Signed out" in `foreground-hint`, no bar: a fact, not a problem; the card still offers Sign in (xxchan, 2026-11-12) |
+| Unsupported, failed to read, or its windows can't be parsed | "—", with no mark and no reason ([Writing](../../content/writing.md#principles)); a failed read is reported to tracing |
+| Its data is past `staleAfter` while the computer is online | The last values, text and bar in `foreground-hint` |
+| The computer is offline | No usage cells: the row says "Offline · Last seen …" and sits in the Offline group (below) |
+
+- A runtime that reports no usage at all (Cursor, OpenCode) has no column; its mark is in the Other column.
+- The computer's own detail keeps its runtime chips as they are: a signed-out runtime is an orange chip, "Claude Code (not signed in)", which opens the card to sign in. The chip already says it plainly, so it doesn't take the usage cell's form (xxchan, 2026-11-12).
+- The cell carries no status light or dot: a light is presence, and the words carry the state. Hovering or focusing the cell opens the usage card, which lists every window and every account.
+- The computer reports only its default account's usage. An agent that signs in with its own account (its own `CLAUDE_CONFIG_DIR` or `CODEX_HOME`) isn't covered; reading each agent's account is follow-up work.
+
+## Offline computers
+
+Whatever the grouping and the sort, offline computers go in one group at the end, Offline with its count, folded. This device is the exception: it stays first even while offline, since it is the one computer people can bring back from where they are. Most of a long-lived server's computers can be offline for months; folded, they no longer push the computers that can work out of sight. With Status set to Offline they are the list itself, with no group around them.
+
+## On a phone
+
+- The toolbar takes two lines, as [The toolbar over a list](../../patterns/responsive.md#the-toolbar-over-a-list) gives way: the search field filling the first, with Group and Sort as icons and Add computer as + at its end (Group and Sort move into More when the search would be narrower than its icon and its whole placeholder); then Status and Runtime with their values, scrolling sideways, Clear all as × pinned at the line's end. Every icon keeps its words as its accessible name.
+- Each filter opens the same Select list as on a desktop. Don't gather the filters into a sheet of their own.
+- Each computer is one block, as in the list of places ([Lists](../../patterns/lists.md)).

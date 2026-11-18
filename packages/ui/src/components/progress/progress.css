@@ -1,0 +1,17 @@
+@keyframes raft-progress-indeterminate {
+  0% {
+    transform: translateX(-65%) scaleX(0.35);
+  }
+  50% {
+    transform: translateX(70%) scaleX(0.6);
+  }
+  100% {
+    transform: translateX(185%) scaleX(0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="progress-indicator"][data-indeterminate] {
+    animation-duration: 2400ms;
+  }
+}

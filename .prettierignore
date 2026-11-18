@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+design
+packages/ui/src/foundation.css
+packages/ui/src/themes.css
+packages/ui/src/upstream-styles.css
+packages/ui/src/tokens.json
+packages/ui/src/themes.json
+tooling/upstream/upstream.lock.json
+.changeset/*.md

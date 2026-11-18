@@ -1,0 +1,91 @@
+<script setup lang="ts">
+import { computed, useAttrs } from "vue";
+import { PopoverContent, PopoverPortal } from "reka-ui";
+
+import { cn } from "../../lib/cn";
+import { useFrameCollisionPadding } from "../../lib/frame-insets";
+import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { popover } from "../popover/popover.variants";
+import { PopoverArrow } from "../popover";
+import { useCoachMarkContext } from "./coach-mark-context";
+import { coachMark } from "./coach-mark.variants";
+
+defineOptions({ name: "RaftCoachMarkContent", inheritAttrs: false });
+
+const props = withDefaults(
+  defineProps<{
+    side?: "top" | "right" | "bottom" | "left";
+    sideOffset?: number;
+    align?: "start" | "center" | "end";
+    alignOffset?: number;
+    collisionPadding?: number;
+    className?: string;
+  }>(),
+  { side: "bottom", sideOffset: 8, align: "center", alignOffset: 0, collisionPadding: 8 },
+);
+
+const attrs = useAttrs();
+const { anchor, popupRef, dismiss } = useCoachMarkContext("Content");
+const collision = useFrameCollisionPadding(() => props.collisionPadding);
+const sheetBoundary = useSheetPopupBoundary();
+const collisionBoundary = computed(() => sheetBoundary.value as unknown as Element | undefined);
+const classes = computed(() =>
+  cn(
+    popover().content(),
+    coachMark().content(),
+    props.className,
+    attrs.class as string | undefined,
+  ),
+);
+const popupAttrs = computed(() => {
+  const { class: _class, ...rest } = attrs;
+  return rest;
+});
+
+function setPopup(element: unknown) {
+  popupRef.value = element instanceof HTMLElement ? element : null;
+}
+
+function onEscapeKeyDown(event: KeyboardEvent) {
+  const from = event.target;
+  const popup = popupRef.value;
+  if (from instanceof Node && popup?.contains(from)) {
+    event.preventDefault();
+    dismiss();
+    return;
+  }
+  // Esc elsewhere belongs to what has focus (a composer's suggestions, an
+  // edit): leave the event to it and keep the tour open.
+  event.preventDefault();
+}
+</script>
+
+<template>
+  <PopoverPortal>
+    <PopoverContent
+      :reference="anchor ?? undefined"
+      :side="side"
+      :side-offset="sideOffset"
+      :align="align"
+      :align-offset="alignOffset"
+      :collision-padding="collision"
+      :collision-boundary="collisionBoundary"
+      :class="popover().positioner()"
+      @open-auto-focus.prevent
+      @close-auto-focus.prevent
+      @interact-outside.prevent
+      @focus-outside.prevent
+      @escape-key-down="onEscapeKeyDown"
+    >
+      <div
+        :ref="setPopup"
+        v-bind="popupAttrs"
+        data-slot="coach-mark-content"
+        :class="classes"
+      >
+        <slot />
+      </div>
+      <PopoverArrow />
+    </PopoverContent>
+  </PopoverPortal>
+</template>

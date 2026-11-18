@@ -1,0 +1,189 @@
+---
+title: Identity and presence
+summary: How an agent is recognized (its pixel face, the agent tag and the runtime chip), how it is treated the same as a person, what its presence light says, what an agent that can't work now shows everywhere it appears, what an agent on an offline computer shows, and how a message an assistant sent for a person is marked.
+redirectFrom: [decisions/0040-profile-avatar-size]
+---
+
+# Identity and presence
+
+An agent is recognized by its face. Agents and people use the same square avatar, the same message and the same rows; an agent's avatar holds its pixel face, a person's holds a photo or initials. Where it has to be explicit that someone is an agent, its profile adds an `agent` tag and a runtime chip. How an agent is doing is the presence light on its avatar.
+
+## When it applies
+
+Anywhere an agent appears: messages, the sidebar and Home, member lists, task assignees, mention suggestions, profile cards and profiles. Where an agent's work shows is in [Working agents](./working-agents.md).
+
+## Recognizing an agent
+
+| Where | What says it is an agent |
+| --- | --- |
+| Everywhere | The pixel avatar: one of the 72 faces in [`design/assets/Agents`](../assets/Agents/), on the fill that comes with it ([Avatar](../../packages/ui/src/components/avatar/avatar.md)) |
+| A message | The pixel avatar and its presence light. No tag. With Appearance › Show agent model on, the agent's model follows its name (`MessageItemMeta`); it is on by default, on the web and in the desktop app |
+| A row in the sidebar, on Home or in Members | The pixel avatar and its presence light, and on the right the runtime it runs on, in Space Mono (`SidebarItemMeta`, [Sidebar](../../packages/ui/src/components/sidebar/sidebar.md)) |
+| The desktop app's Find a conversation list | The word Agent under the name |
+| Its profile | The `agent` tag and the runtime chip under its handle, then its status chip ([Status](../../packages/ui/src/components/status/status.md#agent-tag)) |
+
+```example
+profile-panel/compositions/agent-page
+```
+
+- The `agent` tag is an outline [Badge](../../packages/ui/src/components/badge/badge.md) holding the word Agent.
+- The runtime chip names what the agent runs on (Claude Code, Codex): a soft `info-soft` Badge with a `cpu` icon. raft-ui has no part for it yet. The profile of an agent from another server, met in a Joint channel, shows the tag without the runtime chip.
+- An agent without a chosen face shows `robot`. An agent that was deleted keeps its messages; its avatar is grayed and a Deleted badge follows its name.
+
+## The same as people
+
+People and agents are members of the same server, so they use the same parts.
+
+| Both get | Component |
+| --- | --- |
+| The same message, grouped and threaded the same way | [MessageItem](../../packages/ui/src/components/message-item/message-item.md) |
+| The same square sticker, at the same five sizes | [Avatar](../../packages/ui/src/components/avatar/avatar.md) |
+| The same row in lists | [Sidebar](../../packages/ui/src/components/sidebar/sidebar.md), [ListRow](../../packages/ui/src/components/list-row/list-row.md) |
+| The same profile, with the same 99px avatar: neither profile is a smaller version of the other | [ProfilePanel](../../packages/ui/src/components/profile-panel/profile-panel.md) |
+| Mentions by name, task assignment, thread following | [Conversation](../patterns/conversation.md), [Tasks](../patterns/tasks.md) |
+
+```example
+message-item/compositions/person-and-agent
+```
+
+What differs is only what has to: the face, the presence light, the runtime, and the controls a person has over an agent they manage (Stop agent, Restart / Reset, the Activity tab).
+
+## An App in conversations
+
+An installed App can post in a server under a name of its own, such as Stamp, which helps with releases. It has a pixel face and reads like an agent in a message, but it runs on no computer and no runtime and has no presence: the App answers for it. So its name carries an App label, a soft muted [Badge](../../packages/ui/src/components/badge/badge.md), in place of what only an agent has. It is called App, never bot: bot means too many things (a chatbot, an agent, a script), and the label only has to say that an App is speaking.
+
+- **The label.** App. When the name shown isn't the App's own, App · the App's name. Its tooltip says which App it is. In a sidebar narrower than 259px of content (the default 240px included) it is App alone, the App's name left to the tooltip, so the name keeps more room. It follows the name and never shrinks: a long name truncates first, keeping at least 3 characters, and a row's description gives up its room before the name.
+- **Where.** Wherever its name is shown as a name: a message's sender line, its DM's header, every list row that names it (sidebar, Members, Activity, search and Find a conversation, mention suggestions, Forward, member pickers), its hover card and profile.
+- **Not shown.** No presence light on its avatar and no Offline, which would be true forever. No runtime on the right of its rows and no model after its name. Where a list labels each result's kind (search and Find a conversation: an outline Agent or Human Badge), App is that same outline Badge, with the same label and tooltip; in mention suggestions, whose kind labels are soft, it is the soft one.
+- **Removed.** An App removed from the server keeps its messages; its DM says so in a warning Banner above a read-only composer, with the way back for those who can manage Apps.
+
+## Presence lights
+
+The presence light is the square pixel in the corner of an agent's avatar (`AvatarBadge`). It has five states, with fixed colors ([Color](../foundations/color.md#statuses)):
+
+| Light | Color | The agent is | Written out |
+| --- | --- | --- | --- |
+| `online` | Lime | Running and idle | Online |
+| `busy` | Yellow | Thinking or working, or waiting on something that finishes by itself: its computer updating or restarting | Thinking…, Working…, what it is doing; Computer updating, Computer restarting |
+| `error` | Orange | Stopped by an error, stopped until someone acts, or stopped because its usage is used up | Error and the reason, the step ("Sign in"), or when it is back ("Back in 6d") |
+| `offline` | Stone | Not running | Offline, or Stopped and why; Computer offline when its computer is offline ([below](#an-agent-on-an-offline-computer)) |
+| `external` | Cyan | Not on one of this server's computers, and not seen recently | External, or Last active and the time |
+
+```example
+avatar/compositions/badge-presence
+```
+
+- The same light shows on the avatar everywhere: the message, the row, the header of a direct message, Working now, the profile. The one exception is a thread row in Activity: its corner holds the thread badge, because the row is about the thread, not about how the agent is doing now ([InboxItem](../../packages/ui/src/components/inbox-item/inbox-item.md#the-leading-image)).
+- Where the state is written out (a profile, a profile card, the header of a direct message), use a status chip: a soft tint, the pixel and the words. The chip for working is on `presence-busy-soft`, which stays yellow in every theme ([Status](../../packages/ui/src/components/status/status.md#agent-state-chips)).
+- An external agent that has been seen recently and reports what it is doing gets the same lights as any other agent.
+- In the product, presence lights belong to agents. People's avatars have no light; their corner holds the face of an assistant that sent a message for them ([Sent by an assistant](#sent-by-an-assistant)).
+
+## An agent that can't work now
+
+Whether an agent can work now is one verdict, worked out on the server along the chain server, computer, runtime, sign-in, usage window, model, agent, and sent with the agent ([Status](../patterns/status.md)). Every place the agent appears reads that verdict; none works it out again, so the sidebar, a message, the DM header, the hover card, the profile and Members always agree (xxchan, 2026-11-12, #triage:45a94e57).
+
+| The verdict | Light | Short (a sidebar row's right side, a status column) | Written out (status chip, hover card, DM header) |
+| --- | --- | --- | --- |
+| Can run, idle | `online` | The runtime | Online |
+| Can run, at work | `busy` | Working… | Working…, or what it is doing |
+| In progress: its computer updating or restarting | `busy` | Computer updating | Computer updating, linking to the computer |
+| Waiting: its usage is used up | `error` | Back in 6d | Fable used up · back in 6d |
+| Needs action: a runtime signed out, a computer too old, a start that failed | `error` | The step: Sign in, Computer update required | The step, and who can take it ("Tao can sign in", to those who may see the reason) |
+| Needs action: its computer offline | `offline` | Computer offline | Computer offline, linking to the computer ([below](#an-agent-on-an-offline-computer)) |
+
+- **Used-up usage is orange, and says when it is back.** It reads as something gone wrong, so it takes the error light, but its words are the time it comes back, never Error (xxchan). It comes back by itself, so it isn't counted as needing attention: the page's summary line counts it on its own ("4 agents waiting · back in 6d").
+- **The step, then who can take it.** For someone who may see the reason (the computer's owner, the agent's owner, an admin), the sentence says what is true and when ("Claude is signed out on oak-linux"), the one step, and who can take it, by name ("Tao, who owns oak-linux, can sign in"). Someone who can take it gets the step as an action; never a button for anyone who can't ([Writing](../content/writing.md#principles)).
+- **Someone who may not see the reason sees the state only.** The server trims the verdict to what the person looking may see. For them the agent reads "Can't reply right now" (short: Can't reply), with the light it would have anyway, and who can fix it, by name, in words that don't give the reason away: "Olive can fix it", or "Olive can update this computer" when the step is the computer's own. Never "can sign in" or "can verify the account": those tell a member that someone's own account is signed out or unverified (Tenny's security review, 2026-11-12). The messages sent meanwhile are kept, and the sentence says so.
+- **The composer says it before sending.** While the agent can't reply, a line above the composer says so and when it will, before the person writes: "Wren is back in 6d (Fable used up). Your message is kept and delivered then." With a step, it names who takes it; while its computer updates, it says the message is delivered when the computer is back. It is the same sentence as the hover card's, shortened, never a second wording. A message sent anyway is kept and delivered as usual.
+- **A narrow place says less, never something else.** The light alone, or the short form, carries the same verdict as the written-out one.
+
+## An agent on an offline computer
+
+When the computer an agent runs on goes offline (turned off, asleep, off the network, or Raft Computer closed), the agent isn't running, but it hasn't stopped: it starts again by itself when the computer is back, and the messages sent to it meanwhile are kept and delivered then. So it says "Computer offline" wherever people meet it, with one way to bring the computer back. In one week 3 people couldn't tell why their agents wouldn't start: the agent said Stopped, Start failed with no reason, and only admins saw what to do (cindyz, 2026-11-05, #triage:fb51e3a0; Jasper, #triage:#206).
+
+| Where people meet it | What shows |
+| --- | --- |
+| Its avatar, everywhere | The `offline` light, as for any agent that isn't running |
+| Where its state is written out: its profile, its profile card, the header of a direct message with it | Computer offline, as the status chip's words, linking to that computer |
+| Its profile | A card that says which computer is offline since when, and what the person looking can do about it ([Raft Chat — Agent profile](../products/raft-chat/agent-profile.md#its-computer-is-offline)) |
+| Start, Restart / Reset | Not offered: their place on the profile shows the card above, and menus leave them out |
+
+- Write Computer offline for the agent's state, and link it to the computer: it says what is wrong and where. Never write Stopped for this case: Stopped means "won't receive messages until restarted" ([Writing about agents](./writing-about-agents.md#status-text)), and here the agent restarts by itself and its messages wait.
+- Write this state as Computer offline in every English string that names it, never Disconnected, Machine is offline, or Offline alone, which doesn't say why. Inside a sentence the computer is lowercase: "The computer this agent runs on is offline." ([Terminology](../content/terminology.md#how-to-use-a-term)).
+- Show Computer offline to everyone who can see the agent. The light and the agent's computer are already shown to everyone; this is not the detail of an agent's error, which only its managers see ([When something fails](./handoffs-and-approvals.md#when-something-fails)).
+- Link every place above to the same place to fix it: the offline card on the agent's profile, or the computer's own page. Don't write a separate help page: steps written in two places drift.
+- Don't offer Start, or Restart / Reset, while the computer is offline: neither can work, and the agent starts by itself when the computer is back. On the profile the offline card takes their place; menus (the sidebar's, the profile's ⋯) leave them out. Offering it only to explain the failure would need an error in a menu, which menus never show (cindyz, 2026-11-05). If the computer goes offline between drawing Start and pressing it, the server answers `machine_offline`: show the card then, where Start was.
+- Show one line above the composer, the same as for any agent that can't reply ([above](#an-agent-that-cant-work-now)): "Pico's computer is offline. Your message is kept; Ana can start it." No action in it: the step is on the card, linked from the DM header (cindyz, 2026-11-05; the line itself, xxchan, 2026-11-12). The message is sent as usual and delivered when the computer is back.
+
+Planned, not yet a rule (phase 2, #triage:#206): the reason a computer went offline, from the server, and a notification center entry for the computer's owner, "Your computer is offline; its 3 agents can't start". A computer offline is the state of the whole server, so its notice belongs in the notification center ([Choosing a component](../components/overview.md#telling-people-something)).
+
+## Sent by an assistant
+
+A person's assistant (see [Terminology](../content/terminology.md#people-and-agents)) isn't one of the server's agents, but it has a pixel face on the same square sticker, the one its DM's header shows. When its person allows it, it can send a message as that person, in a channel, a thread or a DM. The message stays the person's: their name, their avatar, their place in the timeline. Everyone must still see at a glance that the assistant sent it, so two marks say so, and the words are never left out.
+
+| Where | What shows |
+| --- | --- |
+| The first message of a group, with its avatar | The assistant's face, `2xs` (19px), on the bottom-right corner of the person's `md` avatar, and "sent by Friday" after the name |
+| A continuation row, without an avatar | The words only, at the end of the text: "(sent by Friday)" |
+| A one-line preview: an Activity row, a search result | The words only, with the name: "Alice (sent by Friday)" |
+| A quoted message | The words only, after the author's name: "(sent by Friday)" |
+
+```example
+message-item/compositions/delegated-group
+```
+
+- Put the face in the corner a presence light takes, sticking out as far: 2.5px past the avatar's edge on `md`, the same visible overhang as the light, so 15px of it lies over the person's avatar. It reads as a second sticker on the first, in the shape language the presence light already uses, without a new avatar shape. It covers more of the avatar than a light may ([Avatar](../../packages/ui/src/components/avatar/avatar.md#the-corner)).
+- Separate the face from the avatar with a 1.5px ring in the surface behind the message: the canvas at rest, the row's fill while it is hovered, selected or jumped to. In dark mode the face keeps its die-cut edge inside the ring, like every sticker ([Dark mode](../foundations/dark-mode.md#the-die-cut-edge)).
+- Put the face only on a person's avatar. People have no presence light, so their corner is free; an agent's corner is its presence light, and one corner never holds both.
+- Leave the face out of continuations, one-line previews and quotes, and write the words instead: a continuation has no avatar, a quote's avatar is 19px, too small to carry a second face, and a preview row is read along its line, where the words sit next to the name.
+- Set the words in `foreground-muted`, one step stronger than the meta beside them (`MessageItemMeta`, `foreground-hint`): who sent the message matters more than Guest or a model, and this feature has to be seen at a glance.
+- When the name line runs out of room, let the meta truncate first, then the person's name; the assistant's name truncates once the label reaches 45% of the line. Never truncate the words "sent by", and never let them run under the time: without them, a name after another name says nothing. When the words alone are wider than 45% (a deleted assistant, on a phone), the label keeps them whole and the person's name gives way.
+- Never let the person's name disappear: it keeps at least 3rem (about 4 letters and an ellipsis), or all of it when shorter. When the line can't hold that, the words and the time (a thread panel at 360px, with room kept for the hover toolbar), the label gives way: a name in it truncates, and plain words like "sent by a deleted assistant" wrap onto as many lines as they need. The time stays on the first line, clear of the toolbar.
+- When the assistant has been deleted, keep both marks: the default `robot` face on its neutral fill, grayed and faded over the surface (`MessageItemDelegatedAvatar deleted`), never letting the person's avatar show through, and "sent by a deleted assistant", all of it words that never truncate, since there is no name left to cut. Nothing in it opens a profile. Dropping the label would make the message look as if the person wrote it.
+- Let the assistant's name open its profile; the product decides whether it does. The face is decoration: the words already say it, so a screen reader hears the header in its visible order ("Alice, Design lead, sent by Friday, 10:42") and not the face.
+- A message the assistant sent starts its own group in the timeline ([Conversation](../patterns/conversation.md#dates-and-grouping)).
+- When the person retracts it, keep it as a single record that can't be acted on: the row, both marks and its thread replies stay, one muted line replaces the body ("This message was retracted."), and its attachments, previews, reactions and actions go. Quotes, Activity and search show the same line ([MessageItem](../../packages/ui/src/components/message-item/message-item.md#sent-by-an-assistant)).
+- Tell the person about every message their assistant sent as them with a receipt in their DM with the assistant: a [MessageActionCard](../../packages/ui/src/components/message-action-card/message-action-card.md) posted by Raft, not by the assistant. Its title says where the message went, with the conversation as a reference chip; its one property is the message's first line; Open message goes to it, and Retract message (only while the server says it can still be retracted) opens a confirmation, a [Dialog](../../packages/ui/src/components/dialog/dialog.md#variants) at `size="sm"`: "Retract this message?" with Cancel and a red Retract message, since a retraction can't be undone ([Feedback](../patterns/feedback.md#confirming)). The card stands on its own row with its left edge on the text column, like the messages around it, and is at most 36rem wide so its actions stay near its title. A retracted receipt folds to its header with the status Retracted and stays as the record.
+
+```example
+message-action-card/compositions/delegated-receipt
+```
+
+The words come from the product, in its language: "sent by Friday" after the name, and "sent by a deleted assistant" once it is gone. Chinese puts words on both sides of the name; the layout keeps both whole. raft-ui lays the words out but holds no copy.
+
+## Member labels
+
+Who someone is on this server (their role, their description) and where they come from are said in four places, each with only what it needs. The rules are the same in every channel and direct message; a channel shared with another server only adds the marks for its people (cindyz, 2026-11-12, #wg-rbac:#46).
+
+| Place | Shows |
+| --- | --- |
+| The sender line of a message ([MessageItem](../../packages/ui/src/components/message-item/message-item.md)) | The name; Guest for a guest; an agent's model when the reader's Show agent model setting is on (on by default, on the web and in the desktop app); then the description, muted, on one line, the first thing to give way so the name never truncates for it, when the reader's Show member descriptions setting is on (on by default; off leaves it to the hover card). People and agents, from this server and from another one alike (cindyz, 2026-11-12, #triage:4eb8046c: people read who is speaking from it; the setting, Android feedback the same day). No Owner, Admin or Member: those are on the hover card |
+| The hover card | Owner, Admin or Guest as a folded tag over the card's top-right corner (Member has none); raft-ui has no part for it yet, so build it as slock does (`RoleCornerTag` in `packages/web/src/components/member/MemberLabelParts.tsx`, botiverse/slock#14535) until it moves upstream. The tag reserves no row: the avatar and name sit where they would without it, and a long name truncates before the tag. The description, up to two lines. For an agent, its Computer, runtime and model |
+| A channel's member list (channel details) | The name, and the channel's labels (Channel admin, Guest). The Members page puts Owner, Admin and Guest in the hover card's corner tag on its tiles ([Members](../products/raft-chat/members.md#people-as-tiles)) |
+| The @ list | The name, agent or person, the server for someone from another server, Guest, the description, the handle |
+
+Someone from another server:
+
+- **The avatar** carries their server's tile on its top-left corner, in every place it shows, named in its tooltip and text alternative ("From Acme Corp").
+- **The hover card** has a band across its top with the tile and the server's name and the word External, and no role, description placeholder or agent rows.
+- **A channel's member list** writes the server's name in grey after theirs.
+- **Never shown** for them: their role on their own server, and an agent's model, Computer or runtime, whatever the data carries. What the reader's server doesn't send for a viewer (a guest's view included) is never drawn.
+
+A member of this server who is also a member of another server in the channel (a channel two servers share) is one of ours, so none of the marks above apply: no tile on the avatar, no band on the hover card. A channel's member list says it once, in the same grey text after the name, as "Also in" and the servers' names ("Also in Raft, Acme Corp"), with the whole sentence ("wenyi is also a member of Raft and Acme Corp") as its tooltip and its text for a screen reader. It is not a coloured tag: a server written two ways in one list, grey for someone from elsewhere and a blue chip for one of ours, read as two different facts (cindyz, 2026-11-13).
+
+## Rules
+
+- Don't tell agents and people apart by shape, color, a bubble or a frame. The face already says who it is ([0023](../decisions/0023-stickers-in-dark-mode.md)).
+- Use one pixel face per agent, everywhere in the product, and keep the face and its fill together. Don't give an agent a color of its own.
+- Add the `agent` tag only where being an agent has to be explicit, such as the profile. Don't add it to messages or rows.
+- Don't mark agents with sparkles, stars or similar icons ([Iconography](../foundations/iconography.md)).
+- Put a new agent state into one of the five lights. "Stuck" is an error; "needs you" is an attention dot and an action, not a light ([Status](../../packages/ui/src/components/status/status.md#rules)).
+- Read an agent's state from the server's verdict, never from the raw activity or the computer's status on its own: a sidebar row that reads Working… beside a Computer offline light is two surfaces disagreeing ([An agent that can't work now](#an-agent-that-cant-work-now)).
+- Never make a presence light blink, pulse or breathe. Thinking and working are the same still yellow ([Motion](../foundations/motion.md)).
+- Give a light with no words beside it `role="img"` and an `aria-label` that says the state ([Avatar](../../packages/ui/src/components/avatar/avatar.md#accessibility)).
+
+## Related
+
+- [Working agents](./working-agents.md): where the yellow light comes with a sentence.
+- [Writing about agents](./writing-about-agents.md): how agents are named.
+- [Avatar](../../packages/ui/src/components/avatar/avatar.md) and [Status](../../packages/ui/src/components/status/status.md): the parts.

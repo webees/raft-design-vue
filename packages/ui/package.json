@@ -1,0 +1,85 @@
+{
+  "name": "@webees/raft-design-vue",
+  "version": "0.0.0",
+  "description": "Vue 3 port of the Raft Design System, built with Bun, Rslib and Tailwind CSS v4.",
+  "keywords": [
+    "design-system",
+    "raft",
+    "reka-ui",
+    "tailwindcss",
+    "vue"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webees/raft-design-vue.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "NOTICE.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./wip": {
+      "types": "./dist/wip.d.ts",
+      "import": "./dist/wip.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "bun run build:tokens && bun run build:themes && rslib build && bun run build:css && bun run build:types",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:types": "vue-tsc -p tsconfig.build.json && node scripts/normalize-dts.mjs",
+    "build:tokens": "node scripts/vendor-build-tokens.mjs",
+    "build:themes": "node scripts/build-themes.mjs",
+    "dev": "rslib build --watch",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "check:api": "node scripts/check-api-surface.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@fontsource/space-grotesk": "^5.2.8",
+    "@fontsource/space-mono": "^5.2.8",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.548.0",
+    "reka-ui": "^2.11.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwind-variants": "^3.1.0"
+  },
+  "devDependencies": {
+    "@rsbuild/plugin-vue": "^2.0.1",
+    "@rslib/core": "^1.0.7",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/cli": "^4.1.18",
+    "@types/node": "^22.18.0",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^28.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
+    "vue": "^3.5.24",
+    "vue-tsc": "^3.2.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

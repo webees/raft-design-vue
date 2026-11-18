@@ -1,0 +1,31 @@
+/*
+ * Reka's `Presence` keeps a closed surface mounted only while its computed
+ * `animation-name` is set. The upstream recipes animate with transitions, so
+ * `usePresenceStyle` marks the element and this inert animation buys exactly
+ * the length of that transition. It animates a private custom property, so it
+ * never fights the recipe's own transition on opacity/transform/filter.
+ */
+@property --raft-presence-tick {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes raft-presence-exit {
+  from {
+    --raft-presence-tick: 0;
+  }
+  to {
+    --raft-presence-tick: 1;
+  }
+}
+
+[data-presence][data-ending-style] {
+  animation: raft-presence-exit var(--raft-presence-exit, 1ms) linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-presence][data-ending-style] {
+    animation-duration: 1ms;
+  }
+}

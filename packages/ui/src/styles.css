@@ -1,0 +1,44 @@
+@import "tailwindcss" source(none);
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+
+@import "./foundation.css";
+@import "./typography.css";
+@import "./themes.css";
+@import "./upstream-styles.css";
+@import "./components/combobox-select/combobox-select.css";
+@import "./components/virtual-list/virtual-list.css";
+@import "./components/spinner/spinner.css";
+@import "./components/scroll-area/scroll-area.css";
+@import "./components/progress/progress.css";
+@import "./components/timeline/timeline.css";
+@import "./components/message-action-card/collapsible.css";
+@import "./components/steps/steps.css";
+@import "./components/steps/otter-indicator.css";
+@import "./components/toast/toast.css";
+@import "./components/pull-to-refresh/pull-to-refresh.css";
+@import "./presence.css";
+
+@source "./**/*.{ts,vue}";
+
+@layer base {
+  html {
+    font-family: var(--sans-font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--layer-page);
+    color: var(--foreground-default);
+  }
+
+  ::selection {
+    background: var(--layer-selected);
+    color: var(--foreground-default);
+  }
+}

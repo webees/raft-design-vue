@@ -1,0 +1,12 @@
+[data-slot="pull-to-refresh-indicator"][data-pull-step] [data-spinner-pixel],
+[data-slot="pull-to-refresh-indicator"][data-state="idle"] [data-spinner-pixel] {
+  animation: none;
+  opacity: 0.2;
+}
+
+[data-slot="pull-to-refresh-indicator"][data-pull-step="0"] [data-spinner-pixel]:nth-child(1),
+[data-slot="pull-to-refresh-indicator"][data-pull-step="1"] [data-spinner-pixel]:nth-child(2),
+[data-slot="pull-to-refresh-indicator"][data-pull-step="2"] [data-spinner-pixel]:nth-child(4),
+[data-slot="pull-to-refresh-indicator"][data-pull-step="3"] [data-spinner-pixel]:nth-child(3) {
+  opacity: 1;
+}

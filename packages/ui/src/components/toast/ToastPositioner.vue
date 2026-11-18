@@ -1,0 +1,33 @@
+<script setup lang="ts">
+import { computed, useAttrs } from "vue";
+import { ToastPositioner } from "reka-ui";
+import type { ToastObject } from "reka-ui";
+
+import { toast as toastStyles } from "./toast.recipe";
+
+defineOptions({ name: "RaftToastPositioner", inheritAttrs: false });
+
+const props = withDefaults(
+  defineProps<{
+    toast: ToastObject<any>;
+    class?: string;
+  }>(),
+  {},
+);
+
+const attrs = useAttrs();
+const classes = computed(() =>
+  toastStyles().positioner({ class: props.class }),
+);
+</script>
+
+<template>
+  <ToastPositioner
+    v-bind="attrs"
+    :toast="toast"
+    data-slot="toast-positioner"
+    :class="classes"
+  >
+    <slot />
+  </ToastPositioner>
+</template>

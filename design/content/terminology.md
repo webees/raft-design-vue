@@ -1,0 +1,111 @@
+---
+title: Terminology
+summary: The words Raft products use for their places, people, agents and work — server, channel, DM, thread, agent, task, computer, runtime, Activity, notifications and more — how to write each one, and the words to avoid.
+---
+
+# Terminology
+
+Raft uses one word for each thing, and the same word on every screen, in every product and in what agents write. When a label, a help text and an error all say "computer", people learn the product once; when one says "machine", they wonder whether it is something else. This page lists the product's terms as the Raft web app uses them, and the words to avoid. The words for agents' actions and states are in [Writing about agents](../people-and-agents/writing-about-agents.md).
+
+## How to use a term
+
+- Use the term in this page's first column, spelled the way it is spelled here.
+- Write a term in lowercase inside a sentence and inside a label ("move it to another computer", Add computer). It takes a capital only as the first word of a label or a sentence, as a destination, a view or a status that this page lists (Activity, Active, Backlog), or as a product name (Raft Computer, Artifact). Every other section or settings page is a phrase in sentence case (Direct messages, Server profile); see [Writing](./writing.md#casing).
+- Keep the word the interface shows when you explain the interface: if the button says Create server, the help text says server.
+- When a word you need isn't here, use the plain everyday word and add it to this page.
+
+## Places
+
+| Term | Is | Write | Avoid |
+| --- | --- | --- | --- |
+| server | The space a team shares: its people, agents, channels, tasks and computers. Each server is separate from the others | Create server, Server profile, Leave server, Switch server, "Mute this server" | workspace as the name of the object in the interface; organization, team, org. See [Server and workspace](#server-and-workspace) |
+| slug | A server's short name in its address, the part after `/s/` (`launch` in `app.raft.build/s/launch`). Lowercase letters, digits and hyphens, starting with a letter. Show it in Space Mono with a leading slash (`/launch`) | Slug as the label of the field where it is entered or shown, when creating a server and in its settings; Server slug where it names another server's (a joint channel invite); "This slug is taken" | Server URL, URL slug or address for the same field; one server calling it three things reads as three settings (stdrc, 2026-11-09, #wg-onboarding-v3:54b951a2) |
+| channel | A named conversation about one topic, open to the members who join it. Its name is lowercase with dashes: `#launch-week` | Channels, Create channel, Leave channel | room, group, chat, conversation |
+| joint channel | A channel shared by two or more servers | Joint channels, Create joint channel, "Joint channels support…" | shared channel, bridge (the IM bridges in Settings are a different thing) |
+| direct message, DM | A private conversation with one or more people or agents, outside any channel. One-to-one and group conversations are both direct messages | Direct messages as the sidebar section and a title; DM in compact labels and in running text: Channels & DMs | private message, group chat, chat |
+| thread | The replies to one message, opened beside the conversation | Reply in thread, Follow thread, "thread with new replies" | sub-conversation, topic |
+| message | Anything a person or an agent posts in a conversation | message, reply, "Message #launch-week" | prompt, post, chat, comment |
+| comment | What a person or an agent writes on a document or on a passage of it, shown beside the document; its replies make a discussion | Comments, "2 comments", "2 replies", Reply | note, annotation, message |
+| Home | The phone's first destination: Saved and the conversations | Home | Dashboard. On desktop, the conversations are under Chat on the rail |
+| Activity | The destination that lists the conversations waiting for the person: channels, DMs and followed threads with unread messages or mentions. Filters: All, Unread, Mentions | Activity, Mark all read, Mark as Done | Inbox, Feed, Notifications. The components are named `ActivityInbox` and `InboxItem` after the code; the product's label is Activity |
+| notification center | The list behind the bell: the state of the whole server, such as joint-channel invites, a usage limit, a plan change or a computer that needs attention | "Notification center" as the accessible name; the bell has no visible label | Activity, alerts. Notifications is the Settings page for what notifies the person |
+| Active, Saved, Done | Activity's three views: what still waits for the person, what they saved, and what they marked done. Each is a name, in a label too | Restore to Active, Remove from Saved, Mark as Done | Inbox, Archive. Done is also a task status; the view keeps the same word |
+| Saved | The messages a person saved for later | Save on a message, Saved as the destination | bookmarks, favorites, starred. Pinned is a sidebar section of conversations, not saved messages |
+| Settings, Members, Tasks, Computers | Destinations, each named with a capital, as a name, in a label too: Back to Home, Remove from Saved | Settings, Members, Tasks, Computers | Another name for the same destination in help text or an empty state |
+
+### Server and workspace
+
+The interface calls the shared space a server, and so do the people and agents who use it. "Workspace" has two other jobs:
+
+- In the design system, workspace survives only in the names of the parts that show a server, and in code: the workspace tile, the workspace strip, the workspace button. These are design and code names; the product's words on them, and every description of what people see, stay server.
+- In running text that explains what a server is, workspace is the everyday word: "A server is the workspace for your people, agents, channels, and computers."
+
+Don't use workspace for a server anywhere else in the interface. The product also uses Workspace for the folder an agent works in on its computer, so a second meaning would be ambiguous.
+
+## People and agents
+
+| Term | Is | Write | Avoid |
+| --- | --- | --- | --- |
+| member | Anyone in a server, person or agent | Members, "members of #launch-week" | user |
+| human | A member who is a person, where people and agents are listed side by side | Humans, Invite human | user, account, real person |
+| person, people | The everyday words for humans in running text | "people in this channel" | user, end user |
+| agent | A teammate that runs on a computer with a runtime and works in channels, DMs and tasks | Agents, Create agent, Stop agent, "Bugen claimed #25" | bot, chatbot, assistant, AI agent, AI assistant, AI. See [Writing about agents](../people-and-agents/writing-about-agents.md) |
+| assistant, personal assistant | A person's own assistant. It reads what they can see in a server, their DMs too unless they turn that off, and talks with them in a DM. When they allow it, it also sends messages as them, in channels, threads and DMs, and every such message is marked "sent by" the assistant ([Identity and presence](../people-and-agents/identity-and-presence.md#sent-by-an-assistant)). It belongs to a person, not to the server, so it isn't one of the server's agents: it isn't in Members, has no runtime chip and no presence light, and nobody else mentions or assigns it. It looks like one, though: a pixel face on the same square sticker, as in its DM's header. It's the only thing in Raft called an assistant | Assistant, Create assistant, "Your assistant is connected to Raft" | assistant for an agent; bot; AI assistant. Don't name who runs it: write "runs in the cloud" if it matters |
+| App (as a sender) | What an installed App posts as in a server, such as Stamp, which helps with releases. It has a pixel face like an agent, but no runtime, no computer and no presence: the App answers for it. It is labeled App wherever its name is shown ([An App in conversations](../people-and-agents/identity-and-presence.md#an-app-in-conversations)) | App, "App · Stamp", "Added by the Stamp app" | bot, agent, integration. Bot means too many things (a chatbot, an agent, a script) to name one of them |
+| external agent | An agent someone runs themselves and connects to Raft, instead of one Raft starts on a computer | Create external agent, External agent | custom bot, integration |
+| agent credential | The secret an external agent signs in to Raft with, until it is revoked. Shown once, set in Space Mono; anyone who has it can act as the agent. Both ways of connecting use the same one: `raft agent login` asks for it at its prompt, and the Raft SDK reads it from `RAFT_AGENT_CREDENTIAL`; switching between them keeps it (Grace, 2026-11-12, #wg-external-agent-ux:b732f0a4) | Agent credential, Create credential, "revoke it on Nathan's page" | login token, API key, token alone |
+| Owner, Admin, Member, Guest | A member's role, with a capital only as the first word of a label, also where a menu picks a role | Owner in a label; Invite members, Visible to guests, Make admin; "only an owner or admin can…" in a sentence | moderator, super admin |
+| display name | The name people see. Name people and agents by it | Martin, Bugen | the handle, except where the exact identity matters: `@martin` in Space Mono |
+
+## Work
+
+| Term | Is | Write | Avoid |
+| --- | --- | --- | --- |
+| task | A piece of work with a number and a status, in a channel or a DM, with its own discussion. It is created from a message, but it isn't the message | Tasks, Create task, Create task from message, `#25` | ticket, issue, job, to-do |
+| Backlog, Todo, In progress, Done, Closed | The five task statuses, spelled exactly like this, in a label too, as a state or as a board column. Backlog is "not now"; Closed is "won't do" | Move to Backlog, Collapse Backlog, Mark as Done, "No Backlog tasks" | To Do, Doing, WIP, Complete, Resolved |
+| Artifact, Artifacts | A page shared in Raft, an HTML page or a Markdown document, opened in the Artifact viewer, where people comment on it and follow it. A product name, with a capital in every position | Artifacts, Save as Artifact, "Commenting on an Artifact" | artifact in lowercase, page or doc as its name |
+| announcement | The one Artifact a channel shows at its top for everyone in it, set by the channel's owner or the server's owners and admins ([Channel](../products/raft-chat/channel.md#the-announcement)) | Announcement, Set announcement, Set as channel announcement | pinned message, notice, the description. `AnnouncementDialog` is a different thing, the product's dialog about something new; the code calls a channel's `ChannelAnnouncement` |
+| computer | The machine Raft Computer runs on, where agents run. A server needs at least one online | Computers, Add computer, "Move to another computer"; Computer offline as the state of a computer and of an agent on it, "The computer this agent runs on is offline." in a sentence ([An agent on an offline computer](../people-and-agents/identity-and-presence.md#an-agent-on-an-offline-computer)) | machine, host, device, node, cloud server; Disconnected and Machine is offline for an offline computer |
+| Raft Computer | The app that runs on a computer and starts its agents | "Restart Raft Computer and try again" | daemon, the agent process, the client |
+| runtime | The program an agent runs in: Claude Code, Codex and others. Runtime names are set in Space Mono, in a runtime chip | Runtime, "No usable runtime found on this computer" | harness, engine, AI agent runtime, provider |
+| model | The language model a runtime uses, chosen separately from the runtime | Model | brain |
+| application, connected app | A third-party app connected to a server or an agent | Applications as the Settings page; connected apps in running text | integration, plugin, add-on |
+| mention | A reference to someone with @ that calls their attention | Mentions, "Mentioned you" | ping, tag |
+| reaction | An emoji added to a message | "React with thumbs up" as the accessible name of a quick reaction | like |
+
+## Words to avoid
+
+These words are wrong for Raft even when they are common elsewhere.
+
+| Avoid | Because | Use |
+| --- | --- | --- |
+| bot, chatbot, assistant, AI agent, AI-powered | Agents are teammates with names; these words make them a feature or a tool. Assistant names only the personal assistant ([People and agents](#people-and-agents)) | agent, or the agent's name |
+| prompt | People don't prompt agents in Raft; they write to them like anyone else | message |
+| user | It names a record in a database, not someone in the room | person, people, human, member |
+| machine, host | The interface and the setup call it a computer | computer |
+| harness | It no longer says clearly whether it means the runtime or the app around it | runtime |
+| inbox | The destination is called Activity | Activity |
+| workspace, for a server | The interface calls it a server | server; see [Server and workspace](#server-and-workspace) |
+| room, conversation, chat | Too vague: Raft has three kinds of conversation | channel, DM or thread |
+| leverage, unlock, supercharge, next-gen | Promotional words describe nothing; the [writing guide](../authoring/writing.md#voice) lists more | Say what the feature does |
+| log in, log out, login as a verb | The sign-in page says Sign in; one pair everywhere ([Writing](./writing.md#signing-in-and-out)) | sign in, sign out |
+| simply, just, easily | They tell people a step is easy instead of making it easy, and make people who struggle feel worse | Leave them out |
+
+## Where the product isn't consistent yet
+
+The web app has strings that don't follow this page. Fix them when you touch them, and don't copy them into new work:
+
+- "machine" in a few strings about computers, and "Edit Machines" as a permission name.
+- Workspace as the heading of the server's Settings group, and in RaftBench's titles.
+- Product nouns capitalized in the middle of a sentence: "Keep it on the Computer", "Install on this Server".
+- Labels still in Title Case that the web app doesn't write itself (slock #12979 follow-ups; every label the web app writes is sentence case, [0044](../decisions/0044-sentence-case-for-labels.md)): the task statuses the server writes into event lines ("In Progress", and the retired "In Review"), copy the server sends for the runtime form ("API Key"), the desktop app's native menus and its updater, and the labels of the shared action cards.
+- "Filter inbox" as the accessible name of the Activity filters.
+- Log Out and Log out beside Sign in, in Settings, on the server list and for an app's connection.
+- "The AI agent runtime your agents run on" as the help text of the Runtime field.
+
+## Related
+
+- [Writing](./writing.md): casing, labels, dialogs and errors.
+- [Voice and tone](./voice-and-tone.md): how Raft sounds.
+- [Writing about agents](../people-and-agents/writing-about-agents.md): the verbs and states for agents.
+- [Writing guide](../authoring/writing.md#terms): the design system's own terms, for the docs.

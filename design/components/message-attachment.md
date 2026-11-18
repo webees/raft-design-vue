@@ -1,0 +1,131 @@
+---
+title: MessageAttachment
+summary: Files, images and video attached to a message — a file is a card with its name, size and an action; images and video show inline.
+status: stable
+aliases: [Attachment, File card]
+layer: collaboration
+category: messages
+related: [message-item, file-preview, composer, progress]
+---
+
+# MessageAttachment
+
+What is attached to a message. A file is a card: its name, its size and one or two actions such as Download. Images show inline in a gallery, and a video shows in a player. Attachments sit under the message body, in `MessageItemAttachments` ([MessageItem](../message-item/message-item.md)).
+
+```example
+message-attachment/compositions/message-attachments-showcase
+```
+
+## When to use
+
+| Situation                             | Use                                                                                                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| A file attached to a sent message     | `MessageAttachmentCard`, in a `MessageAttachmentGroup`                                                                                |
+| Images attached to a message          | `MessageImageGallery`                                                                                                                 |
+| A video attached to a message         | `MessageVideoPreview`                                                                                                                 |
+| A file waiting to be sent             | A thumbnail in the [Composer](../composer/composer.md)                                                                                |
+| A file's type, as an icon             | [FilePreview](../file-preview/file-preview.md)                                                                                        |
+| A link to a page, a forwarded message | A link card ([Built from existing parts](../../../../../design/components/overview.md#link-cards-forwarded-messages-quoted-previews)) |
+
+## Anatomy
+
+A file card:
+
+- `MessageAttachmentGroup`: holds the cards, at most 360px wide.
+- `MessageAttachmentCard`: one file. Required.
+- `MessageAttachmentTitle`: the file name. It can start with the file's type icon. Required.
+- `MessageAttachmentSummary`: an optional line about the contents, with `MessageAttachmentCommentSummary` for a comment count or `MessageAttachmentDiffSummary`, `MessageAttachmentDiffAddition` and `MessageAttachmentDiffDeletion` for changed lines.
+- `MessageAttachmentMeta`: the bottom line, with `MessageAttachmentMetaStart` (size and type) and `MessageAttachmentMetaEnd` (actions).
+- `MessageAttachmentAction`: an icon button, such as Download or Preview.
+
+Images: `MessageImageGallery`, its rows (`MessageImageGalleryRow`, laid out by `buildMessageImageGalleryRows`), and in each `MessageImageGalleryItem` the `MessageImageGalleryMedia`, a `MessageImageGalleryPreview` button that opens the image, an optional `MessageImageGalleryAction` and a `MessageImageGalleryOverlay` while it is pending.
+
+Video: `MessageVideoPreview`, with `MessageVideoPreviewMedia`, `MessageVideoPreviewAction`, `MessageVideoPreviewFallback` and the `MessageVideoPreviewFailure*` parts.
+
+## Variants
+
+| Variant          | Use for                                                    |
+| ---------------- | ---------------------------------------------------------- |
+| Download         | A file people save                                         |
+| Preview          | A file that opens in Raft, such as HTML or audio           |
+| With a summary   | A document with comments, or a diff with its changed lines |
+| With a type icon | A file whose type the name doesn't make clear              |
+
+```example
+message-attachment/compositions/file-attachments
+```
+
+```example
+message-attachment/compositions/document-summaries
+```
+
+```example
+message-attachment/compositions/diff-attachment
+```
+
+| Images    | Layout                                |
+| --------- | ------------------------------------- |
+| 1         | Keeps its own proportions             |
+| 2 or more | Rows laid out from the images' shapes |
+
+```example
+message-media/compositions/image-gallery-single
+```
+
+```example
+message-media/compositions/image-gallery-pair
+```
+
+```example
+message-media/compositions/image-gallery-triple
+```
+
+## States
+
+| State                 | Look                                                                                                                                                                                                                                |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Uploading             | The meta line says "Uploading · 64%", and a 4px progress track runs under the file name, inside the card and aligned with the text ([Shape](../../../../../design/foundations/shape.md#nothing-on-the-edge-of-a-rounded-container)) |
+| Opening or processing | `aria-busy` on the card, and a [Spinner](../spinner/spinner.md) in place of the action                                                                                                                                              |
+| Pending image         | The image under `MessageImageGalleryOverlay`, a `layer-veil` cover with a default-color spinner                                                                                                                                     |
+| Failed                | A `danger-strong` border, a line that says why, and Remove or Retry                                                                                                                                                                 |
+
+```example
+message-attachment/compositions/attachment-statuses
+```
+
+```example
+message-media/compositions/image-gallery-pending
+```
+
+```example
+message-media/compositions/video-states
+```
+
+## Behavior
+
+- The whole card is clickable: the file name is the link, and it covers the card. The action buttons sit above it and work on their own.
+- The card is read, so it hovers with the subtle tier, like a file row or a comment card, and presses with the medium tier; its action buttons hover medium ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).
+- Selecting an image or a file opens it in the file viewer ([Built from existing parts](../../../../../design/components/overview.md#file-viewer)).
+- An image hovers with `ink-8` over the whole picture, the media hover ([Hover and press](../../../../../design/foundations/states.md#hover-and-press)).
+- The gallery's action button shows on hover and on keyboard focus.
+- An action in a card's or a medium's corner (a file card's Download, a video's or an image's action) is a control embedded in its frame: it sits 6px from the corner and wears `radius-chip` ([Shape](../../../../../design/foundations/shape.md#inside-a-frame)).
+
+## Content
+
+- Show the file name as it is, on one line, truncated when it doesn't fit.
+- Write the size and type in Space Mono: "2.4 MB · PDF".
+- In a failure, say why and give the limit: "Larger than 25 MB. Remove it, or compress it and try again." Label the buttons Remove and Retry.
+- Say what is happening while a file is busy, such as "Uploading · 64%"; don't write "Processing…" ([Writing](../../../../../design/content/writing.md#do-and-dont)).
+
+## Accessibility
+
+- Don't put a button inside the file name's `<a>`: lay the actions over the link instead, so each is its own control.
+- Give every `MessageAttachmentAction` an `aria-label` with the action and the file name: "Download release-notes.pdf".
+- Give the upload progress `role="progressbar"`, labeled with the file it uploads.
+- Set `aria-busy` on a card while it uploads or opens.
+- Give every image an `alt` that says what it shows. Give `MessageImageGalleryPreview` an `aria-label`, such as "Open onboarding-step-2.png".
+
+## Rules
+
+- Keep a file card at most 360px wide.
+- Show images at most 360px wide, with `radius-container` and a `line-hairline` border, and never wider than the column: a gallery and a video are `min(360px, 100%)` of the column, not the window less a guess at the chrome. A gallery's rows are 8rem tall (7rem with three images) below its full 360px and 9rem (8rem) at it, by the gallery's own width, so a thread beside a conversation lays out as a phone does ([Switch on the region's width](../../../../../design/patterns/responsive.md#switch-on-the-regions-width)). A row of three images sits three across at every width, never two over one: two over one laid six images out 2, 1, 2, 1, which reads as an F rather than a set. Put it in a parent with a definite width (a block, a stretched flex or grid item, or a set width), not one that shrinks to its content (`inline-block`, `w-fit`, an absolutely positioned box or floating layer with no width, a flex item with `flex-basis: auto` and no width): as its own container it takes no width from what it holds and would collapse to nothing.

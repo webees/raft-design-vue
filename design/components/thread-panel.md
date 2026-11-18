@@ -1,0 +1,62 @@
+---
+title: ThreadPanel
+summary: The side panel for one thread — a header that names it, the original message, the replies and a composer, with no tabs.
+status: stable
+aliases: [Thread]
+layer: collaboration
+category: messages
+related: [panel, conversation-panel, message-replies, composer]
+---
+
+# ThreadPanel
+
+ThreadPanel shows the replies to one message beside the conversation it belongs to. It is not a narrower conversation panel: its header names the thread and where it is, the original message comes first, and it has no tabs.
+
+```example
+thread-panel/thread-panel
+```
+
+## When to use
+
+| Situation                                                | Use                                                                                                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The replies to one message, read beside the conversation | ThreadPanel                                                                                                                                            |
+| The conversation itself                                  | [ConversationPanel](../conversation-panel/conversation-panel.md)                                                                                       |
+| A profile beside the conversation                        | A [Panel](../panel/panel.md) with `edge="attached"`                                                                                                    |
+| A channel's tasks and files                              | Side sections in columns right of the conversation's panel ([Page structure](../../../../../design/patterns/page-structure.md#sidebar-and-side-panel)) |
+| How a thread is reached from a message                   | [MessageReplies](../message-replies/message-replies.md)                                                                                                |
+
+## Anatomy
+
+- `ThreadPanelRoot`: the panel. It is a `Panel` with `edge="attached"`, so it draws its own left seam.
+- `ThreadPanelHeader`: the header (44px with a mouse, 56px on a touch screen), built on `PanelHeaderRoot`.
+  - `ThreadPanelTitle`: the title, "Thread", followed by `ThreadPanelTitleMeta` for where the thread is.
+  - `ThreadPanelActions`: `PanelAction` buttons. The last ones are Expand and the × ([Panel](../panel/panel.md#rules), [Navigation](../../../../../design/patterns/navigation.md#closing)); folded over the conversation, the header starts with Back and has no ×.
+- `ThreadPanelContent`: everything under the header.
+  - `ThreadPanelSearch`, with `ThreadPanelSearchTrailing` and `ThreadPanelSearchCount`: an optional row for searching within the thread.
+  - `ThreadPanelOriginalMessage`: the message the thread replies to, with a hairline under it. The hairline is a boundary: it sits a section step, 24px, under the message's last line, and the replies start a section step under it (`ThreadPanelReplySummary`) ([Timeline rhythm](../../../../../design/foundations/spacing.md#timeline-rhythm)).
+  - `ThreadPanelBody`: the scrolling replies. `ThreadPanelReplySummary` and `ThreadPanelReplyCount` head the list of replies.
+  - `ThreadPanelFooter`: the composer ([Composer](../composer/composer.md)), with no space of its own above it, as in [ConversationPanel](../conversation-panel/conversation-panel.md#anatomy).
+
+## Behavior
+
+- A thread and a profile can be open together: a profile opened from the thread sits beside it, and a profile opened from the conversation replaces it ([Page structure](../../../../../design/patterns/page-structure.md#sidebar-and-side-panel)).
+- Its width is in [Spacing](../../../../../design/foundations/spacing.md#layout-widths). When it sits beside the conversation and when it covers it is the product's rule ([Raft Chat](../../../../../design/products/raft-chat/README.md)).
+- On a phone the thread is a pushed page: the same panel covers the conversation, with Back instead of the ×, and the tab bar stays hidden, as under the conversation ([Responsive layout](../../../../../design/patterns/responsive.md)). On desktop, where the row can't hold it beside the conversation, it folds over the conversation, in the conversation's column, with Back at its header's start and no × ([The channel's side columns](../../../../../design/patterns/responsive.md#the-channels-side-columns)).
+
+## Content
+
+- Title the panel "Thread".
+- Say in the header where the thread is and how many replies it has: "#launch-week · 3 replies".
+
+## Accessibility
+
+- `ThreadPanelRoot` renders a `section`. Name it with `aria-label="Thread"`.
+- `ThreadPanelTitle` renders an `h2`.
+- Give every icon-only action an `aria-label`: "Search in thread", "Close thread".
+
+## Rules
+
+- Don't add tabs to a thread. It holds the original message, the replies and the composer, nothing else.
+- Leave 20px above the original message. The hover toolbar rides on a message's top edge ([MessageItem](../message-item/message-item.md)); the original message is the first item in the scroll area, so with less room the toolbar is cut off and looks pinned under the header.
+- Separate the original message from the replies with a `line-hairline`, not a seam: both are content of the same panel.

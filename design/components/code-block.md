@@ -1,0 +1,80 @@
+---
+title: CodeBlock
+summary: Several lines of code or a log on a framed code surface, with an optional header for the file name and a copy action.
+status: stable
+aliases: []
+layer: core
+category: data-display
+related: [inline-code, copyable-code, message-item]
+---
+
+# CodeBlock
+
+Several lines of code or a log, on a framed code surface that scrolls sideways instead of wrapping. An optional header names the file and holds actions such as Copy. You render the code inside, plain or highlighted.
+
+```example
+code-block/compositions/shiki
+```
+
+## When to use
+
+| Situation                          | Use                                                                                                                         |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Several lines of code, or a log    | CodeBlock                                                                                                                   |
+| One command people copy and run    | [CopyableCode](../copyable-code/copyable-code.md)                                                                           |
+| A name from code inside a sentence | [InlineCode](../inline-code/inline-code.md)                                                                                 |
+| A diagram or a Markdown table      | The same container ([Built from existing parts](../../../../../design/components/overview.md#diagrams-and-markdown-tables)) |
+
+## Anatomy
+
+- `CodeBlock`: the frame. Required.
+- `CodeBlockHeader`: the optional top bar, with a hairline under it.
+  - `CodeBlockTitle`: the file name, in Space Mono.
+  - `CodeBlockActions`: the actions at its right end.
+- `CodeBlockBody`: the code panel. Render the code in a `CodeBlockPre` with its `code` inside it. Required.
+- `CodeBlockPre`: the code's `pre`, keyboard-reachable while it scrolls ([Accessibility](#accessibility)).
+- `CodeBlockAction`: a 32px icon button with `radius-chip` (34px with `radius-control` with a mouse), like every control embedded in a frame. You provide its icon and what it does.
+
+## Variants
+
+| Variant          | Use for                                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| With a header    | Code from a file: the header names it                                                                                   |
+| Without a header | A snippet or a log without a file name; `CodeBlockActions` placed inside the body takes its own column at its top right |
+| Highlighted      | Code in a known language, highlighted with Shiki                                                                        |
+| Plain            | Logs and text without a language                                                                                        |
+
+```example
+code-block/compositions/plain
+```
+
+```example
+code-block/compositions/without-header
+```
+
+```example
+code-block/compositions/animated-copy
+```
+
+## Behavior
+
+- Long lines scroll sideways inside the body. The code doesn't wrap.
+- After a copy, the copy icon turns into a check, then back after a moment, as in [CopyableCode](../copyable-code/copyable-code.md).
+
+## Content
+
+- Put the file name in the title, with its extension: `raft.config.ts`.
+- Leave the header out when there is no file name.
+
+## Accessibility
+
+- Give every `CodeBlockAction` an `aria-label`, such as "Copy code": it is icon-only.
+- Announce a completed copy, for example with `aria-live` on the button, so the change of icon isn't the only signal.
+- Keep the code in `pre` and `code`, so it is read as code and keeps its whitespace.
+- Render the code in `CodeBlockPre`. A long line scrolls inside it, and while it does it is a region the keyboard can reach (`tabindex="0"`, `role="region"`), named by its `aria-label` ("Code" by default; name it after the language, "ts code"): Safari doesn't let the keyboard reach a scroller that can't take focus, and a `pre` with no role can't carry a name. Code that fits adds no Tab stop. It measures again whenever the `pre` resizes or its code changes (highlighting that arrives late, code that streams in), so a line that grows long gets the Tab stop. It shows the inset ink ring on keyboard focus.
+
+## Rules
+
+- Set code in Space Mono, `text-mono-code`.
+- Put the block on `layer-code`, with a `line-hairline` border and `radius-container`.
+- Put the actions 6px from the block's corner, 4px apart. Without a header they sit in a column of their own beside the code, as wide as the actions, so no line runs under them however many there are, and the block is at least tall enough to keep 6px under them. In a header they are centered in its 40px and 6px from its end ([Shape](../../../../../design/foundations/shape.md#inside-a-frame)).

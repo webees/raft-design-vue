@@ -1,0 +1,66 @@
+import { tv } from "../../lib/tv";
+
+export const choiceList = tv({
+  slots: {
+    root: ["grid min-w-0 gap-2"],
+    searchInput: ["[&::-webkit-search-cancel-button]:appearance-none"],
+    frame: [
+      "flex min-w-0 flex-col overflow-hidden",
+      "rounded-container border border-line-hairline bg-layer-card",
+    ],
+    scroller: ["min-h-0 min-w-0 p-1"],
+    rows: ["grid grid-cols-[minmax(0,1fr)_auto] gap-x-0 gap-y-0.5"],
+    group: ["col-span-2 col-start-1 grid grid-cols-subgrid grid-rows-subgrid gap-x-0 gap-y-0.5"],
+    section: ["col-span-2 col-start-1 grid grid-cols-subgrid grid-rows-subgrid"],
+    heading: [
+      "col-span-2 px-2.5 pt-2 pb-1",
+      "font-sans text-caption font-bold text-foreground-hint",
+    ],
+    item: [
+      "col-span-2 flex min-w-0 items-start gap-2.5 rounded-chip px-2.5",
+      "min-h-option py-option-inset",
+      "pointer-coarse:min-h-11 pointer-coarse:py-[calc((--spacing(11)-1lh)/2)]",
+      "text-left font-sans text-subhead",
+      "not-data-disabled:hover:bg-brand-soft not-data-disabled:active:overlay-medium",
+      "data-disabled:cursor-not-allowed",
+    ],
+    media: ["flex h-lh shrink-0 items-center"],
+    body: ["grid min-w-0 flex-1 gap-0.5"],
+    label: ["truncate font-semibold text-foreground", "in-data-disabled:text-foreground-disabled"],
+    description: [
+      "block truncate font-sans text-footnote font-normal text-foreground-muted",
+      "in-data-disabled:text-foreground-disabled",
+    ],
+    meta: [
+      "block truncate font-sans text-footnote font-normal text-foreground-muted",
+      "in-data-disabled:text-foreground-disabled",
+    ],
+    action: [
+      "relative z-raised col-start-2 flex h-lh items-center self-start pr-1",
+      "mt-option-inset pointer-coarse:mt-[calc((--spacing(11)-1lh)/2)]",
+      "font-sans text-subhead",
+    ],
+    note: ["px-2.5 py-2 font-sans text-callout text-foreground-hint"],
+    footer: ["shrink-0 border-t border-line-seam p-1"],
+  },
+  variants: {
+    scroll: {
+      true: { scroller: ["max-h-72"], action: ["pr-3"] },
+    },
+    fill: {
+      true: {
+        root: ["flex min-h-0 flex-1 flex-col"],
+        frame: ["min-h-0 flex-1"],
+        scroller: ["flex-1"],
+        action: ["pr-3"],
+      },
+    },
+    hasAction: {
+      true: { item: ["pr-11"] },
+    },
+  },
+  compoundVariants: [
+    { scroll: true, hasAction: true, class: { item: ["pr-13"] } },
+    { fill: true, hasAction: true, class: { item: ["pr-13"] } },
+  ],
+});
