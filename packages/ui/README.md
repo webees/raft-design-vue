@@ -41,7 +41,7 @@ Set `class="light"` or `class="dark"` plus an optional `data-theme`
 - ESM only, tree-shakeable, no global component registration
 
 The full component inventory and parity numbers live in
-[`docs/en/parity.md`](../../docs/en/parity.md).
+[docs/en/parity.md](https://github.com/webees/raft-design-vue/blob/main/docs/en/parity.md).
 
 ## Development
 

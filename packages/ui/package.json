@@ -18,6 +18,7 @@
     "dist",
     "!dist/test",
     "README.md",
+    "README.zh-CN.md",
     "NOTICE.md",
     "LICENSE"
   ],

@@ -40,7 +40,7 @@ import { Button, Card, CardHeader, CardTitle } from "@webees/raft-design-vue";
 - 仅 ESM、可 tree-shaking、不注册全局组件
 
 完整组件清单与对齐数字见
-[`docs/zh/parity.md`](../../docs/zh/parity.md)。
+[docs/zh/parity.md](https://github.com/webees/raft-design-vue/blob/main/docs/zh/parity.md)。
 
 ## 开发
 
