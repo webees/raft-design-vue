@@ -36,8 +36,8 @@ export function createSlotPart({
           tag,
           {
             ...extra,
-            ...rest,
             ...(type ? { type } : {}),
+            ...rest,
             "data-slot": (attrs["data-slot"] as string | undefined) ?? dataSlot,
             class: rootClass.value,
           },
