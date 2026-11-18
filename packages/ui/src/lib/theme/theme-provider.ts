@@ -41,9 +41,15 @@ function readStoredMode(storageKey: string | undefined, fallback: ThemeMode): Th
   return stored === "light" || stored === "dark" || stored === "system" ? stored : fallback;
 }
 
+function darkQuery(): MediaQueryList | null {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") return null;
+  return window.matchMedia("(prefers-color-scheme: dark)");
+}
+
 function systemMode(): ResolvedThemeMode {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  const media = darkQuery();
+  if (!media) return "light";
+  return media.matches ? "dark" : "light";
 }
 
 /**
@@ -85,8 +91,8 @@ export const ThemeProvider = defineComponent({
       props.onModeChange?.(next);
     };
 
-    if (typeof window !== "undefined") {
-      const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const media = darkQuery();
+    if (media) {
       const onChange = () => {
         systemDark.value = media.matches;
       };

@@ -83,8 +83,8 @@ export const MessageReactionCount = defineComponent({
       last = value;
       if (!/^-?\d+$/.test(value)) return;
       if (typeof el.value?.animate !== "function") return;
-      if (typeof matchMedia !== "function") return;
-      reduced ??= matchMedia("(prefers-reduced-motion: reduce)");
+      if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+      reduced ??= window.matchMedia("(prefers-reduced-motion: reduce)");
       if (reduced.matches) return;
       animation?.cancel();
       animation = el.value.animate(reactionCountKeyframes, reactionCountTiming);
@@ -92,8 +92,8 @@ export const MessageReactionCount = defineComponent({
     onMounted(async () => {
       await nextTick();
       last = el.value?.textContent ?? "";
-      if (typeof matchMedia === "function") {
-        reduced = matchMedia("(prefers-reduced-motion: reduce)");
+      if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
+        reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
         reduced.addEventListener("change", onMotion);
       }
     });

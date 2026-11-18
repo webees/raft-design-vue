@@ -283,7 +283,7 @@ watch(
   async (shouldFocus) => {
     if (!shouldFocus) return;
     await nextTick();
-    if (typeof window.matchMedia !== "function") return;
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
     if (isTextEntry(document.activeElement)) return;
     focusSearch();
