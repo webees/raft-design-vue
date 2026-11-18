@@ -15,14 +15,12 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = join(ROOT, "src/component-props.generated.ts");
 const LOCAL = join(ROOT, "src/components");
 const UPSTREAM = join(ROOT, "../../tooling/upstream/.work");
+const LOCK = join(ROOT, "../../tooling/upstream/upstream.lock.json");
 
-const upstreamRoot = existsSync(UPSTREAM)
-  ? join(
-      UPSTREAM,
-      (await readdir(UPSTREAM)).find((name) => name.startsWith("raft-design-")) ?? "",
-      "packages/ui/src/components",
-    )
-  : null;
+const lock = existsSync(LOCK) ? JSON.parse(await readFile(LOCK, "utf8")) : null;
+const snapshot = lock ? join(UPSTREAM, `raft-design-${lock.commit}`) : null;
+const upstreamRoot =
+  snapshot && existsSync(snapshot) ? join(snapshot, "packages/ui/src/components") : null;
 
 const check = process.argv.includes("--check");
 if (!upstreamRoot) {
