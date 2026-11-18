@@ -66,10 +66,11 @@
   "devDependencies": {
     "@rsbuild/plugin-vue": "^2.0.1",
     "@rslib/core": "^1.0.7",
-    "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^22.18.0",
     "@vitejs/plugin-vue": "^6.0.2",
+    "@vitest/coverage-v8": "4.1.12",
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^28.1.0",
     "postcss": "^8.5.6",
