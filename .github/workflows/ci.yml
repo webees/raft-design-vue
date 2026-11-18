@@ -34,6 +34,7 @@ jobs:
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run check:api
+      - run: bun run check:props
       - run: bun run test -- --coverage
       - run: bun run build
       - run: bun run check:consumer-types

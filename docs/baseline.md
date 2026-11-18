@@ -31,7 +31,8 @@ PATH="$HOME/.bun/bin:$PATH" bun run verify
 ```
 
 Runs, in order: `check:parity → check:audit → check:docs-links → format:check
-→ lint → typecheck → check:api → test → build → check:consumer-types`.
+→ lint → typecheck → check:api → check:props → test → build →
+check:consumer-types`.
 
 Measured on 2026-11-19:
 

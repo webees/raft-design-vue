@@ -41,6 +41,8 @@
     "build": "bun run build:tokens && bun run build:themes && rslib build && bun run build:css && bun run build:types",
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && node scripts/copy-css-assets.mjs",
     "build:types": "vue-tsc -p tsconfig.build.json && node scripts/normalize-dts.mjs",
+    "generate:props": "node scripts/generate-component-props.mjs",
+    "check:props": "node scripts/generate-component-props.mjs --check",
     "build:tokens": "node scripts/vendor-build-tokens.mjs",
     "build:themes": "node scripts/build-themes.mjs",
     "dev": "rslib build --watch",

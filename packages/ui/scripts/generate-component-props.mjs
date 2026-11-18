@@ -24,6 +24,17 @@ const upstreamRoot = existsSync(UPSTREAM)
     )
   : null;
 
+const check = process.argv.includes("--check");
+if (!upstreamRoot) {
+  const message = "upstream snapshot missing; run `bun run sync:upstream`";
+  if (check) console.warn(`skipped props check: ${message}`);
+  else {
+    console.error(message);
+    process.exit(1);
+  }
+  process.exit(0);
+}
+
 function exportedTypes(source) {
   const names = new Set();
   for (const match of source.matchAll(/export\s+type\s*\{([^}]*)\}/g)) {
@@ -148,5 +159,15 @@ for (const [type, entry] of [...aliases].sort(([a], [b]) => a.localeCompare(b)))
 }
 lines.push("");
 
-await writeFile(OUT, lines.join("\n"));
-console.log(`generated ${aliases.size} props types -> ${OUT}`);
+const content = lines.join("\n");
+if (check) {
+  const current = existsSync(OUT) ? await readFile(OUT, "utf8") : "";
+  if (current !== content) {
+    console.error("component-props.generated.ts is stale; run `bun run generate:props`");
+    process.exit(1);
+  }
+  console.log(`component props: ${aliases.size} up to date`);
+} else {
+  await writeFile(OUT, content);
+  console.log(`generated ${aliases.size} props types -> ${OUT}`);
+}

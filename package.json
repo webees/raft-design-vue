@@ -30,9 +30,10 @@
     "check:audit": "bun run --cwd tooling/upstream audit --check",
     "check:docs-links": "bun run --cwd tooling/upstream docs-links --check",
     "check:api": "bun run --cwd packages/ui check:api",
+    "check:props": "bun run --cwd packages/ui check:props",
     "check:consumer-types": "cd tests/type-consumer && tsc -p tsconfig.json",
     "changeset": "changeset",
-    "verify": "bun run check:parity && bun run check:audit && bun run check:docs-links && bun run format:check && bun run lint && bun run typecheck && bun run check:api && bun run test && bun run build && bun run check:consumer-types"
+    "verify": "bun run check:parity && bun run check:audit && bun run check:docs-links && bun run format:check && bun run lint && bun run typecheck && bun run check:api && bun run check:props && bun run test && bun run build && bun run check:consumer-types"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
