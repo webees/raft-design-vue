@@ -113,7 +113,7 @@ Which component to use for which job is in the [components overview](../componen
 
 ## Versions and upgrading
 
-raft-ui is pre-1.0: a minor version can include breaking changes. Each release lists them, with what to change, in the [changelog](https://github.com/botiverse/raft-design/blob/d98cae8c225ce19584bf27445b65ec943f82cd62/packages/ui/CHANGELOG.md).
+raft-ui is pre-1.0: a minor version can include breaking changes. Each release lists them, with what to change, in the [changelog](https://github.com/botiverse/raft-design/blob/7d280d65142bf924190f068735c246c155c45089/packages/ui/CHANGELOG.md).
 
 A component's status follows where it is exported:
 

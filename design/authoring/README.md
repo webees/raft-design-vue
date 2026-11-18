@@ -164,4 +164,4 @@ Link to a section with its heading anchor (`color.md#dark-mode`). Headings are s
 - A change to how something looks or behaves updates the rule it follows in the same pull request, in code and docs together.
 - A choice that overrides a decision record adds a new record and marks the earlier one `superseded`. A choice that changes a smaller rule updates that rule and its reason in the page that owns it.
 - When raft-ui and the docs disagree, one of them is wrong. Fix the code or the rule; never leave them apart.
-- Write in English. Translations live in `i18n/<language>/`, mirroring these paths, and are kept up to date separately: a pull request that changes or adds an English page doesn't touch them ([i18n/README.md](https://github.com/botiverse/raft-design/blob/d98cae8c225ce19584bf27445b65ec943f82cd62/i18n/README.md)).
+- Write in English. Translations live in `i18n/<language>/`, mirroring these paths, and are kept up to date separately: a pull request that changes or adds an English page doesn't touch them ([i18n/README.md](https://github.com/botiverse/raft-design/blob/7d280d65142bf924190f068735c246c155c45089/i18n/README.md)).

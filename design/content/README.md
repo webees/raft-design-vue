@@ -29,4 +29,4 @@ How to write about agents (their names, verbs and states) is in [Writing about a
 - Write new UI copy against [Writing](writing.md) and [Terminology](terminology.md); a reviewer can check both.
 - Read [Voice and tone](voice-and-tone.md) before writing a new kind of message: an onboarding flow, an error family, an empty state.
 - When the product needs a word this section doesn't have, add it to [Terminology](terminology.md) in the same pull request as the feature.
-- Product copy and its translations live in each product's own repository, not in raft-ui ([packages/ui/AGENTS.md](https://github.com/botiverse/raft-design/blob/d98cae8c225ce19584bf27445b65ec943f82cd62/packages/ui/AGENTS.md)). These pages are the rules that copy follows.
+- Product copy and its translations live in each product's own repository, not in raft-ui ([packages/ui/AGENTS.md](https://github.com/botiverse/raft-design/blob/7d280d65142bf924190f068735c246c155c45089/packages/ui/AGENTS.md)). These pages are the rules that copy follows.

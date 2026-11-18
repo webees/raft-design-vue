@@ -27,6 +27,10 @@ jobs:
         with:
           node-version: 22
       - run: bun install --frozen-lockfile
+      - name: Fetch pinned upstream snapshot
+        run: bun run sync:upstream --commit "$(node -p "require('./tooling/upstream/upstream.lock.json').commit")"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: bun run check:parity
       - run: bun run check:audit
       - run: bun run check:docs-links
