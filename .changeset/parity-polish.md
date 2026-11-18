@@ -44,3 +44,7 @@ slot names and caller attribute forwarding, `ToastAction` caller slot overrides,
 `SegmentedControlItem` tooltip that preserves the item's checked state.
 `PreviewCardContent` and `MessageActionCardStatus` now react to prop changes;
 `SelectionToolbarAction` no longer inherits caller classes twice.
+
+Round six closes the last deep parity gaps: frame popups now use the upstream
+rect collision boundary as well as padding, and `VirtualList` uses one shared
+ResizeObserver delegate that batches callbacks after a browser entry batch.

@@ -30,6 +30,7 @@ import {
 import { findItemsAnchor, getAnchoredRange } from "./virtual-list-items-anchor";
 import { measureRowSpans, measureRowStart, toLayoutUnit } from "./virtual-list-measure";
 import { getWheelDeltaScale, isCoarsePointer, isIOS } from "./virtual-list-platform";
+import { getResizeObserverDelegate } from "./resize-observer-delegate";
 import {
   getNeededEnd,
   getHorizontalRange,
@@ -572,21 +573,7 @@ function handleScroll(event: Event) {
 
 /* ---------- measurement ---------- */
 
-const rowObserver = new ResizeObserver((entries) => {
-  if (ignoreItemResize || !props.itemResizable) {
-    return;
-  }
-  for (const entry of entries) {
-    const el = entry.target as HTMLElement;
-    const key = el.getAttribute(ITEM_KEY_ATTR);
-    if (key === null) {
-      continue;
-    }
-    const queued = renderQueue.get(key);
-    renderQueue.set(key, { el, isFirst: queued?.isFirst === true });
-  }
-  scheduleApplyResizes();
-});
+const rowObserver = getResizeObserverDelegate();
 
 function measureElement(el: Element | null, key: string) {
   if (!(el instanceof HTMLElement) || !props.itemResizable) {
@@ -597,7 +584,14 @@ function measureElement(el: Element | null, key: string) {
   }
   measured.set(key, el);
   el.setAttribute(ITEM_KEY_ATTR, key);
-  rowObserver.observe(el);
+  rowObserver.observe(el, (entry) => {
+    if (ignoreItemResize || !props.itemResizable) return;
+    const key = entry.target.getAttribute(ITEM_KEY_ATTR);
+    if (key === null) return;
+    const queued = renderQueue.get(key);
+    renderQueue.set(key, { el: entry.target, isFirst: queued?.isFirst === true });
+    rowObserver.runAfterEntries(applyResizes);
+  });
   renderQueue.set(key, { el, isFirst: true });
   scheduleApplyResizes();
 }
@@ -1299,7 +1293,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(wheelScrollFrame);
-  rowObserver.disconnect();
+  for (const el of measured.values()) rowObserver.unobserve(el);
   contentResizeObserver.disconnect();
   nonVirtualResizeObserver.disconnect();
   observedContent.clear();

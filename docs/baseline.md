@@ -41,7 +41,7 @@ Measured on 2026-11-19:
 | Tests | 375 |
 | Type check | clean (`vue-tsc --noEmit`) |
 | API surface | 960 / 960 |
-| Docs bundle | 4200.1 kB total, 1607.1 kB gzip |
+| Docs bundle | 4201.1 kB total, 1607.4 kB gzip |
 
 ## Static audit
 

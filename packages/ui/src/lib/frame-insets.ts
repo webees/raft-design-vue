@@ -13,6 +13,17 @@ export interface FrameInsets {
   left: number;
 }
 
+export type CollisionBoundary =
+  | "clipping-ancestors"
+  | Element
+  | Element[]
+  | { x: number; y: number; width: number; height: number };
+
+export interface FrameCollision {
+  collisionPadding: CollisionPadding;
+  collisionBoundary: CollisionBoundary | undefined;
+}
+
 export type CollisionPadding =
   | number
   | { top?: number; right?: number; bottom?: number; left?: number };
@@ -101,4 +112,82 @@ export function useFrameCollisionPadding(padding: MaybeRefOrGetter<CollisionPadd
     insets.value = readFrameInsets();
   });
   return computed(() => frameCollisionPadding(toValue(padding), insets.value));
+}
+
+function hasInset(insets: FrameInsets) {
+  return insets.top !== 0 || insets.right !== 0 || insets.bottom !== 0 || insets.left !== 0;
+}
+
+function portalsToBody(
+  container?: Element | { host?: Element } | { current?: Element | null } | null,
+): boolean {
+  if (container && "current" in container) return false;
+  const element = container && "host" in container ? container.host : container;
+  return (
+    element == null ||
+    element === document.body ||
+    element === document.documentElement
+  );
+}
+
+function visualViewportShift(): { x: number; y: number } {
+  if (typeof window === "undefined" || !window.visualViewport) return { x: 0, y: 0 };
+  return {
+    x: window.visualViewport.offsetLeft,
+    y: window.visualViewport.offsetTop,
+  };
+}
+
+export function frameCollisionBoundary(insets: FrameInsets): CollisionBoundary {
+  return {
+    get x() {
+      return insets.left + visualViewportShift().x;
+    },
+    get y() {
+      return insets.top + visualViewportShift().y;
+    },
+    get width() {
+      return Math.max(
+        0,
+        (typeof document === "undefined" ? 0 : document.documentElement.clientWidth) -
+          insets.left -
+          insets.right,
+      );
+    },
+    get height() {
+      return Math.max(
+        0,
+        (typeof document === "undefined" ? 0 : document.documentElement.clientHeight) -
+          insets.top -
+          insets.bottom,
+      );
+    },
+  };
+}
+
+export function frameCollision(
+  padding: CollisionPadding,
+  boundary: CollisionBoundary | undefined,
+  insets: FrameInsets,
+  gap = POPUP_FRAME_GAP,
+  container?: Element | { host?: Element } | { current?: Element | null } | null,
+): FrameCollision {
+  const padded = frameCollisionPadding(padding, insets, gap);
+  if (!hasInset(insets) || boundary !== undefined || !portalsToBody(container)) {
+    return { collisionPadding: padded, collisionBoundary: boundary };
+  }
+  const full =
+    typeof padded === "number"
+      ? { top: padded, right: padded, bottom: padded, left: padded }
+      : padded;
+  const side = (key: keyof FrameInsets) => Math.max(0, (full[key] ?? 0) - insets[key]);
+  return {
+    collisionPadding: {
+      top: side("top"),
+      right: side("right"),
+      bottom: side("bottom"),
+      left: side("left"),
+    },
+    collisionBoundary: frameCollisionBoundary(insets),
+  };
 }

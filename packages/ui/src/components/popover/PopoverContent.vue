@@ -3,7 +3,7 @@ import { computed, useAttrs } from "vue";
 import { PopoverContent, PopoverPortal } from "reka-ui";
 import PopoverArrow from "./PopoverArrow.vue";
 import PopoverPopup from "./PopoverPopup.vue";
-import { useFrameCollisionPadding } from "../../lib/frame-insets";
+import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
 import { providePopoverSize } from "./popover-context";
 import { popover, type PopoverSize } from "./popover.variants";
@@ -38,11 +38,17 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const collision = useFrameCollisionPadding(() => props.collisionPadding);
+const insets = computed(() => readFrameInsets());
 const sheetBoundary = useSheetPopupBoundary();
-// floating-ui accepts a rect boundary; Reka's prop type only names Elements.
+const collision = computed(() =>
+  frameCollision(
+    props.collisionPadding,
+    sheetBoundary.value,
+    insets.value,
+  ),
+);
 const collisionBoundary = computed(
-  () => sheetBoundary.value as unknown as Element | undefined,
+  () => collision.value.collisionBoundary as Element | undefined,
 );
 const positionerClass = computed(() => popover().positioner());
 const positionerAttrs = computed(() => {
@@ -63,7 +69,7 @@ providePopoverSize(() => props.size);
       :align="align"
       :align-offset="alignOffset"
       :avoid-collisions="avoidCollisions"
-      :collision-padding="collision"
+      :collision-padding="collision.collisionPadding"
       :collision-boundary="collisionBoundary"
       :force-mount="forceMount"
       data-slot="popover-positioner"

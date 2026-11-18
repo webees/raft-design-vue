@@ -3,7 +3,7 @@ import { computed, useAttrs } from "vue";
 import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import { cn } from "../../lib/cn";
-import { useFrameCollisionPadding } from "../../lib/frame-insets";
+import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
 import { popover } from "../popover/popover.variants";
 import { PopoverArrow } from "../popover";
@@ -26,9 +26,14 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const { anchor, popupRef, dismiss } = useCoachMarkContext("Content");
-const collision = useFrameCollisionPadding(() => props.collisionPadding);
+const insets = computed(() => readFrameInsets());
 const sheetBoundary = useSheetPopupBoundary();
-const collisionBoundary = computed(() => sheetBoundary.value as unknown as Element | undefined);
+const collision = computed(() =>
+  frameCollision(props.collisionPadding, sheetBoundary.value, insets.value),
+);
+const collisionBoundary = computed(
+  () => collision.value.collisionBoundary as Element | undefined,
+);
 const classes = computed(() =>
   cn(
     popover().content(),
@@ -68,7 +73,7 @@ function onEscapeKeyDown(event: KeyboardEvent) {
       :side-offset="sideOffset"
       :align="align"
       :align-offset="alignOffset"
-      :collision-padding="collision"
+      :collision-padding="collision.collisionPadding"
       :collision-boundary="collisionBoundary"
       :class="popover().positioner()"
       @open-auto-focus.prevent
