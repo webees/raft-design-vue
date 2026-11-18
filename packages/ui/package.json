@@ -55,8 +55,6 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@fontsource/space-grotesk": "^5.2.8",
-    "@fontsource/space-mono": "^5.2.8",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.548.0",
     "reka-ui": "^2.11.0",
@@ -64,6 +62,8 @@
     "tailwind-variants": "^3.1.0"
   },
   "devDependencies": {
+    "@fontsource/space-grotesk": "^5.2.8",
+    "@fontsource/space-mono": "^5.2.8",
     "@rsbuild/plugin-vue": "^2.0.1",
     "@rslib/core": "^1.0.7",
     "@tailwindcss/cli": "^4.1.18",
