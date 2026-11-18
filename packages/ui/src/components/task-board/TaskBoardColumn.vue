@@ -13,9 +13,7 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>();
 const attrs = useAttrs();
 const internalOpen = ref(props.defaultOpen);
 const instance = getCurrentInstance();
-const isControlled = computed(
-  () => instance?.vnode.props?.["open"] !== undefined,
-);
+const isControlled = computed(() => instance?.vnode.props?.["open"] !== undefined);
 const openState = computed({
   get: () => (isControlled.value ? (props.open as boolean) : internalOpen.value),
   set: (value: boolean) => {
@@ -23,9 +21,7 @@ const openState = computed({
     emit("update:open", value);
   },
 });
-const rootClass = computed(() =>
-  taskBoardColumn().root({ className: attrs.class as string }),
-);
+const rootClass = computed(() => taskBoardColumn().root({ className: attrs.class as string }));
 </script>
 
 <template>

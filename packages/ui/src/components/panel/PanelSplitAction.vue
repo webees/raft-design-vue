@@ -5,14 +5,9 @@ import { panelSplitAction } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSplitAction", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ as?: string; asChild?: boolean }>(),
-  { as: "div", asChild: false },
-);
+withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "div", asChild: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelSplitAction({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelSplitAction({ className: attrs.class as string }));
 </script>
 
 <template>

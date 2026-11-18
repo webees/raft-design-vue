@@ -42,8 +42,7 @@ describe("MessageItem", () => {
   it("registers a sender button as the row label", () => {
     const wrapper = mount(MessageItem, {
       slots: {
-        default: () =>
-          h(MessageItemSenderButton, { id: "sender-button" }, () => "Ada"),
+        default: () => h(MessageItemSenderButton, { id: "sender-button" }, () => "Ada"),
       },
     });
 

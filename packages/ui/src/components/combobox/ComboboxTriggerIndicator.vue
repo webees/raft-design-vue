@@ -6,7 +6,9 @@ import { cn } from "../../lib/cn";
 defineOptions({ name: "RaftComboboxTriggerIndicator", inheritAttrs: false });
 const props = withDefaults(defineProps<{ className?: string }>(), {});
 const attrs = useAttrs();
-const classes = computed(() => cn(combobox().triggerIndicator(), props.className, attrs.class as string));
+const classes = computed(() =>
+  cn(combobox().triggerIndicator(), props.className, attrs.class as string),
+);
 </script>
 
 <template>

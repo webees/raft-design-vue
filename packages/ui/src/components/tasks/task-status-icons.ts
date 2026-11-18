@@ -15,10 +15,7 @@ function createStatusIcon(name: string, status: TaskStatusId) {
 
 export const TaskBacklogIcon = createStatusIcon("RaftTaskBacklogIcon", "backlog");
 export const TaskTodoIcon = createStatusIcon("RaftTaskTodoIcon", "todo");
-export const TaskInProgressIcon = createStatusIcon(
-  "RaftTaskInProgressIcon",
-  "in-progress",
-);
+export const TaskInProgressIcon = createStatusIcon("RaftTaskInProgressIcon", "in-progress");
 export const TaskInReviewIcon = createStatusIcon("RaftTaskInReviewIcon", "in-review");
 export const TaskDoneIcon = createStatusIcon("RaftTaskDoneIcon", "done");
 export const TaskClosedIcon = createStatusIcon("RaftTaskClosedIcon", "closed");

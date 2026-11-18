@@ -4,10 +4,10 @@ import { OverlayLayer } from "../../lib/overlay-depth";
 
 defineOptions({ name: "RaftAlertDialog", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ open?: boolean; defaultOpen?: boolean }>(),
-  { open: undefined, defaultOpen: false },
-);
+withDefaults(defineProps<{ open?: boolean; defaultOpen?: boolean }>(), {
+  open: undefined,
+  defaultOpen: false,
+});
 
 const emit = defineEmits<{ "update:open": [open: boolean] }>();
 </script>

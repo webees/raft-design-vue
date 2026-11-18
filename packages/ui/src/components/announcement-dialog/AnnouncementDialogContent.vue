@@ -34,9 +34,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const contentClass = computed(() =>
-  announcement().content({ className: attrs.class as string }),
-);
+const contentClass = computed(() => announcement().content({ className: attrs.class as string }));
 
 function focusAction(event: Event) {
   if (props.onOpenAutoFocus) return props.onOpenAutoFocus(event);

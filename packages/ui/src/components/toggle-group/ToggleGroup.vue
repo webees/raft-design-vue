@@ -13,9 +13,7 @@ withDefaults(
 );
 
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  toggleGroup().root({ className: attrs.class as string }),
-);
+const rootClass = computed(() => toggleGroup().root({ className: attrs.class as string }));
 </script>
 
 <template>

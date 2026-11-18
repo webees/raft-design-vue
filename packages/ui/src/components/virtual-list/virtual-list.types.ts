@@ -35,11 +35,7 @@ export type VirtualListScrollAlign = "start" | "center" | "end";
 export type VirtualListScrollPosition = "top" | "bottom";
 
 export type VirtualListRenderReason =
-  | "sessionChanged"
-  | "itemsChanged"
-  | "listScroll"
-  | "batchItemResize"
-  | "listResize";
+  "sessionChanged" | "itemsChanged" | "listScroll" | "batchItemResize" | "listResize";
 
 export interface VirtualListRenderAnomaly {
   type: "renderThrashing";

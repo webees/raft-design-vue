@@ -38,7 +38,10 @@ const scrollClass = computed(() =>
   cn(
     area.scroller.value,
     variants.value.bodyScroll({
-      className: cn(inSheet.value ? dialogSheet().body() : undefined, attrs.class as string | undefined),
+      className: cn(
+        inSheet.value ? dialogSheet().body() : undefined,
+        attrs.class as string | undefined,
+      ),
     }),
   ),
 );

@@ -28,7 +28,9 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const slots = computed(() => inboxItemSkeleton());
-const listClass = computed(() => slots.value.list({ className: attrs.class as string | undefined }));
+const listClass = computed(() =>
+  slots.value.list({ className: attrs.class as string | undefined }),
+);
 
 const passed = ref(props.delay <= 0);
 let timer: ReturnType<typeof setTimeout> | undefined;

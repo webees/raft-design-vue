@@ -2,11 +2,7 @@
 import { computed, ref, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { useOverflowTitle } from "../../lib/use-overflow-title";
-import {
-  inputGroup,
-  type InputGroupAlign,
-  type InputGroupVariant,
-} from "./input-group.variants";
+import { inputGroup, type InputGroupAlign, type InputGroupVariant } from "./input-group.variants";
 
 defineOptions({ name: "RaftInputGroupAddonText", inheritAttrs: false });
 
@@ -23,9 +19,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const element = ref<HTMLElement | null>(null);
-const styles = computed(() =>
-  inputGroup({ align: props.align, variant: props.variant }),
-);
+const styles = computed(() => inputGroup({ align: props.align, variant: props.variant }));
 const textClass = computed(() => cn(styles.value.text(), props.class, attrs.class as string));
 const innerClass = computed(() => cn(styles.value.textInner(), props.innerClass));
 

@@ -5,7 +5,9 @@ import { cn } from "../../lib/cn";
 import { useComboboxSelection } from "./combobox-context";
 import { combobox } from "./combobox.recipe";
 defineOptions({ name: "RaftComboboxClear", inheritAttrs: false });
-const props = withDefaults(defineProps<{ className?: string; label?: string }>(), { label: "Clear" });
+const props = withDefaults(defineProps<{ className?: string; label?: string }>(), {
+  label: "Clear",
+});
 const attrs = useAttrs();
 const { context, values } = useComboboxSelection();
 const classes = computed(() => cn(combobox().clear(), props.className, attrs.class as string));

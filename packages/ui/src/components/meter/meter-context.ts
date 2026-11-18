@@ -9,5 +9,4 @@ export interface MeterContextValue {
   valueText: string;
 }
 
-export const meterContextKey: InjectionKey<ComputedRef<MeterContextValue>> =
-  Symbol("raft-meter");
+export const meterContextKey: InjectionKey<ComputedRef<MeterContextValue>> = Symbol("raft-meter");

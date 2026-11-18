@@ -13,11 +13,7 @@ const detailsClass = computed(() =>
 </script>
 
 <template>
-  <dd
-    v-bind="{ ...attrs, class: undefined }"
-    data-slot="description-details"
-    :class="detailsClass"
-  >
+  <dd v-bind="{ ...attrs, class: undefined }" data-slot="description-details" :class="detailsClass">
     <slot />
   </dd>
 </template>

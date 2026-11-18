@@ -57,7 +57,13 @@ const itemClass = computed(() => segmentedControlItem(props.class));
   <TooltipProvider>
     <Tooltip :open="tooltipOpen" :disabled="!iconsOnly" @update:open="onTooltipOpen">
       <SegmentedControlItemTrigger
-        :ref="(el: unknown) => { const node = toElement(el); tapRef(node); setItemEl(node); }"
+        :ref="
+          (el: unknown) => {
+            const node = toElement(el);
+            tapRef(node);
+            setItemEl(node);
+          }
+        "
       >
         <RadioGroupItem
           v-bind="{ ...attrs, class: undefined }"

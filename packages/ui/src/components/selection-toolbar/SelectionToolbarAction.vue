@@ -97,10 +97,7 @@ const buttonClass = computed(() =>
         :class="buttonClass"
       >
         <slot name="icon" />
-        <span
-          data-slot="selection-toolbar-action-label"
-          :class="styles.actionLabel()"
-        >
+        <span data-slot="selection-toolbar-action-label" :class="styles.actionLabel()">
           <slot />
         </span>
         <ChevronDown v-if="menu" aria-hidden="true" :class="styles.actionChevron()" />

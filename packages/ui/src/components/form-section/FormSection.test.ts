@@ -11,9 +11,7 @@ describe("FormSection", () => {
 
     expect(wrapper.attributes("data-slot")).toBe("form-section");
     expect(wrapper.get("h3").text()).toBe("Profile");
-    expect(wrapper.get("[data-slot='form-section-head'] p").text()).toBe(
-      "How people find you",
-    );
+    expect(wrapper.get("[data-slot='form-section-head'] p").text()).toBe("How people find you");
     expect(wrapper.find("[data-test='status']").exists()).toBe(true);
     expect(wrapper.find("input").exists()).toBe(true);
   });

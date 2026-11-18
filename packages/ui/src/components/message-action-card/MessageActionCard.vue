@@ -30,11 +30,7 @@ const rootClass = computed(() =>
     :default-open="defaultOpen"
     @update:open="emit('update:open', $event)"
   >
-    <MessageEmbed
-      size="item"
-      data-slot="message-action-card"
-      :class="rootClass"
-    >
+    <MessageEmbed size="item" data-slot="message-action-card" :class="rootClass">
       <slot />
     </MessageEmbed>
   </CollapsibleRoot>

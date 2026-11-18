@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import meta from "../generated/meta.json";
 import {
   Avatar,
   AvatarBadge,
@@ -401,19 +402,15 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Table <span>sortable · scrollable</span></h2>
     <p class="docs-section-copy">
-      Native table semantics with hairline rows, hover feedback, and a keyboard-reachable
-      horizontal scroll region.
+      Native table semantics with hairline rows, hover feedback, and a keyboard-reachable horizontal
+      scroll region.
     </p>
     <div class="docs-panel">
       <TableScroll>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableSortableHead
-                :sort="tableSort"
-                class="w-1/2"
-                @sort-change="tableSort = $event"
-              >
+              <TableSortableHead :sort="tableSort" class="w-1/2" @sort-change="tableSort = $event">
                 Member
               </TableSortableHead>
               <TableHead align="right">Seats</TableHead>
@@ -472,8 +469,7 @@ function submit() {
         </CardHeader>
         <CardContent>
           <Text.Sans size="small">
-            The card recipe is copied from upstream: hairline border, container radius,
-            no shadow.
+            The card recipe is copied from upstream: hairline border, container radius, no shadow.
           </Text.Sans>
         </CardContent>
         <CardFooter>
@@ -581,7 +577,9 @@ function submit() {
   </section>
 
   <section class="docs-section">
-    <h2 class="docs-section-title">Tiles, meters &amp; saved state <span>small system parts</span></h2>
+    <h2 class="docs-section-title">
+      Tiles, meters &amp; saved state <span>small system parts</span>
+    </h2>
     <div class="docs-grid">
       <div class="docs-panel">
         <div class="docs-row" style="align-items: flex-end; gap: 12px">
@@ -604,11 +602,21 @@ function submit() {
           </IconTile>
           <IconTile size="lg">
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <rect x="2.5" y="2.5" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.5" />
+              <rect
+                x="2.5"
+                y="2.5"
+                width="11"
+                height="11"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
             </svg>
           </IconTile>
         </div>
-        <p class="docs-section-copy">Decorative at four sizes; pass a role and label to announce one.</p>
+        <p class="docs-section-copy">
+          Decorative at four sizes; pass a role and label to announce one.
+        </p>
         <div class="docs-row" style="margin-top: 12px">
           <FilterChip>
             <FilterChipLabel>Status: Open</FilterChipLabel>
@@ -646,11 +654,7 @@ function submit() {
           </MeterHeader>
           <MeterTrack><MeterIndicator /></MeterTrack>
         </Meter>
-        <Meter
-          :used="86"
-          value-text="86% of storage used"
-          style="margin-top: 16px"
-        >
+        <Meter :used="86" value-text="86% of storage used" style="margin-top: 16px">
           <MeterHeader>
             <MeterLabel>Storage</MeterLabel>
             <MeterValue />
@@ -703,9 +707,7 @@ function submit() {
             <TooltipTrigger as-child>
               <Button variant="outline" size="sm">Hover for shortcut</Button>
             </TooltipTrigger>
-            <TooltipContent side="top">
-              Save changes <Kbd>⌘</Kbd><Kbd>S</Kbd>
-            </TooltipContent>
+            <TooltipContent side="top"> Save changes <Kbd>⌘</Kbd><Kbd>S</Kbd> </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
@@ -760,8 +762,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Dialog &amp; Select <span>modal · combobox</span></h2>
     <p class="docs-section-copy">
-      Modal dialogs keep their actions in the footer; selects open a portalled listbox
-      that inherits the trigger width.
+      Modal dialogs keep their actions in the footer; selects open a portalled listbox that inherits
+      the trigger width.
     </p>
     <div class="docs-grid">
       <div class="docs-panel">
@@ -864,10 +866,10 @@ function submit() {
     <div class="docs-panel">
       <Text.Heading :level="3">Design tokens, copied not invented</Text.Heading>
       <Text.Sans size="large">Large sans text for introductions and empty states.</Text.Sans>
-      <Text.Sans size="small" variant="muted">
-        Small sans text for supporting copy.
-      </Text.Sans>
-      <Text.Mono size="meta" variant="muted">raft-design-vue@0.1.0 · upstream 624dd37</Text.Mono>
+      <Text.Sans size="small" variant="muted"> Small sans text for supporting copy. </Text.Sans>
+      <Text.Mono size="meta" variant="muted">
+        raft-design-vue@{{ meta.version }} · upstream {{ meta.upstream.slice(0, 7) }}
+      </Text.Mono>
     </div>
   </section>
 
@@ -879,8 +881,8 @@ function submit() {
         <p style="margin-top: 12px">
           Install with <InlineCode>bun add @webees/raft-design-vue</InlineCode> and read the
           <TextLink :native-button="false" variant="muted">
-            migration notes <TextLinkExternalIcon />
-          </TextLink>.
+            migration notes <TextLinkExternalIcon /> </TextLink
+          >.
         </p>
       </div>
 
@@ -893,7 +895,9 @@ function submit() {
             </CodeBlockActions>
           </CodeBlockHeader>
           <CodeBlockBody>
-        <CodeBlockPre><code>{{ "bun install\nbun run dev" }}</code></CodeBlockPre>
+            <CodeBlockPre
+              ><code>{{ "bun install\nbun run dev" }}</code></CodeBlockPre
+            >
           </CodeBlockBody>
         </CodeBlock>
         <CopyableCodeRoot size="sm" style="margin-top: 12px">
@@ -918,9 +922,7 @@ function submit() {
           </BannerAction>
           <BannerClose label="Dismiss banner" @click="showBanner = false" />
         </Banner>
-        <Button v-else size="sm" variant="outline" @click="showBanner = true">
-          Show banner
-        </Button>
+        <Button v-else size="sm" variant="outline" @click="showBanner = true"> Show banner </Button>
       </div>
 
       <div class="docs-panel">
@@ -945,8 +947,8 @@ function submit() {
       FormSection, DescriptionList &amp; InputGroup <span>forms · details</span>
     </h2>
     <p class="docs-section-copy">
-      Section scaffolding, label/value alignment with automatic stacking, and compound
-      field groups that keep the upstream 1.5px field ring.
+      Section scaffolding, label/value alignment with automatic stacking, and compound field groups
+      that keep the upstream 1.5px field ring.
     </p>
     <div class="docs-grid">
       <div class="docs-panel">
@@ -1001,8 +1003,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Resizable <span>split panes</span></h2>
     <p class="docs-section-copy">
-      Keyboard-accessible split panes powered by Reka UI Splitter, using the upstream
-      hairline seam that strengthens on hover and drag.
+      Keyboard-accessible split panes powered by Reka UI Splitter, using the upstream hairline seam
+      that strengthens on hover and drag.
     </p>
     <div class="docs-panel">
       <ResizableGroup orientation="horizontal" style="height: 180px">
@@ -1020,8 +1022,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">ScrollArea <span>native scroll, styled rails</span></h2>
     <p class="docs-section-copy">
-      Native scrolling with overlay gutters, fade edges, and a textarea variant that
-      keeps the same rail geometry.
+      Native scrolling with overlay gutters, fade edges, and a textarea variant that keeps the same
+      rail geometry.
     </p>
     <div class="docs-panel">
       <div class="docs-row" style="align-items: stretch; gap: 1rem">
@@ -1043,8 +1045,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Logo <span>brand marks</span></h2>
     <p class="docs-section-copy">
-      The mark, wordmark, and lockup share the upstream geometry and invert in dark
-      mode. Size them with utilities and keep the aspect ratio.
+      The mark, wordmark, and lockup share the upstream geometry and invert in dark mode. Size them
+      with utilities and keep the aspect ratio.
     </p>
     <div class="docs-panel">
       <div class="docs-row" style="align-items: center; gap: 2rem">
@@ -1058,8 +1060,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">SegmentedControl <span>compact view switch</span></h2>
     <p class="docs-section-copy">
-      A radio group with a sliding sticker selection, keyboard arrow navigation, and
-      count labels that collapse cleanly on narrow tracks.
+      A radio group with a sliding sticker selection, keyboard arrow navigation, and count labels
+      that collapse cleanly on narrow tracks.
     </p>
     <div class="docs-panel">
       <SegmentedControl v-model="segmentedView" aria-label="Layout">
@@ -1089,8 +1091,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Steps <span>progress with a mascot</span></h2>
     <p class="docs-section-copy">
-      Status is carried by the marker, the connector, and a visually hidden label.
-      Click a step to make it current; the Ottie indicator animates only when visible.
+      Status is carried by the marker, the connector, and a visually hidden label. Click a step to
+      make it current; the Ottie indicator animates only when visible.
     </p>
     <div class="docs-panel">
       <Steps :current="stepIndex" @update:current="stepIndex = $event">
@@ -1108,8 +1110,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Timeline <span>status pixels on a hairline</span></h2>
     <p class="docs-section-copy">
-      Events use task-status colours, hollow backlog markers, optional icons, and
-      horizontal or right-aligned layouts.
+      Events use task-status colours, hollow backlog markers, optional icons, and horizontal or
+      right-aligned layouts.
     </p>
     <div class="docs-panel">
       <Timeline>
@@ -1134,8 +1136,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">AppRail <span>the application frame</span></h2>
     <p class="docs-section-copy">
-      The narrow rail shares the shell recipe with upstream: frame tokens, a scroll-safe
-      nav, attention badges, and a quiet footer.
+      The narrow rail shares the shell recipe with upstream: frame tokens, a scroll-safe nav,
+      attention badges, and a quiet footer.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <AppRailRoot style="height: 320px">
@@ -1173,8 +1175,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Files <span>shared file list</span></h2>
     <p class="docs-section-copy">
-      Rows keep the preview target and actions as separate buttons, with the upstream
-      hairline card, thumbnail geometry, and compact metadata scale.
+      Rows keep the preview target and actions as separate buttons, with the upstream hairline card,
+      thumbnail geometry, and compact metadata scale.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <FilesPanel aria-label="Files" style="height: 280px">
@@ -1234,19 +1236,15 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Panel <span>the framed workspace surface</span></h2>
     <p class="docs-section-copy">
-      The panel primitive matches upstream geometry: a compact frame header, section
-      rhythm, action slots, notices and a footer that stays outside the scroll region.
+      The panel primitive matches upstream geometry: a compact frame header, section rhythm, action
+      slots, notices and a footer that stays outside the scroll region.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <Panel edge="attached" style="height: 360px">
         <PanelHeader>
           <PanelHeaderIcon>
             <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path
-                d="M4 5.5h12v9H4zM7 8.5h6M7 11.5h4"
-                stroke="currentColor"
-                stroke-width="1.4"
-              />
+              <path d="M4 5.5h12v9H4zM7 8.5h6M7 11.5h4" stroke="currentColor" stroke-width="1.4" />
             </svg>
           </PanelHeaderIcon>
           <PanelHeaderContent>
@@ -1290,8 +1288,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">ConversationPanel <span>a full-height thread column</span></h2>
     <p class="docs-section-copy">
-      Tabs sit above the scrollable body, while the composer footer keeps the upstream
-      frame edge and quiet empty state.
+      Tabs sit above the scrollable body, while the composer footer keeps the upstream frame edge
+      and quiet empty state.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <ConversationPanelRoot style="height: 360px">
@@ -1304,9 +1302,7 @@ function submit() {
         <ConversationPanelContent>
           <ConversationPanelBody>
             <div class="space-y-3">
-              <div class="rounded-lg border p-3 text-sm">
-                The release copy is ready for review.
-              </div>
+              <div class="rounded-lg border p-3 text-sm">The release copy is ready for review.</div>
               <div class="rounded-lg border p-3 text-sm">
                 I added the customer impact notes to the brief.
               </div>
@@ -1334,8 +1330,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">ProfilePanel <span>profile and preferences</span></h2>
     <p class="docs-section-copy">
-      A framed profile surface with header, body and section slots for account details
-      and workspace settings.
+      A framed profile surface with header, body and section slots for account details and workspace
+      settings.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <ProfilePanel style="height: 320px">
@@ -1353,9 +1349,7 @@ function submit() {
         <ProfilePanelBody>
           <ProfilePanelSection>
             <h4 class="text-sm font-medium">Account</h4>
-            <p class="mt-1 text-sm text-muted-foreground">
-              Personal workspace · Member since 2024
-            </p>
+            <p class="mt-1 text-sm text-muted-foreground">Personal workspace · Member since 2024</p>
           </ProfilePanelSection>
           <ProfilePanelSection>
             <h4 class="text-sm font-medium">Notifications</h4>
@@ -1372,8 +1366,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">ThreadPanel <span>focused reply view</span></h2>
     <p class="docs-section-copy">
-      The thread panel keeps the original message, reply summary and reply count in a
-      narrow, scroll-safe column.
+      The thread panel keeps the original message, reply summary and reply count in a narrow,
+      scroll-safe column.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <ThreadPanelRoot style="height: 360px">
@@ -1402,8 +1396,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">ListRow <span>lists and settings</span></h2>
     <p class="docs-section-copy">
-      The whole row is the target, with hairline separators, attached rows, and quiet
-      unread emphasis.
+      The whole row is the target, with hairline separators, attached rows, and quiet unread
+      emphasis.
     </p>
     <div class="docs-panel">
       <ListRowGroup>
@@ -1456,8 +1450,8 @@ function submit() {
   <section class="docs-section" id="tasks">
     <h2 class="docs-section-title">Tasks <span>panel, card, list and board</span></h2>
     <p class="docs-section-copy">
-      Task surfaces share the status pixels, soft status chips and the panel rhythm used by
-      the upstream issue views. Sections and board columns collapse independently.
+      Task surfaces share the status pixels, soft status chips and the panel rhythm used by the
+      upstream issue views. Sections and board columns collapse independently.
     </p>
     <div class="docs-panel" style="padding: 0; overflow: hidden">
       <TasksPanelRoot style="height: 360px">
@@ -1573,8 +1567,8 @@ function submit() {
   <section class="docs-section" id="message-chrome">
     <h2 class="docs-section-title">Message chrome <span>embeds and system notes</span></h2>
     <p class="docs-section-copy">
-      Cards in messages share one frame; system notes sit between messages as their own
-      turn. The selection toolbar floats above a highlight.
+      Cards in messages share one frame; system notes sit between messages as their own turn. The
+      selection toolbar floats above a highlight.
     </p>
     <div class="docs-panel">
       <MessageEmbed size="item" interactive>
@@ -1587,7 +1581,9 @@ function submit() {
           </div>
         </MessageEmbedContent>
         <MessageEmbedFooter>
-          <span class="text-footnote text-foreground-hint">A design system for agent interfaces</span>
+          <span class="text-footnote text-foreground-hint"
+            >A design system for agent interfaces</span
+          >
         </MessageEmbedFooter>
       </MessageEmbed>
     </div>
@@ -1635,9 +1631,8 @@ function submit() {
       <MarkdownHeading :level="2">Release notes</MarkdownHeading>
       <MarkdownParagraph>
         Raft exports <MarkdownMark>design tokens</MarkdownMark> and a
-        <MarkdownLink href="https://raft.build">component library</MarkdownLink>.
-        Inline code such as <MarkdownInlineCode>bun run verify</MarkdownInlineCode> stays in
-        the text flow.
+        <MarkdownLink href="https://raft.build">component library</MarkdownLink>. Inline code such
+        as <MarkdownInlineCode>bun run verify</MarkdownInlineCode> stays in the text flow.
       </MarkdownParagraph>
       <MarkdownList>
         <MarkdownListItem>
@@ -1671,8 +1666,8 @@ function submit() {
   <section class="docs-section" id="preview-card">
     <h2 class="docs-section-title">Preview card <span>hover disclosure</span></h2>
     <p class="docs-section-copy">
-      A 300px profile card that opens on hover or focus, reusing the message card recipe when
-      size is <code>item</code>.
+      A 300px profile card that opens on hover or focus, reusing the message card recipe when size
+      is <code>item</code>.
     </p>
     <PreviewCard>
       <PreviewCardTrigger as-child>
@@ -1702,8 +1697,8 @@ function submit() {
   <section class="docs-section">
     <h2 class="docs-section-title">Lightbox <span>full-screen viewer</span></h2>
     <p class="docs-section-copy">
-      Dialog over the scrim, with a header and one close button. The body scrolls inside the
-      dialog, so the frame stays still while the media moves.
+      Dialog over the scrim, with a header and one close button. The body scrolls inside the dialog,
+      so the frame stays still while the media moves.
     </p>
     <Lightbox>
       <LightboxTrigger as-child>

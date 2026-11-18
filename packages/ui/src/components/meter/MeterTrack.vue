@@ -8,9 +8,7 @@ defineOptions({ name: "RaftMeterTrack", inheritAttrs: false });
 defineProps<{ as?: string; asChild?: boolean }>();
 
 const attrs = useAttrs();
-const trackClass = computed(() =>
-  meter().track({ className: attrs.class as string }),
-);
+const trackClass = computed(() => meter().track({ className: attrs.class as string }));
 </script>
 
 <template>

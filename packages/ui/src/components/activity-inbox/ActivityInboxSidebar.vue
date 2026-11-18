@@ -14,7 +14,11 @@ const sidebarClass = computed(() => styles.sidebar({ class: attrs.class as strin
 </script>
 
 <template>
-  <SidebarRoot v-bind="{ ...attrs, class: undefined }" data-slot="activity-inbox-sidebar" :class="sidebarClass">
+  <SidebarRoot
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="activity-inbox-sidebar"
+    :class="sidebarClass"
+  >
     <SidebarBody :class="styles.sidebarBody()">
       <SidebarContent :class="styles.sidebarContent()"><slot /></SidebarContent>
     </SidebarBody>

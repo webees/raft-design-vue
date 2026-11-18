@@ -17,7 +17,14 @@ const props = withDefaults(
     disabled?: boolean;
     className?: string;
   }>(),
-  { modelValue: undefined, defaultValue: null, open: undefined, defaultOpen: false, multiple: false, disabled: false },
+  {
+    modelValue: undefined,
+    defaultValue: null,
+    open: undefined,
+    defaultOpen: false,
+    multiple: false,
+    disabled: false,
+  },
 );
 
 const attrs = useAttrs();
@@ -30,7 +37,9 @@ const emit = defineEmits<{
 
 const looseValue = ref<string | readonly string[] | null>(props.defaultValue ?? null);
 const looseOpen = ref(props.defaultOpen ?? false);
-function mutableValue(input: string | readonly string[] | null | undefined): string | string[] | null {
+function mutableValue(
+  input: string | readonly string[] | null | undefined,
+): string | string[] | null {
   if (input == null) return null;
   return typeof input === "string" ? input : [...input];
 }
@@ -41,7 +50,8 @@ const value = computed<string | string[] | null>(() =>
 const open = computed(() => (props.open !== undefined ? props.open : looseOpen.value));
 
 function updateValue(next: unknown) {
-  const normalised = next == null ? null : Array.isArray(next) ? ([...next] as string[]) : String(next);
+  const normalised =
+    next == null ? null : Array.isArray(next) ? ([...next] as string[]) : String(next);
   if (props.modelValue === undefined) looseValue.value = normalised;
   emit("update:modelValue", normalised);
   emit("update:model-value", normalised);

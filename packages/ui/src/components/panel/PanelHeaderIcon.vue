@@ -5,14 +5,13 @@ import { panelHeader } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelHeaderIcon", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ kind?: "icon" | "avatar"; as?: string; asChild?: boolean }>(),
-  { kind: "icon", as: "div", asChild: false },
-);
+withDefaults(defineProps<{ kind?: "icon" | "avatar"; as?: string; asChild?: boolean }>(), {
+  kind: "icon",
+  as: "div",
+  asChild: false,
+});
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelHeader().headerIcon({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelHeader().headerIcon({ className: attrs.class as string }));
 </script>
 
 <template>

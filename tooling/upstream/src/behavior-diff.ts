@@ -34,7 +34,8 @@ const read = (file: string) => readFileSync(file, "utf8");
 const readCode = (file: string) => stripComments(read(file));
 const isTest = (file: string) => /\.(?:test|spec|browser\.test)\./.test(file);
 const isDoc = (file: string) => /\.(md|mdx|css)$/.test(file);
-const isFixture = (file: string) => /(?:test-scenes|test-fixture|\.parity\.|provenance\.json)/.test(file);
+const isFixture = (file: string) =>
+  /(?:test-scenes|test-fixture|\.parity\.|provenance\.json)/.test(file);
 
 const listeners = (source: string) =>
   new Set([
@@ -43,18 +44,26 @@ const listeners = (source: string) =>
     ...[...source.matchAll(/@([\w-]+)(?:\.[\w-]+)?\s*=/g)].map((m) => m[1]!),
   ]);
 const keys = (source: string) =>
-  new Set(
-    [
-      ...[...source.matchAll(/["'`](Arrow\w+|Enter|Escape|Tab|Home|End|PageUp|PageDown|Space|Backspace|Delete)["'`]/g)].map(
-        (m) => m[1]!,
+  new Set([
+    ...[
+      ...source.matchAll(
+        /["'`](Arrow\w+|Enter|Escape|Tab|Home|End|PageUp|PageDown|Space|Backspace|Delete)["'`]/g,
       ),
-      // Vue key modifiers (`@keydown.enter`, `@keydown.up`).
-      ...[...source.matchAll(/@keydown\.([\w-]+)/g)].map((m) => {
-        const name = m[1]!.toLowerCase();
-        return name === "up" ? "ArrowUp" : name === "down" ? "ArrowDown" : name === "left" ? "ArrowLeft" : name === "right" ? "ArrowRight" : name[0]!.toUpperCase() + name.slice(1);
-      }),
-    ],
-  );
+    ].map((m) => m[1]!),
+    // Vue key modifiers (`@keydown.enter`, `@keydown.up`).
+    ...[...source.matchAll(/@keydown\.([\w-]+)/g)].map((m) => {
+      const name = m[1]!.toLowerCase();
+      return name === "up"
+        ? "ArrowUp"
+        : name === "down"
+          ? "ArrowDown"
+          : name === "left"
+            ? "ArrowLeft"
+            : name === "right"
+              ? "ArrowRight"
+              : name[0]!.toUpperCase() + name.slice(1);
+    }),
+  ]);
 const count = (source: string, pattern: RegExp) => [...source.matchAll(pattern)].length;
 
 const markers = (source: string) => ({
@@ -63,7 +72,10 @@ const markers = (source: string) => ({
   timers: count(source, /\bset(?:Timeout|Interval)\s*\(/g),
   raf: count(source, /requestAnimationFrame\s*\(/g),
   observers: count(source, /new\s+(?:Resize|Mutation|Intersection)Observer\b/g),
-  pointer: count(source, /\bon(?:Pointer|Touch|Mouse|Wheel)\w*\b|addEventListener\(\s*["'`](?:pointer|touch|mouse|wheel)/g),
+  pointer: count(
+    source,
+    /\bon(?:Pointer|Touch|Mouse|Wheel)\w*\b|addEventListener\(\s*["'`](?:pointer|touch|mouse|wheel)/g,
+  ),
   document: count(source, /\bdocument\./g),
   window: count(source, /\bwindow\./g),
 });
@@ -87,7 +99,10 @@ for (const component of walk(upstreamComponents, () => true)
   const localDir = join(localComponents, component);
   if (!existsSync(localDir)) continue;
 
-  const upstreamFiles = walk(upstreamDir, (file) => !isTest(file) && !isDoc(file) && !isFixture(file));
+  const upstreamFiles = walk(
+    upstreamDir,
+    (file) => !isTest(file) && !isDoc(file) && !isFixture(file),
+  );
   const localFiles = walk(localDir, (file) => /\.(vue|ts)$/.test(file) && !isTest(file));
   const upstreamSource = upstreamFiles.map(readCode).join("\n");
   const localSource = closure(localFiles, join(SPEC_DIR, ".."));

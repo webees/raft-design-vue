@@ -36,9 +36,7 @@ export function createSlotComponent(options: SlotComponentOptions) {
         type: String,
         default: undefined,
       },
-      ...(options.defaultType
-        ? { type: { type: String, default: options.defaultType } }
-        : {}),
+      ...(options.defaultType ? { type: { type: String, default: options.defaultType } } : {}),
       ...Object.fromEntries(
         Object.keys(options.flags ?? {}).map((flag) => [flag, { type: Boolean, default: false }]),
       ),

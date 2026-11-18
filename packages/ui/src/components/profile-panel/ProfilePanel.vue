@@ -5,10 +5,11 @@ import { profilePanel } from "./profile-panel.variants";
 
 defineOptions({ name: "RaftProfilePanel", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ edge?: "attached" | "inset"; as?: string; asChild?: boolean }>(),
-  { edge: "inset", as: "section", asChild: false },
-);
+withDefaults(defineProps<{ edge?: "attached" | "inset"; as?: string; asChild?: boolean }>(), {
+  edge: "inset",
+  as: "section",
+  asChild: false,
+});
 const attrs = useAttrs();
 const rootClass = computed(() => profilePanel().root({ className: attrs.class as string }));
 </script>

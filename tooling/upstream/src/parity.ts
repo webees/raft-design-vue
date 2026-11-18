@@ -23,7 +23,9 @@ const notApplicable: string[] = [];
 for (const [name, entry] of entries) {
   const hasLocal = existsSync(join(localComponents, name, "index.ts"));
   if (entry.status === "ported" && !hasLocal) {
-    statusMismatch.push(`${name}: manifest says ported but ${entry.localPath ?? "local path"} is missing`);
+    statusMismatch.push(
+      `${name}: manifest says ported but ${entry.localPath ?? "local path"} is missing`,
+    );
   }
   if (entry.status === "planned" && hasLocal && args.write !== true) {
     statusMismatch.push(`${name}: component exists locally but manifest still says planned`);
@@ -55,9 +57,7 @@ if (args.write === true) {
             {
               ...entry,
               status: hasLocal ? "ported" : "planned",
-              ...(hasLocal
-                ? { localPath: `packages/ui/src/components/${name}` }
-                : {}),
+              ...(hasLocal ? { localPath: `packages/ui/src/components/${name}` } : {}),
             },
           ];
         })
@@ -101,7 +101,9 @@ if (args.json === true) {
       missingFromManifest.length
         ? `untracked local components: ${missingFromManifest.join(", ")}`
         : "untracked local components: none",
-      statusMismatch.length ? `status issues:\n- ${statusMismatch.join("\n- ")}` : "status issues: none",
+      statusMismatch.length
+        ? `status issues:\n- ${statusMismatch.join("\n- ")}`
+        : "status issues: none",
     ].join("\n"),
   );
 }

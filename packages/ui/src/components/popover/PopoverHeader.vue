@@ -5,9 +5,7 @@ import { popover } from "./popover.variants";
 defineOptions({ name: "RaftPopoverHeader", inheritAttrs: false });
 
 const attrs = useAttrs();
-const headerClass = computed(() =>
-  popover().header({ class: attrs.class as string | undefined }),
-);
+const headerClass = computed(() => popover().header({ class: attrs.class as string | undefined }));
 const headerAttrs = computed(() => {
   const { class: _class, ...rest } = attrs;
   return rest;

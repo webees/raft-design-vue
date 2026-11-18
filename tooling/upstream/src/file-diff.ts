@@ -34,7 +34,8 @@ const limit = typeof args.limit === "string" ? Number(args.limit) : 15;
 const read = (file: string) => readFileSync(file, "utf8");
 const isTest = (file: string) => /\.(test|spec|browser\.test)\./.test(file);
 const isDoc = (file: string) => /\.(md|mdx)$/.test(file);
-const isFixture = (file: string) => /(?:test-scenes|test-fixture|\.parity\.|provenance\.json)/.test(file);
+const isFixture = (file: string) =>
+  /(?:test-scenes|test-fixture|\.parity\.|provenance\.json)/.test(file);
 const isGeneratedOrRecipe = (file: string) => /\.(recipes?|variants)\.ts$/.test(file);
 const accepted = (file: string) =>
   !isTest(file) && !isDoc(file) && !isFixture(file) && basename(file) !== "index.ts";
@@ -87,23 +88,26 @@ for (const component of components) {
   }));
   // Assign globally: highest-overlap pairs first, so a merged file such as
   // MessageItem.vue is not stolen by an earlier alphabetical sibling.
-  const scoredPairs = upstreamFiles.flatMap((file) => {
-    const stem = basename(file).replace(/\.[^.]+$/, "");
-    const upstreamTokens = tokens(stem.replace(/\.recipe$/, "")).map((token) =>
-      token === "recipe" ? "variants" : token,
-    );
-    return localTokens.map((entry) => {
-      const shared = entry.tokens.filter((token) => upstreamTokens.includes(token)).length;
-      return {
-        upstream: file,
-        local: entry.file,
-        shared,
-        score: shared / Math.max(upstreamTokens.length, entry.tokens.length, 1),
-      };
-    });
-  })
+  const scoredPairs = upstreamFiles
+    .flatMap((file) => {
+      const stem = basename(file).replace(/\.[^.]+$/, "");
+      const upstreamTokens = tokens(stem.replace(/\.recipe$/, "")).map((token) =>
+        token === "recipe" ? "variants" : token,
+      );
+      return localTokens.map((entry) => {
+        const shared = entry.tokens.filter((token) => upstreamTokens.includes(token)).length;
+        return {
+          upstream: file,
+          local: entry.file,
+          shared,
+          score: shared / Math.max(upstreamTokens.length, entry.tokens.length, 1),
+        };
+      });
+    })
     .filter((pair) => pair.score === 1 || (pair.shared >= 2 && pair.score >= 0.6))
-    .sort((a, b) => b.score - a.score || b.shared - a.shared || a.upstream.localeCompare(b.upstream));
+    .sort(
+      (a, b) => b.score - a.score || b.shared - a.shared || a.upstream.localeCompare(b.upstream),
+    );
 
   const used = new Set<string>();
   const assigned = new Map<string, string>();
@@ -143,7 +147,9 @@ if (json) {
   for (const row of rows) {
     console.log(`## ${row.component}`);
     for (const pair of row.pairs) {
-      const ratio = pair.local ? (pair.localLines / Math.max(pair.upstreamLines, 1)).toFixed(2) : "  - ";
+      const ratio = pair.local
+        ? (pair.localLines / Math.max(pair.upstreamLines, 1)).toFixed(2)
+        : "  - ";
       console.log(
         `  ${ratio}  ${String(pair.upstreamLines).padStart(5)}  ${pair.upstream}  ->  ${pair.local ?? "MISSING"}`,
       );
@@ -155,10 +161,7 @@ if (json) {
     .map((row) => ({
       ...row,
       missing: row.pairs.filter((pair) => !pair.local).length,
-      thinLines: row.thin.reduce(
-        (sum, pair) => sum + (pair.upstreamLines - pair.localLines),
-        0,
-      ),
+      thinLines: row.thin.reduce((sum, pair) => sum + (pair.upstreamLines - pair.localLines), 0),
     }))
     .sort((a, b) => b.missing - a.missing || b.thinLines - a.thinLines);
 
@@ -171,9 +174,7 @@ if (json) {
       console.log(`  missing: ${missing.map((pair) => pair.upstream).join(", ")}`);
     }
     for (const pair of row.thin.slice(0, 8)) {
-      console.log(
-        `  thin: ${pair.upstreamLines}L -> ${pair.localLines}L (${pair.local})`,
-      );
+      console.log(`  thin: ${pair.upstreamLines}L -> ${pair.localLines}L (${pair.local})`);
     }
   }
 }

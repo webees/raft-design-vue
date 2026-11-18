@@ -10,9 +10,7 @@ defineProps<{
   overscroll?: "contain" | "auto";
 }>();
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  tasksPanel().viewport({ className: attrs.class as string }),
-);
+const rootClass = computed(() => tasksPanel().viewport({ className: attrs.class as string }));
 </script>
 
 <template>

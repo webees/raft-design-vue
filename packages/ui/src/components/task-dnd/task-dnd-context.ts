@@ -24,25 +24,21 @@ export interface TaskDndContextValue {
   activeHeight: () => number | null;
   activeId: () => DragId | null;
   engine: DragEngine;
-  isDropAllowed: (
-    activeId: DragId,
-    overId: DragId,
-    overData: TaskDropData | undefined,
-  ) => boolean;
+  isDropAllowed: (activeId: DragId, overId: DragId, overData: TaskDropData | undefined) => boolean;
   overlay: () => boolean;
   setOverlay: (value: boolean) => void;
-  over: () => { overId: DragId | null; overPlacement: TaskDropPlacement | null; overData?: TaskDropData };
+  over: () => {
+    overId: DragId | null;
+    overPlacement: TaskDropPlacement | null;
+    overData?: TaskDropData;
+  };
 }
 
 export type TaskDndProviderProps = {
   accessibility?: unknown;
   describe?: DragAnnouncementSource;
   disabled?: boolean;
-  isDropAllowed?: (
-    activeId: DragId,
-    overId: DragId,
-    overData: TaskDropData | undefined,
-  ) => boolean;
+  isDropAllowed?: (activeId: DragId, overId: DragId, overData: TaskDropData | undefined) => boolean;
   messages?: Partial<DragMessages>;
   onDragCancel?: (session: DragSession) => void;
   onDragEnd?: (session: DragSession, reason: "drop" | "cancel") => void;

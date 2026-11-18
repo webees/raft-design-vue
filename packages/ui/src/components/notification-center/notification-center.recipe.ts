@@ -87,6 +87,4 @@ export const notificationCenter = tv({
   },
 });
 
-export type NotificationCenterVariants = NonNullable<
-  Parameters<typeof notificationCenter>[0]
->;
+export type NotificationCenterVariants = NonNullable<Parameters<typeof notificationCenter>[0]>;

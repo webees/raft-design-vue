@@ -21,9 +21,7 @@
   --r-timeline-marker-radius: 2px;
   --r-timeline-marker-fill: 100%;
   --r-timeline-marker-border-color: var(--sticker-ink);
-  --r-timeline-axis-offset: calc(
-    (var(--r-timeline-line-height) - var(--r-timeline-icon-size)) / 2
-  );
+  --r-timeline-axis-offset: calc((var(--r-timeline-line-height) - var(--r-timeline-icon-size)) / 2);
 
   &.r-timeline--lg {
     --r-timeline-title-font-size: 16px;

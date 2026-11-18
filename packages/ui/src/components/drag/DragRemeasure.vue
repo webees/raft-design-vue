@@ -12,7 +12,10 @@ function remeasure() {
 }
 
 onMounted(remeasure);
-watch(() => props.version, () => nextTick(remeasure));
+watch(
+  () => props.version,
+  () => nextTick(remeasure),
+);
 </script>
 
 <template>

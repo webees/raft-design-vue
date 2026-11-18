@@ -24,16 +24,11 @@ const copied = computed(() => copiedRef.value);
 const actionClass = computed(() => copyableCode().action({ className: props.class }));
 const iconSwapClass = computed(() => copyableCode().iconSwap());
 
-const accessibleLabel = computed(() =>
-  props.label ?? (copied.value ? "Copied code" : "Copy code"),
-);
+const accessibleLabel = computed(() => props.label ?? (copied.value ? "Copied code" : "Copy code"));
 
 async function handleClick(event: MouseEvent) {
-  const root = (event.currentTarget as HTMLElement).closest(
-    '[data-slot="copyable-code-root"]',
-  );
-  const value =
-    root?.querySelector('[data-slot="copyable-code"]')?.textContent ?? "";
+  const root = (event.currentTarget as HTMLElement).closest('[data-slot="copyable-code-root"]');
+  const value = root?.querySelector('[data-slot="copyable-code"]')?.textContent ?? "";
   await copyValue(value);
   emit("click", event);
 }

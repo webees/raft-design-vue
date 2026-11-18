@@ -11,9 +11,7 @@ const props = withDefaults(defineProps<{ modal?: boolean; open?: boolean }>(), {
 
 const attrs = useAttrs();
 const instance = getCurrentInstance();
-const controlled = computed(
-  () => instance?.vnode.props != null && "open" in instance.vnode.props,
-);
+const controlled = computed(() => instance?.vnode.props != null && "open" in instance.vnode.props);
 const innerOpen = ref(false);
 const isOpen = computed(() => (controlled.value ? props.open === true : innerOpen.value));
 const triggerRef = ref<HTMLElement | null>(null);

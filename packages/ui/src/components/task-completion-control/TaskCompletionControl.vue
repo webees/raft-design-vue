@@ -19,11 +19,12 @@ const emit = defineEmits<{
 
 const attrs = useAttrs();
 const preview = computed(() => !props.checked && !props.disabled);
-const rootClass = computed(
-  () =>
-    taskCompletionControl({ preview: preview.value }).root({ className: attrs.class as string }),
+const rootClass = computed(() =>
+  taskCompletionControl({ preview: preview.value }).root({ className: attrs.class as string }),
 );
-const indicatorClass = computed(() => taskCompletionControl({ preview: preview.value }).indicator());
+const indicatorClass = computed(() =>
+  taskCompletionControl({ preview: preview.value }).indicator(),
+);
 
 function onClick(event: MouseEvent) {
   event.stopPropagation();

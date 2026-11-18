@@ -17,9 +17,7 @@ const props = withDefaults(
 );
 const attrs = useAttrs();
 const tapRef = useTapActivation(() => props.activateOnTouchEnd);
-const rootClass = computed(() =>
-  panelAction({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelAction({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -43,9 +43,16 @@ const description = computed(() => props.description ?? props.variant === "defau
     data-skeleton=""
     :interactive="false"
     :variant="props.variant"
-    :class="styles.row({ class: cn(props.class as string | undefined, attrs.class as string | undefined) })"
+    :class="
+      styles.row({
+        class: cn(props.class as string | undefined, attrs.class as string | undefined),
+      })
+    "
   >
-    <Skeleton v-if="leading" :class="props.variant === 'default' ? styles.avatar() : styles.icon()" />
+    <Skeleton
+      v-if="leading"
+      :class="props.variant === 'default' ? styles.avatar() : styles.icon()"
+    />
     <ListRowBody>
       <ListRowTop>
         <ListRowTitle>

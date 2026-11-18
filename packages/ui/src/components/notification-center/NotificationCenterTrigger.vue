@@ -14,11 +14,7 @@ const classes = computed(() => notificationCenter().trigger({ class: props.class
 </script>
 
 <template>
-  <PopoverTrigger
-    v-bind="attrs"
-    data-slot="notification-center-trigger"
-    :class="classes"
-  >
+  <PopoverTrigger v-bind="attrs" data-slot="notification-center-trigger" :class="classes">
     <slot>
       <span aria-hidden="true" :class="notificationCenter().triggerIcon()">
         <Bell :class="notificationCenter().triggerBell()" :stroke-width="2" />

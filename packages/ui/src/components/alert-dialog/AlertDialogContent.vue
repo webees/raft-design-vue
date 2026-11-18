@@ -25,9 +25,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const nested = computed(() => props.nested || useParentOverlayKind() !== null);
 provideDialogSheetReset();
-const contentClass = computed(() =>
-  alertDialog().content({ className: attrs.class as string }),
-);
+const contentClass = computed(() => alertDialog().content({ className: attrs.class as string }));
 const overlayClass = computed(() => alertDialog({ nested: nested.value }).overlay());
 </script>
 

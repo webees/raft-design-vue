@@ -49,7 +49,11 @@ const hasAfter = computed(() => Boolean(slots.after));
 const hasTooltip = computed(() => props.tooltip !== false && props.tooltip != null);
 
 const clickable = computed(
-  () => props.expandOnClick && !hasAfter.value && !interactive.value && (truncation.value === true || expanded.value),
+  () =>
+    props.expandOnClick &&
+    !hasAfter.value &&
+    !interactive.value &&
+    (truncation.value === true || expanded.value),
 );
 const truncated = computed(() => truncation.value === true && !expanded.value);
 const afterHidden = computed(() => !truncated.value && !expanded.value);

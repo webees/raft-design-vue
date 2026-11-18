@@ -62,12 +62,14 @@ export type DragAnnouncementSource = {
 
 export type DragAnnouncements = {
   onDragStart: (event: { activeId: string | number }) => string | undefined;
-  onDragOver: (event: { activeId: string | number; overId: string | number | null }) =>
-    | string
-    | undefined;
-  onDragEnd: (event: { activeId: string | number; overId: string | number | null }) =>
-    | string
-    | undefined;
+  onDragOver: (event: {
+    activeId: string | number;
+    overId: string | number | null;
+  }) => string | undefined;
+  onDragEnd: (event: {
+    activeId: string | number;
+    overId: string | number | null;
+  }) => string | undefined;
   onDragCancel: (event: { activeId: string | number }) => string | undefined;
 };
 

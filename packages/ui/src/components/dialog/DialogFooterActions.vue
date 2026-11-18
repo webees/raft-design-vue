@@ -9,7 +9,11 @@ const actionsClass = computed(() => dialog().footerActions({ className: attrs.cl
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" :class="actionsClass" data-slot="dialog-footer-actions">
+  <div
+    v-bind="{ ...attrs, class: undefined }"
+    :class="actionsClass"
+    data-slot="dialog-footer-actions"
+  >
     <slot />
   </div>
 </template>

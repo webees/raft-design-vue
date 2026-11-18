@@ -48,8 +48,6 @@ describe("CopyableCode", () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(writeText).toHaveBeenCalledWith("bun install");
-    expect(wrapper.find("[data-slot=copyable-code-root]").attributes("data-state")).toBe(
-      "copied",
-    );
+    expect(wrapper.find("[data-slot=copyable-code-root]").attributes("data-state")).toBe("copied");
   });
 });

@@ -39,9 +39,7 @@ describe("Timeline", () => {
     expect(right.find("[data-slot='timeline']").classes()).toContain("r-timeline--right");
 
     const horizontal = mount(Timeline, { props: { horizontal: true } });
-    expect(horizontal.find("[data-slot='timeline']").classes()).toContain(
-      "r-timeline--horizontal",
-    );
+    expect(horizontal.find("[data-slot='timeline']").classes()).toContain("r-timeline--horizontal");
   });
 
   it("paints markers from task status tokens and keeps custom colours winning", () => {

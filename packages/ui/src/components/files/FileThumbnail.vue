@@ -9,12 +9,7 @@ withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
 </script>
 
 <template>
-  <FileSlot
-    part="thumbnail"
-    data-slot="file-thumbnail"
-    :as="as"
-    :as-child="asChild"
-  >
+  <FileSlot part="thumbnail" data-slot="file-thumbnail" :as="as" :as-child="asChild">
     <slot />
   </FileSlot>
 </template>

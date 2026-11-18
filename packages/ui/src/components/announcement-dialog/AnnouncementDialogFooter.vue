@@ -9,11 +9,7 @@ const footerClass = computed(() => announcement().footer({ className: attrs.clas
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    :class="footerClass"
-    data-slot="announcement-footer"
-  >
+  <div v-bind="{ ...attrs, class: undefined }" :class="footerClass" data-slot="announcement-footer">
     <slot />
   </div>
 </template>

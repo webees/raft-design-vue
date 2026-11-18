@@ -21,7 +21,9 @@ const slots = useSlots();
 const context = inject(sortableTabsContextKey, null);
 const tabRef = ref<unknown>(null);
 const key = computed(() => String(props.value));
-const index = computed(() => context?.value.value.findIndex((item) => String(item) === key.value) ?? -1);
+const index = computed(
+  () => context?.value.value.findIndex((item) => String(item) === key.value) ?? -1,
+);
 
 const sortable = useSortableItem({
   id: key.value,

@@ -23,9 +23,7 @@ describe("MessageEmbed", () => {
     expect(wrapper.attributes("data-interactive")).toBe("true");
     expect(wrapper.classes().join(" ")).toContain("max-w-[400px]");
     expect(wrapper.find("[data-slot=message-embed-header]").text()).toBe("Raft");
-    expect(wrapper.find("[data-slot=message-embed-content]").text()).toBe(
-      "A link preview",
-    );
+    expect(wrapper.find("[data-slot=message-embed-content]").text()).toBe("A link preview");
     expect(wrapper.find("[data-slot=message-embed-footer]").text()).toBe("raft.build");
   });
 

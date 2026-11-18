@@ -16,10 +16,14 @@ const mountInToolbar = (node: () => VNodeChild) =>
 describe("SelectionToolbarAction", () => {
   it("keeps the label mounted so the button always has an accessible name", () => {
     const wrapper = mountInToolbar(() =>
-      h(SelectionToolbarAction, { id: "copy" }, {
-        default: () => "Copy",
-        icon: () => h("span", { "data-icon": "" }),
-      }),
+      h(
+        SelectionToolbarAction,
+        { id: "copy" },
+        {
+          default: () => "Copy",
+          icon: () => h("span", { "data-icon": "" }),
+        },
+      ),
     );
 
     const label = wrapper.find('[data-slot="selection-toolbar-action-label"]');
@@ -40,10 +44,14 @@ describe("SelectionToolbarAction", () => {
 
   it("renders the icon next to the label", () => {
     const wrapper = mountInToolbar(() =>
-      h(SelectionToolbarAction, { id: "copy" }, {
-        default: () => "Copy",
-        icon: () => h("span", { "data-icon": "" }),
-      }),
+      h(
+        SelectionToolbarAction,
+        { id: "copy" },
+        {
+          default: () => "Copy",
+          icon: () => h("span", { "data-icon": "" }),
+        },
+      ),
     );
 
     expect(wrapper.find("[data-selection-toolbar-action] [data-icon]").exists()).toBe(true);

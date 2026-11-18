@@ -80,7 +80,5 @@ export const banner = tv({
   ],
 });
 
-export type BannerStatus = NonNullable<
-  VariantProps<typeof banner>["status"]
->;
+export type BannerStatus = NonNullable<VariantProps<typeof banner>["status"]>;
 export type BannerSize = NonNullable<VariantProps<typeof banner>["size"]>;

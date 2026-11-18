@@ -86,7 +86,10 @@ export const messageActionCardContent = tv({
     scopeListViewport: ["max-h-[136px]"],
     scopeListViewportContent: ["stack-y-1.5 pr-1"],
     scopeListLabel: ["text-footnote font-medium text-foreground-hint"],
-    scope: ["min-w-0 border p-1.5", "rounded-control border-line-hairline bg-layer-card px-2.5 py-2"],
+    scope: [
+      "min-w-0 border p-1.5",
+      "rounded-control border-line-hairline bg-layer-card px-2.5 py-2",
+    ],
     scopeName: ["break-all font-mono", "text-mono-meta font-normal text-foreground"],
     scopeDescription: ["mt-0.5 text-footnote text-pretty text-foreground-muted"],
     hintLabel: ["text-footnote font-medium text-foreground-hint"],

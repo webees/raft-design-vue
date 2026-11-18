@@ -20,14 +20,10 @@ function mountOpenTooltip(slot: () => unknown, props: Record<string, unknown> = 
           { defaultOpen: true, ...props },
           {
             default: () =>
-              h(
-                "div",
-                { style: "display:flex" },
-                [
-                  h(TooltipTrigger, {}, { default: () => "Hover me" }),
-                  h(TooltipContent, {}, { default: slot }),
-                ],
-              ),
+              h("div", { style: "display:flex" }, [
+                h(TooltipTrigger, {}, { default: () => "Hover me" }),
+                h(TooltipContent, {}, { default: slot }),
+              ]),
           },
         ),
     },
@@ -49,10 +45,7 @@ describe("Tooltip", () => {
   });
 
   it("passes shortcut markup through to the body", async () => {
-    const wrapper = mountOpenTooltip(() => [
-      "Save",
-      h("kbd", { "data-slot": "kbd" }, "⌘S"),
-    ]);
+    const wrapper = mountOpenTooltip(() => ["Save", h("kbd", { "data-slot": "kbd" }, "⌘S")]);
     await nextTick();
     await nextTick();
 
@@ -62,10 +55,7 @@ describe("Tooltip", () => {
   });
 
   it("detects a leading icon and switches the body layout", async () => {
-    const wrapper = mountOpenTooltip(() => [
-      h("svg", { "data-testid": "lead" }),
-      "Play",
-    ]);
+    const wrapper = mountOpenTooltip(() => [h("svg", { "data-testid": "lead" }), "Play"]);
     await nextTick();
     await nextTick();
 

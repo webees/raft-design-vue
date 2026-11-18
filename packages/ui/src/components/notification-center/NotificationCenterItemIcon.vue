@@ -27,11 +27,7 @@ const STATUS_LABEL = {
 } as const;
 
 const icon = computed(() =>
-  props.status === "success"
-    ? CheckCircle2
-    : props.status === "info"
-      ? Info
-      : AlertTriangle,
+  props.status === "success" ? CheckCircle2 : props.status === "info" ? Info : AlertTriangle,
 );
 </script>
 

@@ -38,15 +38,11 @@ const manager = useToastManager();
 
 const intent = computed<ToastIntent>(() => {
   const value = props.toast.data?.intent;
-  return value === "success" || value === "warning" || value === "error"
-    ? value
-    : "info";
+  return value === "success" || value === "warning" || value === "error" ? value : "info";
 });
 
 const placement = computed(() => config?.placement.value ?? "bottom-center");
-const classes = computed(() =>
-  toastStyles({ layout: props.layout }).root({ class: props.class }),
-);
+const classes = computed(() => toastStyles({ layout: props.layout }).root({ class: props.class }));
 
 provide(TOAST_ITEM_CONTEXT_KEY, {
   toast: computed(() => props.toast),

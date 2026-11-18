@@ -18,6 +18,4 @@ export { default as DialogSheetContent } from "./DialogSheetContent.vue";
 export { default as DialogSurface } from "./DialogSurface.vue";
 export { dialog, type DialogVariants } from "./dialog.variants";
 export { dialogSheet } from "./dialog-sheet-context";
-export type {
-  DialogSheetContextValue,
-} from "./dialog-sheet-context";
+export type { DialogSheetContextValue } from "./dialog-sheet-context";

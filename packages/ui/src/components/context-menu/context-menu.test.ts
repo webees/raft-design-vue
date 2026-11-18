@@ -16,9 +16,7 @@ import {
 
 const Example = defineComponent({
   render() {
-    return h(ContextMenu, () => [
-      h(ContextMenuTrigger, () => "Right-click me"),
-    ]);
+    return h(ContextMenu, () => [h(ContextMenuTrigger, () => "Right-click me")]);
   },
 });
 
@@ -28,7 +26,10 @@ const ContentExample = defineComponent({
       h(ContextMenuTrigger, () => "Right-click me"),
       h(ContextMenuContent, { forceMount: true }, () => [
         h(ContextMenuLabel, () => "Actions"),
-        h(ContextMenuItem, () => [h(ContextMenuItemLabel, () => "Open"), h(ContextMenuShortcut, () => "↵")]),
+        h(ContextMenuItem, () => [
+          h(ContextMenuItemLabel, () => "Open"),
+          h(ContextMenuShortcut, () => "↵"),
+        ]),
         h(ContextMenuSeparator),
         h(ContextMenuFooter, () => "raft.build"),
       ]),

@@ -19,16 +19,12 @@ const Rail = defineComponent({
       h(AppRailRoot, () => [
         h(AppRailHeader, () => h(AppRailItem, { selected: true }, () => "R")),
         h(AppRailNav, () => [
-          h(
-            AppRailItem,
-            { selected: true, "aria-label": "Tasks" },
-            () => [
-              h(AppRailItemIcon, () => h("svg", { "data-testid": "tasks-icon" })),
-              h(AppRailItemLabel, () => "Tasks"),
-              h(AppRailItemBadge, () => "3"),
-              h(AppRailItemAttention, { title: "Needs review" }),
-            ],
-          ),
+          h(AppRailItem, { selected: true, "aria-label": "Tasks" }, () => [
+            h(AppRailItemIcon, () => h("svg", { "data-testid": "tasks-icon" })),
+            h(AppRailItemLabel, () => "Tasks"),
+            h(AppRailItemBadge, () => "3"),
+            h(AppRailItemAttention, { title: "Needs review" }),
+          ]),
           h(AppRailItem, { disabled: true }, () => "D"),
         ]),
         h(AppRailFooter, () => "F"),

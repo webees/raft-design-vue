@@ -90,7 +90,15 @@ export const inputGroup = tv({
     {
       variant: "default",
       align: "inline-start",
-      class: { addon: "pr-2", text: "pr-0.5" },
+      class: {
+        addon: [
+          "pr-2",
+          "*:data-[slot=button]:size-control-embedded *:data-[slot=button]:rounded-chip",
+          "[&>[data-slot=button]_svg:not([class*='size-'])]:size-4",
+          "[&>[data-slot=button]:first-child]:ms-[calc(var(--control-embedded-inset)-0.75rem-1px)]",
+        ],
+        text: "pr-0.5",
+      },
     },
     {
       variant: "default",

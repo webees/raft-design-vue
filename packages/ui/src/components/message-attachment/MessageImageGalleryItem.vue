@@ -19,8 +19,8 @@ const rootClass = computed(() =>
   }),
 );
 
-const rootStyle = computed<StyleValue>(
-  () => (props.layout?.reserved ? { ...props.layout.reserved } : (attrs.style as StyleValue)),
+const rootStyle = computed<StyleValue>(() =>
+  props.layout?.reserved ? { ...props.layout.reserved } : (attrs.style as StyleValue),
 );
 </script>
 

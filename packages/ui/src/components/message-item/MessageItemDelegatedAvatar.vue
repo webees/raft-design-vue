@@ -11,9 +11,7 @@ const props = withDefaults(
   { as: "span", asChild: false },
 );
 const attrs = useAttrs();
-const classes = computed(() =>
-  messageItem().delegatedAvatar({ className: props.class }),
-);
+const classes = computed(() => messageItem().delegatedAvatar({ className: props.class }));
 </script>
 
 <template>

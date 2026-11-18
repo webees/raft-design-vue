@@ -142,7 +142,7 @@ export function getOverscannedRange({
   // The row `target` above the view's top, the rows not measured yet at the size rows typically are
   // (`plannedSize`), not the estimate: an estimate well below that would mount many more rows at once.
   let ahead = view.startIndex;
-  for (let above = viewTop - fenwickTree.sum(ahead); ahead > 0 && above < target; ) {
+  for (let above = viewTop - fenwickTree.sum(ahead); ahead > 0 && above < target;) {
     ahead -= 1;
     above += plannedSize(ahead);
   }

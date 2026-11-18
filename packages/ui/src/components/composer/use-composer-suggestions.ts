@@ -1,12 +1,4 @@
-import {
-  computed,
-  onBeforeUnmount,
-  ref,
-  toValue,
-  useId,
-  watch,
-  type MaybeRefOrGetter,
-} from "vue";
+import { computed, onBeforeUnmount, ref, toValue, useId, watch, type MaybeRefOrGetter } from "vue";
 
 export interface ComposerSuggestionTriggerMatch {
   /** The trigger marker that opened the list, e.g. "@" or "#". */

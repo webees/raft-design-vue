@@ -10,9 +10,7 @@ class ResizeObserverDelegate {
   ensureObserver(): ResizeObserver | null {
     if (this.observer === undefined) {
       this.observer =
-        typeof ResizeObserver === "undefined"
-          ? null
-          : new ResizeObserver(this.callback.bind(this));
+        typeof ResizeObserver === "undefined" ? null : new ResizeObserver(this.callback.bind(this));
     }
     return this.observer;
   }

@@ -20,13 +20,7 @@ const classes = computed(() => search().frame({ class: props.class }));
 </script>
 
 <template>
-  <Panel
-    v-bind="attrs"
-    :as="as"
-    :edge="edge"
-    data-slot="search-shell-root"
-    :class="classes"
-  >
+  <Panel v-bind="attrs" :as="as" :edge="edge" data-slot="search-shell-root" :class="classes">
     <slot />
   </Panel>
 </template>

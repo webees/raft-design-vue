@@ -49,9 +49,7 @@ const plusTaken = computed(() => item.taken("plus"));
 const moreTaken = computed(() => item.taken("more"));
 const showTooltip = computed(() => labelTaken.value || plusTaken.value);
 
-const rootClass = computed(() =>
-  cn(styles.button(), attrs.class as string | undefined),
-);
+const rootClass = computed(() => cn(styles.button(), attrs.class as string | undefined));
 
 const content = computed(() => {
   if (slots.default) return undefined;

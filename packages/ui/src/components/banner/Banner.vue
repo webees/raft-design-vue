@@ -21,9 +21,7 @@ const attrs = useAttrs();
 const rootClass = computed(() =>
   cn(banner({ size: props.size, status: props.status }).root(), attrs.class as string),
 );
-const role = computed(() =>
-  props.status === "destructive" ? "alert" : "status",
-);
+const role = computed(() => (props.status === "destructive" ? "alert" : "status"));
 
 function emitClose() {
   emit("close");

@@ -53,9 +53,7 @@ describe("toast command api", () => {
     const second = createToastManager();
     expect(first.add({ title: "one", type: "background" })).toBeTypeOf("string");
     expect(first.add({ title: "two", type: "background" })).toBeTypeOf("string");
-    expect(second.add({ title: "three", type: "background" })).toBeTypeOf(
-      "string",
-    );
+    expect(second.add({ title: "three", type: "background" })).toBeTypeOf("string");
   });
 
   it("default manager is available for global commands", () => {
@@ -88,27 +86,21 @@ describe("toast components", () => {
     expect(toastEl?.getAttribute("data-toast-type")).toBe("warning");
     expect(document.querySelector('[data-slot="toast-icon"]')).not.toBeNull();
     expect(document.querySelector('[data-slot="toast-title"]')).not.toBeNull();
-    expect(
-      document.querySelector('[data-slot="toast-description"]'),
-    ).not.toBeNull();
+    expect(document.querySelector('[data-slot="toast-description"]')).not.toBeNull();
     expect(document.querySelector('[data-slot="toast-actions"]')).not.toBeNull();
     expect(document.querySelector('[data-slot="toast-progress"]')).not.toBeNull();
-    expect(
-      document
-        .querySelector('[data-slot="toast-progress"]')
-        ?.getAttribute("style"),
-    ).toContain("5000ms");
+    expect(document.querySelector('[data-slot="toast-progress"]')?.getAttribute("style")).toContain(
+      "5000ms",
+    );
   });
 
   it("hides optional parts when data says so", () => {
     mount(ToastProvider, {
       slots: {
-        default: () => h(ToastDefaultItem, {
-          toast: createToast(
-          { intent: "info", hasIcon: false },
-          { description: undefined },
-          ),
-        }),
+        default: () =>
+          h(ToastDefaultItem, {
+            toast: createToast({ intent: "info", hasIcon: false }, { description: undefined }),
+          }),
       },
     });
 
@@ -121,12 +113,10 @@ describe("toast components", () => {
   it("does not show progress for loading toasts", () => {
     mount(ToastProvider, {
       slots: {
-        default: () => h(ToastDefaultItem, {
-          toast: createToast(
-          { intent: "info", hasProgress: true },
-          { status: "loading" },
-          ),
-        }),
+        default: () =>
+          h(ToastDefaultItem, {
+            toast: createToast({ intent: "info", hasProgress: true }, { status: "loading" }),
+          }),
       },
     });
 
@@ -138,10 +128,7 @@ describe("toast components", () => {
       slots: {
         default: () => [
           h(ToastIcon),
-          h(ToastBody, () => [
-            h(ToastTitle),
-            h(ToastDescription, () => "Details"),
-          ]),
+          h(ToastBody, () => [h(ToastTitle), h(ToastDescription, () => "Details")]),
           h(ToastActions),
         ],
       },

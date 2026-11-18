@@ -5,10 +5,7 @@ import { panel } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelFooter", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ as?: string; asChild?: boolean }>(),
-  { as: "div", asChild: false },
-);
+withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "div", asChild: false });
 const attrs = useAttrs();
 const rootClass = computed(() => panel().footer({ className: attrs.class as string }));
 </script>

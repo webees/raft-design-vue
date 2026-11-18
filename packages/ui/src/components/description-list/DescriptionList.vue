@@ -2,16 +2,16 @@
 import { computed, ref, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { useLabelValueFit } from "../../lib/label-value-fit";
-import {
-  descriptionList,
-  type DescriptionListDirection,
-} from "./description-list.variants";
+import { descriptionList, type DescriptionListDirection } from "./description-list.variants";
 
 defineOptions({ name: "RaftDescriptionList", inheritAttrs: false });
 
-const props = withDefaults(defineProps<{ direction?: DescriptionListDirection; class?: string }>(), {
-  direction: "vertical",
-});
+const props = withDefaults(
+  defineProps<{ direction?: DescriptionListDirection; class?: string }>(),
+  {
+    direction: "vertical",
+  },
+);
 
 const attrs = useAttrs();
 const list = ref<HTMLElement | null>(null);
@@ -23,12 +23,7 @@ useLabelValueFit(list, () => props.direction === "horizontal", {
 });
 
 const rootClass = computed(() =>
-  cn(
-    styles.value.root(),
-    "group/description-list",
-    props.class,
-    attrs.class as string,
-  ),
+  cn(styles.value.root(), "group/description-list", props.class, attrs.class as string),
 );
 </script>
 

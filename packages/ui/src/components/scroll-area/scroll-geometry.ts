@@ -18,10 +18,7 @@ export type ScrollPlacement = {
 };
 
 /** Where a thumb goes, or `null` when the axis has nothing to scroll. */
-export function thumbPlacement(
-  metrics: ScrollMetrics,
-  axis: ScrollAxis,
-): ScrollPlacement | null {
+export function thumbPlacement(metrics: ScrollMetrics, axis: ScrollAxis): ScrollPlacement | null {
   const client = axis === "y" ? metrics.clientHeight : metrics.clientWidth;
   const scroll = axis === "y" ? metrics.scrollHeight : metrics.scrollWidth;
   const offset = axis === "y" ? metrics.scrollTop : metrics.scrollLeft;

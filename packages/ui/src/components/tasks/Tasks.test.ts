@@ -13,7 +13,13 @@ import {
   TasksPanelToolbarLabel,
   TasksPanelViewport,
 } from ".";
-import { TaskBoardColumn, TaskBoardColumnEmpty, TaskBoardColumnPanel, TaskBoardColumnTrigger, TaskBoardRoot } from "../task-board";
+import {
+  TaskBoardColumn,
+  TaskBoardColumnEmpty,
+  TaskBoardColumnPanel,
+  TaskBoardColumnTrigger,
+  TaskBoardRoot,
+} from "../task-board";
 import { TaskCard, TaskCardMeta, TaskCardStatus, TaskCardTitle } from "../task-card";
 import {
   TaskListRoot,
@@ -67,9 +73,7 @@ describe("Tasks", () => {
       defineComponent({
         render: () =>
           h(TasksPanelRoot, () => [
-            h(TasksPanelToolbar, () => [
-              h(TasksPanelToolbarLabel, () => "Board"),
-            ]),
+            h(TasksPanelToolbar, () => [h(TasksPanelToolbarLabel, () => "Board")]),
             h(TasksPanelViewport, () => [
               h(TaskLoadingList, () => [h(TaskLoadingRow), h(TaskLoadingRow)]),
               h(TasksPanelEmpty, () => "No tasks"),
@@ -79,9 +83,7 @@ describe("Tasks", () => {
     );
     expect(wrapper.find("section[data-slot=tasks-panel-root]").exists()).toBe(true);
     expect(wrapper.findAll("[data-slot=task-loading-row]")).toHaveLength(2);
-    expect(wrapper.get("[data-slot=task-loading-list]").attributes("aria-busy")).toBe(
-      "true",
-    );
+    expect(wrapper.get("[data-slot=task-loading-list]").attributes("aria-busy")).toBe("true");
     expect(wrapper.get("[data-slot=tasks-panel-viewport]").classes()).toContain("r-scroll-area");
     expect(wrapper.get("[data-slot=tasks-panel-viewport]").attributes("data-slot")).toBe(
       "tasks-panel-viewport",
@@ -120,9 +122,7 @@ describe("Tasks", () => {
     const wrapper = mount(TaskListRoot, {
       slots: { default: () => h(TaskSection, () => "Section") },
     });
-    expect(wrapper.get("[data-slot=task-list-root]").classes().join(" ")).toContain(
-      "stack-y-6",
-    );
+    expect(wrapper.get("[data-slot=task-list-root]").classes().join(" ")).toContain("stack-y-6");
   });
 
   it("renders task card metadata and status", () => {
@@ -148,9 +148,7 @@ describe("Tasks", () => {
       slots: {
         default: () => [
           h(TaskBoardColumnTrigger, () => "Todo"),
-          h(TaskBoardColumnPanel, () => [
-            h(TaskBoardColumnEmpty, () => "No tasks"),
-          ]),
+          h(TaskBoardColumnPanel, () => [h(TaskBoardColumnEmpty, () => "No tasks")]),
         ],
       },
     });
@@ -164,8 +162,6 @@ describe("Tasks", () => {
     const wrapper = mount(TaskBoardRoot, {
       slots: { default: () => h(TaskBoardColumn, () => "Column") },
     });
-    expect(wrapper.get("[data-slot=task-board-root]").classes().join(" ")).toContain(
-      "min-w-max",
-    );
+    expect(wrapper.get("[data-slot=task-board-root]").classes().join(" ")).toContain("min-w-max");
   });
 });

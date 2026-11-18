@@ -61,7 +61,11 @@ const contentClass = computed(() => select().content({ className: attrs.class as
       :as-child="asChild"
       :force-mount="forceMount"
       data-slot="select-content"
-      style="--available-height: var(--reka-select-content-available-height); --available-width: var(--reka-select-content-available-width); --anchor-width: var(--reka-select-trigger-width)"
+      style="
+        --available-height: var(--reka-select-content-available-height);
+        --available-width: var(--reka-select-content-available-width);
+        --anchor-width: var(--reka-select-trigger-width);
+      "
     >
       <slot />
     </SelectContent>

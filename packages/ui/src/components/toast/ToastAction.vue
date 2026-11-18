@@ -24,9 +24,7 @@ const attrs = useAttrs();
 const item = inject(TOAST_ITEM_CONTEXT_KEY, null);
 
 const actionProps = computed(() => item?.toast.value.actionProps);
-const classes = computed(() =>
-  toastActionStyles().root({ class: props.class }),
-);
+const classes = computed(() => toastActionStyles().root({ class: props.class }));
 const resolvedAltText = computed(
   () => props.altText ?? actionProps.value?.altText ?? actionProps.value?.label,
 );

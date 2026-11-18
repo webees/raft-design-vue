@@ -12,5 +12,12 @@ const classes = computed(() => cn(combobox().chip(), props.className, attrs.clas
 </script>
 
 <template>
-  <span v-if="visible" v-bind="{ ...attrs, class: undefined }" data-slot="combobox-chip" :data-value="value" :class="classes"><slot /></span>
+  <span
+    v-if="visible"
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="combobox-chip"
+    :data-value="value"
+    :class="classes"
+    ><slot
+  /></span>
 </template>

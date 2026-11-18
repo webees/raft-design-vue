@@ -5,9 +5,7 @@ import { messageReplies } from "./message-replies.variants";
 defineOptions({ name: "RaftMessageRepliesSummary", inheritAttrs: false });
 
 const attrs = useAttrs();
-const summaryClass = computed(() =>
-  messageReplies().summary({ className: attrs.class as string }),
-);
+const summaryClass = computed(() => messageReplies().summary({ className: attrs.class as string }));
 </script>
 
 <template>

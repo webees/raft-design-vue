@@ -39,7 +39,9 @@ provide(tabsUiContextKey, ui);
 const activeId = ref<string | null>(null);
 const overId = ref<string | null>(null);
 const activeSize = ref(0);
-const axis = computed<"x" | "y">(() => (props.placement === "left" || props.placement === "right" ? "y" : "x"));
+const axis = computed<"x" | "y">(() =>
+  props.placement === "left" || props.placement === "right" ? "y" : "x",
+);
 const copies = new Map<string, () => unknown>();
 
 provide(sortableTabsContextKey, {
@@ -84,7 +86,8 @@ function reset() {
 
 const AddedCopy = {
   props: { render: { type: Function, default: undefined } },
-  setup: (copyProps: { render?: () => unknown }) => () => copyProps.render?.() as VNode | VNode[] | undefined,
+  setup: (copyProps: { render?: () => unknown }) => () =>
+    copyProps.render?.() as VNode | VNode[] | undefined,
 };
 
 const liftClass = computed(() => tabs(ui).tab({ className: "pointer-events-none" }));

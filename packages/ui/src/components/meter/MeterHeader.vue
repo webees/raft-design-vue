@@ -8,9 +8,7 @@ defineOptions({ name: "RaftMeterHeader", inheritAttrs: false });
 defineProps<{ as?: string; asChild?: boolean }>();
 
 const attrs = useAttrs();
-const headerClass = computed(() =>
-  meter().header({ className: attrs.class as string }),
-);
+const headerClass = computed(() => meter().header({ className: attrs.class as string }));
 </script>
 
 <template>

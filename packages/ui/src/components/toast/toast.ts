@@ -3,10 +3,7 @@ import {
   createToastManager as createRekaToastManager,
   useToastManager as useRekaToastManager,
 } from "reka-ui";
-import type {
-  GlobalToastManager,
-  ToastObject as RekaToastObject,
-} from "reka-ui";
+import type { GlobalToastManager, ToastObject as RekaToastObject } from "reka-ui";
 
 export type ToastIntent = "info" | "success" | "warning" | "error";
 
@@ -43,11 +40,10 @@ export type ToastCommandOptions<Data extends object = ToastData> = Omit<
   progress?: boolean;
 };
 
-export type ToastAddOptions<Data extends object = ToastData> =
-  ToastCommandOptions<Data> & {
-    title: string;
-    type?: ToastIntent;
-  };
+export type ToastAddOptions<Data extends object = ToastData> = ToastCommandOptions<Data> & {
+  title: string;
+  type?: ToastIntent;
+};
 
 export const DEFAULT_TOAST_TIMEOUT_MS = 5000;
 export const DEFAULT_TOAST_ACTION_TIMEOUT_MS = 8000;
@@ -56,14 +52,9 @@ const defaultManagerTiming = {
   actionTimeout: DEFAULT_TOAST_ACTION_TIMEOUT_MS,
 };
 
-export function resolveToastActionTimeout(
-  timeout: number,
-  actionTimeout?: number,
-): number {
+export function resolveToastActionTimeout(timeout: number, actionTimeout?: number): number {
   if (actionTimeout !== undefined) return actionTimeout;
-  return timeout > 0
-    ? Math.max(timeout, DEFAULT_TOAST_ACTION_TIMEOUT_MS)
-    : 0;
+  return timeout > 0 ? Math.max(timeout, DEFAULT_TOAST_ACTION_TIMEOUT_MS) : 0;
 }
 
 function getNodeLabel(node: VNodeChild): string | undefined {
@@ -117,8 +108,7 @@ function addDefaultToast(
 
   const needsActionTime = intent === "error" || Boolean(action);
   const resolvedDuration =
-    duration ??
-    (needsActionTime ? defaultManagerTiming.actionTimeout : undefined);
+    duration ?? (needsActionTime ? defaultManagerTiming.actionTimeout : undefined);
 
   return defaultToastManager.add({
     ...toastOptions,

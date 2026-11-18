@@ -23,7 +23,12 @@ const closeAttrs = computed(() => {
 </script>
 
 <template>
-  <PopoverClose v-bind="closeAttrs" :as-child="asChild" data-slot="popover-close" :class="closeClass">
+  <PopoverClose
+    v-bind="closeAttrs"
+    :as-child="asChild"
+    data-slot="popover-close"
+    :class="closeClass"
+  >
     <slot />
   </PopoverClose>
 </template>

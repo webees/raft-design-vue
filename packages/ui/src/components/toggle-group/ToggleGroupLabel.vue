@@ -11,9 +11,7 @@ defineProps<{
 }>();
 
 const attrs = useAttrs();
-const labelClass = computed(() =>
-  toggleGroup().label({ className: attrs.class as string }),
-);
+const labelClass = computed(() => toggleGroup().label({ className: attrs.class as string }));
 </script>
 
 <template>

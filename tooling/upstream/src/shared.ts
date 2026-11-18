@@ -46,10 +46,7 @@ export async function writeJson(path: string, value: unknown): Promise<void> {
   await Bun.write(path, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-export function walk(
-  dir: string,
-  predicate: (path: string) => boolean = () => true,
-): string[] {
+export function walk(dir: string, predicate: (path: string) => boolean = () => true): string[] {
   if (!existsSync(dir)) return [];
   const out: string[] = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -89,7 +86,9 @@ export async function resolveCommit(ref: string): Promise<string> {
     { headers: upstreamHeaders() },
   );
   if (!response.ok) {
-    throw new Error(`Cannot resolve upstream ${ref}: HTTP ${response.status} ${await response.text()}`);
+    throw new Error(
+      `Cannot resolve upstream ${ref}: HTTP ${response.status} ${await response.text()}`,
+    );
   }
   const data = (await response.json()) as { sha: string };
   return data.sha;

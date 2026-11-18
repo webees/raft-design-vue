@@ -49,7 +49,13 @@ export function listKeyboardCoordinates(
     const dx = to.x - from.x;
     const dy = to.y - from.y;
     const forward =
-      direction === "down" ? dy > 0 : direction === "up" ? dy < 0 : direction === "right" ? dx > 0 : dx < 0;
+      direction === "down"
+        ? dy > 0
+        : direction === "up"
+          ? dy < 0
+          : direction === "right"
+            ? dx > 0
+            : dx < 0;
     if (!forward) continue;
     const primary = direction === "down" || direction === "up" ? Math.abs(dy) : Math.abs(dx);
     const secondary = direction === "down" || direction === "up" ? Math.abs(dx) : Math.abs(dy);
@@ -83,7 +89,9 @@ export type DragSensors = {
  * keyboard on Space/arrows/Escape. Render `<DragScope :sensors="sensors">`
  * so the engine uses these thresholds.
  */
-export function useDragSensors(options: DragSensorsOptions | DragKeyboardCoordinateGetter = {}): DragSensors {
+export function useDragSensors(
+  options: DragSensorsOptions | DragKeyboardCoordinateGetter = {},
+): DragSensors {
   const normalized = typeof options === "function" ? { coordinateGetter: options } : options;
   return {
     mouse: useMouseOnlyPointerSensor(MOUSE_DRAG_DISTANCE_PX),
@@ -132,7 +140,9 @@ export type DragAcrossLists = {
  * tracker mirrors the upstream contract for consumers that drive a custom
  * collision detection through `DragScope`.
  */
-export function useDragAcrossLists(collisionDetection: DragCollisionDetection = () => []): DragAcrossLists {
+export function useDragAcrossLists(
+  collisionDetection: DragCollisionDetection = () => [],
+): DragAcrossLists {
   let overSelf = false;
   let frame = 0;
 
@@ -153,7 +163,8 @@ export function useDragAcrossLists(collisionDetection: DragCollisionDetection = 
       overSelf = true;
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
-      if (!viaKeyboard && typeof requestAnimationFrame === "function") frame = requestAnimationFrame(reset);
+      if (!viaKeyboard && typeof requestAnimationFrame === "function")
+        frame = requestAnimationFrame(reset);
     },
     reset,
     isOverSelf: () => overSelf,

@@ -21,7 +21,10 @@ function createPart(name: string, slot: PanelSlot, tag: string) {
           tag,
           {
             ...attrs,
-            "data-slot": slot === "toolbarLabel" ? "tasks-panel-toolbar-label" : `tasks-panel-${toKebab(slot)}`,
+            "data-slot":
+              slot === "toolbarLabel"
+                ? "tasks-panel-toolbar-label"
+                : `tasks-panel-${toKebab(slot)}`,
             class: slotClass,
           },
           slots.default?.(),
@@ -35,11 +38,7 @@ function toKebab(value: string) {
   return value.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
 }
 
-export const TasksPanelToolbar = createPart(
-  "RaftTasksPanelToolbar",
-  "toolbar",
-  "div",
-);
+export const TasksPanelToolbar = createPart("RaftTasksPanelToolbar", "toolbar", "div");
 export const TasksPanelToolbarGroup = createPart(
   "RaftTasksPanelToolbarGroup",
   "toolbarGroup",
@@ -55,11 +54,7 @@ export const TasksPanelToolbarFilters = createPart(
   "toolbarFilters",
   "div",
 );
-export const TasksPanelToolbarView = createPart(
-  "RaftTasksPanelToolbarView",
-  "toolbarView",
-  "div",
-);
+export const TasksPanelToolbarView = createPart("RaftTasksPanelToolbarView", "toolbarView", "div");
 export const TasksPanelToolbarLabel = createPart(
   "RaftTasksPanelToolbarLabel",
   "toolbarLabel",

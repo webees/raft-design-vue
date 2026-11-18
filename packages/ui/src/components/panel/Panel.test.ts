@@ -48,13 +48,17 @@ const PanelExample = defineComponent({
             ]),
             h(PanelActions, () => [
               h(PanelAction, { "aria-label": "Search" }, () => "S"),
-              h(PanelToggleAction, {
-                "aria-label": "Pin panel",
-                pressed: this.pressed,
-                "onUpdate:pressed": (value: boolean) => {
-                  this.pressed = value;
+              h(
+                PanelToggleAction,
+                {
+                  "aria-label": "Pin panel",
+                  pressed: this.pressed,
+                  "onUpdate:pressed": (value: boolean) => {
+                    this.pressed = value;
+                  },
                 },
-              }, () => "P"),
+                () => "P",
+              ),
             ]),
           ]),
           h(PanelNotice, { status: "warning" }, () => [
@@ -62,9 +66,7 @@ const PanelExample = defineComponent({
             h(PanelNoticeActions, () => "Retry"),
           ]),
           h(PanelBody, () =>
-            h(PanelScrollViewport, () =>
-              h(PanelScrollContent, () => "Panel content"),
-            ),
+            h(PanelScrollViewport, () => h(PanelScrollContent, () => "Panel content")),
           ),
           h(PanelFooter, () => "Footer"),
         ],
@@ -98,9 +100,7 @@ describe("Panel", () => {
     expect(toggle.attributes("aria-pressed")).toBe("false");
     await toggle.trigger("click");
     expect(wrapper.vm.pressed).toBe(true);
-    expect(wrapper.find("[data-slot=panel-toggle-action]").attributes("aria-pressed")).toBe(
-      "true",
-    );
+    expect(wrapper.find("[data-slot=panel-toggle-action]").attributes("aria-pressed")).toBe("true");
     expect(wrapper.find("[data-slot=panel-toggle-action]").attributes("data-pressed")).toBe("");
   });
 

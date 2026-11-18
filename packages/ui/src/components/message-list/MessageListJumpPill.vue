@@ -24,7 +24,9 @@ const contentClass = computed(() => styles.content());
     v-bind="{ ...attrs, class: undefined }"
     data-slot="message-list-jump-pill"
     :class="rootClass"
-    :type="as === 'button' && !asChild ? ((attrs.type as string | undefined) ?? 'button') : undefined"
+    :type="
+      as === 'button' && !asChild ? ((attrs.type as string | undefined) ?? 'button') : undefined
+    "
   >
     <span data-slot="message-list-jump-pill-content" :class="contentClass">
       <slot />

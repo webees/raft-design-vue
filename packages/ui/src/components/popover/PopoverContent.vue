@@ -41,15 +41,9 @@ const attrs = useAttrs();
 const insets = computed(() => readFrameInsets());
 const sheetBoundary = useSheetPopupBoundary();
 const collision = computed(() =>
-  frameCollision(
-    props.collisionPadding,
-    sheetBoundary.value,
-    insets.value,
-  ),
+  frameCollision(props.collisionPadding, sheetBoundary.value, insets.value),
 );
-const collisionBoundary = computed(
-  () => collision.value.collisionBoundary as Element | undefined,
-);
+const collisionBoundary = computed(() => collision.value.collisionBoundary as Element | undefined);
 const positionerClass = computed(() => popover().positioner());
 const positionerAttrs = computed(() => {
   const { class: _class, ...rest } = attrs;
@@ -74,7 +68,10 @@ providePopoverSize(() => props.size);
       :force-mount="forceMount"
       data-slot="popover-positioner"
       :class="positionerClass"
-      style="--available-height: var(--reka-popper-available-height); --transform-origin: var(--reka-popper-transform-origin)"
+      style="
+        --available-height: var(--reka-popper-available-height);
+        --transform-origin: var(--reka-popper-transform-origin);
+      "
     >
       <PopoverPopup :class="attrs.class">
         <slot />

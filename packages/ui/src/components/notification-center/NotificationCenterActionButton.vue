@@ -8,9 +8,7 @@ defineOptions({ name: "RaftNotificationCenterActionButton", inheritAttrs: false 
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  notificationCenter().actionButton({ class: props.class }),
-);
+const classes = computed(() => notificationCenter().actionButton({ class: props.class }));
 </script>
 
 <template>

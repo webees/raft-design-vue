@@ -36,10 +36,7 @@ const resolved = computed(() => margin?.topOf(id) ?? Math.max(props.top, 0));
 const classes = computed(() =>
   comment().marginItem({ class: cn(attrs.class as string | undefined, props.class) }),
 );
-const itemStyle = computed(() => [
-  props.style,
-  { transform: `translateY(${resolved.value}px)` },
-]);
+const itemStyle = computed(() => [props.style, { transform: `translateY(${resolved.value}px)` }]);
 
 watch(
   () => [props.top, props.active] as const,

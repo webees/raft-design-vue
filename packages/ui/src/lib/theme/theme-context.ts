@@ -1,4 +1,4 @@
-import { inject, provide, reactive, type InjectionKey } from "vue";
+import { inject, reactive, type InjectionKey } from "vue";
 
 /** Colour mode. Raft is the only visual family; "system" follows the OS. */
 export type ThemeMode = "light" | "dark" | "system";
@@ -19,10 +19,6 @@ export function createThemeState(): ThemeState {
     resolvedMode: "light",
     setMode: () => undefined,
   }) as ThemeState;
-}
-
-export function provideThemeState(state: ThemeState): void {
-  provide(THEME_STATE_KEY, state);
 }
 
 export function injectThemeState(): ThemeState {

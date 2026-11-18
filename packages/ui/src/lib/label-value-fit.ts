@@ -24,8 +24,7 @@ export interface LabelValueParts {
  */
 function oneLineWidths(elements: HTMLElement[]): number[] {
   const saved = elements.map(
-    ({ style }) =>
-      [style.width, style.maxWidth, style.whiteSpace, style.flexWrap] as const,
+    ({ style }) => [style.width, style.maxWidth, style.whiteSpace, style.flexWrap] as const,
   );
   for (const { style } of elements) {
     style.width = "max-content";

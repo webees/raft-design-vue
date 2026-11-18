@@ -13,7 +13,11 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <CollapsibleContent v-bind="{ ...attrs, class: undefined }" data-slot="sidebar-section-empty" :class="rootClass">
+  <CollapsibleContent
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="sidebar-section-empty"
+    :class="rootClass"
+  >
     <slot />
   </CollapsibleContent>
 </template>

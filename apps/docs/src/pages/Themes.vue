@@ -24,10 +24,12 @@ function swatches(name: string) {
 
 <template>
   <section class="docs-section">
-    <h2 class="docs-section-title">Themes <span>{{ names.length }} palettes</span></h2>
+    <h2 class="docs-section-title">
+      Themes <span>{{ names.length }} palettes</span>
+    </h2>
     <p class="docs-section-copy">
-      主题通过 <code class="docs-mono">data-theme</code> 生效，刻意不含上游的 Agent
-      像素 sprite（品牌资产不随包发布）。点击卡片可实时切换全站主题。
+      主题通过 <code class="docs-mono">data-theme</code> 生效，刻意不含上游的 Agent 像素
+      sprite（品牌资产不随包发布）。点击卡片可实时切换全站主题。
     </p>
     <div class="docs-theme-grid">
       <button
@@ -44,6 +46,15 @@ function swatches(name: string) {
         </span>
       </button>
     </div>
-    <pre class="docs-mono" style="margin-top: 18px; padding: 14px; border: 1px solid var(--line-hairline); border-radius: 6px; overflow: auto"><code>&lt;html class="light" data-theme="{{ preview }}"&gt;</code></pre>
+    <pre
+      class="docs-mono"
+      style="
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid var(--line-hairline);
+        border-radius: 6px;
+        overflow: auto;
+      "
+    ><code>&lt;html class="light" data-theme="{{ preview }}"&gt;</code></pre>
   </section>
 </template>

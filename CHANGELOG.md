@@ -4,9 +4,9 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2026-11-17
+## [Unreleased]
 
-### Added (0.2.0)
+### Added
 
 - Completed the upstream component surface: `Lightbox`, `Comment*`, `Drag*`,
   `TaskDnd*`, `Composer*`, `Toast*`, `Search*`, `NotificationCenter`,
@@ -15,9 +15,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   cross-list moves, announcements, lift and drop placeholders (no React
   `@dnd-kit` dependency).
 - Parity now reports 102 / 102 upstream components ported.
-
-### Added
-
 - Bun workspace, Vue 3 + Rsbuild/Rslib toolchain and MIT licensing.
 - Ported design-token and theme generation from the pinned upstream commit.
 - 71 Vue components: Button, TextLink, Spinner, Badge, Card, Avatar, Input,

@@ -34,19 +34,18 @@ await mkdir(WORK_DIR, { recursive: true });
 
 if (!existsSync(join(sourceDir, "packages/ui/src/tokens.json"))) {
   console.log(`Fetching ${UPSTREAM_REPO}@${commit.slice(0, 12)}…`);
-  const response = await fetch(
-    `https://codeload.github.com/${UPSTREAM_REPO}/tar.gz/${commit}`,
-    { headers: { "User-Agent": "webees-raft-design-vue-sync" } },
-  );
+  const response = await fetch(`https://codeload.github.com/${UPSTREAM_REPO}/tar.gz/${commit}`, {
+    headers: { "User-Agent": "webees-raft-design-vue-sync" },
+  });
   if (!response.ok) {
     throw new Error(`Download failed: HTTP ${response.status}`);
   }
   await Bun.write(archive, response);
   await mkdir(sourceDir, { recursive: true });
-  const tar = Bun.spawnSync(
-    ["tar", "-xzf", archive, "-C", sourceDir, "--strip-components=1"],
-    { stdout: "inherit", stderr: "inherit" },
-  );
+  const tar = Bun.spawnSync(["tar", "-xzf", archive, "-C", sourceDir, "--strip-components=1"], {
+    stdout: "inherit",
+    stderr: "inherit",
+  });
   if (tar.exitCode !== 0) throw new Error("Failed to extract upstream archive");
 }
 
@@ -60,8 +59,9 @@ async function copyFile(from: string, to: string): Promise<void> {
 }
 
 // Design documentation and fonts. Brand artwork is deliberately excluded.
-for (const file of walk(join(sourceDir, "design"), (path) =>
-  path.endsWith(".md") || path.endsWith(".woff2") || path.endsWith("OFL.txt"),
+for (const file of walk(
+  join(sourceDir, "design"),
+  (path) => path.endsWith(".md") || path.endsWith(".woff2") || path.endsWith("OFL.txt"),
 )) {
   const relativePath = file.slice(join(sourceDir, "design").length + 1);
   await copyFile(file, join(DESIGN_DIR, relativePath));
@@ -163,9 +163,7 @@ for (const name of names) {
           ? "ported"
           : (previous?.status ?? "planned"),
     upstreamPath: `packages/ui/src/components/${name}`,
-    ...(existsSync(join(localPath, "index.ts"))
-      ? { localPath: rel(localPath) }
-      : {}),
+    ...(existsSync(join(localPath, "index.ts")) ? { localPath: rel(localPath) } : {}),
     ...(previous?.notes ? { notes: previous.notes } : {}),
   };
 }
@@ -198,8 +196,6 @@ function componentDocs(dir: string): { name: string; file: string }[] {
   if (!existsSync(dir)) return [];
   return walk(dir, (path) => path.endsWith(".md")).flatMap((file) => {
     const parts = file.slice(dir.length + 1).split("/");
-    return parts.length === 2 && parts[0] && parts[1]
-      ? [{ name: parts[0], file }]
-      : [];
+    return parts.length === 2 && parts[0] && parts[1] ? [{ name: parts[0], file }] : [];
   });
 }

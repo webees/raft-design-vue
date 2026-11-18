@@ -23,7 +23,9 @@ const dropState = computed<TaskDropState>(() => {
   const over = context.over();
   if (over.overId !== props.id) return "idle";
   if (props.placement && over.overPlacement !== props.placement) return "idle";
-  return context.isDropAllowed(context.activeId()!, props.id, over.overData) ? "allowed" : "blocked";
+  return context.isDropAllowed(context.activeId()!, props.id, over.overData)
+    ? "allowed"
+    : "blocked";
 });
 
 const classes = computed(() =>

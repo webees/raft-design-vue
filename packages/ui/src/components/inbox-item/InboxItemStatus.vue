@@ -47,12 +47,7 @@ const label = computed(() => textOf(slots.default?.() ?? []));
     <slot />
   </TaskStatusBadge>
   <Tooltip>
-    <TooltipTrigger
-      as-child
-      role="img"
-      :aria-label="label"
-      data-slot="inbox-item-status-pixel"
-    >
+    <TooltipTrigger as-child role="img" :aria-label="label" data-slot="inbox-item-status-pixel">
       <InboxItemHoverTarget :class="itemStatusPixel()">
         <TaskStatusIcon :status="status" />
       </InboxItemHoverTarget>

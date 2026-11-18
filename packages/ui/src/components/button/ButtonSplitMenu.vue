@@ -27,7 +27,10 @@ const attrs = useAttrs();
 const group = useButtonSplit();
 const isDisabled = computed(() => props.disabled || group.disabled.value);
 const rootClass = computed(() =>
-  cn(buttonSplitMenu({ variant: props.variant, size: props.size }), attrs.class as string | undefined),
+  cn(
+    buttonSplitMenu({ variant: props.variant, size: props.size }),
+    attrs.class as string | undefined,
+  ),
 );
 
 let release: (() => void) | undefined;
@@ -46,8 +49,8 @@ onBeforeUnmount(() => release?.());
     v-bind="{ ...attrs, class: undefined }"
     data-split-part="menu"
     :data-split-sticker="BUTTON_SPLIT_STICKERS.has(props.variant) ? '' : undefined"
-    :variant="(props.variant as ButtonVariant)"
-    :size="(props.size as ButtonSize)"
+    :variant="props.variant as ButtonVariant"
+    :size="props.size as ButtonSize"
     :disabled="isDisabled"
     :loading="props.loading"
     :class="rootClass"

@@ -18,9 +18,7 @@ withDefaults(
 
 const attrs = useAttrs();
 const tapRef = useTapActivation();
-const itemClass = computed(() =>
-  toggleGroup().item({ className: attrs.class as string }),
-);
+const itemClass = computed(() => toggleGroup().item({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -6,9 +6,7 @@ import { contextMenu } from "./context-menu.variants";
 
 defineOptions({ name: "RaftContextMenuLabel", inheritAttrs: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  contextMenu().label({ class: attrs.class as string | undefined }),
-);
+const rootClass = computed(() => contextMenu().label({ class: attrs.class as string | undefined }));
 </script>
 
 <template>

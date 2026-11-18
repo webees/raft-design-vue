@@ -70,7 +70,9 @@ export const avatarVariants = tv({
       server: { root: ["bg-sticker-ink"] },
     },
     size: {
-      xl: { root: ["size-[99px] shadow-[0_0_0_1.5px_var(--sticker-edge),var(--elevation-sticker)]"] },
+      xl: {
+        root: ["size-[99px] shadow-[0_0_0_1.5px_var(--sticker-edge),var(--elevation-sticker)]"],
+      },
       lg: { root: ["size-[51px]"] },
       md: { root: ["size-[35px]"] },
       sm: { root: ["size-[27px]"] },

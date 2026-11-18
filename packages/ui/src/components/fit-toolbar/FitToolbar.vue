@@ -4,7 +4,6 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  provide,
   ref,
   useAttrs,
   watch,
@@ -12,7 +11,7 @@ import {
 } from "vue";
 
 import { cn } from "../../lib/cn";
-import { fitToolbarKey, type FitItemRegistration } from "./fit-toolbar-context";
+import { provideFitToolbar, type FitItemRegistration } from "./fit-toolbar-context";
 import {
   BREAK,
   keyOf,
@@ -98,7 +97,7 @@ function touch(id: string) {
   if (applied.value.more.includes(id)) refreshMore();
 }
 
-provide(fitToolbarKey, {
+provideFitToolbar({
   register,
   unregister,
   touch,
@@ -255,9 +254,9 @@ watch(
     if (!current || !last || last.getClientRects().length > 0) return;
     const active = document.activeElement;
     if (active !== last && active !== document.body && active !== null) return;
-    const more = Array.from(
-      current.querySelectorAll<HTMLElement>("[data-fit-more-trigger]"),
-    ).find((trigger) => trigger.getClientRects().length > 0);
+    const more = Array.from(current.querySelectorAll<HTMLElement>("[data-fit-more-trigger]")).find(
+      (trigger) => trigger.getClientRects().length > 0,
+    );
     lastFocused = null;
     more?.focus();
   },

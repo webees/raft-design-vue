@@ -30,12 +30,11 @@ describe("TextSelectionToolbar", () => {
   it("merges consumer classes", () => {
     const wrapper = mount(TextSelectionToolbar, {
       slots: {
-        default: () =>
-          h(TextSelectionToolbarButton, { class: "rounded-none" }, () => "Comment"),
+        default: () => h(TextSelectionToolbarButton, { class: "rounded-none" }, () => "Comment"),
       },
     });
-    expect(
-      wrapper.get("[data-slot=text-selection-toolbar-button]").classes().join(" "),
-    ).toContain("rounded-none");
+    expect(wrapper.get("[data-slot=text-selection-toolbar-button]").classes().join(" ")).toContain(
+      "rounded-none",
+    );
   });
 });

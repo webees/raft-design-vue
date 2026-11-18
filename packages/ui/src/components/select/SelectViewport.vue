@@ -29,7 +29,12 @@ const setContainer = (element: unknown) => {
 
 <template>
   <div data-slot="select-list-frame" :class="frameClass" :style="area.blockStyle.value">
-    <SelectViewport :ref="setContainer" v-bind="restAttrs" :class="listClass" data-slot="select-list">
+    <SelectViewport
+      :ref="setContainer"
+      v-bind="restAttrs"
+      :class="listClass"
+      data-slot="select-list"
+    >
       <slot />
     </SelectViewport>
     <ScrollAreaGutters :binding="area" />

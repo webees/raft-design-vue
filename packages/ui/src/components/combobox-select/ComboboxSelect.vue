@@ -90,9 +90,7 @@ function keepRoomBelow() {
   const viewport = visual
     ? { top: visual.offsetTop, height: visual.height }
     : { top: 0, height: view.innerHeight };
-  if (
-    roomBelowIsShort(element.getBoundingClientRect(), viewport)
-  ) {
+  if (roomBelowIsShort(element.getBoundingClientRect(), viewport)) {
     if (!element.style.scrollMarginTop) element.style.scrollMarginTop = "2.5rem";
     element.scrollIntoView({ block: "start", inline: "nearest", behavior: "instant" });
   }
@@ -173,7 +171,9 @@ const selectedValues = computed<ComboboxSelectValue[]>(() => {
   if (value == null) return [];
   return Array.isArray(value) ? value : [value as ComboboxSelectValue];
 });
-const query = computed(() => (props.inputValue !== undefined ? props.inputValue : looseQuery.value));
+const query = computed(() =>
+  props.inputValue !== undefined ? props.inputValue : looseQuery.value,
+);
 const open = computed(() => (props.open !== undefined ? props.open : looseOpen.value));
 const ariaLabel = computed(() => props["aria-label"]);
 const ariaLabelledby = computed(() => props["aria-labelledby"]);
@@ -181,7 +181,8 @@ const ariaDescribedby = computed(() => props["aria-describedby"]);
 const ariaInvalid = computed(() => props["aria-invalid"]);
 
 const normalised = computed(() => {
-  const groups: { key: string; label?: unknown; items: OptionRecord<ComboboxSelectOption>[] }[] = [];
+  const groups: { key: string; label?: unknown; items: OptionRecord<ComboboxSelectOption>[] }[] =
+    [];
   for (const [index, option] of props.options.entries()) {
     if (isOptionGroup(option)) {
       groups.push({
@@ -198,9 +199,13 @@ const normalised = computed(() => {
       });
     }
   }
-  const records = new Map(groups.flatMap((group) => group.items.map((record) => [record.value, record] as const)));
+  const records = new Map(
+    groups.flatMap((group) => group.items.map((record) => [record.value, record] as const)),
+  );
   const created = createdOptions.value
-    .map((option) => normalizeOption(option, props.labelField, props.valueField, props.disabledField))
+    .map((option) =>
+      normalizeOption(option, props.labelField, props.valueField, props.disabledField),
+    )
     .filter((record) => !records.has(record.value));
   if (created.length) groups.push({ key: "created", items: created });
   created.forEach((record) => records.set(record.value, record));
@@ -245,7 +250,9 @@ const filteredGroups = computed(() => {
   if (canCreate.value) {
     groups.push({
       key: "create",
-      items: [{ value: search.value, label: search.value, disabled: false, createQuery: search.value }],
+      items: [
+        { value: search.value, label: search.value, disabled: false, createQuery: search.value },
+      ],
     });
   }
   return groups.filter((group) => group.items.length > 0);
@@ -261,12 +268,16 @@ const indexedGroups = computed(() => {
 });
 const selectedSet = computed(() => new Set(selectedValues.value.map((value) => optionKey(value))));
 const tagLimit = computed(() =>
-  props.maxTagCount === undefined ? Number.POSITIVE_INFINITY : Math.max(0, Math.floor(props.maxTagCount)),
+  props.maxTagCount === undefined
+    ? Number.POSITIVE_INFINITY
+    : Math.max(0, Math.floor(props.maxTagCount)),
 );
 const listHeight = computed(() =>
   typeof props.listMaxHeight === "number" ? `${props.listMaxHeight}px` : props.listMaxHeight,
 );
-const css = computed(() => cn("r-combobox-select", `r-combobox-select--${props.size}`, props.className));
+const css = computed(() =>
+  cn("r-combobox-select", `r-combobox-select--${props.size}`, props.className),
+);
 
 function setValue(next: ComboboxSelectValue | ComboboxSelectValue[] | null) {
   if (props.modelValue === undefined) looseValue.value = next;
@@ -378,20 +389,18 @@ watch(filteredGroups, () => {
   if (activeIndex.value >= flatOptions.value.length) activeIndex.value = firstEnabledIndex();
 });
 
-watch(
-  [activeIndex, open],
-  async ([index, isOpen]) => {
-    if (!isOpen || index < 0) return;
-    await nextTick();
-    const list = document.getElementById(listId);
-    const option = document.getElementById(`${listId}-${index}`);
-    if (!list || !option) return;
-    const listRect = list.getBoundingClientRect();
-    const optionRect = option.getBoundingClientRect();
-    if (optionRect.top < listRect.top) list.scrollTop -= listRect.top - optionRect.top;
-    else if (optionRect.bottom > listRect.bottom) list.scrollTop += optionRect.bottom - listRect.bottom;
-  },
-);
+watch([activeIndex, open], async ([index, isOpen]) => {
+  if (!isOpen || index < 0) return;
+  await nextTick();
+  const list = document.getElementById(listId);
+  const option = document.getElementById(`${listId}-${index}`);
+  if (!list || !option) return;
+  const listRect = list.getBoundingClientRect();
+  const optionRect = option.getBoundingClientRect();
+  if (optionRect.top < listRect.top) list.scrollTop -= listRect.top - optionRect.top;
+  else if (optionRect.bottom > listRect.bottom)
+    list.scrollTop += optionRect.bottom - listRect.bottom;
+});
 
 watch(
   open,
@@ -477,7 +486,9 @@ onBeforeUnmount(() => {
           aria-autocomplete="list"
           :aria-expanded="open"
           :aria-controls="listId"
-          :aria-activedescendant="open && flatOptions[activeIndex] ? `${listId}-${activeIndex}` : undefined"
+          :aria-activedescendant="
+            open && flatOptions[activeIndex] ? `${listId}-${activeIndex}` : undefined
+          "
           @input="setQuery(($event.target as HTMLInputElement).value)"
           @keydown="onKeydown"
           @focus="openOnFocus"
@@ -509,7 +520,9 @@ onBeforeUnmount(() => {
           aria-autocomplete="list"
           :aria-expanded="open"
           :aria-controls="listId"
-          :aria-activedescendant="open && flatOptions[activeIndex] ? `${listId}-${activeIndex}` : undefined"
+          :aria-activedescendant="
+            open && flatOptions[activeIndex] ? `${listId}-${activeIndex}` : undefined
+          "
           @input="setQuery(($event.target as HTMLInputElement).value)"
           @keydown="onKeydown"
           @focus="openOnFocus"
@@ -596,17 +609,30 @@ onBeforeUnmount(() => {
                       >
                         <component
                           v-if="record.createQuery !== undefined"
-                          :is="() => (renderCreateLabel ?? ((value: string) => `Create “${value}”`))(record.label)"
+                          :is="
+                            () =>
+                              (renderCreateLabel ?? ((value: string) => `Create “${value}”`))(
+                                record.label,
+                              )
+                          "
                         />
                         <component
                           v-else-if="record.option && (renderOption || renderLabel)"
-                          :is="() => (renderOption ?? renderLabel)!(record.option as ComboboxSelectOption, { selected: selectedSet.has(optionKey(record.value)) })"
+                          :is="
+                            () =>
+                              (renderOption ?? renderLabel)!(
+                                record.option as ComboboxSelectOption,
+                                { selected: selectedSet.has(optionKey(record.value)) },
+                              )
+                          "
                         />
                         <template v-else>{{ record.label }}</template>
                       </slot>
                     </span>
                     <span
-                      v-if="record.createQuery === undefined && selectedSet.has(optionKey(record.value))"
+                      v-if="
+                        record.createQuery === undefined && selectedSet.has(optionKey(record.value))
+                      "
                       class="r-combobox-select__indicator"
                     >
                       <Check aria-hidden="true" />

@@ -1,9 +1,5 @@
 import { cloneVNode, defineComponent, mergeProps, type VNode } from "vue";
-import {
-  injectTooltipProviderContext,
-  injectTooltipRootContext,
-  useId,
-} from "reka-ui";
+import { injectTooltipProviderContext, injectTooltipRootContext, useId } from "reka-ui";
 
 /**
  * Reka's `TooltipTrigger` writes `data-state` on its child, which would clobber
@@ -44,7 +40,10 @@ export default defineComponent({
     }
     function onFocus(event: FocusEvent) {
       if (pointerDown) return;
-      if (root.ignoreNonKeyboardFocus.value && !(event.target as HTMLElement).matches?.(":focus-visible")) {
+      if (
+        root.ignoreNonKeyboardFocus.value &&
+        !(event.target as HTMLElement).matches?.(":focus-visible")
+      ) {
         return;
       }
       root.onOpen();

@@ -6,9 +6,7 @@ import { taskListSection } from "./task-list.variants";
 defineOptions({ name: "RaftTaskSectionPanel", inheritAttrs: false });
 withDefaults(defineProps<{ forceMount?: boolean }>(), { forceMount: false });
 const attrs = useAttrs();
-const panelClass = computed(() =>
-  taskListSection().panel({ className: attrs.class as string }),
-);
+const panelClass = computed(() => taskListSection().panel({ className: attrs.class as string }));
 </script>
 
 <template>

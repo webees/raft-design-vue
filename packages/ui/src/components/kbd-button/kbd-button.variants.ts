@@ -16,10 +16,7 @@ export const kbdButton = tv({
       "data-recording:data-invalid:border-danger-strong",
       "data-invalid:**:data-[slot=kbd]:bg-danger-soft data-invalid:**:data-[slot=kbd]:text-danger-strong data-invalid:**:data-[slot=kbd]:inset-ring-danger-strong",
     ],
-    placeholder: [
-      "px-0.5 whitespace-nowrap",
-      "font-sans text-callout text-foreground-hint",
-    ],
+    placeholder: ["px-0.5 whitespace-nowrap", "font-sans text-callout text-foreground-hint"],
     caret: ["block h-[18px] w-[1.5px] shrink-0 bg-foreground"],
   },
 });

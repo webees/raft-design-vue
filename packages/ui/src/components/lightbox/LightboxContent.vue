@@ -50,8 +50,10 @@ function inScroller(target: Element | null, popup: Element) {
   while (node && node !== popup) {
     const style = getComputedStyle(node as HTMLElement);
     const element = node as HTMLElement;
-    if (/(auto|scroll)/.test(style.overflowY) && element.scrollHeight > element.clientHeight) return true;
-    if (/(auto|scroll)/.test(style.overflowX) && element.scrollWidth > element.clientWidth) return true;
+    if (/(auto|scroll)/.test(style.overflowY) && element.scrollHeight > element.clientHeight)
+      return true;
+    if (/(auto|scroll)/.test(style.overflowX) && element.scrollWidth > element.clientWidth)
+      return true;
     node = node.parentElement;
   }
   return false;

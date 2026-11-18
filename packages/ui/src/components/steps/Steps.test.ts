@@ -4,7 +4,9 @@ import { h } from "vue";
 import { Step, Steps } from ".";
 
 const statuses = (wrapper: ReturnType<typeof mount>) =>
-  wrapper.findAll("li").map((item) => /r-step--(process|finish|error|wait)\b/.exec(item.classes().join(" "))?.[1]);
+  wrapper
+    .findAll("li")
+    .map((item) => /r-step--(process|finish|error|wait)\b/.exec(item.classes().join(" "))?.[1]);
 
 const list = (children: () => unknown[], props: Record<string, unknown> = {}) =>
   mount(Steps, { props, slots: { default: children } });

@@ -19,9 +19,6 @@ export {
   NotificationCenterTitle,
 } from "./notification-center-parts";
 
-export {
-  notificationCenter,
-  type NotificationCenterVariants,
-} from "./notification-center.recipe";
+export { notificationCenter, type NotificationCenterVariants } from "./notification-center.recipe";
 /** Props for the popover portal that hosts the notification center. */
 export type NotificationCenterPortalProps = import("reka-ui").PopoverPortalProps;

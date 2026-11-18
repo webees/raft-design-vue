@@ -1,7 +1,16 @@
 import { existsSync, readFileSync } from "node:fs";
 import { basename, join, relative } from "node:path";
 
-import { SPEC_DIR, WORK_DIR, LOCK_PATH, ROOT, readJson, rel, walk, type UpstreamLock } from "./shared";
+import {
+  SPEC_DIR,
+  WORK_DIR,
+  LOCK_PATH,
+  ROOT,
+  readJson,
+  rel,
+  walk,
+  type UpstreamLock,
+} from "./shared";
 
 const upstreamRoot = join(
   WORK_DIR,
@@ -68,7 +77,9 @@ function exportNames(source: string) {
       if (name) names.add(name);
     }
   }
-  for (const match of source.matchAll(/export\s+(?:async\s+)?(?:function|const|class)\s+([A-Za-z0-9_$]+)/g)) {
+  for (const match of source.matchAll(
+    /export\s+(?:async\s+)?(?:function|const|class)\s+([A-Za-z0-9_$]+)/g,
+  )) {
     names.add(match[1]!);
   }
   for (const match of source.matchAll(/export\s+(?:type|interface)\s+([A-Za-z0-9_$]+)/g)) {
@@ -86,7 +97,9 @@ function slots(source: string) {
   const out = new Set<string>();
   // Handles `data-slot="x"`, `"data-slot": "x"`, `:data-slot="attrs['data-slot'] ?? 'x'"`
   // and template literals such as ``data-slot={`thread-panel-${part}`}``.
-  for (const match of source.matchAll(/["']?data-slot["']?\s*[=:]\s*(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}|`([^`]*)`)/g)) {
+  for (const match of source.matchAll(
+    /["']?data-slot["']?\s*[=:]\s*(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}|`([^`]*)`)/g,
+  )) {
     const expression = match[1] ?? match[2] ?? match[3] ?? match[4]!;
     for (const literal of expression.matchAll(/["'`]([\w-]+)["'`]/g)) out.add(literal[1]!);
     const template = expression.match(/`([\w-]+)\$\{/);
@@ -120,7 +133,10 @@ function classTokens(source: string) {
 }
 
 function localSources(dir: string) {
-  return walk(dir, (file) => /\.(vue|ts)$/.test(file) && !isTest(file) && !file.endsWith(".variants.ts"))
+  return walk(
+    dir,
+    (file) => /\.(vue|ts)$/.test(file) && !isTest(file) && !file.endsWith(".variants.ts"),
+  )
     .map(read)
     .join("\n");
 }
@@ -144,13 +160,17 @@ function missingLocalFiles(upstreamDir: string, localDir: string) {
   const localExports = exportNames(localSources(localDir));
   const missing: string[] = [];
 
-  for (const file of walk(upstreamDir, (entry) => !isTest(entry) && !isDoc(entry) && !isFixture(entry))) {
+  for (const file of walk(
+    upstreamDir,
+    (entry) => !isTest(entry) && !isDoc(entry) && !isFixture(entry),
+  )) {
     const relativePath = relative(upstreamDir, file).split("\\").join("/");
     const stem = basename(file).replace(/\.[^.]+$/, "");
 
     if (localFiles.some((local) => relative(localDir, local) === relativePath)) continue;
     if (localStems.has(stem)) continue;
-    if (stem.endsWith(".recipe") && localFiles.some((local) => local.endsWith(".variants.ts"))) continue;
+    if (stem.endsWith(".recipe") && localFiles.some((local) => local.endsWith(".variants.ts")))
+      continue;
     if (localStems.has(`${stem}.variants`)) continue;
 
     const symbols = [...exportNames(read(file))];
@@ -215,7 +235,12 @@ interface Row {
 }
 
 const components = walk(upstreamComponents, (file) => !isTest(file) && !isDoc(file))
-  .map((file) => rel(file).slice(rel(upstreamComponents).length + 1).split("/")[0]!)
+  .map(
+    (file) =>
+      rel(file)
+        .slice(rel(upstreamComponents).length + 1)
+        .split("/")[0]!,
+  )
   .filter((name, index, all) => all.indexOf(name) === index)
   .sort();
 
@@ -237,24 +262,28 @@ for (const component of components) {
     (name) => !name.endsWith("Props") && !localExports.has(name),
   );
 
-      // A template-literal slot on either side matches by prefix, so
-      // `thread-panel-${part}` covers the upstream `thread-panel-original-message`.
-      const localSlots = [...slots(localCorpus)];
-      const localPrefixes = localSlots.filter((slot) => slot.endsWith("*")).map((slot) => slot.slice(0, -1));
-      const missingSlots = [...slots(upstreamSource)].filter((slot) => {
-        if (localSlots.includes(slot)) return false;
-        if (slot.endsWith("*")) {
-          return !localSlots.some((local) => local.startsWith(slot.slice(0, -1)));
-        }
-        return !localPrefixes.some((prefix) => slot.startsWith(prefix));
-      });
+  // A template-literal slot on either side matches by prefix, so
+  // `thread-panel-${part}` covers the upstream `thread-panel-original-message`.
+  const localSlots = [...slots(localCorpus)];
+  const localPrefixes = localSlots
+    .filter((slot) => slot.endsWith("*"))
+    .map((slot) => slot.slice(0, -1));
+  const missingSlots = [...slots(upstreamSource)].filter((slot) => {
+    if (localSlots.includes(slot)) return false;
+    if (slot.endsWith("*")) {
+      return !localSlots.some((local) => local.startsWith(slot.slice(0, -1)));
+    }
+    return !localPrefixes.some((prefix) => slot.startsWith(prefix));
+  });
 
   const upstreamRecipes = upstreamFiles
     .filter((file) => /\.(recipes?|variants)\.ts$/.test(file))
     .map(read)
     .join("\n");
   const localTokens = new Set(classTokens(variantSource));
-  const missingClasses = [...classTokens(upstreamRecipes)].filter((token) => !localTokens.has(token));
+  const missingClasses = [...classTokens(upstreamRecipes)].filter(
+    (token) => !localTokens.has(token),
+  );
 
   const upstreamProps: string[] = [];
   const upstreamExports = exportNames(upstreamSource);
@@ -305,7 +334,9 @@ if (json) {
     if (row.missingSlots.length) console.log(`  slots:    ${row.missingSlots.join(", ")}`);
     if (row.missingProps.length) console.log(`  props:    ${row.missingProps.join(", ")}`);
     if (row.missingClasses.length)
-      console.log(`  classes (${row.missingClasses.length}): ${row.missingClasses.slice(0, 40).join(" ")}`);
+      console.log(
+        `  classes (${row.missingClasses.length}): ${row.missingClasses.slice(0, 40).join(" ")}`,
+      );
   }
   console.log(`\n${rows.length} of ${components.length} components have findings.`);
 }

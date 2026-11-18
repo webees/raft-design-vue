@@ -12,4 +12,5 @@ export type SortableTabsContextValue = {
   copies: Map<string, () => unknown>;
 };
 
-export const sortableTabsContextKey: InjectionKey<SortableTabsContextValue> = Symbol("raft-sortable-tabs");
+export const sortableTabsContextKey: InjectionKey<SortableTabsContextValue> =
+  Symbol("raft-sortable-tabs");

@@ -31,9 +31,7 @@ const variants = computed(() =>
   }),
 );
 const closeClass = computed(() => variants.value.close({ class: props.class }));
-const closeButtonClass = computed(() =>
-  props.size ? undefined : variants.value.closeButton(),
-);
+const closeButtonClass = computed(() => (props.size ? undefined : variants.value.closeButton()));
 const closeIconClass = computed(() => variants.value.closeIcon());
 </script>
 

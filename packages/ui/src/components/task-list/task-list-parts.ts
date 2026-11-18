@@ -6,14 +6,7 @@ import { ChevronDown } from "lucide-vue-next";
 import type { TaskStatusId } from "../../lib/task-status";
 import { taskListSection } from "./task-list.variants";
 
-type SectionSlot =
-  | "heading"
-  | "badge"
-  | "count"
-  | "chevron"
-  | "panel"
-  | "items"
-  | "empty";
+type SectionSlot = "heading" | "badge" | "count" | "chevron" | "panel" | "items" | "empty";
 
 function createSectionPart(name: string, slot: SectionSlot, tag: string, slotName: string) {
   return defineComponent({

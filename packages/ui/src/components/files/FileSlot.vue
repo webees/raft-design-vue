@@ -7,7 +7,17 @@ defineOptions({ name: "RaftFileSlot", inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<{
-    part: "panel" | "list" | "row" | "rowOpen" | "thumbnail" | "content" | "name" | "meta" | "metaItem" | "actions";
+    part:
+      | "panel"
+      | "list"
+      | "row"
+      | "rowOpen"
+      | "thumbnail"
+      | "content"
+      | "name"
+      | "meta"
+      | "metaItem"
+      | "actions";
     dataSlot: string;
     as?: string;
     asChild?: boolean;
@@ -20,13 +30,7 @@ const rootClass = computed(() => files()[props.part]());
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
-    v-bind="attrs"
-    :data-slot="dataSlot"
-    :class="rootClass"
-  >
+  <Primitive :as="as" :as-child="asChild" v-bind="attrs" :data-slot="dataSlot" :class="rootClass">
     <slot />
   </Primitive>
 </template>

@@ -5,9 +5,7 @@ import { messageSystem } from "./system-message.variants";
 defineOptions({ name: "RaftSystemMessageTime", inheritAttrs: false });
 
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  messageSystem().systemTime({ className: attrs.class as string }),
-);
+const rootClass = computed(() => messageSystem().systemTime({ className: attrs.class as string }));
 </script>
 
 <template>

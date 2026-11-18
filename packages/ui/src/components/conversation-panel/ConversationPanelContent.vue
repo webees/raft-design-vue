@@ -10,9 +10,7 @@ withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
   asChild: false,
 });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  conversationPanel().content({ className: attrs.class as string }),
-);
+const rootClass = computed(() => conversationPanel().content({ className: attrs.class as string }));
 </script>
 
 <template>

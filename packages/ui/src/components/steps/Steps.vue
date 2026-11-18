@@ -76,11 +76,7 @@ export default defineComponent({
     provide(STEPS_KEY, context);
 
     const rootClass = computed(() =>
-      cn(
-        "r-steps",
-        props.vertical ? "r-steps--vertical" : "r-steps--horizontal",
-        props.class,
-      ),
+      cn("r-steps", props.vertical ? "r-steps--vertical" : "r-steps--horizontal", props.class),
     );
 
     const isRenderable = (node: VNode) =>

@@ -11,12 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <DialogPortal
-    :to="to"
-    :force-mount="forceMount"
-    :disabled="disabled"
-    data-slot="dialog-portal"
-  >
+  <DialogPortal :to="to" :force-mount="forceMount" :disabled="disabled" data-slot="dialog-portal">
     <slot />
   </DialogPortal>
 </template>

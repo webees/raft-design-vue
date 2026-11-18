@@ -5,14 +5,13 @@ import { conversationPanel } from "./conversation-panel.variants";
 
 defineOptions({ name: "RaftConversationPanelRoot", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ edge?: "attached" | "inset"; as?: string; asChild?: boolean }>(),
-  { edge: "inset", as: "section", asChild: false },
-);
+withDefaults(defineProps<{ edge?: "attached" | "inset"; as?: string; asChild?: boolean }>(), {
+  edge: "inset",
+  as: "section",
+  asChild: false,
+});
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  conversationPanel().root({ className: attrs.class as string }),
-);
+const rootClass = computed(() => conversationPanel().root({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -16,8 +16,7 @@ const separator = tv({
     root: ["shrink-0 bg-line-hairline"],
     labeledRoot: "grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 py-3",
     labeledLine: "h-px w-full shrink-0 bg-line-hairline",
-    labeledContent:
-      "min-w-0 font-sans text-footnote font-semibold text-foreground-hint",
+    labeledContent: "min-w-0 font-sans text-footnote font-semibold text-foreground-hint",
   },
   variants: {
     orientation: {

@@ -17,9 +17,7 @@ withDefaults(
 );
 
 const attrs = useAttrs();
-const removeClass = computed(() =>
-  filterChip().remove({ className: attrs.class as string }),
-);
+const removeClass = computed(() => filterChip().remove({ className: attrs.class as string }));
 </script>
 
 <template>

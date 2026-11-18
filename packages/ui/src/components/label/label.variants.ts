@@ -10,10 +10,7 @@ export const labelVariants = tv({
       "data-[disabled]:cursor-not-allowed data-[disabled]:text-foreground-disabled",
       "font-sans font-semibold text-foreground-muted",
     ],
-    asterisk: [
-      "group-data-[disabled]/label:text-foreground-disabled",
-      "text-foreground-hint",
-    ],
+    asterisk: ["group-data-[disabled]/label:text-foreground-disabled", "text-foreground-hint"],
     sub: [
       "normal-case",
       "group-data-[disabled]/label:text-foreground-disabled",

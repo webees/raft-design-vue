@@ -117,9 +117,9 @@ describe("getOverscannedRange", () => {
 
   it("renders the range in view when the rendered range is out of bounds", () => {
     const fenwickTree = rows(100);
-    expect(overscan({ fenwickTree, viewTop: 900, prev: { startIndex: 85, endIndex: 120 } })).toEqual(
-      viewAt(fenwickTree, 900),
-    );
+    expect(
+      overscan({ fenwickTree, viewTop: 900, prev: { startIndex: 85, endIndex: 120 } }),
+    ).toEqual(viewAt(fenwickTree, 900));
   });
 
   it("renders the range in view after a move of more than 2.5 viewports", () => {

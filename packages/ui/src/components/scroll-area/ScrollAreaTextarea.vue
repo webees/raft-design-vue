@@ -79,12 +79,7 @@ onUpdated(() => area.measure());
 </script>
 
 <template>
-  <div
-    :ref="setFrame"
-    data-slot="scroll-area-textarea"
-    :class="frameClass"
-    :style="frameStyle"
-  >
+  <div :ref="setFrame" data-slot="scroll-area-textarea" :class="frameClass" :style="frameStyle">
     <textarea
       :ref="setTextarea"
       v-bind="attrs"

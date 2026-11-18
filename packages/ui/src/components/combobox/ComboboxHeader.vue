@@ -9,5 +9,7 @@ const classes = computed(() => cn(combobox().header(), props.className, attrs.cl
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-header" :class="classes"><slot /></div>
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-header" :class="classes">
+    <slot />
+  </div>
 </template>

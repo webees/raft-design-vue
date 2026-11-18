@@ -9,5 +9,7 @@ const classes = computed(() => cn(combobox().groupLabel(), props.className, attr
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-group-label" :class="classes"><slot /></div>
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-group-label" :class="classes">
+    <slot />
+  </div>
 </template>

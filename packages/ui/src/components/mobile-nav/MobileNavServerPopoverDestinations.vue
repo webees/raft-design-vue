@@ -13,7 +13,8 @@ const slots = useSlots();
 /** Count elements the way React's Children does: look inside fragments, skip text. */
 function countElements(nodes: VNode[]): number {
   return nodes.reduce((total, node) => {
-    if (node.type === Fragment) return total + countElements((node.children as VNode[] | null) ?? []);
+    if (node.type === Fragment)
+      return total + countElements((node.children as VNode[] | null) ?? []);
     if (node.type === Comment || node.type === Text) return total;
     return total + 1;
   }, 0);

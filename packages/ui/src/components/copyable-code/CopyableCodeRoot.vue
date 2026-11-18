@@ -2,10 +2,7 @@
 import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { useCopyToClipboard } from "../../lib/use-copy-to-clipboard";
-import {
-  provideCopyableCode,
-  type CopyableCodeSize,
-} from "./copyable-code-context";
+import { provideCopyableCode, type CopyableCodeSize } from "./copyable-code-context";
 import { copyableCode } from "./copyable-code.variants";
 
 defineOptions({ name: "RaftCopyableCodeRoot", inheritAttrs: false });

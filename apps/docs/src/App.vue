@@ -56,12 +56,34 @@ function applyTheme() {
         <label class="docs-select">
           <span>主题</span>
           <select v-model="theme" @change="applyTheme">
-            <option v-for="name in ['boring','bots','critters','space','desk','food','quest','weather','plants','spooky']" :key="name" :value="name">
+            <option
+              v-for="name in [
+                'boring',
+                'bots',
+                'critters',
+                'space',
+                'desk',
+                'food',
+                'quest',
+                'weather',
+                'plants',
+                'spooky',
+              ]"
+              :key="name"
+              :value="name"
+            >
               {{ name }}
             </option>
           </select>
         </label>
-        <button class="docs-toggle" type="button" @click="dark = !dark; applyTheme()">
+        <button
+          class="docs-toggle"
+          type="button"
+          @click="
+            dark = !dark;
+            applyTheme();
+          "
+        >
           {{ dark ? "Dark" : "Light" }}
         </button>
       </div>

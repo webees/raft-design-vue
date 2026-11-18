@@ -5,17 +5,11 @@ import { webTopBar } from "./web-top-bar.variants";
 defineOptions({ name: "RaftWebTopBarStart", inheritAttrs: false });
 
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  webTopBar().start({ className: attrs.class as string }),
-);
+const rootClass = computed(() => webTopBar().start({ className: attrs.class as string }));
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    data-slot="web-top-bar-start"
-    :class="rootClass"
-  >
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="web-top-bar-start" :class="rootClass">
     <slot />
   </div>
 </template>

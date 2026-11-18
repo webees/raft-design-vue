@@ -9,7 +9,11 @@ const countClass = computed(() => segmentedControlCount(props.class));
 </script>
 
 <template>
-  <span v-bind="{ ...attrs, class: undefined }" data-slot="segmented-control-count" :class="countClass">
+  <span
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="segmented-control-count"
+    :class="countClass"
+  >
     <slot />
   </span>
 </template>

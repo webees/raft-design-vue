@@ -25,7 +25,12 @@ const triggerAttrs = computed(() => {
 </script>
 
 <template>
-  <PopoverTrigger v-bind="triggerAttrs" :as-child="asChild" data-slot="popover-trigger" :class="triggerClass">
+  <PopoverTrigger
+    v-bind="triggerAttrs"
+    :as-child="asChild"
+    data-slot="popover-trigger"
+    :class="triggerClass"
+  >
     <slot />
   </PopoverTrigger>
 </template>

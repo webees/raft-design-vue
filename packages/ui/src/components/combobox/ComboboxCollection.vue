@@ -8,5 +8,7 @@ const classes = computed(() => cn("contents", props.className, attrs.class as st
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-collection" :class="classes"><slot /></div>
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-collection" :class="classes">
+    <slot />
+  </div>
 </template>

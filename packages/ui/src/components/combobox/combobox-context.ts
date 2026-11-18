@@ -34,7 +34,10 @@ export type ComboboxInputOwner = "group" | "control";
 const inputOwnerKey: InjectionKey<Ref<ComboboxInputOwner>> = Symbol("raft-combobox-input-owner");
 
 export function provideComboboxInputOwner(owner: ComboboxInputOwner) {
-  provide(inputOwnerKey, computed(() => owner));
+  provide(
+    inputOwnerKey,
+    computed(() => owner),
+  );
 }
 
 export function useComboboxInputOwner() {

@@ -1,7 +1,4 @@
-import type {
-  ComboboxSelectGroup,
-  ComboboxSelectValue,
-} from "./combobox-select.types";
+import type { ComboboxSelectGroup, ComboboxSelectValue } from "./combobox-select.types";
 
 export interface OptionRecord<Option> {
   value: ComboboxSelectValue;

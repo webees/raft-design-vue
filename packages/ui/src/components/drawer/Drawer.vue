@@ -35,9 +35,7 @@ const swipeAxis = computed<"x" | "y">(() =>
 );
 
 const instance = getCurrentInstance();
-const controlled = computed(
-  () => instance?.vnode.props != null && "open" in instance.vnode.props,
-);
+const controlled = computed(() => instance?.vnode.props != null && "open" in instance.vnode.props);
 const openProps = computed(() => (controlled.value ? { open: props.open === true } : {}));
 
 provideDrawerConfig(

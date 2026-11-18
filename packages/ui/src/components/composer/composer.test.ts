@@ -45,7 +45,9 @@ describe("Composer", () => {
     });
 
     expect(wrapper.find('[data-slot="composer-attachment"]').exists()).toBe(true);
-    expect(wrapper.find('[data-slot="composer-attachment-remove"]').attributes("type")).toBe("button");
+    expect(wrapper.find('[data-slot="composer-attachment-remove"]').attributes("type")).toBe(
+      "button",
+    );
   });
 
   it("detects a trigger, highlights items and selects one", async () => {
@@ -59,7 +61,10 @@ describe("Composer", () => {
         const at = text.lastIndexOf("@");
         return at < 0 ? null : { marker: "@", query: text.slice(at + 1), start: at };
       },
-      getItems: () => [{ id: "ada", label: "ada" }, { id: "lin", label: "lin" }],
+      getItems: () => [
+        { id: "ada", label: "ada" },
+        { id: "lin", label: "lin" },
+      ],
       getItemText: (item) => `@${item.label}`,
     });
 

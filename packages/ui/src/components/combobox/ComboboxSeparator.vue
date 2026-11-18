@@ -10,5 +10,9 @@ const classes = computed(() => cn(combobox().separator(), props.className, attrs
 </script>
 
 <template>
-  <ComboboxSeparator v-bind="{ ...attrs, class: undefined }" data-slot="combobox-separator" :class="classes" />
+  <ComboboxSeparator
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="combobox-separator"
+    :class="classes"
+  />
 </template>

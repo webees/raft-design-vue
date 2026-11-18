@@ -3,7 +3,12 @@ import { computed, ref } from "vue";
 
 import { createDragEngine, type DragSession } from "../../lib/drag-engine";
 import { createDragAnnouncements, SILENT_DRAG_ANNOUNCEMENTS } from "../drag/drag-announcements";
-import { provideTaskDnd, allowTaskDrop, type TaskDndProviderProps, type TaskDropData } from "./task-dnd-context";
+import {
+  provideTaskDnd,
+  allowTaskDrop,
+  type TaskDndProviderProps,
+  type TaskDropData,
+} from "./task-dnd-context";
 
 defineOptions({ name: "RaftTaskDndProvider", inheritAttrs: false });
 
@@ -16,13 +21,19 @@ const activeId = ref<string | number | null>(null);
 const activeDropId = ref<string | number | null>(null);
 const activeHeight = ref<number | null>(null);
 const overlay = ref(false);
-const over = ref<{ overId: string | number | null; overPlacement: "before" | "after" | null; overData?: TaskDropData }>({
+const over = ref<{
+  overId: string | number | null;
+  overPlacement: "before" | "after" | null;
+  overData?: TaskDropData;
+}>({
   overId: null,
   overPlacement: null,
 });
 
 const announcements = computed(() =>
-  props.describe ? createDragAnnouncements(props.describe, props.messages) : SILENT_DRAG_ANNOUNCEMENTS,
+  props.describe
+    ? createDragAnnouncements(props.describe, props.messages)
+    : SILENT_DRAG_ANNOUNCEMENTS,
 );
 
 function ownDropId(session: DragSession) {
@@ -70,7 +81,11 @@ const engine = createDragEngine({
     const nextOverId = session.over?.id ?? null;
     const nextOverData = session.over?.data as TaskDropData | undefined;
     const own = ownDropId(session);
-    if (nextOverId != null && nextOverId !== own && props.isDropAllowed(session.id, nextOverId, nextOverData)) {
+    if (
+      nextOverId != null &&
+      nextOverId !== own &&
+      props.isDropAllowed(session.id, nextOverId, nextOverData)
+    ) {
       const details = {
         activeId: session.id,
         overData: nextOverData,

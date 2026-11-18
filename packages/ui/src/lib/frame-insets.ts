@@ -25,8 +25,7 @@ export interface FrameCollision {
 }
 
 export type CollisionPadding =
-  | number
-  | { top?: number; right?: number; bottom?: number; left?: number };
+  number | { top?: number; right?: number; bottom?: number; left?: number };
 
 export const NO_FRAME_INSETS: Readonly<FrameInsets> = Object.freeze({
   top: 0,
@@ -123,11 +122,7 @@ function portalsToBody(
 ): boolean {
   if (container && "current" in container) return false;
   const element = container && "host" in container ? container.host : container;
-  return (
-    element == null ||
-    element === document.body ||
-    element === document.documentElement
-  );
+  return element == null || element === document.body || element === document.documentElement;
 }
 
 function visualViewportShift(): { x: number; y: number } {

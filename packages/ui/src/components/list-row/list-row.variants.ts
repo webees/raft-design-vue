@@ -5,10 +5,7 @@ const hairlineLine = [
   "before:pointer-events-none before:absolute before:top-0 before:right-0 before:hidden",
   "before:left-(--list-row-rule-start) before:border-t before:border-line-hairline",
 ];
-const hairline = [
-  ...hairlineLine,
-  "[[data-slot=list-row]+&]:before:block [li+li>&]:before:block",
-];
+const hairline = [...hairlineLine, "[[data-slot=list-row]+&]:before:block [li+li>&]:before:block"];
 const attachedAfterTarget = [
   ...hairlineLine,
   "[[data-slot=list-row][data-interactive]:not([data-attached])+&]:before:block",
@@ -49,10 +46,7 @@ export const listRow = tv({
       "group-data-[tone=unread]/list-row:font-bold",
       "text-(--list-row-risk-ink)",
     ],
-    subtitle: [
-      "min-w-0 flex-1 truncate",
-      "text-footnote font-normal text-(--list-row-ink)",
-    ],
+    subtitle: ["min-w-0 flex-1 truncate", "text-footnote font-normal text-(--list-row-ink)"],
     description: ["min-w-0 flex-1 truncate", "text-callout text-(--list-row-ink-2)"],
     meta: [
       "min-w-0 truncate",

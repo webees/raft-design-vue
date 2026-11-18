@@ -189,7 +189,10 @@ onMounted(() => {
   void nextTick(bind);
 });
 
-watch(() => props.overflow, () => void nextTick(bind));
+watch(
+  () => props.overflow,
+  () => void nextTick(bind),
+);
 
 onBeforeUnmount(() => {
   unbind?.();

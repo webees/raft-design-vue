@@ -33,13 +33,10 @@ export function useFitItem({ moreItem: moreItemSource, ...steps }: FitItemOption
     registry.element = node;
     context.requestMeasure();
   });
-  watch(
-    moreItem,
-    (item) => {
-      registry.moreItem = item;
-      context.touch(id);
-    },
-  );
+  watch(moreItem, (item) => {
+    registry.moreItem = item;
+    context.touch(id);
+  });
 
   const declared = computed(() =>
     Object.entries(steps)

@@ -11,5 +11,7 @@ const classes = computed(() => cn(combobox().control(), props.className, attrs.c
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-control" :class="classes"><slot /></div>
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="combobox-control" :class="classes">
+    <slot />
+  </div>
 </template>

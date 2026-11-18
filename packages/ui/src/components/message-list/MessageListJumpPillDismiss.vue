@@ -14,9 +14,7 @@ withDefaults(defineProps<{ as?: string; asChild?: boolean; ariaLabel?: string }>
 });
 
 const attrs = useAttrs();
-const resolvedAriaLabel = computed(
-  () => (attrs["aria-label"] as string | undefined) ?? undefined,
-);
+const resolvedAriaLabel = computed(() => (attrs["aria-label"] as string | undefined) ?? undefined);
 const styles = buttonVariants({ variant: "outline", size: "icon-md" });
 const slots = messageListJump();
 const rootClass = computed(() =>
@@ -35,7 +33,9 @@ const contentClass = computed(() => styles.content());
     data-slot="message-list-jump-pill-dismiss"
     :aria-label="ariaLabel ?? resolvedAriaLabel"
     :class="rootClass"
-    :type="as === 'button' && !asChild ? ((attrs.type as string | undefined) ?? 'button') : undefined"
+    :type="
+      as === 'button' && !asChild ? ((attrs.type as string | undefined) ?? 'button') : undefined
+    "
   >
     <span data-slot="message-list-jump-pill-dismiss-content" :class="contentClass">
       <slot><X /></slot>

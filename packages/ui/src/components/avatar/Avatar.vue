@@ -6,10 +6,10 @@ import AvatarFallback from "./AvatarFallback.vue";
 
 defineOptions({ name: "RaftAvatar", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ size?: AvatarSize; type?: AvatarType }>(),
-  { size: "md", type: "agent" },
-);
+const props = withDefaults(defineProps<{ size?: AvatarSize; type?: AvatarType }>(), {
+  size: "md",
+  type: "agent",
+});
 
 const attrs = useAttrs();
 const rootClass = computed(() =>

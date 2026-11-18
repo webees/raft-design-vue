@@ -18,12 +18,7 @@ const rootClass = computed(() => cn(markBox, attrs.class as string));
     :class="rootClass"
     data-slot="text-link-external-icon"
   >
-    <ArrowUpRight
-      aria-hidden="true"
-      focusable="false"
-      class="size-[0.857em]"
-      :stroke-width="2"
-    />
+    <ArrowUpRight aria-hidden="true" focusable="false" class="size-[0.857em]" :stroke-width="2" />
     <span v-if="label" class="sr-only"> {{ label }}</span>
   </span>
 </template>

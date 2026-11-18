@@ -31,9 +31,7 @@ const sheetBoundary = useSheetPopupBoundary();
 const collision = computed(() =>
   frameCollision(props.collisionPadding, sheetBoundary.value, insets.value),
 );
-const collisionBoundary = computed(
-  () => collision.value.collisionBoundary as Element | undefined,
-);
+const collisionBoundary = computed(() => collision.value.collisionBoundary as Element | undefined);
 const classes = computed(() =>
   cn(
     popover().content(),
@@ -82,12 +80,7 @@ function onEscapeKeyDown(event: KeyboardEvent) {
       @focus-outside.prevent
       @escape-key-down="onEscapeKeyDown"
     >
-      <div
-        :ref="setPopup"
-        v-bind="popupAttrs"
-        data-slot="coach-mark-content"
-        :class="classes"
-      >
+      <div :ref="setPopup" v-bind="popupAttrs" data-slot="coach-mark-content" :class="classes">
         <slot />
       </div>
       <PopoverArrow />

@@ -19,12 +19,8 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const badgeClass = computed(() =>
-  avatarVariants().badge({ className: attrs.class as string }),
-);
-const dotClass = computed(() =>
-  cn(avatarVariants().dot(), PRESENCE_COLOR[props.presence]),
-);
+const badgeClass = computed(() => avatarVariants().badge({ className: attrs.class as string }));
+const dotClass = computed(() => cn(avatarVariants().dot(), PRESENCE_COLOR[props.presence]));
 const toCssLength = (value: string | number) => (typeof value === "number" ? `${value}px` : value);
 const badgeStyle = computed<CSSProperties | undefined>(() =>
   props.offset

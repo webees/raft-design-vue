@@ -16,9 +16,7 @@ function measure() {
   const el = element.value;
   if (!el) return;
   hasIcon.value = Boolean(el.querySelector('[data-slot="toast-icon"]'));
-  hasDescription.value = Boolean(
-    el.querySelector('[data-slot="toast-description"]'),
-  );
+  hasDescription.value = Boolean(el.querySelector('[data-slot="toast-description"]'));
   hasActions.value = Boolean(el.querySelector('[data-slot="toast-actions"]'));
 }
 

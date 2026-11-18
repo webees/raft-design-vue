@@ -47,7 +47,8 @@ const linkedForm = computed(() => props.form ?? (writtenIn.value?.id || undefine
 function onClick(event: MouseEvent) {
   emit("click", event);
   const form = writtenIn.value;
-  if (event.defaultPrevented || !inSheet.value || props.type !== "submit" || !form || form.id) return;
+  if (event.defaultPrevented || !inSheet.value || props.type !== "submit" || !form || form.id)
+    return;
   event.preventDefault();
   form.requestSubmit();
 }

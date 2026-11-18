@@ -22,8 +22,8 @@ tooling/upstream          Sync, lockfile, drift report, parity manifest
 
 1. Pick a component from `tooling/upstream/component-manifest.json` whose
    status is `planned`.
-2. Read its upstream source and Markdown doc under
-   `packages/spec` / the upstream repository.
+2. Read its upstream source and Markdown doc in the pinned snapshot under
+   `tooling/upstream/.work/` (or the upstream repository).
 3. Port the recipe first: copy variant names, class strings and data
    attributes. Do not rename variants.
 4. Implement the Vue SFC with slots instead of React `children`/render props.
@@ -40,8 +40,8 @@ bun run verify
 ```
 
 This runs component parity, the docs drift audit, the Markdown link check,
-ESLint, `vue-tsc`, Vitest and a full production build. Pull requests must be
-green.
+Prettier, ESLint, `vue-tsc`, the API surface check, Vitest and a full
+production build. Pull requests must be green.
 
 ## Upstream sync workflow
 

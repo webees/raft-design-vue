@@ -1,8 +1,8 @@
 {
   "repository": "botiverse/raft-design",
   "ref": "main",
-  "commit": "d98cae8c225ce19584bf27445b65ec943f82cd62",
-  "syncedAt": "2026-11-18T20:46:20.034Z",
+  "commit": "7d280d65142bf924190f068735c246c155c45089",
+  "syncedAt": "2026-11-18T20:57:57.592Z",
   "files": {
     "design/about/use-raft-ui.md": "65f49105a49f77d592d842e257785303ffa407a1ba5aa80fa9360760ac9ecdf1",
     "design/assets/Agents/README.md": "07854f72f49fb0c270bdd96fb0d2d0085830b21ba4dbd2c90d8ec96f19a7170b",
@@ -53,7 +53,7 @@
     "design/components/icon-tile.md": "b9967e6115ef5f14b85d763435815f41e7d3401279b5c2b06b50b0e13eba7ade",
     "design/components/inbox-item.md": "caf2e50e240693053ccb7be9808733e5fcde58604734390f118dbfff4711a2e7",
     "design/components/inline-code.md": "d9001510be3c05312b76165dc1dfef3805a126fe42413257bb43598848780392",
-    "design/components/input-group.md": "7b590839f5dba6c9cf945a9addee1482e2f8cd759c83610311bb782e4a1faee6",
+    "design/components/input-group.md": "610273aebded8edfecec4a273c599be20913281ab789175d5ac7b6429a4590c2",
     "design/components/input.md": "21eb3b8a60429eb836791f62ef735f7ad285178ef6d9067dbdc2d9b85b0c9f4b",
     "design/components/kbd-button.md": "53f60a0fc67158e8271b0d5f690ccaa32e40271a2ac2b2ae81bc37c1a2feba57",
     "design/components/kbd.md": "fcfe3a4e22c3a294eb33fc1a5b47d762d16590bdfb81e2fc6fbc4e9f542f6542",
@@ -89,7 +89,7 @@
     "design/components/search.md": "8e5e2d6f13789ebfc001525ff90ffd149c50058aeed2467a3aeb55c4b9b32fbd",
     "design/components/segmented-control.md": "2482712415eee1291cedb386db96df0723e0c6cd784886ee3147d6fe82ab6802",
     "design/components/select.md": "5080cb98c0dede176b241ab2976309302e3beed63d1c1dd4c21de1b6c00ae920",
-    "design/components/selection-toolbar.md": "6d02538e9871d3c7162e35cb346aa3afd1a46d875dd6a099d1d0796ce43c367c",
+    "design/components/selection-toolbar.md": "8b0bf53b572a644bfee76304b6570b4291a9447421c84d113747d457de237dd9",
     "design/components/separator.md": "e7bcff921ebef2817fcbcd5b7d8eecce671269f37f87de6c649ef1a409ff721c",
     "design/components/sidebar.md": "18ddcfd105419291243b31c164b3718be2966310625b33a6819b058d80b1159d",
     "design/components/skeleton.md": "f21de7ea7858313171424233b35748613a36a15c005d3b406cef2b6e01565d86",
@@ -195,7 +195,7 @@
     "packages/ui/src/fonts.css": "9dad5c00acd351c91f46f106e450d65101e756f90538e4597bf79c3ea70a9133",
     "packages/ui/src/themes.json": "aa58511b900d03cc92eba26ecd28e5d6784804794627e8b1ea8867ec01522714",
     "packages/ui/src/tokens.json": "58c0c11a8f1ea92da19695cf85f397e911ed8716e1e5f6829181c0c47014686c",
-    "packages/ui/src/upstream-styles.css": "535097bff569258a2dcae4d5fe5dd7c0ae5cc50b469dbc99ee7b30ce01174296",
+    "packages/ui/src/upstream-styles.css": "dbf20ed3e05f74ea2d53bad17b2beacc3daf105a084e6087b70a9f822c35b0d8",
     "tooling/upstream/UPSTREAM-LICENSE": "a1d02f0b3564fef2e7cbe7494377350e531429ef50f787bd824342402916e0e3",
     "tooling/upstream/UPSTREAM-NOTICE.md": "c397f27b6147739560a59b07c500715d38c90715d496c88f45fad4e72a8d3d80"
   }

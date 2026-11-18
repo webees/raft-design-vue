@@ -50,9 +50,3 @@ export function releaseEscape(win: Window | null | undefined, sensor: object) {
   if (!win) return;
   holds.get(win)?.delete(sensor);
 }
-
-/** The window an event happened in. */
-export function eventWindow(event: Event | null | undefined): Window | null {
-  const target = event?.target as Node | null | undefined;
-  return target?.ownerDocument?.defaultView ?? (typeof window === "undefined" ? null : window);
-}

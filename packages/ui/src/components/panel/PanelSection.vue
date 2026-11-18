@@ -5,10 +5,7 @@ import { panel } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSection", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ as?: string; asChild?: boolean }>(),
-  { as: "section", asChild: false },
-);
+withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "section", asChild: false });
 const attrs = useAttrs();
 const rootClass = computed(() => panel().section({ className: attrs.class as string }));
 </script>

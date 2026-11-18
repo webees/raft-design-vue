@@ -1,8 +1,17 @@
 import { createSlotComponent } from "../../lib/create-slot-component";
 import { composerAttachment } from "./composer-attachment.recipe";
 
-const { attachments, attachment, attachmentFile, attachmentImage, attachmentBody, attachmentTitle, attachmentMeta, attachmentUploadingOverlay, attachmentFailedOverlay } =
-  composerAttachment();
+const {
+  attachments,
+  attachment,
+  attachmentFile,
+  attachmentImage,
+  attachmentBody,
+  attachmentTitle,
+  attachmentMeta,
+  attachmentUploadingOverlay,
+  attachmentFailedOverlay,
+} = composerAttachment();
 
 export const ComposerAttachments = createSlotComponent({
   name: "RaftComposerAttachments",

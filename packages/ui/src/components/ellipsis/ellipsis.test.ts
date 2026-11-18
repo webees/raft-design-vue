@@ -22,10 +22,14 @@ describe("Ellipsis", () => {
     const wrapper = mount(TooltipProvider, {
       slots: {
         default: () =>
-          h(Ellipsis, { lines: 2 }, {
-            default: () => "Long text",
-            after: () => h(EllipsisToggle, () => "More"),
-          }),
+          h(
+            Ellipsis,
+            { lines: 2 },
+            {
+              default: () => "Long text",
+              after: () => h(EllipsisToggle, () => "More"),
+            },
+          ),
       },
     });
     const toggle = wrapper.find("[data-slot='text-link']");

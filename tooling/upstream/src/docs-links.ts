@@ -79,8 +79,9 @@ function mapSpecial(path: string): string | null {
   if (/icons\/src\/icons\.md$/.test(path)) return join(DOCS, "foundations/iconography.md");
   if (/apps\/doc\/src\/lib\/markdown\/markdown\.tsx$/.test(path))
     return join(ROOT, "apps/docs/src/pages/DesignDocs.vue");
-  const mirrored =
-    /(?:^|\/)((?:i18n|packages\/ui)\/(?:README|AGENTS|CHANGELOG)\.md)$/.exec(path)?.[1];
+  const mirrored = /(?:^|\/)((?:i18n|packages\/ui)\/(?:README|AGENTS|CHANGELOG)\.md)$/.exec(
+    path,
+  )?.[1];
   if (mirrored) {
     const commit = readJson<UpstreamLock>(LOCK_PATH).commit;
     return `https://github.com/${UPSTREAM_REPO}/blob/${commit}/${mirrored}`;

@@ -63,8 +63,8 @@ describe("SystemMessage", () => {
     await wrapper.vm.$nextTick();
 
     expect(disclosure.attributes("data-state")).toBe("closed");
-    expect(
-      wrapper.get("[data-slot=system-message-group-panel]").attributes("data-state"),
-    ).toBe("closed");
+    expect(wrapper.get("[data-slot=system-message-group-panel]").attributes("data-state")).toBe(
+      "closed",
+    );
   });
 });

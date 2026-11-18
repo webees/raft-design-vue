@@ -10,5 +10,7 @@ const classes = computed(() => cn(combobox().label(), props.className, attrs.cla
 </script>
 
 <template>
-  <ComboboxLabel v-bind="{ ...attrs, class: undefined }" data-slot="combobox-label" :class="classes"><slot /></ComboboxLabel>
+  <ComboboxLabel v-bind="{ ...attrs, class: undefined }" data-slot="combobox-label" :class="classes"
+    ><slot
+  /></ComboboxLabel>
 </template>

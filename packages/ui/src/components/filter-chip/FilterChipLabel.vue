@@ -8,9 +8,7 @@ defineOptions({ name: "RaftFilterChipLabel", inheritAttrs: false });
 defineProps<{ as?: string; asChild?: boolean }>();
 
 const attrs = useAttrs();
-const labelClass = computed(() =>
-  filterChip().label({ className: attrs.class as string }),
-);
+const labelClass = computed(() => filterChip().label({ className: attrs.class as string }));
 </script>
 
 <template>

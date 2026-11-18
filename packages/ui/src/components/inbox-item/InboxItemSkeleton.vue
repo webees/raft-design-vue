@@ -46,7 +46,9 @@ const titleClass = computed(() => slots.value.title());
 const contextBarClass = computed(() => slots.value.bar({ className: slots.value.contextBar() }));
 const titleBarClass = computed(() => slots.value.bar({ className: slots.value.titleBar() }));
 const bodyBarClass = computed(() => slots.value.bar({ className: slots.value.bodyBar() }));
-const timestampBarClass = computed(() => slots.value.bar({ className: slots.value.timestampBar() }));
+const timestampBarClass = computed(() =>
+  slots.value.bar({ className: slots.value.timestampBar() }),
+);
 </script>
 
 <template>

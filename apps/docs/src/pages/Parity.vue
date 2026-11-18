@@ -38,11 +38,14 @@ const counts = computed(() => {
 
 <template>
   <section class="docs-section">
-    <h2 class="docs-section-title">Migration parity <span>{{ rows.length }} components</span></h2>
+    <h2 class="docs-section-title">
+      Migration parity <span>{{ rows.length }} components</span>
+    </h2>
     <p class="docs-section-copy">
-      清单由 <code class="docs-mono">tooling/upstream/parity.ts</code> 维护。
-      上游 commit：<code class="docs-mono">{{ lock.commit.slice(0, 12) }}</code>。
-      状态为 <code class="docs-mono">ported</code> 的组件必须有 SFC、导出和测试。
+      清单由 <code class="docs-mono">tooling/upstream/parity.ts</code> 维护。 上游 commit：<code
+        class="docs-mono"
+        >{{ lock.commit.slice(0, 12) }}</code
+      >。 状态为 <code class="docs-mono">ported</code> 的组件必须有 SFC、导出和测试。
     </p>
     <div class="docs-row" style="margin-bottom: 14px">
       <button
@@ -72,9 +75,13 @@ const counts = computed(() => {
         <tbody>
           <tr v-for="component in components" :key="component.slug">
             <td>{{ component.name }}</td>
-            <td><code>{{ component.slug }}</code></td>
             <td>
-              <span class="docs-status" :data-status="component.status">{{ component.status }}</span>
+              <code>{{ component.slug }}</code>
+            </td>
+            <td>
+              <span class="docs-status" :data-status="component.status">{{
+                component.status
+              }}</span>
             </td>
             <td>{{ component.notes ?? "" }}</td>
           </tr>

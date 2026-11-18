@@ -7,9 +7,7 @@ defineOptions({ name: "RaftFieldControl", inheritAttrs: false });
 const attrs = useAttrs();
 const context = useFieldContext();
 
-const describedBy = computed(() =>
-  context?.invalid ? context.errorId : context?.descriptionId,
-);
+const describedBy = computed(() => (context?.invalid ? context.errorId : context?.descriptionId));
 </script>
 
 <template>

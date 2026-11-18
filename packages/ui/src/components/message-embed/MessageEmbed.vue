@@ -4,10 +4,9 @@ import { messageEmbed } from "./message-embed.variants";
 
 defineOptions({ name: "RaftMessageEmbed", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ interactive?: boolean; size?: "item" | "content" }>(),
-  { interactive: false },
-);
+const props = withDefaults(defineProps<{ interactive?: boolean; size?: "item" | "content" }>(), {
+  interactive: false,
+});
 
 const attrs = useAttrs();
 const rootClass = computed(() =>

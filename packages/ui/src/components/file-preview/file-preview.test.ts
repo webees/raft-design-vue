@@ -31,7 +31,10 @@ describe("file-preview", () => {
 
   it("tags a type in the corner by default and inline when asked", () => {
     const corner = mount(FilePreviewBadge, { slots: { default: "PDF" } });
-    const inline = mount(FilePreviewBadge, { props: { placement: "inline" }, slots: { default: "PDF" } });
+    const inline = mount(FilePreviewBadge, {
+      props: { placement: "inline" },
+      slots: { default: "PDF" },
+    });
 
     expect(corner.classes()).toContain("-right-1.5");
     expect(inline.classes()).toContain("h-3.5");

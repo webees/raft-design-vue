@@ -51,9 +51,5 @@ const slotName = computed(() => (attrs["data-slot"] as string | undefined) ?? "i
 </script>
 
 <template>
-  <input
-    v-bind="controlAttrs"
-    :class="rootClass"
-    :data-slot="slotName"
-  />
+  <input v-bind="controlAttrs" :class="rootClass" :data-slot="slotName" />
 </template>

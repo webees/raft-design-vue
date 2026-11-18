@@ -154,11 +154,28 @@ const splitActionMainParts = [
 ];
 
 export const panelSplitActionMain = tv({
-  base: [...panelActionBase, ...splitActionMainParts, "whitespace-nowrap", "disabled:pointer-events-none disabled:transform-none", "gap-1.5 text-control font-bold", "disabled:bg-transparent disabled:text-foreground-disabled disabled:opacity-100", "aria-pressed:border-sticker-ink aria-pressed:bg-selected aria-pressed:text-sticker-ink aria-pressed:ring-[1.5px] aria-pressed:ring-sticker-edge", "aria-pressed:active:overlay-sticker-medium"],
+  base: [
+    ...panelActionBase,
+    ...splitActionMainParts,
+    "whitespace-nowrap",
+    "disabled:pointer-events-none disabled:transform-none",
+    "gap-1.5 text-control font-bold",
+    "disabled:bg-transparent disabled:text-foreground-disabled disabled:opacity-100",
+    "aria-pressed:border-sticker-ink aria-pressed:bg-selected aria-pressed:text-sticker-ink aria-pressed:ring-[1.5px] aria-pressed:ring-sticker-edge",
+    "aria-pressed:active:overlay-sticker-medium",
+  ],
 });
 
 export const panelSplitActionToggle = tv({
-  base: [...panelActionBase, ...splitActionMainParts, "data-disabled:pointer-events-none data-disabled:transform-none", "gap-1.5 text-control font-bold", "data-disabled:bg-transparent data-disabled:text-foreground-disabled data-disabled:opacity-100", "data-pressed:border-sticker-ink data-pressed:bg-selected data-pressed:text-sticker-ink data-pressed:ring-[1.5px] data-pressed:ring-sticker-edge", "data-pressed:active:overlay-sticker-medium"],
+  base: [
+    ...panelActionBase,
+    ...splitActionMainParts,
+    "data-disabled:pointer-events-none data-disabled:transform-none",
+    "gap-1.5 text-control font-bold",
+    "data-disabled:bg-transparent data-disabled:text-foreground-disabled data-disabled:opacity-100",
+    "data-pressed:border-sticker-ink data-pressed:bg-selected data-pressed:text-sticker-ink data-pressed:ring-[1.5px] data-pressed:ring-sticker-edge",
+    "data-pressed:active:overlay-sticker-medium",
+  ],
 });
 
 export const panelSplitActionMenu = tv({

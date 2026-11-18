@@ -45,9 +45,7 @@ export const taskBoardColumn = tv({
       "text-center text-footnote text-foreground-hint",
       "group-data-[drop-state=blocked]:text-foreground-muted",
     ],
-    emptyIdle: [
-      "group-data-[drop-state=allowed]:hidden group-data-[drop-state=blocked]:hidden",
-    ],
+    emptyIdle: ["group-data-[drop-state=allowed]:hidden group-data-[drop-state=blocked]:hidden"],
     emptyAllowed: ["hidden group-data-[drop-state=allowed]:block"],
     emptyBlocked: ["hidden group-data-[drop-state=blocked]:block"],
   },

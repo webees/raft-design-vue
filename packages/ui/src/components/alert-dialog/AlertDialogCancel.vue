@@ -6,10 +6,10 @@ import type { ButtonSize, ButtonVariant } from "../button/button.variants";
 
 defineOptions({ name: "RaftAlertDialogCancel", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ variant?: ButtonVariant; size?: ButtonSize }>(),
-  { variant: "ghost", size: "md" },
-);
+const props = withDefaults(defineProps<{ variant?: ButtonVariant; size?: ButtonSize }>(), {
+  variant: "ghost",
+  size: "md",
+});
 
 const attrs = useAttrs();
 const cancelClass = computed(() => attrs.class as string);

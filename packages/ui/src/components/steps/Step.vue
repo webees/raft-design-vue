@@ -16,7 +16,14 @@ const props = withDefaults(
     index?: number;
     class?: string;
   }>(),
-  { title: undefined, description: undefined, status: undefined, icon: undefined, disabled: false, index: 0 },
+  {
+    title: undefined,
+    description: undefined,
+    status: undefined,
+    icon: undefined,
+    disabled: false,
+    index: 0,
+  },
 );
 
 const attrs = useAttrs();
@@ -42,9 +49,7 @@ const status = computed<StepStatus>(() => {
   return steps.status;
 });
 
-const isCurrent = computed(
-  () => steps.current !== undefined && index.value === steps.current,
-);
+const isCurrent = computed(() => steps.current !== undefined && index.value === steps.current);
 const clickable = computed(() => steps.select !== undefined && !props.disabled);
 const body = computed(() => slots.default?.() ?? props.description);
 
@@ -62,7 +67,6 @@ const handleClick = () => steps.select?.(index.value);
 
 const resolveIcon = (icon: unknown) =>
   typeof icon === "function" ? (icon as () => unknown)() : icon;
-
 </script>
 
 <template>
@@ -107,8 +111,12 @@ const resolveIcon = (icon: unknown) =>
       <div data-slot="step-content" class="r-step__content">
         <div v-if="steps.select === undefined" data-slot="step-title" class="r-step__title">
           <slot name="title">{{ title }}</slot>
-          <span v-if="status === 'finish'" data-slot="step-status" class="r-step__status">{{ " " + steps.finishLabel }}</span>
-          <span v-else-if="status === 'error'" data-slot="step-status" class="r-step__status">{{ " " + steps.errorLabel }}</span>
+          <span v-if="status === 'finish'" data-slot="step-status" class="r-step__status">{{
+            " " + steps.finishLabel
+          }}</span>
+          <span v-else-if="status === 'error'" data-slot="step-status" class="r-step__status">{{
+            " " + steps.errorLabel
+          }}</span>
         </div>
         <button
           v-else
@@ -120,8 +128,12 @@ const resolveIcon = (icon: unknown) =>
           @click="handleClick"
         >
           <slot name="title">{{ title }}</slot>
-          <span v-if="status === 'finish'" data-slot="step-status" class="r-step__status">{{ " " + steps.finishLabel }}</span>
-          <span v-else-if="status === 'error'" data-slot="step-status" class="r-step__status">{{ " " + steps.errorLabel }}</span>
+          <span v-if="status === 'finish'" data-slot="step-status" class="r-step__status">{{
+            " " + steps.finishLabel
+          }}</span>
+          <span v-else-if="status === 'error'" data-slot="step-status" class="r-step__status">{{
+            " " + steps.errorLabel
+          }}</span>
         </button>
         <div
           v-if="body != null"

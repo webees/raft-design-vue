@@ -25,12 +25,12 @@ const place = computed(() => props.dragging && !props.home);
 
 <template>
   <div data-slot="drag-slot" class="relative">
-    <div :data-drag-origin="dragging && home ? '' : undefined" :class="place ? 'invisible' : undefined">
+    <div
+      :data-drag-origin="dragging && home ? '' : undefined"
+      :class="place ? 'invisible' : undefined"
+    >
       <slot />
     </div>
-    <DropPlaceholder
-      v-if="place"
-      :class="cn('absolute inset-0', radius, props.class)"
-    />
+    <DropPlaceholder v-if="place" :class="cn('absolute inset-0', radius, props.class)" />
   </div>
 </template>

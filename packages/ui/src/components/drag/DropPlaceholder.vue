@@ -6,10 +6,7 @@ import { drag } from "./drag.recipe";
 
 defineOptions({ name: "RaftDropPlaceholder", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ class?: string; opaque?: boolean }>(),
-  { opaque: false },
-);
+const props = withDefaults(defineProps<{ class?: string; opaque?: boolean }>(), { opaque: false });
 const attrs = useAttrs();
 const classes = computed(() =>
   drag({ opaque: props.opaque }).placeholder({

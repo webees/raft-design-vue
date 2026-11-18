@@ -9,7 +9,11 @@ const replyClass = computed(() => messageReplies().reply({ className: attrs.clas
 </script>
 
 <template>
-  <span v-bind="{ ...attrs, class: undefined }" :class="replyClass" data-slot="message-replies-item">
+  <span
+    v-bind="{ ...attrs, class: undefined }"
+    :class="replyClass"
+    data-slot="message-replies-item"
+  >
     <slot />
   </span>
 </template>

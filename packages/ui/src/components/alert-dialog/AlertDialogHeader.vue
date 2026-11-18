@@ -9,11 +9,7 @@ const headerClass = computed(() => alertDialog().header({ className: attrs.class
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    :class="headerClass"
-    data-slot="alert-dialog-header"
-  >
+  <div v-bind="{ ...attrs, class: undefined }" :class="headerClass" data-slot="alert-dialog-header">
     <slot />
   </div>
 </template>

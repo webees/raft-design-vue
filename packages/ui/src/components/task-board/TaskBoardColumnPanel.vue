@@ -6,9 +6,7 @@ import { taskBoardColumn } from "./task-board.variants";
 defineOptions({ name: "RaftTaskBoardColumnPanel", inheritAttrs: false });
 withDefaults(defineProps<{ forceMount?: boolean }>(), { forceMount: false });
 const attrs = useAttrs();
-const panelClass = computed(() =>
-  taskBoardColumn().panel({ className: attrs.class as string }),
-);
+const panelClass = computed(() => taskBoardColumn().panel({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -5,14 +5,9 @@ import { panelHeader } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSectionHeader", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ as?: string; asChild?: boolean }>(),
-  { as: "div", asChild: false },
-);
+withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "div", asChild: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelHeader().sectionHeader({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelHeader().sectionHeader({ className: attrs.class as string }));
 </script>
 
 <template>

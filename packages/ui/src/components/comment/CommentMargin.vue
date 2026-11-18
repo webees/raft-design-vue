@@ -3,10 +3,7 @@ import { computed, onBeforeUnmount, reactive, ref, useAttrs, watch } from "vue";
 
 import { comment } from "./comment.recipe";
 import { resolveCommentMarginLayout } from "./comment-margin-layout";
-import {
-  provideCommentMargin,
-  type CommentMarginPlacement,
-} from "./comment-margin-context";
+import { provideCommentMargin, type CommentMarginPlacement } from "./comment-margin-context";
 
 defineOptions({ name: "RaftCommentMargin", inheritAttrs: false });
 
@@ -99,12 +96,7 @@ provideCommentMargin({
 </script>
 
 <template>
-  <component
-    :is="props.as"
-    v-bind="attrs"
-    :class="marginClass"
-    :style="marginStyle"
-  >
+  <component :is="props.as" v-bind="attrs" :class="marginClass" :style="marginStyle">
     <slot />
   </component>
 </template>

@@ -7,13 +7,15 @@ defineOptions({ name: "RaftListRowSubtitle", inheritAttrs: false });
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const styles = listRow();
-const subtitleClass = computed(() =>
-  cn(styles.subtitle(), props.class, attrs.class as string),
-);
+const subtitleClass = computed(() => cn(styles.subtitle(), props.class, attrs.class as string));
 </script>
 
 <template>
-  <span v-bind="{ ...attrs, class: undefined }" data-slot="list-row-subtitle" :class="subtitleClass">
+  <span
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="list-row-subtitle"
+    :class="subtitleClass"
+  >
     <slot />
   </span>
 </template>

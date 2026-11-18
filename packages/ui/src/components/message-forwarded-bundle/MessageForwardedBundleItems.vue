@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch, type ComponentPublicInstance } from "vue";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+  type ComponentPublicInstance,
+} from "vue";
 
 import MessageEmbedContent from "../message-embed/MessageEmbedContent.vue";
 import { messageForwardedBundle } from "./message-forwarded-bundle.recipes";
@@ -7,21 +14,21 @@ import { useForwardedBundleFold } from "./message-forwarded-bundle-fold";
 
 defineOptions({ name: "RaftMessageForwardedBundleItems" });
 
-const props = withDefaults(
-  defineProps<{ collapsed?: boolean; foldLineLimit?: number }>(),
-  { collapsed: undefined, foldLineLimit: undefined },
-);
+const props = withDefaults(defineProps<{ collapsed?: boolean; foldLineLimit?: number }>(), {
+  collapsed: undefined,
+  foldLineLimit: undefined,
+});
 
 const FOLD_LINE_HEIGHT_FALLBACK = 20;
 const fold = useForwardedBundleFold();
 const controlled = computed(() => props.collapsed !== undefined);
-const collapsed = computed(() => (controlled.value ? props.collapsed! : (fold?.collapsed ?? false)));
+const collapsed = computed(() =>
+  controlled.value ? props.collapsed! : (fold?.collapsed ?? false),
+);
 const lineLimit = computed(() => props.foldLineLimit ?? fold?.foldLineLimit ?? 8);
 const container = ref<ComponentPublicInstance | null>(null);
 const foldHeight = ref<number | null>(null);
-const rootClass = computed(() =>
-  messageForwardedBundle({ collapsed: collapsed.value }).items(),
-);
+const rootClass = computed(() => messageForwardedBundle({ collapsed: collapsed.value }).items());
 const tightFold = computed(() => foldHeight.value !== null && foldHeight.value < 60);
 
 function measure() {
@@ -34,7 +41,10 @@ function measure() {
   const lineHeight =
     Number.parseFloat(getComputedStyle(contentSlots[0] ?? element).lineHeight) ||
     FOLD_LINE_HEIGHT_FALLBACK;
-  const height = contentSlots.reduce((total, slot) => total + slot.getBoundingClientRect().height, 0);
+  const height = contentSlots.reduce(
+    (total, slot) => total + slot.getBoundingClientRect().height,
+    0,
+  );
   foldHeight.value = contentSlots.length > 0 ? lineHeight * lineLimit.value : null;
   fold?.reportFold(contentSlots.length > 0 && height > lineHeight * lineLimit.value + 1);
 }

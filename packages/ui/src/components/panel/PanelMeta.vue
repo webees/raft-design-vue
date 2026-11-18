@@ -5,10 +5,11 @@ import { panelHeader } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelMeta", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ size?: "sm" | "md"; as?: string; asChild?: boolean }>(),
-  { size: "sm", as: "div", asChild: false },
-);
+const props = withDefaults(defineProps<{ size?: "sm" | "md"; as?: string; asChild?: boolean }>(), {
+  size: "sm",
+  as: "div",
+  asChild: false,
+});
 const attrs = useAttrs();
 const rootClass = computed(() =>
   panelHeader({ size: props.size }).meta({ className: attrs.class as string }),

@@ -9,7 +9,11 @@ const timeClass = computed(() => messageReplies().time({ className: attrs.class 
 </script>
 
 <template>
-  <time v-bind="{ ...attrs, class: undefined }" :class="timeClass" data-slot="message-replies-item-time">
+  <time
+    v-bind="{ ...attrs, class: undefined }"
+    :class="timeClass"
+    data-slot="message-replies-item-time"
+  >
     <slot />
   </time>
 </template>

@@ -1,5 +1,15 @@
 <script setup lang="ts">
-import { computed, defineComponent, h, nextTick, ref, useAttrs, useId, watch, type VNodeChild } from "vue";
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  ref,
+  useAttrs,
+  useId,
+  watch,
+  type VNodeChild,
+} from "vue";
 import { Search, X } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";
@@ -97,7 +107,9 @@ const uncontrolledValue = ref<string | readonly string[] | null>(
 );
 const uncontrolledSearch = ref(props.defaultSearchValue ?? "");
 
-const currentValue = computed(() => (props.value !== undefined ? props.value : uncontrolledValue.value));
+const currentValue = computed(() =>
+  props.value !== undefined ? props.value : uncontrolledValue.value,
+);
 const selected = computed<readonly string[]>(() => {
   const value = currentValue.value;
   if (value == null) return [];
@@ -123,7 +135,9 @@ const slots = computed(() =>
   }),
 );
 
-const rootClass = computed(() => slots.value.root({ className: cn(props.className, attrs.class as string) }));
+const rootClass = computed(() =>
+  slots.value.root({ className: cn(props.className, attrs.class as string) }),
+);
 const frameClass = computed(() => slots.value.frame());
 const scrollerClass = computed(() => slots.value.scroller());
 const rowsClass = computed(() => slots.value.rows());
@@ -142,7 +156,9 @@ function commit(next: string | readonly string[] | null) {
   if (props.value === undefined) uncontrolledValue.value = next;
   emit("update:value", next as string | string[] | null);
   emit("value-change", next as string | string[] | null);
-  (props.onValueChange as ((value: string | string[] | null) => void) | undefined)?.(next as string | string[] | null);
+  (props.onValueChange as ((value: string | string[] | null) => void) | undefined)?.(
+    next as string | string[] | null,
+  );
 }
 
 function toggle(item: ChoiceListItem, checked: boolean) {
@@ -169,9 +185,11 @@ function clearSearch() {
   nextTick(focusSearch);
 }
 
-const isDrawn = (line: unknown) => line !== null && line !== undefined && line !== false && line !== "";
+const isDrawn = (line: unknown) =>
+  line !== null && line !== undefined && line !== false && line !== "";
 const asLines = (value: unknown) => (Array.isArray(value) ? value : [value]);
-const labelText = (label: unknown) => (typeof label === "string" || typeof label === "number" ? String(label) : "");
+const labelText = (label: unknown) =>
+  typeof label === "string" || typeof label === "number" ? String(label) : "";
 
 const descriptionLines = (item: ChoiceListItem) =>
   asLines(item.description).filter(isDrawn).slice(0, MAX_DESCRIPTION_LINES);
@@ -201,8 +219,7 @@ const visibleItems = computed(() => {
   };
   const pinnedSet = new Set(pinned.value);
   const top = props.items.filter(
-    (item) =>
-      pinnedSet.has(item.value) || (selected.value.includes(item.value) && !matches(item)),
+    (item) => pinnedSet.has(item.value) || (selected.value.includes(item.value) && !matches(item)),
   );
   const ordered = props.matchedValues
     ? props.matchedValues.flatMap((value) => byValue.get(value) ?? [])
@@ -212,9 +229,9 @@ const visibleItems = computed(() => {
 
 const layout = computed(() => {
   const known = new Map((props.groups ?? []).map((group, index) => [group.value, index]));
-  const sections: { key: string; group?: ChoiceListGroup; rows: ChoiceListItem[] }[] = (props.groups ?? []).map(
-    (group) => ({ key: group.value, group, rows: [] }),
-  );
+  const sections: { key: string; group?: ChoiceListGroup; rows: ChoiceListItem[] }[] = (
+    props.groups ?? []
+  ).map((group) => ({ key: group.value, group, rows: [] }));
   const unknown = new Map<string, ChoiceListItem[]>();
   for (const item of visibleItems.value) {
     const index = item.group !== undefined ? known.get(item.group) : undefined;
@@ -291,14 +308,25 @@ watch(
         @input="setSearch(($event.target as HTMLInputElement).value)"
       />
       <InputGroupAddon v-if="query" align="inline-end">
-        <Button type="button" size="icon-xs" variant="ghost" :aria-label="clearSearchLabel" @click="clearSearch">
+        <Button
+          type="button"
+          size="icon-xs"
+          variant="ghost"
+          :aria-label="clearSearchLabel"
+          @click="clearSearch"
+        >
           <X aria-hidden />
         </Button>
       </InputGroupAddon>
     </InputGroup>
 
     <div data-slot="choice-list-frame" :class="frameClass">
-      <ScrollArea data-slot="choice-list-scroller" overscroll="contain" :tab-index="-1" :class="scrollerClass">
+      <ScrollArea
+        data-slot="choice-list-scroller"
+        overscroll="contain"
+        :tab-index="-1"
+        :class="scrollerClass"
+      >
         <p v-if="empty" data-slot="choice-list-note" :class="noteClass">
           <RenderedNode :node="props.empty" />
         </p>
@@ -355,7 +383,11 @@ watch(
                   :aria-labelledby="`${baseId}-label-${item.value}`"
                   :aria-describedby="describedBy(item)"
                 />
-                <span v-if="item.media !== undefined" data-slot="choice-list-media" :class="slots.media()">
+                <span
+                  v-if="item.media !== undefined"
+                  data-slot="choice-list-media"
+                  :class="slots.media()"
+                >
                   <RenderedNode :node="item.media" />
                 </span>
                 <span data-slot="choice-list-body" :class="slots.body()">
@@ -380,7 +412,11 @@ watch(
                       <RenderedNode :node="line" />
                     </CutLine>
                   </span>
-                  <span v-if="metaLines(item).length" :id="`${baseId}-meta-${item.value}`" class="contents">
+                  <span
+                    v-if="metaLines(item).length"
+                    :id="`${baseId}-meta-${item.value}`"
+                    class="contents"
+                  >
                     <CutLine
                       v-for="(line, index) in metaLines(item)"
                       :key="index"
@@ -394,14 +430,21 @@ watch(
               </label>
             </div>
             <div v-if="hasAction" class="contents">
-              <div v-for="section in layout.sections" :key="`action-${section.key}`" class="contents">
+              <div
+                v-for="section in layout.sections"
+                :key="`action-${section.key}`"
+                class="contents"
+              >
                 <div
                   v-for="item in section.rows"
                   :key="item.value"
                   :style="{ gridRow: layout.gridRowOf.get(item.value) }"
                   class="contents"
                 >
-                  <div v-if="item.action !== undefined && item.action !== null" data-slot="choice-list-action">
+                  <div
+                    v-if="item.action !== undefined && item.action !== null"
+                    data-slot="choice-list-action"
+                  >
                     <RenderedNode :node="item.action" />
                   </div>
                 </div>
@@ -414,7 +457,11 @@ watch(
         </div>
       </ScrollArea>
     </div>
-    <div v-if="footer !== undefined && footer !== null || $slots.footer" data-slot="choice-list-footer" :class="footerClass">
+    <div
+      v-if="(footer !== undefined && footer !== null) || $slots.footer"
+      data-slot="choice-list-footer"
+      :class="footerClass"
+    >
       <slot name="footer"><RenderedNode :node="footer" /></slot>
     </div>
   </div>

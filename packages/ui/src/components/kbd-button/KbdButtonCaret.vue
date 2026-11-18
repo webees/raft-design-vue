@@ -8,9 +8,7 @@ defineOptions({ name: "RaftKbdButtonCaret", inheritAttrs: false });
 defineProps<{ as?: string }>();
 
 const attrs = useAttrs();
-const caretClass = computed(() =>
-  kbdButton().caret({ className: attrs.class as string }),
-);
+const caretClass = computed(() => kbdButton().caret({ className: attrs.class as string }));
 </script>
 
 <template>

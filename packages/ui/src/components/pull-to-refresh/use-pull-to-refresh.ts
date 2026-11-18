@@ -1,4 +1,12 @@
-import { onBeforeUnmount, onMounted, ref, toValue, watch, type MaybeRefOrGetter, type Ref } from "vue";
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  toValue,
+  watch,
+  type MaybeRefOrGetter,
+  type Ref,
+} from "vue";
 
 import {
   DEFAULT_PULL_GESTURE_CONFIG,
@@ -19,8 +27,7 @@ export type PullToRefreshPlatform = "default" | "android";
 
 export function detectPullToRefreshPlatform(): PullToRefreshPlatform {
   if (typeof navigator === "undefined") return "default";
-  const hints = (navigator as Navigator & { userAgentData?: { platform?: string } })
-    .userAgentData;
+  const hints = (navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData;
   if (hints?.platform) return hints.platform === "Android" ? "android" : "default";
   return /\bAndroid\b/i.test(navigator.userAgent) ? "android" : "default";
 }
@@ -142,10 +149,7 @@ export function usePullToRefresh(
       });
       if (gesture.value.phase === "tracking") {
         clearTimeout(holdTimer);
-        holdTimer = setTimeout(
-          () => dispatch({ type: "hold" }),
-          PULL_TO_REFRESH_LONG_PRESS_MS,
-        );
+        holdTimer = setTimeout(() => dispatch({ type: "hold" }), PULL_TO_REFRESH_LONG_PRESS_MS);
       }
     };
     const onTouchMove = (event: TouchEvent) => {
@@ -202,10 +206,7 @@ export function usePullToRefresh(
     media.addEventListener("change", onChange);
     detachMedia = () => media.removeEventListener("change", onChange);
   });
-  watch(
-    () => [scrollRef.value, coarse.value, toValue(options.disabled ?? false)],
-    attach,
-  );
+  watch(() => [scrollRef.value, coarse.value, toValue(options.disabled ?? false)], attach);
   onBeforeUnmount(() => {
     detachMedia?.();
     cleanup?.();

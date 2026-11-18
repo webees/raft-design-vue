@@ -8,8 +8,7 @@ export type CopyableCodeContext = {
   size: Ref<CopyableCodeSize>;
 };
 
-const COPYABLE_CODE_KEY: InjectionKey<CopyableCodeContext> =
-  Symbol("raft-copyable-code");
+const COPYABLE_CODE_KEY: InjectionKey<CopyableCodeContext> = Symbol("raft-copyable-code");
 
 export function provideCopyableCode(context: CopyableCodeContext) {
   provide(COPYABLE_CODE_KEY, context);

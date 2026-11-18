@@ -2,7 +2,12 @@ import { createSlotPart } from "../../lib/slot-part";
 import { useFitItem } from "../fit-toolbar/use-fit-item";
 import { selectionToolbar } from "./selection-toolbar.recipe";
 
-function part(name: string, tag: string, dataSlot: string, slot: keyof ReturnType<typeof selectionToolbar>) {
+function part(
+  name: string,
+  tag: string,
+  dataSlot: string,
+  slot: keyof ReturnType<typeof selectionToolbar>,
+) {
   return createSlotPart({ name, tag, dataSlot, className: () => selectionToolbar()[slot]() });
 }
 
@@ -13,7 +18,12 @@ export const SelectionToolbarCount = createSlotPart({
   className: () => selectionToolbar().count(),
   rootProps: () => ({ "aria-live": "polite", "aria-atomic": "true" }),
 });
-export const SelectionToolbarCountValue = part("RaftSelectionToolbarCountValue", "span", "selection-toolbar-count-value", "countValue");
+export const SelectionToolbarCountValue = part(
+  "RaftSelectionToolbarCountValue",
+  "span",
+  "selection-toolbar-count-value",
+  "countValue",
+);
 export const SelectionToolbarHint = createSlotPart({
   name: "RaftSelectionToolbarHint",
   tag: "span",
@@ -24,7 +34,12 @@ export const SelectionToolbarHint = createSlotPart({
     return { ...item.props.value, ref: item.ref };
   },
 });
-export const SelectionToolbarActions = part("RaftSelectionToolbarActions", "div", "selection-toolbar-actions", "actions");
+export const SelectionToolbarActions = part(
+  "RaftSelectionToolbarActions",
+  "div",
+  "selection-toolbar-actions",
+  "actions",
+);
 export const SelectionToolbarItem = createSlotPart({
   name: "RaftSelectionToolbarItem",
   tag: "div",

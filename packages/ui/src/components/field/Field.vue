@@ -28,9 +28,7 @@ provideFieldContext({
   size: props.size,
 });
 
-const rootClass = computed(() =>
-  fieldVariants().root({ className: attrs.class as string }),
-);
+const rootClass = computed(() => fieldVariants().root({ className: attrs.class as string }));
 </script>
 
 <template>

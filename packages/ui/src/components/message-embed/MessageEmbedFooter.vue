@@ -5,9 +5,7 @@ import { messageEmbed } from "./message-embed.variants";
 defineOptions({ name: "RaftMessageEmbedFooter", inheritAttrs: false });
 
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  messageEmbed().footer({ className: attrs.class as string }),
-);
+const rootClass = computed(() => messageEmbed().footer({ className: attrs.class as string }));
 </script>
 
 <template>

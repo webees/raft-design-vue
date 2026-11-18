@@ -19,9 +19,7 @@ withDefaults(
 );
 
 const attrs = useAttrs();
-const errorClass = computed(() =>
-  saveStatus().error({ className: attrs.class as string }),
-);
+const errorClass = computed(() => saveStatus().error({ className: attrs.class as string }));
 </script>
 
 <template>

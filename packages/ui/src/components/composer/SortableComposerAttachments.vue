@@ -38,7 +38,9 @@ const lastReorderPointer = ref<{ x: number; y: number } | null>(null);
 const siblingTransition = useDragSiblingTransition();
 const siblingStyle = computed(() => {
   const transition = siblingTransition.value;
-  return transition ? { transition: `transform ${transition.duration}ms ${transition.easing}` } : undefined;
+  return transition
+    ? { transition: `transform ${transition.duration}ms ${transition.easing}` }
+    : undefined;
 });
 
 /** Each attachment registers its announcement label as it renders. */
@@ -50,9 +52,7 @@ const announcements = computed(() =>
       name: (id) => labels.get(String(id)) ?? "",
       place: (id) => {
         const index = draft.value.indexOf(String(id));
-        return index < 0
-          ? null
-          : { place: "", position: index + 1, count: draft.value.length };
+        return index < 0 ? null : { place: "", position: index + 1, count: draft.value.length };
       },
     },
     props.messages,

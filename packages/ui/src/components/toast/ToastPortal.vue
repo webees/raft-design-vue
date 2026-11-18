@@ -13,15 +13,10 @@ withDefaults(
     to: "body",
   },
 );
-
 </script>
 
 <template>
-  <ToastPortal
-    :to="to"
-    :disabled="disabled"
-    :force-mount="forceMount"
-  >
+  <ToastPortal :to="to" :disabled="disabled" :force-mount="forceMount">
     <div data-slot="toast-portal" data-raft-ui-overlay="" style="display: contents">
       <slot />
     </div>

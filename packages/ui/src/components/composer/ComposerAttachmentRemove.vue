@@ -16,12 +16,7 @@ const classes = computed(() =>
 </script>
 
 <template>
-  <button
-    v-bind="attrs"
-    :class="classes"
-    data-slot="composer-attachment-remove"
-    type="button"
-  >
+  <button v-bind="attrs" :class="classes" data-slot="composer-attachment-remove" type="button">
     <slot />
   </button>
 </template>

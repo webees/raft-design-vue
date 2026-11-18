@@ -40,11 +40,17 @@ const groups = computed(() => {
   </section>
 
   <section v-for="group in groups" :key="group.group" class="docs-section">
-    <h2 class="docs-section-title">{{ group.group }} <span>{{ group.entries.length }}</span></h2>
+    <h2 class="docs-section-title">
+      {{ group.group }} <span>{{ group.entries.length }}</span>
+    </h2>
     <div class="docs-token-grid">
       <div v-for="entry in group.entries" :key="entry.name" class="docs-token">
         <span
-          v-if="entry.value.startsWith('oklch') || entry.value.startsWith('#') || entry.value.startsWith('rgb')"
+          v-if="
+            entry.value.startsWith('oklch') ||
+            entry.value.startsWith('#') ||
+            entry.value.startsWith('rgb')
+          "
           class="docs-swatch"
           :style="{ background: entry.value }"
         />

@@ -88,8 +88,7 @@ function eventPoint(event: Event): { x: number; y: number } | null {
     const pointerEvent = event as PointerEvent;
     return { x: pointerEvent.clientX, y: pointerEvent.clientY };
   }
-  const touch =
-    (event as TouchEvent).touches?.[0] ?? (event as TouchEvent).changedTouches?.[0];
+  const touch = (event as TouchEvent).touches?.[0] ?? (event as TouchEvent).changedTouches?.[0];
   return touch ? { x: touch.clientX, y: touch.clientY } : null;
 }
 

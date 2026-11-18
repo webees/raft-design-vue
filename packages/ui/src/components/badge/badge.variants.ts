@@ -66,7 +66,11 @@ export const badgeVariants = tv({
     { appearance: "solid", variant: "you", class: { root: "bg-you" } },
     { appearance: "solid", variant: "busy", class: { root: "bg-presence-busy" } },
     { appearance: "solid", variant: "information", class: { root: "bg-info" } },
-    { appearance: "solid", variant: "accent", class: { root: "bg-attention font-mono text-mono-meta" } },
+    {
+      appearance: "solid",
+      variant: "accent",
+      class: { root: "bg-attention font-mono text-mono-meta" },
+    },
     { appearance: "solid", variant: "success", class: { root: "bg-success" } },
     { appearance: "solid", variant: "warning", class: { root: "bg-warning" } },
     { appearance: "solid", variant: "danger", class: { root: "bg-danger" } },

@@ -14,7 +14,11 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <CollapsibleTrigger v-bind="{ ...attrs, class: undefined }" data-slot="message-action-card-collapse-trigger" :class="rootClass">
+  <CollapsibleTrigger
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="message-action-card-collapse-trigger"
+    :class="rootClass"
+  >
     <ChevronDown aria-hidden="true" />
   </CollapsibleTrigger>
 </template>

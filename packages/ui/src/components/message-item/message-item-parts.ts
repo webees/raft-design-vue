@@ -27,7 +27,12 @@ function part(name: string, tag: string, dataSlot: string, slotName: keyof Messa
   });
 }
 
-export const MessageItemGutter = part("RaftMessageItemGutter", "div", "message-item-gutter", "gutter");
+export const MessageItemGutter = part(
+  "RaftMessageItemGutter",
+  "div",
+  "message-item-gutter",
+  "gutter",
+);
 export const MessageItemAvatarSlot = part(
   "RaftMessageItemAvatarSlot",
   "div",
@@ -41,8 +46,18 @@ export const MessageItemContinuationTime = labelledPart(
   "continuationTime",
   "time",
 );
-export const MessageItemContent = part("RaftMessageItemContent", "div", "message-item-content", "content");
-export const MessageItemHeader = part("RaftMessageItemHeader", "div", "message-item-header", "header");
+export const MessageItemContent = part(
+  "RaftMessageItemContent",
+  "div",
+  "message-item-content",
+  "content",
+);
+export const MessageItemHeader = part(
+  "RaftMessageItemHeader",
+  "div",
+  "message-item-header",
+  "header",
+);
 export const MessageItemSenderGroup = part(
   "RaftMessageItemSenderGroup",
   "span",
@@ -151,8 +166,18 @@ export const MessageItemAttachments = part(
   "message-item-attachments",
   "attachments",
 );
-export const MessageItemEmbedded = part("RaftMessageItemEmbedded", "div", "message-item-embedded", "embedded");
-export const MessageItemEdited = part("RaftMessageItemEdited", "span", "message-item-edited", "edited");
+export const MessageItemEmbedded = part(
+  "RaftMessageItemEmbedded",
+  "div",
+  "message-item-embedded",
+  "embedded",
+);
+export const MessageItemEdited = part(
+  "RaftMessageItemEdited",
+  "span",
+  "message-item-edited",
+  "edited",
+);
 export const MessageItemSearchMatch = part(
   "RaftMessageItemSearchMatch",
   "mark",
@@ -209,7 +234,12 @@ export const MessageItemTrailing = defineComponent({
       );
   },
 });
-export const MessageItemFooter = part("RaftMessageItemFooter", "div", "message-item-footer", "footer");
+export const MessageItemFooter = part(
+  "RaftMessageItemFooter",
+  "div",
+  "message-item-footer",
+  "footer",
+);
 export const MessageItemToolbarSlot = part(
   "RaftMessageItemToolbarSlot",
   "div",
@@ -227,9 +257,7 @@ export const MessageItemToolbarButton = defineComponent({
   },
   setup(props, { slots }) {
     const attrs = useAttrs();
-    const classes = computed(() =>
-      messageItem().toolbarButton({ className: props.class }),
-    );
+    const classes = computed(() => messageItem().toolbarButton({ className: props.class }));
     return () =>
       h(
         Primitive,

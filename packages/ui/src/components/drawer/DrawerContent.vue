@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs } from "vue";
-import {
-  DrawerContent,
-  DrawerPortal,
-  DrawerViewport,
-  injectDrawerRootContext,
-} from "reka-ui";
+import { DrawerContent, DrawerPortal, DrawerViewport, injectDrawerRootContext } from "reka-ui";
 
 import { cn } from "../../lib/cn";
 import { usePresenceStyle } from "../../lib/presence-style";
@@ -45,9 +40,7 @@ const viewportClass = computed(() =>
   cn(variants.value.viewport(), config.modal && "pointer-events-auto"),
 );
 const swipeHandleClass = computed(() => variants.value.swipeHandle());
-const showSwipeHandle = computed(
-  () => config.hasSnapPoints || config.swipeDirection === "down",
-);
+const showSwipeHandle = computed(() => config.hasSnapPoints || config.swipeDirection === "down");
 
 const surface = ref<HTMLElement | null>(null);
 const popup = ref<Element | null>(null);

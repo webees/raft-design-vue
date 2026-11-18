@@ -52,7 +52,9 @@ export function useSelectItems() {
 export function selectItemLabels(items: SelectItems | undefined): SelectItemLabel[] {
   if (items == null) return [];
   if (!Array.isArray(items)) return Object.values(items);
-  return (items as readonly { label?: SelectItemLabel; items?: readonly { label?: SelectItemLabel }[] }[])
+  return (
+    items as readonly { label?: SelectItemLabel; items?: readonly { label?: SelectItemLabel }[] }[]
+  )
     .flatMap((entry) => (Array.isArray(entry.items) ? entry.items : [entry]))
     .map((item) => item.label)
     .filter((label): label is SelectItemLabel => label != null);

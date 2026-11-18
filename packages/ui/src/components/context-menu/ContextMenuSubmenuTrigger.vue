@@ -21,7 +21,11 @@ const rootClass = computed(() =>
     :class="rootClass"
   >
     <slot />
-    <span aria-hidden data-slot="context-menu-submenu-trigger-indicator" :class="contextMenu().indicator()">
+    <span
+      aria-hidden
+      data-slot="context-menu-submenu-trigger-indicator"
+      :class="contextMenu().indicator()"
+    >
       <svg viewBox="0 0 12 12" fill="none" class="size-3 shrink-0">
         <path
           d="m4.5 2.5 3.5 3.5-3.5 3.5"

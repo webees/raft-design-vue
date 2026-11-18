@@ -32,11 +32,11 @@ Requirements: Bun >= 1.4, Node >= 22.
 
 ## Packages
 
-| Package | Purpose |
-| --- | --- |
-| `packages/ui` | `@webees/raft-design-vue`, Vue components, tokens and CSS |
-| `apps/docs` | Documentation and live component gallery |
-| `tooling/upstream` | Upstream sync, lockfile, drift report and parity checks |
+| Package            | Purpose                                                   |
+| ------------------ | --------------------------------------------------------- |
+| `packages/ui`      | `@webees/raft-design-vue`, Vue components, tokens and CSS |
+| `apps/docs`        | Documentation and live component gallery                  |
+| `tooling/upstream` | Upstream sync, lockfile, drift report and parity checks   |
 
 ## Using the library
 
@@ -56,7 +56,7 @@ import "@webees/raft-design-vue/styles.css";
 Set the theme on the document root:
 
 ```html
-<html class="light" data-theme="boring">
+<html class="light" data-theme="boring"></html>
 ```
 
 `light` / `dark` select the mode. `data-theme` selects one of the upstream
@@ -72,7 +72,7 @@ inputs live in:
 - `packages/ui/src/tokens.json` — design tokens
 - `packages/ui/src/themes.json` — theme definitions
 - `packages/ui/src/upstream-styles.css` — upstream Tailwind theme and utilities
-- `packages/ui/src/fonts/` — upstream font files
+- `packages/ui/src/fonts.css` and `design/fonts/` — upstream font faces and files
 
 ```bash
 bun run sync:upstream     # fetch pinned/latest upstream and update synced inputs
@@ -86,10 +86,10 @@ with the generated diff. See [`docs/adr/0001-upstream-sync.md`](./docs/adr/0001-
 
 ## Status
 
-`0.1.0` is the first public alpha. `check:parity` is the source of truth for
-coverage: every upstream component is either implemented, explicitly planned,
-or marked not applicable. Visual parity for implemented components is enforced
-by recipe tests and the docs gallery.
+This is pre-release alpha code; the first published version will be `0.1.0`.
+`check:parity` is the source of truth for coverage: every upstream component is
+either implemented, explicitly planned, or marked not applicable. Visual parity
+for implemented components is enforced by recipe tests and the docs gallery.
 
 Ported (102 / 102):
 

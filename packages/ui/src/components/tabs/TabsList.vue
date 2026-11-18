@@ -43,7 +43,15 @@ const listClass = computed(() =>
     data-slot="tabs-list"
     :data-variant="ui.variant"
     :data-placement="ui.placement"
-    :data-overflow="overflowStart && overflowEnd ? 'both' : overflowStart ? 'start' : overflowEnd ? 'end' : undefined"
+    :data-overflow="
+      overflowStart && overflowEnd
+        ? 'both'
+        : overflowStart
+          ? 'start'
+          : overflowEnd
+            ? 'end'
+            : undefined
+    "
     :class="listClass"
     @scroll="measure"
     @wheel="onWheel"

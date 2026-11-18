@@ -18,7 +18,8 @@ import { provideDialogSheetReset } from "../components/dialog/dialog-sheet-conte
  */
 export type OverlayLayerKind = "dialog" | "drawer";
 
-const OVERLAY_STACK_KEY: InjectionKey<Ref<readonly OverlayLayerKind[]>> = Symbol("raft-overlay-stack");
+const OVERLAY_STACK_KEY: InjectionKey<Ref<readonly OverlayLayerKind[]>> =
+  Symbol("raft-overlay-stack");
 
 function useOverlayStack() {
   return inject(OVERLAY_STACK_KEY, null);
@@ -53,7 +54,9 @@ export const OverlayLayer = defineComponent({
     const parent = useOverlayStack();
     provide(
       OVERLAY_STACK_KEY,
-      computed(() => (props.modal ? [...(parent?.value ?? []), props.kind] : (parent?.value ?? []))),
+      computed(() =>
+        props.modal ? [...(parent?.value ?? []), props.kind] : (parent?.value ?? []),
+      ),
     );
     return () => slots.default?.();
   },

@@ -15,7 +15,9 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const triggerClass = computed(() => tooltip().trigger({ class: attrs.class as string | undefined }));
+const triggerClass = computed(() =>
+  tooltip().trigger({ class: attrs.class as string | undefined }),
+);
 const triggerAttrs = computed(() => {
   const { class: _class, ...rest } = attrs;
   return rest;

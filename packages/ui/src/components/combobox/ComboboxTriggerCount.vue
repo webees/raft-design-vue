@@ -11,5 +11,6 @@ const { values } = useComboboxSelection();
     v-if="values.length"
     data-slot="combobox-trigger-count"
     :class="cn(combobox().triggerCount(), props.className)"
-  >{{ values.length }}</span>
+    >{{ values.length }}</span
+  >
 </template>

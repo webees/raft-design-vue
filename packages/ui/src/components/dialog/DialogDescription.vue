@@ -6,9 +6,7 @@ import { dialog } from "./dialog.variants";
 defineOptions({ name: "RaftDialogDescription", inheritAttrs: false });
 
 const attrs = useAttrs();
-const descriptionClass = computed(() =>
-  dialog().description({ className: attrs.class as string }),
-);
+const descriptionClass = computed(() => dialog().description({ className: attrs.class as string }));
 </script>
 
 <template>

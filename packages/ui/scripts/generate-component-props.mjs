@@ -28,7 +28,12 @@ function exportedTypes(source) {
   const names = new Set();
   for (const match of source.matchAll(/export\s+type\s*\{([^}]*)\}/g)) {
     for (const part of match[1].split(",")) {
-      const name = part.trim().replace(/^type\s+/, "").split(/\s+as\s+/).pop()?.trim();
+      const name = part
+        .trim()
+        .replace(/^type\s+/, "")
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim();
       if (name) names.add(name);
     }
   }
@@ -37,7 +42,13 @@ function exportedTypes(source) {
     for (const part of match[1].split(",")) {
       const trimmed = part.trim();
       if (!trimmed.startsWith("type ")) continue;
-      names.add(trimmed.slice(5).split(/\s+as\s+/).pop()?.trim());
+      names.add(
+        trimmed
+          .slice(5)
+          .split(/\s+as\s+/)
+          .pop()
+          ?.trim(),
+      );
     }
   }
   for (const match of source.matchAll(/export\s+type\s+(\w+)/g)) names.add(match[1]);
@@ -46,7 +57,9 @@ function exportedTypes(source) {
 
 function exportedComponents(source) {
   const components = new Map();
-  for (const match of source.matchAll(/export\s*\{\s*default\s+as\s+(\w+)\s*\}\s*from\s+"([^"]+)"/g)) {
+  for (const match of source.matchAll(
+    /export\s*\{\s*default\s+as\s+(\w+)\s*\}\s*from\s+"([^"]+)"/g,
+  )) {
     components.set(match[1], { path: match[2] });
   }
   const imports = new Map();
@@ -55,14 +68,20 @@ function exportedComponents(source) {
   }
   for (const match of source.matchAll(/export\s*\{([^}]*)\}/g)) {
     for (const part of match[1].split(",")) {
-      const name = part.trim().split(/\s+as\s+/).pop()?.trim();
+      const name = part
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim();
       if (name && imports.has(name)) components.set(name, { path: imports.get(name) });
     }
   }
   return components;
 }
 
-const folders = (await readdir(LOCAL, { withFileTypes: true })).filter((entry) => entry.isDirectory());
+const folders = (await readdir(LOCAL, { withFileTypes: true })).filter((entry) =>
+  entry.isDirectory(),
+);
 const localTypes = new Set();
 const localComponents = new Map();
 

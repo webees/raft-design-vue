@@ -106,7 +106,10 @@ const contentAttrs = computed(() => {
       :force-mount="forceMount"
       data-slot="tooltip-content"
       :class="contentClass"
-      style="--available-width: var(--reka-popper-available-width); --transform-origin: var(--reka-popper-transform-origin)"
+      style="
+        --available-width: var(--reka-popper-available-width);
+        --transform-origin: var(--reka-popper-transform-origin);
+      "
     >
       <span data-slot="tooltip-body" :class="bodyClass">
         <template v-if="hasLeadingIcon">

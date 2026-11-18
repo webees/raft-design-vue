@@ -13,9 +13,7 @@ import {
 
 const args = parseArgs(process.argv.slice(2));
 const json = args.json === true;
-const lock = existsSync(LOCK_PATH)
-  ? readJson<UpstreamLock>(LOCK_PATH)
-  : undefined;
+const lock = existsSync(LOCK_PATH) ? readJson<UpstreamLock>(LOCK_PATH) : undefined;
 const latest = await resolveCommit("main");
 
 if (!lock) {
@@ -55,8 +53,7 @@ const addedComponents = [
     watched
       .filter(
         (file) =>
-          file.status === "added" &&
-          file.filename.startsWith("packages/ui/src/components/"),
+          file.status === "added" && file.filename.startsWith("packages/ui/src/components/"),
       )
       .map((file) => file.filename.split("/")[4])
       .filter((name): name is string => typeof name === "string" && !known.has(name)),
@@ -88,9 +85,7 @@ if (json) {
       "",
       "Watched changes:",
       ...watched.map((file) => `- ${file.status} ${file.filename}`),
-      ...(addedComponents.length
-        ? ["", `New components: ${addedComponents.join(", ")}`]
-        : []),
+      ...(addedComponents.length ? ["", `New components: ${addedComponents.join(", ")}`] : []),
       "",
       "Run `bun run sync:upstream` to update.",
     ].join("\n"),

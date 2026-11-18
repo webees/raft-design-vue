@@ -43,7 +43,12 @@ export type DragSortStrategyArgs = {
  * outside the list. Exposed for parity with the React package; the Vue engine
  * computes its own sibling offsets.
  */
-export function dragListStrategy({ activeIndex, overIndex, index, rects }: DragSortStrategyArgs): DragSortTransform | null {
+export function dragListStrategy({
+  activeIndex,
+  overIndex,
+  index,
+  rects,
+}: DragSortStrategyArgs): DragSortTransform | null {
   if (overIndex < 0) return null;
   if (activeIndex === overIndex || index === activeIndex) return null;
   const active = rects[activeIndex];
@@ -51,7 +56,12 @@ export function dragListStrategy({ activeIndex, overIndex, index, rects }: DragS
   const movedDown = index > activeIndex && index <= overIndex;
   const movedUp = index < activeIndex && index >= overIndex;
   if (!movedDown && !movedUp) return null;
-  return { x: 0, y: movedDown ? -active.initial.height : active.translated.height, scaleX: 1, scaleY: 1 };
+  return {
+    x: 0,
+    y: movedDown ? -active.initial.height : active.translated.height,
+    scaleX: 1,
+    scaleY: 1,
+  };
 }
 
 function cloneItems<L extends string>(items: DragListsItems<L>): DragListsItems<L> {
@@ -128,7 +138,8 @@ export function useDragLists<L extends string>(options: UseDragListsOptions<L>) 
     if (reason) return;
     const next = placeInList(options.items, activeId.value, list, index, options.lists);
     const place = where(next, activeId.value);
-    if (place) options.announce(`Over ${place.place}, position ${place.position} of ${place.count}.`);
+    if (place)
+      options.announce(`Over ${place.place}, position ${place.position} of ${place.count}.`);
     options.onItemsChange(next);
   }
 
@@ -141,7 +152,9 @@ export function useDragLists<L extends string>(options: UseDragListsOptions<L>) 
       if (snapshot.value) options.onItemsChange(snapshot.value);
       options.announce(`${reason} Cancelled.`);
     } else if (place) {
-      options.announce(`Dropped ${options.itemName(id)} in ${place.place}, position ${place.position}.`);
+      options.announce(
+        `Dropped ${options.itemName(id)} in ${place.place}, position ${place.position}.`,
+      );
     }
     activeId.value = null;
     snapshot.value = null;

@@ -6,9 +6,7 @@ import { useFieldContext } from "./field-context";
 defineOptions({ name: "RaftFieldDescription", inheritAttrs: false });
 const attrs = useAttrs();
 const context = useFieldContext();
-const rootClass = computed(() =>
-  fieldVariants().description({ className: attrs.class as string }),
-);
+const rootClass = computed(() => fieldVariants().description({ className: attrs.class as string }));
 </script>
 
 <template>

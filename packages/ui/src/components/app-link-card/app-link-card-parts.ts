@@ -8,15 +8,7 @@ export function appLinkCardFrame(className: string | undefined) {
   return messageEmbed({ size: "item" }).root({ className: root({ className }) });
 }
 
-type Part =
-  | "header"
-  | "icon"
-  | "name"
-  | "body"
-  | "eyebrow"
-  | "title"
-  | "meta"
-  | "actions";
+type Part = "header" | "icon" | "name" | "body" | "eyebrow" | "title" | "meta" | "actions";
 
 const tags: Record<Part, string> = {
   header: "div",

@@ -10,9 +10,6 @@ import type { CSSProperties } from "vue";
  */
 export const ITEM_KEY_ATTR = "data-virtual-list-item-key";
 
-/** The default of the `columns` and `items` props, and the empty kept-item lists. */
-export const EMPTY_ARRAY: readonly never[] = [];
-
 /**
  * The visible-items element lays the rows out in normal block flow, so their margins collapse as the
  * consumer's CSS says (between adjacent rows, and a row's children's through the row). It is a block

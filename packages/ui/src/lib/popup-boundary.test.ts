@@ -42,12 +42,20 @@ describe("sheetPopupBoundary", () => {
 
   it("leaves a popup anchored in the head unbounded", () => {
     const head = fake(0, 56);
-    const boundary = sheetPopupBoundary(sheet(head, fake(0, 700)), () => null, () => head);
+    const boundary = sheetPopupBoundary(
+      sheet(head, fake(0, 700)),
+      () => null,
+      () => head,
+    );
     expect(boundary).toBeNull();
   });
 
   it("bounds a popup anchored in the body", () => {
-    const boundary = sheetPopupBoundary(sheet(fake(0, 56), fake(0, 700)), () => null, () => fake(200, 240));
+    const boundary = sheetPopupBoundary(
+      sheet(fake(0, 56), fake(0, 700)),
+      () => null,
+      () => fake(200, 240),
+    );
     expect(boundary?.y).toBe(56);
     expect(boundary?.height).toBe(644);
   });

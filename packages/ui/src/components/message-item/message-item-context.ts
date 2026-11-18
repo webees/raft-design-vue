@@ -1,4 +1,14 @@
-import { computed, inject, onBeforeUnmount, provide, ref, useId, watch, type InjectionKey, type Ref } from "vue";
+import {
+  computed,
+  inject,
+  onBeforeUnmount,
+  provide,
+  ref,
+  useId,
+  watch,
+  type InjectionKey,
+  type Ref,
+} from "vue";
 
 export type MessageItemLabelPart = "sender" | "time";
 

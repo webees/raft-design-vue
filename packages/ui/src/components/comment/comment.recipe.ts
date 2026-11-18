@@ -37,7 +37,11 @@ export const comment = tv({
       "shrink-0 whitespace-nowrap",
       "font-mono text-mono-meta tabular-nums text-foreground-hint",
     ],
-    entryBody: ["wrap-break-word select-text", "text-callout text-foreground", "selection:bg-selection"],
+    entryBody: [
+      "wrap-break-word select-text",
+      "text-callout text-foreground",
+      "selection:bg-selection",
+    ],
     marker: [
       "relative inline-flex h-6 shrink-0 items-center gap-1 align-top whitespace-nowrap",
       "rounded-chip border border-line-hairline py-0 ps-[3px] pe-1.5",

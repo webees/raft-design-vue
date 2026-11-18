@@ -51,7 +51,7 @@ export function useBannerWrap(action: Ref<HTMLElement | null>) {
       wraps.value = false;
       return;
     }
-    if (root.querySelector(':scope > [data-banner-close]')) {
+    if (root.querySelector(":scope > [data-banner-close]")) {
       wraps.value = true;
       return;
     }

@@ -102,7 +102,8 @@ export function createDragEngine(options: DragEngineOptions = {}) {
   const draggables = new Map<Element, DraggableRegistration>();
   const droppables = new Map<Element, DroppableRegistration>();
 
-  let start: { point: DragPoint; registration: DraggableRegistration; pointerId: number } | null = null;
+  let start: { point: DragPoint; registration: DraggableRegistration; pointerId: number } | null =
+    null;
   let holdTimer: ReturnType<typeof setTimeout> | null = null;
   let started = false;
   let armed = false;
@@ -272,8 +273,10 @@ export function createDragEngine(options: DragEngineOptions = {}) {
 
   /** The drag's own token: every escape guard keys its hold by it. */
   const escapeToken = {};
-  const grabEscape = () => holdEscape(typeof window === "undefined" ? null : window, escapeToken, cancel);
-  const dropEscape = () => releaseEscape(typeof window === "undefined" ? null : window, escapeToken);
+  const grabEscape = () =>
+    holdEscape(typeof window === "undefined" ? null : window, escapeToken, cancel);
+  const dropEscape = () =>
+    releaseEscape(typeof window === "undefined" ? null : window, escapeToken);
 
   const pointerListeners = {
     move: (event: Event) => move(event as PointerEvent),
@@ -306,7 +309,8 @@ export function createDragEngine(options: DragEngineOptions = {}) {
   function startPointer(event: PointerEvent, registration: DraggableRegistration) {
     if (options.disabled?.() || registration.disabled) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
-    if ((event.target as HTMLElement | null)?.closest("input, textarea, select, [contenteditable]")) return;
+    if ((event.target as HTMLElement | null)?.closest("input, textarea, select, [contenteditable]"))
+      return;
     start = { point: pointOf(event), registration, pointerId: event.pointerId };
     started = false;
     armed = false;
@@ -351,7 +355,10 @@ export function createDragEngine(options: DragEngineOptions = {}) {
         (entry) => entry.id !== session.id && (!entry.accept || entry.accept(session.data)),
       );
       if (candidates.length === 0) return;
-      const rects = candidates.map((entry) => ({ entry, rect: entry.element.getBoundingClientRect() }));
+      const rects = candidates.map((entry) => ({
+        entry,
+        rect: entry.element.getBoundingClientRect(),
+      }));
       let next: { entry: DroppableRegistration; rect: DOMRect } | undefined;
       if (direction === "up" || direction === "down") {
         const sorted = [...rects].sort((a, b) => a.rect.top - b.rect.top);

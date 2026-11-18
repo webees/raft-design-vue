@@ -31,12 +31,8 @@ const showAction = computed(
   () => data.value?.hasAction === true || Boolean(props.toast.actionProps?.label),
 );
 const showClose = computed(() => data.value?.hasClose === true);
-const showIcon = computed(
-  () => data.value?.leading !== undefined || data.value?.hasIcon !== false,
-);
-const progressDuration = computed(
-  () => props.toast.duration ?? config?.timeout.value ?? 5000,
-);
+const showIcon = computed(() => data.value?.leading !== undefined || data.value?.hasIcon !== false);
+const progressDuration = computed(() => props.toast.duration ?? config?.timeout.value ?? 5000);
 const showProgress = computed(
   () =>
     data.value?.hasProgress === true &&

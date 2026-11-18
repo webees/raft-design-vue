@@ -32,9 +32,7 @@ const attrs = useAttrs();
 const labelId = useId();
 const value = computed(() => clamp(props.used, 0, props.max));
 const share = computed(() => (props.max > 0 ? value.value / props.max : 1));
-const warnFrom = computed(() =>
-  props.warnAt !== undefined ? clamp(props.warnAt, 0, 1) : 0.8,
-);
+const warnFrom = computed(() => (props.warnAt !== undefined ? clamp(props.warnAt, 0, 1) : 0.8));
 const level = computed<MeterContextValue["level"]>(() => {
   if (share.value >= 1) return "full";
   if (share.value >= warnFrom.value) return "high";

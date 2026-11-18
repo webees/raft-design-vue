@@ -15,7 +15,11 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <span v-bind="{ ...attrs, class: undefined }" data-slot="message-forwarded-bundle-attachment" :class="rootClass">
+  <span
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="message-forwarded-bundle-attachment"
+    :class="rootClass"
+  >
     <slot />
   </span>
 </template>

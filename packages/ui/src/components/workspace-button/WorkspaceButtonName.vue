@@ -7,9 +7,7 @@ defineOptions({ name: "RaftWorkspaceButtonName", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const nameClass = computed(() =>
-  cn(workspaceButton().name(), props.class, attrs.class as string),
-);
+const nameClass = computed(() => cn(workspaceButton().name(), props.class, attrs.class as string));
 </script>
 
 <template>

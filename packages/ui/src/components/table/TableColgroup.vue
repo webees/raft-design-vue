@@ -9,7 +9,11 @@ const colgroupClass = computed(() => table().colgroup({ className: attrs.class a
 </script>
 
 <template>
-  <colgroup v-bind="{ ...attrs, class: undefined }" :class="colgroupClass" data-slot="table-colgroup">
+  <colgroup
+    v-bind="{ ...attrs, class: undefined }"
+    :class="colgroupClass"
+    data-slot="table-colgroup"
+  >
     <slot />
   </colgroup>
 </template>

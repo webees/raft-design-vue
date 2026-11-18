@@ -7,10 +7,5 @@ export { default as TimelineTitle } from "./TimelineTitle.vue";
 export type TimelineSize = "sm" | "md" | "lg";
 export type TimelineItemPlacement = "left" | "right";
 export type TimelineItemVariant =
-  | "default"
-  | "information"
-  | "success"
-  | "warning"
-  | "danger"
-  | "accent";
+  "default" | "information" | "success" | "warning" | "danger" | "accent";
 export type TimelineLineType = "solid" | "dashed";

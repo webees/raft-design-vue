@@ -10,7 +10,9 @@ defineOptions({ name: "RaftMessageActionCardContent", inheritAttrs: false });
 
 const attrs = useAttrs();
 const styles = messageActionCardContent();
-const innerClass = computed(() => messageCard().inset({ class: styles.root({ class: attrs.class as string | undefined }) }));
+const innerClass = computed(() =>
+  messageCard().inset({ class: styles.root({ class: attrs.class as string | undefined }) }),
+);
 </script>
 
 <template>
@@ -19,6 +21,8 @@ const innerClass = computed(() => messageCard().inset({ class: styles.root({ cla
     :class="styles.panel()"
     style="--collapsible-panel-height: var(--reka-collapsible-content-height)"
   >
-    <MessageEmbedContent v-bind="{ ...attrs, class: undefined }" :class="innerClass"><slot /></MessageEmbedContent>
+    <MessageEmbedContent v-bind="{ ...attrs, class: undefined }" :class="innerClass"
+      ><slot
+    /></MessageEmbedContent>
   </CollapsibleContent>
 </template>

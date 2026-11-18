@@ -8,14 +8,11 @@ import { useOptionalAppShellSidebar } from "./app-shell-context";
 
 defineOptions({ name: "RaftAppShellMainSlot", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ as?: string; asChild?: boolean; overlay?: boolean }>(),
-  {
-    as: "main",
-    asChild: false,
-    overlay: false,
-  },
-);
+const props = withDefaults(defineProps<{ as?: string; asChild?: boolean; overlay?: boolean }>(), {
+  as: "main",
+  asChild: false,
+  overlay: false,
+});
 
 const attrs = useAttrs();
 const sidebar = useOptionalAppShellSidebar();

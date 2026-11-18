@@ -10,12 +10,8 @@ const props = withDefaults(
 );
 const attrs = useAttrs();
 
-const isInteractive = computed(
-  () => props.interactive ?? attrs.onClick != null,
-);
-const rootClass = computed(() =>
-  taskCard().root({ className: attrs.class as string }),
-);
+const isInteractive = computed(() => props.interactive ?? attrs.onClick != null);
+const rootClass = computed(() => taskCard().root({ className: attrs.class as string }));
 </script>
 
 <template>

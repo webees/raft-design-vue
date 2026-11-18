@@ -6,14 +6,13 @@ import { panelSplitActionMenu } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSplitActionMenu", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(),
-  { disabled: false, as: "button", asChild: false },
-);
+withDefaults(defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(), {
+  disabled: false,
+  as: "button",
+  asChild: false,
+});
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelSplitActionMenu({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelSplitActionMenu({ className: attrs.class as string }));
 </script>
 
 <template>

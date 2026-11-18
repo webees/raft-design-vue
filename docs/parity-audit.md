@@ -37,20 +37,20 @@ utility (a token the theme never generated), or a recipe string that drifted.
 
 ## Findings fixed in this pass
 
-| Component | Defect | Fix |
-| --- | --- | --- |
-| `context-menu` | recipe used `rounded-popup`, `shadow-popover`, `bg-fill-hover`, none of which exist in the generated theme; slot names were stale | rebuilt from the current upstream recipe (`rounded-container`, `shadow-float`, `ring-line-seam`, `min-h-option`), added submenu indicator |
-| `dropdown-menu` | `dropdown-menu-sub-trigger`, `-sub-popup`, `-radio-label` names; submenu trigger had no chevron | upstream `data-slot` names, `submenuTrigger` slot, indicator span |
-| `combobox` | list had no scroll-area frame/gutters; `ComboboxPopup` emitted `combobox-popup`; content used undefined `--available-*` vars | `combobox-list-frame` + `ScrollAreaGutters`, `combobox-content`, Reka-variable aliases |
-| `select` | viewport had no frame/gutters; `SelectValue` had no fit sizer; `SelectContent` did not portal; `SelectPortal` was a no-op | frame + gutters, `SelectValueSizer` + overflow title, internal portal |
-| `choice-list` | simplified API (`groups[].items`, boolean `search`), no pinning, no subgrid layout, no primitive marks | rewritten to upstream API (`items` + `groups`, `search="auto|always"`, pin snapshot, subgrid rows/actions, Checkbox/RadioGroup marks, CutLine titles, status line) |
-| `composer` | attachments scroller measured edges by hand, nav buttons used the wrong variant | uses `ScrollArea` (`horizontal`, `small`, `scroll`, `contain`) with `composerAttachment` classes |
-| `tooltip` | text nodes were dropped when partitioning a leading icon | only comments are filtered; text stays in the body |
-| `form-section` | no `status` prop, no `-title`/`-status`/`-description` slots | added `status` badge and slots |
-| `preview-card` | trigger and portal emitted no `data-slot` | upstream names added |
-| `drag` | lift had no portal wrapper | `drag-lift-portal` (`contents`, `dir`) |
-| `dialog` | commit slot was `dialog-sheet-commit` | upstream `dialog-commit-slot` |
-| `selection-toolbar` | action label had no slot | `selection-toolbar-action-label` |
+| Component           | Defect                                                                                                                            | Fix                                                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context-menu`      | recipe used `rounded-popup`, `shadow-popover`, `bg-fill-hover`, none of which exist in the generated theme; slot names were stale | rebuilt from the current upstream recipe (`rounded-container`, `shadow-float`, `ring-line-seam`, `min-h-option`), added submenu indicator                                   |
+| `dropdown-menu`     | `dropdown-menu-sub-trigger`, `-sub-popup`, `-radio-label` names; submenu trigger had no chevron                                   | upstream `data-slot` names, `submenuTrigger` slot, indicator span                                                                                                           |
+| `combobox`          | list had no scroll-area frame/gutters; `ComboboxPopup` emitted `combobox-popup`; content used undefined `--available-*` vars      | `combobox-list-frame` + `ScrollAreaGutters`, `combobox-content`, Reka-variable aliases                                                                                      |
+| `select`            | viewport had no frame/gutters; `SelectValue` had no fit sizer; `SelectContent` did not portal; `SelectPortal` was a no-op         | frame + gutters, `SelectValueSizer` + overflow title, internal portal                                                                                                       |
+| `choice-list`       | simplified API (`groups[].items`, boolean `search`), no pinning, no subgrid layout, no primitive marks                            | rewritten to the upstream API (`items` + `groups`, `search` of `auto`/`always`, pin snapshot, subgrid rows/actions, Checkbox/RadioGroup marks, CutLine titles, status line) |
+| `composer`          | attachments scroller measured edges by hand, nav buttons used the wrong variant                                                   | uses `ScrollArea` (`horizontal`, `small`, `scroll`, `contain`) with `composerAttachment` classes                                                                            |
+| `tooltip`           | text nodes were dropped when partitioning a leading icon                                                                          | only comments are filtered; text stays in the body                                                                                                                          |
+| `form-section`      | no `status` prop, no `-title`/`-status`/`-description` slots                                                                      | added `status` badge and slots                                                                                                                                              |
+| `preview-card`      | trigger and portal emitted no `data-slot`                                                                                         | upstream names added                                                                                                                                                        |
+| `drag`              | lift had no portal wrapper                                                                                                        | `drag-lift-portal` (`contents`, `dir`)                                                                                                                                      |
+| `dialog`            | commit slot was `dialog-sheet-commit`                                                                                             | upstream `dialog-commit-slot`                                                                                                                                               |
+| `selection-toolbar` | action label had no slot                                                                                                          | `selection-toolbar-action-label`                                                                                                                                            |
 
 ## Verified clean
 
@@ -80,21 +80,21 @@ listed as intentional differences, not gaps.
 
 Real defects fixed while auditing file by file:
 
-| Component / file | Defect | Fix |
-| --- | --- | --- |
-| `InlineCode` | missing `appearance="message"`; default size was `0.9em` with no baseline padding | upstream `0.875em`, `wrap-anywhere`, full message variant |
-| `Ellipsis` | expanded/lines states used a single `truncate`; no print rules | upstream compound variants (truncate, `wrap-anywhere`, `line-clamp`, print overrides) |
-| `ComboboxInput` | input had no owner variants, so chips/control inputs were unstyled | `inputOwner` (group/control) variants + provide/inject context |
-| `ComposerToolbarLabel` | rendered `<span>` with caption styling; upstream renders a `<label>` | `<label>` with bar-button height and disabled affordances |
-| `SegmentedControl` | upstream `data-overflowing`, `data-checked`, `data-fit-label` rules absent | attributes now drive the same recipes, with Reka state aliases |
-| `InboxItemTrigger` | `data-slot="inbox-item-trigger"` while the recipe targets `inbox-item-open`; was a `span` with `role=button` | `<button>` with `data-slot="inbox-item-open"` + disabled context |
-| `ListRowSkeleton` | not ported (upstream `./wip`) | full Vue port + tests |
-| `DropdownMenuLinkItem` | not ported (upstream `./wip`) | link item with `current` indicator + `aria-current` |
-| `SheetPopupBoundary` | not ported; sheet popups bounded by the viewport only | rect boundary + `useSheetPopupBoundary`, wired into every positioner and both sheet surfaces |
-| `MessageActionCard` | hint label spacing rule missing; trigger lacked `data-panel-open` | upstream hint rule, `data-panel-open` attribute, `--collapsible-panel-height` alias |
-| `Tabs` | sorting/drag cursor rules missing | `data-[sorting]`, `data-[reorderable]`, `data-[dragging-source]` classes |
-| `TaskChip` | link/button hover and focus rules missing | upstream `[a,button]` overlay + focus ring |
-| `CoachMark` | Escape outside the popup closed the tour | outside Escape is cancelled, matching upstream |
+| Component / file       | Defect                                                                                                       | Fix                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `InlineCode`           | missing `appearance="message"`; default size was `0.9em` with no baseline padding                            | upstream `0.875em`, `wrap-anywhere`, full message variant                                    |
+| `Ellipsis`             | expanded/lines states used a single `truncate`; no print rules                                               | upstream compound variants (truncate, `wrap-anywhere`, `line-clamp`, print overrides)        |
+| `ComboboxInput`        | input had no owner variants, so chips/control inputs were unstyled                                           | `inputOwner` (group/control) variants + provide/inject context                               |
+| `ComposerToolbarLabel` | rendered `<span>` with caption styling; upstream renders a `<label>`                                         | `<label>` with bar-button height and disabled affordances                                    |
+| `SegmentedControl`     | upstream `data-overflowing`, `data-checked`, `data-fit-label` rules absent                                   | attributes now drive the same recipes, with Reka state aliases                               |
+| `InboxItemTrigger`     | `data-slot="inbox-item-trigger"` while the recipe targets `inbox-item-open`; was a `span` with `role=button` | `<button>` with `data-slot="inbox-item-open"` + disabled context                             |
+| `ListRowSkeleton`      | not ported (upstream `./wip`)                                                                                | full Vue port + tests                                                                        |
+| `DropdownMenuLinkItem` | not ported (upstream `./wip`)                                                                                | link item with `current` indicator + `aria-current`                                          |
+| `SheetPopupBoundary`   | not ported; sheet popups bounded by the viewport only                                                        | rect boundary + `useSheetPopupBoundary`, wired into every positioner and both sheet surfaces |
+| `MessageActionCard`    | hint label spacing rule missing; trigger lacked `data-panel-open`                                            | upstream hint rule, `data-panel-open` attribute, `--collapsible-panel-height` alias          |
+| `Tabs`                 | sorting/drag cursor rules missing                                                                            | `data-[sorting]`, `data-[reorderable]`, `data-[dragging-source]` classes                     |
+| `TaskChip`             | link/button hover and focus rules missing                                                                    | upstream `[a,button]` overlay + focus ring                                                   |
+| `CoachMark`            | Escape outside the popup closed the tour                                                                     | outside Escape is cancelled, matching upstream                                               |
 
 ## Known limits
 

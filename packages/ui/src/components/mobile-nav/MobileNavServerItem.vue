@@ -4,10 +4,7 @@ import { PopoverTrigger } from "reka-ui";
 
 import { mobileNavServer } from "./mobile-nav-server.recipe";
 import { useMobileNavServer } from "./mobile-nav-server-context";
-import {
-  TOUCH_DRAG_HOLD_MS,
-  TOUCH_DRAG_TOLERANCE_PX,
-} from "../../lib/touch-drag";
+import { TOUCH_DRAG_HOLD_MS, TOUCH_DRAG_TOLERANCE_PX } from "../../lib/touch-drag";
 
 defineOptions({ name: "RaftMobileNavServerItem", inheritAttrs: false });
 

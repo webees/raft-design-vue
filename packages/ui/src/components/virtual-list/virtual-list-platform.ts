@@ -43,22 +43,3 @@ export function getWheelDeltaScale(): number {
   }
   return devicePixelRatioCache;
 }
-
-/**
- * Makes a runner that runs a callback in the next animation frame. Each runner requests one frame at
- * a time: a callback given before it fires replaces the previous one. One per list, so lists never
- * replace each other's callbacks.
- */
-export function createLatestInNextFrame(): (callback: () => void) => void {
-  let nextFrameCallback: (() => void) | undefined;
-  let nextFrameHandle: number | undefined;
-  return (callback: () => void) => {
-    nextFrameCallback = callback;
-    if (nextFrameHandle === undefined) {
-      nextFrameHandle = requestAnimationFrame(() => {
-        nextFrameHandle = undefined;
-        nextFrameCallback?.();
-      });
-    }
-  };
-}

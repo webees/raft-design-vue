@@ -79,11 +79,7 @@ function onClick(event: MouseEvent) {
     :data-focusable-when-disabled="focusableWhenDisabled && disabled ? '' : undefined"
     @click="onClick"
   >
-    <span
-      v-if="loading"
-      data-slot="button-loading-indicator"
-      :class="loadingClass"
-    >
+    <span v-if="loading" data-slot="button-loading-indicator" :class="loadingClass">
       <Spinner :aria-label="loadingLabel" />
     </span>
     <span

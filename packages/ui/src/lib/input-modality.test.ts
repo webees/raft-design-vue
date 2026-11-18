@@ -10,7 +10,12 @@ describe("installInputModality", () => {
   it("marks a pointer press", () => {
     const uninstall = installInputModality();
     document.dispatchEvent(
-      new PointerEvent("pointerdown", { bubbles: true, pointerType: "mouse", width: 12, height: 12 }),
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        pointerType: "mouse",
+        width: 12,
+        height: 12,
+      }),
     );
     expect(attribute()).toBe("pointer");
     uninstall();

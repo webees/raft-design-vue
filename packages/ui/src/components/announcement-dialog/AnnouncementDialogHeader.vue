@@ -9,11 +9,7 @@ const headerClass = computed(() => announcement().header({ className: attrs.clas
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    :class="headerClass"
-    data-slot="announcement-header"
-  >
+  <div v-bind="{ ...attrs, class: undefined }" :class="headerClass" data-slot="announcement-header">
     <slot />
   </div>
 </template>

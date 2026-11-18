@@ -17,10 +17,7 @@ export const taskCard = tv({
     row: ["flex min-w-0 items-start gap-2"],
     body: ["min-w-0 flex-1"],
     meta: ["flex min-w-0 flex-nowrap items-center gap-2", "mb-2"],
-    channel: [
-      "min-w-0 truncate",
-      "font-mono text-mono-meta font-normal text-foreground-hint",
-    ],
+    channel: ["min-w-0 truncate", "font-mono text-mono-meta font-normal text-foreground-hint"],
     number: ["shrink-0", "font-mono text-mono-meta font-normal text-foreground-hint"],
     legacy: [
       "shrink-0",

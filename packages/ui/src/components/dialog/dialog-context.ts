@@ -6,7 +6,10 @@ const DIALOG_PROPS_KEY: InjectionKey<{
   bar: () => boolean;
 }> = Symbol("raft-dialog-props");
 
-export function provideDialogContext(size: () => NonNullable<DialogVariants["size"]>, bar: () => boolean) {
+export function provideDialogContext(
+  size: () => NonNullable<DialogVariants["size"]>,
+  bar: () => boolean,
+) {
   provide(DIALOG_PROPS_KEY, { size, bar });
 }
 

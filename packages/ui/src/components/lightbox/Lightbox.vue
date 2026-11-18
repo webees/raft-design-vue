@@ -3,11 +3,7 @@ import { computed, getCurrentInstance, onBeforeUnmount, ref, watch } from "vue";
 import { DialogRoot } from "reka-ui";
 
 import { OverlayLayer } from "../../lib/overlay-depth";
-import {
-  createLightboxDepth,
-  provideLightboxModal,
-  type LightboxModal,
-} from "./lightbox-context";
+import { createLightboxDepth, provideLightboxModal, type LightboxModal } from "./lightbox-context";
 
 defineOptions({ name: "RaftLightbox", inheritAttrs: false });
 

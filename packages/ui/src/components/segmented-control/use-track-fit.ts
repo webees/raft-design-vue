@@ -24,7 +24,9 @@ function queryContainerOf(track: HTMLElement): HTMLElement | null {
 
 function contentInlineSize(el: HTMLElement): number {
   const style = getComputedStyle(el);
-  return el.clientWidth - Number.parseFloat(style.paddingLeft) - Number.parseFloat(style.paddingRight);
+  return (
+    el.clientWidth - Number.parseFloat(style.paddingLeft) - Number.parseFloat(style.paddingRight)
+  );
 }
 
 function labelsFit(track: HTMLElement): boolean {

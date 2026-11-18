@@ -7,17 +7,11 @@ defineOptions({ name: "RaftDescriptionItem", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const itemClass = computed(() =>
-  cn(descriptionList().item(), props.class, attrs.class as string),
-);
+const itemClass = computed(() => cn(descriptionList().item(), props.class, attrs.class as string));
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    data-slot="description-item"
-    :class="itemClass"
-  >
+  <div v-bind="{ ...attrs, class: undefined }" data-slot="description-item" :class="itemClass">
     <slot />
   </div>
 </template>

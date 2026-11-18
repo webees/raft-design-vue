@@ -1,12 +1,4 @@
-import {
-  defineComponent,
-  inject,
-  provide,
-  ref,
-  toRef,
-  type InjectionKey,
-  type Ref,
-} from "vue";
+import { defineComponent, inject, provide, ref, toRef, type InjectionKey, type Ref } from "vue";
 
 import { tv } from "../../lib/tv";
 import { providePopupSheet } from "../../lib/popup-boundary";
@@ -24,8 +16,11 @@ export type DialogSheetContextValue = {
   bodyEndSlot: Ref<HTMLElement | null>;
 };
 
-export const dialogSheetContextKey: InjectionKey<DialogSheetContextValue> = Symbol("raft-dialog-sheet");
-export const dialogSheetSurfaceKey: InjectionKey<Ref<boolean>> = Symbol("raft-dialog-sheet-surface");
+export const dialogSheetContextKey: InjectionKey<DialogSheetContextValue> =
+  Symbol("raft-dialog-sheet");
+export const dialogSheetSurfaceKey: InjectionKey<Ref<boolean>> = Symbol(
+  "raft-dialog-sheet-surface",
+);
 export const dialogSheetHeadKey: InjectionKey<Ref<boolean>> = Symbol("raft-dialog-sheet-head");
 
 export function useDialogSheet(): DialogSheetContextValue | null {
@@ -72,9 +67,7 @@ export const DialogSheetProvider = defineComponent({
     // A popup opened in the sheet stays in it, under its head.
     providePopupSheet({
       head: () =>
-        props.sheet
-          ? (props.popup?.querySelector('[data-slot="dialog-header"]') ?? null)
-          : null,
+        props.sheet ? (props.popup?.querySelector('[data-slot="dialog-header"]') ?? null) : null,
       surface: () => (props.sheet ? props.popup : null),
     });
     return () => slots.default?.();

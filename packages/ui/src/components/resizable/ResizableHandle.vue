@@ -3,10 +3,7 @@ import { computed, inject, useAttrs, type Ref } from "vue";
 import { SplitterResizeHandle } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { resizable } from "./resizable.variants";
-import {
-  RESIZABLE_ORIENTATION_KEY,
-  type ResizableOrientation,
-} from "./context";
+import { RESIZABLE_ORIENTATION_KEY, type ResizableOrientation } from "./context";
 
 defineOptions({ name: "RaftResizableHandle", inheritAttrs: false });
 
@@ -31,13 +28,7 @@ const groupOrientation = inject<Ref<ResizableOrientation>>(
 const handleOrientation = computed<ResizableOrientation>(() =>
   groupOrientation.value === "horizontal" ? "vertical" : "horizontal",
 );
-const handleClass = computed(() =>
-  cn(
-    styles.handle(),
-    props.class,
-    attrs.class as string,
-  ),
-);
+const handleClass = computed(() => cn(styles.handle(), props.class, attrs.class as string));
 </script>
 
 <template>

@@ -10,7 +10,8 @@ const attrs = useAttrs();
 
 const props = withDefaults(
   defineProps<{
-    variant?: "default" | "muted" | "primary" | "information" | "accent" | "success" | "warning" | "danger";
+    variant?:
+      "default" | "muted" | "primary" | "information" | "accent" | "success" | "warning" | "danger";
     appearance?: "solid" | "soft" | "outline";
   }>(),
   { variant: "default", appearance: "soft" },

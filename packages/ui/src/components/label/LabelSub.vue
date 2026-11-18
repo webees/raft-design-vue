@@ -4,9 +4,7 @@ import { labelVariants } from "./label.variants";
 
 defineOptions({ name: "RaftLabelSub", inheritAttrs: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  labelVariants().sub({ className: attrs.class as string }),
-);
+const rootClass = computed(() => labelVariants().sub({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -26,7 +26,9 @@ const attrs = useAttrs();
 
 const uncontrolledOpen = ref(props.defaultSidebarOpen);
 const controlled = computed(() => props.sidebarOpen !== undefined);
-const open = computed(() => (controlled.value ? Boolean(props.sidebarOpen) : uncontrolledOpen.value));
+const open = computed(() =>
+  controlled.value ? Boolean(props.sidebarOpen) : uncontrolledOpen.value,
+);
 
 watch(
   () => props.defaultSidebarOpen,
@@ -49,20 +51,25 @@ const setSidebarWidth = (width: number) => {
   sidebarWidth.value = width;
 };
 
-provide(appShellSidebarKey, reactive({
-  collapsible: props.sidebarCollapsible,
-  open,
-  setOpen,
-  sidebarId,
-  setSidebarId: (id: string | undefined) => {
-    sidebarId.value = id;
-  },
-  sidebarWidth,
-  setSidebarWidth,
-  toggle: () => setOpen(!open.value),
-}) as unknown as import("./app-shell-context").AppShellSidebarContextValue);
+provide(
+  appShellSidebarKey,
+  reactive({
+    collapsible: props.sidebarCollapsible,
+    open,
+    setOpen,
+    sidebarId,
+    setSidebarId: (id: string | undefined) => {
+      sidebarId.value = id;
+    },
+    sidebarWidth,
+    setSidebarWidth,
+    toggle: () => setOpen(!open.value),
+  }) as unknown as import("./app-shell-context").AppShellSidebarContextValue,
+);
 
-const rootClass = computed(() => appShell().root({ className: cn("group/app-shell", attrs.class as string) }));
+const rootClass = computed(() =>
+  appShell().root({ className: cn("group/app-shell", attrs.class as string) }),
+);
 
 const rootStyle = computed<StyleValue>(() => {
   if (!props.sidebarCollapsible) return attrs.style as StyleValue;

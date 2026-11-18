@@ -60,7 +60,10 @@ const popupClass = computed(() => styles.value.popup({ className: attrs.class as
       :force-mount="forceMount"
       :class="positionerClass"
       data-slot="preview-card-positioner"
-      style="--available-height: var(--reka-hover-card-content-available-height); --transform-origin: var(--reka-hover-card-content-transform-origin)"
+      style="
+        --available-height: var(--reka-hover-card-content-available-height);
+        --transform-origin: var(--reka-hover-card-content-transform-origin);
+      "
     >
       <div :data-size="size" :class="popupClass" data-slot="preview-card-content">
         <slot />

@@ -9,5 +9,7 @@ const classes = computed(() => cn("py-1", props.className, attrs.class as string
 </script>
 
 <template>
-  <ComboboxGroup v-bind="{ ...attrs, class: undefined }" data-slot="combobox-group" :class="classes"><slot /></ComboboxGroup>
+  <ComboboxGroup v-bind="{ ...attrs, class: undefined }" data-slot="combobox-group" :class="classes"
+    ><slot
+  /></ComboboxGroup>
 </template>

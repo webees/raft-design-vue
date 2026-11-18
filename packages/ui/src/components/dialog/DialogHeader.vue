@@ -49,9 +49,7 @@ const headItems = computed(() => {
   const children = (slots.default?.() ?? []).flatMap((node) =>
     node.type === Fragment && Array.isArray(node.children) ? (node.children as VNode[]) : [node],
   );
-  const meaningful = children.filter(
-    (node) => node.type !== Comment && node.type !== Text,
-  );
+  const meaningful = children.filter((node) => node.type !== Comment && node.type !== Text);
   const backs = meaningful.filter((node) => isComponent(node, "RaftDialogSheetBack"));
   const closes = meaningful.filter((node) => isComponent(node, "RaftDialogClose"));
   const leading = backs.length ? backs : closes;

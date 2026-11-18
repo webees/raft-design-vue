@@ -6,15 +6,11 @@ import { ResizableGroup, ResizableHandle, ResizablePanel } from ".";
 const Demo = defineComponent({
   setup() {
     return () =>
-      h(
-        ResizableGroup,
-        { orientation: "horizontal", class: "demo" },
-        () => [
-          h(ResizablePanel, { defaultSize: 50 }, () => "Left"),
-          h(ResizableHandle, { ariaLabel: "Resize sidebar" }),
-          h(ResizablePanel, { defaultSize: 50 }, () => "Right"),
-        ],
-      );
+      h(ResizableGroup, { orientation: "horizontal", class: "demo" }, () => [
+        h(ResizablePanel, { defaultSize: 50 }, () => "Left"),
+        h(ResizableHandle, { ariaLabel: "Resize sidebar" }),
+        h(ResizablePanel, { defaultSize: 50 }, () => "Right"),
+      ]);
   },
 });
 

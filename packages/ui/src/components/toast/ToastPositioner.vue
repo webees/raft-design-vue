@@ -16,18 +16,11 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const classes = computed(() =>
-  toastStyles().positioner({ class: props.class }),
-);
+const classes = computed(() => toastStyles().positioner({ class: props.class }));
 </script>
 
 <template>
-  <ToastPositioner
-    v-bind="attrs"
-    :toast="toast"
-    data-slot="toast-positioner"
-    :class="classes"
-  >
+  <ToastPositioner v-bind="attrs" :toast="toast" data-slot="toast-positioner" :class="classes">
     <slot />
   </ToastPositioner>
 </template>

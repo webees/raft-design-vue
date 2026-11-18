@@ -1,20 +1,6 @@
 <script setup lang="ts">
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  toRef,
-  useAttrs,
-  type StyleValue,
-} from "vue";
-import {
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-  injectDialogRootContext,
-} from "reka-ui";
+import { computed, defineComponent, h, inject, ref, toRef, useAttrs, type StyleValue } from "vue";
+import { DialogContent, DialogOverlay, DialogPortal, injectDialogRootContext } from "reka-ui";
 import type { SoftKeyboardViewport } from "../../lib/use-soft-keyboard";
 import { useParentOverlayKind } from "../../lib/overlay-depth";
 import { usePresenceStyle } from "../../lib/presence-style";
@@ -71,7 +57,10 @@ const attrs = useAttrs();
 const nested = computed(() => props.nested || useParentOverlayKind() !== null);
 const sizeRef = toRef(props, "size");
 const barRef = toRef(props, "bar");
-provideDialogContext(() => sizeRef.value, () => barRef.value);
+provideDialogContext(
+  () => sizeRef.value,
+  () => barRef.value,
+);
 
 const inheritedSheetSurface = inject(dialogSheetSurfaceKey, null);
 // Nested content inside a sheet (or a dialog) is not the phone sheet itself.
@@ -112,8 +101,7 @@ const overlayClass = computed(() =>
 );
 const portalClassName = computed(
   () =>
-    [props.portalProps?.className, props.portalProps?.class].filter(Boolean).join(" ") ||
-    undefined,
+    [props.portalProps?.className, props.portalProps?.class].filter(Boolean).join(" ") || undefined,
 );
 const portalClass = computed(() =>
   lifted.value ? styles.value.portal({ className: portalClassName.value }) : portalClassName.value,
@@ -132,7 +120,10 @@ const contentStyle = computed<StyleValue>(() => [
 const InPlace = defineComponent({
   name: "RaftDialogInPlace",
   inheritAttrs: false,
-  setup: (_, { slots }) => () => slots.default?.(),
+  setup:
+    (_, { slots }) =>
+    () =>
+      slots.default?.(),
 });
 
 /** Upstream puts the portal classes on the portalled element. */
@@ -143,10 +134,16 @@ const PortalFrame = defineComponent({
     frameClass: { type: [String, Array, Object], default: undefined },
     dataLayer: { type: [String, Number], default: undefined },
   },
-  setup: (frameProps, { slots }) => () =>
-    frameProps.active
-        ? h("div", { class: frameProps.frameClass, "data-layer": frameProps.dataLayer }, slots.default?.())
-      : slots.default?.(),
+  setup:
+    (frameProps, { slots }) =>
+    () =>
+      frameProps.active
+        ? h(
+            "div",
+            { class: frameProps.frameClass, "data-layer": frameProps.dataLayer },
+            slots.default?.(),
+          )
+        : slots.default?.(),
 });
 </script>
 

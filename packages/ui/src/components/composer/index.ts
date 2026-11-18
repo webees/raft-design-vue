@@ -4,11 +4,7 @@ export { default as ComposerInput } from "./ComposerInput.vue";
 export { default as ComposerSubmit } from "./ComposerSubmit.vue";
 export { default as ComposerIconButton } from "./ComposerIconButton.vue";
 export { default as ComposerToolbarLabel } from "./ComposerToolbarLabel.vue";
-export {
-  ComposerActions,
-  ComposerMeta,
-  ComposerToolbar,
-} from "./composer-parts";
+export { ComposerActions, ComposerMeta, ComposerToolbar } from "./composer-parts";
 
 export {
   ComposerAttachment,

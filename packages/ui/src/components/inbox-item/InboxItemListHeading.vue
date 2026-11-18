@@ -12,5 +12,11 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <h3 v-bind="{ ...attrs, class: undefined }" data-slot="inbox-item-list-heading" :class="rootClass"><slot /></h3>
+  <h3
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="inbox-item-list-heading"
+    :class="rootClass"
+  >
+    <slot />
+  </h3>
 </template>

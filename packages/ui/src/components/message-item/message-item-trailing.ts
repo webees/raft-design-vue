@@ -22,10 +22,7 @@ let sharedObserver: ResizeObserver | null = null;
 function flush() {
   frame = 0;
   for (const [body, width] of pendingWidths) {
-    body.style.setProperty(
-      "--message-trailing-width",
-      `${Math.ceil(width) + TRAILING_GAP_PX}px`,
-    );
+    body.style.setProperty("--message-trailing-width", `${Math.ceil(width) + TRAILING_GAP_PX}px`);
   }
   for (const [body, slot] of pendingStamps) {
     if (body.contains(slot)) {

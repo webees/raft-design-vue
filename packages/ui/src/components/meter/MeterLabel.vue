@@ -10,9 +10,7 @@ defineProps<{ as?: string; asChild?: boolean }>();
 
 const attrs = useAttrs();
 const context = inject(meterContextKey, undefined);
-const labelClass = computed(() =>
-  meter().label({ className: attrs.class as string }),
-);
+const labelClass = computed(() => meter().label({ className: attrs.class as string }));
 </script>
 
 <template>

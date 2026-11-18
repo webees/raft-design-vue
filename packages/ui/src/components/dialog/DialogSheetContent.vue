@@ -5,11 +5,7 @@ import { toElement } from "../../lib/dom";
 import { useMobileViewport } from "../../lib/use-mobile-viewport";
 import { useSoftKeyboard } from "../../lib/use-soft-keyboard";
 import DialogContent from "./DialogContent.vue";
-import {
-  DialogSheetProvider,
-  dialogSheet,
-  dialogSheetSurfaceKey,
-} from "./dialog-sheet-context";
+import { DialogSheetProvider, dialogSheet, dialogSheetSurfaceKey } from "./dialog-sheet-context";
 
 defineOptions({ name: "RaftDialogSheetContent", inheritAttrs: false });
 
@@ -60,7 +56,9 @@ watch(
       for (const record of records) {
         for (const node of record.addedNodes) {
           if (!(node instanceof Element)) continue;
-          const problem = node.matches(PROBLEM_SELECTOR) ? node : node.querySelector(PROBLEM_SELECTOR);
+          const problem = node.matches(PROBLEM_SELECTOR)
+            ? node
+            : node.querySelector(PROBLEM_SELECTOR);
           if (!problem) continue;
           problem.scrollIntoView?.({ block: "nearest" });
           return;
@@ -82,7 +80,7 @@ onBeforeUnmount(() => observer?.disconnect());
     :overlay-class="overlayClass"
     :overlay-cover="sheet"
     :placement="sheet ? undefined : ($attrs.placement as 'top' | 'center' | undefined)"
-    :style="[($attrs.style as string | Record<string, string> | undefined), sheetBox]"
+    :style="[$attrs.style as string | Record<string, string> | undefined, sheetBox]"
     :data-sheet="sheet ? '' : undefined"
   >
     <DialogSheetProvider :sheet="sheet" :popup="popupElement">

@@ -119,7 +119,11 @@ const displayState = computed(() =>
       :class="indicator({ platform: pull.platform }).surface()"
       @transitionend="
         (event: TransitionEvent) => {
-          if (event.target === event.currentTarget && event.propertyName === 'scale' && exitKind === 'finish')
+          if (
+            event.target === event.currentTarget &&
+            event.propertyName === 'scale' &&
+            exitKind === 'finish'
+          )
             exitKind = 'gone';
         }
       "

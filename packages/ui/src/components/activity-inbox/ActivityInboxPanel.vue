@@ -13,7 +13,12 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <Panel edge="inset" v-bind="{ ...attrs, class: undefined }" data-slot="activity-inbox-root" :class="rootClass">
+  <Panel
+    edge="inset"
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="activity-inbox-root"
+    :class="rootClass"
+  >
     <slot />
   </Panel>
 </template>

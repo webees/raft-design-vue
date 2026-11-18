@@ -6,14 +6,13 @@ import { panelTitleTrigger, panelTitleTriggerLabel } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelTitleTrigger", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(),
-  { disabled: false, as: "button", asChild: false },
-);
+withDefaults(defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(), {
+  disabled: false,
+  as: "button",
+  asChild: false,
+});
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelTitleTrigger({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelTitleTrigger({ className: attrs.class as string }));
 </script>
 
 <template>

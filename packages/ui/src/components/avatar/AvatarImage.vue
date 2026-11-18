@@ -6,9 +6,7 @@ import { avatarVariants } from "./avatar.variants";
 defineOptions({ name: "RaftAvatarImage", inheritAttrs: false });
 defineProps<{ src: string }>();
 const attrs = useAttrs();
-const imageClass = computed(() =>
-  avatarVariants().image({ className: attrs.class as string }),
-);
+const imageClass = computed(() => avatarVariants().image({ className: attrs.class as string }));
 </script>
 
 <template>

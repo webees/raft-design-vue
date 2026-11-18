@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
+import { computed, useAttrs } from "vue";
 import { ArrowLeft } from "lucide-vue-next";
 
 import PanelAction from "../panel/PanelAction.vue";
-import { dialogSheetHeadKey } from "./dialog-sheet-context";
+import { useInDialogSheetHead } from "./dialog-sheet-context";
 
 defineOptions({ name: "RaftDialogSheetBack", inheritAttrs: false });
 
@@ -16,7 +16,7 @@ withDefaults(
 );
 
 const attrs = useAttrs();
-const inSheetHead = inject(dialogSheetHeadKey, null);
+const inSheetHead = useInDialogSheetHead();
 const visible = computed(() => !!inSheetHead?.value);
 </script>
 

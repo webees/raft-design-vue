@@ -24,10 +24,7 @@ export const tasksPanel = tv({
       "@min-md/tasks:mr-auto",
       "flex flex-wrap items-center gap-2",
     ],
-    toolbarView: [
-      "col-start-2 row-start-1 justify-self-end",
-      "flex flex-wrap items-center gap-2",
-    ],
+    toolbarView: ["col-start-2 row-start-1 justify-self-end", "flex flex-wrap items-center gap-2"],
     toolbarLabel: [
       "inline-flex items-center",
       "[&_svg]:size-3.5 [&_svg]:shrink-0 [&>svg:last-child]:size-3",

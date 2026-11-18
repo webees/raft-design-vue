@@ -34,7 +34,10 @@ export const messageCard = tv({
       "*:size-full *:shrink-0 [&>img]:rounded-[2px] [&>img]:object-cover",
     ],
     sourceName: ["min-w-0 truncate", "font-semibold text-foreground"],
-    sourceHost: ["flex min-w-0 items-baseline", "before:shrink-0 before:pe-1.5 before:content-['·']"],
+    sourceHost: [
+      "flex min-w-0 items-baseline",
+      "before:shrink-0 before:pe-1.5 before:content-['·']",
+    ],
     sourceHostText: ["min-w-0 truncate"],
     sourceFooter: [
       "m-0 truncate",

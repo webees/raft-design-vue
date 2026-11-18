@@ -5,10 +5,10 @@ import type { ButtonSize, ButtonVariant } from "../button/button.variants";
 
 defineOptions({ name: "RaftAlertDialogAction", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ variant?: ButtonVariant; size?: ButtonSize }>(),
-  { variant: "primary", size: "md" },
-);
+const props = withDefaults(defineProps<{ variant?: ButtonVariant; size?: ButtonSize }>(), {
+  variant: "primary",
+  size: "md",
+});
 
 const attrs = useAttrs();
 const actionClass = computed(() => attrs.class as string);

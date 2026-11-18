@@ -40,7 +40,11 @@ const slots = useSlots();
 const isCount = (value: unknown) =>
   typeof value === "number" || (typeof value === "string" && /^\d+$/.test(value));
 const styles = computed(() => fitToolbar({ count: isCount(props.value) }));
-const item = useFitItem({ label: props.labelOrder, more: props.moreOrder, moreItem: props.moreItem });
+const item = useFitItem({
+  label: props.labelOrder,
+  more: props.moreOrder,
+  moreItem: props.moreItem,
+});
 
 const hasValue = computed(
   () => props.hasValue ?? (props.value !== undefined && props.value !== null && props.value !== ""),
@@ -76,11 +80,7 @@ const rootClass = computed(() => cn(styles.value.picker(), attrs.class as string
         <span data-slot="fit-toolbar-picker-label" :class="styles.label()">
           <slot>{{ label }}</slot>
         </span>
-        <span
-          v-if="hasValue"
-          data-slot="fit-toolbar-picker-value"
-          :class="styles.pickerValue()"
-        >
+        <span v-if="hasValue" data-slot="fit-toolbar-picker-value" :class="styles.pickerValue()">
           {{ value }}
         </span>
         <span

@@ -8,9 +8,7 @@ defineOptions({ name: "RaftListRowChevron", inheritAttrs: false });
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const styles = listRow();
-const chevronClass = computed(() =>
-  cn(styles.chevron(), props.class, attrs.class as string),
-);
+const chevronClass = computed(() => cn(styles.chevron(), props.class, attrs.class as string));
 </script>
 
 <template>

@@ -9,7 +9,10 @@ import {
   type SegmentedControlVariant,
 } from "./segmented-control.variants";
 import { isIconsOnlyPreset, useTrackFit } from "./use-track-fit";
-import { provideSegmentedControlIconsOnly, provideSegmentedControlToolbarStop } from "./segmented-control-context";
+import {
+  provideSegmentedControlIconsOnly,
+  provideSegmentedControlToolbarStop,
+} from "./segmented-control-context";
 
 defineOptions({ name: "RaftSegmentedControl", inheritAttrs: false });
 

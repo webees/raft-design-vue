@@ -30,7 +30,9 @@ const valueClass = computed(() =>
 );
 const frameClass = computed(() => styles.fitFrame());
 const sizerClass = computed(() => styles.sizer());
-const sizerLabelClass = computed(() => styles.sizerLabel({ className: "after:content-[attr(data-label)]" }));
+const sizerLabelClass = computed(() =>
+  styles.sizerLabel({ className: "after:content-[attr(data-label)]" }),
+);
 const sizerPlaceholderClass = computed(() =>
   styles.sizerPlaceholder({ className: "after:content-[attr(data-label)]" }),
 );
@@ -50,7 +52,12 @@ const sizerPlaceholderClass = computed(() =>
     </SelectValue>
     <span aria-hidden data-slot="select-value-sizer" :class="sizerClass">
       <span v-if="placeholder" :data-label="placeholder" :class="sizerPlaceholderClass" />
-      <span v-for="(label, index) in labels" :key="index" :data-label="label" :class="sizerLabelClass" />
+      <span
+        v-for="(label, index) in labels"
+        :key="index"
+        :data-label="label"
+        :class="sizerLabelClass"
+      />
     </span>
   </span>
   <SelectValue

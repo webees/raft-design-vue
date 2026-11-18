@@ -81,9 +81,7 @@ describe("MessageList", () => {
     const pill = wrapper.get('[data-slot="message-list-jump-pill"]');
     expect(pill.element.tagName).toBe("BUTTON");
     expect(pill.classes()).toContain("h-8");
-    expect(pill.find('[data-slot="message-list-jump-pill-content"]').text()).toBe(
-      "New messages",
-    );
+    expect(pill.find('[data-slot="message-list-jump-pill-content"]').text()).toBe("New messages");
   });
 
   it("renders the dismiss pill at icon size", () => {
@@ -93,9 +91,7 @@ describe("MessageList", () => {
     const pill = wrapper.get('[data-slot="message-list-jump-pill-dismiss"]');
     expect(pill.attributes("aria-label")).toBe("Dismiss");
     expect(pill.classes()).toContain("size-8");
-    expect(
-      pill.find('[data-slot="message-list-jump-pill-dismiss-content"]').exists(),
-    ).toBe(true);
+    expect(pill.find('[data-slot="message-list-jump-pill-dismiss-content"]').exists()).toBe(true);
   });
 
   it("applies the requested notice tone", () => {

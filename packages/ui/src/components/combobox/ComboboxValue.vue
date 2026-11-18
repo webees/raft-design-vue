@@ -3,7 +3,9 @@ import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { useComboboxSelection } from "./combobox-context";
 defineOptions({ name: "RaftComboboxValue", inheritAttrs: false });
-const props = withDefaults(defineProps<{ className?: string; placeholder?: string }>(), { placeholder: "" });
+const props = withDefaults(defineProps<{ className?: string; placeholder?: string }>(), {
+  placeholder: "",
+});
 const attrs = useAttrs();
 const { values } = useComboboxSelection();
 const classes = computed(() => cn("min-w-0 truncate", props.className, attrs.class as string));

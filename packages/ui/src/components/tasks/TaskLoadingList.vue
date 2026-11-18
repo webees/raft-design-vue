@@ -4,9 +4,7 @@ import { taskLoading } from "./task-loading.variants";
 
 defineOptions({ name: "RaftTaskLoadingList", inheritAttrs: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  taskLoading().list({ className: attrs.class as string }),
-);
+const rootClass = computed(() => taskLoading().list({ className: attrs.class as string }));
 </script>
 
 <template>

@@ -24,18 +24,30 @@ function mountPopover(props: Record<string, unknown> = {}) {
       default: () =>
         h("div", { style: "display:flex" }, [
           h(PopoverTrigger, {}, { default: () => "Open" }),
-          h(PopoverContent, { size }, {
-            default: () => [
-              h(PopoverHeader, {}, { default: () => h(PopoverTitle, {}, { default: () => "Rename" }) }),
-              h(PopoverBody, {}, {
-                default: () => [
-                  h(PopoverDescription, {}, { default: () => "Choose a new name." }),
-                  h(PopoverSeparator),
-                ],
-              }),
-              h(PopoverActions, {}, { default: () => "Save" }),
-            ],
-          }),
+          h(
+            PopoverContent,
+            { size },
+            {
+              default: () => [
+                h(
+                  PopoverHeader,
+                  {},
+                  { default: () => h(PopoverTitle, {}, { default: () => "Rename" }) },
+                ),
+                h(
+                  PopoverBody,
+                  {},
+                  {
+                    default: () => [
+                      h(PopoverDescription, {}, { default: () => "Choose a new name." }),
+                      h(PopoverSeparator),
+                    ],
+                  },
+                ),
+                h(PopoverActions, {}, { default: () => "Save" }),
+              ],
+            },
+          ),
         ]),
     },
   });

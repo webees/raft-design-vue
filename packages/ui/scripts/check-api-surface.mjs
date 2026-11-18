@@ -12,7 +12,12 @@ import { join } from "node:path";
 const uiRoot = join(import.meta.dir, "..");
 const root = join(uiRoot, "../..");
 const lock = JSON.parse(readFileSync(join(root, "tooling/upstream/upstream.lock.json"), "utf8"));
-const upstream = join(root, "tooling/upstream/.work", `raft-design-${lock.commit}`, "packages/ui/src/components");
+const upstream = join(
+  root,
+  "tooling/upstream/.work",
+  `raft-design-${lock.commit}`,
+  "packages/ui/src/components",
+);
 
 if (!existsSync(upstream)) {
   console.error(`Upstream snapshot missing: ${upstream}\nRun \`bun run sync:upstream\`.`);
@@ -27,7 +32,12 @@ function exportedTypes(file) {
   const names = new Set();
   for (const match of source.matchAll(typeBlock)) {
     for (const part of match[1].split(",")) {
-      const name = part.trim().replace(/^type\s+/, "").split(/\s+as\s+/).pop()?.trim();
+      const name = part
+        .trim()
+        .replace(/^type\s+/, "")
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim();
       if (name) names.add(name);
     }
   }

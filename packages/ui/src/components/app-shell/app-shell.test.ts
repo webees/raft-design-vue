@@ -49,9 +49,7 @@ describe("AppShell", () => {
     const wrapper = mount(Example);
     expect(wrapper.find('[data-slot="app-shell-rail-slot"]').text()).toBe("Rail");
     expect(wrapper.find('[data-slot="app-shell-main-slot"]').text()).toBe("Main");
-    expect(wrapper.find('[data-slot="app-shell-root"]').attributes("data-state")).toBe(
-      "expanded",
-    );
+    expect(wrapper.find('[data-slot="app-shell-root"]').attributes("data-state")).toBe("expanded");
   });
 
   it("toggles the sidebar from the trigger and links aria-controls", async () => {
@@ -66,9 +64,7 @@ describe("AppShell", () => {
 
     expect(trigger.attributes("aria-expanded")).toBe("false");
     expect(sidebar.attributes("inert")).toBeDefined();
-    expect(wrapper.find('[data-slot="app-shell-root"]').attributes("data-state")).toBe(
-      "collapsed",
-    );
+    expect(wrapper.find('[data-slot="app-shell-root"]').attributes("data-state")).toBe("collapsed");
   });
 
   it("renders no trigger when the sidebar is not collapsible", () => {

@@ -16,7 +16,9 @@ const canPrev = ref(false);
 const canNext = ref(false);
 
 const recipe = computed(() => composerAttachment());
-const rootClass = computed(() => recipe.value.attachmentsScrollArea({ class: cn(attrs.class as string, props.class) }));
+const rootClass = computed(() =>
+  recipe.value.attachmentsScrollArea({ class: cn(attrs.class as string, props.class) }),
+);
 const prevNavClass = computed(() => composerAttachment({ side: "prev" }).attachmentsNav());
 const nextNavClass = computed(() => composerAttachment({ side: "next" }).attachmentsNav());
 const rowClass = computed(() => recipe.value.attachmentsRow());
@@ -56,7 +58,13 @@ function scrollByPage(direction: -1 | 1) {
     >
       <slot name="prev">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden class="size-4">
-          <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="M10 3 5 8l5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </slot>
     </Button>
@@ -84,7 +92,13 @@ function scrollByPage(direction: -1 | 1) {
     >
       <slot name="next">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden class="size-4">
-          <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="m6 3 5 5-5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </slot>
     </Button>

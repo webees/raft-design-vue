@@ -10,9 +10,7 @@ defineProps<{ as?: string; asChild?: boolean }>();
 
 const attrs = useAttrs();
 const context = inject(meterContextKey, undefined);
-const indicatorClass = computed(() =>
-  meter().indicator({ className: attrs.class as string }),
-);
+const indicatorClass = computed(() => meter().indicator({ className: attrs.class as string }));
 const indicatorStyle = computed(() => [
   { width: `${(context?.value.share ?? 0) * 100}%` },
   attrs.style,

@@ -11,9 +11,8 @@ export type AppShellSidebarContextValue = {
   toggle: () => void;
 };
 
-export const appShellSidebarKey: InjectionKey<AppShellSidebarContextValue> = Symbol(
-  "raft-app-shell-sidebar",
-);
+export const appShellSidebarKey: InjectionKey<AppShellSidebarContextValue> =
+  Symbol("raft-app-shell-sidebar");
 
 export function useOptionalAppShellSidebar() {
   return inject(appShellSidebarKey, null);

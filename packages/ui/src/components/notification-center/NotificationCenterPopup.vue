@@ -62,8 +62,8 @@ const positionerAttrs = computed(() => {
       :align="align"
       :align-offset="alignOffset"
       :avoid-collisions="avoidCollisions"
-        :collision-padding="collision"
-        :collision-boundary="collisionBoundary"
+      :collision-padding="collision"
+      :collision-boundary="collisionBoundary"
       class="isolate z-popup outline-none"
     >
       <div

@@ -13,12 +13,8 @@ const Profile = defineComponent({
   setup() {
     return () =>
       h(ProfilePanel, { edge: "attached" }, () => [
-        h(ProfilePanelHeader, () => [
-          h(ProfilePanelHeaderContent, () => "Profile"),
-        ]),
-        h(ProfilePanelBody, () => [
-          h(ProfilePanelSection, () => "Details"),
-        ]),
+        h(ProfilePanelHeader, () => [h(ProfilePanelHeaderContent, () => "Profile")]),
+        h(ProfilePanelBody, () => [h(ProfilePanelSection, () => "Details")]),
       ]);
   },
 });

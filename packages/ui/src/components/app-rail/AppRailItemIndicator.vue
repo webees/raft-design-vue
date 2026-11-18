@@ -9,7 +9,8 @@ const attrs = useAttrs();
 const props = withDefaults(
   defineProps<{
     size?: "xs" | "sm" | "md" | "lg";
-    variant?: "default" | "primary" | "information" | "muted" | "accent" | "success" | "warning" | "danger";
+    variant?:
+      "default" | "primary" | "information" | "muted" | "accent" | "success" | "warning" | "danger";
     class?: string;
   }>(),
   { size: "sm", variant: "accent" },

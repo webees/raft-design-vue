@@ -43,12 +43,7 @@ export const TaskCardLegacy = createPart(
   "span",
   "task-card-legacy",
 );
-export const TaskCardTitle = createPart(
-  "RaftTaskCardTitle",
-  "title",
-  "p",
-  "task-card-title",
-);
+export const TaskCardTitle = createPart("RaftTaskCardTitle", "title", "p", "task-card-title");
 export const TaskCardDescription = createPart(
   "RaftTaskCardDescription",
   "description",

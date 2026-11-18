@@ -7,5 +7,8 @@ packages/ui/src/themes.css
 packages/ui/src/upstream-styles.css
 packages/ui/src/tokens.json
 packages/ui/src/themes.json
+packages/ui/src/component-props.generated.ts
 tooling/upstream/upstream.lock.json
+tooling/upstream/.work
+apps/docs/src/generated
 .changeset/*.md

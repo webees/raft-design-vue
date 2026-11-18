@@ -12,5 +12,10 @@ const rootClass = computed(() =>
 </script>
 
 <template>
-  <span v-bind="{ ...attrs, class: undefined }" data-slot="inbox-item-leading-badge" :class="rootClass"><slot /></span>
+  <span
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="inbox-item-leading-badge"
+    :class="rootClass"
+    ><slot
+  /></span>
 </template>

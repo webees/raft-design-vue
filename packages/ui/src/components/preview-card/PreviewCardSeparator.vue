@@ -5,7 +5,9 @@ import { previewCard } from "./preview-card.variants";
 defineOptions({ name: "RaftPreviewCardSeparator", inheritAttrs: false });
 
 const attrs = useAttrs();
-const separatorClass = computed(() => previewCard().separator({ className: attrs.class as string }));
+const separatorClass = computed(() =>
+  previewCard().separator({ className: attrs.class as string }),
+);
 </script>
 
 <template>

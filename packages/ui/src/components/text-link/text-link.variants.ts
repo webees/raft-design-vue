@@ -25,6 +25,4 @@ export const textLinkVariants = tv({
   },
 });
 
-export type TextLinkVariant = NonNullable<
-  VariantProps<typeof textLinkVariants>["variant"]
->;
+export type TextLinkVariant = NonNullable<VariantProps<typeof textLinkVariants>["variant"]>;

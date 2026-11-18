@@ -20,9 +20,7 @@ type PartName = keyof typeof parts;
 
 export function createMessageQuotedPreviewPart(name: PartName) {
   const { tag, slot } = parts[name];
-  const kebab = name
-    .replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`)
-    .replace(/^-/, ""); 
+  const kebab = name.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`).replace(/^-/, "");
   return defineComponent({
     name: `RaftMessageQuotedPreview${name}`,
     inheritAttrs: false,
@@ -52,9 +50,8 @@ export const MessageQuotedPreviewThread = createMessageQuotedPreviewPart("Thread
 export const MessageQuotedPreviewAuthor = createMessageQuotedPreviewPart("Author");
 export const MessageQuotedPreviewAuthorName = createMessageQuotedPreviewPart("AuthorName");
 export const MessageQuotedPreviewAuthorMeta = createMessageQuotedPreviewPart("AuthorMeta");
-export const MessageQuotedPreviewAuthorDelegatedBy = createMessageQuotedPreviewPart(
-  "AuthorDelegatedBy",
-);
+export const MessageQuotedPreviewAuthorDelegatedBy =
+  createMessageQuotedPreviewPart("AuthorDelegatedBy");
 export const MessageQuotedPreviewTimestamp = createMessageQuotedPreviewPart("Timestamp");
 export const MessageQuotedPreviewText = createMessageQuotedPreviewPart("Text");
 export const MessageQuotedPreviewAttachments = createMessageQuotedPreviewPart("Attachments");

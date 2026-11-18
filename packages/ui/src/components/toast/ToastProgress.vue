@@ -16,9 +16,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const classes = computed(() =>
-  toastStyles().progress({ class: props.class }),
-);
+const classes = computed(() => toastStyles().progress({ class: props.class }));
 </script>
 
 <template>

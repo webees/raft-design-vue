@@ -10,7 +10,14 @@ type SlotPartOptions = {
   rootProps?: () => Record<string, unknown>;
 };
 
-export function createSlotPart({ name, tag, dataSlot, className, type, rootProps }: SlotPartOptions) {
+export function createSlotPart({
+  name,
+  tag,
+  dataSlot,
+  className,
+  type,
+  rootProps,
+}: SlotPartOptions) {
   return defineComponent({
     name,
     inheritAttrs: false,

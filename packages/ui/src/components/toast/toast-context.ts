@@ -26,9 +26,7 @@ export const TOAST_PROVIDER_CONFIG_KEY: InjectionKey<ToastProviderConfig> =
 export const TOAST_ITEM_CONTEXT_KEY: InjectionKey<ToastItemContext> =
   Symbol("RaftToastItemContext");
 
-export function getSwipeDirection(
-  placement: ToastPlacement,
-): "up" | "down" | "left" | "right" {
+export function getSwipeDirection(placement: ToastPlacement): "up" | "down" | "left" | "right" {
   if (placement.startsWith("top")) return "up";
   if (placement === "none") return "down";
   return "down";

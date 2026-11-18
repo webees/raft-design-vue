@@ -45,8 +45,7 @@ function mountBundle(foldLineLimit?: number) {
           {
             default: () =>
               h(MessageForwardedBundleItem, null, {
-                default: () =>
-                  h(MessageForwardedBundleItemContent, null, () => "Forwarded"),
+                default: () => h(MessageForwardedBundleItemContent, null, () => "Forwarded"),
               }),
           },
         ),

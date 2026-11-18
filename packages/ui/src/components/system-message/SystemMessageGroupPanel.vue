@@ -8,10 +8,7 @@ const attrs = useAttrs();
 </script>
 
 <template>
-  <CollapsibleContent
-    v-bind="attrs"
-    data-slot="system-message-group-panel"
-  >
+  <CollapsibleContent v-bind="attrs" data-slot="system-message-group-panel">
     <slot />
   </CollapsibleContent>
 </template>

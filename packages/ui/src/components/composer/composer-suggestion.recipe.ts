@@ -41,7 +41,10 @@ export const composerSuggestionList = tv({
       },
       auxiliary: { icon: ["-ml-1 size-3", "text-foreground-hint"] },
       inline: {
-        icon: ["flex size-3.5 items-center justify-center [&_svg]:size-3.5", "text-foreground-hint"],
+        icon: [
+          "flex size-3.5 items-center justify-center [&_svg]:size-3.5",
+          "text-foreground-hint",
+        ],
       },
     },
     metaVariant: {

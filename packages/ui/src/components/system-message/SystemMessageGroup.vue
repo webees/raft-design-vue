@@ -15,9 +15,7 @@ const emit = defineEmits<{ "update:open": [open: boolean] }>();
 const attrs = useAttrs();
 const instance = getCurrentInstance();
 
-const rootClass = computed(() =>
-  messageSystem().systemGroup({ className: attrs.class as string }),
-);
+const rootClass = computed(() => messageSystem().systemGroup({ className: attrs.class as string }));
 
 const rootProps = computed(() => {
   const controlled = instance?.vnode.props?.["open"] !== undefined;

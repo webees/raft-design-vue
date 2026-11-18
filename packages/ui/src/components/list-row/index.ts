@@ -11,8 +11,4 @@ export { default as ListRowDescription } from "./ListRowDescription.vue";
 export { default as ListRowMeta } from "./ListRowMeta.vue";
 export { default as ListRowValue } from "./ListRowValue.vue";
 export { default as ListRowChevron } from "./ListRowChevron.vue";
-export {
-  listRow,
-  type ListRowTone,
-  type ListRowVariant,
-} from "./list-row.variants";
+export { listRow, type ListRowTone, type ListRowVariant } from "./list-row.variants";

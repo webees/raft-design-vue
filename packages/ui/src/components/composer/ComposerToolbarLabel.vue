@@ -20,7 +20,11 @@ const classes = computed(() =>
 </script>
 
 <template>
-  <label v-bind="{ ...attrs, class: undefined }" :class="classes" data-slot="composer-toolbar-label">
+  <label
+    v-bind="{ ...attrs, class: undefined }"
+    :class="classes"
+    data-slot="composer-toolbar-label"
+  >
     <slot />
   </label>
 </template>

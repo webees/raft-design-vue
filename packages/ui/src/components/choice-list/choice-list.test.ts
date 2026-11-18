@@ -43,7 +43,14 @@ describe("ChoiceList", () => {
 
   it("keeps pinned rows above the rest while searching", async () => {
     const wrapper = mount(ChoiceList, {
-      props: { items: [{ value: "a", label: "One" }, { value: "b", label: "Two" }], defaultValue: "b", search: "always" },
+      props: {
+        items: [
+          { value: "a", label: "One" },
+          { value: "b", label: "Two" },
+        ],
+        defaultValue: "b",
+        search: "always",
+      },
     });
     await wrapper.find("input[type=search]").setValue("one");
     const rows = wrapper.findAll("[data-slot=choice-list-item]");

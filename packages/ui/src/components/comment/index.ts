@@ -26,7 +26,4 @@ export {
   type CommentMarginLayoutItem,
   type CommentMarginLayoutOptions,
 } from "./comment-margin-layout";
-export {
-  useCommentMarginFits,
-  type UseCommentMarginFitsOptions,
-} from "./use-comment-margin-fits";
+export { useCommentMarginFits, type UseCommentMarginFitsOptions } from "./use-comment-margin-fits";

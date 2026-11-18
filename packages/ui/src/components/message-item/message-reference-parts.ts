@@ -2,20 +2,10 @@ import { computed, defineComponent, h, useAttrs, type PropType } from "vue";
 import { Check } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 
-import {
-  messageReference,
-  type MessageReferenceTextVariant,
-} from "./message-extras.recipe";
+import { messageReference, type MessageReferenceTextVariant } from "./message-extras.recipe";
 
 export type MessageReferenceChipVariant =
-  | "primary"
-  | "secondary"
-  | "accent"
-  | "muted"
-  | "info"
-  | "link"
-  | "pending"
-  | "unavailable";
+  "primary" | "secondary" | "accent" | "muted" | "info" | "link" | "pending" | "unavailable";
 
 function referencePart(
   name: string,

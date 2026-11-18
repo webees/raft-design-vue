@@ -41,8 +41,14 @@ const strings = (source: string) => {
 const normalize = (value: string) =>
   value
     .replace(/data-(?!\[)([a-z0-9-]+):/g, "data-[$1]:")
-    .replace(/data-\[state=([a-z-]+)\]:/g, (_m, state: string) => `data-[${state === "on" ? "pressed" : state}]:`)
-    .replace(/data-state=([a-z-]+)/g, (_m, state: string) => `data-${state === "on" ? "pressed" : state}`)
+    .replace(
+      /data-\[state=([a-z-]+)\]:/g,
+      (_m, state: string) => `data-[${state === "on" ? "pressed" : state}]:`,
+    )
+    .replace(
+      /data-state=([a-z-]+)/g,
+      (_m, state: string) => `data-${state === "on" ? "pressed" : state}`,
+    )
     .replace(/(^|:)disabled:/g, "$1data-[disabled]:")
     .replace(/group-data-(?!\[)([a-z0-9-]+)\//g, "group-data-[$1]/")
     .replace(/var\[var\((--[a-z0-9-]+)\)\]/g, "var($1)")
@@ -75,7 +81,10 @@ const diff = (upstream: string[], local: string[]) => {
 };
 
 const recipeFiles = (dir: string) =>
-  walk(dir, (file) => /\.(recipes?|variants)\.ts$/.test(file) && !basename(file).includes(".test."));
+  walk(
+    dir,
+    (file) => /\.(recipes?|variants)\.ts$/.test(file) && !basename(file).includes(".test."),
+  );
 
 const tvBlocks = (source: string) => {
   const blocks: string[] = [];
@@ -113,9 +122,10 @@ const reports: Report[] = [];
 
 const components = [
   ...new Set(
-    walk(upstreamRoot, (file) => /(\.recipe\.ts|\.tsx)$/.test(file) && !file.includes(".test.")).map(
-      (file) => file.slice(upstreamRoot.length + 1).split("/")[0]!,
-    ),
+    walk(
+      upstreamRoot,
+      (file) => /(\.recipe\.ts|\.tsx)$/.test(file) && !file.includes(".test."),
+    ).map((file) => file.slice(upstreamRoot.length + 1).split("/")[0]!),
   ),
 ]
   .filter((component) => {
@@ -161,8 +171,10 @@ if (json) {
 } else {
   for (const report of reports) {
     console.log(`\n## ${report.component}  (${report.upstream} → ${report.local})`);
-    if (report.missing.length) console.log(`  missing (${report.missing.length}): ${report.missing.join(" · ")}`);
-    if (report.extra.length) console.log(`  extra   (${report.extra.length}): ${report.extra.join(" · ")}`);
+    if (report.missing.length)
+      console.log(`  missing (${report.missing.length}): ${report.missing.join(" · ")}`);
+    if (report.extra.length)
+      console.log(`  extra   (${report.extra.length}): ${report.extra.join(" · ")}`);
   }
   console.log(`\n${reports.length} of ${components.length} components differ`);
 }

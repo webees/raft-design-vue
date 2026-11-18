@@ -51,9 +51,7 @@ const contentClass = computed(() =>
   mobileNavServer().content({ class: [props.class, attrs.class as string | undefined] }),
 );
 const scrollClass = computed(() => mobileNavServer().scroll());
-const portalTarget = computed(
-  () => attrs.to as string | HTMLElement | undefined,
-);
+const portalTarget = computed(() => attrs.to as string | HTMLElement | undefined);
 
 const LIST_SLOT = "mobile-nav-server-popover-list";
 const GUTTERS_SLOT = "scroll-area-gutters";
@@ -94,8 +92,7 @@ function measureOneRowFloor(area: HTMLElement) {
     }
     measure();
   };
-  const mutation =
-    typeof MutationObserver === "undefined" ? null : new MutationObserver(remeasure);
+  const mutation = typeof MutationObserver === "undefined" ? null : new MutationObserver(remeasure);
   mutation?.observe(area, { childList: true });
   remeasure();
   return () => {

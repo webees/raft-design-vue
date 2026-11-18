@@ -11,9 +11,7 @@ defineProps<{
 }>();
 
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  saveStatus().root({ className: attrs.class as string }),
-);
+const rootClass = computed(() => saveStatus().root({ className: attrs.class as string }));
 </script>
 
 <template>

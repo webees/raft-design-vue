@@ -35,7 +35,11 @@ const triggerAttrs = computed(() => {
     :class="triggerClass"
   >
     <slot />
-    <span aria-hidden data-slot="dropdown-menu-submenu-trigger-indicator" :class="dropdownMenu().indicator()">
+    <span
+      aria-hidden
+      data-slot="dropdown-menu-submenu-trigger-indicator"
+      :class="dropdownMenu().indicator()"
+    >
       <svg viewBox="0 0 12 12" fill="none" class="size-3 shrink-0">
         <path
           d="m4.5 2.5 3.5 3.5-3.5 3.5"

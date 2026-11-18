@@ -5,14 +5,9 @@ import { panelNotice } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelNoticeContent", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{ as?: string; asChild?: boolean }>(),
-  { as: "div", asChild: false },
-);
+withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "div", asChild: false });
 const attrs = useAttrs();
-const rootClass = computed(() =>
-  panelNotice().content({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelNotice().content({ className: attrs.class as string }));
 </script>
 
 <template>

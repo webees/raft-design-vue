@@ -43,10 +43,7 @@ describe("ListRow", () => {
     const wrapper = mount(ListRow, {
       props: { interactive: false, selected: true, variant: "plain" },
       slots: {
-        default: () => [
-          h(ListRowValue, null, { default: () => "Enabled" }),
-          h(ListRowChevron),
-        ],
+        default: () => [h(ListRowValue, null, { default: () => "Enabled" }), h(ListRowChevron)],
       },
     });
     const row = wrapper.find("[data-slot='list-row']");
@@ -60,9 +57,7 @@ describe("ListRow", () => {
     const wrapper = mount(ListRowGroup, {
       slots: { default: () => "Rows" },
     });
-    expect(wrapper.find("[data-slot='list-row-group']").classes()).toContain(
-      "rounded-container",
-    );
+    expect(wrapper.find("[data-slot='list-row-group']").classes()).toContain("rounded-container");
   });
 
   it("renders meta in tabular mono type", () => {

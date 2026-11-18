@@ -19,9 +19,7 @@ const emit = defineEmits<{ "update:pressed": [value: boolean] }>();
 const attrs = useAttrs();
 const internal = ref(props.defaultPressed);
 const current = computed(() => props.pressed ?? internal.value);
-const rootClass = computed(() =>
-  panelToggleAction({ className: attrs.class as string }),
-);
+const rootClass = computed(() => panelToggleAction({ className: attrs.class as string }));
 
 function update(value: boolean) {
   internal.value = value;

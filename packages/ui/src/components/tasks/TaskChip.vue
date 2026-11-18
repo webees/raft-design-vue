@@ -23,9 +23,7 @@ const rootClass = computed(() =>
     }),
   ),
 );
-const slotName = computed(
-  () => (attrs["data-slot"] as string | undefined) ?? "task-chip",
-);
+const slotName = computed(() => (attrs["data-slot"] as string | undefined) ?? "task-chip");
 </script>
 
 <template>

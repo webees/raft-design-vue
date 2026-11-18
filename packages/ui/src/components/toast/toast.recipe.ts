@@ -15,9 +15,7 @@ export const toast = tv({
       "pointer-events-none isolate z-toast w-[min(24rem,calc(100vw-2rem))]",
       "outline-none",
     ],
-    positioner: [
-      "isolate z-[calc(var(--z-index-toast)-var(--toast-index))] outline-none",
-    ],
+    positioner: ["isolate z-[calc(var(--z-index-toast)-var(--toast-index))] outline-none"],
     root: [
       "group/toast pointer-events-auto",
       "select-text",

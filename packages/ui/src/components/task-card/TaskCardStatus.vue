@@ -8,18 +8,13 @@ import { taskCardStatus } from "./task-card.variants";
 
 defineOptions({ name: "RaftTaskCardStatus", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ status: TaskStatusId; busy?: boolean }>(),
-  { busy: false },
-);
+const props = withDefaults(defineProps<{ status: TaskStatusId; busy?: boolean }>(), {
+  busy: false,
+});
 const attrs = useAttrs();
 
 const rootClass = computed(() =>
-  cn(
-    taskCardStatus(),
-    taskStatusSoft({ status: props.status }),
-    attrs.class as string,
-  ),
+  cn(taskCardStatus(), taskStatusSoft({ status: props.status }), attrs.class as string),
 );
 </script>
 

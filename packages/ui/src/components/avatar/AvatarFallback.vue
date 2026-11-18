@@ -11,7 +11,11 @@ const fallbackClass = computed(() =>
 </script>
 
 <template>
-  <AvatarFallback v-bind="{ ...attrs, class: undefined }" data-slot="avatar-fallback" :class="fallbackClass">
+  <AvatarFallback
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="avatar-fallback"
+    :class="fallbackClass"
+  >
     <slot>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -21,24 +25,137 @@ const fallbackClass = computed(() =>
         aria-hidden="true"
         focusable="false"
       >
-        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" stroke="currentColor">
+        <g
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1"
+          stroke="currentColor"
+        >
           <circle cx="9" cy="7.75" r="2" />
-          <path d="M9,16.25c1.407,0,2.716-.407,3.827-1.101-.481-1.67-2.003-2.899-3.827-2.899s-3.347,1.229-3.827,2.899c1.112,.694,2.42,1.101,3.827,1.101Z" />
-          <circle cx="1.889" cy="10.414" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="2.971" cy="4.972" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="2.972" cy="13.027" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="1.89" cy="7.586" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="4.973" cy="2.972" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="7.586" cy="1.889" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="15.029" cy="13.028" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="16.111" cy="7.586" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="13.028" cy="2.971" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="14.111" cy="4.972" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="16.111" cy="10.414" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="14.111" cy="13.027" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="10.414" cy="16.111" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="7.586" cy="16.111" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
-          <circle cx="10.414" cy="1.889" r=".75" fill="currentColor" data-stroke="none" stroke="none" />
+          <path
+            d="M9,16.25c1.407,0,2.716-.407,3.827-1.101-.481-1.67-2.003-2.899-3.827-2.899s-3.347,1.229-3.827,2.899c1.112,.694,2.42,1.101,3.827,1.101Z"
+          />
+          <circle
+            cx="1.889"
+            cy="10.414"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="2.971"
+            cy="4.972"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="2.972"
+            cy="13.027"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="1.89"
+            cy="7.586"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="4.973"
+            cy="2.972"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="7.586"
+            cy="1.889"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="15.029"
+            cy="13.028"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="16.111"
+            cy="7.586"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="13.028"
+            cy="2.971"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="14.111"
+            cy="4.972"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="16.111"
+            cy="10.414"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="14.111"
+            cy="13.027"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="10.414"
+            cy="16.111"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="7.586"
+            cy="16.111"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
+          <circle
+            cx="10.414"
+            cy="1.889"
+            r=".75"
+            fill="currentColor"
+            data-stroke="none"
+            stroke="none"
+          />
         </g>
       </svg>
     </slot>

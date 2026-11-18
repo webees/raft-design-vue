@@ -1,10 +1,4 @@
-import {
-  onScopeDispose,
-  shallowRef,
-  toValue,
-  watchEffect,
-  type MaybeRefOrGetter,
-} from "vue";
+import { onScopeDispose, shallowRef, toValue, watchEffect, type MaybeRefOrGetter } from "vue";
 
 import { toElement } from "./dom";
 
@@ -51,8 +45,7 @@ export function isTextEntry(node: Element | null): boolean {
   return node.tagName === "INPUT" && !NON_TEXT_INPUTS.has((node as HTMLInputElement).type);
 }
 
-const isStylus = (touch: Touch) =>
-  (touch as Touch & { touchType?: string }).touchType === "stylus";
+const isStylus = (touch: Touch) => (touch as Touch & { touchType?: string }).touchType === "stylus";
 
 /** Make `element` activate on a tap's `touchend`. Does nothing outside a browser. */
 export function attachTapActivation(element: HTMLElement): () => void {

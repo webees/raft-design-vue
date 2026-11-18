@@ -66,18 +66,12 @@ export type PullGestureStep = {
   armed: boolean;
 };
 
-export function pullDistance(
-  delta: number,
-  maxDistance = PULL_TO_REFRESH_MAX_DISTANCE,
-): number {
+export function pullDistance(delta: number, maxDistance = PULL_TO_REFRESH_MAX_DISTANCE): number {
   if (delta <= 0) return 0;
   return Math.min(maxDistance, delta * PULL_TO_REFRESH_DAMPING);
 }
 
-export function pullProgress(
-  distance: number,
-  threshold = PULL_TO_REFRESH_THRESHOLD,
-): number {
+export function pullProgress(distance: number, threshold = PULL_TO_REFRESH_THRESHOLD): number {
   if (threshold <= 0) return 1;
   return Math.min(1, Math.max(0, distance / threshold));
 }
