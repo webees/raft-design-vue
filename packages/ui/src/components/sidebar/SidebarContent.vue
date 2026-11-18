@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { useMobileViewport } from "../../lib/use-mobile-viewport";
 import { sidebarRecipe } from "./sidebar.recipe";

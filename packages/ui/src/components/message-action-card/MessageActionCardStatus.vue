@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Badge from "../badge/Badge.vue";
 import { messageActionCard } from "./message-action-card.recipes";
 
@@ -11,7 +9,14 @@ const attrs = useAttrs();
 const props = withDefaults(
   defineProps<{
     variant?:
-      "default" | "muted" | "primary" | "information" | "accent" | "success" | "warning" | "danger";
+      | "default"
+      | "muted"
+      | "primary"
+      | "information"
+      | "accent"
+      | "success"
+      | "warning"
+      | "danger";
     appearance?: "solid" | "soft" | "outline";
   }>(),
   { variant: "default", appearance: "soft" },

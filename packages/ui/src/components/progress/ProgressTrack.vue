@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { progress } from "./progress.recipe";
 
 defineOptions({ name: "RaftProgressTrack", inheritAttrs: false });

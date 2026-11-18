@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { avatarVariants } from "./avatar.variants";
 
 defineOptions({ name: "RaftAvatarGroup", inheritAttrs: false });

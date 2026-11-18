@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-  type ComponentPublicInstance,
-} from "vue";
-
+import type { ComponentPublicInstance } from "vue";
 import MessageEmbedContent from "../message-embed/MessageEmbedContent.vue";
 import { messageForwardedBundle } from "./message-forwarded-bundle.recipes";
 import { useForwardedBundleFold } from "./message-forwarded-bundle-fold";

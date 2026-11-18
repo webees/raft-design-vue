@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-
 import { createDragEngine, type DragSession } from "../../lib/drag-engine";
 import { createDragAnnouncements, SILENT_DRAG_ANNOUNCEMENTS } from "../drag/drag-announcements";
 import {

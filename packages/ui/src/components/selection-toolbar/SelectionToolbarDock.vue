@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { selectionToolbar } from "./selection-toolbar.recipe";
 
 defineOptions({ name: "RaftSelectionToolbarDock", inheritAttrs: false });

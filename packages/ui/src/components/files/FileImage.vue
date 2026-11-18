@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { files } from "./files.variants";
 
 defineOptions({ name: "RaftFileImage", inheritAttrs: false });

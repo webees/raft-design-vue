@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { HoverCardArrow, useDirection } from "reka-ui";
 import { previewCard } from "./preview-card.variants";
 

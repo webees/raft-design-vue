@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { segmentedControlCount } from "./segmented-control.variants";
 
 defineOptions({ name: "RaftSegmentedControlCount", inheritAttrs: false });

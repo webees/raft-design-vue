@@ -1,0 +1,97 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/coverage",
+      "!**/.rsbuild",
+      "!**/.cache",
+      "!design",
+      "!apps/docs/design",
+      "!apps/docs/src/generated",
+      "!tooling/upstream/.work",
+      "!**/*.generated.ts",
+      "!**/auto-imports.d.ts",
+      "!**/foundation.css",
+      "!**/themes.css",
+      "!**/upstream-styles.css",
+      "!**/tokens.json",
+      "!**/themes.json",
+      "!packages/ui/src/styles.css",
+      "!bun.lock",
+      "!.changeset"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "quoteProperties": "asNeeded"
+    }
+  },
+  "json": { "formatter": { "enabled": true, "indentWidth": 2 } },
+  "css": { "formatter": { "enabled": true, "quoteStyle": "double" } },
+  "assist": { "actions": { "source": { "organizeImports": "off" } } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error",
+        "noUnknownMediaFeatureName": "off"
+      },
+      "style": {
+        "useImportType": "error",
+        "noNonNullAssertion": "off",
+        "noDescendingSpecificity": "off",
+        "useVueNextTickPromise": "off"
+      },
+      "complexity": { "noImportantStyles": "off" },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noFocusedTests": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.vue"],
+      "linter": {
+        "rules": {
+          "correctness": { "noUnusedVariables": "off", "noUnusedImports": "off" },
+          "style": {
+            "useImportType": "off",
+            "useVueMultiWordComponentNames": "off",
+            "noUnusedTemplateLiteral": "off"
+          },
+          "a11y": { "useKeyWithClickEvents": "off", "noSvgWithoutTitle": "off" }
+        }
+      }
+    },
+    {
+      "includes": ["tests/**", "**/*.test.ts", "**/*.spec.ts", "tooling/**"],
+      "linter": { "rules": { "suspicious": { "noExplicitAny": "off" } } }
+    },
+    {
+      "includes": ["**/*.md"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false }
+    }
+  ]
+}

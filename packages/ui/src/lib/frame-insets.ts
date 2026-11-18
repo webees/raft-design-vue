@@ -25,7 +25,8 @@ export interface FrameCollision {
 }
 
 export type CollisionPadding =
-  number | { top?: number; right?: number; bottom?: number; left?: number };
+  | number
+  | { top?: number; right?: number; bottom?: number; left?: number };
 
 export const NO_FRAME_INSETS: Readonly<FrameInsets> = Object.freeze({
   top: 0,

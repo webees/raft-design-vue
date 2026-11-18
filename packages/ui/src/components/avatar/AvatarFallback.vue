@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { AvatarFallback } from "reka-ui";
 import { avatarVariants } from "./avatar.variants";
 

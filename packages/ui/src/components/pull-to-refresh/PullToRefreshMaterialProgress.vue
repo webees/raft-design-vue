@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { tv } from "../../lib/tv";
 import type { PullToRefreshState } from "./pull-to-refresh-gesture";
 import {

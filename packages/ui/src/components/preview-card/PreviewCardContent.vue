@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { HoverCardContent, HoverCardPortal } from "reka-ui";
 import { previewCard } from "./preview-card.variants";
 import { useFrameCollisionPadding } from "../../lib/frame-insets";

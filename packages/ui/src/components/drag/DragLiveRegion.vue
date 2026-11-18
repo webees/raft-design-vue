@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import { useDragEngine } from "./drag-context";
 

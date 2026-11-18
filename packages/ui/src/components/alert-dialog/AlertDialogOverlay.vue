@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { AlertDialogOverlay } from "reka-ui";
 import { useParentOverlayKind } from "../../lib/overlay-depth";
 import { alertDialog } from "./alert-dialog.variants";

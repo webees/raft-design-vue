@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, ref, watchEffect } from "vue";
 import { PopoverRoot } from "reka-ui";
 
 import { COACH_MARK_KEY, type CoachMarkContext } from "./coach-mark-context";

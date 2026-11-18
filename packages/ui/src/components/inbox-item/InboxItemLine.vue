@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { inboxItemRecipe } from "./inbox-item.recipe";
 
 defineOptions({ name: "RaftInboxItemLine", inheritAttrs: false });

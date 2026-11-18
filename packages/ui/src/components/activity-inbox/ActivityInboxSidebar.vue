@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import SidebarBody from "../sidebar/SidebarBody.vue";
 import SidebarContent from "../sidebar/SidebarContent.vue";
 import SidebarRoot from "../sidebar/SidebarRoot.vue";

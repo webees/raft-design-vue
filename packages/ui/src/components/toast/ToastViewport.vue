@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
 import { ToastViewport } from "reka-ui";
 
 import { toast as toastStyles } from "./toast.recipe";

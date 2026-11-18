@@ -57,7 +57,9 @@ describe("readingOrder", () => {
     disabled.disabled = true;
     root.append(first, hidden, inert, disabled);
     document.body.append(root);
-    [first, hidden, inert, disabled].forEach((element) => show(element));
+    for (const element of [first, hidden, inert, disabled]) {
+      show(element);
+    }
 
     expect(readingOrder(root)).toEqual([first]);
   });
@@ -70,7 +72,9 @@ describe("readingOrder", () => {
     line.append(second, first);
     root.append(line);
     document.body.append(root);
-    [first, second].forEach((element) => show(element));
+    for (const element of [first, second]) {
+      show(element);
+    }
     vi.spyOn(window, "getComputedStyle").mockImplementation(
       (element) =>
         ({
@@ -148,7 +152,9 @@ describe("measure", () => {
 
     show(root, rect(0, 0, 100));
     const children = [item, plain, trigger];
-    children.forEach((child, index) => show(child, rect(index * 60, 0, 60)));
+    children.forEach((child, index) => {
+      show(child, rect(index * 60, 0, 60));
+    });
 
     const applied = measure(root, false);
     expect(applied.more).toEqual(["a"]);

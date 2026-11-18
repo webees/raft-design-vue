@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ToggleGroupRoot } from "reka-ui";
 import { toggleGroup } from "./toggle-group.variants";
 

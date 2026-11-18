@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { markdown, type MarkdownHeadingLevel } from "./markdown.variants";
 
 defineOptions({ name: "RaftMarkdownHeading", inheritAttrs: false });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { DrawerOverlay, injectDrawerRootContext } from "reka-ui";
 
 import { usePresenceStyle } from "../../lib/presence-style";

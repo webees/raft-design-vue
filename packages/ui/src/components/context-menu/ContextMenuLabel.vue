@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ContextMenuLabel } from "reka-ui";
 
 import { contextMenu } from "./context-menu.variants";

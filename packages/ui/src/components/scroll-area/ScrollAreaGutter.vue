@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, type Ref } from "vue";
-
+import type { Ref } from "vue";
 import { cn } from "../../lib/cn";
 import type { ScrollAxis } from "./scroll-geometry";
 import { useRailPointer } from "./use-rail-pointer";

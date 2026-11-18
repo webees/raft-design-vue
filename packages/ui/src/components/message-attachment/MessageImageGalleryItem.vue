@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, type StyleValue } from "vue";
+import type { StyleValue } from "vue";
 
 import { cn } from "../../lib/cn";
 import { messageImageGallery } from "./message-attachment.variants";

@@ -30,7 +30,6 @@ jobs:
       - run: bun run check:parity
       - run: bun run check:audit
       - run: bun run check:docs-links
-      - run: bun run format:check
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run check:api

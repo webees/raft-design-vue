@@ -21,6 +21,7 @@
     "@tailwindcss/postcss": "^4.1.18",
     "@types/markdown-it": "^14.1.2",
     "typescript": "^5.9.3",
+    "unplugin-auto-import": "21.1.0",
     "vue-tsc": "^3.2.4"
   }
 }

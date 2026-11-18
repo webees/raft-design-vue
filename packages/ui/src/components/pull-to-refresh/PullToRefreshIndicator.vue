@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, watch, useAttrs } from "vue";
-
 import Spinner from "../spinner/Spinner.vue";
 import { cn } from "../../lib/cn";
 import { tv } from "../../lib/tv";

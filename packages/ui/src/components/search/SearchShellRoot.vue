@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Panel from "../panel/Panel.vue";
 import { search } from "./search.recipe";
 

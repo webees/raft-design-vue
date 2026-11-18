@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import { useLabelValueFit } from "../../lib/label-value-fit";
 import { messageActionCardContent } from "./message-action-card.recipes";

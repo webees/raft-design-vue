@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, provide, ref, useAttrs } from "vue";
 import type { VNode } from "vue";
-
 import DragLift from "../drag/DragLift.vue";
 import DragScope from "../drag/DragScope.vue";
 import { useDragSensors } from "../drag/drag-sensors";

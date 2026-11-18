@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ComboboxItemIndicator } from "reka-ui";
 import { Check } from "lucide-vue-next";
 import { combobox } from "./combobox.recipe";

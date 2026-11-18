@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { useOverflowTitle } from "../../lib/use-overflow-title";
 import { inputGroup, type InputGroupAlign, type InputGroupVariant } from "./input-group.variants";

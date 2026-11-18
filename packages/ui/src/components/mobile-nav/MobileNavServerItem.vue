@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, useId } from "vue";
 import { PopoverTrigger } from "reka-ui";
 
 import { mobileNavServer } from "./mobile-nav-server.recipe";

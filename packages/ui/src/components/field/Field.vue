@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs, useId } from "vue";
 import { fieldVariants } from "./field.variants";
 import { provideFieldContext } from "./field-context";
 

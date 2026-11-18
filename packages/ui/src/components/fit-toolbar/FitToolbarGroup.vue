@@ -1,16 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useAttrs,
-  useSlots,
-  watch,
-  type VNode,
-} from "vue";
-
+import type { VNode } from "vue";
 import { cn } from "../../lib/cn";
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { useFitItem } from "./use-fit-item";

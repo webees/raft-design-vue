@@ -1,20 +1,6 @@
 <script setup lang="ts" generic="T">
-import {
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  shallowRef,
-  useSlots,
-  watch,
-  type ComponentPublicInstance,
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-} from "vue";
+import type { ComponentPublicInstance, PropType } from "vue";
+import type { CSSProperties, VNodeChild } from "vue";
 
 import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
@@ -66,7 +52,9 @@ const items = computed<readonly T[]>(() => props.items ?? []);
 const keys = computed(() => items.value.map((item) => props.getKey(item)));
 const keyToIndex = computed(() => {
   const map = new Map<string, number>();
-  keys.value.forEach((key, index) => map.set(key, index));
+  keys.value.forEach((key, index) => {
+    map.set(key, index);
+  });
   return map;
 });
 const estimatedSize = computed(() => Math.max(1, props.itemEstimatedSize ?? 40));
@@ -123,7 +111,9 @@ const columnTree = computed(() => {
     return null;
   }
   const tree = new FenwickTree(columns.length, 0);
-  columns.forEach((column, index) => tree.add(index, column.width));
+  columns.forEach((column, index) => {
+    tree.add(index, column.width);
+  });
   return tree;
 });
 const forcedRenderTimes: number[] = [];
@@ -652,7 +642,7 @@ function applyResizes() {
   for (let index = range.value.startIndex; index <= range.value.endIndex; index += 1) {
     const key = keys.value[index];
     const el = key === undefined ? undefined : flowElements.get(key);
-    if (key !== undefined && el !== undefined && el.isConnected) {
+    if (key !== undefined && el?.isConnected) {
       flowRows.push({ key, index, el });
     }
   }
@@ -966,7 +956,7 @@ function horizontalRange(columns: readonly { width: number }[]) {
   return { start, end, lefts, total };
 }
 
-function renderCols(index: number, item: T) {
+function renderCols(_index: number, item: T) {
   if (!props.renderCol) {
     return undefined;
   }

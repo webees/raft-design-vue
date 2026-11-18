@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, provide, ref, useAttrs } from "vue";
-
 import MessageEmbed from "../message-embed/MessageEmbed.vue";
 import { messageForwardedBundle } from "./message-forwarded-bundle.recipes";
 import { forwardedBundleFoldKey } from "./message-forwarded-bundle-fold";

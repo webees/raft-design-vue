@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { combobox } from "./combobox.recipe";
 
 defineOptions({ name: "RaftComboboxPopup", inheritAttrs: false });

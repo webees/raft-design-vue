@@ -124,7 +124,7 @@ function rewrite(source: string, from: string): string {
       .replace(/`+[^`\n]*`+|!?\[[^\]]*\]\(([^)\s]+)\)/g, (whole, target) => {
         if (target === undefined || EXTERNAL.test(target)) return whole;
         const next = resolveTarget(from, target);
-        return next === null ? whole : whole.slice(0, whole.lastIndexOf("(") + 1) + next + ")";
+        return next === null ? whole : `${whole.slice(0, whole.lastIndexOf("(") + 1)}${next})`;
       });
   return source
     .split("\n")

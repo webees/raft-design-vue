@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs, type StyleValue } from "vue";
+import type { StyleValue } from "vue";
 
 import { toElement } from "../../lib/dom";
 import { useMobileViewport } from "../../lib/use-mobile-viewport";

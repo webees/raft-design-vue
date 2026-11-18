@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { announcement } from "./announcement-dialog.variants";
 
 defineOptions({ name: "RaftAnnouncementDialogHeader", inheritAttrs: false });

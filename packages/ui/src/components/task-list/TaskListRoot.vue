@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { taskList } from "./task-list.variants";
 
 defineOptions({ name: "RaftTaskListRoot", inheritAttrs: false });

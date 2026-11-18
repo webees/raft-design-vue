@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { tasksPanel } from "./tasks-panel.variants";
 
 defineOptions({ name: "RaftTasksPanelRoot", inheritAttrs: false });

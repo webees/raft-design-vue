@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DropdownMenuCheckboxItem } from "reka-ui";
 import DropdownMenuItemIndicator from "./DropdownMenuItemIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";

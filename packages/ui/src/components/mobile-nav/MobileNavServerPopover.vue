@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, useAttrs } from "vue";
 import { PopoverRoot } from "reka-ui";
 import { provideMobileNavServer } from "./mobile-nav-server-context";
 

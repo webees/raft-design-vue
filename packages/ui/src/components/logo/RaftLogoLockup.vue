@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import LogoArtwork from "./LogoArtwork.vue";
 import WordmarkArtwork from "./WordmarkArtwork.vue";

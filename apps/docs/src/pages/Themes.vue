@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import themes from "../../../../packages/ui/src/themes.json";
 
 const preview = ref("boring");

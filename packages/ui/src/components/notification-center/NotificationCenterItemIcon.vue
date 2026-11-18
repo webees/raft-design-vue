@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { AlertTriangle, CheckCircle2, Info } from "lucide-vue-next";
 
 import { notificationCenter } from "./notification-center.recipe";

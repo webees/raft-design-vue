@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { useFitToolbar } from "./fit-toolbar-context";
 
 defineOptions({ name: "RaftFitToolbarMoreItems" });

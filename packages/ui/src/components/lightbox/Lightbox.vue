@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, onBeforeUnmount, ref, watch } from "vue";
 import { DialogRoot } from "reka-ui";
 
 import { OverlayLayer } from "../../lib/overlay-depth";

@@ -41,7 +41,7 @@ describe("drag", () => {
   it("announces a lift, a move over and a drop", () => {
     const announcements = createDragAnnouncements({
       name: (id) => String(id),
-      place: (activeId, overId) => ({
+      place: (_activeId, overId) => ({
         place: overId == null ? "Todo" : "Doing",
         position: overId == null ? 1 : 2,
         count: 3,

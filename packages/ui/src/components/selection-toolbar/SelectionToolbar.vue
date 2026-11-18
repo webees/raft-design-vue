@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import FitToolbar from "../fit-toolbar/FitToolbar.vue";
 import { selectionToolbar } from "./selection-toolbar.recipe";
 

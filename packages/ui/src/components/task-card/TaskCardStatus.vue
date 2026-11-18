@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import type { TaskStatusId } from "../../lib/task-status";
 import { taskStatusSoft } from "../tasks/task-status.variants";

@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  ref,
-  useAttrs,
-  useId,
-  watch,
-  type VNodeChild,
-} from "vue";
+import type { VNodeChild } from "vue";
 import { Search, X } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";

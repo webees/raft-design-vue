@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineComponent, h, inject, ref, toRef, useAttrs, type StyleValue } from "vue";
+import type { StyleValue } from "vue";
 import { DialogContent, DialogOverlay, DialogPortal, injectDialogRootContext } from "reka-ui";
 import type { SoftKeyboardViewport } from "../../lib/use-soft-keyboard";
 import { useParentOverlayKind } from "../../lib/overlay-depth";

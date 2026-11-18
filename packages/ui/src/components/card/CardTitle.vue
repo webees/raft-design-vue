@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { cardVariants } from "./card.variants";
 import { useCardVariant } from "./card-context";
 

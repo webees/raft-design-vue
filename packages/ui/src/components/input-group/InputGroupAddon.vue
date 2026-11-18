@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { inputGroup, type InputGroupAlign, type InputGroupVariant } from "./input-group.variants";
 

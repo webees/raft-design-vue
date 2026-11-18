@@ -2,10 +2,15 @@ import path from "node:path";
 import { defineConfig } from "@rsbuild/core";
 import { pluginVue } from "@rsbuild/plugin-vue";
 import tailwindcss from "@tailwindcss/postcss";
+import AutoImport from "unplugin-auto-import/rspack";
+import { autoImportOptions } from "../../packages/ui/auto-imports.preset";
 
 export default defineConfig({
   plugins: [pluginVue()],
   tools: {
+    rspack: {
+      plugins: [AutoImport(autoImportOptions("../../packages/ui/src/auto-imports.d.ts"))],
+    },
     postcss: {
       postcssOptions: {
         plugins: [tailwindcss()],

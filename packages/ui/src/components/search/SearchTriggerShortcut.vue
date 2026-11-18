@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Kbd from "../kbd/Kbd.vue";
 import { searchTrigger } from "./search-trigger.recipe";
 

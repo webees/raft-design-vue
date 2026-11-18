@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { textarea } from "./textarea.variants";
 
 defineOptions({ name: "RaftTextarea", inheritAttrs: false });

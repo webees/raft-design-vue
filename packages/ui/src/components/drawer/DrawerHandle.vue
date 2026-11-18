@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DrawerHandle } from "reka-ui";
 
 import { drawer } from "./drawer.recipe";

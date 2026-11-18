@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs, type ComponentPublicInstance } from "vue";
+import type { ComponentPublicInstance } from "vue";
 import { cn } from "../../lib/cn";
 import DialogBodyScrollArea from "./DialogBodyScrollArea.vue";
 import { dialog } from "./dialog.variants";

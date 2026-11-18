@@ -71,7 +71,8 @@
   &[data-icon] {
     --r-timeline-icon-size: var(--r-timeline-custom-icon-size, 14px);
     --r-timeline-axis-offset: calc(
-      (var(--r-timeline-line-height) - var(--r-timeline-icon-size)) / 2
+      (var(--r-timeline-line-height) - var(--r-timeline-icon-size)) /
+      2
     );
   }
 }

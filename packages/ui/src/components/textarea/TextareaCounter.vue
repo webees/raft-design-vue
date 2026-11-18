@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { textareaCounter } from "./textarea.variants";
 
 defineOptions({ name: "RaftTextareaCounter", inheritAttrs: false });

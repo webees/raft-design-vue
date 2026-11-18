@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { cn } from "../../lib/cn";
 import DropPlaceholder from "./DropPlaceholder.vue";
 

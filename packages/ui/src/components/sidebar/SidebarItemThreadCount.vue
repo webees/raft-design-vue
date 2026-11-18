@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { sidebarItemRecipe } from "./sidebar-item.recipe";
 
 defineOptions({ name: "RaftSidebarItemThreadCount", inheritAttrs: false });

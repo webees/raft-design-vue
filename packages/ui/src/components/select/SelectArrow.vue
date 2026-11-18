@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
 import { SelectArrow } from "reka-ui";
 
 defineOptions({ name: "RaftSelectArrow", inheritAttrs: false });

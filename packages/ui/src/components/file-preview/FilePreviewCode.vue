@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { filePreview } from "./file-preview.variants";
 
 defineOptions({ name: "RaftFilePreviewCode", inheritAttrs: false });

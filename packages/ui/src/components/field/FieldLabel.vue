@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { fieldVariants } from "./field.variants";
 import { useFieldContext } from "./field-context";
 import LabelAsterisk from "../label/LabelAsterisk.vue";

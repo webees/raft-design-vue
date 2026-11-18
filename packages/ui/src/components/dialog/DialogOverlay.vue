@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DialogOverlay } from "reka-ui";
 import { useParentOverlayKind } from "../../lib/overlay-depth";
 import { dialog } from "./dialog.variants";

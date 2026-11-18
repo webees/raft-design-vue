@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { taskCard } from "./task-card.variants";
 
 defineOptions({ name: "RaftTaskCard", inheritAttrs: false });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs, useId, useSlots } from "vue";
 import { cn } from "../../lib/cn";
 import { STEPS_KEY } from "./context";
 import type { StepStatus } from ".";

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, watchEffect } from "vue";
-
 import DropPlaceholder from "../drag/DropPlaceholder.vue";
 import { useSortableItem } from "../drag/use-sortable-item";
 import { composerSortableContextKey } from "./composer-sortable-context";

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import MessageImageGalleryItem from "../message-attachment/MessageImageGalleryItem.vue";
 import { messageForwardedBundleGallery } from "./message-forwarded-bundle.recipes";
 

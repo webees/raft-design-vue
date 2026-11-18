@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { messageMultiSelect } from "./message-multi-select.recipe";
 
 const props = defineProps<{ class?: string }>();

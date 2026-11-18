@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import { Checkbox } from "../checkbox";
 import { messageMultiSelect } from "./message-multi-select.recipe";
 

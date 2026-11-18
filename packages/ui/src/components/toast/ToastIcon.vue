@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs, type VNodeChild } from "vue";
+import type { VNodeChild } from "vue";
 import { CircleCheck, Info, TriangleAlert, type LucideIcon } from "lucide-vue-next";
 
 import { toast as toastStyles } from "./toast.recipe";

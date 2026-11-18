@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import { combobox } from "./combobox.recipe";
 import { cn } from "../../lib/cn";

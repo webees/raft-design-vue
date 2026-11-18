@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useAttrs,
-  useId,
-  watch,
-  type CSSProperties,
-} from "vue";
+import type { CSSProperties } from "vue";
 
 import { cn } from "../../lib/cn";
 import { comment } from "./comment.recipe";

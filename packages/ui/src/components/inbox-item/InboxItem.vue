@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, provide, useAttrs } from "vue";
-
 import { inboxItemDensityKey, inboxItemDisabledKey } from "./inbox-item-context";
 import { inboxItemRecipe } from "./inbox-item.recipe";
 

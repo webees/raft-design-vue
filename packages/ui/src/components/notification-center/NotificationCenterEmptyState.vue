@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
 import EmptyState from "../empty-state/EmptyState.vue";
 
 defineOptions({ name: "RaftNotificationCenterEmptyState", inheritAttrs: false });

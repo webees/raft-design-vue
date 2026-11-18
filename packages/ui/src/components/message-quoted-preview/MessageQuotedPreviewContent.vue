@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { MessageEmbedContent } from "../message-embed";
 import { messageQuotedPreview } from "./message-quoted-preview.variants";
 

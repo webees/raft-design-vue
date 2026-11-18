@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, ref, watch } from "vue";
-
 import { toElement } from "../../lib/dom";
 import { useMobileViewport } from "../../lib/use-mobile-viewport";
 import { useSoftKeyboard } from "../../lib/use-soft-keyboard";

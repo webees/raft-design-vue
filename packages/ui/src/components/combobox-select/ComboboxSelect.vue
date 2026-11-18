@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useId, watch } from "vue";
 import { Check, ChevronDown, LoaderCircle, Plus, X } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";
@@ -208,7 +207,9 @@ const normalised = computed(() => {
     )
     .filter((record) => !records.has(record.value));
   if (created.length) groups.push({ key: "created", items: created });
-  created.forEach((record) => records.set(record.value, record));
+  created.forEach((record) => {
+    records.set(record.value, record);
+  });
   return { groups, records };
 });
 

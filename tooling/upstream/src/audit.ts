@@ -257,7 +257,7 @@ for (const component of components) {
 
   const upstreamIndex = read(join(upstreamDir, "index.ts"));
   const localIndex = read(join(localDir, "index.ts"));
-  const localExports = exportNames(localIndex + "\n" + localSource);
+  const localExports = exportNames(`${localIndex}\n${localSource}`);
   const missingExports = [...exportNames(upstreamIndex)].filter(
     (name) => !name.endsWith("Props") && !localExports.has(name),
   );

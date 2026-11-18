@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, type Component } from "vue";
+import type { Component } from "vue";
 import {
   ArrowBigUp,
   ArrowDown,

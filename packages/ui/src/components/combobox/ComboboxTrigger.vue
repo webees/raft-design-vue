@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ComboboxTrigger } from "reka-ui";
 
 import { cn } from "../../lib/cn";

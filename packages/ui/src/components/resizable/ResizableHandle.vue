@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs, type Ref } from "vue";
+import type { Ref } from "vue";
 import { SplitterResizeHandle } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { resizable } from "./resizable.variants";

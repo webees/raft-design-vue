@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from "vue";
 import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import ScrollArea from "../scroll-area/ScrollArea.vue";

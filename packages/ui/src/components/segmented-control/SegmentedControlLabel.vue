@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { segmentedControlLabel } from "./segmented-control.variants";
 
 defineOptions({ name: "RaftSegmentedControlLabel", inheritAttrs: false });

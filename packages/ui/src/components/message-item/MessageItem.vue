@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, useAttrs, watch } from "vue";
 import { Primitive } from "reka-ui";
 
 import { toElement } from "../../lib/dom";

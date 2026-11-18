@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CheckboxIndicator } from "../checkbox";
 import { taskCompletionControl } from "./task-completion-control.variants";
 

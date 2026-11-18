@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, useAttrs, watch } from "vue";
 import { RadioGroupRoot } from "reka-ui";
 import { toElement } from "../../lib/dom";
 import { useInFitToolbar } from "../fit-toolbar/fit-toolbar-context";

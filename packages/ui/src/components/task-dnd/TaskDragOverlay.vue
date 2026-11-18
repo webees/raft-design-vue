@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import DragLift from "../drag/DragLift.vue";
 import { useTaskDnd } from "./task-dnd-context";

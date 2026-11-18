@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, reactive, ref } from "vue";
-
 import type { DragSession } from "../../lib/drag-engine";
 import { createDragAnnouncements, type DragMessages } from "../drag/drag-announcements";
 import DragLift from "../drag/DragLift.vue";

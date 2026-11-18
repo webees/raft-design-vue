@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { skeletonVariants, type SkeletonVariant } from "./skeleton.variants";
 
 defineOptions({ name: "RaftSkeleton", inheritAttrs: false });

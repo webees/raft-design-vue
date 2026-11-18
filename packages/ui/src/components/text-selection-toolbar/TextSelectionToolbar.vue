@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ToolbarRoot } from "reka-ui";
 import { textSelectionToolbar } from "./text-selection-toolbar.variants";
 

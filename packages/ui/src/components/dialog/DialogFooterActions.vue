@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { dialog } from "./dialog.variants";
 
 defineOptions({ name: "RaftDialogFooterActions", inheritAttrs: false });

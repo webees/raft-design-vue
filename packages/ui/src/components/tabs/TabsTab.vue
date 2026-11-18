@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
 import { TabsTrigger, injectTabsRootContext } from "reka-ui";
 import { useTapActivation } from "../../lib/tap-activation";
 import { tabs } from "./tabs.variants";

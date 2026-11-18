@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { MoreHorizontal } from "lucide-vue-next";
 
 import Button from "../button/Button.vue";

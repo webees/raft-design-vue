@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { AlertDialogDescription } from "reka-ui";
 import { alertDialog } from "./alert-dialog.variants";
 

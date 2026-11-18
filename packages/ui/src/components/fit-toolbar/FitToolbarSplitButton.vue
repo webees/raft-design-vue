@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs, useSlots } from "vue";
 import { Plus } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";

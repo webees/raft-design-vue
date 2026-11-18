@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { taskBoard } from "./task-board.variants";
 
 defineOptions({ name: "RaftTaskBoardRoot", inheritAttrs: false });

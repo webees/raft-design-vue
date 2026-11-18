@@ -1,5 +1,7 @@
 import { defineConfig } from "@rslib/core";
 import { pluginVue } from "@rsbuild/plugin-vue";
+import AutoImport from "unplugin-auto-import/rspack";
+import { autoImportOptions } from "./auto-imports.preset";
 
 export default defineConfig({
   lib: [
@@ -22,4 +24,9 @@ export default defineConfig({
     },
   ],
   plugins: [pluginVue()],
+  tools: {
+    rspack: {
+      plugins: [AutoImport(autoImportOptions("src/auto-imports.d.ts"))],
+    },
+  },
 });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Check, Minus } from "lucide-vue-next";
 import { checkboxIndicator } from "./checkbox-indicator.variants";
 

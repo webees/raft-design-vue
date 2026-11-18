@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, toRef, useAttrs } from "vue";
 import { SelectTrigger } from "reka-ui";
 import { select } from "./select.variants";
 import { provideSelectFit, useSelectChrome } from "./select-context";

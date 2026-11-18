@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CollapsibleTrigger } from "reka-ui";
 import { messageSystem } from "./system-message.variants";
 

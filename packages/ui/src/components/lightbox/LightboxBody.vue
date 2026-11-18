@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, type CSSProperties } from "vue";
+import type { CSSProperties } from "vue";
 
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { cn } from "../../lib/cn";

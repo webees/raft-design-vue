@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CollapsibleTrigger } from "reka-ui";
 import { taskBoardColumn } from "./task-board.variants";
 

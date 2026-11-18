@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import ComposerDropOverlay from "./ComposerDropOverlay.vue";
 import {
   ComposerDropOverlayIcon,

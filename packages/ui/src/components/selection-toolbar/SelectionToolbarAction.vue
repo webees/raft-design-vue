@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, h, useAttrs, useSlots, type VNode } from "vue";
+import type { VNode } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 
 import Button from "../button/Button.vue";

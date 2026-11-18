@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, useAttrs, useId } from "vue";
 import { select } from "./select.variants";
 import { useSelectItemParts } from "./select-context";
 

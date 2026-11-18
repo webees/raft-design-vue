@@ -1,17 +1,6 @@
 <script lang="ts">
-import {
-  Comment,
-  Fragment,
-  Text,
-  cloneVNode,
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  h,
-  provide,
-  ref,
-  type VNode,
-} from "vue";
+import type { VNode } from "vue";
+import { Comment, Fragment, Text, cloneVNode } from "vue";
 import { cn } from "../../lib/cn";
 import { STEPS_KEY, type StepsContextValue } from "./context";
 import type { StepStatus } from ".";
