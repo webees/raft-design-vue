@@ -9,10 +9,11 @@ md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
   const text = (tokens[idx + 1]?.children ?? [])
     .map((token) => (token.type === "text" || token.type === "code_inline" ? token.content : ""))
     .join("");
-  const slug = text
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s_-]/gu, "")
-    .replace(/ /g, "-");
+  const slug =
+    text
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s_-]/gu, "")
+      .replace(/ /g, "-") || "section";
   const seen = (env.headingIds ??= new Map<string, number>());
   const count = seen.get(slug) ?? 0;
   seen.set(slug, count + 1);
