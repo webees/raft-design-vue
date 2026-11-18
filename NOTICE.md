@@ -1,5 +1,7 @@
 # NOTICE
 
+**English** | [简体中文](./docs/zh/licensing.md)
+
 This project is an independent, unofficial Vue 3 port of the Raft Design
 System. It is not affiliated with, endorsed by, or sponsored by Botiverse.
 "Raft", the Raft logo and the Raft brand assets are trademarks or brand

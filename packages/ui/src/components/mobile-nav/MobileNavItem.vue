@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { mobileNav } from "./mobile-nav.recipe";
 import { useTapActivation } from "../../lib/tap-activation";
 

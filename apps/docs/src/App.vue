@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
 import Gallery from "./pages/Gallery.vue";
 import Tokens from "./pages/Tokens.vue";
 import Themes from "./pages/Themes.vue";

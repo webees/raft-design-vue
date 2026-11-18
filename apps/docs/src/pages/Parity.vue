@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
 import manifest from "../../../../tooling/upstream/component-manifest.json";
 import lock from "../../../../tooling/upstream/upstream.lock.json";
 

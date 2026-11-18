@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, toRef, useAttrs, useSlots, type VNode } from "vue";
+import type { VNode } from "vue";
 import { dialog } from "./dialog.variants";
 import { useDialogSheet } from "./dialog-sheet-context";
 import { useDialogContext } from "./dialog-context";

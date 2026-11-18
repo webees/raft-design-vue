@@ -1,37 +1,42 @@
 # Contributing
 
+**English** | [简体中文](./docs/zh/contributing.md)
+
 Thanks for helping build the Vue port of Raft.
 
 ## Setup
 
 ```bash
 bun install
-bun run dev
+bun run dev       # docs gallery at http://localhost:3000
+bun run verify    # the full gate
 ```
 
 ## Repository map
 
 ```
-apps/docs                 Rsbuild + Vue documentation site
-design/                   Synced upstream design docs (read-only)
-packages/ui               Vue component library and generated tokens
-tooling/upstream          Sync, lockfile, drift report, parity manifest
+apps/docs          Rsbuild + Vue documentation site
+design/            Synced upstream design docs (read-only)
+packages/ui        Vue component library and generated tokens
+tooling/upstream   Sync, lockfile, drift report, parity manifest
 ```
 
 ## Porting a component
 
-1. Pick a component from `tooling/upstream/component-manifest.json` whose
-   status is `planned`.
+1. Pick a `planned` component from
+   `tooling/upstream/component-manifest.json`.
 2. Read its upstream source and Markdown doc in the pinned snapshot under
-   `tooling/upstream/.work/` (or the upstream repository).
+   `tooling/upstream/.work/`.
 3. Port the recipe first: copy variant names, class strings and data
-   attributes. Do not rename variants.
+   attributes. Never rename upstream variants.
 4. Implement the Vue SFC with slots instead of React `children`/render props.
-   Map Base UI behaviour to Reka UI. Document unavoidable API differences.
-5. Add tests for rendering, variants, events, disabled/loading states and
+   Map Base UI behaviour to Reka UI and document unavoidable API differences.
+5. Leave Vue runtime imports out of `.vue` files; the `vue` auto-import preset
+   provides them. Public types stay explicitly imported.
+6. Add tests for rendering, variants, events, disabled/loading states and
    accessibility attributes.
-6. Add a gallery entry in `apps/docs`.
-7. Set the manifest status to `ported` and add a Changeset.
+7. Add a gallery entry in `apps/docs`.
+8. Set the manifest status to `ported` and add a Changeset.
 
 ## Quality gates
 
@@ -39,35 +44,47 @@ tooling/upstream          Sync, lockfile, drift report, parity manifest
 bun run verify
 ```
 
-This runs component parity, the docs drift audit, the Markdown link check,
-Prettier, ESLint, `vue-tsc`, the API surface check, Vitest and a full
-production build. Pull requests must be green.
+The chain is parity, upstream audit, docs links, Biome, `vue-tsc`, API surface,
+props snapshot, Vitest, production build and consumer type checks. Pull
+requests must be green.
 
-## Upstream sync workflow
+Useful subsets:
 
-Maintainers run:
+```bash
+bun run lint
+bun run typecheck
+bun run test
+cd packages/ui && ./node_modules/.bin/vitest run src/components/<name>
+```
+
+## Upstream sync
 
 ```bash
 bun run sync:upstream --ref main
 ```
 
-The command updates `tooling/upstream/upstream.lock.json`, regenerates CSS,
-refreshes the docs mirror, rewrites its internal links and prints a changelog
-of upstream additions. Review the generated diff, port anything new, then
-commit. Never hand-edit synced files; `bun run check:docs-links` guards the
-links those files point at.
+This updates `tooling/upstream/upstream.lock.json`, regenerates CSS, refreshes
+the docs mirror, rewrites internal links and prints upstream additions. Review
+the diff, port anything new, then commit. Never hand-edit synced files;
+`bun run check:docs-links` guards the links they point at.
 
 ## Commits and releases
 
-- Use Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`).
-- Add a Changeset for user-visible changes: `bun run changeset`.
-- Sign off commits (`git commit -s`) to certify the Developer Certificate of
-  Origin 1.1.
-- Releases are cut from `main` by the release workflow.
+- Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`).
+- A Changeset for user-visible changes: `bun run changeset`.
+- Sign off every commit (`git commit -s`) for DCO 1.1.
+- `main` is protected: no deletion, no force-push, pull request required
+  (repository admins keep a bypass for releases).
+- Releases are cut from `main` by the release workflow after a green verify.
 
 ## Code style
 
-- Prettier and ESLint are authoritative.
-- Use `<script setup lang="ts">` and explicit prop/emit types.
-- Prefer `defineModel` for v-model support.
-- Keep components unstyled-by-default and token-driven.
+- Biome is authoritative for both lint and formatting.
+- Vue template usage is invisible to Biome's script analysis, so `vue-tsc` is
+  the source of truth for `.vue` unused/type-import rules.
+- Use `<script setup lang="ts">` with typed props and emits.
+- Prefer `defineModel` for `v-model`.
+- Keep components token-driven and free of hard-coded colors.
+- Do not hand-edit generated files (`*.generated.ts`, `foundation.css`,
+  `themes.css`, `upstream-styles.css`, `tokens.json`, `themes.json`,
+  `auto-imports.d.ts`, `design/**`).

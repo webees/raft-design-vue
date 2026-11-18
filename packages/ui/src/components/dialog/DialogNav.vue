@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { tv } from "../../lib/tv";
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 

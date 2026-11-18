@@ -1,5 +1,7 @@
 # Raft 站点 CSS 与 raft-ui 复用分析
 
+[English](../en/upstream-css-analysis.md) | **简体中文**
+
 结论：`raft.build` 与 `app.raft.build` 都使用 **Tailwind CSS v4**，视觉语言是
 Raft 自己的“方形贴纸 / neo-brutalist”体系。`raft-ui` 已开源，采用 MIT；
 当前包名是 `@botiverse/raft-ui`（旧包名 `raft-ui` 仍可安装），仓库为

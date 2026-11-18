@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { SelectLabel } from "reka-ui";
 import { select } from "./select.variants";
 

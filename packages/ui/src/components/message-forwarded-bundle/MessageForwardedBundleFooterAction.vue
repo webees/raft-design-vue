@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { messageForwardedBundle } from "./message-forwarded-bundle.recipes";
 import { useForwardedBundleFold } from "./message-forwarded-bundle-fold";
 

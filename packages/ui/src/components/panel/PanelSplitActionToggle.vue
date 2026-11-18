@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { Toggle } from "reka-ui";
 import { panelSplitActionToggle } from "./panel.variants";
 

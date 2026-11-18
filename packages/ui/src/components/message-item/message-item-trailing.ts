@@ -82,7 +82,7 @@ function lastLine(block: Element): Element | null {
   }
   if (block.tagName === "UL" || block.tagName === "OL") {
     const item = block.lastElementChild;
-    if (!item || item.tagName !== "LI") {
+    if (item?.tagName !== "LI") {
       return null;
     }
     const inner = item.lastElementChild;

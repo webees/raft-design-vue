@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { tabs } from "./tabs.variants";
 
 defineOptions({ name: "RaftTabsLabel", inheritAttrs: false });

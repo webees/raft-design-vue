@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ToggleGroupItem } from "reka-ui";
 import { useTapActivation } from "../../lib/tap-activation";
 import { toggleGroup } from "./toggle-group.variants";

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { X } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 

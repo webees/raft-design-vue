@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, reactive } from "vue";
 import { DrawerRoot } from "reka-ui";
 
 import { OverlayLayer, useEnclosingOverlayKind } from "../../lib/overlay-depth";

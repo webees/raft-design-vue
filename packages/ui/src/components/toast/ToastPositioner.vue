@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ToastPositioner } from "reka-ui";
 
 import type { ToastObject } from "./toast";

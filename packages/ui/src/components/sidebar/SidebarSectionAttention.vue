@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Status from "../status/Status.vue";
 import { sidebarSectionRecipe } from "./sidebar-section.recipe";
 
@@ -10,7 +8,14 @@ const props = withDefaults(
   defineProps<{
     size?: "xs" | "sm" | "md" | "lg";
     variant?:
-      "default" | "primary" | "information" | "muted" | "accent" | "success" | "warning" | "danger";
+      | "default"
+      | "primary"
+      | "information"
+      | "muted"
+      | "accent"
+      | "success"
+      | "warning"
+      | "danger";
   }>(),
   { size: "md", variant: "accent" },
 );

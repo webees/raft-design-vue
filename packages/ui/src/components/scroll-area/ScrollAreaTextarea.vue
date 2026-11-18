@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUpdated, ref, useAttrs, type CSSProperties } from "vue";
+import type { CSSProperties } from "vue";
 
 import { cn } from "../../lib/cn";
 import ScrollAreaGutters from "./ScrollAreaGutters.vue";

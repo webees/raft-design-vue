@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { search } from "./search.recipe";
 

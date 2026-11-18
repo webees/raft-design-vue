@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from "vue";
-
 import { messageItem } from "./message-item.recipe";
 
 defineOptions({ name: "RaftMessageItemToolbar", inheritAttrs: false });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, type CSSProperties } from "vue";
+import type { CSSProperties } from "vue";
 
 import { fillOnSurface, oklchToRgb, parseHexColor, type Rgb } from "../../lib/fill-contrast";
 import { Badge, type BadgeVariant } from "../badge";

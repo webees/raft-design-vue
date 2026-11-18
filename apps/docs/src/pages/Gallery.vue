@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import meta from "../generated/meta.json";
 import {
   Avatar,

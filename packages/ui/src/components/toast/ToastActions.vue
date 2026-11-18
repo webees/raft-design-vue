@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
-
 import { toast as toastStyles } from "./toast.recipe";
 
 defineOptions({ name: "RaftToastActions", inheritAttrs: false });

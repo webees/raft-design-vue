@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { PRESENCE_COLOR, type Presence } from "../../lib/presence";
@@ -10,7 +9,14 @@ const props = withDefaults(
   defineProps<{
     size?: "xs" | "sm" | "md" | "lg";
     variant?:
-      "default" | "primary" | "information" | "muted" | "accent" | "success" | "warning" | "danger";
+      | "default"
+      | "primary"
+      | "information"
+      | "muted"
+      | "accent"
+      | "success"
+      | "warning"
+      | "danger";
     presence?: Presence;
     as?: string;
     asChild?: boolean;

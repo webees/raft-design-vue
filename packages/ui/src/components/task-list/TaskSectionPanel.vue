@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CollapsibleContent } from "reka-ui";
 import { taskListSection } from "./task-list.variants";
 

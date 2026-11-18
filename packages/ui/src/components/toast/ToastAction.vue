@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
 import { ToastAction } from "reka-ui";
 
 import Spinner from "../spinner/Spinner.vue";

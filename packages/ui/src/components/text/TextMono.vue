@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 import { monoVariants, type TextMonoSize, type TextVariant } from "./text.variants";
 

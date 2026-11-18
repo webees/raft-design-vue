@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { messageSystem } from "./system-message.variants";
 
 defineOptions({ name: "RaftSystemMessageTime", inheritAttrs: false });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { X } from "lucide-vue-next";
 import { cn } from "../../lib/cn";
 import { useComboboxSelection } from "./combobox-context";

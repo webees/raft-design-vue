@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Skeleton from "../skeleton/Skeleton.vue";
 import InboxItem from "./InboxItem.vue";
 import InboxItemLine from "./InboxItemLine.vue";

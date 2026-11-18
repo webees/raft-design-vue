@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, useAttrs } from "vue";
 import { CollapsibleRoot } from "reka-ui";
 import { taskBoardColumn } from "./task-board.variants";
 
@@ -13,7 +12,7 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>();
 const attrs = useAttrs();
 const internalOpen = ref(props.defaultOpen);
 const instance = getCurrentInstance();
-const isControlled = computed(() => instance?.vnode.props?.["open"] !== undefined);
+const isControlled = computed(() => instance?.vnode.props?.open !== undefined);
 const openState = computed({
   get: () => (isControlled.value ? (props.open as boolean) : internalOpen.value),
   set: (value: boolean) => {

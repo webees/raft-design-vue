@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, useAttrs } from "vue";
 import { CollapsibleRoot } from "reka-ui";
 import { messageSystem } from "./system-message.variants";
 
@@ -18,7 +17,7 @@ const instance = getCurrentInstance();
 const rootClass = computed(() => messageSystem().systemGroup({ className: attrs.class as string }));
 
 const rootProps = computed(() => {
-  const controlled = instance?.vnode.props?.["open"] !== undefined;
+  const controlled = instance?.vnode.props?.open !== undefined;
   return {
     open: controlled ? props.open : undefined,
     defaultOpen: props.defaultOpen,

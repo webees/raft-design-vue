@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
 import { TabsContent } from "reka-ui";
 import { tabs } from "./tabs.variants";
 import { tabsUiContextKey } from "./tabs-context";

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
-
 import { TextLink } from "../text-link";
 import { useEllipsisContext } from "./ellipsis-context";
 

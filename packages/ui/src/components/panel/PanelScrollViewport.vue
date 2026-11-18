@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { toElement } from "../../lib/dom";
 import { panel } from "./panel.variants";

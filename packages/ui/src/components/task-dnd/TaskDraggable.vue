@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import { useTaskDnd, type TaskDropData } from "./task-dnd-context";
 import { taskDnd } from "./task-dnd.recipe";

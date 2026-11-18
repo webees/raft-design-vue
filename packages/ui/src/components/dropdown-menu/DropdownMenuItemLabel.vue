@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
 
 defineOptions({ name: "RaftDropdownMenuItemLabel", inheritAttrs: false });

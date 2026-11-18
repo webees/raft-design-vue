@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { SelectValue } from "reka-ui";
 
 import { toElement } from "../../lib/dom";

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { PanelHeaderRoot } from "../panel";
 import { threadPanel } from "./thread-panel.variants";
 

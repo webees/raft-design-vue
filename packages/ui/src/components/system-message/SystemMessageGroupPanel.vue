@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
 import { CollapsibleContent } from "reka-ui";
 
 defineOptions({ name: "RaftSystemMessageGroupPanel", inheritAttrs: false });

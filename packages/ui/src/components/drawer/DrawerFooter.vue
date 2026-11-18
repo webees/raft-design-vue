@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { drawer } from "./drawer.recipe";
 import { useDrawerConfig } from "./drawer-context";
 

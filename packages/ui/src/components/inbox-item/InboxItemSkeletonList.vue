@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, watch } from "vue";
-
 import InboxItemSkeleton from "./InboxItemSkeleton.vue";
 import { inboxItemSkeleton } from "./inbox-item-skeleton.variants";
 import type { InboxItemDensity } from "./index";

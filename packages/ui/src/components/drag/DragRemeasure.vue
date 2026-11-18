@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { nextTick, onMounted, useAttrs, watch } from "vue";
-
 defineOptions({ name: "RaftDragRemeasure", inheritAttrs: false });
 const attrs = useAttrs();
 

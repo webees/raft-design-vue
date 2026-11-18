@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, ref, watch } from "vue";
 import type { ButtonHTMLAttributes } from "vue";
 
 import Button from "../button/Button.vue";

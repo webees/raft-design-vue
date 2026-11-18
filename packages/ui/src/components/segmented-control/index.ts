@@ -10,4 +10,8 @@ export type {
   SegmentedControlVariant,
 } from "./segmented-control.variants";
 export type SegmentedControlIconsOnlyBelow =
-  "auto" | SegmentedControlIconsOnlyPreset | `${number}px` | `${number}rem` | `${number}em`;
+  | "auto"
+  | SegmentedControlIconsOnlyPreset
+  | `${number}px`
+  | `${number}rem`
+  | `${number}em`;

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ChevronRight } from "lucide-vue-next";
 import { cn } from "../../lib/cn";
 import { listRow } from "./list-row.variants";

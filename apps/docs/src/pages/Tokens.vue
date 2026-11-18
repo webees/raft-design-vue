@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import tokens from "../../../../packages/ui/src/tokens.json";
 
 interface TokenEntry {

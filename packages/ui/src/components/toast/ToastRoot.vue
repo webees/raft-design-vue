@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, provide, ref, useAttrs, watch } from "vue";
 import { ToastRoot, useToastManager } from "reka-ui";
 
 import { usePresenceStyle } from "../../lib/presence-style";

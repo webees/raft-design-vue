@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 import { panelSplitAction } from "./panel.variants";
 

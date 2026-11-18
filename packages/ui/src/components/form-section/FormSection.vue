@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import Badge from "../badge/Badge.vue";
 import { formSection } from "./form-section.variants";

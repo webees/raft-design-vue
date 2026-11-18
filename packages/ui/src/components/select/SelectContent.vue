@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { SelectContent } from "reka-ui";
 import SelectPortal from "./SelectPortal.vue";
 import { select } from "./select.variants";

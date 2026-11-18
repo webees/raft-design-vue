@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DropdownMenuSubTrigger } from "reka-ui";
 import { dropdownMenu } from "./dropdown-menu.variants";
 

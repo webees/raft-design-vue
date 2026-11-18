@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DialogTitle } from "../dialog";
 import { announcement } from "./announcement-dialog.variants";
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { RadioGroupItem, TooltipProvider } from "reka-ui";
 import Tooltip from "../tooltip/Tooltip.vue";
 import TooltipContent from "../tooltip/TooltipContent.vue";

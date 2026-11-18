@@ -213,33 +213,42 @@
     --r-scroll-area-thumb-size-hover: var(--r-scroll-area-thumb-size-hover-medium);
     /* The gutter is as thick as the hovered thumb plus the gap on both sides. */
     --r-scroll-area-rail-size: calc(
-      var(--r-scroll-area-thumb-size-hover) + 2 * var(--r-scroll-area-rail-gap)
+      var(--r-scroll-area-thumb-size-hover) +
+      2 *
+      var(--r-scroll-area-rail-gap)
     );
     /*
      * Where each gutter starts and ends: the gap plus the room kept clear at
      * that end. Read on the root, where the room is set (it doesn't inherit).
      */
     --r-scroll-area-rail-top: calc(
-      var(--r-scroll-area-rail-gap) + var(--r-scroll-area-rail-inset-top)
+      var(--r-scroll-area-rail-gap) +
+      var(--r-scroll-area-rail-inset-top)
     );
     --r-scroll-area-rail-bottom: calc(
-      var(--r-scroll-area-rail-gap) + var(--r-scroll-area-rail-inset-bottom)
+      var(--r-scroll-area-rail-gap) +
+      var(--r-scroll-area-rail-inset-bottom)
     );
     --r-scroll-area-rail-left: calc(
-      var(--r-scroll-area-rail-gap) + var(--r-scroll-area-rail-inset-left)
+      var(--r-scroll-area-rail-gap) +
+      var(--r-scroll-area-rail-inset-left)
     );
     --r-scroll-area-rail-right: calc(
-      var(--r-scroll-area-rail-gap) + var(--r-scroll-area-rail-inset-right)
+      var(--r-scroll-area-rail-gap) +
+      var(--r-scroll-area-rail-inset-right)
     );
     /* With both gutters, the end at the corner: the other gutter plus the room kept clear there. */
     --r-scroll-area-rail-bottom-shortened: calc(
-      var(--r-scroll-area-rail-size) + var(--r-scroll-area-rail-inset-bottom)
+      var(--r-scroll-area-rail-size) +
+      var(--r-scroll-area-rail-inset-bottom)
     );
     --r-scroll-area-rail-left-shortened: calc(
-      var(--r-scroll-area-rail-size) + var(--r-scroll-area-rail-inset-left)
+      var(--r-scroll-area-rail-size) +
+      var(--r-scroll-area-rail-inset-left)
     );
     --r-scroll-area-rail-right-shortened: calc(
-      var(--r-scroll-area-rail-size) + var(--r-scroll-area-rail-inset-right)
+      var(--r-scroll-area-rail-size) +
+      var(--r-scroll-area-rail-inset-right)
     );
   }
   .r-scroll-area.r-scroll-area--small {
@@ -551,8 +560,9 @@
     > .r-scroll-area__gutters
     > .r-scroll-area__gutter--vertical {
     block-size: calc(
-      var(--r-scroll-area-viewport-height) - var(--r-scroll-area-rail-top) -
-        var(--r-scroll-area-rail-bottom)
+      var(--r-scroll-area-viewport-height) -
+      var(--r-scroll-area-rail-top) -
+      var(--r-scroll-area-rail-bottom)
     );
   }
   .r-scroll-area.r-scroll-area--absolute-gutters
@@ -585,8 +595,9 @@
     > .r-scroll-area__gutters
     > .r-scroll-area__gutter--vertical.r-scroll-area__gutter--shortened {
     block-size: calc(
-      var(--r-scroll-area-viewport-height) - var(--r-scroll-area-rail-top) -
-        var(--r-scroll-area-rail-bottom-shortened)
+      var(--r-scroll-area-viewport-height) -
+      var(--r-scroll-area-rail-top) -
+      var(--r-scroll-area-rail-bottom-shortened)
     );
   }
   .r-scroll-area.r-scroll-area--absolute-gutters

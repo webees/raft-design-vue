@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, inject } from "vue";
-
 import { useToastManager, type ToastData, type ToastObject } from "./toast";
 import { TOAST_PROVIDER_CONFIG_KEY } from "./toast-context";
 import ToastDefaultItem from "./ToastDefaultItem.vue";

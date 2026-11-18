@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { textareaGroup } from "./textarea.variants";
 
 defineOptions({ name: "RaftTextareaGroup", inheritAttrs: false });

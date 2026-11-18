@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { alertDialog } from "./alert-dialog.variants";
 import { useStackedActions } from "../../lib/use-stacked-actions";
 

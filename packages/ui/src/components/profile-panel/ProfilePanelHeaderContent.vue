@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { PanelHeaderContent } from "../panel";
 import { profilePanel } from "./profile-panel.variants";
 

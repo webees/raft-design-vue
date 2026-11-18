@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ProgressIndicator } from "reka-ui";
 
 import { progress } from "./progress.recipe";

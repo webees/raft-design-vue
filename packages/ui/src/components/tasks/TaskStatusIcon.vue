@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import type { TaskStatusId } from "../../lib/task-status";
 
 defineOptions({ name: "RaftTaskStatusIcon", inheritAttrs: false });

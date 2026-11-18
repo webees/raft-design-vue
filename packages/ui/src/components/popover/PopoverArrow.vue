@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { PopoverArrow, useDirection } from "reka-ui";
 import { popover } from "./popover.variants";
 

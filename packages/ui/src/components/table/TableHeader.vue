@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { table } from "./table.variants";
 
 defineOptions({ name: "RaftTableHeader", inheritAttrs: false });

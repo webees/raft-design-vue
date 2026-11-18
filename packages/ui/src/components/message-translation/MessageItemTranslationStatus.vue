@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { messageTranslation } from "./message-translation.variants";
 
 defineOptions({ name: "RaftMessageItemTranslationStatus", inheritAttrs: false });

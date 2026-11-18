@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { markdown } from "./markdown.variants";
 
 defineOptions({ name: "RaftMarkdownBlockquote", inheritAttrs: false });

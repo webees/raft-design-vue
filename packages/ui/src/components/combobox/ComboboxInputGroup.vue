@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { combobox } from "./combobox.recipe";
 import { provideComboboxInputOwner } from "./combobox-context";
 import { cn } from "../../lib/cn";

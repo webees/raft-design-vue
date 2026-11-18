@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import AvatarBadge from "../avatar/AvatarBadge.vue";
 import { messageItem } from "./message-item.recipe";
 

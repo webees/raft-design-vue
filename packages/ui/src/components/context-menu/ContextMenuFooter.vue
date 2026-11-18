@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { contextMenu } from "./context-menu.variants";
 
 defineOptions({ name: "RaftContextMenuFooter", inheritAttrs: false });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CheckboxIndicator as BaseCheckboxIndicator, CheckboxRoot } from "reka-ui";
 
 import CheckboxIndicator from "./CheckboxIndicator.vue";

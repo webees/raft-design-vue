@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { select } from "./select.variants";
 
 defineOptions({ name: "RaftSelectPopup", inheritAttrs: false });

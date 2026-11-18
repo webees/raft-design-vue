@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { DialogDescription } from "reka-ui";
 import { dialog } from "./dialog.variants";
 

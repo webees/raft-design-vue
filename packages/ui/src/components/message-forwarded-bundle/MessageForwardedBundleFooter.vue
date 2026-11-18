@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 import MessageEmbedFooter from "../message-embed/MessageEmbedFooter.vue";
 import { useForwardedBundleFold } from "./message-forwarded-bundle-fold";
 

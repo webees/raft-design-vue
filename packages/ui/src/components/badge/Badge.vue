@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 import { badgeVariants, type BadgeAppearance, type BadgeVariant } from "./badge.variants";
 

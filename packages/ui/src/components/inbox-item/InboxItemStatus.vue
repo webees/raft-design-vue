@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, useSlots, type VNode } from "vue";
-
+import type { VNode } from "vue";
 import type { TaskStatusId } from "../../lib/task-status";
 import TaskStatusBadge from "../tasks/TaskStatusBadge.vue";
 import TaskStatusIcon from "../tasks/TaskStatusIcon.vue";

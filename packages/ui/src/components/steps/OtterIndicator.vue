@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from "vue";
 import { cn } from "../../lib/cn";
 import { observeOtterAnimation } from "./otter-animation-visibility";
 import type { StepStatus } from ".";

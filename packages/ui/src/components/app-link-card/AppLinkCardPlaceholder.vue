@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { Skeleton } from "../skeleton";
 import { messageCard } from "../message-embed/message-embed.variants";
 import { appLinkCardFrame } from "./app-link-card-parts";

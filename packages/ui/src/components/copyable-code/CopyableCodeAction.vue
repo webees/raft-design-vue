@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Check, Copy } from "lucide-vue-next";
 import Button from "../button/Button.vue";
 import type { ButtonSize, ButtonVariant } from "../button";

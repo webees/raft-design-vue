@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { table, type TableAlign } from "./table.variants";
 import TableSortButton from "./TableSortButton.vue";
 

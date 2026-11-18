@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { previewCard } from "./preview-card.variants";
 
 defineOptions({ name: "RaftPreviewCardPopup", inheritAttrs: false });

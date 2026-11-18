@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
 import { Checkbox } from "../checkbox";
 import { markdown } from "./markdown.variants";
 

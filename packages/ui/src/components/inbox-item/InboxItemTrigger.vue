@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
-
 import { inboxItemRecipe } from "./inbox-item.recipe";
 import { inboxItemDisabledKey } from "./inbox-item-context";
 

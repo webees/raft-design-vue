@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
 import MarkdownIt from "markdown-it";
 import docs from "../generated/design-docs.json";
 
@@ -14,7 +13,8 @@ md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
       .toLowerCase()
       .replace(/[^\p{L}\p{N}\s_-]/gu, "")
       .replace(/ /g, "-") || "section";
-  const seen = (env.headingIds ??= new Map<string, number>());
+  env.headingIds ??= new Map<string, number>();
+  const seen = env.headingIds;
   const count = seen.get(slug) ?? 0;
   seen.set(slug, count + 1);
   tokens[idx]!.attrSet("id", count ? `${slug}-${count}` : slug);

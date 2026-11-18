@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { onMounted, onUpdated, ref, useAttrs } from "vue";
-
 import { toast as toastStyles } from "./toast.recipe";
 
 defineOptions({ name: "RaftToastContent", inheritAttrs: false });

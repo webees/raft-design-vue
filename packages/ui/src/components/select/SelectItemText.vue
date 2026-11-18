@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs, useId } from "vue";
 import { SelectItemText } from "reka-ui";
 import { useOverflowTitle } from "../../lib/use-overflow-title";
 import { select } from "./select.variants";

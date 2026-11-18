@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { taskLoading } from "./task-loading.variants";
 
 defineOptions({ name: "RaftTaskLoadingList", inheritAttrs: false });

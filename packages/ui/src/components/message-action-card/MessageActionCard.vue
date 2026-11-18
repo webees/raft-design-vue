@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { CollapsibleRoot } from "reka-ui";
 
 import MessageEmbed from "../message-embed/MessageEmbed.vue";

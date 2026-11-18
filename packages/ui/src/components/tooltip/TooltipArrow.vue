@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { TooltipArrow } from "reka-ui";
 import { tooltip } from "./tooltip.variants";
 

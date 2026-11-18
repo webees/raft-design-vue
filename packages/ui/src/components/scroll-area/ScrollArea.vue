@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, useAttrs, type CSSProperties, type Ref, type StyleValue } from "vue";
+import type { Ref } from "vue";
+import type { CSSProperties, StyleValue } from "vue";
 
 import { cn } from "../../lib/cn";
 import ScrollAreaGutters from "./ScrollAreaGutters.vue";

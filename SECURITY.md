@@ -1,5 +1,7 @@
 # Security Policy
 
+**English** | [简体中文](./docs/zh/security.md)
+
 ## Supported versions
 
 The project is pre-1.0. Security fixes land on `main` and are released in the

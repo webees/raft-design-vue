@@ -129,7 +129,7 @@ export function useDragLists<L extends string>(options: UseDragListsOptions<L>) 
     options.announce(`Picked up ${options.itemName(id)}.`);
   }
 
-  function over(id: string, list: L, index: number) {
+  function over(_id: string, list: L, index: number) {
     if (!activeId.value) return;
     const from = listOf(options.items, activeId.value);
     if (!from) return;

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, watch } from "vue";
-
 import { cn } from "../../lib/cn";
 import { drag } from "./drag.recipe";
 import { useDragEngine } from "./drag-context";

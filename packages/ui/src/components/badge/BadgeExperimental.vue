@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import Badge from "./Badge.vue";
 
 defineOptions({ name: "RaftBadgeExperimental" });

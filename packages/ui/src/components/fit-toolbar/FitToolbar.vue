@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useAttrs,
-  watch,
-  type VNode,
-} from "vue";
-
+import type { VNode } from "vue";
 import { cn } from "../../lib/cn";
 import { provideFitToolbar, type FitItemRegistration } from "./fit-toolbar-context";
 import {

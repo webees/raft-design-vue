@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { messageEmbed } from "./message-embed.variants";
 
 defineOptions({ name: "RaftMessageEmbedHeader", inheritAttrs: false });

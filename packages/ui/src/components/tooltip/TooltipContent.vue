@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, defineComponent, useAttrs, useSlots } from "vue";
-import { Comment, Fragment, Text, type VNode } from "vue";
+import type { VNode } from "vue";
+import { Comment, Fragment, Text } from "vue";
 import { TooltipContent, TooltipPortal } from "reka-ui";
 import TooltipArrow from "./TooltipArrow.vue";
 import { tooltip } from "./tooltip.variants";

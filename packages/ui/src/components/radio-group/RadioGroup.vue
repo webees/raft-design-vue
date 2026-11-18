@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { RadioGroupRoot } from "reka-ui";
 
 defineOptions({ name: "RaftRadioGroup", inheritAttrs: false });

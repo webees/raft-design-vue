@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs } from "vue";
 import type { TaskStatusId } from "../../lib/task-status";
 import TaskChip from "./TaskChip.vue";
 import TaskStatusIcon from "./TaskStatusIcon.vue";

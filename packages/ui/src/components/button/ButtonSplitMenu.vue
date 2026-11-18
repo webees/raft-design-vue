@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, useAttrs, watchEffect } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";

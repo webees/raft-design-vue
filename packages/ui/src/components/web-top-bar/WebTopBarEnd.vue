@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { webTopBar } from "./web-top-bar.variants";
 
 defineOptions({ name: "RaftWebTopBarEnd", inheritAttrs: false });

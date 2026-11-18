@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useAttrs,
-  watch,
-  type VNode,
-} from "vue";
+import type { VNode } from "vue";
 import { Search, X } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";

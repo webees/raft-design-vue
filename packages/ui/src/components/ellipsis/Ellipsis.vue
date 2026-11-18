@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, useId, useSlots, watch } from "vue";
-
 import { measureContent, observeTruncation, readNow, type Truncation } from "../../lib/truncation";
 import { cn } from "../../lib/cn";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";

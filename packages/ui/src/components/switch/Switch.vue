@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { SwitchRoot } from "reka-ui";
 
 import { switchRecipe } from "./switch.recipe";

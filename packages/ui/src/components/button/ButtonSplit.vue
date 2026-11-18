@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, provide, ref, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import { buttonSplit, type ButtonSplitSize } from "./button-split.recipe";
 import { buttonSplitKey, type ButtonSplitContextValue } from "./button-split-context";

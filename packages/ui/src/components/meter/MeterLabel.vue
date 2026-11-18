@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 import { meter } from "./meter.variants";
 import { meterContextKey } from "./meter-context";

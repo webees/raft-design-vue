@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { ArrowLeft } from "lucide-vue-next";
 
 import PanelAction from "../panel/PanelAction.vue";

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { notificationCenter } from "./notification-center.recipe";
 
 defineOptions({ name: "RaftNotificationCenterItem", inheritAttrs: false });

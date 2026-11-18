@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { activityInboxToolbar } from "./activity-inbox.recipes";
 
 defineOptions({ name: "RaftActivityInboxControls", inheritAttrs: false });

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { messageCard } from "../message-embed/message-embed.variants";
 
 defineOptions({ name: "RaftAppLinkCardHost", inheritAttrs: false });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, provide, reactive, ref, useAttrs, watch, type StyleValue } from "vue";
+import type { StyleValue } from "vue";
 
 import { cn } from "../../lib/cn";
 import { appShell } from "./app-shell.variants";

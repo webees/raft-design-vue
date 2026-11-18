@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { onBeforeUnmount, useAttrs } from "vue";
-
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { scrollToElement } from "../scroll-area/scroll-to-element";
 import { mobileNavServer } from "./mobile-nav-server.recipe";

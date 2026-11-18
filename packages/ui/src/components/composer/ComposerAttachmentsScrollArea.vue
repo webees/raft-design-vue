@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs, type ComponentPublicInstance } from "vue";
-
+import type { ComponentPublicInstance } from "vue";
 import { cn } from "../../lib/cn";
 import Button from "../button/Button.vue";
 import ScrollArea from "../scroll-area/ScrollArea.vue";

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { Button } from "../button";
 import { cn } from "../../lib/cn";
 import { useCoachMarkContext } from "./coach-mark-context";

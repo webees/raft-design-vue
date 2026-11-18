@@ -1,18 +1,6 @@
 <script setup lang="ts">
-import {
-  Comment,
-  Fragment,
-  Text,
-  computed,
-  provide,
-  ref,
-  toRef,
-  useAttrs,
-  useSlots,
-  watchEffect,
-  type ComponentPublicInstance,
-  type VNode,
-} from "vue";
+import type { ComponentPublicInstance, VNode } from "vue";
+import { Comment, Fragment, Text } from "vue";
 import { VNodeList } from "../../lib/vnode-list";
 import { PopupSheetReset } from "../../lib/popup-boundary";
 import { dialog } from "./dialog.variants";

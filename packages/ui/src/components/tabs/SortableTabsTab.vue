@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, inject, ref, useSlots } from "vue";
-
 import { useSortableItem } from "../drag/use-sortable-item";
 import TabsTab from "./TabsTab.vue";
 import { sortableTabsContextKey } from "./tabs-sortable-context";

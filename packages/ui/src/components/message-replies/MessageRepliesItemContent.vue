@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { messageReplies } from "./message-replies.variants";
 
 defineOptions({ name: "RaftMessageRepliesItemContent", inheritAttrs: false });

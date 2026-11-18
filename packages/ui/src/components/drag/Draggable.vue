@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from "vue";
 import { Primitive } from "reka-ui";
 
 import { cn } from "../../lib/cn";

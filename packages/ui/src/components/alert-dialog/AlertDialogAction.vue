@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { Button } from "../button";
 import type { ButtonSize, ButtonVariant } from "../button/button.variants";
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, watch } from "vue";
 import { ToastProvider } from "reka-ui";
 import type { GlobalToastManager } from "reka-ui";
 

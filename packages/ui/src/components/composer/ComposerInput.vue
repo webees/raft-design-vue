@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { cn } from "../../lib/cn";
 import ScrollAreaTextarea from "../scroll-area/ScrollAreaTextarea.vue";
 import { composer } from "./composer.recipe";

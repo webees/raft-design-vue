@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { PanelBody } from "../panel";
 import { conversationPanel } from "../conversation-panel/conversation-panel.variants";
 

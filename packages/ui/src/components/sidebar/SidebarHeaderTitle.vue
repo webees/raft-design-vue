@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import { sidebarRecipe } from "./sidebar.recipe";
 
 defineOptions({ name: "RaftSidebarHeaderTitle", inheritAttrs: false });

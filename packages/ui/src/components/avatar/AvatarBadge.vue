@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs, type CSSProperties } from "vue";
+import type { CSSProperties } from "vue";
 import { Primitive } from "reka-ui";
 import { avatarVariants } from "./avatar.variants";
 import { PRESENCE_COLOR, type Presence } from "../../lib/presence";

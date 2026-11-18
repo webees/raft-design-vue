@@ -1,6 +1,6 @@
 # Agent instructions
 
-Read `CONTRIBUTING.md` and `docs/adr/0001-upstream-sync.md` before changing
+Read `CONTRIBUTING.md` and `docs/en/adr/0001-upstream-sync.md` before changing
 code. Key rules:
 
 - This is a source-faithful port. Copy upstream recipes, tokens and semantics

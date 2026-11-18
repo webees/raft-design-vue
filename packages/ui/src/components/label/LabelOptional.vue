@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { labelVariants } from "./label.variants";
 
 defineOptions({ name: "RaftLabelOptional", inheritAttrs: false });

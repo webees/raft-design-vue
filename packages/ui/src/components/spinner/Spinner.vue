@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
 import { spinnerVariants, type SpinnerSize, type SpinnerVariant } from "./spinner.variants";
 
 defineOptions({ name: "RaftSpinner", inheritAttrs: false });

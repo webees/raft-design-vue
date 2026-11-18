@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
-
 import Button from "../button/Button.vue";
 import { sidebarSectionRecipe } from "./sidebar-section.recipe";
 
