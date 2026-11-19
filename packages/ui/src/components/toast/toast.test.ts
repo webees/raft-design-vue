@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { h } from "vue";
 
 import ToastProvider from "./ToastProvider.vue";
 import ToastDefaultItem from "./ToastDefaultItem.vue";

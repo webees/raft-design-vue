@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it, vi } from "vitest";
-import { h } from "vue";
 import { Step, Steps } from ".";
 
 const statuses = (wrapper: ReturnType<typeof mount>) =>

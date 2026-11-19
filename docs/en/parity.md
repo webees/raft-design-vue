@@ -53,9 +53,9 @@ measured on 2026-11-19:
 
 | Metric                                         | Value  |
 | ---------------------------------------------- | ------ |
-| Source lines                                   | 55,275 |
-| `components/` lines                            | 50,319 |
-| `lib/` lines                                   | 3,823  |
+| Source lines                                   | 55,192 |
+| `components/` lines                            | 50,244 |
+| `lib/` lines                                   | 3,815  |
 | Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0     |
 | Duplicated lines / tokens                      | 0.00% / 0.00% |
 | Unused locals and parameters (`vue-tsc`)       | 0      |

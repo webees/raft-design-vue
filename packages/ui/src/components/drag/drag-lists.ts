@@ -1,5 +1,3 @@
-import { computed, ref, shallowRef } from "vue";
-
 import type { DragMessages } from "./drag-announcements";
 
 export type DragListsItems<L extends string> = Record<L, string[]>;

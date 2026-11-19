@@ -1,4 +1,3 @@
-import { computed, defineComponent, h } from "vue";
 import { Primitive } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { threadPanel } from "./thread-panel.variants";

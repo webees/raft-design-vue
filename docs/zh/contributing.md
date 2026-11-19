@@ -29,7 +29,7 @@ tooling/upstream   同步、锁文件、漂移报告、对齐清单
 3. 先移植 recipe：复制变体名、类名字符串与 data 属性，绝不重命名上游变体。
 4. 用 Vue SFC 与插槽实现，替代 React 的 `children`/render props；把 Base UI
    行为映射到 Reka UI，并记录无法避免的 API 差异。
-5. `.vue` 文件不写 Vue 运行时 import，由 `vue` 自动导入预设提供；公共类型
+5. `.vue` 与 `.ts` 源码都不写 Vue 运行时 import，由 `vue` 自动导入预设提供；公共类型
    仍显式导入。
 6. 补测试：渲染、变体、事件、禁用/加载状态、可访问性属性。
 7. 在 `apps/docs` 添加画廊条目。

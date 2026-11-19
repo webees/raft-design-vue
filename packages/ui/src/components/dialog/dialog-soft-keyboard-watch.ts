@@ -1,5 +1,3 @@
-import { defineComponent, watch } from "vue";
-
 import { useMobileViewport } from "../../lib/use-mobile-viewport";
 import { useSoftKeyboard, type SoftKeyboardViewport } from "../../lib/use-soft-keyboard";
 

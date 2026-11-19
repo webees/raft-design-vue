@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { h } from "vue";
 import RadioGroup from "./RadioGroup.vue";
 import RadioGroupItem from "./RadioGroupItem.vue";
 

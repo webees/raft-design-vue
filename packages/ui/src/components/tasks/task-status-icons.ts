@@ -1,4 +1,3 @@
-import { defineComponent, h } from "vue";
 import type { SVGAttributes } from "vue";
 import TaskStatusIcon from "./TaskStatusIcon.vue";
 import type { TaskStatusId } from "../../lib/task-status";

@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h } from "vue";
 import SystemMessage from "./SystemMessage.vue";
 import SystemMessageTime from "./SystemMessageTime.vue";
 import SystemMessageContent from "./SystemMessageContent.vue";

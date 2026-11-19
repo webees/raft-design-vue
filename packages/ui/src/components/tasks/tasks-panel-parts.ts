@@ -1,4 +1,3 @@
-import { defineComponent, h } from "vue";
 import { tasksPanel } from "./tasks-panel.variants";
 
 type PanelSlot =

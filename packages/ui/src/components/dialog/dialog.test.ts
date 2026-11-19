@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { nextTick } from "vue";
 import Dialog from "./Dialog.vue";
 import DialogBody from "./DialogBody.vue";
 import DialogClose from "./DialogClose.vue";

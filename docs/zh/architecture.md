@@ -37,16 +37,16 @@ TypeScript 配置和锁文件。
 AutoImport({ imports: ["vue"], dts: "src/auto-imports.d.ts" });
 ```
 
-因此 SFC 可直接使用 `ref`、`computed`、`useAttrs`、`watch`、生命周期
-钩子等 Vue 运行时 API，无需 import。出现在公共 props 中的类型仍显式
-导入（`import type { Ref, VNode } from "vue"`），因为声明产物需要模块级
-符号。
+因此 SFC 与 TypeScript 模块都可直接使用 `ref`、`computed`、`useAttrs`、
+`watch`、生命周期钩子等 Vue 运行时 API，无需 import。出现在公共 props
+中的类型仍显式导入（`import type { Ref, VNode } from "vue"`），因为声明
+产物需要模块级符号。
 
 生成的 `src/auto-imports.d.ts` 需要提交，并由 Biome 排除。不要手改，
 每次构建与测试都会重新生成。
 
-`packages/ui/src/**/*.ts` 有意保留显式导入：非 SFC 模块同时被同步工具和
-直接阅读源码的消费者使用。
+`packages/ui/src` 下的所有文件都由该预设编译，因此重新加入运行时导入
+属于应当清理的冗余。
 
 ## Lint 与格式化
 

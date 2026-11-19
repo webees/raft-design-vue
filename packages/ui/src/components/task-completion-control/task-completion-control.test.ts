@@ -1,5 +1,4 @@
 import { mount } from "@vue/test-utils";
-import { h } from "vue";
 import { describe, expect, it, vi } from "vitest";
 import TaskCompletionControl from "./TaskCompletionControl.vue";
 

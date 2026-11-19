@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { nextTick } from "vue";
 
 import Lightbox from "./Lightbox.vue";
 import LightboxBody from "./LightboxBody.vue";

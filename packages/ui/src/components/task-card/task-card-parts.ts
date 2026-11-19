@@ -1,4 +1,3 @@
-import { defineComponent, h } from "vue";
 import { taskCard } from "./task-card.variants";
 
 type CardSlot = "row" | "body" | "meta" | "channel" | "number" | "legacy" | "title" | "description";
