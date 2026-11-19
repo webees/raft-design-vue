@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { cn } from "../../lib/cn";
-import { toElement } from "../../lib/dom";
 import { useHoldsFocusable } from "../../lib/use-holds-focusable";
 import ScrollAreaGutters from "../scroll-area/ScrollAreaGutters.vue";
 import { useScrollAreaContainer } from "../scroll-area/use-scroll-area-container";
@@ -44,23 +43,11 @@ const scrollClass = computed(() =>
   ),
 );
 const holdsFocusable = useHoldsFocusable(area.containerRef);
-const guttersBinding = computed(() => ({
-  containerRef: area.containerRef,
-  rails: area.rails,
-  setDragging: area.setDragging,
-  setGuttersRef: area.setGuttersRef,
-  setXThumbRef: area.setXThumbRef,
-  setYThumbRef: area.setYThumbRef,
-}));
 const effectiveTabIndex = computed(() => {
   if (props.tabIndex !== undefined) return props.tabIndex;
   if (holdsFocusable.value) return -1;
   return area.scrollable() ? 0 : undefined;
 });
-
-function setContainer(element: unknown) {
-  area.containerRef.value = toElement(element);
-}
 </script>
 
 <template>
@@ -71,7 +58,7 @@ function setContainer(element: unknown) {
     :style="area.blockStyle.value"
   >
     <div
-      :ref="setContainer"
+      :ref="area.setContainer"
       v-bind="{ ...attrs, class: undefined }"
       data-slot="dialog-body"
       :class="scrollClass"
@@ -79,6 +66,6 @@ function setContainer(element: unknown) {
     >
       <slot />
     </div>
-    <ScrollAreaGutters :binding="guttersBinding" />
+    <ScrollAreaGutters :binding="area.binding" />
   </div>
 </template>

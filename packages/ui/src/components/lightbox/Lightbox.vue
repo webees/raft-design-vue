@@ -2,6 +2,7 @@
 import { DialogRoot } from "reka-ui";
 
 import { OverlayLayer } from "../../lib/overlay-depth";
+import { useControlledState, useIsControlled } from "../../lib/use-controlled-state";
 import { createLightboxDepth, provideLightboxModal, type LightboxModal } from "./lightbox-context";
 
 defineOptions({ name: "RaftLightbox", inheritAttrs: false });
@@ -23,22 +24,21 @@ const props = withDefaults(
 
 const emit = defineEmits<{ "update:open": [open: boolean] }>();
 
-const instance = getCurrentInstance();
-const controlled = computed(() => {
-  const vnodeProps = instance?.vnode.props;
-  return vnodeProps != null && "open" in vnodeProps;
-});
-const innerOpen = ref(props.defaultOpen ?? false);
-const isOpen = computed(() => (controlled.value ? props.open === true : innerOpen.value));
+const isOpen = useControlledState(
+  "open",
+  () => props.open,
+  props.defaultOpen ?? false,
+  (value) => emit("update:open", value),
+);
 const modal = computed(() => props.modal);
+const controlled = useIsControlled("open");
 const openProps = computed(() => (controlled.value ? { open: props.open === true } : {}));
 
 provideLightboxModal(modal);
 const depth = createLightboxDepth();
 
 function handleOpenChange(value: boolean) {
-  if (!controlled.value) innerOpen.value = value;
-  emit("update:open", value);
+  isOpen.value = value;
 }
 
 function onKeydown(event: KeyboardEvent) {

@@ -43,8 +43,33 @@ Measured on 2026-11-19 with Bun 1.4.4 / Node 22:
 | Tests       | 375                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 2005.1 kB raw, 287.6 kB gzip         |
-| Docs bundle | 4163.3 kB total, 1605.1 kB gzip      |
+| Library     | 1997.7 kB raw, 287.1 kB gzip         |
+| Docs bundle | 4162.3 kB total, 1605.1 kB gzip      |
+
+### Source baseline
+
+Source size and duplication floor for `packages/ui/src` (`.ts` + `.vue`),
+measured on 2026-11-19:
+
+| Metric                                         | Value  |
+| ---------------------------------------------- | ------ |
+| Source lines                                   | 55,502 |
+| `components/` lines                            | 50,629 |
+| `lib/` lines                                   | 3,740  |
+| Copy-paste clones (jscpd, 10 lines / 70 tokens) | 4     |
+| Duplicated lines / tokens                      | 0.08% / 0.12% |
+| Unused locals and parameters (`vue-tsc`)       | 0      |
+| Component files with no importer               | 0      |
+
+Re-measure with:
+
+```bash
+find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) | xargs wc -l
+bunx jscpd packages/ui/src --min-lines 10 --min-tokens 70 \
+  --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
+cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
+  -p tsconfig.json --noUnusedLocals --noUnusedParameters
+```
 
 ## Audit method
 

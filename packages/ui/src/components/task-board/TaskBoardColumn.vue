@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CollapsibleRoot } from "reka-ui";
+import { useControlledState } from "../../lib/use-controlled-state";
 import { taskBoardColumn } from "./task-board.variants";
 
 defineOptions({ name: "RaftTaskBoardColumn", inheritAttrs: false });
@@ -10,16 +11,12 @@ const props = withDefaults(
 );
 const emit = defineEmits<{ "update:open": [value: boolean] }>();
 const attrs = useAttrs();
-const internalOpen = ref(props.defaultOpen);
-const instance = getCurrentInstance();
-const isControlled = computed(() => instance?.vnode.props?.open !== undefined);
-const openState = computed({
-  get: () => (isControlled.value ? (props.open as boolean) : internalOpen.value),
-  set: (value: boolean) => {
-    if (!isControlled.value) internalOpen.value = value;
-    emit("update:open", value);
-  },
-});
+const openState = useControlledState(
+  "open",
+  () => props.open,
+  props.defaultOpen,
+  (value) => emit("update:open", value),
+);
 const rootClass = computed(() => taskBoardColumn().root({ className: attrs.class as string }));
 </script>
 

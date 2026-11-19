@@ -29,7 +29,7 @@ const overlayClass = computed(() => alertDialog({ nested: nested.value }).overla
 </script>
 
 <template>
-  <AlertDialogPortal v-if="portal" :to="to">
+  <AlertDialogPortal :to="to" :disabled="!portal">
     <AlertDialogOverlay
       v-if="overlay"
       :class="overlayClass"
@@ -51,26 +51,4 @@ const overlayClass = computed(() => alertDialog({ nested: nested.value }).overla
       <slot />
     </AlertDialogContent>
   </AlertDialogPortal>
-  <template v-else>
-    <AlertDialogOverlay
-      v-if="overlay"
-      :class="overlayClass"
-      :data-nested="nested ? '' : undefined"
-      data-slot="alert-dialog-overlay"
-      data-raft-ui-overlay=""
-    />
-    <AlertDialogContent
-      v-bind="{ ...attrs, class: undefined }"
-      :class="contentClass"
-      :force-mount="forceMount"
-      :as-child="asChild"
-      role="alertdialog"
-      data-slot="alert-dialog-content"
-      @open-auto-focus="onOpenAutoFocus"
-      @close-auto-focus="onCloseAutoFocus"
-      @escape-key-down="onEscapeKeyDown"
-    >
-      <slot />
-    </AlertDialogContent>
-  </template>
 </template>

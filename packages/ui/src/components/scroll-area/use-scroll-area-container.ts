@@ -1,6 +1,7 @@
 import { computed, ref, type CSSProperties, type Ref } from "vue";
 
 import { cn } from "../../lib/cn";
+import { toElement } from "../../lib/dom";
 import { scrollAreaClassNames } from "./class-names";
 import { scrollToElement } from "./scroll-to-element";
 import type {
@@ -118,6 +119,19 @@ export function useScrollAreaContainer(options: ScrollAreaContainerOptions = {})
 
   const scroller = computed(() => cn(sticky ? blockClassName.value : scrollAreaContainerClassName));
 
+  const binding = {
+    containerRef,
+    rails: bars.rails,
+    setDragging: bars.setDragging,
+    setGuttersRef: bars.setGuttersRef,
+    setXThumbRef: bars.setXThumbRef,
+    setYThumbRef: bars.setYThumbRef,
+  };
+
+  const setContainer = (element: unknown) => {
+    containerRef.value = toElement(element);
+  };
+
   const scrollTo = (element: Element, scrollOptions?: ScrollAreaScrollToElementOptions) => {
     const container = containerRef.value;
     if (container) scrollToElement(container, element, orientation, scrollOptions);
@@ -128,6 +142,7 @@ export function useScrollAreaContainer(options: ScrollAreaContainerOptions = {})
   if (actionsRef) actionsRef.value = { measure, scrollToElement: scrollTo };
 
   return {
+    binding,
     blockClassName,
     blockStyle,
     containerRef,
@@ -142,6 +157,7 @@ export function useScrollAreaContainer(options: ScrollAreaContainerOptions = {})
     scrollToElement: scrollTo,
     scrollable: bars.scrollable,
     scroller,
+    setContainer,
     setDragging: bars.setDragging,
     setGuttersRef: bars.setGuttersRef,
     setXThumbRef: bars.setXThumbRef,
