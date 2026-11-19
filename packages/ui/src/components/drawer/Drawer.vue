@@ -58,7 +58,6 @@ provideDrawerConfig(
     :snap-point="snapPoint"
     :default-snap-point="defaultSnapPoint"
     :snap-to-sequential-points="snapToSequentialPoints"
-    data-slot="drawer"
     @update:open="emit('update:open', $event)"
     @update:open-complete="emit('update:openComplete', $event)"
     @update:snap-point="emit('update:snapPoint', $event)"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ContextMenuSubTrigger } from "reka-ui";
 
+import MenuIndicator from "./MenuIndicator.vue";
 import { contextMenu } from "./context-menu.variants";
 
 defineOptions({ name: "RaftContextMenuSubmenuTrigger", inheritAttrs: false });
@@ -20,20 +21,9 @@ const rootClass = computed(() =>
     :class="rootClass"
   >
     <slot />
-    <span
-      aria-hidden
+    <MenuIndicator
       data-slot="context-menu-submenu-trigger-indicator"
       :class="contextMenu().indicator()"
-    >
-      <svg viewBox="0 0 12 12" fill="none" class="size-3 shrink-0">
-        <path
-          d="m4.5 2.5 3.5 3.5-3.5 3.5"
-          stroke="currentColor"
-          stroke-width="1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </span>
+    />
   </ContextMenuSubTrigger>
 </template>

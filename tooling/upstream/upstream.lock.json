@@ -1,8 +1,8 @@
 {
   "repository": "botiverse/raft-design",
   "ref": "main",
-  "commit": "7d280d65142bf924190f068735c246c155c45089",
-  "syncedAt": "2026-11-18T23:37:52.686Z",
+  "commit": "c7045d63f72c5c7cac06685415323948e5a32f15",
+  "syncedAt": "2026-11-19T03:58:23.968Z",
   "files": {
     "design/about/use-raft-ui.md": "0d9f7cfeee66155de835e94f7a3d6a1b8809a976a4710240ceafd6ec41cd881e",
     "design/assets/Agents/README.md": "07854f72f49fb0c270bdd96fb0d2d0085830b21ba4dbd2c90d8ec96f19a7170b",
@@ -151,7 +151,7 @@
     "design/foundations/iconography.md": "b2247cb9a7292f545552b9d2f19a88dae211034fdb6a3f7928650a7845a4fbc4",
     "design/foundations/motion.md": "f27baa0ef3b102fc6cea0e7ca82c0946341b1c9d4400de204e88d126428c4db7",
     "design/foundations/shape.md": "2f42266b2d40803fecf325b2c0e7a5ff6a374d22da3a46282ac2b8377ab331f6",
-    "design/foundations/spacing.md": "9837e8af76c177472534bea4024c2505bcc66332fdb99b8475476195b0a826ef",
+    "design/foundations/spacing.md": "e146dec9aa8558c560a6ab5680785e6fed9fccd98b27fe348e446bae3d746cf1",
     "design/foundations/states.md": "2c0bab309df6cf5ce7967b909b5ac8cea2a14df4bd603e3e77b19b0418756679",
     "design/foundations/themes.md": "4c167391960661dc4508d7186c25e6f05bc1d058030dfd570e3546207538ca9f",
     "design/foundations/tokens.md": "d6ed3810ba0e9ed43dde2c0ccb7016cf3e8f22cd4c573209baa1dff356c8e0c7",
@@ -169,7 +169,7 @@
     "design/patterns/navigation.md": "fa6f095b8864593b49258f22d947ccf574e1fac0cea60348fbc2e9a58e368b08",
     "design/patterns/page-structure.md": "4b7c2326e0357f30ceca2b514e778bc0998e9e90e024e7e050b14a8cd6fa1179",
     "design/patterns/questions.md": "4e4e29eab171c4bf82bebe1c4daf30802ac9ebda115f74afa8bff130bba9e1e5",
-    "design/patterns/responsive.md": "f5522c843ddb1b48062a67f46c37af878d4f5c6031baef35f72a382f8e9e2dc0",
+    "design/patterns/responsive.md": "dec8d118ecd5ce18da61914bc6a02208a86f7c6c885ccaa936aa7e4da752c0ab",
     "design/patterns/status.md": "7927aa5d268b8cc7e640011d582febe63823086cc5bfadf93b2b31914148acdf",
     "design/patterns/tasks.md": "e45d4f31dd05fdf2884b3be8dfd587a07c40c08404337357130e053c21033212",
     "design/people-and-agents/handoffs-and-approvals.md": "2278dce61d3c2272d6aca57d46e94ad1baaea1fa1c23e9819689506340187153",
@@ -195,7 +195,7 @@
     "packages/ui/src/fonts.css": "9dad5c00acd351c91f46f106e450d65101e756f90538e4597bf79c3ea70a9133",
     "packages/ui/src/themes.json": "aa58511b900d03cc92eba26ecd28e5d6784804794627e8b1ea8867ec01522714",
     "packages/ui/src/tokens.json": "58c0c11a8f1ea92da19695cf85f397e911ed8716e1e5f6829181c0c47014686c",
-    "packages/ui/src/upstream-styles.css": "dbf20ed3e05f74ea2d53bad17b2beacc3daf105a084e6087b70a9f822c35b0d8",
+    "packages/ui/src/upstream-styles.css": "0a8723554fbb79dac0c217e4712b40e792987aa097e6c931e0d38a103dc07627",
     "tooling/upstream/UPSTREAM-LICENSE": "a1d02f0b3564fef2e7cbe7494377350e531429ef50f787bd824342402916e0e3",
     "tooling/upstream/UPSTREAM-NOTICE.md": "c397f27b6147739560a59b07c500715d38c90715d496c88f45fad4e72a8d3d80"
   }

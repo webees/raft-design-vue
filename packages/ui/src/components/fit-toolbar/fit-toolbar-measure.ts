@@ -47,7 +47,7 @@ function canWrap(group: HTMLElement, allowWrap: boolean) {
  * Nothing pokes out of the toolbar or out of any of its rows, and no line has
  * broken by itself: while groups wrap, each line (one `order`) stays one line.
  */
-export function fits(root: HTMLElement, allowWrap: boolean) {
+function fits(root: HTMLElement, allowWrap: boolean) {
   const rows = [root, ...root.querySelectorAll<HTMLElement>(`[${ROW}]`)];
   const inside = rows.every((row) => {
     if (row.getClientRects().length === 0) return true;
@@ -226,7 +226,7 @@ export function measure(root: HTMLElement, allowWrap: boolean): Applied {
  * `wrapLine` share a line, in their order; any other takes one of its own.
  * A zero-height break before each line ends the one before it.
  */
-export function layOutLines(root: HTMLElement, elements: readonly HTMLElement[]) {
+function layOutLines(root: HTMLElement, elements: readonly HTMLElement[]) {
   root.setAttribute(WRAPPING, "");
   for (const line of Array.from(root.querySelectorAll(`:scope > [${BREAK}]`))) line.remove();
   const lines: string[] = [];

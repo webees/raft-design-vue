@@ -5,7 +5,7 @@
 ## Pinned upstream
 
 `tooling/upstream/upstream.lock.json` records the exact commit this port is
-measured against. Today: `botiverse/raft-design@7d280d65`. Every synced file
+measured against. Today: `botiverse/raft-design@c7045d63`. Every synced file
 also stores its SHA-256, so partial edits are detectable.
 
 ## What is synced

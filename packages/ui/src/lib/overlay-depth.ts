@@ -43,13 +43,15 @@ export function useEnclosingOverlayKind(): OverlayLayerKind | null {
   return useOverlayStack()?.value.at(-1) ?? null;
 }
 
+const OVERLAY_LAYER_PROPS = {
+  kind: { type: String as PropType<OverlayLayerKind>, required: true },
+  modal: { type: Boolean, required: true },
+} as const;
+
 /** Adds a modal surface to the stack for everything under it. */
 export const OverlayLayer = defineComponent({
   name: "RaftOverlayLayer",
-  props: {
-    kind: { type: String as PropType<OverlayLayerKind>, required: true },
-    modal: { type: Boolean, required: true },
-  },
+  props: OVERLAY_LAYER_PROPS,
   setup(props, { slots }) {
     const parent = useOverlayStack();
     provide(
@@ -77,10 +79,7 @@ const PopupSheetReset = defineComponent({
  */
 export const OverlayLayerProvider = defineComponent({
   name: "RaftOverlayLayerProvider",
-  props: {
-    kind: { type: String as PropType<OverlayLayerKind>, required: true },
-    modal: { type: Boolean, required: true },
-  },
+  props: OVERLAY_LAYER_PROPS,
   setup(props, { slots }) {
     return () =>
       h(

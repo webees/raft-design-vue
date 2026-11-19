@@ -5,7 +5,14 @@ defineOptions({ name: "RaftPreviewCardPortal", inheritAttrs: false });
 </script>
 
 <template>
-  <HoverCardPortal v-bind="$attrs" data-slot="preview-card-portal" data-raft-ui-overlay="">
-    <slot />
+  <HoverCardPortal>
+    <div
+      v-bind="$attrs"
+      data-slot="preview-card-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </HoverCardPortal>
 </template>

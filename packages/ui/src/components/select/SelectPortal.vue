@@ -6,14 +6,14 @@ defineProps<{ to?: string | HTMLElement; disabled?: boolean; forceMount?: boolea
 </script>
 
 <template>
-  <SelectPortal
-    v-bind="$attrs"
-    :to="to"
-    :disabled="disabled"
-    :force-mount="forceMount"
-    data-slot="select-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <SelectPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="select-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </SelectPortal>
 </template>

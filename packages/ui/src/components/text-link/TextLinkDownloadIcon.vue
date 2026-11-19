@@ -1,23 +1,12 @@
 <script setup lang="ts">
 import { Download } from "lucide-vue-next";
-import { cn } from "../../lib/cn";
 
-defineOptions({ name: "RaftTextLinkDownloadIcon", inheritAttrs: false });
+import TextLinkIcon from "./TextLinkIcon.vue";
 
+defineOptions({ name: "RaftTextLinkDownloadIcon" });
 defineProps<{ label?: string }>();
-
-const attrs = useAttrs();
-const markBox = "ml-0.5 inline-flex align-[calc(0.7em/2-0.857em/2)]";
-const rootClass = computed(() => cn(markBox, attrs.class as string));
 </script>
 
 <template>
-  <span
-    v-bind="{ ...attrs, class: undefined }"
-    :class="rootClass"
-    data-slot="text-link-download-icon"
-  >
-    <Download aria-hidden="true" focusable="false" class="size-[0.857em]" :stroke-width="2" />
-    <span v-if="label" class="sr-only"> {{ label }}</span>
-  </span>
+  <TextLinkIcon :icon="Download" dataSlot="text-link-download-icon" :label="label" />
 </template>

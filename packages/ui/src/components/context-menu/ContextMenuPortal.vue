@@ -16,13 +16,14 @@ withDefaults(
 </script>
 
 <template>
-  <ContextMenuPortal
-    v-bind="$attrs"
-    data-slot="context-menu-portal"
-    data-raft-ui-overlay=""
-    :disabled="disabled"
-    :force-mount="forceMount"
-  >
-    <slot />
+  <ContextMenuPortal :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="context-menu-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </ContextMenuPortal>
 </template>

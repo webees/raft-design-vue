@@ -1,10 +1,10 @@
-export { default as AppRailRoot } from "./AppRailRoot.vue";
-export { default as AppRailHeader } from "./AppRailHeader.vue";
+export { AppRailRoot } from "./AppRailRoot";
+export { AppRailHeader } from "./AppRailHeader";
 export { default as AppRailNav } from "./AppRailNav.vue";
 export { default as AppRailItem } from "./AppRailItem.vue";
-export { default as AppRailItemIcon } from "./AppRailItemIcon.vue";
-export { default as AppRailItemLabel } from "./AppRailItemLabel.vue";
-export { default as AppRailItemBadge } from "./AppRailItemBadge.vue";
+export { AppRailItemIcon } from "./AppRailItemIcon";
+export { AppRailItemLabel } from "./AppRailItemLabel";
+export { AppRailItemBadge } from "./AppRailItemBadge";
 export { default as AppRailItemIndicator } from "./AppRailItemIndicator.vue";
 export { default as AppRailItemAttention } from "./AppRailItemAttention.vue";
-export { default as AppRailFooter } from "./AppRailFooter.vue";
+export { AppRailFooter } from "./AppRailFooter";

@@ -5,7 +5,7 @@
 ## 锁定上游
 
 `tooling/upstream/upstream.lock.json` 记录本移植版本对照的确切提交，当前为
-`botiverse/raft-design@7d280d65`。每个同步文件还记录 SHA-256，可检测局部
+`botiverse/raft-design@c7045d63`。每个同步文件还记录 SHA-256，可检测局部
 篡改。
 
 ## 同步范围

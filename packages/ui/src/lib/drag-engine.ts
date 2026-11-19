@@ -215,20 +215,28 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     document.documentElement.style.cursor = "grabbing";
   }
 
+  function sessionFor(
+    registration: DraggableRegistration,
+    keyboard: boolean,
+    pointer?: { x: number; y: number },
+  ): DragSession {
+    const rect = registration.element.getBoundingClientRect();
+    return {
+      data: { ...registration.data, element: registration.element },
+      delta: { x: 0, y: 0 },
+      id: registration.id,
+      keyboard,
+      over: null,
+      pointer: pointer ?? rectCenter(rect),
+      rect,
+    };
+  }
+
   function begin() {
     if (!start) return;
     started = true;
     const { registration } = start;
-    const rect = registration.element.getBoundingClientRect();
-    const session: DragSession = {
-      data: { ...registration.data, element: registration.element },
-      delta: { x: 0, y: 0 },
-      id: registration.id,
-      keyboard: false,
-      over: null,
-      pointer: start.point,
-      rect,
-    };
+    const session = sessionFor(registration, false, start.point);
     active.value = session;
     if (typeof ResizeObserver !== "undefined") {
       measureObserver?.disconnect();
@@ -329,16 +337,7 @@ export function createDragEngine(options: DragEngineOptions = {}) {
   const keyboard = {
     start(registration: DraggableRegistration) {
       if (options.disabled?.() || registration.disabled) return;
-      const rect = registration.element.getBoundingClientRect();
-      const session: DragSession = {
-        data: { ...registration.data, element: registration.element },
-        delta: { x: 0, y: 0 },
-        id: registration.id,
-        keyboard: true,
-        over: null,
-        pointer: rectCenter(rect),
-        rect,
-      };
+      const session = sessionFor(registration, true);
       active.value = session;
       grabEscape();
       options.onDragStart?.(session);
