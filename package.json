@@ -25,6 +25,7 @@
     "format": "biome check --write .",
     "format:check": "biome check .",
     "sync:upstream": "bun run --cwd tooling/upstream sync",
+    "fetch:upstream": "bun run --cwd tooling/upstream sync --locked --snapshot",
     "check:upstream": "bun run --cwd tooling/upstream check",
     "check:parity": "bun run --cwd tooling/upstream parity",
     "check:audit": "bun run --cwd tooling/upstream audit --check",

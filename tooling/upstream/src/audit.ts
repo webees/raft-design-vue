@@ -19,10 +19,10 @@ const upstreamRoot = join(
 const upstreamComponents = join(upstreamRoot, "components");
 
 if (!existsSync(upstreamRoot)) {
-  console.log(
-    `check:audit skipped: ${relative(ROOT, upstreamRoot)} is missing; run \`bun run sync:upstream\`.`,
+  console.error(
+    `check:audit failed: ${relative(ROOT, upstreamRoot)} is missing; run \`bun run fetch:upstream\`.`,
   );
-  process.exit(0);
+  process.exit(1);
 }
 
 const isTest = (file: string) => /\.(?:test|spec)[^/]*\.(?:[cm]?[jt]sx?)$/.test(file);

@@ -25,8 +25,14 @@ import {
 import { rewriteDesignLinks } from "./docs-links";
 
 const args = parseArgs(process.argv.slice(2));
+const locked = args.locked === true;
 const ref = typeof args.ref === "string" ? args.ref : "main";
-const commit = typeof args.commit === "string" ? args.commit : await resolveCommit(ref);
+const commit =
+  typeof args.commit === "string"
+    ? args.commit
+    : locked
+      ? readJson<UpstreamLock>(LOCK_PATH).commit
+      : await resolveCommit(ref);
 const sourceDir = join(WORK_DIR, `raft-design-${commit}`);
 const archive = join(WORK_DIR, `${commit}.tar.gz`);
 
@@ -47,6 +53,11 @@ if (!existsSync(join(sourceDir, "packages/ui/src/tokens.json"))) {
     stderr: "inherit",
   });
   if (tar.exitCode !== 0) throw new Error("Failed to extract upstream archive");
+}
+
+if (args.snapshot === true) {
+  console.log(`Snapshot ready: ${rel(sourceDir)}`);
+  process.exit(0);
 }
 
 const synced = new Map<string, string>();

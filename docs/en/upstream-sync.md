@@ -23,6 +23,7 @@ Hand-written code is never overwritten: `packages/ui/src/components/**`,
 ## Commands
 
 ```bash
+bun run fetch:upstream   # materialize the pinned snapshot only (CI uses this)
 bun run sync:upstream    # fetch the pinned commit (or latest) and update inputs
 bun run check:upstream   # report drift against upstream main
 bun run check:parity     # component coverage: 102 / 102, no untracked local dirs
