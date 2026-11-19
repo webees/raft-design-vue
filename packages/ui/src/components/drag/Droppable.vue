@@ -2,8 +2,7 @@
 import { Primitive } from "reka-ui";
 
 import { cn } from "../../lib/cn";
-import { toElement } from "../../lib/dom";
-import { useDragEngine } from "./drag-context";
+import { useDragElement } from "./drag-context";
 
 defineOptions({ name: "RaftDroppable", inheritAttrs: false });
 
@@ -20,31 +19,20 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const engine = useDragEngine();
-const root = ref<HTMLElement | null>(null);
+const { engine, root } = useDragElement((engine, element) =>
+  engine.registerDroppable({
+    accept: props.accept,
+    data: props.data,
+    disabled: props.disabled,
+    element,
+    id: props.id,
+  }),
+);
 const over = computed(() => {
   const session = engine?.active.value;
   return session?.over?.id === props.id ? session.over : null;
 });
 const classes = computed(() => cn(attrs.class as string | undefined, props.class));
-
-let unregister: (() => void) | null = null;
-
-const elementOf = toElement;
-
-onMounted(() => {
-  const node = elementOf(root.value);
-  if (!node || !engine) return;
-  unregister = engine.registerDroppable({
-    accept: props.accept,
-    data: props.data,
-    disabled: props.disabled,
-    element: node,
-    id: props.id,
-  });
-});
-
-onBeforeUnmount(() => unregister?.());
 </script>
 
 <template>

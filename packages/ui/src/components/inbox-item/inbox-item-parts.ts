@@ -4,18 +4,23 @@ import { inboxItemDensityKey, inboxItemHeadingKey } from "./inbox-item-context";
 import { inboxItemRecipe } from "./inbox-item.recipe";
 
 type SlotName = keyof ReturnType<typeof inboxItemRecipe>;
+type PartProps = { class?: string } & Record<string, unknown>;
+type RecipeSlots = Record<SlotName, (options?: { class?: string }) => string>;
 
-function usesDensity(slot: SlotName) {
-  return [
-    "itemContent",
-    "itemHeading",
-    "itemTitle",
-    "itemTrailing",
-    "itemBody",
-    "itemMessage",
-    "itemTimestamp",
-    "itemActions",
-  ].includes(slot);
+const slotClasses = (state: Record<string, unknown>, slot: SlotName, className?: string) =>
+  (inboxItemRecipe(state as never) as RecipeSlots)[slot]({ class: className || undefined });
+
+interface PartOptions {
+  density?: boolean;
+  props?: Record<string, { type: unknown; default?: unknown }>;
+  /** Extra attributes computed from props and the injected heading state. */
+  attrs?: (props: PartProps, heading: { value: boolean }) => Record<string, unknown>;
+  /** Variant inputs derived from props, e.g. `reveal`. */
+  variant?: (props: PartProps) => Record<string, unknown>;
+  /** Publish whether we sit inside a compact heading. */
+  provideHeading?: boolean;
+  /** Consume the heading state published by an ancestor part. */
+  consumeHeading?: boolean;
 }
 
 function part(
@@ -23,38 +28,46 @@ function part(
   tag: string,
   dataSlot: string,
   slot: SlotName,
-  options: {
-    density?: boolean;
-    props?: Record<string, { type: unknown; default?: unknown }>;
-  } = {},
+  options: PartOptions = {},
 ) {
   return defineComponent({
     name,
     inheritAttrs: false,
     props: {
-      class: { type: String as PropType<string>, default: undefined },
+      class: { type: String, default: undefined },
       ...(options.props ?? {}),
     },
-    setup(props, { slots }) {
+    setup(props: PartProps, { slots }) {
       const attrs = useAttrs();
-      const density =
-        options.density && usesDensity(slot) ? inject(inboxItemDensityKey, undefined) : undefined;
-      const rootClass = computed(() =>
-        (
-          inboxItemRecipe({ density: density?.value }) as Record<
-            SlotName,
-            (options?: { class?: string }) => string
-          >
-        )[slot]({
-          class: [props.class, attrs.class as string].filter(Boolean).join(" ") || undefined,
-        }),
-      );
+      const density = options.density ? inject(inboxItemDensityKey, undefined) : undefined;
+      const heading = options.provideHeading
+        ? computed(() => density?.value === "compact")
+        : options.consumeHeading
+          ? inject(
+              inboxItemHeadingKey,
+              computed(() => false),
+            )
+          : undefined;
+      if (heading && options.provideHeading) provide(inboxItemHeadingKey, heading);
+
+      const rootClass = computed(() => {
+        const className = [props.class, attrs.class as string | undefined]
+          .filter(Boolean)
+          .join(" ");
+        return slotClasses(
+          { density: density?.value, ...options.variant?.(props) },
+          slot,
+          className,
+        );
+      });
+
       return () => {
         const { class: _class, ...rest } = attrs;
         return h(
           tag,
           {
             ...rest,
+            ...options.attrs?.(props, heading ?? { value: false }),
             "data-slot": dataSlot,
             class: rootClass.value,
           },
@@ -65,176 +78,117 @@ function part(
   });
 }
 
-const InboxItemActionsBase = defineComponent({
-  name: "RaftInboxItemActions",
-  inheritAttrs: false,
-  props: {
-    class: { type: String as PropType<string>, default: undefined },
-    reveal: { type: String as PropType<"hover" | undefined>, default: undefined },
+export const InboxItemActions = part(
+  "RaftInboxItemActions",
+  "div",
+  "inbox-item-actions",
+  "itemActions",
+  {
+    density: true,
+    props: { reveal: { type: String as PropType<"hover" | undefined>, default: undefined } },
+    variant: (props) => ({ reveal: props.reveal }),
+    attrs: (props) => ({ "data-reveal": props.reveal }),
   },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const density = inject(inboxItemDensityKey, undefined);
-    const rootClass = computed(() =>
-      inboxItemRecipe({ density: density?.value, reveal: props.reveal }).itemActions({
-        class: [props.class, attrs.class as string].filter(Boolean).join(" ") || undefined,
-      }),
-    );
-    return () => {
-      const { class: _class, ...rest } = attrs;
-      return h(
-        "div",
-        {
-          ...rest,
-          "data-reveal": props.reveal,
-          "data-slot": "inbox-item-actions",
-          class: rootClass.value,
-        },
-        slots.default?.(),
-      );
-    };
-  },
-});
+);
 
-const InboxItemHeadingBase = defineComponent({
-  name: "RaftInboxItemHeading",
-  inheritAttrs: false,
-  props: {
-    class: { type: String as PropType<string>, default: undefined },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const density = inject(inboxItemDensityKey, undefined);
-    const inHeading = computed(() => density?.value === "compact");
-    provide(inboxItemHeadingKey, inHeading);
-    const rootClass = computed(() =>
-      inboxItemRecipe({ density: density?.value }).itemHeading({
-        class: [props.class, attrs.class as string].filter(Boolean).join(" ") || undefined,
-      }),
-    );
-    return () => {
-      const { class: _class, ...rest } = attrs;
-      return h(
-        "div",
-        {
-          ...rest,
-          "data-slot": "inbox-item-heading",
-          class: rootClass.value,
-        },
-        slots.default?.(),
-      );
-    };
-  },
-});
-
-const InboxItemTimestampBase = defineComponent({
-  name: "RaftInboxItemTimestamp",
-  inheritAttrs: false,
-  props: {
-    class: { type: String as PropType<string>, default: undefined },
-    reveal: { type: String as PropType<"hover" | undefined>, default: undefined },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const density = inject(inboxItemDensityKey, undefined);
-    const inHeading = inject(
-      inboxItemHeadingKey,
-      computed(() => false),
-    );
-    const rootClass = computed(() =>
-      inboxItemRecipe({ density: density?.value, reveal: props.reveal }).itemTimestamp({
-        class: [props.class, attrs.class as string].filter(Boolean).join(" ") || undefined,
-      }),
-    );
-    return () => {
-      const { class: _class, ...rest } = attrs;
-      return h(
-        "span",
-        {
-          ...rest,
-          "data-inbox-item-time": inHeading.value ? "" : undefined,
-          "data-slot": "inbox-item-timestamp",
-          class: rootClass.value,
-        },
-        slots.default?.(),
-      );
-    };
-  },
-});
-
-export const InboxItemActions = InboxItemActionsBase;
 export const InboxItemBody = part("RaftInboxItemBody", "p", "inbox-item-body", "itemBody", {
   density: true,
 });
+
 export const InboxItemContent = part(
   "RaftInboxItemContent",
   "div",
   "inbox-item-content",
   "itemContent",
-  {
-    density: true,
-  },
+  { density: true },
 );
+
 export const InboxItemContext = part(
   "RaftInboxItemContext",
   "div",
   "inbox-item-context",
   "itemContext",
 );
-export const InboxItemHeading = InboxItemHeadingBase;
+
+export const InboxItemHeading = part(
+  "RaftInboxItemHeading",
+  "div",
+  "inbox-item-heading",
+  "itemHeading",
+  { density: true, provideHeading: true },
+);
+
 export const InboxItemLeading = part(
   "RaftInboxItemLeading",
   "div",
   "inbox-item-leading",
   "itemLeading",
 );
+
 export const InboxItemMarks = part("RaftInboxItemMarks", "div", "inbox-item-marks", "itemMarks");
+
 export const InboxItemMessage = part(
   "RaftInboxItemMessage",
   "p",
   "inbox-item-message",
   "itemMessage",
-  {
-    density: true,
-  },
+  { density: true },
 );
+
 export const InboxItemMetadata = part(
   "RaftInboxItemMetadata",
   "div",
   "inbox-item-metadata",
   "itemMetadata",
 );
+
 export const InboxItemSelection = part(
   "RaftInboxItemSelection",
   "div",
   "inbox-item-selection",
   "itemSelection",
 );
+
 export const InboxItemSender = part(
   "RaftInboxItemSender",
   "span",
   "inbox-item-sender",
   "itemSender",
 );
+
 export const InboxItemSubtitle = part(
   "RaftInboxItemSubtitle",
   "div",
   "inbox-item-subtitle",
   "itemSubtitle",
 );
-export const InboxItemTimestamp = InboxItemTimestampBase;
+
+export const InboxItemTimestamp = part(
+  "RaftInboxItemTimestamp",
+  "span",
+  "inbox-item-timestamp",
+  "itemTimestamp",
+  {
+    density: true,
+    consumeHeading: true,
+    props: { reveal: { type: String as PropType<"hover" | undefined>, default: undefined } },
+    variant: (props) => ({ reveal: props.reveal }),
+    attrs: (_props, heading) => ({ "data-inbox-item-time": heading.value ? "" : undefined }),
+  },
+);
+
 export const InboxItemTitle = part("RaftInboxItemTitle", "div", "inbox-item-title", "itemTitle", {
   density: true,
 });
+
 export const InboxItemTrailing = part(
   "RaftInboxItemTrailing",
   "div",
   "inbox-item-trailing",
   "itemTrailing",
-  {
-    density: true,
-  },
+  { density: true },
 );
+
 export const InboxItemHoverTarget = part(
   "RaftInboxItemHoverTarget",
   "span",

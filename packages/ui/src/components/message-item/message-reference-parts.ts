@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, useAttrs, type PropType } from "vue";
+import { defineComponent, h, useAttrs, type ComponentObjectPropsOptions, type PropType } from "vue";
 import { Check } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 
@@ -14,213 +14,131 @@ export type MessageReferenceChipVariant =
   | "pending"
   | "unavailable";
 
-function referencePart(
-  name: string,
-  tag: string,
-  dataSlot: string,
-  slot: "chipLabel" | "suffix" | "icon" | "indicator" | "readMark",
-) {
+interface ReferencePartOptions {
+  name: string;
+  dataSlot?: string;
+  slot?: "chipLabel" | "suffix" | "icon" | "indicator" | "readMark";
+  variant?: MessageReferenceChipVariant;
+  capped?: boolean;
+  readMark?: boolean;
+}
+
+interface ReferencePartProps {
+  as: string;
+  asChild: boolean;
+  class?: string;
+  variant?: MessageReferenceChipVariant | MessageReferenceTextVariant;
+  capped?: boolean;
+}
+
+/** Every chip part is a `Primitive` wrapped around one recipe slot. */
+function referencePart({
+  name,
+  dataSlot = "message-reference",
+  slot,
+  variant,
+  capped = false,
+  readMark = false,
+}: ReferencePartOptions) {
   return defineComponent({
     name,
     inheritAttrs: false,
     props: {
-      as: { type: String, default: tag },
+      as: { type: String, default: "span" },
       asChild: { type: Boolean, default: false },
       class: { type: String, default: undefined },
-    },
-    setup(props, { slots }) {
+      ...(variant
+        ? {
+            variant: {
+              type: String as PropType<MessageReferenceChipVariant | MessageReferenceTextVariant>,
+              default: variant,
+            },
+          }
+        : {}),
+      ...(capped ? { capped: { type: Boolean, default: false } } : {}),
+    } as ComponentObjectPropsOptions,
+    setup(props: ReferencePartProps, { slots }) {
       const attrs = useAttrs();
-      return () =>
-        h(
+      return () => {
+        const className = props.class;
+        const classes = slot
+          ? messageReference()[slot]({ className })
+          : messageReference({ variant: props.variant, capped: props.capped }).root({
+              className,
+            });
+        const label = slots.default?.();
+        return h(
           Primitive,
           {
             ...attrs,
             as: props.as,
             asChild: props.asChild,
             "data-slot": dataSlot,
-            class: messageReference()[slot]({ className: props.class }),
+            class: classes,
           },
-          slots.default?.(),
+          readMark
+            ? [
+                h(Check, { "aria-hidden": "true", "stroke-width": 2.5 }),
+                label ? h("span", { class: "sr-only" }, label) : null,
+              ]
+            : label,
         );
+      };
     },
   });
 }
 
-export const MessageReferenceLabel = referencePart(
-  "RaftMessageReferenceLabel",
-  "span",
-  "message-reference-label",
-  "chipLabel",
-);
-export const MessageReferenceSuffix = referencePart(
-  "RaftMessageReferenceSuffix",
-  "span",
-  "message-reference-suffix",
-  "suffix",
-);
-export const MessageReferenceIcon = referencePart(
-  "RaftMessageReferenceIcon",
-  "span",
-  "message-reference-icon",
-  "icon",
-);
-export const MessageReferenceIndicator = referencePart(
-  "RaftMessageReferenceIndicator",
-  "span",
-  "message-reference-indicator",
-  "indicator",
-);
-export const MessageReferenceReadMark = defineComponent({
-  name: "RaftMessageReferenceReadMark",
-  inheritAttrs: false,
-  props: {
-    as: { type: String, default: "span" },
-    asChild: { type: Boolean, default: false },
-    class: { type: String, default: undefined },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    return () => {
-      const label = slots.default?.();
-      return h(
-        Primitive,
-        {
-          ...attrs,
-          as: props.as,
-          asChild: props.asChild,
-          "data-slot": "message-reference-read-mark",
-          class: messageReference().readMark({ className: props.class }),
-        },
-        [
-          h(Check, { "aria-hidden": "true", "stroke-width": 2.5 }),
-          label ? h("span", { class: "sr-only" }, label) : null,
-        ],
-      );
-    };
-  },
+export const MessageReferenceLabel = referencePart({
+  name: "RaftMessageReferenceLabel",
+  dataSlot: "message-reference-label",
+  slot: "chipLabel",
 });
 
-export const MessageReference = defineComponent({
+export const MessageReferenceSuffix = referencePart({
+  name: "RaftMessageReferenceSuffix",
+  dataSlot: "message-reference-suffix",
+  slot: "suffix",
+});
+
+export const MessageReferenceIcon = referencePart({
+  name: "RaftMessageReferenceIcon",
+  dataSlot: "message-reference-icon",
+  slot: "icon",
+});
+
+export const MessageReferenceIndicator = referencePart({
+  name: "RaftMessageReferenceIndicator",
+  dataSlot: "message-reference-indicator",
+  slot: "indicator",
+});
+
+export const MessageReferenceReadMark = referencePart({
+  name: "RaftMessageReferenceReadMark",
+  dataSlot: "message-reference-read-mark",
+  slot: "readMark",
+  readMark: true,
+});
+
+export const MessageReference = referencePart({
   name: "RaftMessageReference",
-  inheritAttrs: false,
-  props: {
-    as: { type: String, default: "span" },
-    asChild: { type: Boolean, default: false },
-    class: { type: String, default: undefined },
-    variant: {
-      type: String as PropType<MessageReferenceChipVariant>,
-      default: "muted",
-    },
-    capped: { type: Boolean, default: false },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const classes = computed(() =>
-      messageReference({
-        variant: props.variant,
-        capped: props.capped,
-      }).root({ className: props.class }),
-    );
-    return () =>
-      h(
-        Primitive,
-        {
-          ...attrs,
-          as: props.as,
-          asChild: props.asChild,
-          "data-slot": "message-reference",
-          class: classes.value,
-        },
-        slots.default?.(),
-      );
-  },
+  variant: "muted",
+  capped: true,
 });
 
 export const MessageReferenceChip = MessageReference;
 
-export const MessageReferenceText = defineComponent({
+export const MessageReferenceText = referencePart({
   name: "RaftMessageReferenceText",
-  inheritAttrs: false,
-  props: {
-    as: { type: String, default: "span" },
-    asChild: { type: Boolean, default: false },
-    class: { type: String, default: undefined },
-    variant: {
-      type: String as PropType<MessageReferenceTextVariant>,
-      default: "secondary",
-    },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const classes = computed(() =>
-      messageReference({ variant: props.variant }).root({
-        className: props.class,
-      }),
-    );
-    return () =>
-      h(
-        Primitive,
-        {
-          ...attrs,
-          as: props.as,
-          asChild: props.asChild,
-          "data-slot": "message-reference",
-          class: classes.value,
-        },
-        slots.default?.(),
-      );
-  },
+  variant: "secondary",
 });
 
-export const MessageReferencePending = defineComponent({
+export const MessageReferencePending = referencePart({
   name: "RaftMessageReferencePending",
-  inheritAttrs: false,
-  props: {
-    as: { type: String, default: "span" },
-    asChild: { type: Boolean, default: false },
-    capped: { type: Boolean, default: false },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    return () =>
-      h(
-        Primitive,
-        {
-          ...attrs,
-          as: props.as,
-          asChild: props.asChild,
-          "data-slot": "message-reference",
-          class: messageReference({ variant: "pending", capped: props.capped }).root({
-            className: attrs.class as string | undefined,
-          }),
-        },
-        slots.default?.(),
-      );
-  },
+  variant: "pending",
+  capped: true,
 });
 
-export const MessageReferenceUnavailable = defineComponent({
+export const MessageReferenceUnavailable = referencePart({
   name: "RaftMessageReferenceUnavailable",
-  inheritAttrs: false,
-  props: {
-    as: { type: String, default: "span" },
-    asChild: { type: Boolean, default: false },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    return () =>
-      h(
-        Primitive,
-        {
-          ...attrs,
-          as: props.as,
-          asChild: props.asChild,
-          "data-slot": "message-reference",
-          class: messageReference({ variant: "unavailable" }).root({
-            className: attrs.class as string | undefined,
-          }),
-        },
-        slots.default?.(),
-      );
-  },
+  variant: "unavailable",
 });

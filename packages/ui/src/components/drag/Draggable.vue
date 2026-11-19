@@ -3,7 +3,7 @@ import { Primitive } from "reka-ui";
 
 import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
-import { useDragEngine } from "./drag-context";
+import { useDragElement } from "./drag-context";
 
 defineOptions({ name: "RaftDraggable", inheritAttrs: false });
 
@@ -19,31 +19,20 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const engine = useDragEngine();
-const root = ref<HTMLElement | null>(null);
+const { engine, root } = useDragElement((engine, element) =>
+  engine.registerDraggable({
+    data: props.data,
+    disabled: props.disabled,
+    element,
+    id: props.id,
+  }),
+);
 
 const dragging = computed(() => engine?.active.value?.id === props.id);
 const classes = computed(() => cn(attrs.class as string | undefined, props.class));
 
-let unregister: (() => void) | null = null;
-
-const elementOf = toElement;
-
-onMounted(() => {
-  const node = elementOf(root.value);
-  if (!node || !engine) return;
-  unregister = engine.registerDraggable({
-    data: props.data,
-    disabled: props.disabled,
-    element: node,
-    id: props.id,
-  });
-});
-
-onBeforeUnmount(() => unregister?.());
-
 function onPointerDown(event: PointerEvent) {
-  const node = elementOf(root.value);
+  const node = toElement<HTMLElement>(root.value);
   if (!engine || !node) return;
   engine.startPointer(event, {
     data: props.data,
@@ -54,7 +43,7 @@ function onPointerDown(event: PointerEvent) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  const node = elementOf(root.value);
+  const node = toElement<HTMLElement>(root.value);
   if (!engine || !node) return;
   const active = engine.active.value;
   if (event.code === "Space") {
