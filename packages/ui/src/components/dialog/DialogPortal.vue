@@ -11,14 +11,14 @@ defineProps<{
 </script>
 
 <template>
-  <DialogPortal
-    v-bind="$attrs"
-    :to="to"
-    :force-mount="forceMount"
-    :disabled="disabled"
-    data-slot="dialog-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <DialogPortal :to="to" :force-mount="forceMount" :disabled="disabled">
+    <div
+      v-bind="$attrs"
+      data-slot="dialog-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </DialogPortal>
 </template>

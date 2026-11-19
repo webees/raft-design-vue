@@ -1,4 +1,4 @@
-import { TOUCH_DRAG_HOLD_MS, TOUCH_DRAG_TOLERANCE_PX } from "../../lib/touch-drag";
+import { TOUCH_DRAG_HOLD_MS, TOUCH_DRAG_TOLERANCE_PX } from "../../lib/drag-constants";
 
 export const PULL_TO_REFRESH_THRESHOLD = 100;
 export const PULL_TO_REFRESH_MAX_DISTANCE = 140;

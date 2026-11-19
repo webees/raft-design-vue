@@ -68,10 +68,13 @@ const visibleComponent = ref<HTMLElement | { $el?: unknown } | null>(null);
 
 const VNodeRenderer = defineComponent({
   props: {
-    node: { type: [Object, Array, String, Number] as PropType<VNodeChild>, default: undefined },
+    node: {
+      type: [Object, Array, String, Number, Boolean] as PropType<VNodeChild>,
+      default: undefined,
+    },
   },
   setup(nodeProps) {
-    return () => nodeProps.node as VNodeChild;
+    return () => (typeof nodeProps.node === "boolean" ? null : (nodeProps.node as VNodeChild));
   },
 });
 

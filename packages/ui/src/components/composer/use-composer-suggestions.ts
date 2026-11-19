@@ -1,4 +1,13 @@
-import { computed, onBeforeUnmount, ref, toValue, useId, watch, type MaybeRefOrGetter } from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  onBeforeUnmount,
+  ref,
+  toValue,
+  useId,
+  watch,
+  type MaybeRefOrGetter,
+} from "vue";
 
 export interface ComposerSuggestionTriggerMatch {
   /** The trigger marker that opened the list, e.g. "@" or "#". */
@@ -27,6 +36,15 @@ export interface UseComposerSuggestionsParams<TItem extends object> {
 export type ComposerSuggestionsInputProps = Record<string, unknown>;
 export type ComposerSuggestionsListProps = Record<string, unknown>;
 export type ComposerSuggestionsOptionProps = Record<string, unknown>;
+
+let fallbackListId = 0;
+
+/** `useId` needs a component instance, but the composable is also usable headlessly. */
+function useListId() {
+  if (getCurrentInstance()) return useId();
+  fallbackListId += 1;
+  return `headless-${fallbackListId}`;
+}
 
 function findNextEnabledIndex<TItem>(
   items: readonly TItem[],
@@ -67,7 +85,7 @@ export function useComposerSuggestions<TItem extends object>({
   getItemText,
   isItemDisabled = () => false,
 }: UseComposerSuggestionsParams<TItem>) {
-  const listId = `composer-suggestions-${useId()}`;
+  const listId = `composer-suggestions-${useListId()}`;
   const inputRef = ref<HTMLTextAreaElement | null>(null);
   const listRef = ref<HTMLDivElement | null>(null);
   const composing = ref(false);
@@ -226,9 +244,11 @@ export function useComposerSuggestions<TItem extends object>({
     { flush: "post" },
   );
 
-  onBeforeUnmount(() => {
-    if (frame !== null) cancelAnimationFrame(frame);
-  });
+  if (getCurrentInstance()) {
+    onBeforeUnmount(() => {
+      if (frame !== null) cancelAnimationFrame(frame);
+    });
+  }
 
   function mergeProps(base: Record<string, unknown>, internal: Record<string, unknown>) {
     const out: Record<string, unknown> = { ...base, ...internal };

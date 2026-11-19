@@ -11,7 +11,7 @@ audit notes.
 |               |                                            |
 | ------------- | ------------------------------------------ |
 | Repository    | `botiverse/raft-design`                    |
-| Commit        | `7d280d65142bf924190f068735c246c155c45089` |
+| Commit        | `c7045d63f72c5c7cac06685415323948e5a32f15` |
 | Synced inputs | 194 files (`tooling/upstream/upstream.lock.json`) |
 
 ## Covered surface
@@ -43,8 +43,8 @@ Measured on 2026-11-19 with Bun 1.4.4 / Node 22:
 | Tests       | 377                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 1983.1 kB raw, 285.5 kB gzip         |
-| Docs bundle | 4160.4 kB total, 1605.8 kB gzip      |
+| Library     | 2001.5 kB raw, 293.2 kB gzip         |
+| Docs bundle | 4159.6 kB total, 1606.5 kB gzip      |
 
 ### Source baseline
 
@@ -53,9 +53,9 @@ measured on 2026-11-19:
 
 | Metric                                         | Value  |
 | ---------------------------------------------- | ------ |
-| Source lines                                   | 55,192 |
-| `components/` lines                            | 50,244 |
-| `lib/` lines                                   | 3,815  |
+| Source lines                                   | 55,133 |
+| `components/` lines                            | 50,055 |
+| `lib/` lines                                   | 3,945  |
 | Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0     |
 | Duplicated lines / tokens                      | 0.00% / 0.00% |
 | Unused locals and parameters (`vue-tsc`)       | 0      |

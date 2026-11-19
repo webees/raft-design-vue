@@ -7,14 +7,14 @@ defineProps<{ to?: string | HTMLElement; forceMount?: boolean; disabled?: boolea
 </script>
 
 <template>
-  <AlertDialogPortal
-    v-bind="$attrs"
-    :to="to"
-    :force-mount="forceMount"
-    :disabled="disabled"
-    data-slot="alert-dialog-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <AlertDialogPortal :to="to" :force-mount="forceMount" :disabled="disabled">
+    <div
+      v-bind="$attrs"
+      data-slot="alert-dialog-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </AlertDialogPortal>
 </template>

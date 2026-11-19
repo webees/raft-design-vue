@@ -18,14 +18,14 @@ withDefaults(
 </script>
 
 <template>
-  <TooltipPortal
-    v-bind="$attrs"
-    :to="to"
-    :disabled="disabled"
-    :force-mount="forceMount"
-    data-slot="tooltip-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <TooltipPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="tooltip-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </TooltipPortal>
 </template>

@@ -11,21 +11,15 @@ import {
 import { Primitive } from "reka-ui";
 
 import { toElement } from "../../lib/dom";
-import { createSlotPart } from "../../lib/slot-part";
+import { createSlotPart, recipePart } from "../../lib/slot-part";
 import { useMessageItemLabelId } from "./message-item-context";
 import { observeTrailing, stampTrailingSlot } from "./message-item-trailing";
 import { messageItem } from "./message-item.recipe";
 
 type MessageItemSlots = ReturnType<typeof messageItem>;
 
-function part(name: string, tag: string, dataSlot: string, slotName: keyof MessageItemSlots) {
-  return createSlotPart({
-    name,
-    tag,
-    dataSlot,
-    className: (className) => messageItem()[slotName]({ className }) as string,
-  });
-}
+const part = (name: string, tag: string, dataSlot: string, slotName: keyof MessageItemSlots) =>
+  recipePart(name, tag, dataSlot, () => messageItem()[slotName]());
 
 export const MessageItemGutter = part(
   "RaftMessageItemGutter",
@@ -153,12 +147,6 @@ export const MessageItemDelegatedByButton = createSlotPart({
   type: "button",
   className: (className) => messageItem().delegatedByButton({ className }),
 });
-export const MessageItemDelegatedAvatar = part(
-  "RaftMessageItemDelegatedAvatar",
-  "span",
-  "message-item-delegated-avatar",
-  "delegatedAvatar",
-);
 export const MessageItemBody = part("RaftMessageItemBody", "div", "message-item-body", "body");
 export const MessageItemAttachments = part(
   "RaftMessageItemAttachments",
@@ -230,7 +218,7 @@ export const MessageItemTrailing = defineComponent({
           "data-slot": "message-item-trailing",
           class: messageItem().trailing({ className: props.class }),
         },
-        slots.default?.(),
+        { default: () => slots.default?.() },
       );
   },
 });
@@ -270,7 +258,7 @@ export const MessageItemToolbarButton = defineComponent({
           "data-active": props.active ? "true" : undefined,
           class: classes.value,
         },
-        slots.default?.(),
+        { default: () => slots.default?.() },
       );
   },
 });

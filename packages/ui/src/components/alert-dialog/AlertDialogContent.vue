@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { AlertDialogContent, AlertDialogOverlay, AlertDialogPortal } from "reka-ui";
+import type { OverlayContentProps } from "../../lib/overlay-content-props";
 import { alertDialog } from "./alert-dialog.variants";
 import { useParentOverlayKind } from "../../lib/overlay-depth";
 import { provideDialogSheetReset } from "../dialog/dialog-sheet-context";
@@ -7,17 +8,12 @@ import { provideDialogSheetReset } from "../dialog/dialog-sheet-context";
 defineOptions({ name: "RaftAlertDialogContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    nested?: boolean;
-    overlay?: boolean;
-    portal?: boolean;
-    forceMount?: boolean;
-    asChild?: boolean;
-    to?: string | HTMLElement;
-    onOpenAutoFocus?: (event: Event) => void;
-    onCloseAutoFocus?: (event: Event) => void;
-    onEscapeKeyDown?: (event: KeyboardEvent) => void;
-  }>(),
+  defineProps<
+    {
+      nested?: boolean;
+      overlay?: boolean;
+    } & OverlayContentProps
+  >(),
   { nested: false, overlay: true, portal: true, forceMount: false, asChild: false },
 );
 

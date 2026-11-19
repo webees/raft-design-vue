@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SortArrow from "./SortArrow.vue";
 import { table, type TableAlign } from "./table.variants";
 
 defineOptions({ name: "RaftTableSortButton", inheritAttrs: false });
@@ -41,48 +42,8 @@ function onClick() {
     data-slot="table-sort-button"
     @click="onClick"
   >
-    <svg
-      v-if="align === 'right' && sort"
-      :class="arrowClass"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      data-slot="table-sort-arrow"
-    >
-      <path
-        :d="sort === 'descending' ? 'M3 4.5l3 3 3-3' : 'M3 7.5l3-3 3 3'"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="square"
-      />
-    </svg>
-    <span
-      v-else-if="align === 'right'"
-      :class="arrowClass"
-      aria-hidden="true"
-      data-slot="table-sort-arrow-space"
-    />
+    <SortArrow v-if="align === 'right'" :sort="sort" :class="arrowClass" />
     <slot />
-    <svg
-      v-if="align === 'left' && sort"
-      :class="arrowClass"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      data-slot="table-sort-arrow"
-    >
-      <path
-        :d="sort === 'descending' ? 'M3 4.5l3 3 3-3' : 'M3 7.5l3-3 3 3'"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="square"
-      />
-    </svg>
-    <span
-      v-else-if="align === 'left'"
-      :class="arrowClass"
-      aria-hidden="true"
-      data-slot="table-sort-arrow-space"
-    />
+    <SortArrow v-if="align === 'left'" :sort="sort" :class="arrowClass" />
   </button>
 </template>

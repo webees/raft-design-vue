@@ -10,7 +10,7 @@
 |          |                                            |
 | -------- | ------------------------------------------ |
 | 仓库     | `botiverse/raft-design`                    |
-| 提交     | `7d280d65142bf924190f068735c246c155c45089` |
+| 提交     | `c7045d63f72c5c7cac06685415323948e5a32f15` |
 | 同步输入 | 194 个文件（`tooling/upstream/upstream.lock.json`） |
 
 ## 覆盖范围
@@ -42,8 +42,8 @@ check:api → check:props → test → build → check:consumer-types`。
 | 测试用例 | 377                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 1983.1 kB 原始，285.5 kB gzip        |
-| 文档产物 | 4160.4 kB 总计，1605.8 kB gzip       |
+| 库产物   | 2001.5 kB 原始，293.2 kB gzip        |
+| 文档产物 | 4159.6 kB 总计，1606.5 kB gzip       |
 
 ### 源码基线
 
@@ -51,9 +51,9 @@ check:api → check:props → test → build → check:consumer-types`。
 
 | 指标                                  | 数值        |
 | ------------------------------------- | ----------- |
-| 源码行数                              | 55,192      |
-| `components/` 行数                    | 50,244      |
-| `lib/` 行数                           | 3,815       |
+| 源码行数                              | 55,133      |
+| `components/` 行数                    | 50,055      |
+| `lib/` 行数                           | 3,945       |
 | 复制粘贴克隆（jscpd，10 行 / 70 token） | 0          |
 | 重复行 / 重复 token                   | 0.00% / 0.00% |
 | 未使用变量与参数（`vue-tsc`）          | 0           |

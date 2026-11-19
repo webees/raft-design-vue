@@ -5,13 +5,6 @@ import {
   TOUCH_DRAG_TOLERANCE_PX,
 } from "./drag-constants";
 
-export {
-  MOUSE_DRAG_DISTANCE_PX,
-  TOUCH_DRAG_DISTANCE_PX,
-  TOUCH_DRAG_HOLD_MS,
-  TOUCH_DRAG_TOLERANCE_PX,
-};
-
 /**
  * Vue counterpart of the dnd-kit sensors in the React package. The Raft Vue
  * engine (`createDragEngine`) owns the pointer listeners, so these are plain

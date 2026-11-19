@@ -1,9 +1,5 @@
-import { createSlotPart } from "../../lib/slot-part";
+import { recipePart as part } from "../../lib/slot-part";
 import { messageActionCard, messageActionCardContent } from "./message-action-card.recipes";
-
-function part(name: string, tag: string, dataSlot: string, style: () => string) {
-  return createSlotPart({ name, tag, dataSlot, className: () => style() });
-}
 
 export const MessageActionCardHeader = part(
   "RaftMessageActionCardHeader",

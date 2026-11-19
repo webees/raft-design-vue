@@ -16,8 +16,13 @@ withDefaults(
 </script>
 
 <template>
-  <ToastPortal v-bind="$attrs" :to="to" :disabled="disabled" :force-mount="forceMount">
-    <div data-slot="toast-portal" data-raft-ui-overlay="" style="display: contents">
+  <ToastPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="toast-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
       <slot />
     </div>
   </ToastPortal>

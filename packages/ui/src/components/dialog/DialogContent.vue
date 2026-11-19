@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import { DialogContent, DialogOverlay, DialogPortal, injectDialogRootContext } from "reka-ui";
+import type { OverlayContentProps } from "../../lib/overlay-content-props";
 import type { SoftKeyboardViewport } from "../../lib/use-soft-keyboard";
 import { useParentOverlayKind } from "../../lib/overlay-depth";
 import { usePresenceStyle } from "../../lib/presence-style";
@@ -13,31 +14,26 @@ import DialogSoftKeyboardWatch from "./dialog-soft-keyboard-watch";
 defineOptions({ name: "RaftDialogContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    size?: NonNullable<DialogVariants["size"]>;
-    placement?: NonNullable<DialogVariants["placement"]>;
-    bar?: boolean;
-    layer?: 0 | 1;
-    lifted?: boolean;
-    nested?: boolean;
-    /** `false` hides the scrim; an object styles it (upstream's `overlay`). */
-    overlay?: boolean | { className?: string; class?: string };
-    /** Extra classes for the scrim, after the frame's own. */
-    overlayClass?: string;
-    /** Props for the portal element, as upstream's `portalProps`. */
-    portalProps?: { className?: string; class?: string } & Record<string, unknown>;
-    /** Put a cover over the scrim so a tap above a sheet doesn't dismiss. */
-    overlayCover?: boolean;
-    portal?: boolean;
-    forceMount?: boolean;
-    asChild?: boolean;
-    to?: string | HTMLElement;
-    onOpenAutoFocus?: (event: Event) => void;
-    onCloseAutoFocus?: (event: Event) => void;
-    onEscapeKeyDown?: (event: KeyboardEvent) => void;
-    onPointerDownOutside?: (event: Event) => void;
-    onInteractOutside?: (event: Event) => void;
-  }>(),
+  defineProps<
+    {
+      size?: NonNullable<DialogVariants["size"]>;
+      placement?: NonNullable<DialogVariants["placement"]>;
+      bar?: boolean;
+      layer?: 0 | 1;
+      lifted?: boolean;
+      nested?: boolean;
+      /** `false` hides the scrim; an object styles it (upstream's `overlay`). */
+      overlay?: boolean | { className?: string; class?: string };
+      /** Extra classes for the scrim, after the frame's own. */
+      overlayClass?: string;
+      /** Props for the portal element, as upstream's `portalProps`. */
+      portalProps?: { className?: string; class?: string } & Record<string, unknown>;
+      /** Put a cover over the scrim so a tap above a sheet doesn't dismiss. */
+      overlayCover?: boolean;
+      onPointerDownOutside?: (event: Event) => void;
+      onInteractOutside?: (event: Event) => void;
+    } & OverlayContentProps
+  >(),
   {
     size: "md",
     placement: "center",

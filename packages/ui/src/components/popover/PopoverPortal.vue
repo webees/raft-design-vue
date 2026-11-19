@@ -18,14 +18,14 @@ withDefaults(
 </script>
 
 <template>
-  <PopoverPortal
-    v-bind="$attrs"
-    :to="to"
-    :disabled="disabled"
-    :force-mount="forceMount"
-    data-slot="popover-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <PopoverPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="popover-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </PopoverPortal>
 </template>

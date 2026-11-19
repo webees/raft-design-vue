@@ -17,14 +17,14 @@ withDefaults(
 </script>
 
 <template>
-  <DrawerPortal
-    v-bind="$attrs"
-    :to="to"
-    :disabled="disabled"
-    :force-mount="forceMount"
-    data-slot="drawer-portal"
-    data-raft-ui-overlay=""
-  >
-    <slot />
+  <DrawerPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+    <div
+      v-bind="$attrs"
+      data-slot="drawer-portal"
+      data-raft-ui-overlay=""
+      style="display: contents"
+    >
+      <slot />
+    </div>
   </DrawerPortal>
 </template>

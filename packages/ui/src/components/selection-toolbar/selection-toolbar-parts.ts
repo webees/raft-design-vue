@@ -1,4 +1,4 @@
-import { createSlotPart } from "../../lib/slot-part";
+import { createSlotPart, recipePart } from "../../lib/slot-part";
 import { useFitItem } from "../fit-toolbar/use-fit-item";
 import { selectionToolbar } from "./selection-toolbar.recipe";
 
@@ -8,7 +8,7 @@ function part(
   dataSlot: string,
   slot: keyof ReturnType<typeof selectionToolbar>,
 ) {
-  return createSlotPart({ name, tag, dataSlot, className: () => selectionToolbar()[slot]() });
+  return recipePart(name, tag, dataSlot, () => selectionToolbar()[slot]());
 }
 
 export const SelectionToolbarCount = createSlotPart({
