@@ -12,6 +12,7 @@ import {
 
 import TooltipContent from "../tooltip/TooltipContent.vue";
 import DropdownMenuContent from "../dropdown-menu/DropdownMenuContent.vue";
+import { createSlotPart } from "../../lib/slot-part";
 import {
   messageReaction,
   reactionCountKeyframes,
@@ -37,24 +38,12 @@ function reactionPart(
     | "tooltipMeta",
   defaults: Record<string, unknown> = {},
 ) {
-  return defineComponent({
+  return createSlotPart({
     name,
-    inheritAttrs: false,
-    props: { class: { type: String, default: undefined } },
-    setup(props, { slots }) {
-      const attrs = useAttrs();
-      return () =>
-        h(
-          tag,
-          {
-            ...defaults,
-            ...attrs,
-            "data-slot": dataSlot,
-            class: messageReaction()[slot]({ className: props.class }),
-          },
-          slots.default?.(),
-        );
-    },
+    tag,
+    dataSlot,
+    className: (className) => messageReaction()[slot]({ className }),
+    rootProps: () => defaults,
   });
 }
 

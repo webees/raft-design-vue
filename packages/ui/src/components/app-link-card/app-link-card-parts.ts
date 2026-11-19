@@ -32,7 +32,7 @@ const slotNames: Record<Part, keyof ReturnType<typeof messageCard>> = {
   actions: "actions",
 };
 
-export function createAppLinkCardPart(part: Part) {
+function createAppLinkCardPart(part: Part) {
   return defineComponent({
     name: `RaftAppLinkCard${part.charAt(0).toUpperCase()}${part.slice(1)}`,
     inheritAttrs: false,

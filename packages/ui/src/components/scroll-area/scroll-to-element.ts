@@ -24,7 +24,7 @@ type AlignedScrollOptions = {
  * what the container can scroll. `nearest` doesn't move an element that is
  * already in view, and otherwise lines it up with the closer edge.
  */
-export function alignedScrollOffset({
+function alignedScrollOffset({
   align,
   itemSize,
   itemStart,

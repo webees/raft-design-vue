@@ -13,7 +13,7 @@
  * first row's top margin and the last row's bottom margin stay inside it, and between two rows sits their
  * collapsed margin, whatever the consumer's CSS (a child's margins collapsing through a row included).
  */
-export function measureRowStarts(
+function measureRowStarts(
   container: HTMLElement,
   rows: readonly HTMLElement[],
 ): { starts: number[]; end: number } {

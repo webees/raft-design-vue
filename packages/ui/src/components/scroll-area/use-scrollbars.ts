@@ -81,10 +81,10 @@ export function effectiveHideDelay(trigger: ScrollAreaTrigger, hideDelay: number
   return trigger === "scroll" ? Math.max(hideDelay, minScrollTriggerHideDelay) : hideDelay;
 }
 
-export const stickyScrollTimelineCondition = "(animation-timeline: scroll())";
-export const scrollTimelineCondition = "(animation-timeline: scroll()) and (timeline-scope: none)";
+const stickyScrollTimelineCondition = "(animation-timeline: scroll())";
+const scrollTimelineCondition = "(animation-timeline: scroll()) and (timeline-scope: none)";
 
-export function supportsScrollTimeline(position: ScrollAreaGuttersPosition = "absolute"): boolean {
+function supportsScrollTimeline(position: ScrollAreaGuttersPosition = "absolute"): boolean {
   return (
     typeof CSS !== "undefined" &&
     typeof CSS.supports === "function" &&

@@ -1,5 +1,6 @@
 import { computed, defineComponent, h, useAttrs, type PropType } from "vue";
 
+import { createSlotPart } from "../../lib/slot-part";
 import { badgeVariants } from "../badge/badge.variants";
 import { messageFooter } from "./message-footer.recipe";
 
@@ -8,27 +9,14 @@ function footerPart(
   tag: string,
   dataSlot: string,
   slot: "savedIndicator" | "readReceipt" | "badgeSeparator",
-  extra: { "aria-hidden"?: "true"; iconOnly?: boolean } = {},
+  staticAttrs: Record<string, string> = {},
 ) {
-  return defineComponent({
+  return createSlotPart({
     name,
-    inheritAttrs: false,
-    props: { class: { type: String, default: undefined } },
-    setup(props, { slots }) {
-      const attrs = useAttrs();
-      return () =>
-        h(
-          tag,
-          {
-            ...attrs,
-            "data-slot": dataSlot,
-            ...(extra["aria-hidden"] ? { "aria-hidden": extra["aria-hidden"] } : {}),
-            ...(extra.iconOnly ? { "data-icon-only": "" } : {}),
-            class: messageFooter()[slot]({ className: props.class }),
-          },
-          slots.default?.(),
-        );
-    },
+    tag,
+    dataSlot,
+    className: (className) => messageFooter()[slot]({ className }),
+    rootProps: () => staticAttrs,
   });
 }
 

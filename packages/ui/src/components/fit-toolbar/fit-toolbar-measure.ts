@@ -18,19 +18,19 @@ export const STEPS: readonly FitStep[] = ["label", "more", "collapse", "wrap", "
 /** The most a search's measured least width may be, in px. */
 export const FIT_SEARCH_MAX_LEAST = 120;
 
-export const ID = "data-fit-id";
-export const DECLARED = "data-fit-steps";
-export const MORE_TRIGGER = "data-fit-more-trigger";
-export const SHOWN = "data-fit-shown";
-export const WRAPPING = "data-fit-wrapping";
-export const ROW = "data-fit-row";
-export const NO_WRAP = "data-fit-first-line";
-export const WRAP_LINE = "data-fit-wrap-line";
+const ID = "data-fit-id";
+const DECLARED = "data-fit-steps";
+const MORE_TRIGGER = "data-fit-more-trigger";
+const SHOWN = "data-fit-shown";
+const WRAPPING = "data-fit-wrapping";
+const ROW = "data-fit-row";
+const NO_WRAP = "data-fit-first-line";
+const WRAP_LINE = "data-fit-wrap-line";
 export const BREAK = "data-fit-break";
-export const NEEDS_ICON = "data-fit-needs-icon";
+const NEEDS_ICON = "data-fit-needs-icon";
 const PINNED_END = "[data-slot=fit-toolbar-group-end]";
 
-export const stepAttribute = (step: FitStep) => `data-fit-${step}`;
+const stepAttribute = (step: FitStep) => `data-fit-${step}`;
 
 const hasIcon = (item: Element) => item.querySelector("svg, img") !== null;
 

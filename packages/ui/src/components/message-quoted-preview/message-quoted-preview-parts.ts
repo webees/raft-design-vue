@@ -18,7 +18,7 @@ const parts = {
 
 type PartName = keyof typeof parts;
 
-export function createMessageQuotedPreviewPart(name: PartName) {
+function createMessageQuotedPreviewPart(name: PartName) {
   const { tag, slot } = parts[name];
   const kebab = name.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`).replace(/^-/, "");
   return defineComponent({

@@ -5,7 +5,7 @@
  * Toast. Each `…Portal` part sets it, so an overlay opened from inside another
  * (portaled into that one's container) is inside both.
  */
-export const OVERLAY_PORTAL_ATTRIBUTE = "data-raft-ui-overlay";
+const OVERLAY_PORTAL_ATTRIBUTE = "data-raft-ui-overlay";
 
 const OVERLAY_SELECTOR = `[${OVERLAY_PORTAL_ATTRIBUTE}]`;
 
