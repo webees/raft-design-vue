@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 
 import { messageList } from "./message-list.recipe";
 
 defineOptions({ name: "RaftMessageListHistoryLimited", inheritAttrs: false });
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "span", asChild: false });
+defineProps(asChildProps("span"));
 const attrs = useAttrs();
 const rootClass = computed(() =>
   messageList().historyLimited({ className: attrs.class as string }),

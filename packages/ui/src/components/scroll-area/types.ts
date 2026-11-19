@@ -106,5 +106,6 @@ export type ScrollAreaContainerOptions = ScrollAreaOptions & {
   contentRef?: Ref<HTMLElement | null>;
   fadeRef?: Ref<HTMLElement | null>;
   frameRef?: Ref<HTMLElement | null>;
+  guttersRef?: Ref<HTMLElement | null>;
   guttersPosition?: ScrollAreaGuttersPosition;
 };

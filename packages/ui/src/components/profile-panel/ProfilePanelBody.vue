@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { PanelBody } from "../panel";
 import { conversationPanel } from "../conversation-panel/conversation-panel.variants";
 
 defineOptions({ name: "RaftProfilePanelBody", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() => conversationPanel().content({ className: attrs.class as string }));
 </script>

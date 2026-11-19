@@ -1,18 +1,10 @@
-import { computed, ref, type CSSProperties, type Ref } from "vue";
+import { computed, ref, type CSSProperties } from "vue";
 
 import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
 import { scrollAreaClassNames } from "./class-names";
 import { scrollToElement } from "./scroll-to-element";
-import type {
-  ScrollAreaActions,
-  ScrollAreaGuttersPosition,
-  ScrollAreaOrientation,
-  ScrollAreaOverscroll,
-  ScrollAreaScrollToElementOptions,
-  ScrollAreaSize,
-  ScrollAreaTrigger,
-} from "./types";
+import type { ScrollAreaContainerOptions, ScrollAreaScrollToElementOptions } from "./types";
 import { effectiveHideDelay, scrollAreaContainerClassName, useScrollbars } from "./use-scrollbars";
 
 const railInsetEdges = ["top", "bottom", "left", "right"] as const;
@@ -32,24 +24,6 @@ function rootStyle(
   }
   return vars as CSSProperties;
 }
-
-export type ScrollAreaContainerOptions = {
-  actionsRef?: Ref<ScrollAreaActions | null>;
-  containerRef?: Ref<HTMLElement | null>;
-  contentRef?: Ref<HTMLElement | null>;
-  fadeRef?: Ref<HTMLElement | null>;
-  frameRef?: Ref<HTMLElement | null>;
-  guttersRef?: Ref<HTMLElement | null>;
-  fade?: boolean;
-  guttersPosition?: ScrollAreaGuttersPosition;
-  hideDelay?: number;
-  onEdgeChange?: (edges: import("./types").ScrollAreaEdges) => void;
-  orientation?: ScrollAreaOrientation;
-  overscroll?: ScrollAreaOverscroll;
-  railInset?: Partial<Record<(typeof railInsetEdges)[number], number>>;
-  size?: ScrollAreaSize;
-  trigger?: ScrollAreaTrigger;
-};
 
 /**
  * ScrollArea's scrollbars for an element you render yourself. It measures

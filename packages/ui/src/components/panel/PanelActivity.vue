@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 import { panelHeader } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelActivity", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "span", asChild: false });
+defineProps(asChildProps("span"));
 const attrs = useAttrs();
 const rootClass = computed(() => panelHeader().activity({ className: attrs.class as string }));
 </script>

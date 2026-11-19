@@ -19,7 +19,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const { engine, root } = useDragElement((engine, element) =>
+const { engine, root, setRoot } = useDragElement((engine, element) =>
   engine.registerDraggable({
     data: props.data,
     disabled: props.disabled,
@@ -81,7 +81,7 @@ function onKeydown(event: KeyboardEvent) {
 <template>
   <Primitive
     :as="props.as"
-    ref="root"
+    :ref="setRoot"
     v-bind="attrs"
     :class="classes"
     :data-drag-id="props.id"

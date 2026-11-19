@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { X } from "lucide-vue-next";
 import { AlertDialogCancel } from "reka-ui";
 import { Button } from "../button";
+import { cn } from "../../lib/cn";
 import type { ButtonSize, ButtonVariant } from "../button/button.variants";
 
 defineOptions({ name: "RaftAlertDialogClose", inheritAttrs: false });
@@ -11,7 +13,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const closeClass = computed(() => attrs.class as string);
+const closeClass = cn("-my-1.5", attrs.class as string | undefined);
 </script>
 
 <template>
@@ -25,14 +27,7 @@ const closeClass = computed(() => attrs.class as string);
       data-slot="alert-dialog-close"
     >
       <slot>
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="size-4.5">
-          <path
-            d="M5 5l10 10M15 5L5 15"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="square"
-          />
-        </svg>
+        <X class="size-4.5" />
       </slot>
     </Button>
   </AlertDialogCancel>

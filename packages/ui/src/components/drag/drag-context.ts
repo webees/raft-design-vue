@@ -1,5 +1,5 @@
 import { inject, provide, type InjectionKey } from "vue";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 
 import { toElement } from "../../lib/dom";
 import type { DragEngine } from "../../lib/drag-engine";
@@ -20,11 +20,14 @@ export function useDragElement(register: (engine: DragEngine, element: HTMLEleme
   const root = ref<HTMLElement | null>(null);
   let unregister: (() => void) | null = null;
 
-  onMounted(() => {
-    const element = toElement<HTMLElement>(root.value);
+  const setRoot = (value: unknown) => {
+    unregister?.();
+    unregister = null;
+    const element = toElement<HTMLElement>(value);
+    root.value = element;
     if (element && engine) unregister = register(engine, element);
-  });
+  };
   onBeforeUnmount(() => unregister?.());
 
-  return { engine, root };
+  return { engine, root, setRoot };
 }

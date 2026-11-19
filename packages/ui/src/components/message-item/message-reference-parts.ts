@@ -2,15 +2,15 @@ import { defineComponent, h, useAttrs, type ComponentObjectPropsOptions, type Pr
 import { Check } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 
-import { messageReference, type MessageReferenceTextVariant } from "./message-extras.recipe";
+import {
+  messageReference,
+  type MessageReferenceChipVariant,
+  type MessageReferenceTextVariant,
+} from "./message-extras.recipe";
 
-export type MessageReferenceChipVariant =
-  | "primary"
-  | "secondary"
-  | "accent"
-  | "muted"
-  | "info"
-  | "link"
+type ReferenceVariant =
+  | MessageReferenceChipVariant
+  | MessageReferenceTextVariant
   | "pending"
   | "unavailable";
 
@@ -18,7 +18,7 @@ interface ReferencePartOptions {
   name: string;
   dataSlot?: string;
   slot?: "chipLabel" | "suffix" | "icon" | "indicator" | "readMark";
-  variant?: MessageReferenceChipVariant;
+  variant?: ReferenceVariant;
   capped?: boolean;
   readMark?: boolean;
 }
@@ -27,7 +27,7 @@ interface ReferencePartProps {
   as: string;
   asChild: boolean;
   class?: string;
-  variant?: MessageReferenceChipVariant | MessageReferenceTextVariant;
+  variant?: ReferenceVariant;
   capped?: boolean;
 }
 
@@ -50,7 +50,7 @@ function referencePart({
       ...(variant
         ? {
             variant: {
-              type: String as PropType<MessageReferenceChipVariant | MessageReferenceTextVariant>,
+              type: String as PropType<ReferenceVariant>,
               default: variant,
             },
           }

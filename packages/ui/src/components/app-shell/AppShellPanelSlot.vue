@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 
 import { appShell } from "./app-shell.variants";
 
 defineOptions({ name: "RaftAppShellPanelSlot", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "aside",
-  asChild: false,
-});
+defineProps(asChildProps("aside"));
 
 const attrs = useAttrs();
 const rootClass = computed(() => appShell().panelSlot({ className: attrs.class as string }));

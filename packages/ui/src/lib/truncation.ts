@@ -16,7 +16,7 @@ export interface TruncationTarget {
   commit: (truncated: Truncation) => void;
 }
 
-export const TOLERANCE = 0.5;
+const TOLERANCE = 0.5;
 
 interface Box {
   left: number;
@@ -93,7 +93,7 @@ function flush() {
   });
 }
 
-export function scheduleMeasure(target: TruncationTarget) {
+function scheduleMeasure(target: TruncationTarget) {
   if (!targets.has(target)) return;
   pending.add(target);
   if (frame === 0 && typeof requestAnimationFrame === "function") {

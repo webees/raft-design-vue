@@ -78,7 +78,7 @@ function minContentWidths(elements: HTMLElement[]): number[] {
  * now, so the answer depends only on the list's width and its content and
  * can't flap at the boundary.
  */
-export function labelsGoAbove(list: HTMLElement, parts: LabelValueParts): boolean {
+function labelsGoAbove(list: HTMLElement, parts: LabelValueParts): boolean {
   const style = getComputedStyle(list);
   const width = list.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
   const gap = parseFloat(style.columnGap) || 0;

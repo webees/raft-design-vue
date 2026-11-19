@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { PanelBody } from "../panel";
 
 defineOptions({ name: "RaftThreadPanelBody", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() => (attrs.class as string | undefined) ?? "");
 </script>

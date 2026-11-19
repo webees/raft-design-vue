@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import FileSlot from "./FileSlot.vue";
 
 defineOptions({ name: "RaftFilesList" });
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 </script>
 
 <template>
