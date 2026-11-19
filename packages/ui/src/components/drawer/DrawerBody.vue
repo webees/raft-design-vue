@@ -2,12 +2,10 @@
 import { Primitive } from "reka-ui";
 
 import { cn } from "../../lib/cn";
-import { toElement } from "../../lib/dom";
 import { useHoldsFocusable } from "../../lib/use-holds-focusable";
 import ScrollAreaGutters from "../scroll-area/ScrollAreaGutters.vue";
 import { useScrollAreaContainer } from "../scroll-area/use-scroll-area-container";
-import { drawer } from "./drawer.recipe";
-import { useDrawerConfig } from "./drawer-context";
+import { useDrawerConfig, useDrawerRecipe } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawerBody", inheritAttrs: false });
 
@@ -37,14 +35,7 @@ const area = useScrollAreaContainer({
   overscroll: "contain",
 });
 
-const variants = computed(() =>
-  drawer({
-    axis: config.swipeAxis,
-    side: config.swipeDirection,
-    snapPoints: config.hasSnapPoints,
-    nested: config.nested,
-  }),
-);
+const variants = useDrawerRecipe();
 const classes = computed(() => variants.value.body({ className: props.class }));
 const frameClasses = computed(() =>
   cn(area.blockClassName.value, variants.value.bodyFrame({ className: props.wrapperClassName })),
@@ -53,15 +44,6 @@ const scrollClasses = computed(() =>
   cn(area.scroller.value, variants.value.bodyScroll({ className: props.class })),
 );
 const holdsFocusable = useHoldsFocusable(area.containerRef);
-const guttersBinding = computed(() => ({
-  containerRef: area.containerRef,
-  rails: area.rails,
-  setDragging: area.setDragging,
-  setGuttersRef: area.setGuttersRef,
-  setXThumbRef: area.setXThumbRef,
-  setYThumbRef: area.setYThumbRef,
-}));
-
 const effectiveTabIndex = computed(() => {
   if (props.tabIndex !== undefined) {
     return props.tabIndex;
@@ -71,10 +53,6 @@ const effectiveTabIndex = computed(() => {
   }
   return area.scrollable() ? 0 : undefined;
 });
-
-function setContainer(element: unknown) {
-  area.containerRef.value = toElement(element);
-}
 </script>
 
 <template>
@@ -88,7 +66,7 @@ function setContainer(element: unknown) {
     <Primitive
       :as="as"
       :as-child="asChild"
-      :ref="setContainer"
+      :ref="area.setContainer"
       v-bind="{ ...attrs, class: undefined }"
       data-slot="drawer-body"
       :class="scrollClasses"
@@ -96,7 +74,7 @@ function setContainer(element: unknown) {
     >
       <slot />
     </Primitive>
-    <ScrollAreaGutters :binding="guttersBinding" />
+    <ScrollAreaGutters :binding="area.binding" />
   </div>
   <Primitive
     v-else

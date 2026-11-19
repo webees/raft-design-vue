@@ -61,15 +61,6 @@ const frameClass = computed(() =>
 
 const frameStyle = computed(() => [props.wrapperStyle, area.blockStyle.value]);
 
-const binding = computed(() => ({
-  containerRef: area.containerRef,
-  rails: area.rails,
-  setDragging: area.setDragging,
-  setGuttersRef: area.setGuttersRef,
-  setXThumbRef: area.setXThumbRef,
-  setYThumbRef: area.setYThumbRef,
-}));
-
 const handleInput = () => {
   area.measure();
 };
@@ -86,6 +77,6 @@ onUpdated(() => area.measure());
       :class="cn(area.scroller.value, 'r-scroll-area__textarea', props.class)"
       @input="handleInput"
     />
-    <ScrollAreaGutters :binding="binding" />
+    <ScrollAreaGutters :binding="area.binding" />
   </div>
 </template>

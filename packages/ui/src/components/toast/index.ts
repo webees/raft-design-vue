@@ -21,7 +21,6 @@ export {
   DEFAULT_TOAST_TIMEOUT_MS,
   createToastManager,
   defaultToastManager,
-  defaultToastManagerInstance,
   resolveToastActionTimeout,
   setDefaultToastActionTimeout,
   toast,

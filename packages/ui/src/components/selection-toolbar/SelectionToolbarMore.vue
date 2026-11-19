@@ -11,7 +11,7 @@ defineOptions({ name: "RaftSelectionToolbarMore", inheritAttrs: false });
  * More, after the actions: a menu trigger whose menu opens upward. Wrap it in
  * a DropdownMenuTrigger and put the out-of-row actions in that menu.
  */
-defineProps<{
+const props = defineProps<{
   /** Its accessible name, such as "More actions". */
   ariaLabel: string;
   class?: string;
@@ -21,7 +21,7 @@ const attrs = useAttrs();
 const fit = useFitMore();
 const moreClass = computed(() =>
   selectionToolbar().more({
-    class: [attrs.class as string | undefined].filter(Boolean).join(" ") || undefined,
+    class: props.class,
   }),
 );
 </script>

@@ -42,8 +42,32 @@ check:api → check:props → test → build → check:consumer-types`。
 | 测试用例 | 375                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 2005.1 kB 原始，287.6 kB gzip        |
-| 文档产物 | 4163.3 kB 总计，1605.1 kB gzip       |
+| 库产物   | 1997.7 kB 原始，287.1 kB gzip        |
+| 文档产物 | 4162.3 kB 总计，1605.1 kB gzip       |
+
+### 源码基线
+
+`packages/ui/src` 中 `.ts` + `.vue` 的规模与重复度下限，2026-11-19 实测：
+
+| 指标                                  | 数值        |
+| ------------------------------------- | ----------- |
+| 源码行数                              | 55,502      |
+| `components/` 行数                    | 50,629      |
+| `lib/` 行数                           | 3,740       |
+| 复制粘贴克隆（jscpd，10 行 / 70 token） | 4          |
+| 重复行 / 重复 token                   | 0.08% / 0.12% |
+| 未使用变量与参数（`vue-tsc`）          | 0           |
+| 无任何导入方的组件文件                | 0           |
+
+复测命令：
+
+```bash
+find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) | xargs wc -l
+bunx jscpd packages/ui/src --min-lines 10 --min-tokens 70 \
+  --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
+cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
+  -p tsconfig.json --noUnusedLocals --noUnusedParameters
+```
 
 ## 审计方法
 

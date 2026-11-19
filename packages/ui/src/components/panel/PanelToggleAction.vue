@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Toggle } from "reka-ui";
+import { useControlledState } from "../../lib/use-controlled-state";
 import { panelToggleAction } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelToggleAction", inheritAttrs: false });
@@ -16,14 +17,13 @@ const props = withDefaults(
 );
 const emit = defineEmits<{ "update:pressed": [value: boolean] }>();
 const attrs = useAttrs();
-const internal = ref(props.defaultPressed);
-const current = computed(() => props.pressed ?? internal.value);
+const current = useControlledState(
+  "pressed",
+  () => props.pressed,
+  props.defaultPressed,
+  (value) => emit("update:pressed", value),
+);
 const rootClass = computed(() => panelToggleAction({ className: attrs.class as string }));
-
-function update(value: boolean) {
-  internal.value = value;
-  emit("update:pressed", value);
-}
 </script>
 
 <template>
@@ -38,7 +38,7 @@ function update(value: boolean) {
     data-icon-inset=""
     :data-pressed="current ? '' : undefined"
     :class="rootClass"
-    @update:model-value="update"
+    @update:model-value="current = $event"
   >
     <slot />
   </Toggle>

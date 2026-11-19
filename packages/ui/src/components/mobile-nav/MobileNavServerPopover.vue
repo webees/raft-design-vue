@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PopoverRoot } from "reka-ui";
+import { useIsControlled } from "../../lib/use-controlled-state";
 import { provideMobileNavServer } from "./mobile-nav-server-context";
 
 defineOptions({ name: "RaftMobileNavServerPopover", inheritAttrs: false });
@@ -9,8 +10,7 @@ const props = withDefaults(defineProps<{ modal?: boolean; open?: boolean }>(), {
 });
 
 const attrs = useAttrs();
-const instance = getCurrentInstance();
-const controlled = computed(() => instance?.vnode.props != null && "open" in instance.vnode.props);
+const controlled = useIsControlled("open");
 const innerOpen = ref(false);
 const isOpen = computed(() => (controlled.value ? props.open === true : innerOpen.value));
 const triggerRef = ref<HTMLElement | null>(null);

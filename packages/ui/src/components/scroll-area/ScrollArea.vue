@@ -79,15 +79,6 @@ const rootClass = computed(() => cn(area.blockClassName.value, "r-scroll-area__v
 
 const rootStyle = computed(() => area.blockStyle.value);
 
-const binding = computed(() => ({
-  containerRef: area.containerRef,
-  rails: area.rails,
-  setDragging: area.setDragging,
-  setGuttersRef: area.setGuttersRef,
-  setXThumbRef: area.setXThumbRef,
-  setYThumbRef: area.setYThumbRef,
-}));
-
 defineExpose({
   measure: area.measure,
   scrollToElement: area.scrollToElement,
@@ -106,7 +97,7 @@ defineExpose({
     @scroll="props.onScroll"
     v-bind="attrs"
   >
-    <ScrollAreaGutters :binding="binding" />
+    <ScrollAreaGutters :binding="area.binding" />
     <div
       v-if="hasContentWrapper"
       :ref="setContent"

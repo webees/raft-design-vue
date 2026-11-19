@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DropdownMenuSubContent } from "reka-ui";
-import { dropdownMenu } from "./dropdown-menu.variants";
+import { useDropdownContent } from "./use-dropdown-content";
 
 defineOptions({ name: "RaftDropdownMenuSubContent", inheritAttrs: false });
 
@@ -21,16 +21,7 @@ withDefaults(
   },
 );
 
-const attrs = useAttrs();
-const positionerClass = computed(() => dropdownMenu().positioner());
-const contentClass = computed(() =>
-  dropdownMenu().content({ class: attrs.class as string | undefined }),
-);
-const contentAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
-const vars = { "--available-height": "var(--reka-dropdown-menu-content-available-height)" };
+const { positionerClass, contentClass, contentAttrs, vars } = useDropdownContent();
 </script>
 
 <template>

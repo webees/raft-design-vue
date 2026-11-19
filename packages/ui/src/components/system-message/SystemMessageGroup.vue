@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { CollapsibleRoot } from "reka-ui";
+import { useIsControlled } from "../../lib/use-controlled-state";
 import { messageSystem } from "./system-message.variants";
 
 defineOptions({ name: "RaftSystemMessageGroup", inheritAttrs: false });
@@ -12,14 +13,12 @@ const props = defineProps<{
 
 const emit = defineEmits<{ "update:open": [open: boolean] }>();
 const attrs = useAttrs();
-const instance = getCurrentInstance();
-
+const controlled = useIsControlled("open");
 const rootClass = computed(() => messageSystem().systemGroup({ className: attrs.class as string }));
 
 const rootProps = computed(() => {
-  const controlled = instance?.vnode.props?.open !== undefined;
   return {
-    open: controlled ? props.open : undefined,
+    open: controlled.value ? props.open : undefined,
     defaultOpen: props.defaultOpen,
     disabled: props.disabled,
   };

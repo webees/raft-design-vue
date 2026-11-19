@@ -4,7 +4,7 @@ import { join, relative } from "node:path";
 
 export const UPSTREAM_REPO = "botiverse/raft-design";
 export const ROOT = join(import.meta.dir, "../../..");
-export const UI_DIR = join(ROOT, "packages/ui");
+const UI_DIR = join(ROOT, "packages/ui");
 export const SPEC_DIR = join(UI_DIR, "src");
 export const DESIGN_DIR = join(ROOT, "design");
 export const TOOLING_DIR = join(ROOT, "tooling/upstream");
