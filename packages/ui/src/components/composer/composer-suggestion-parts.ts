@@ -1,20 +1,6 @@
 import { createSlotComponent } from "../../lib/create-slot-component";
 import { composerSuggestionList } from "./composer-suggestion.recipe";
 
-export const ComposerSuggestionList = createSlotComponent({
-  name: "RaftComposerSuggestionList",
-  tag: "div",
-  dataSlot: "composer-suggestion-list",
-  classes: (className) => composerSuggestionList().root({ class: className }),
-});
-
-export const ComposerSuggestionGroup = createSlotComponent({
-  name: "RaftComposerSuggestionGroup",
-  tag: "div",
-  dataSlot: "composer-suggestion-group",
-  classes: (className) => composerSuggestionList().group({ class: className }),
-});
-
 export const ComposerSuggestionGroupLabel = createSlotComponent({
   name: "RaftComposerSuggestionGroupLabel",
   tag: "div",
@@ -34,13 +20,6 @@ export const ComposerSuggestionContent = createSlotComponent({
   tag: "span",
   dataSlot: "composer-suggestion-content",
   classes: (className) => composerSuggestionList().content({ class: className }),
-});
-
-export const ComposerSuggestionIcon = createSlotComponent({
-  name: "RaftComposerSuggestionIcon",
-  tag: "span",
-  dataSlot: "composer-suggestion-icon",
-  classes: (className) => composerSuggestionList().icon({ class: className }),
 });
 
 export const ComposerSuggestionTitle = createSlotComponent({

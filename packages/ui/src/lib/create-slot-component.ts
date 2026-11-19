@@ -7,6 +7,8 @@ export interface SlotComponentOptions {
   tag: string;
   dataSlot: string;
   classes: (className?: string) => string;
+  /** Set to `false` to keep the component tag fixed (no `as` prop). */
+  as?: boolean;
   /**
    * Presence flags the upstream part turns into data attributes, e.g.
    * `{ muted: "data-muted" }` (empty value) or
@@ -17,6 +19,8 @@ export interface SlotComponentOptions {
   staticAttrs?: Record<string, string>;
   /** Default `type` for button parts; a caller's own `type` still wins. */
   defaultType?: "button" | "submit" | "reset";
+  /** Static attributes evaluated once during setup, e.g. fit registration. */
+  rootProps?: () => Record<string, unknown>;
 }
 
 /**
@@ -28,10 +32,14 @@ export function createSlotComponent(options: SlotComponentOptions) {
     name: options.name,
     inheritAttrs: false,
     props: {
-      as: {
-        type: [String, Object, Function] as PropType<string | Component>,
-        default: undefined,
-      },
+      ...(options.as === false
+        ? {}
+        : {
+            as: {
+              type: [String, Object, Function] as PropType<string | Component>,
+              default: undefined,
+            },
+          }),
       class: {
         type: String,
         default: undefined,
@@ -42,6 +50,7 @@ export function createSlotComponent(options: SlotComponentOptions) {
       ),
     },
     setup(props, { attrs, slots }) {
+      const extra = options.rootProps?.() ?? {};
       const flagAttrs = () =>
         Object.fromEntries(
           Object.entries(options.flags ?? {})
@@ -54,18 +63,20 @@ export function createSlotComponent(options: SlotComponentOptions) {
             ([attribute]) => !(attribute === "type" && props.as),
           ),
         );
-      return () =>
-        h(
+      return () => {
+        const { class: attrClass, ...rest } = attrs;
+        return h(
           (props.as ?? options.tag) as string,
-          mergeProps(attrs, {
+          mergeProps(extra, rest, {
             "data-slot": (attrs["data-slot"] as string | undefined) ?? options.dataSlot,
             ...staticAttrs(),
             ...(options.defaultType && !props.as ? { type: props.type } : {}),
             ...flagAttrs(),
-            class: options.classes(cn(attrs.class as string | undefined, props.class)),
+            class: options.classes(cn(attrClass as string | undefined, props.class)),
           }),
           slots.default ? slots.default() : undefined,
         );
+      };
     },
   });
 }
