@@ -13,7 +13,7 @@ export type ThemeState = {
 export const THEME_STATE_KEY: InjectionKey<ThemeState> = Symbol("raft-theme");
 
 /** The default when no `ThemeProvider` is above: light, and setting does nothing. */
-export function createThemeState(): ThemeState {
+function createThemeState(): ThemeState {
   return reactive({
     mode: "light",
     resolvedMode: "light",

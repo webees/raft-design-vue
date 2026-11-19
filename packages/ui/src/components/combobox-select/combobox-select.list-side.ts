@@ -1,6 +1,6 @@
-export const ROW = 36;
-export const LIST_PADDING = 8;
-export const SIDE_OFFSET = 4;
+const ROW = 36;
+const LIST_PADDING = 8;
+const SIDE_OFFSET = 4;
 
 export function roomBelowIsShort(
   field: Pick<DOMRect, "bottom">,

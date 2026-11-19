@@ -3,7 +3,7 @@ import { defineConfig } from "@rsbuild/core";
 import { pluginVue } from "@rsbuild/plugin-vue";
 import tailwindcss from "@tailwindcss/postcss";
 import AutoImport from "unplugin-auto-import/rspack";
-import { autoImportOptions } from "../../packages/ui/auto-imports.preset";
+import { autoImportOptions } from "../../packages/ui/auto-imports.preset.ts";
 
 export default defineConfig({
   plugins: [pluginVue()],

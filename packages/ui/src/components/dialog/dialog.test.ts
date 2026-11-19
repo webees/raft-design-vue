@@ -1,9 +1,10 @@
 import { mount } from "@vue/test-utils";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { nextTick } from "vue";
 import Dialog from "./Dialog.vue";
 import DialogBody from "./DialogBody.vue";
 import DialogClose from "./DialogClose.vue";
+import DialogPortal from "./DialogPortal.vue";
 import DialogContent from "./DialogContent.vue";
 import DialogDescription from "./DialogDescription.vue";
 import DialogFooter from "./DialogFooter.vue";
@@ -17,6 +18,7 @@ const components = {
   Dialog,
   DialogBody,
   DialogClose,
+  DialogPortal,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -136,6 +138,25 @@ describe("Dialog", () => {
     expect(close?.className).toContain("md:pointer-fine:size-(--bar-button-size)");
     expect(close?.getAttribute("aria-label")).toBe("Close");
     wrapper.unmount();
+  });
+
+  it("forwards portal attributes without warnings", async () => {
+    const warn = vi.spyOn(console, "warn");
+    const wrapper = mount(
+      {
+        components,
+        template: `
+          <Dialog default-open>
+            <DialogPortal class="portal-test" data-testid="portal" />
+          </Dialog>
+        `,
+      },
+      { attachTo: document.body },
+    );
+    await nextTick();
+    expect(warn).not.toHaveBeenCalledWith(expect.stringContaining("Extraneous non-props"));
+    wrapper.unmount();
+    warn.mockRestore();
   });
 
   it("takes an overlay object's class names", async () => {

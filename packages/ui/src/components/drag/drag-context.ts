@@ -4,7 +4,7 @@ import { onBeforeUnmount, ref } from "vue";
 import { toElement } from "../../lib/dom";
 import type { DragEngine } from "../../lib/drag-engine";
 
-export const DRAG_ENGINE_KEY: InjectionKey<DragEngine> = Symbol("raft-drag-engine");
+const DRAG_ENGINE_KEY: InjectionKey<DragEngine> = Symbol("raft-drag-engine");
 
 export function provideDragEngine(engine: DragEngine) {
   provide(DRAG_ENGINE_KEY, engine);

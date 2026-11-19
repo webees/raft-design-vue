@@ -13,8 +13,7 @@ export interface CommentMarginContextValue {
   topOf: (id: string) => number;
 }
 
-export const COMMENT_MARGIN_KEY: InjectionKey<CommentMarginContextValue> =
-  Symbol("raft-comment-margin");
+const COMMENT_MARGIN_KEY: InjectionKey<CommentMarginContextValue> = Symbol("raft-comment-margin");
 
 export function provideCommentMargin(context: CommentMarginContextValue) {
   provide(COMMENT_MARGIN_KEY, context);

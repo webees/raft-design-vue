@@ -17,8 +17,7 @@ export interface MessageItemLabelRegistry {
   sync: () => void;
 }
 
-export const MESSAGE_ITEM_LABEL: InjectionKey<MessageItemLabelRegistry> =
-  Symbol("MessageItemLabel");
+const MESSAGE_ITEM_LABEL: InjectionKey<MessageItemLabelRegistry> = Symbol("MessageItemLabel");
 
 export function provideMessageItemLabels(
   register: MessageItemLabelRegistry["register"],
@@ -51,7 +50,7 @@ export function useMessageItemLabelId(
   return labelId;
 }
 
-export function useGeneratedId(prefix: string) {
+function useGeneratedId(prefix: string) {
   const id = useId();
   return ref(`${prefix}-${id.replaceAll(":", "")}`);
 }

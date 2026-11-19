@@ -9,7 +9,7 @@ export type ComboboxContext = {
   multiple: Ref<boolean>;
 };
 
-export const COMBOBOX_KEY: InjectionKey<ComboboxContext> = Symbol("raft-combobox");
+const COMBOBOX_KEY: InjectionKey<ComboboxContext> = Symbol("raft-combobox");
 
 export function provideCombobox(context: ComboboxContext) {
   provide(COMBOBOX_KEY, context);

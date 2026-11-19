@@ -32,7 +32,7 @@ export function detectPullToRefreshPlatform(): PullToRefreshPlatform {
   return /\bAndroid\b/i.test(navigator.userAgent) ? "android" : "default";
 }
 
-export const PULL_TO_REFRESH_HAPTIC_MS = 10;
+const PULL_TO_REFRESH_HAPTIC_MS = 10;
 
 function hapticTick() {
   if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {

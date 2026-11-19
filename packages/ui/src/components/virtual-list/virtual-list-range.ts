@@ -216,12 +216,3 @@ export function isHiddenByDisplayNone(el: HTMLElement): boolean {
   }
   return false;
 }
-
-/** A CSS pixel length, or `undefined` for `undefined`. */
-export function px(value: number): string;
-export function px(value: number | undefined): string | undefined;
-export function px(value: number | undefined): string | undefined {
-  if (value !== undefined) {
-    return `${value}px`;
-  }
-}

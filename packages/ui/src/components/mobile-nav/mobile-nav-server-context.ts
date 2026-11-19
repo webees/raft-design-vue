@@ -6,7 +6,7 @@ export interface MobileNavServerContextValue {
   triggerRef: Ref<HTMLElement | null>;
 }
 
-export const MOBILE_NAV_SERVER_KEY: InjectionKey<MobileNavServerContextValue> =
+const MOBILE_NAV_SERVER_KEY: InjectionKey<MobileNavServerContextValue> =
   Symbol("raft-mobile-nav-server");
 
 export function provideMobileNavServer(value: MobileNavServerContextValue) {

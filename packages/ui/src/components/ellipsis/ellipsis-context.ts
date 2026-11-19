@@ -6,7 +6,7 @@ export interface EllipsisContextValue {
   textId: string;
 }
 
-export const ellipsisKey: InjectionKey<EllipsisContextValue> = Symbol("raft-ellipsis");
+const ellipsisKey: InjectionKey<EllipsisContextValue> = Symbol("raft-ellipsis");
 
 export function provideEllipsis(value: EllipsisContextValue) {
   provide(ellipsisKey, value);

@@ -98,7 +98,7 @@ function lastLine(block: Element): Element | null {
   return null;
 }
 
-export function stampLastLine(body: HTMLElement, slot: Element) {
+function stampLastLine(body: HTMLElement, slot: Element) {
   const block = lastBlock(body, slot);
   const line = block ? lastLine(block) : null;
   const previous = body.querySelector("[data-trailing-line]");

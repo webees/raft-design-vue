@@ -21,7 +21,7 @@ export interface FitToolbarContext {
   requestMeasure: () => void;
 }
 
-export const fitToolbarKey: InjectionKey<FitToolbarContext> = Symbol("raft-fit-toolbar");
+const fitToolbarKey: InjectionKey<FitToolbarContext> = Symbol("raft-fit-toolbar");
 
 export function provideFitToolbar(value: FitToolbarContext) {
   provide(fitToolbarKey, value);

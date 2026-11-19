@@ -49,7 +49,7 @@ export type TaskDndProviderProps = {
   onMoveError?: (error: unknown, details: TaskMoveDetails) => void;
 };
 
-export const TASK_DND_KEY: InjectionKey<TaskDndContextValue> = Symbol("raft-task-dnd");
+const TASK_DND_KEY: InjectionKey<TaskDndContextValue> = Symbol("raft-task-dnd");
 
 export function provideTaskDnd(context: TaskDndContextValue) {
   provide(TASK_DND_KEY, context);
