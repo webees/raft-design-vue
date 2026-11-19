@@ -1,23 +1,19 @@
 <script setup lang="ts">
 import { CollapsibleRoot } from "reka-ui";
-import { useControlledState } from "../../lib/use-controlled-state";
+import { COLLAPSIBLE_SECTION_PROPS, useCollapsibleSection } from "../../lib/use-collapsible";
 import { taskListSection } from "./task-list.variants";
 
 defineOptions({ name: "RaftTaskSection", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{ open?: boolean; defaultOpen?: boolean; disabled?: boolean }>(),
-  { defaultOpen: true },
-);
+const props = defineProps(COLLAPSIBLE_SECTION_PROPS);
 const emit = defineEmits<{ "update:open": [value: boolean] }>();
 const attrs = useAttrs();
-const openState = useControlledState(
-  "open",
-  () => props.open,
-  props.defaultOpen,
+const { openState, rootClass } = useCollapsibleSection(
+  props,
   (value) => emit("update:open", value),
+  taskListSection,
+  attrs.class as string,
 );
-const rootClass = computed(() => taskListSection().root({ className: attrs.class as string }));
 </script>
 
 <template>

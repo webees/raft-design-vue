@@ -3,25 +3,13 @@ import { ChevronDown } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";
 import Button from "./Button.vue";
-import {
-  buttonSplitMenu,
-  type ButtonSplitSize,
-  type ButtonSplitVariant,
-} from "./button-split.recipe";
-import { useButtonSplitPart } from "./use-button-split-part";
+import { buttonSplitMenu } from "./button-split.recipe";
+import { BUTTON_SPLIT_PART_PROPS, useButtonSplitPart } from "./use-button-split-part";
 import type { ButtonSize, ButtonVariant } from "./button.variants";
 
 defineOptions({ name: "RaftButtonSplitMenu", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    variant?: ButtonSplitVariant;
-    size?: ButtonSplitSize;
-    disabled?: boolean;
-    loading?: boolean;
-  }>(),
-  { variant: "default", size: "md", disabled: false, loading: false },
-);
+const props = defineProps(BUTTON_SPLIT_PART_PROPS);
 const attrs = useAttrs();
 const { isDisabled, isSticker } = useButtonSplitPart(props);
 const rootClass = computed(() =>

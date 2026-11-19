@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Primitive } from "reka-ui";
-
 import { cn } from "../../lib/cn";
 import { PanelAction } from "../panel";
 import { useOptionalAppShellSidebar } from "./app-shell-context";
@@ -42,24 +40,8 @@ const handleClick = (event: MouseEvent) => {
 
 <template>
   <template v-if="sidebar?.collapsible">
-    <Primitive
-      v-if="as"
-      :as="as"
-      :as-child="asChild"
-      :aria-label="label"
-      :aria-controls="sidebar.sidebarId"
-      :aria-expanded="sidebar.open"
-      :data-state="sidebar.open ? 'expanded' : 'collapsed'"
-      data-slot="app-shell-sidebar-trigger"
-      :title="label"
-      :class="rootClass"
-      v-bind="{ ...attrs, class: undefined }"
-      @click="handleClick"
-    >
-      <slot />
-    </Primitive>
     <PanelAction
-      v-else
+      :as="as ?? 'button'"
       :as-child="asChild"
       :aria-label="label"
       :aria-controls="sidebar.sidebarId"

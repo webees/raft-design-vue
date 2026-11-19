@@ -1,29 +1,19 @@
 <script setup lang="ts">
 import { Toggle } from "reka-ui";
-import { useControlledState } from "../../lib/use-controlled-state";
+import { TOGGLE_PROPS, usePanelToggle } from "../../lib/use-collapsible";
 import { panelSplitActionToggle } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSplitActionToggle", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    pressed?: boolean;
-    defaultPressed?: boolean;
-    disabled?: boolean;
-    as?: string;
-    asChild?: boolean;
-  }>(),
-  { defaultPressed: false, disabled: false, as: "button", asChild: false },
-);
+const props = defineProps(TOGGLE_PROPS);
 const emit = defineEmits<{ "update:pressed": [value: boolean] }>();
 const attrs = useAttrs();
-const current = useControlledState(
-  "pressed",
-  () => props.pressed,
-  props.defaultPressed,
+const { current, rootClass } = usePanelToggle(
+  props,
   (value) => emit("update:pressed", value),
+  panelSplitActionToggle,
+  attrs.class as string,
 );
-const rootClass = computed(() => panelSplitActionToggle({ className: attrs.class as string }));
 </script>
 
 <template>

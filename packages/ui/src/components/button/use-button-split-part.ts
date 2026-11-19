@@ -1,7 +1,15 @@
-import { computed, onBeforeUnmount, watch, watchEffect } from "vue";
+import { computed, onBeforeUnmount, watch, watchEffect, type PropType } from "vue";
 
 import { BUTTON_SPLIT_STICKERS, useButtonSplit } from "./button-split-context";
 import type { ButtonSplitSize, ButtonSplitVariant } from "./button-split.recipe";
+
+/** Props shared by both halves of a split button. */
+export const BUTTON_SPLIT_PART_PROPS = {
+  variant: { type: String as PropType<ButtonSplitVariant>, default: "default" },
+  size: { type: String as PropType<ButtonSplitSize>, default: "md" },
+  disabled: { type: Boolean, default: false },
+  loading: { type: Boolean, default: false },
+};
 
 interface ButtonSplitPartProps {
   variant: ButtonSplitVariant;
