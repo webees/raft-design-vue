@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { PanelHeaderContent } from "../panel";
 import { profilePanel } from "./profile-panel.variants";
 
 defineOptions({ name: "RaftProfilePanelHeaderContent", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() =>
   profilePanel().headerContent({ className: attrs.class as string }),

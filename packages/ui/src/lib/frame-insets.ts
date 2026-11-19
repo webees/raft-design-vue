@@ -36,7 +36,7 @@ export const NO_FRAME_INSETS: Readonly<FrameInsets> = Object.freeze({
 });
 
 /** The room a popup, a menu or a toast keeps from an inset. */
-export const POPUP_FRAME_GAP = 8;
+const POPUP_FRAME_GAP = 8;
 
 const PX_LENGTH = /^-?(\d+\.?\d*|\.\d+)px$/;
 
@@ -134,7 +134,7 @@ function visualViewportShift(): { x: number; y: number } {
   };
 }
 
-export function frameCollisionBoundary(insets: FrameInsets): CollisionBoundary {
+function frameCollisionBoundary(insets: FrameInsets): CollisionBoundary {
   return {
     get x() {
       return insets.left + visualViewportShift().x;

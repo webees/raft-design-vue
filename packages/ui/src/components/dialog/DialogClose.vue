@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { DialogClose } from "reka-ui";
+import { X } from "lucide-vue-next";
+
+import { cn } from "../../lib/cn";
 import { Button } from "../button";
+import PanelAction from "../panel/PanelAction.vue";
+import { barButtonDesktop } from "../../lib/head-edges";
+import { useInDialogSheetHead } from "./dialog-sheet-context";
 import { dialog } from "./dialog.variants";
 import type { ButtonSize, ButtonVariant } from "../button/button.variants";
 
@@ -13,34 +19,48 @@ const props = withDefaults(
     ariaLabel?: string;
     asChild?: boolean;
   }>(),
-  { variant: "ghost", size: "icon-md", asChild: false },
+  { variant: "ghost", asChild: false },
 );
 
 const attrs = useAttrs();
-const closeClass = computed(() => dialog().close({ className: attrs.class as string }));
+const inSheetHead = useInDialogSheetHead();
+const closeClass = computed(() =>
+  cn(
+    dialog().close({ className: attrs.class as string }),
+    props.size ? undefined : barButtonDesktop,
+  ),
+);
 </script>
 
 <template>
-  <DialogClose v-if="asChild" as-child>
+  <DialogClose v-if="asChild" as-child v-bind="attrs">
     <slot />
+  </DialogClose>
+  <DialogClose
+    v-else-if="inSheetHead"
+    as-child
+    v-bind="{ ...attrs, class: undefined }"
+    data-slot="dialog-close"
+  >
+    <PanelAction
+      activate-on-touch-end
+      :aria-label="props.ariaLabel ?? 'Close'"
+      :class="attrs.class as string"
+    >
+      <slot><X /></slot>
+    </PanelAction>
   </DialogClose>
   <DialogClose v-else as-child>
     <Button
+      v-bind="{ ...attrs, class: undefined }"
       :variant="props.variant"
-      :size="props.size"
+      :size="props.size ?? 'icon-md'"
       :class="closeClass"
       :aria-label="props.ariaLabel ?? 'Close'"
       data-slot="dialog-close"
     >
       <slot>
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="size-4.5">
-          <path
-            d="M5 5l10 10M15 5L5 15"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="square"
-          />
-        </svg>
+        <X class="size-4.5" />
       </slot>
     </Button>
   </DialogClose>

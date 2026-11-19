@@ -1,15 +1,12 @@
 <script setup lang="ts">
+import { actionProps } from "../../lib/part-props";
 import { ChevronDown } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 import { panelSplitActionMenu } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelSplitActionMenu", inheritAttrs: false });
 
-withDefaults(defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(), {
-  disabled: false,
-  as: "button",
-  asChild: false,
-});
+defineProps(actionProps());
 const attrs = useAttrs();
 const rootClass = computed(() => panelSplitActionMenu({ className: attrs.class as string }));
 </script>

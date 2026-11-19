@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import FileSlot from "./FileSlot.vue";
 
 defineOptions({ name: "RaftFileRowOpen" });
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "button",
-  asChild: false,
-});
+defineProps(asChildProps("button"));
 </script>
 
 <template>

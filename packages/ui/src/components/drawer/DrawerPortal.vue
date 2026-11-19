@@ -18,6 +18,7 @@ withDefaults(
 
 <template>
   <DrawerPortal
+    v-bind="$attrs"
     :to="to"
     :disabled="disabled"
     :force-mount="forceMount"

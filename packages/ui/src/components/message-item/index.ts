@@ -45,7 +45,7 @@ export {
   MessageReferenceText,
   MessageReferenceUnavailable,
 } from "./message-reference-parts";
-export type { MessageReferenceChipVariant } from "./message-reference-parts";
+export type { MessageReferenceChipVariant } from "./message-reference.recipe";
 export type { MessageItemBadgeStatus } from "./message-footer.recipe";
 export type { MessageReferenceTextVariant } from "./message-reference.recipe";
 export {

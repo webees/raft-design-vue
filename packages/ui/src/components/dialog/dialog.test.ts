@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { nextTick } from "vue";
 import Dialog from "./Dialog.vue";
 import DialogBody from "./DialogBody.vue";
+import DialogClose from "./DialogClose.vue";
 import DialogContent from "./DialogContent.vue";
 import DialogDescription from "./DialogDescription.vue";
 import DialogFooter from "./DialogFooter.vue";
@@ -15,6 +16,7 @@ import { Button } from "../button";
 const components = {
   Dialog,
   DialogBody,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -105,6 +107,34 @@ describe("Dialog", () => {
 
     expect(document.body.querySelector("[role=dialog]")).not.toBeNull();
     expect(document.body.querySelector("[data-slot=dialog-overlay]")).toBeNull();
+    wrapper.unmount();
+  });
+
+  it("keeps the caller class and desktop bar sizing on the close action", async () => {
+    const wrapper = mount(
+      {
+        components,
+        template: `
+          <Dialog default-open>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Close me</DialogTitle>
+                <DialogClose class="custom-close" />
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        `,
+      },
+      { attachTo: document.body },
+    );
+    await nextTick();
+    await nextTick();
+
+    const close = document.body.querySelector("[data-slot=dialog-close]");
+    expect(close?.className).toContain("custom-close");
+    expect(close?.className).toContain("-my-1.5");
+    expect(close?.className).toContain("md:pointer-fine:size-(--bar-button-size)");
+    expect(close?.getAttribute("aria-label")).toBe("Close");
     wrapper.unmount();
   });
 

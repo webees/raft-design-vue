@@ -19,7 +19,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const { engine, root } = useDragElement((engine, element) =>
+const { engine, setRoot } = useDragElement((engine, element) =>
   engine.registerDroppable({
     accept: props.accept,
     data: props.data,
@@ -38,7 +38,7 @@ const classes = computed(() => cn(attrs.class as string | undefined, props.class
 <template>
   <Primitive
     :as="props.as"
-    ref="root"
+    :ref="setRoot"
     v-bind="attrs"
     :class="classes"
     :data-drop-id="props.id"

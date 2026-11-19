@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ContextMenuPortal } from "reka-ui";
 
-defineOptions({ name: "RaftContextMenuPortal" });
+defineOptions({ name: "RaftContextMenuPortal", inheritAttrs: false });
 
 withDefaults(
   defineProps<{
@@ -17,6 +17,7 @@ withDefaults(
 
 <template>
   <ContextMenuPortal
+    v-bind="$attrs"
     data-slot="context-menu-portal"
     data-raft-ui-overlay=""
     :disabled="disabled"

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { PanelHeaderRoot } from "../panel";
+import { asChildProps } from "../../lib/part-props";
 import { threadPanel } from "./thread-panel.variants";
 
 defineOptions({ name: "RaftThreadPanelHeader", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() => threadPanel().header({ className: attrs.class as string }));
 </script>

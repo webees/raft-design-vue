@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 import { panel, panelHeader } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelHeader", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), { as: "div", asChild: false });
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() => {
   const header = panelHeader().header({ className: attrs.class as string });

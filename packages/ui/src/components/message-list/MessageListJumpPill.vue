@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 
 import { buttonVariants } from "../button";
 
 defineOptions({ name: "RaftMessageListJumpPill", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "button",
-  asChild: false,
-});
+defineProps(asChildProps("button"));
 
 const attrs = useAttrs();
 const styles = buttonVariants({ variant: "outline", size: "md" });

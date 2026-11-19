@@ -7,8 +7,8 @@ import { toElement } from "./dom";
  * the click that follows. While a list is still momentum-scrolling the first
  * tap only stops it, so activating on click would need a second tap.
  */
-export const TAP_SLOP_PX = 10;
-export const TAP_MAX_MS = 500;
+const TAP_SLOP_PX = 10;
+const TAP_MAX_MS = 500;
 
 /** How long after a tap a click on the same control is the browser's echo of it. */
 const ECHO_CLICK_MS = 800;

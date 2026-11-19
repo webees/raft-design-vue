@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import { asChildProps } from "../../lib/part-props";
 import { Primitive } from "reka-ui";
 import { conversationPanelEmptyState } from "./conversation-panel.variants";
 
 defineOptions({ name: "RaftConversationPanelEmptyState", inheritAttrs: false });
 
-withDefaults(defineProps<{ as?: string; asChild?: boolean }>(), {
-  as: "div",
-  asChild: false,
-});
+defineProps(asChildProps());
 const attrs = useAttrs();
 const rootClass = computed(() =>
   conversationPanelEmptyState().root({ className: attrs.class as string }),

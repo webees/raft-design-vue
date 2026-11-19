@@ -1,15 +1,12 @@
 <script setup lang="ts">
+import { actionProps } from "../../lib/part-props";
 import { ChevronDown } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 import { panelTitleTrigger, panelTitleTriggerLabel } from "./panel.variants";
 
 defineOptions({ name: "RaftPanelTitleTrigger", inheritAttrs: false });
 
-withDefaults(defineProps<{ disabled?: boolean; as?: string; asChild?: boolean }>(), {
-  disabled: false,
-  as: "button",
-  asChild: false,
-});
+defineProps(actionProps());
 const attrs = useAttrs();
 const rootClass = computed(() => panelTitleTrigger({ className: attrs.class as string }));
 </script>

@@ -16,7 +16,7 @@ withDefaults(
 </script>
 
 <template>
-  <DialogPortal :to="to" :disabled="disabled" :force-mount="forceMount">
+  <DialogPortal v-bind="$attrs" :to="to" :disabled="disabled" :force-mount="forceMount">
     <div data-slot="lightbox-portal" data-raft-ui-overlay="" style="display: contents">
       <slot />
     </div>
