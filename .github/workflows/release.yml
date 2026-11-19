@@ -32,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: bun run verify
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2
         with:
           publish: bunx changeset publish
           version: bunx changeset version
