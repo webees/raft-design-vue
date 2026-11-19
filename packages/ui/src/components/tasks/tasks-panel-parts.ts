@@ -61,13 +61,3 @@ export const TasksPanelToolbarLabel = createPart(
   "span",
 );
 export const TasksPanelEmpty = createPart("RaftTasksPanelEmpty", "empty", "div");
-
-export const tasksPanelPartNames = [
-  "TasksPanelToolbar",
-  "TasksPanelToolbarGroup",
-  "TasksPanelToolbarNewTask",
-  "TasksPanelToolbarFilters",
-  "TasksPanelToolbarView",
-  "TasksPanelToolbarLabel",
-  "TasksPanelEmpty",
-] as const;

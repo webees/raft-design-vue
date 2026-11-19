@@ -17,7 +17,6 @@ export interface ToastData extends Record<string, unknown> {
   leading?: VNodeChild;
   actionLabel?: VNodeChild;
 }
-
 export type ToastObject<Data extends object = ToastData> = RekaToastObject<Data>;
 
 export interface ToastActionCommand {
@@ -165,5 +164,3 @@ export function useToastManager<Data extends object = ToastData>() {
 export function setDefaultToastActionTimeout(value: number) {
   defaultManagerTiming.actionTimeout = value;
 }
-
-export const defaultToastManagerInstance = defaultToastManager;

@@ -18,7 +18,3 @@ export function createLightboxDepth(): number {
   provide(LIGHTBOX_DEPTH_KEY, depth);
   return depth;
 }
-
-export function useLightboxDepth(): number {
-  return inject(LIGHTBOX_DEPTH_KEY, 0);
-}
