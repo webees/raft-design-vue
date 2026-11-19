@@ -1,4 +1,6 @@
-import { inject, provide, type InjectionKey } from "vue";
+import { computed, inject, provide, type InjectionKey } from "vue";
+
+import { drawer } from "./drawer.recipe";
 
 export interface DrawerConfig {
   readonly modal: boolean;
@@ -14,20 +16,26 @@ export function provideDrawerConfig(config: DrawerConfig) {
   provide(DRAWER_CONFIG_KEY, config);
 }
 
+const DEFAULT_DRAWER_CONFIG: DrawerConfig = {
+  modal: true,
+  swipeAxis: "x",
+  swipeDirection: "right",
+  hasSnapPoints: false,
+  nested: false,
+};
+
 export function useDrawerConfig(): DrawerConfig {
-  return (
-    inject(DRAWER_CONFIG_KEY, {
-      modal: true,
-      swipeAxis: "x",
-      swipeDirection: "right",
-      hasSnapPoints: false,
-      nested: false,
-    }) ?? {
-      modal: true,
-      swipeAxis: "x",
-      swipeDirection: "right",
-      hasSnapPoints: false,
-      nested: false,
-    }
+  return inject(DRAWER_CONFIG_KEY, DEFAULT_DRAWER_CONFIG);
+}
+
+export function useDrawerRecipe() {
+  const config = useDrawerConfig();
+  return computed(() =>
+    drawer({
+      axis: config.swipeAxis,
+      side: config.swipeDirection,
+      snapPoints: config.hasSnapPoints,
+      nested: config.nested,
+    }),
   );
 }

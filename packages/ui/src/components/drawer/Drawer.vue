@@ -2,6 +2,7 @@
 import { DrawerRoot } from "reka-ui";
 
 import { OverlayLayer, useEnclosingOverlayKind } from "../../lib/overlay-depth";
+import { useIsControlled } from "../../lib/use-controlled-state";
 import { provideDrawerConfig } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawer", inheritAttrs: false });
@@ -33,8 +34,7 @@ const swipeAxis = computed<"x" | "y">(() =>
   props.swipeDirection === "up" || props.swipeDirection === "down" ? "y" : "x",
 );
 
-const instance = getCurrentInstance();
-const controlled = computed(() => instance?.vnode.props != null && "open" in instance.vnode.props);
+const controlled = useIsControlled("open");
 const openProps = computed(() => (controlled.value ? { open: props.open === true } : {}));
 
 provideDrawerConfig(

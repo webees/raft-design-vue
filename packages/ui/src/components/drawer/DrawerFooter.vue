@@ -1,20 +1,12 @@
 <script setup lang="ts">
-import { drawer } from "./drawer.recipe";
-import { useDrawerConfig } from "./drawer-context";
+import { useDrawerRecipe } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawerFooter", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const config = useDrawerConfig();
-const classes = computed(() =>
-  drawer({
-    axis: config.swipeAxis,
-    side: config.swipeDirection,
-    snapPoints: config.hasSnapPoints,
-    nested: config.nested,
-  }).footer({ class: props.class }),
-);
+const variants = useDrawerRecipe();
+const classes = computed(() => variants.value.footer({ class: props.class }));
 </script>
 
 <template>

@@ -2,21 +2,16 @@
 import { DrawerOverlay, injectDrawerRootContext } from "reka-ui";
 
 import { usePresenceStyle } from "../../lib/presence-style";
-import { drawer } from "./drawer.recipe";
-import { useDrawerConfig } from "./drawer-context";
+import { useDrawerConfig, useDrawerRecipe } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawerOverlay", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const config = useDrawerConfig();
+const variants = useDrawerRecipe();
 const classes = computed(() =>
-  drawer({
-    axis: config.swipeAxis,
-    side: config.swipeDirection,
-    snapPoints: config.hasSnapPoints,
-    nested: config.nested,
-  }).overlay({ class: [props.class, attrs.class as string | undefined] }),
+  variants.value.overlay({ class: [props.class, attrs.class as string | undefined] }),
 );
 
 const overlay = ref<Element | null>(null);

@@ -3,8 +3,7 @@ import { DrawerContent, DrawerPortal, DrawerViewport, injectDrawerRootContext } 
 
 import { cn } from "../../lib/cn";
 import { usePresenceStyle } from "../../lib/presence-style";
-import { drawer } from "./drawer.recipe";
-import { useDrawerConfig } from "./drawer-context";
+import { useDrawerConfig, useDrawerRecipe } from "./drawer-context";
 import { provideDialogSheetReset } from "../dialog/dialog-sheet-context";
 import { providePopupSheet } from "../../lib/popup-boundary";
 import DrawerOverlay from "./DrawerOverlay.vue";
@@ -25,14 +24,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const config = useDrawerConfig();
-const variants = computed(() =>
-  drawer({
-    axis: config.swipeAxis,
-    side: config.swipeDirection,
-    snapPoints: config.hasSnapPoints,
-    nested: config.nested,
-  }),
-);
+const variants = useDrawerRecipe();
 const popupClass = computed(() => variants.value.popup({ class: props.class }));
 const contentClass = computed(() => variants.value.content());
 const viewportClass = computed(() =>

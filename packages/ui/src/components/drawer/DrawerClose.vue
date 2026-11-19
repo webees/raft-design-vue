@@ -3,8 +3,7 @@ import { DrawerClose } from "reka-ui";
 
 import { Button } from "../button";
 import type { ButtonSize, ButtonVariant } from "../button/button.variants";
-import { drawer } from "./drawer.recipe";
-import { useDrawerConfig } from "./drawer-context";
+import { useDrawerRecipe } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawerClose", inheritAttrs: false });
 
@@ -20,15 +19,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const config = useDrawerConfig();
-const variants = computed(() =>
-  drawer({
-    axis: config.swipeAxis,
-    side: config.swipeDirection,
-    snapPoints: config.hasSnapPoints,
-    nested: config.nested,
-  }),
-);
+const variants = useDrawerRecipe();
 const closeClass = computed(() => variants.value.close({ class: props.class }));
 const closeButtonClass = computed(() => (props.size ? undefined : variants.value.closeButton()));
 const closeIconClass = computed(() => variants.value.closeIcon());
