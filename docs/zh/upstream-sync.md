@@ -23,6 +23,7 @@
 ## 命令
 
 ```bash
+bun run fetch:upstream   # 仅落盘锁定快照（CI 使用）
 bun run sync:upstream    # 拉取锁定提交（或最新）并更新同步输入
 bun run check:upstream   # 报告相对上游 main 的漂移
 bun run check:parity     # 组件覆盖：102 / 102，无未登记目录

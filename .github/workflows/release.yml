@@ -27,6 +27,10 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
       - run: bun install --frozen-lockfile
+      - name: Fetch pinned upstream snapshot
+        run: bun run fetch:upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: bun run verify
       - uses: changesets/action@v1
         with:
