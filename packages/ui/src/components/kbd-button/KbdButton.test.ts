@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { defineComponent } from "vue";
 import KbdButton from "./KbdButton.vue";
 import KbdButtonCaret from "./KbdButtonCaret.vue";
 import KbdButtonPlaceholder from "./KbdButtonPlaceholder.vue";

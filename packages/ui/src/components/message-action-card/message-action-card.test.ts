@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { nextTick } from "vue";
 
 import MessageActionCard from "./MessageActionCard.vue";
 import MessageActionCardCollapseTrigger from "./MessageActionCardCollapseTrigger.vue";

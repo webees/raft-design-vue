@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { defineComponent, ref } from "vue";
 import Tabs from "./Tabs.vue";
 import TabsList from "./TabsList.vue";
 import TabsPanel from "./TabsPanel.vue";

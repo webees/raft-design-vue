@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { h, nextTick } from "vue";
 import DropdownMenu from "./DropdownMenu.vue";
 import DropdownMenuContent from "./DropdownMenuContent.vue";
 import DropdownMenuItem from "./DropdownMenuItem.vue";

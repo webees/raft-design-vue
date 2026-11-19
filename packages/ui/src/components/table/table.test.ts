@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { ref } from "vue";
 import Table from "./Table.vue";
 import TableBody from "./TableBody.vue";
 import TableCaption from "./TableCaption.vue";

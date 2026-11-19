@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { defineComponent, ref } from "vue";
 import ToggleGroup from "./ToggleGroup.vue";
 import ToggleGroupItem from "./ToggleGroupItem.vue";
 

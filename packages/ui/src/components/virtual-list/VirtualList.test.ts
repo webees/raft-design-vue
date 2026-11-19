@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { h, nextTick } from "vue";
 
 import VirtualList from "./VirtualList.vue";
 

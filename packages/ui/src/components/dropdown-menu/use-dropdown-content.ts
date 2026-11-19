@@ -1,5 +1,3 @@
-import { computed } from "vue";
-
 import { dropdownMenu } from "./dropdown-menu.variants";
 
 /** Class and attribute plumbing shared by the menu content and sub-content. */

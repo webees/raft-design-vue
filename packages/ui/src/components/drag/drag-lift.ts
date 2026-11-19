@@ -1,5 +1,3 @@
-import { computed, getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue";
-
 import {
   DRAG_AUTO_SCROLL_ZONE_PX,
   DRAG_KEYBOARD_OFFSET_PX,

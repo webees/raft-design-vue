@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h } from "vue";
 import MessageEmbed from "./MessageEmbed.vue";
 import MessageEmbedHeader from "./MessageEmbedHeader.vue";
 import MessageEmbedContent from "./MessageEmbedContent.vue";

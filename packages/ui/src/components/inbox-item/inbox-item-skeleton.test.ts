@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { nextTick } from "vue";
 
 import InboxItemSkeleton from "./InboxItemSkeleton.vue";
 import InboxItemSkeletonList from "./InboxItemSkeletonList.vue";

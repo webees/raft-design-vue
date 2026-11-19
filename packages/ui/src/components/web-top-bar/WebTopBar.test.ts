@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h } from "vue";
 import WebTopBarRoot from "./WebTopBarRoot.vue";
 import WebTopBarStart from "./WebTopBarStart.vue";
 import WebTopBarCenter from "./WebTopBarCenter.vue";

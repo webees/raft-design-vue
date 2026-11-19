@@ -1,5 +1,3 @@
-import { onBeforeUnmount, ref } from "vue";
-
 type CopyToClipboardOptions = {
   timeout?: number;
 };

@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { nextTick } from "vue";
 import Select from "./Select.vue";
 import SelectContent from "./SelectContent.vue";
 import SelectIcon from "./SelectIcon.vue";

@@ -1,5 +1,3 @@
-import { computed, defineComponent, h, useAttrs } from "vue";
-
 import { messageQuotedPreview } from "./message-quoted-preview.variants";
 
 const parts = {

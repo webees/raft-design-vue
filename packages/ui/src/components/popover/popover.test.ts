@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { h, nextTick } from "vue";
 import Popover from "./Popover.vue";
 import PopoverActions from "./PopoverActions.vue";
 import PopoverBody from "./PopoverBody.vue";

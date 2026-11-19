@@ -31,8 +31,8 @@ tooling/upstream   Sync, lockfile, drift report, parity manifest
    attributes. Never rename upstream variants.
 4. Implement the Vue SFC with slots instead of React `children`/render props.
    Map Base UI behaviour to Reka UI and document unavoidable API differences.
-5. Leave Vue runtime imports out of `.vue` files; the `vue` auto-import preset
-   provides them. Public types stay explicitly imported.
+5. Leave Vue runtime imports out of `.vue` and `.ts` source; the `vue`
+   auto-import preset provides them. Public types stay explicitly imported.
 6. Add tests for rendering, variants, events, disabled/loading states and
    accessibility attributes.
 7. Add a gallery entry in `apps/docs`.

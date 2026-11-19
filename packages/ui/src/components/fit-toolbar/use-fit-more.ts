@@ -1,5 +1,3 @@
-import { computed } from "vue";
-
 import { useFitToolbar } from "./fit-toolbar-context";
 
 export { useInFitToolbar } from "./fit-toolbar-context";

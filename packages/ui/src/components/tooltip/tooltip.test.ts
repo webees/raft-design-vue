@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { h, nextTick } from "vue";
 import Tooltip from "./Tooltip.vue";
 import TooltipContent from "./TooltipContent.vue";
 import TooltipProvider from "./TooltipProvider.vue";

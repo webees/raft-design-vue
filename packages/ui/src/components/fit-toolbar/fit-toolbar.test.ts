@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { h } from "vue";
 
 import FitToolbar from "./FitToolbar.vue";
 import {

@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
-import { nextTick } from "vue";
 import AlertDialog from "./AlertDialog.vue";
 import AlertDialogAction from "./AlertDialogAction.vue";
 import AlertDialogBody from "./AlertDialogBody.vue";

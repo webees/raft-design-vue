@@ -1,5 +1,3 @@
-import { onBeforeUnmount, ref, shallowRef } from "vue";
-
 import {
   DRAG_AUTO_SCROLL_ZONE_PX,
   MOUSE_DRAG_DISTANCE_PX,

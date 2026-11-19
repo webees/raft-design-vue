@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { ref } from "vue";
 import { TabsRoot } from "reka-ui";
 
 import SortableTabsList from "./SortableTabsList.vue";

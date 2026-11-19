@@ -1,5 +1,4 @@
 import { inject, provide, type InjectionKey } from "vue";
-import { onBeforeUnmount, ref } from "vue";
 
 import { toElement } from "../../lib/dom";
 import type { DragEngine } from "../../lib/drag-engine";

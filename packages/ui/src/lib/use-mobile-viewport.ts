@@ -1,5 +1,3 @@
-import { onBeforeUnmount, ref } from "vue";
-
 const MOBILE_QUERY = "(max-width: 767px)";
 
 function canMatchMedia() {

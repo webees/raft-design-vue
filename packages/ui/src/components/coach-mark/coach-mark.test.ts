@@ -1,5 +1,4 @@
 import { mount } from "@vue/test-utils";
-import { h, nextTick } from "vue";
 import { afterEach, describe, expect, it } from "vitest";
 
 import CoachMark from "./CoachMark.vue";

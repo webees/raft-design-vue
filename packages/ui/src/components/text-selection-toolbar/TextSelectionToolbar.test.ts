@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import { h } from "vue";
 import TextSelectionToolbar from "./TextSelectionToolbar.vue";
 import TextSelectionToolbarButton from "./TextSelectionToolbarButton.vue";
 import TextSelectionToolbarSeparator from "./TextSelectionToolbarSeparator.vue";
