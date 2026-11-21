@@ -8,7 +8,7 @@ function part(
   dataSlot: string,
   slot: keyof ReturnType<typeof selectionToolbar>,
 ) {
-  return recipePart(name, tag, dataSlot, () => selectionToolbar()[slot]());
+  return recipePart(name, tag, dataSlot, (className) => selectionToolbar()[slot]({ className }));
 }
 
 export const SelectionToolbarCount = createSlotPart({

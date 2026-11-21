@@ -2,6 +2,7 @@
 import type { Component } from "vue";
 
 import { cn } from "../../lib/cn";
+import { omitAttrs } from "../../lib/attrs";
 import { toElement } from "../../lib/dom";
 import ScrollAreaGutters from "./ScrollAreaGutters.vue";
 import { useScrollAreaContainer } from "./use-scroll-area-container";
@@ -18,10 +19,7 @@ const props = defineProps<{
 
 const attrs = useAttrs();
 const area = useScrollAreaContainer({ guttersPosition: "absolute", overscroll: "contain" });
-const restAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const restAttrs = computed(() => omitAttrs(attrs, "class"));
 const setContainer = (element: unknown) => {
   area.containerRef.value = toElement(element);
 };

@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import Dialog from "./Dialog.vue";
 import DialogBody from "./DialogBody.vue";
 import DialogClose from "./DialogClose.vue";
-import DialogPortal from "./DialogPortal.vue";
+import { DialogPortal } from "./DialogPortal";
 import DialogContent from "./DialogContent.vue";
 import DialogDescription from "./DialogDescription.vue";
 import DialogFooter from "./DialogFooter.vue";

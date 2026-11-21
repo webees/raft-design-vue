@@ -44,10 +44,6 @@ export const table = tv({
       ...sortButtonInteraction,
     ],
     sortArrow: ["size-3 shrink-0"],
-    scroll: [
-      "w-full overflow-x-auto overscroll-x-contain",
-      "outline-none focus-visible:shadow-focus rounded-sticker",
-    ],
   },
   variants: {
     align: {

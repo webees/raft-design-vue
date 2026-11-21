@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CollapsibleContent } from "reka-ui";
 
-import MessageEmbedContent from "../message-embed/MessageEmbedContent.vue";
+import { MessageEmbedContent } from "../message-embed/parts";
 import { messageCard } from "../message-embed/message-embed.variants";
 import { messageActionCardContent } from "./message-action-card.recipes";
 

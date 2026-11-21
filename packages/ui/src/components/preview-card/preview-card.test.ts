@@ -1,15 +1,17 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
+import {
+  PreviewCardBody,
+  PreviewCardEyebrow,
+  PreviewCardFooter,
+  PreviewCardHeader,
+  PreviewCardMeta,
+  PreviewCardTitle,
+} from "./parts";
 import PreviewCard from "./PreviewCard.vue";
 import PreviewCardActions from "./PreviewCardActions.vue";
-import PreviewCardBody from "./PreviewCardBody.vue";
 import PreviewCardDescription from "./PreviewCardDescription.vue";
-import PreviewCardEyebrow from "./PreviewCardEyebrow.vue";
-import PreviewCardFooter from "./PreviewCardFooter.vue";
-import PreviewCardHeader from "./PreviewCardHeader.vue";
-import PreviewCardMeta from "./PreviewCardMeta.vue";
 import PreviewCardSeparator from "./PreviewCardSeparator.vue";
-import PreviewCardTitle from "./PreviewCardTitle.vue";
 
 describe("preview-card", () => {
   it("roots a hover card and renders its slot", () => {

@@ -19,7 +19,7 @@ import { messageItem } from "./message-item.recipe";
 type MessageItemSlots = ReturnType<typeof messageItem>;
 
 const part = (name: string, tag: string, dataSlot: string, slotName: keyof MessageItemSlots) =>
-  recipePart(name, tag, dataSlot, () => messageItem()[slotName]());
+  recipePart(name, tag, dataSlot, (className) => messageItem()[slotName]({ className }));
 
 export const MessageItemGutter = part(
   "RaftMessageItemGutter",

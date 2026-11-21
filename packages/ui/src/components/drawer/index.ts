@@ -8,7 +8,7 @@ export { default as DrawerFooter } from "./DrawerFooter.vue";
 export { default as DrawerHandle } from "./DrawerHandle.vue";
 export { default as DrawerHeader } from "./DrawerHeader.vue";
 export { default as DrawerOverlay } from "./DrawerOverlay.vue";
-export { default as DrawerPortal } from "./DrawerPortal.vue";
+export { DrawerPortal } from "./DrawerPortal";
 export { default as DrawerTitle } from "./DrawerTitle.vue";
 export { default as DrawerTrigger } from "./DrawerTrigger.vue";
 export { drawer, type DrawerVariants } from "./drawer.recipe";

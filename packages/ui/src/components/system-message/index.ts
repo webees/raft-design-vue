@@ -1,4 +1,4 @@
-export { default as SystemMessage } from "./SystemMessage.vue";
+export { SystemMessage } from "./parts";
 export { default as SystemMessageTime } from "./SystemMessageTime.vue";
 export { default as SystemMessageContent } from "./SystemMessageContent.vue";
 export { default as SystemMessageGroup } from "./SystemMessageGroup.vue";

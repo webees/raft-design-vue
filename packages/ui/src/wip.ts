@@ -11,10 +11,10 @@ export type InboxItemLeadingBadgeProps = InstanceType<
   typeof import("./components/inbox-item/InboxItemLeadingBadge.vue")["default"]
 >["$props"];
 export type InboxItemLineProps = InstanceType<
-  typeof import("./components/inbox-item/InboxItemLine.vue")["default"]
+  typeof import("./components/inbox-item/parts")["InboxItemLine"]
 >["$props"];
 export type InboxItemListGroupProps = InstanceType<
-  typeof import("./components/inbox-item/InboxItemListGroup.vue")["default"]
+  typeof import("./components/inbox-item/parts")["InboxItemListGroup"]
 >["$props"];
 export type InboxItemListHeadingProps = InstanceType<
   typeof import("./components/inbox-item/InboxItemListHeading.vue")["default"]
@@ -39,5 +39,5 @@ export type PopoverActionsProps = InstanceType<
   typeof import("./components/popover/PopoverActions.vue")["default"]
 >["$props"];
 export type PopoverBodyProps = InstanceType<
-  typeof import("./components/popover/PopoverBody.vue")["default"]
+  typeof import("./components/popover/parts")["PopoverBody"]
 >["$props"];

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Skeleton from "../skeleton/Skeleton.vue";
 import InboxItem from "./InboxItem.vue";
-import InboxItemLine from "./InboxItemLine.vue";
+import { InboxItemLine } from "./parts";
 import {
   InboxItemBody,
   InboxItemContent,

@@ -14,7 +14,7 @@ import {
   type ToastPlacement,
   type ToastStrategy,
 } from "./toast-context";
-import ToastPortal from "./ToastPortal.vue";
+import { ToastPortal } from "./ToastPortal";
 import ToastViewport from "./ToastViewport.vue";
 import ToastDefaultList from "./ToastDefaultList.vue";
 

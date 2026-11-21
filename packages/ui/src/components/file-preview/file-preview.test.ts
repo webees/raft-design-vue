@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import FilePreview from "./FilePreview.vue";
+import { FilePreview } from "./parts";
 import FilePreviewBadge from "./FilePreviewBadge.vue";
 import FilePreviewCode from "./FilePreviewCode.vue";
 import FilePreviewDocument from "./FilePreviewDocument.vue";

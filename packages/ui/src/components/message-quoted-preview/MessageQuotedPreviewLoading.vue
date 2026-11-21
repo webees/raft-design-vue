@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { MessageEmbed } from "../message-embed";
 import { messageQuotedPreview } from "./message-quoted-preview.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftMessageQuotedPreviewLoading", inheritAttrs: false });
 const attrs = useAttrs();
 const rootClass = computed(() =>
   messageQuotedPreview().loading({ className: attrs.class as string | undefined }),
 );
-const rootAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const rootAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

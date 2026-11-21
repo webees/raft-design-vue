@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { popover } from "./popover.variants";
 import { usePopoverSize } from "./popover-context";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftPopoverPopup", inheritAttrs: false });
 
@@ -12,10 +13,7 @@ const popupClass = computed(() =>
     class: attrs.class as string | undefined,
   }),
 );
-const popupAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const popupAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

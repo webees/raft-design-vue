@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import { table } from "./table.variants";
+import { omitAttrs } from "../../lib/attrs";
+import { ScrollArea } from "../scroll-area";
+import type { ScrollAreaOwnProps } from "../scroll-area/types";
 
 defineOptions({ name: "RaftTableScroll", inheritAttrs: false });
 
-withDefaults(defineProps<{ orientation?: "horizontal" }>(), { orientation: "horizontal" });
+const props = defineProps<Omit<ScrollAreaOwnProps, "orientation" | "class">>();
 
 const attrs = useAttrs();
-const scrollClass = computed(() => table().scroll({ className: attrs.class as string }));
+const forwarded = computed<Record<string, unknown>>(() => ({
+  ...props,
+  ...omitAttrs(attrs, "class", "data-slot"),
+}));
 </script>
 
 <template>
-  <div
-    v-bind="{ ...attrs, class: undefined }"
-    :class="scrollClass"
-    tabindex="0"
-    role="region"
-    aria-label="Table, scrollable horizontally"
+  <ScrollArea
+    v-bind="forwarded"
+    :class="attrs.class"
     :data-slot="(attrs['data-slot'] as string | undefined) ?? 'table-scroll'"
+    orientation="horizontal"
   >
     <slot />
-  </div>
+  </ScrollArea>
 </template>

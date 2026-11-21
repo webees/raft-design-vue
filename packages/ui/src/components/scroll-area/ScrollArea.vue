@@ -77,7 +77,7 @@ const hasContentWrapper = computed(
 
 const rootClass = computed(() => cn(area.blockClassName.value, "r-scroll-area__viewport"));
 
-const rootStyle = computed(() => area.blockStyle.value);
+const rootStyle = computed(() => [area.blockStyle.value, props.style]);
 
 defineExpose({
   measure: area.measure,

@@ -1,4 +1,4 @@
-export { default as TaskListRoot } from "./TaskListRoot.vue";
+export { TaskListRoot } from "./parts";
 export { TaskSection } from "./TaskSection";
 export { default as TaskSectionPanel } from "./TaskSectionPanel.vue";
 export { default as TaskSectionTrigger } from "./TaskSectionTrigger.vue";

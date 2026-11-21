@@ -1,16 +1,18 @@
+export {
+  PreviewCardBody,
+  PreviewCardEyebrow,
+  PreviewCardFooter,
+  PreviewCardHeader,
+  PreviewCardMeta,
+  PreviewCardTitle,
+} from "./parts";
 export { default as PreviewCard } from "./PreviewCard.vue";
 export { default as PreviewCardActions } from "./PreviewCardActions.vue";
 export { default as PreviewCardArrow } from "./PreviewCardArrow.vue";
-export { default as PreviewCardBody } from "./PreviewCardBody.vue";
 export { default as PreviewCardContent } from "./PreviewCardContent.vue";
 export { default as PreviewCardDescription } from "./PreviewCardDescription.vue";
-export { default as PreviewCardEyebrow } from "./PreviewCardEyebrow.vue";
-export { default as PreviewCardFooter } from "./PreviewCardFooter.vue";
-export { default as PreviewCardHeader } from "./PreviewCardHeader.vue";
-export { default as PreviewCardMeta } from "./PreviewCardMeta.vue";
 export { default as PreviewCardPopup } from "./PreviewCardPopup.vue";
-export { default as PreviewCardPortal } from "./PreviewCardPortal.vue";
+export { PreviewCardPortal } from "./PreviewCardPortal";
 export { default as PreviewCardSeparator } from "./PreviewCardSeparator.vue";
-export { default as PreviewCardTitle } from "./PreviewCardTitle.vue";
 export { default as PreviewCardTrigger } from "./PreviewCardTrigger.vue";
 export { previewCard } from "./preview-card.variants";

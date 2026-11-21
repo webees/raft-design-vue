@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TabsContent } from "reka-ui";
 import { tabs } from "./tabs.variants";
-import { tabsUiContextKey } from "./tabs-context";
+import { useTabsUi } from "./tabs-context";
 
 defineOptions({ name: "RaftTabsPanel", inheritAttrs: false });
 
@@ -13,10 +13,7 @@ defineProps<{
 }>();
 
 const attrs = useAttrs();
-const ui = inject(tabsUiContextKey, {
-  placement: "top" as const,
-  variant: "default" as const,
-});
+const ui = useTabsUi();
 const panelClass = computed(() =>
   tabs({ variant: ui.variant, placement: ui.placement }).panel({
     className: attrs.class as string,

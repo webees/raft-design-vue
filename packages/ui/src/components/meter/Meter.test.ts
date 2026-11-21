@@ -2,10 +2,8 @@ import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import Meter from "./Meter.vue";
 import MeterHeader from "./MeterHeader.vue";
-import MeterIndicator from "./MeterIndicator.vue";
-import MeterLabel from "./MeterLabel.vue";
+import { MeterIndicator, MeterLabel, MeterValue } from "./parts";
 import MeterTrack from "./MeterTrack.vue";
-import MeterValue from "./MeterValue.vue";
 
 const Harness = defineComponent({
   components: {

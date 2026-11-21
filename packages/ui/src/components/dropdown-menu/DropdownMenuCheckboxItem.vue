@@ -2,6 +2,7 @@
 import { DropdownMenuCheckboxItem } from "reka-ui";
 import DropdownMenuItemIndicator from "./DropdownMenuItemIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuCheckboxItem", inheritAttrs: false });
 
@@ -27,10 +28,7 @@ const attrs = useAttrs();
 const itemClass = computed(() =>
   dropdownMenu().checkboxItem({ class: attrs.class as string | undefined }),
 );
-const itemAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const itemAttrs = computed(() => omitAttrs(attrs, "class"));
 
 function onUpdate(value: boolean | "indeterminate") {
   emit("update:modelValue", value);

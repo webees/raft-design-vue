@@ -5,7 +5,7 @@ import { appRail } from "./app-rail.variants";
 
 defineOptions({ name: "RaftAppRailItemIndicator", inheritAttrs: false });
 const attrs = useAttrs();
-const props = withDefaults(
+withDefaults(
   defineProps<{
     size?: "xs" | "sm" | "md" | "lg";
     variant?:
@@ -17,7 +17,6 @@ const props = withDefaults(
       | "success"
       | "warning"
       | "danger";
-    class?: string;
   }>(),
   { size: "sm", variant: "accent" },
 );
@@ -29,7 +28,7 @@ const props = withDefaults(
     :size="size"
     :variant="variant"
     data-slot="app-rail-item-indicator"
-    :class="cn(appRail().itemIndicator(), props.class, attrs.class as string | undefined)"
+    :class="cn(appRail().itemIndicator(), attrs.class as string | undefined)"
     v-bind="{ ...attrs, class: undefined }"
   />
 </template>

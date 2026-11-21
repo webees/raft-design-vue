@@ -1,15 +1,14 @@
 export { default as ContextMenu } from "./ContextMenu.vue";
 export { default as ContextMenuTrigger } from "./ContextMenuTrigger.vue";
 export { default as ContextMenuContent } from "./ContextMenuContent.vue";
-export { default as ContextMenuPopup } from "./ContextMenuPopup.vue";
-export { default as ContextMenuPortal } from "./ContextMenuPortal.vue";
+export { ContextMenuFooter, ContextMenuPopup } from "./parts";
+export { ContextMenuPortal } from "./ContextMenuPortal";
 export { default as ContextMenuItem } from "./ContextMenuItem.vue";
 export { default as ContextMenuItemLabel } from "./ContextMenuItemLabel.vue";
 export { default as ContextMenuLabel } from "./ContextMenuLabel.vue";
 export { default as ContextMenuSeparator } from "./ContextMenuSeparator.vue";
 export { default as ContextMenuShortcut } from "./ContextMenuShortcut.vue";
-export { default as ContextMenuFooter } from "./ContextMenuFooter.vue";
-export { default as ContextMenuRadioGroup } from "./ContextMenuRadioGroup.vue";
+export { ContextMenuRadioGroup } from "./parts";
 export { default as ContextMenuRadioItem } from "./ContextMenuRadioItem.vue";
 export { default as ContextMenuRadioItemIndicator } from "./ContextMenuRadioItemIndicator.vue";
 export { default as ContextMenuCheckboxItem } from "./ContextMenuCheckboxItem.vue";

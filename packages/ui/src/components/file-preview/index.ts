@@ -1,4 +1,4 @@
-export { default as FilePreview } from "./FilePreview.vue";
+export { FilePreview } from "./parts";
 export { default as FilePreviewBadge } from "./FilePreviewBadge.vue";
 export { default as FilePreviewCode } from "./FilePreviewCode.vue";
 export { default as FilePreviewDocument } from "./FilePreviewDocument.vue";

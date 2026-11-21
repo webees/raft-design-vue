@@ -2,7 +2,7 @@
 import { TabsTrigger, injectTabsRootContext } from "reka-ui";
 import { useTapActivation } from "../../lib/tap-activation";
 import { tabs } from "./tabs.variants";
-import { tabsUiContextKey } from "./tabs-context";
+import { useTabsUi } from "./tabs-context";
 import DropPlaceholder from "../drag/DropPlaceholder.vue";
 
 defineOptions({ name: "RaftTabsTab", inheritAttrs: false });
@@ -21,10 +21,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const tapRef = useTapActivation();
-const ui = inject(tabsUiContextKey, {
-  placement: "top" as const,
-  variant: "default" as const,
-});
+const ui = useTabsUi();
 const root = injectTabsRootContext();
 const active = computed(() => root.modelValue.value === props.value);
 const tabClass = computed(() =>

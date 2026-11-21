@@ -1,4 +1,4 @@
-export { default as TaskBoardRoot } from "./TaskBoardRoot.vue";
+export { TaskBoardRoot } from "./parts";
 export { TaskBoardColumn } from "./TaskBoardColumn";
 export { default as TaskBoardColumnPanel } from "./TaskBoardColumnPanel.vue";
 export { default as TaskBoardColumnTrigger } from "./TaskBoardColumnTrigger.vue";

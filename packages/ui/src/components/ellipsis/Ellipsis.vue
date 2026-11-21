@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { measureContent, observeTruncation, readNow, type Truncation } from "../../lib/truncation";
 import { cn } from "../../lib/cn";
+import { omitAttrs } from "../../lib/attrs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
 import { ellipsis } from "./ellipsis.variants";
 import { provideEllipsis } from "./ellipsis-context";
@@ -174,10 +175,7 @@ provideEllipsis({
   textId,
 });
 
-const forwardedAttrs = computed(() => {
-  const { class: _class, style: _style, ...rest } = attrs;
-  return rest;
-});
+const forwardedAttrs = computed(() => omitAttrs(attrs, "class", "style"));
 </script>
 
 <template>

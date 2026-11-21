@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
 import MessageEmbed from "./MessageEmbed.vue";
-import MessageEmbedHeader from "./MessageEmbedHeader.vue";
-import MessageEmbedContent from "./MessageEmbedContent.vue";
+import { MessageEmbedContent, MessageEmbedHeader } from "./parts";
 import MessageEmbedFooter from "./MessageEmbedFooter.vue";
 
 describe("MessageEmbed", () => {

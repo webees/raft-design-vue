@@ -4,7 +4,7 @@ import DropdownMenu from "./DropdownMenu.vue";
 import DropdownMenuContent from "./DropdownMenuContent.vue";
 import DropdownMenuItem from "./DropdownMenuItem.vue";
 import DropdownMenuItemLabel from "./DropdownMenuItemLabel.vue";
-import DropdownMenuSeparator from "./DropdownMenuSeparator.vue";
+import { DropdownMenuSeparator } from "./parts";
 import DropdownMenuTrigger from "./DropdownMenuTrigger.vue";
 
 afterEach(() => {

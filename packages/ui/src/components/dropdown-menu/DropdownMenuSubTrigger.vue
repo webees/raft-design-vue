@@ -2,6 +2,7 @@
 import { DropdownMenuSubTrigger } from "reka-ui";
 import MenuIndicator from "../context-menu/MenuIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuSubTrigger", inheritAttrs: false });
 
@@ -20,10 +21,7 @@ const attrs = useAttrs();
 const triggerClass = computed(() =>
   dropdownMenu().submenuTrigger({ class: attrs.class as string | undefined }),
 );
-const triggerAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const triggerAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

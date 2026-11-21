@@ -4,6 +4,7 @@ import { Comment, Fragment, Text } from "vue";
 import { TooltipContent, TooltipPortal } from "reka-ui";
 import TooltipArrow from "./TooltipArrow.vue";
 import { tooltip } from "./tooltip.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftTooltipContent", inheritAttrs: false });
 
@@ -88,10 +89,7 @@ const bodyClass = computed(() =>
 );
 const bodyIconClass = computed(() => tooltip().bodyIcon());
 const bodyTextClass = computed(() => tooltip().bodyText());
-const contentAttrs = computed(() => {
-  const { class: _class, bodyClass: _bodyClass, ...rest } = attrs;
-  return rest;
-});
+const contentAttrs = computed(() => omitAttrs(attrs, "class", "bodyClass"));
 </script>
 
 <template>

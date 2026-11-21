@@ -17,7 +17,7 @@ export { default as ComboboxItemIndicator } from "./ComboboxItemIndicator.vue";
 export { default as ComboboxLabel } from "./ComboboxLabel.vue";
 export { default as ComboboxList } from "./ComboboxList.vue";
 export { default as ComboboxPopup } from "./ComboboxPopup.vue";
-export { default as ComboboxPortal } from "./ComboboxPortal.vue";
+export { ComboboxPortal } from "./ComboboxPortal";
 export { default as ComboboxRow } from "./ComboboxRow.vue";
 export { default as ComboboxSeparator } from "./ComboboxSeparator.vue";
 export { default as ComboboxTrigger } from "./ComboboxTrigger.vue";

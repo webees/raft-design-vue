@@ -1,14 +1,9 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import Table from "./Table.vue";
-import TableBody from "./TableBody.vue";
-import TableCaption from "./TableCaption.vue";
+import { Table, TableBody, TableCaption, TableColumn, TableHeader, TableRow } from "./parts";
 import TableCell from "./TableCell.vue";
 import TableColgroup from "./TableColgroup.vue";
-import TableColumn from "./TableColumn.vue";
 import TableHead from "./TableHead.vue";
-import TableHeader from "./TableHeader.vue";
-import TableRow from "./TableRow.vue";
 import TableScroll from "./TableScroll.vue";
 import TableSortableHead from "./TableSortableHead.vue";
 import TableSortButton from "./TableSortButton.vue";
@@ -94,16 +89,25 @@ describe("Table", () => {
     expect(wrapper.find("[data-slot=table-sort-arrow-space]").exists()).toBe(true);
   });
 
-  it("makes a wide table a keyboard-reachable scroll region", () => {
+  it("renders a horizontal ScrollArea with the table as its own child", () => {
     const wrapper = mount({
       components,
-      template: `<TableScroll><Table><TableBody><TableRow><TableCell>Wide</TableCell></TableRow></TableBody></Table></TableScroll>`,
+      template:
+        `<TableScroll id="runs" class="extra" role="region" :overscroll="'contain'">` +
+        `<Table><TableBody><TableRow><TableCell>Wide</TableCell></TableRow></TableBody></Table>` +
+        `</TableScroll>`,
     });
 
-    const region = wrapper.find("[data-slot=table-scroll]");
-    expect(region.attributes("tabindex")).toBe("0");
-    expect(region.attributes("role")).toBe("region");
-    expect(region.classes()).toContain("overflow-x-auto");
+    const scroll = wrapper.find("[data-slot=table-scroll]");
+    expect(scroll.classes()).toContain("r-scroll-area");
+    expect(scroll.classes()).toContain("r-scroll-area--horizontal-orientation");
+    expect(scroll.classes()).toContain("extra");
+    expect(scroll.attributes("id")).toBe("runs");
+    expect(scroll.attributes("role")).toBe("region");
+    expect(scroll.classes().some((name) => name.includes("overscroll-y"))).toBe(false);
+    expect(
+      scroll.element.querySelector(":scope > .r-scroll-area__gutters + table[data-slot=table]"),
+    ).not.toBeNull();
   });
 
   it("supports fixed columns through colgroup", () => {

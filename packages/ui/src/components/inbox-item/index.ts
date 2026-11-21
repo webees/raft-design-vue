@@ -3,9 +3,8 @@ export { default as InboxItemTrigger } from "./InboxItemTrigger.vue";
 export { default as InboxItemLeadingBadge } from "./InboxItemLeadingBadge.vue";
 export { default as InboxItemSkeleton } from "./InboxItemSkeleton.vue";
 export { default as InboxItemSkeletonList } from "./InboxItemSkeletonList.vue";
-export { default as InboxItemListGroup } from "./InboxItemListGroup.vue";
+export { InboxItemLine, InboxItemListGroup } from "./parts";
 export { default as InboxItemListHeading } from "./InboxItemListHeading.vue";
-export { default as InboxItemLine } from "./InboxItemLine.vue";
 export { default as InboxItemStatus } from "./InboxItemStatus.vue";
 export {
   InboxItemActions,

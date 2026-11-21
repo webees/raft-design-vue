@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import WebTopBarRoot from "./WebTopBarRoot.vue";
-import WebTopBarStart from "./WebTopBarStart.vue";
-import WebTopBarCenter from "./WebTopBarCenter.vue";
-import WebTopBarEnd from "./WebTopBarEnd.vue";
+import { WebTopBarCenter, WebTopBarEnd, WebTopBarRoot, WebTopBarStart } from "./parts";
 
 describe("WebTopBar", () => {
   it("renders a three-column frame bar", () => {

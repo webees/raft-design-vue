@@ -34,26 +34,26 @@ bun run verify
 顺序：`check:parity → check:audit → check:docs-links → lint → typecheck →
 check:api → check:props → test → build → check:consumer-types`。
 
-2026-11-19，Bun 1.4.4 / Node 22 实测：
+2026-11-22，Bun 1.4.4 / Node 22 实测：
 
 |          |                                      |
 | -------- | ------------------------------------ |
-| 测试文件 | 104                                  |
-| 测试用例 | 377                                  |
+| 测试文件 | 105                                  |
+| 测试用例 | 378                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 2001.5 kB 原始，293.2 kB gzip        |
-| 文档产物 | 4159.6 kB 总计，1606.5 kB gzip       |
+| 库产物   | 1930.7 kB 原始，290.8 kB gzip        |
+| 文档产物 | 4151.8 kB 总计，1607.1 kB gzip       |
 
 ### 源码基线
 
-`packages/ui/src` 中 `.ts` + `.vue` 的规模与重复度下限，2026-11-19 实测：
+`packages/ui/src` 中 `.ts` + `.vue`（不含测试）的规模与重复度下限，2026-11-22 实测：
 
 | 指标                                  | 数值        |
 | ------------------------------------- | ----------- |
-| 源码行数                              | 55,133      |
-| `components/` 行数                    | 50,055      |
-| `lib/` 行数                           | 3,945       |
+| 源码行数                              | 46,719      |
+| `components/` 行数                    | 42,798      |
+| `lib/` 行数                           | 3,724       |
 | 复制粘贴克隆（jscpd，10 行 / 70 token） | 0          |
 | 重复行 / 重复 token                   | 0.00% / 0.00% |
 | 未使用变量与参数（`vue-tsc`）          | 0           |

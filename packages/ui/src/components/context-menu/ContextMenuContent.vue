@@ -4,6 +4,7 @@ import { ContextMenuContent, ContextMenuPortal } from "reka-ui";
 import { contextMenu } from "./context-menu.variants";
 import { useFrameCollisionPadding } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftContextMenuContent", inheritAttrs: false });
 
@@ -32,10 +33,7 @@ const positionerClass = computed(() => contextMenu().positioner());
 const contentClass = computed(() =>
   contextMenu().content({ class: attrs.class as string | undefined }),
 );
-const contentAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const contentAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

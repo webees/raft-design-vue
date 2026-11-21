@@ -7,7 +7,7 @@ export const Tabs = TabsRoot;
 export const TabsList = TabsListRoot;
 export const TabsTab = TabsTabRoot;
 export const TabsPanel = TabsPanelRoot;
-export { default as TabsLabel } from "./TabsLabel.vue";
+export { TabsLabel } from "./parts";
 export { default as SortableTabsList } from "./SortableTabsList.vue";
 export { default as SortableTabsTab } from "./SortableTabsTab.vue";
 

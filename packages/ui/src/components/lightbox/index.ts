@@ -1,6 +1,6 @@
 export { default as Lightbox } from "./Lightbox.vue";
 export { default as LightboxTrigger } from "./LightboxTrigger.vue";
-export { default as LightboxPortal } from "./LightboxPortal.vue";
+export { LightboxPortal } from "./LightboxPortal";
 export { default as LightboxContent } from "./LightboxContent.vue";
 export { default as LightboxBody } from "./LightboxBody.vue";
 export { default as LightboxNavigationButton } from "./LightboxNavigationButton.vue";

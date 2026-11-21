@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PopoverTrigger } from "reka-ui";
 import { popover } from "./popover.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftPopoverTrigger", inheritAttrs: false });
 
@@ -17,10 +18,7 @@ const attrs = useAttrs();
 const triggerClass = computed(() =>
   popover().trigger({ class: attrs.class as string | undefined }),
 );
-const triggerAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const triggerAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

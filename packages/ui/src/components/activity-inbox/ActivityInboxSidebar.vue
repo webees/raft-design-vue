@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import SidebarBody from "../sidebar/SidebarBody.vue";
+import { SidebarBody, SidebarRoot } from "../sidebar/parts";
 import SidebarContent from "../sidebar/SidebarContent.vue";
-import SidebarRoot from "../sidebar/SidebarRoot.vue";
 import { activityInboxSidebar } from "./activity-inbox.recipes";
 
 defineOptions({ name: "RaftActivityInboxSidebar", inheritAttrs: false });
