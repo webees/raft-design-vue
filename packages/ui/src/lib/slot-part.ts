@@ -1,14 +1,7 @@
 import { createSlotComponent } from "./create-slot-component";
-import { defineComponent, h, mergeProps, type Component, type PropType } from "vue";
+import { defineComponent, h, mergeProps, type Component } from "vue";
 
 import { cn } from "./cn";
-
-/** The `as` / `asChild` / `class` trio every Primitive-backed part declares. */
-export const primitivePartProps = {
-  as: { type: String as PropType<string>, default: "span" },
-  asChild: { type: Boolean as PropType<boolean>, default: false },
-  class: { type: String as PropType<string | undefined>, default: undefined },
-} as const;
 
 interface SlotPartOptions {
   name: string;

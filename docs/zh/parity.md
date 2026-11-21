@@ -42,29 +42,31 @@ check:api → check:props → test → build → check:consumer-types`。
 | 测试用例 | 390                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 1904.1 kB 原始，287.0 kB gzip        |
+| 库产物   | 1930.6 kB 原始，293.7 kB gzip        |
 | 文档产物 | 4152.0 kB 总计，1607.3 kB gzip       |
 
 ### 源码基线
 
 `packages/ui/src` 中 `.ts` + `.vue`（不含测试）的规模与重复度下限，2026-11-22 实测：
 
-| 指标                                  | 数值        |
-| ------------------------------------- | ----------- |
-| 源码行数                              | 46,957      |
-| `components/` 行数                    | 42,692      |
-| `lib/` 行数                           | 3,999       |
-| 复制粘贴克隆（jscpd，10 行 / 70 token） | 0          |
-| 复制粘贴克隆（jscpd，6 行 / 40 token）  | 2（仅模板） |
-| 重复行 / 重复 token                   | 0.00% / 0.00% |
-| 未使用变量与参数（`vue-tsc`）          | 0           |
-| 无任何导入方的组件文件                | 0           |
+| 指标                                    | 数值              |
+| --------------------------------------- | ----------------- |
+| 源码行数                                | 46,877            |
+| `components/` 行数                      | 42,693            |
+| `lib/` 行数                             | 4,000             |
+| 复制粘贴克隆（jscpd，10 行 / 70 token） | 0                 |
+| 复制粘贴克隆（jscpd，6 行 / 40 token）  | 2（仅 import）    |
+| 重复行 / token 占比（6 行 / 40 token）  | 0.04% / 0.02%     |
+| 未使用变量与参数（`vue-tsc`）           | 0                 |
+| 无任何导入方的组件文件                  | 0                 |
 
 复测命令：
 
 ```bash
-find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) | xargs wc -l
-bunx jscpd packages/ui/src --min-lines 10 --min-tokens 70 \
+find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) \
+  ! -name '*.test.ts' ! -name '*.generated.ts' ! -name 'auto-imports.d.ts' \
+  ! -path '*/test/*' | xargs wc -l
+bunx jscpd packages/ui/src --min-lines 6 --min-tokens 40 \
   --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
 cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
   -p tsconfig.json --noUnusedLocals --noUnusedParameters
