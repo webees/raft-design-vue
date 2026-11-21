@@ -43,7 +43,7 @@ jobs:
           fi
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2
         with:
           publish: ${{ steps.npm.outputs.command }}
           version: bunx changeset version
