@@ -4,6 +4,14 @@ import type { PropType } from "vue";
 export const asChildProps = (as = "div") =>
   ({ as: { type: String, default: as }, asChild: Boolean }) as const;
 
+/** The caller-class prop the part factories merge into their recipe output. */
+const classProp = {
+  class: { type: String as PropType<string | undefined>, default: undefined },
+} as const;
+
+/** `asChildProps` plus the caller class, for parts built with `h`. */
+export const primitivePartProps = (as = "span") => ({ ...asChildProps(as), ...classProp }) as const;
+
 /** `asChildProps` plus the disabled flag shared by action buttons. */
 export const actionProps = (as = "button") =>
   ({ ...asChildProps(as), disabled: { type: Boolean, default: false } }) as const;

@@ -43,7 +43,7 @@ Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 | Tests       | 390                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 1904.1 kB raw, 287.0 kB gzip         |
+| Library     | 1930.6 kB raw, 293.7 kB gzip         |
 | Docs bundle | 4152.0 kB total, 1607.3 kB gzip      |
 
 ### Source baseline
@@ -51,22 +51,24 @@ Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 Source size and duplication floor for `packages/ui/src` (`.ts` + `.vue`, tests
 excluded), measured on 2026-11-22:
 
-| Metric                                         | Value  |
-| ---------------------------------------------- | ------ |
-| Source lines                                   | 46,957 |
-| `components/` lines                            | 42,692 |
-| `lib/` lines                                   | 3,999  |
-| Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0     |
-| Copy-paste clones (jscpd, 6 lines / 40 tokens)  | 2 (template-only) |
-| Duplicated lines / tokens                      | 0.00% / 0.00% |
-| Unused locals and parameters (`vue-tsc`)       | 0      |
-| Component files with no importer               | 0      |
+| Metric                                          | Value             |
+| ----------------------------------------------- | ----------------- |
+| Source lines                                    | 46,877            |
+| `components/` lines                             | 42,693            |
+| `lib/` lines                                    | 4,000             |
+| Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0                 |
+| Copy-paste clones (jscpd, 6 lines / 40 tokens)  | 2 (imports only)  |
+| Duplicated lines / tokens (6/40)                | 0.04% / 0.02%     |
+| Unused locals and parameters (`vue-tsc`)        | 0                 |
+| Component files with no importer                | 0                 |
 
 Re-measure with:
 
 ```bash
-find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) | xargs wc -l
-bunx jscpd packages/ui/src --min-lines 10 --min-tokens 70 \
+find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) \
+  ! -name '*.test.ts' ! -name '*.generated.ts' ! -name 'auto-imports.d.ts' \
+  ! -path '*/test/*' | xargs wc -l
+bunx jscpd packages/ui/src --min-lines 6 --min-tokens 40 \
   --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
 cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
   -p tsconfig.json --noUnusedLocals --noUnusedParameters

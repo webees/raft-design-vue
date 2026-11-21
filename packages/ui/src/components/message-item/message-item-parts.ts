@@ -11,7 +11,8 @@ import {
 import { Primitive } from "reka-ui";
 
 import { toElement } from "../../lib/dom";
-import { createSlotPart, primitivePartProps, recipePart } from "../../lib/slot-part";
+import { primitivePartProps } from "../../lib/part-props";
+import { createSlotPart, recipePart } from "../../lib/slot-part";
 import { useMessageItemLabelId } from "./message-item-context";
 import { observeTrailing, stampTrailingSlot } from "./message-item-trailing";
 import { messageItem } from "./message-item.recipe";
@@ -175,7 +176,7 @@ export const MessageItemSearchMatch = part(
 export const MessageItemTrailing = defineComponent({
   name: "RaftMessageItemTrailing",
   inheritAttrs: false,
-  props: primitivePartProps,
+  props: primitivePartProps(),
   setup(props, { slots }) {
     const attrs = useAttrs();
     const element = ref<HTMLElement | null>(null);
