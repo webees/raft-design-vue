@@ -80,8 +80,10 @@ check:parity → check:audit → check:docs-links → lint → typecheck
 → check:api → check:props → test → build → check:consumer-types
 ```
 
-CI runs the same chain on Node 22 with Bun, plus coverage. Release workflow
-requires a green verify before publishing.
+CI runs the same chain on Node 22 with Bun, plus coverage. The release
+workflow runs the same chain and only publishes when the `NPM_TOKEN` secret is
+set; without it the run still versions and opens the release PR but skips the
+npm publish and reports a warning instead of failing.
 
 ## TypeScript
 

@@ -32,9 +32,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: bun run verify
+      - name: Check npm token
+        id: npm
+        run: |
+          if [ -n "$NPM_TOKEN" ]; then
+            echo "command=bunx changeset publish" >> "$GITHUB_OUTPUT"
+          else
+            echo "command=" >> "$GITHUB_OUTPUT"
+            echo "::warning::NPM_TOKEN is not configured; this run only opens the version PR and does not publish."
+          fi
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: changesets/action@v1
         with:
-          publish: bunx changeset publish
+          publish: ${{ steps.npm.outputs.command }}
           version: bunx changeset version
           commit: "chore: release"
           title: "chore: release"

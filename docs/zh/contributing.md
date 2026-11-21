@@ -69,7 +69,9 @@ bun run sync:upstream --ref main
 - 用户可见变更添加 Changeset：`bun run changeset`。
 - 每次提交使用 `git commit -s` 签署 DCO 1.1。
 - `main` 受保护：禁止删除、禁止强推、必须走 PR（仓库管理员保留发布绕过）。
-- 发布由 release 工作流在 verify 通过后从 `main` 切出。
+- 发布由 release 工作流在 verify 通过后从 `main` 切出。工作流仅在配置了
+  `NPM_TOKEN` 时执行 npm 发布；未配置时仍会打版本并开 release PR，但跳过
+  发布并以 warning 提示，不再判定为失败。
 
 ## 代码风格
 
