@@ -4,19 +4,31 @@ import { ComboboxContent } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { combobox } from "./combobox.recipe";
 import { ComboboxPortal } from "./ComboboxPortal";
+import { useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 
 defineOptions({ name: "RaftComboboxContent", inheritAttrs: false });
 const props = withDefaults(
-  defineProps<{
-    className?: string;
-    side?: "top" | "right" | "bottom" | "left";
-    align?: "start" | "center" | "end";
-    sideOffset?: number;
-    alignOffset?: number;
-  }>(),
-  { side: "bottom", align: "start", sideOffset: 4, alignOffset: 0 },
+  defineProps<
+    PopupPositionerProps & {
+      className?: string;
+    }
+  >(),
+  {
+    side: "bottom",
+    align: "start",
+    sideOffset: 4,
+    alignOffset: 0,
+    avoidCollisions: true,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
+    container: null,
+  },
 );
 const attrs = useAttrs();
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  defaultPadding: 8,
+});
 const classes = computed(() => cn(combobox().content(), props.className, attrs.class as string));
 const vars = {
   "--available-width": "var(--reka-combobox-content-available-width)",
@@ -26,14 +38,11 @@ const vars = {
 </script>
 
 <template>
-  <ComboboxPortal>
+  <ComboboxPortal :to="container ?? undefined">
     <ComboboxContent
-      v-bind="{ ...attrs, class: undefined }"
+      :ref="setPositioner"
+      v-bind="{ ...attrs, class: undefined, ...bindings }"
       data-slot="combobox-content"
-      :side="side"
-      :align="align"
-      :side-offset="sideOffset"
-      :align-offset="alignOffset"
       :class="classes"
       :style="vars"
     >

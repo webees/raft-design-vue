@@ -2,8 +2,7 @@
 import { PopoverContent, PopoverPortal } from "reka-ui";
 import PopoverArrow from "./PopoverArrow.vue";
 import PopoverPopup from "./PopoverPopup.vue";
-import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
-import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 import { omitAttrs } from "../../lib/attrs";
 import { providePopoverSize } from "./popover-context";
 import { popover, type PopoverSize } from "./popover.variants";
@@ -11,18 +10,13 @@ import { popover, type PopoverSize } from "./popover.variants";
 defineOptions({ name: "RaftPopoverContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    anchor?: Element | null;
-    side?: "top" | "right" | "bottom" | "left";
-    sideOffset?: number;
-    align?: "start" | "center" | "end";
-    alignOffset?: number;
-    avoidCollisions?: boolean;
-    collisionPadding?: number;
-    arrow?: boolean;
-    size?: PopoverSize;
-    forceMount?: boolean;
-  }>(),
+  defineProps<
+    PopupPositionerProps & {
+      arrow?: boolean;
+      size?: PopoverSize;
+      forceMount?: boolean;
+    }
+  >(),
   {
     anchor: null,
     side: "bottom",
@@ -30,7 +24,9 @@ const props = withDefaults(
     align: "start",
     alignOffset: 0,
     avoidCollisions: true,
-    collisionPadding: 8,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    container: null,
     arrow: true,
     size: "default",
     forceMount: undefined,
@@ -38,12 +34,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const insets = computed(() => readFrameInsets());
-const sheetBoundary = useSheetPopupBoundary();
-const collision = computed(() =>
-  frameCollision(props.collisionPadding, sheetBoundary.value, insets.value),
-);
-const collisionBoundary = computed(() => collision.value.collisionBoundary as Element | undefined);
+const { bindings, ref: setPositioner } = useContentCollision(props);
 const positionerClass = computed(() => popover().positioner());
 const positionerAttrs = computed(() => omitAttrs(attrs, "class"));
 
@@ -51,17 +42,11 @@ providePopoverSize(() => props.size);
 </script>
 
 <template>
-  <PopoverPortal :force-mount="forceMount">
+  <PopoverPortal :to="container ?? undefined" :force-mount="forceMount">
     <PopoverContent
-      v-bind="positionerAttrs"
+      :ref="setPositioner"
+      v-bind="{ ...positionerAttrs, ...bindings }"
       :reference="anchor ?? undefined"
-      :side="side"
-      :side-offset="sideOffset"
-      :align="align"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
-      :collision-padding="collision.collisionPadding"
-      :collision-boundary="collisionBoundary"
       :force-mount="forceMount"
       data-slot="popover-positioner"
       :class="positionerClass"

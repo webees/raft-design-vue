@@ -230,44 +230,37 @@ export const MessageReactionChip = defineComponent({
   },
 });
 
-export const MessageReactionAddButton = defineComponent({
-  name: "RaftMessageReactionAddButton",
-  inheritAttrs: false,
-  props: {
-    class: { type: String, default: undefined },
-  },
-  setup(props, { attrs, slots }) {
-    return () =>
-      h(
-        "button",
-        {
-          ...attrs,
-          type: "button",
-          "data-slot": "message-reaction-add-button",
-          class: messageReaction().addButton({ className: props.class }),
-        },
-        slots.default?.(),
-      );
-  },
-});
+function reactionButton(name: string, dataSlot: string, slot: "addButton" | "quickButton") {
+  return defineComponent({
+    name,
+    inheritAttrs: false,
+    props: {
+      class: { type: String, default: undefined },
+    },
+    setup(props, { attrs, slots }) {
+      return () =>
+        h(
+          "button",
+          {
+            ...attrs,
+            type: "button",
+            "data-slot": dataSlot,
+            class: messageReaction()[slot]({ className: props.class }),
+          },
+          slots.default?.(),
+        );
+    },
+  });
+}
 
-export const MessageReactionQuickButton = defineComponent({
-  name: "RaftMessageReactionQuickButton",
-  inheritAttrs: false,
-  props: {
-    class: { type: String, default: undefined },
-  },
-  setup(props, { attrs, slots }) {
-    return () =>
-      h(
-        "button",
-        {
-          ...attrs,
-          type: "button",
-          "data-slot": "message-reaction-quick-button",
-          class: messageReaction().quickButton({ className: props.class }),
-        },
-        slots.default?.(),
-      );
-  },
-});
+export const MessageReactionAddButton = reactionButton(
+  "RaftMessageReactionAddButton",
+  "message-reaction-add-button",
+  "addButton",
+);
+
+export const MessageReactionQuickButton = reactionButton(
+  "RaftMessageReactionQuickButton",
+  "message-reaction-quick-button",
+  "quickButton",
+);

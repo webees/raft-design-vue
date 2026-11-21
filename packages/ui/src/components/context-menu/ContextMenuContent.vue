@@ -2,33 +2,42 @@
 import { ContextMenuContent, ContextMenuPortal } from "reka-ui";
 
 import { contextMenu } from "./context-menu.variants";
-import { useFrameCollisionPadding } from "../../lib/frame-insets";
-import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftContextMenuContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    alignOffset?: number;
-    avoidCollisions?: boolean;
-    collisionPadding?: number;
-    forceMount?: boolean;
-    loop?: boolean;
-  }>(),
+  defineProps<
+    Pick<
+      PopupPositionerProps,
+      | "alignOffset"
+      | "avoidCollisions"
+      | "collisionPadding"
+      | "collisionBoundary"
+      | "anchor"
+      | "container"
+    > & {
+      forceMount?: boolean;
+      loop?: boolean;
+    }
+  >(),
   {
     alignOffset: 0,
     avoidCollisions: true,
-    collisionPadding: 8,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
+    container: null,
     forceMount: undefined,
     loop: false,
   },
 );
 
 const attrs = useAttrs();
-const collision = useFrameCollisionPadding(() => props.collisionPadding);
-const sheetBoundary = useSheetPopupBoundary();
-const collisionBoundary = computed(() => sheetBoundary.value as unknown as Element | undefined);
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  defaultPadding: 8,
+});
 const positionerClass = computed(() => contextMenu().positioner());
 const contentClass = computed(() =>
   contextMenu().content({ class: attrs.class as string | undefined }),
@@ -37,13 +46,10 @@ const contentAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>
-  <ContextMenuPortal :force-mount="forceMount">
+  <ContextMenuPortal :to="container ?? undefined" :force-mount="forceMount">
     <ContextMenuContent
-      v-bind="contentAttrs"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
-      :collision-padding="collision"
-      :collision-boundary="collisionBoundary"
+      :ref="setPositioner"
+      v-bind="{ ...contentAttrs, ...bindings }"
       :loop="loop"
       :force-mount="forceMount"
       :class="positionerClass"

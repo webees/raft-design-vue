@@ -3,8 +3,6 @@ import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import { cn } from "../../lib/cn";
 import { omitAttrs } from "../../lib/attrs";
-import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
-import { useSheetPopupBoundary } from "../../lib/popup-boundary";
 import { popover } from "../popover/popover.variants";
 import { PopoverArrow } from "../popover";
 import { useCoachMarkContext } from "./coach-mark-context";
@@ -26,12 +24,6 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const { anchor, popupRef, dismiss } = useCoachMarkContext("Content");
-const insets = computed(() => readFrameInsets());
-const sheetBoundary = useSheetPopupBoundary();
-const collision = computed(() =>
-  frameCollision(props.collisionPadding, sheetBoundary.value, insets.value),
-);
-const collisionBoundary = computed(() => collision.value.collisionBoundary as Element | undefined);
 const classes = computed(() =>
   cn(
     popover().content(),
@@ -68,8 +60,7 @@ function onEscapeKeyDown(event: KeyboardEvent) {
       :side-offset="sideOffset"
       :align="align"
       :align-offset="alignOffset"
-      :collision-padding="collision.collisionPadding"
-      :collision-boundary="collisionBoundary"
+      :collision-padding="collisionPadding"
       :class="popover().positioner()"
       @open-auto-focus.prevent
       @close-auto-focus.prevent

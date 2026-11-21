@@ -2,25 +2,20 @@
 import { SelectContent } from "reka-ui";
 import { SelectPortal } from "./SelectPortal";
 import { select } from "./select.variants";
-import { useFrameCollisionPadding } from "../../lib/frame-insets";
-import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 
 defineOptions({ name: "RaftSelectContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    position?: "item-aligned" | "popper";
-    side?: "top" | "right" | "bottom" | "left";
-    sideOffset?: number;
-    align?: "start" | "center" | "end";
-    alignOffset?: number;
-    avoidCollisions?: boolean;
-    collisionPadding?: number;
-    prioritizePosition?: boolean;
-    asChild?: boolean;
-    forceMount?: boolean;
-    to?: string | HTMLElement;
-  }>(),
+  defineProps<
+    Omit<PopupPositionerProps, "container"> & {
+      position?: "item-aligned" | "popper";
+      prioritizePosition?: boolean;
+      asChild?: boolean;
+      forceMount?: boolean;
+      to?: string | HTMLElement;
+    }
+  >(),
   {
     position: "popper",
     side: "bottom",
@@ -28,7 +23,9 @@ const props = withDefaults(
     align: "start",
     alignOffset: 0,
     avoidCollisions: true,
-    collisionPadding: 8,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
     prioritizePosition: false,
     asChild: false,
     forceMount: false,
@@ -37,25 +34,20 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const collision = useFrameCollisionPadding(() => props.collisionPadding);
-const sheetBoundary = useSheetPopupBoundary();
-const collisionBoundary = computed(() => sheetBoundary.value as unknown as Element | undefined);
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  container: () => props.to,
+  defaultPadding: 8,
+});
 const contentClass = computed(() => select().content({ className: attrs.class as string }));
 </script>
 
 <template>
   <SelectPortal :to="to">
     <SelectContent
-      v-bind="{ ...attrs, class: undefined }"
+      :ref="setPositioner"
+      v-bind="{ ...attrs, class: undefined, ...bindings }"
       :class="contentClass"
       :position="position"
-      :side="side"
-      :side-offset="sideOffset"
-      :align="align"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
-      :collision-padding="collision"
-      :collision-boundary="collisionBoundary"
       :prioritize-position="prioritizePosition"
       :as-child="asChild"
       :force-mount="forceMount"
