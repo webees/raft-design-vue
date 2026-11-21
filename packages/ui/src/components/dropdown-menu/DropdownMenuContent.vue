@@ -1,42 +1,41 @@
 <script setup lang="ts">
 import { DropdownMenuContent, DropdownMenuPortal } from "reka-ui";
 import { useDropdownContent } from "./use-dropdown-content";
+import { useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 
 defineOptions({ name: "RaftDropdownMenuContent", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{
-    side?: "top" | "right" | "bottom" | "left";
-    sideOffset?: number;
-    align?: "start" | "center" | "end";
-    alignOffset?: number;
-    avoidCollisions?: boolean;
-    loop?: boolean;
-    forceMount?: boolean;
-  }>(),
+const props = withDefaults(
+  defineProps<
+    PopupPositionerProps & {
+      loop?: boolean;
+      forceMount?: boolean;
+    }
+  >(),
   {
     side: "bottom",
     sideOffset: 4,
     align: "start",
     alignOffset: 0,
     avoidCollisions: true,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
+    container: null,
     loop: false,
     forceMount: undefined,
   },
 );
 
 const { positionerClass, contentClass, contentAttrs, vars } = useDropdownContent();
+const { bindings, ref: setPositioner } = useContentCollision(props);
 </script>
 
 <template>
-  <DropdownMenuPortal :force-mount="forceMount">
+  <DropdownMenuPortal :to="container ?? undefined" :force-mount="forceMount">
     <DropdownMenuContent
-      v-bind="contentAttrs"
-      :side="side"
-      :side-offset="sideOffset"
-      :align="align"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
+      :ref="setPositioner"
+      v-bind="{ ...contentAttrs, ...bindings }"
       :loop="loop"
       :force-mount="forceMount"
       :class="positionerClass"

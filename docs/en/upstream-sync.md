@@ -71,7 +71,9 @@ intentional differences from drift.
 - `ComboboxList` renders inside a scroll-area frame with absolute gutters;
   `ComboboxContent` aliases Reka's `--reka-combobox-content-*` variables.
 - Frame popups use the same computed rect boundary as upstream. floating-ui
-  accepts a rect at runtime; Reka's prop type only names elements.
+  accepts a rect at runtime; Reka's prop type only names elements, so the
+  public `collisionBoundary` prop stays `Element | Element[]` and the internal
+  frame rect is passed through unchanged.
 - Dialogs and alert dialogs reset the sheet scope for their own children, so a
   dialog opened inside a sheet renders as a plain dialog, matching upstream's
   `DialogSheetReset`.

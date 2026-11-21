@@ -1,28 +1,32 @@
 <script setup lang="ts">
+import type { ComponentPublicInstance } from "vue";
 import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { mobileNavServer } from "./mobile-nav-server.recipe";
 import { useMobileNavServer } from "./mobile-nav-server-context";
+import { elementOf, useContentCollision, type PopupPositionerProps } from "../../lib/frame-insets";
 
 defineOptions({ name: "RaftMobileNavServerPopoverContent", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    anchor?: HTMLElement;
-    side?: "top" | "right" | "bottom" | "left";
-    align?: "start" | "center" | "end";
-    sideOffset?: number;
-    collisionPadding?: number;
-    keepOneRow?: boolean;
-    initialFocus?: (openType: "touch" | "keyboard" | "mouse") => HTMLElement | true | false;
-    class?: string;
-  }>(),
+  defineProps<
+    Pick<
+      PopupPositionerProps,
+      "side" | "align" | "sideOffset" | "collisionPadding" | "collisionBoundary"
+    > & {
+      anchor?: HTMLElement;
+      keepOneRow?: boolean;
+      initialFocus?: (openType: "touch" | "keyboard" | "mouse") => HTMLElement | true | false;
+      class?: string;
+    }
+  >(),
   {
     side: "top",
     align: "center",
     sideOffset: 8,
-    collisionPadding: 8,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
     keepOneRow: true,
   },
 );
@@ -37,6 +41,16 @@ const emit = defineEmits<{
 const attrs = useAttrs();
 const context = useMobileNavServer();
 const contentRef = ref<HTMLElement | null>(null);
+const portalTarget = computed(() => attrs.to as string | HTMLElement | undefined);
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  container: () => portalTarget.value,
+  defaultPadding: 8,
+  anchor: () => tabBarAnchor.value,
+});
+const setContentRef = (value: Element | ComponentPublicInstance | null) => {
+  setPositioner(value);
+  contentRef.value = elementOf(value) as HTMLElement | null;
+};
 
 const tabBarAnchor = computed<HTMLElement | undefined>(() => {
   if (props.anchor) return props.anchor;
@@ -50,7 +64,6 @@ const contentClass = computed(() =>
   mobileNavServer().content({ class: [props.class, attrs.class as string | undefined] }),
 );
 const scrollClass = computed(() => mobileNavServer().scroll());
-const portalTarget = computed(() => attrs.to as string | HTMLElement | undefined);
 
 const LIST_SLOT = "mobile-nav-server-popover-list";
 const GUTTERS_SLOT = "scroll-area-gutters";
@@ -140,13 +153,9 @@ function handleOpenAutoFocus(event: Event) {
 <template>
   <PopoverPortal :to="portalTarget">
     <PopoverContent
-      ref="contentRef"
-      v-bind="{ ...attrs, class: undefined, to: undefined }"
+      :ref="setContentRef"
+      v-bind="{ ...attrs, class: undefined, to: undefined, ...bindings }"
       :reference="tabBarAnchor"
-      :side="props.side"
-      :align="props.align"
-      :side-offset="props.sideOffset"
-      :collision-padding="props.collisionPadding"
       data-slot="mobile-nav-server-popover-content"
       :class="contentClass"
       @escape-key-down="emit('escapeKeyDown', $event)"

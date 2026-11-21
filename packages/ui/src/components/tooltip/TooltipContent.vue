@@ -5,25 +5,31 @@ import { TooltipContent, TooltipPortal } from "reka-ui";
 import TooltipArrow from "./TooltipArrow.vue";
 import { tooltip } from "./tooltip.variants";
 import { omitAttrs } from "../../lib/attrs";
+import {
+  BASE_COLLISION_PADDING,
+  useContentCollision,
+  type PopupPositionerProps,
+} from "../../lib/frame-insets";
 
 defineOptions({ name: "RaftTooltipContent", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{
-    side?: "top" | "right" | "bottom" | "left";
-    sideOffset?: number;
-    align?: "start" | "center" | "end";
-    alignOffset?: number;
-    avoidCollisions?: boolean;
-    arrow?: boolean;
-    forceMount?: boolean;
-  }>(),
+const props = withDefaults(
+  defineProps<
+    PopupPositionerProps & {
+      arrow?: boolean;
+      forceMount?: boolean;
+    }
+  >(),
   {
     side: "top",
     sideOffset: 8,
     align: "center",
     alignOffset: 0,
     avoidCollisions: true,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
+    container: null,
     arrow: true,
     forceMount: undefined,
   },
@@ -31,6 +37,11 @@ withDefaults(
 
 const attrs = useAttrs();
 const slots = useSlots();
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  padding: () => undefined,
+  defaultPadding: () => props.collisionPadding ?? BASE_COLLISION_PADDING,
+  gap: 0,
+});
 
 const RenderedNodes = defineComponent({
   name: "RaftRenderedNodes",
@@ -93,14 +104,10 @@ const contentAttrs = computed(() => omitAttrs(attrs, "class", "bodyClass"));
 </script>
 
 <template>
-  <TooltipPortal>
+  <TooltipPortal :to="container ?? undefined">
     <TooltipContent
-      v-bind="contentAttrs"
-      :side="side"
-      :side-offset="sideOffset"
-      :align="align"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
+      :ref="setPositioner"
+      v-bind="{ ...contentAttrs, ...bindings }"
       :force-mount="forceMount"
       data-slot="tooltip-content"
       :class="contentClass"

@@ -68,7 +68,8 @@ bun run check:audit      # 对照快照审计 recipe、类名与 props
 - `ComboboxList` 渲染在带绝对沟槽的 scroll-area 框架内；
   `ComboboxContent` 将 Reka 的 `--reka-combobox-content-*` 变量做别名。
 - 框架弹层使用与上游相同的计算矩形边界；floating-ui 运行时接受 rect，
-  Reka 的 prop 类型只声明元素。
+  Reka 的 prop 类型只声明元素，因此公开的 `collisionBoundary` 仍为
+  `Element | Element[]`，内部矩形边界原样透传。
 - Dialog 与 AlertDialog 会为自己的子节点重置 sheet 作用域，使 sheet 内打开
   的对话框按普通对话框渲染，对应上游 `DialogSheetReset`。
 

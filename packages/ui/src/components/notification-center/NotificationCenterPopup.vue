@@ -2,26 +2,25 @@
 import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import { notificationCenter } from "./notification-center.recipe";
-import { useFrameCollisionPadding } from "../../lib/frame-insets";
-import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import {
+  BASE_COLLISION_PADDING,
+  useContentCollision,
+  type PopupPositionerProps,
+} from "../../lib/frame-insets";
 import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftNotificationCenterPopup", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    size?: "sm" | "md" | "lg";
-    viewport?: "desktop" | "mobile";
-    align?: "start" | "center" | "end";
-    side?: "top" | "right" | "bottom" | "left";
-    sideOffset?: number;
-    alignOffset?: number;
-    collisionPadding?: number;
-    avoidCollisions?: boolean;
-    initialFocus?: boolean;
-    class?: string;
-    portalTo?: string | HTMLElement;
-  }>(),
+  defineProps<
+    Omit<PopupPositionerProps, "container"> & {
+      size?: "sm" | "md" | "lg";
+      viewport?: "desktop" | "mobile";
+      initialFocus?: boolean;
+      class?: string;
+      portalTo?: string | HTMLElement;
+    }
+  >(),
   {
     size: "md",
     viewport: "desktop",
@@ -29,16 +28,20 @@ const props = withDefaults(
     side: "bottom",
     sideOffset: 4,
     alignOffset: 0,
-    collisionPadding: 8,
+    collisionPadding: undefined,
+    collisionBoundary: undefined,
+    anchor: undefined,
     avoidCollisions: true,
     initialFocus: false,
   },
 );
 
 const attrs = useAttrs();
-const collision = useFrameCollisionPadding(() => props.collisionPadding);
-const sheetBoundary = useSheetPopupBoundary();
-const collisionBoundary = computed(() => sheetBoundary.value as unknown as Element | undefined);
+const PHONE_INSET = 8;
+const { bindings, ref: setPositioner } = useContentCollision(props, {
+  container: () => props.portalTo,
+  defaultPadding: () => (props.viewport === "mobile" ? PHONE_INSET : BASE_COLLISION_PADDING),
+});
 const popupClass = computed(() =>
   notificationCenter({ size: props.size, viewport: props.viewport }).popup({
     class: props.class,
@@ -56,15 +59,9 @@ const onOpenAutoFocus = (event: Event) => {
 <template>
   <PopoverPortal :to="portalTo" data-raft-ui-overlay="">
     <PopoverContent
-      v-bind="positionerAttrs"
+      :ref="setPositioner"
+      v-bind="{ ...positionerAttrs, ...bindings }"
       @open-auto-focus="onOpenAutoFocus"
-      :side="side"
-      :side-offset="sideOffset"
-      :align="align"
-      :align-offset="alignOffset"
-      :avoid-collisions="avoidCollisions"
-      :collision-padding="collision"
-      :collision-boundary="collisionBoundary"
       class="isolate z-popup outline-none"
     >
       <div
