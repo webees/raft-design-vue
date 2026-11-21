@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useDrawerConfig, useDrawerRecipe } from "./drawer-context";
+import { useDrawerPart } from "./drawer-context";
 
 defineOptions({ name: "RaftDrawerActions", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
-const attrs = useAttrs();
-const config = useDrawerConfig();
-const variants = useDrawerRecipe();
+const { attrs, config, recipe: variants } = useDrawerPart();
 const classes = computed(() => variants.value.actions({ class: props.class }));
 </script>
 

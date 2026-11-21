@@ -3,7 +3,7 @@ import type { ComponentPublicInstance } from "vue";
 import { cn } from "../../lib/cn";
 import DialogBodyScrollArea from "./DialogBodyScrollArea.vue";
 import { dialog } from "./dialog.variants";
-import { dialogSheet, useDialogSheet } from "./dialog-sheet-context";
+import { dialogSheet, useInDialogSheet } from "./dialog-sheet-context";
 import { useDialogContext } from "./dialog-context";
 
 defineOptions({ name: "RaftDialogBody", inheritAttrs: false });
@@ -22,8 +22,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const ctx = useDialogContext();
-const sheet = useDialogSheet();
-const inSheet = computed(() => !!sheet?.sheet.value);
+const { sheet, inSheet } = useInDialogSheet();
 const scrollMode = computed(() => props.unstableScrollArea && !ctx.bar());
 const contentClass = computed(() => attrs.class as string | undefined);
 const bodyEndSlot = sheet?.bodyEndSlot ?? ref<HTMLElement | null>(null);

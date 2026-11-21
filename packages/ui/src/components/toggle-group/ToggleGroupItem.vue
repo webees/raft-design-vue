@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import { ToggleGroupItem } from "reka-ui";
+import type { ItemProps } from "../../lib/item-props";
 import { useTapActivation } from "../../lib/tap-activation";
 import { toggleGroup } from "./toggle-group.variants";
 
 defineOptions({ name: "RaftToggleGroupItem", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{
-    value: string | number;
-    disabled?: boolean;
-    as?: string;
-    asChild?: boolean;
-  }>(),
-  { disabled: false, asChild: false },
-);
+withDefaults(defineProps<ItemProps>(), { disabled: false, asChild: false });
 
 const attrs = useAttrs();
 const tapRef = useTapActivation();

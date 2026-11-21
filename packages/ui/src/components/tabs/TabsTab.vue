@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TabsTrigger, injectTabsRootContext } from "reka-ui";
+import type { ItemProps } from "../../lib/item-props";
 import { useTapActivation } from "../../lib/tap-activation";
 import { tabs } from "./tabs.variants";
 import { useTabsUi } from "./tabs-context";
@@ -8,14 +9,12 @@ import DropPlaceholder from "../drag/DropPlaceholder.vue";
 defineOptions({ name: "RaftTabsTab", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    value: string | number;
-    disabled?: boolean;
-    as?: string;
-    asChild?: boolean;
-    /** Draw the dashed place instead of the content, while the tab is lifted. */
-    dropPlace?: boolean;
-  }>(),
+  defineProps<
+    ItemProps & {
+      /** Draw the dashed place instead of the content, while the tab is lifted. */
+      dropPlace?: boolean;
+    }
+  >(),
   { disabled: false, asChild: false, dropPlace: false },
 );
 

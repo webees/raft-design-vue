@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { PopoverRoot } from "reka-ui";
+import type { DisclosureProps } from "../../lib/disclosure-props";
 
 defineOptions({ name: "RaftPopover", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{
-    defaultOpen?: boolean;
-    open?: boolean;
-    modal?: boolean;
-  }>(),
-  {
-    defaultOpen: undefined,
-    open: undefined,
-    modal: false,
-  },
-);
+withDefaults(defineProps<DisclosureProps & { modal?: boolean }>(), {
+  defaultOpen: undefined,
+  open: undefined,
+  modal: false,
+});
 
 const emit = defineEmits<{
   "update:open": [value: boolean];

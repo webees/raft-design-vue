@@ -4,7 +4,7 @@ import { useHoldsFocusable } from "../../lib/use-holds-focusable";
 import ScrollAreaGutters from "../scroll-area/ScrollAreaGutters.vue";
 import { useScrollAreaContainer } from "../scroll-area/use-scroll-area-container";
 import { dialog } from "./dialog.variants";
-import { dialogSheet, useDialogSheet } from "./dialog-sheet-context";
+import { dialogSheet, useInDialogSheet } from "./dialog-sheet-context";
 
 defineOptions({ name: "RaftDialogBodyScrollArea", inheritAttrs: false });
 
@@ -14,8 +14,7 @@ const props = defineProps<{
 }>();
 
 const attrs = useAttrs();
-const sheet = useDialogSheet();
-const inSheet = computed(() => !!sheet?.sheet.value);
+const { sheet, inSheet } = useInDialogSheet();
 
 const area = useScrollAreaContainer({
   guttersPosition: "absolute",

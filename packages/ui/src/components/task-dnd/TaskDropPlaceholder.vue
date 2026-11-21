@@ -3,7 +3,7 @@ import type { CSSProperties } from "vue";
 
 import { cn } from "../../lib/cn";
 import { drag } from "../drag/drag.recipe";
-import { useTaskDnd, type TaskDropState } from "./task-dnd-context";
+import { useTaskDnd, useTaskDropState } from "./task-dnd-context";
 import { taskDnd } from "./task-dnd.recipe";
 
 defineOptions({ name: "RaftTaskDropPlaceholder", inheritAttrs: false });
@@ -18,15 +18,7 @@ const props = defineProps<{
 const attrs = useAttrs();
 const context = useTaskDnd();
 
-const dropState = computed<TaskDropState>(() => {
-  if (!context || context.activeId() == null) return "idle";
-  const over = context.over();
-  if (over.overId !== props.id) return "idle";
-  if (props.placement && over.overPlacement !== props.placement) return "idle";
-  return context.isDropAllowed(context.activeId()!, props.id, over.overData)
-    ? "allowed"
-    : "blocked";
-});
+const dropState = useTaskDropState(() => props.id, { placement: () => props.placement });
 
 const classes = computed(() =>
   drag().placeholder({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cn } from "../../lib/cn";
-import { useTaskDnd, type TaskDropData, type TaskDropState } from "./task-dnd-context";
+import { useTaskDnd, useTaskDropState, type TaskDropData } from "./task-dnd-context";
 
 defineOptions({ name: "RaftTaskDropZone", inheritAttrs: false });
 
@@ -20,12 +20,7 @@ const attrs = useAttrs();
 const context = useTaskDnd();
 const root = ref<HTMLElement | null>(null);
 
-const dropState = computed<TaskDropState>(() => {
-  if (!context || context.activeId() == null) return "idle";
-  const over = context.over();
-  if (over.overId !== props.id) return "idle";
-  return context.isDropAllowed(context.activeId()!, props.id, props.data) ? "allowed" : "blocked";
-});
+const dropState = useTaskDropState(() => props.id, { data: () => props.data });
 
 const classes = computed(() => cn(attrs.class as string | undefined, props.class));
 

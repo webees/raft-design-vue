@@ -1,24 +1,11 @@
 <script setup lang="ts">
 import Status from "../status/Status.vue";
+import type { StatusStyleProps } from "../../lib/status-props";
 import { sidebarSectionRecipe } from "./sidebar-section.recipe";
 
 defineOptions({ name: "RaftSidebarSectionAttention", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    size?: "xs" | "sm" | "md" | "lg";
-    variant?:
-      | "default"
-      | "primary"
-      | "information"
-      | "muted"
-      | "accent"
-      | "success"
-      | "warning"
-      | "danger";
-  }>(),
-  { size: "md", variant: "accent" },
-);
+const props = withDefaults(defineProps<StatusStyleProps>(), { size: "md", variant: "accent" });
 
 const attrs = useAttrs();
 const rootClass = computed(() => sidebarSectionRecipe().sidebarSectionAttention());

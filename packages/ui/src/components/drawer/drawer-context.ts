@@ -1,4 +1,4 @@
-import { computed, inject, provide, type InjectionKey } from "vue";
+import { computed, inject, provide, useAttrs, type InjectionKey } from "vue";
 
 import { drawer } from "./drawer.recipe";
 
@@ -38,4 +38,9 @@ export function useDrawerRecipe() {
       nested: config.nested,
     }),
   );
+}
+
+/** The attrs/config/recipe triple every drawer sub-part needs. */
+export function useDrawerPart() {
+  return { attrs: useAttrs(), config: useDrawerConfig(), recipe: useDrawerRecipe() };
 }

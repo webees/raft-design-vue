@@ -2,21 +2,15 @@
 import { DropdownMenuRadioItem } from "reka-ui";
 import DropdownMenuItemIndicator from "./DropdownMenuItemIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import type { MenuItemProps } from "./menu-item-props";
 import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuRadioItem", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    value: string;
-    disabled?: boolean;
-    textValue?: string;
-  }>(),
-  {
-    disabled: false,
-    textValue: undefined,
-  },
-);
+const props = withDefaults(defineProps<{ value: string } & MenuItemProps>(), {
+  disabled: false,
+  textValue: undefined,
+});
 
 const attrs = useAttrs();
 const itemClass = computed(() =>

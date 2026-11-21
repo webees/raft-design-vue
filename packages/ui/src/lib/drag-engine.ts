@@ -47,7 +47,16 @@ export interface DragSession {
 
 export type DragEndReason = "drop" | "cancel";
 
-export interface DragEngineOptions {
+/** The lifecycle callbacks every drag host accepts. */
+export interface DragLifecycleProps {
+  onDragCancel?: (session: DragSession) => void;
+  onDragEnd?: (session: DragSession, reason: DragEndReason) => void;
+  onDragMove?: (session: DragSession) => void;
+  onDragOver?: (session: DragSession) => void;
+  onDragStart?: (session: DragSession) => void;
+}
+
+export interface DragEngineOptions extends DragLifecycleProps {
   /** Sensor thresholds; `useDragSensors` builds these from the same tokens. */
   activation?: {
     mouseDistance?: number;
@@ -57,11 +66,6 @@ export interface DragEngineOptions {
   };
   canDrop?: (active: DragData, over: DragData) => boolean;
   disabled?: () => boolean;
-  onDragCancel?: (session: DragSession) => void;
-  onDragEnd?: (session: DragSession, reason: DragEndReason) => void;
-  onDragMove?: (session: DragSession) => void;
-  onDragOver?: (session: DragSession) => void;
-  onDragStart?: (session: DragSession) => void;
 }
 
 function pointOf(event: PointerEvent): DragPoint {

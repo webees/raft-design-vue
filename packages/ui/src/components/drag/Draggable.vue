@@ -4,19 +4,15 @@ import { Primitive } from "reka-ui";
 import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
 import { useDragElement } from "./drag-context";
+import type { DragElementProps } from "./drag-element-props";
 
 defineOptions({ name: "RaftDraggable", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    as?: string;
-    class?: string;
-    data?: Record<string, unknown>;
-    disabled?: boolean;
-    id: string | number;
-  }>(),
-  { as: "div", disabled: false, data: () => ({}) },
-);
+const props = withDefaults(defineProps<DragElementProps>(), {
+  as: "div",
+  disabled: false,
+  data: () => ({}),
+});
 
 const attrs = useAttrs();
 const { engine, root, setRoot } = useDragElement((engine, element) =>

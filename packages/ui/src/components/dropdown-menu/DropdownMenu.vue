@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { DropdownMenuRoot } from "reka-ui";
+import type { DisclosureProps } from "../../lib/disclosure-props";
 
 defineOptions({ name: "RaftDropdownMenu", inheritAttrs: false });
 
-withDefaults(
-  defineProps<{
-    defaultOpen?: boolean;
-    open?: boolean;
-    modal?: boolean;
-  }>(),
-  {
-    defaultOpen: undefined,
-    open: undefined,
-    modal: true,
-  },
-);
+withDefaults(defineProps<DisclosureProps & { modal?: boolean }>(), {
+  defaultOpen: undefined,
+  open: undefined,
+  modal: true,
+});
 
 const emit = defineEmits<{
   "update:open": [value: boolean];

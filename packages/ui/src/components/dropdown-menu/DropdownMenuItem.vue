@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { DropdownMenuItem } from "reka-ui";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import type { MenuItemProps } from "./menu-item-props";
 import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuItem", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    disabled?: boolean;
-    textValue?: string;
-  }>(),
-  {
-    disabled: false,
-    textValue: undefined,
-  },
-);
+const props = withDefaults(defineProps<MenuItemProps>(), {
+  disabled: false,
+  textValue: undefined,
+});
 
 const attrs = useAttrs();
 const itemClass = computed(() => dropdownMenu().item({ class: attrs.class as string | undefined }));

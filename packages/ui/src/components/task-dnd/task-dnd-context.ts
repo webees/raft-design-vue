@@ -1,6 +1,6 @@
 import { inject, provide, type InjectionKey } from "vue";
 
-import type { DragEngine, DragId, DragSession } from "../../lib/drag-engine";
+import type { DragEngine, DragId, DragLifecycleProps } from "../../lib/drag-engine";
 import type { DragAnnouncementSource, DragMessages } from "../drag/drag-announcements";
 
 export type TaskDropState = "idle" | "allowed" | "blocked";
@@ -34,17 +34,12 @@ export interface TaskDndContextValue {
   };
 }
 
-export type TaskDndProviderProps = {
+export type TaskDndProviderProps = DragLifecycleProps & {
   accessibility?: unknown;
   describe?: DragAnnouncementSource;
   disabled?: boolean;
   isDropAllowed?: (activeId: DragId, overId: DragId, overData: TaskDropData | undefined) => boolean;
   messages?: Partial<DragMessages>;
-  onDragCancel?: (session: DragSession) => void;
-  onDragEnd?: (session: DragSession, reason: "drop" | "cancel") => void;
-  onDragMove?: (session: DragSession) => void;
-  onDragOver?: (session: DragSession) => void;
-  onDragStart?: (session: DragSession) => void;
   onMove?: (details: TaskMoveDetails) => void | Promise<void>;
   onMoveError?: (error: unknown, details: TaskMoveDetails) => void;
 };
@@ -57,6 +52,34 @@ export function provideTaskDnd(context: TaskDndContextValue) {
 
 export function useTaskDnd(): TaskDndContextValue | null {
   return inject(TASK_DND_KEY, null);
+}
+
+/**
+ * Resolves the `allowed` / `blocked` / `idle` state a drop target shows.
+ * `placement` narrows the match to one edge; `data` overrides the payload
+ * handed to `isDropAllowed` when the target owns its own drop data.
+ */
+export function useTaskDropState(
+  id: () => string | number,
+  {
+    placement,
+    data,
+  }: {
+    placement?: () => TaskDropPlacement | undefined;
+    data?: () => TaskDropData | undefined;
+  } = {},
+) {
+  const context = useTaskDnd();
+  return computed<TaskDropState>(() => {
+    const active = context?.activeId();
+    const over = context?.over();
+    if (!context || active == null || over?.overId !== id()) return "idle";
+    const edge = placement?.();
+    if (edge && over.overPlacement !== edge) return "idle";
+    return context.isDropAllowed(active, id(), data ? data() : over.overData)
+      ? "allowed"
+      : "blocked";
+  });
 }
 
 export function allowTaskDrop() {
