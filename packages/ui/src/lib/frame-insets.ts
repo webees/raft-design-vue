@@ -69,7 +69,7 @@ export const NO_FRAME_INSETS: Readonly<FrameInsets> = Object.freeze({
 export const BASE_COLLISION_PADDING = 5;
 
 /** The room a popover, a menu or a toast keeps from an inset. */
-export const POPUP_FRAME_GAP = 8;
+const POPUP_FRAME_GAP = 8;
 
 const PX_LENGTH = /^-?(\d+\.?\d*|\.\d+)px$/;
 
@@ -168,14 +168,6 @@ export function readFrameInsets(container?: FrameInsetsContainer): FrameInsets {
 }
 
 /**
- * The frame insets, read when the calling component mounts. Call it from a
- * part inside the popup's portal, which mounts each time the popup opens.
- */
-export function useFrameInsets(container?: FrameInsetsContainer): FrameInsets {
-  return readFrameInsets(container);
-}
-
-/**
  * The collision padding with the insets added: on each side with an inset, at
  * least the inset plus `gap`; elsewhere `padding` as it is. With no inset the
  * padding comes back unchanged, so nothing moves on the web.
@@ -218,7 +210,7 @@ function portalsToBody(container: FrameInsetsContainer): boolean {
  * copies them), so it follows the window when it resizes while the popup is
  * open, and WebKit's visual viewport when it pans.
  */
-export function frameCollisionBoundary(insets: FrameInsets): CollisionBoundary {
+function frameCollisionBoundary(insets: FrameInsets): CollisionBoundary {
   const root = () => document.documentElement;
   return {
     get x() {
@@ -311,18 +303,6 @@ export interface PopupPositionerProps {
   anchor?: Element | null;
 }
 
-/** The placement half of {@link PopupPositionerProps}. */
-export type PopupPlacementProps = Pick<
-  PopupPositionerProps,
-  "side" | "sideOffset" | "align" | "alignOffset" | "avoidCollisions"
->;
-
-/** The collision half of {@link PopupPositionerProps}. */
-export type PopupCollisionProps = Pick<
-  PopupPositionerProps,
-  "collisionPadding" | "collisionBoundary" | "container" | "anchor"
->;
-
 /** Reads the element a template ref points at, whether it is an element or a component. */
 export function elementOf(value: Element | ComponentPublicInstance | null): Element | null {
   if (value instanceof Element) return value;
@@ -338,7 +318,7 @@ export function usePopupCollision(
   gap: number = POPUP_FRAME_GAP,
   anchor?: MaybeRefOrGetter<PopupAnchor | undefined>,
 ): PopupCollision {
-  const insets = useFrameInsets(toValue(container));
+  const insets = readFrameInsets(toValue(container));
   const sheet = usePopupSheet();
   const positioner = ref<Element | null>(null);
   const setPositioner = (value: Element | ComponentPublicInstance | null) => {
@@ -374,7 +354,11 @@ export function usePopupCollision(
 }
 
 /** The placement and collision values a positioner template spreads. */
-export interface PopupBindings extends PopupPlacementProps {
+export interface PopupBindings
+  extends Pick<
+    PopupPositionerProps,
+    "side" | "sideOffset" | "align" | "alignOffset" | "avoidCollisions"
+  > {
   collisionPadding: CollisionPadding;
   collisionBoundary: PopupCollisionBoundary | undefined;
 }
@@ -424,16 +408,3 @@ export const useContentCollision = (
     })),
   };
 };
-
-/** Defaults shared by the positioners that center a bottom popup at `sideOffset` 4. */
-export const POPUP_PLACEMENT_DEFAULTS = {
-  side: "bottom",
-  sideOffset: 4,
-  align: "start",
-  alignOffset: 0,
-  avoidCollisions: true,
-  collisionPadding: undefined,
-  collisionBoundary: undefined,
-  anchor: undefined,
-  container: null,
-} as const;
