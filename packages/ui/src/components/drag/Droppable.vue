@@ -3,18 +3,12 @@ import { Primitive } from "reka-ui";
 
 import { cn } from "../../lib/cn";
 import { useDragElement } from "./drag-context";
+import type { DragElementProps } from "./drag-element-props";
 
 defineOptions({ name: "RaftDroppable", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    accept?: (active: Record<string, unknown>) => boolean;
-    as?: string;
-    class?: string;
-    data?: Record<string, unknown>;
-    disabled?: boolean;
-    id: string | number;
-  }>(),
+  defineProps<DragElementProps & { accept?: (active: Record<string, unknown>) => boolean }>(),
   { as: "div", data: () => ({}), disabled: false },
 );
 

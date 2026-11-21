@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import SortArrow from "./SortArrow.vue";
-import { table, type TableAlign } from "./table.variants";
+import type { TableSortDirection, TableSortProps } from "./sort-props";
+import { table } from "./table.variants";
 
 defineOptions({ name: "RaftTableSortButton", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    sort?: "ascending" | "descending";
-    firstSort?: "ascending" | "descending";
-    align?: TableAlign;
-  }>(),
-  { sort: undefined, firstSort: "ascending", align: "left" },
-);
+const props = withDefaults(defineProps<TableSortProps>(), {
+  sort: undefined,
+  firstSort: "ascending",
+  align: "left",
+});
 
-const emit = defineEmits<{ sortChange: [sort: "ascending" | "descending"] }>();
+const emit = defineEmits<{ sortChange: [sort: TableSortDirection] }>();
 const attrs = useAttrs();
 
 const sorted = computed(() => props.sort !== undefined);
@@ -23,7 +21,7 @@ const buttonClass = computed(() =>
   }),
 );
 const arrowClass = computed(() => table().sortArrow());
-const nextSort = computed<"ascending" | "descending">(() => {
+const nextSort = computed<TableSortDirection>(() => {
   if (!props.sort) return props.firstSort;
   return props.sort === "ascending" ? "descending" : "ascending";
 });

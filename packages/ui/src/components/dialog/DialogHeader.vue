@@ -4,7 +4,7 @@ import { Comment, Fragment, Text } from "vue";
 import { VNodeList } from "../../lib/vnode-list";
 import { PopupSheetReset } from "../../lib/popup-boundary";
 import { dialog } from "./dialog.variants";
-import { dialogSheet, dialogSheetHeadKey, useDialogSheet } from "./dialog-sheet-context";
+import { dialogSheet, dialogSheetHeadKey, useInDialogSheet } from "./dialog-sheet-context";
 import { useDialogContext } from "./dialog-context";
 
 defineOptions({ name: "RaftDialogHeader", inheritAttrs: false });
@@ -12,8 +12,7 @@ defineOptions({ name: "RaftDialogHeader", inheritAttrs: false });
 const props = withDefaults(defineProps<{ bar?: boolean }>(), { bar: false });
 const attrs = useAttrs();
 const ctx = useDialogContext();
-const sheet = useDialogSheet();
-const inSheet = computed(() => !!sheet?.sheet.value);
+const { sheet, inSheet } = useInDialogSheet();
 provide(dialogSheetHeadKey, inSheet);
 const commitSlot = sheet?.commitSlot ?? ref<HTMLElement | null>(null);
 const setCommitSlot = (node: Element | ComponentPublicInstance | null) => {

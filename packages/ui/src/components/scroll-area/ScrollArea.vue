@@ -1,39 +1,20 @@
 <script setup lang="ts">
 import type { Ref } from "vue";
-import type { CSSProperties, StyleValue } from "vue";
 
 import { cn } from "../../lib/cn";
 import ScrollAreaGutters from "./ScrollAreaGutters.vue";
-import type {
-  ScrollAreaActions,
-  ScrollAreaEdges,
-  ScrollAreaOrientation,
-  ScrollAreaOverscroll,
-  ScrollAreaSize,
-  ScrollAreaTrigger,
-} from "./types";
+import type { ScrollAreaActions, ScrollAreaOwnProps } from "./types";
 import { useScrollAreaContainer } from "./use-scroll-area-container";
 
 defineOptions({ name: "RaftScrollArea", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    actionsRef?: Ref<ScrollAreaActions | null> | null;
-    as?: string;
-    contentClass?: string;
-    contentStyle?: CSSProperties;
-    fade?: boolean;
-    hideDelay?: number;
-    onEdgeChange?: (edges: ScrollAreaEdges) => void;
-    onScroll?: (event: Event) => void;
-    orientation?: ScrollAreaOrientation;
-    overscroll?: ScrollAreaOverscroll;
-    railInset?: Partial<Record<"top" | "bottom" | "left" | "right", number>>;
-    size?: ScrollAreaSize;
-    style?: StyleValue;
-    tabIndex?: number;
-    trigger?: ScrollAreaTrigger;
-  }>(),
+  defineProps<
+    Omit<ScrollAreaOwnProps, "actionsRef" | "class" | "contentClass"> & {
+      actionsRef?: Ref<ScrollAreaActions | null> | null;
+      contentClass?: string;
+    }
+  >(),
   {
     as: "div",
     fade: false,

@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import { useSortableItem } from "../drag/use-sortable-item";
+import type { ItemProps } from "../../lib/item-props";
 import TabsTab from "./TabsTab.vue";
 import { sortableTabsContextKey } from "./tabs-sortable-context";
 
 defineOptions({ name: "RaftSortableTabsTab", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    value: string | number;
-    disabled?: boolean;
-    as?: string;
-    asChild?: boolean;
-  }>(),
-  { disabled: false, asChild: false },
-);
+const props = withDefaults(defineProps<ItemProps>(), { disabled: false, asChild: false });
 
 const slots = useSlots();
 const context = inject(sortableTabsContextKey, null);

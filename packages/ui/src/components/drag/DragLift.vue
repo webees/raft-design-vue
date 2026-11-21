@@ -2,6 +2,7 @@
 import { cn } from "../../lib/cn";
 import { drag } from "./drag.recipe";
 import { useDragEngine } from "./drag-context";
+import type { FloatingDragProps } from "./floating-props";
 import {
   DRAG_KEYBOARD_OFFSET_PX,
   type DragModifierArgs,
@@ -15,14 +16,13 @@ import {
 defineOptions({ name: "RaftDragLift", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    container?: Element | DocumentFragment | null;
-    class?: string;
-    style?: string | Record<string, string | number>;
-    autoScroll?: boolean;
-    modifiers?: ((args: DragModifierArgs) => DragTransform)[];
-    zIndex?: number;
-  }>(),
+  defineProps<
+    FloatingDragProps & {
+      autoScroll?: boolean;
+      modifiers?: ((args: DragModifierArgs) => DragTransform)[];
+      zIndex?: number;
+    }
+  >(),
   { autoScroll: true, zIndex: 999 },
 );
 

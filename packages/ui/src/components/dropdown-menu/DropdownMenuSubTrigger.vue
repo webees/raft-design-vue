@@ -2,20 +2,15 @@
 import { DropdownMenuSubTrigger } from "reka-ui";
 import MenuIndicator from "../context-menu/MenuIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import type { MenuItemProps } from "./menu-item-props";
 import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuSubTrigger", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    disabled?: boolean;
-    textValue?: string;
-  }>(),
-  {
-    disabled: false,
-    textValue: undefined,
-  },
-);
+const props = withDefaults(defineProps<MenuItemProps>(), {
+  disabled: false,
+  textValue: undefined,
+});
 
 const attrs = useAttrs();
 const triggerClass = computed(() =>

@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { table, type TableAlign } from "./table.variants";
+import { table } from "./table.variants";
 import TableSortButton from "./TableSortButton.vue";
+import type { TableSortDirection, TableSortProps } from "./sort-props";
 
 defineOptions({ name: "RaftTableSortableHead", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    scope?: "col" | "row" | "colgroup" | "rowgroup";
-    sort?: "ascending" | "descending";
-    firstSort?: "ascending" | "descending";
-    align?: TableAlign;
-  }>(),
+  defineProps<TableSortProps & { scope?: "col" | "row" | "colgroup" | "rowgroup" }>(),
   { scope: "col", sort: undefined, firstSort: "ascending", align: "left" },
 );
 
-const emit = defineEmits<{ sortChange: [sort: "ascending" | "descending"] }>();
+const emit = defineEmits<{ sortChange: [sort: TableSortDirection] }>();
 const attrs = useAttrs();
 const headClass = computed(() =>
   table({ align: props.align }).head({

@@ -1,4 +1,13 @@
-import { defineComponent, inject, provide, ref, toRef, type InjectionKey, type Ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  provide,
+  ref,
+  toRef,
+  type InjectionKey,
+  type Ref,
+} from "vue";
 
 import { tv } from "../../lib/tv";
 import { providePopupSheet } from "../../lib/popup-boundary";
@@ -25,6 +34,12 @@ export const dialogSheetHeadKey: InjectionKey<Ref<boolean>> = Symbol("raft-dialo
 
 export function useDialogSheet(): DialogSheetContextValue | null {
   return inject(dialogSheetContextKey, null);
+}
+
+/** True when the surrounding dialog is currently drawn as a phone sheet. */
+export function useInDialogSheet() {
+  const sheet = useDialogSheet();
+  return { sheet, inSheet: computed(() => !!sheet?.sheet.value) };
 }
 
 export function useInDialogSheetHead() {

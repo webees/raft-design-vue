@@ -2,6 +2,7 @@ import { defineComponent, h, useAttrs, type ComponentObjectPropsOptions, type Pr
 import { Check } from "lucide-vue-next";
 import { Primitive } from "reka-ui";
 
+import { primitivePartProps } from "../../lib/slot-part";
 import {
   messageReference,
   type MessageReferenceChipVariant,
@@ -44,9 +45,7 @@ function referencePart({
     name,
     inheritAttrs: false,
     props: {
-      as: { type: String, default: "span" },
-      asChild: { type: Boolean, default: false },
-      class: { type: String, default: undefined },
+      ...primitivePartProps,
       ...(variant
         ? {
             variant: {

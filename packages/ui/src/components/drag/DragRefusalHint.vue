@@ -3,20 +3,20 @@ import { cn } from "../../lib/cn";
 import { drag } from "./drag.recipe";
 import { useDragEngine } from "./drag-context";
 import { dragPointer } from "./drag-lift";
+import type { FloatingDragProps } from "./floating-props";
 import { placeRefusalHint } from "./drag-refusal-hint";
 
 defineOptions({ name: "RaftDragRefusalHint", inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    container?: Element | DocumentFragment | null;
-    class?: string;
-    style?: string | Record<string, string | number>;
-    /** Why the place under the hand won't take the item. Falls back to the live announcement. */
-    message?: string;
-    /** Render the chip in another element; the body by default. */
-    to?: Element | DocumentFragment | null;
-  }>(),
+  defineProps<
+    FloatingDragProps & {
+      /** Why the place under the hand won't take the item. Falls back to the live announcement. */
+      message?: string;
+      /** Render the chip in another element; the body by default. */
+      to?: Element | DocumentFragment | null;
+    }
+  >(),
   { to: undefined },
 );
 
