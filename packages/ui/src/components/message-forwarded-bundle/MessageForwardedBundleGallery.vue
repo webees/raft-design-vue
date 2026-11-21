@@ -3,7 +3,7 @@ import type { VNode } from "vue";
 import { Comment, Fragment, Text } from "vue";
 
 import { VNodeList } from "../../lib/vnode-list";
-import MessageImageGallery from "../message-attachment/MessageImageGallery.vue";
+import { MessageImageGallery } from "../message-attachment/parts";
 import { messageForwardedBundleGallery } from "./message-forwarded-bundle.recipes";
 
 defineOptions({ name: "RaftMessageForwardedBundleGallery", inheritAttrs: false });

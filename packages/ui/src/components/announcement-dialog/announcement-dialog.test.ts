@@ -2,12 +2,14 @@ import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import AnnouncementDialogAction from "./AnnouncementDialogAction.vue";
 import AnnouncementDialogBody from "./AnnouncementDialogBody.vue";
-import AnnouncementDialogFooter from "./AnnouncementDialogFooter.vue";
-import AnnouncementDialogHeader from "./AnnouncementDialogHeader.vue";
+import {
+  AnnouncementDialogFooter,
+  AnnouncementDialogHeader,
+  AnnouncementDialogText,
+} from "./parts";
 import AnnouncementDialogLabel from "./AnnouncementDialogLabel.vue";
 import AnnouncementDialogPicture from "./AnnouncementDialogPicture.vue";
 import AnnouncementDialogSecondaryAction from "./AnnouncementDialogSecondaryAction.vue";
-import AnnouncementDialogText from "./AnnouncementDialogText.vue";
 
 describe("announcement-dialog", () => {
   it("labels the announcement with an attention square", () => {

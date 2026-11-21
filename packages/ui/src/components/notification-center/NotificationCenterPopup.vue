@@ -4,6 +4,7 @@ import { PopoverContent, PopoverPortal } from "reka-ui";
 import { notificationCenter } from "./notification-center.recipe";
 import { useFrameCollisionPadding } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftNotificationCenterPopup", inheritAttrs: false });
 
@@ -46,16 +47,17 @@ const popupClass = computed(() =>
 const ariaLabel = computed(
   () => (attrs["aria-label"] as string | undefined) ?? "Notification center",
 );
-const positionerAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const positionerAttrs = computed(() => omitAttrs(attrs, "class"));
+const onOpenAutoFocus = (event: Event) => {
+  if (!props.initialFocus) event.preventDefault();
+};
 </script>
 
 <template>
   <PopoverPortal :to="portalTo" data-raft-ui-overlay="">
     <PopoverContent
       v-bind="positionerAttrs"
+      @open-auto-focus="onOpenAutoFocus"
       :side="side"
       :side-offset="sideOffset"
       :align="align"

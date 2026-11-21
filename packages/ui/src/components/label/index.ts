@@ -1,7 +1,7 @@
 import LabelRoot from "./Label.vue";
 import LabelAsterisk from "./LabelAsterisk.vue";
-import LabelSub from "./LabelSub.vue";
 import LabelOptional from "./LabelOptional.vue";
+import { LabelSub } from "./parts";
 
 export const Label = Object.assign(LabelRoot, {
   Asterisk: LabelAsterisk,

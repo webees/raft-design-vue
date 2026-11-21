@@ -2,7 +2,7 @@
 import { DialogContent, DialogOverlay } from "reka-ui";
 
 import { toElement } from "../../lib/dom";
-import LightboxPortal from "./LightboxPortal.vue";
+import { LightboxPortal } from "./LightboxPortal";
 import { lightbox } from "./lightbox.recipe";
 import { useLightboxModal } from "./lightbox-context";
 import { useParentOverlayKind } from "../../lib/overlay-depth";

@@ -1,5 +1,5 @@
 export { default as ToastProvider } from "./ToastProvider.vue";
-export { default as ToastPortal } from "./ToastPortal.vue";
+export { ToastPortal } from "./ToastPortal";
 export { default as ToastViewport } from "./ToastViewport.vue";
 export { default as ToastPositioner } from "./ToastPositioner.vue";
 export { default as ToastRoot } from "./ToastRoot.vue";

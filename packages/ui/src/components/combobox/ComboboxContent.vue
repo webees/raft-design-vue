@@ -3,7 +3,7 @@ import { ComboboxContent } from "reka-ui";
 
 import { cn } from "../../lib/cn";
 import { combobox } from "./combobox.recipe";
-import ComboboxPortal from "./ComboboxPortal.vue";
+import { ComboboxPortal } from "./ComboboxPortal";
 
 defineOptions({ name: "RaftComboboxContent", inheritAttrs: false });
 const props = withDefaults(

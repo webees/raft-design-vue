@@ -1,5 +1,5 @@
 export { default as Kbd } from "./Kbd.vue";
-export { default as KbdGroup } from "./KbdGroup.vue";
+export { KbdGroup } from "./parts";
 export { default as KbdShortcut } from "./KbdShortcut.vue";
 export { resolveKbdKeys } from "./kbd-keys";
 export type { KbdKeyIcon, KbdKeyName, KbdResolvedKey } from "./kbd-keys";

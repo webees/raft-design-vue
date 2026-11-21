@@ -1,21 +1,23 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
+import {
+  MarkdownCell,
+  MarkdownImage,
+  MarkdownLink,
+  MarkdownList,
+  MarkdownListItem,
+  MarkdownMark,
+  MarkdownOrderedList,
+  MarkdownParagraph,
+  MarkdownRule,
+  MarkdownTable,
+  MarkdownTableRow,
+} from "./parts";
 import MarkdownBlockquote from "./MarkdownBlockquote.vue";
-import MarkdownCell from "./MarkdownCell.vue";
 import MarkdownCheckbox from "./MarkdownCheckbox.vue";
 import MarkdownHeaderCell from "./MarkdownHeaderCell.vue";
 import MarkdownHeading from "./MarkdownHeading.vue";
-import MarkdownImage from "./MarkdownImage.vue";
 import MarkdownInlineCode from "./MarkdownInlineCode.vue";
-import MarkdownLink from "./MarkdownLink.vue";
-import MarkdownList from "./MarkdownList.vue";
-import MarkdownListItem from "./MarkdownListItem.vue";
-import MarkdownMark from "./MarkdownMark.vue";
-import MarkdownOrderedList from "./MarkdownOrderedList.vue";
-import MarkdownParagraph from "./MarkdownParagraph.vue";
-import MarkdownRule from "./MarkdownRule.vue";
-import MarkdownTable from "./MarkdownTable.vue";
-import MarkdownTableRow from "./MarkdownTableRow.vue";
 import MarkdownTableScroll from "./MarkdownTableScroll.vue";
 
 describe("markdown", () => {

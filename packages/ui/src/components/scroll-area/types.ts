@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, Ref } from "vue";
+import type { CSSProperties, HTMLAttributes, Ref, StyleValue } from "vue";
 
 export type ScrollAreaEdges = {
   top: boolean;
@@ -83,7 +83,7 @@ export type ScrollAreaOwnProps = ScrollAreaOptions & {
   class?: unknown;
   contentClass?: unknown;
   contentStyle?: CSSProperties;
-  style?: CSSProperties;
+  style?: StyleValue;
   tabIndex?: number;
   as?: string;
 };

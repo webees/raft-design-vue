@@ -2,12 +2,11 @@ import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
 import AlertDialog from "./AlertDialog.vue";
 import AlertDialogAction from "./AlertDialogAction.vue";
-import AlertDialogBody from "./AlertDialogBody.vue";
+import { AlertDialogBody, AlertDialogHeader } from "./parts";
 import AlertDialogCancel from "./AlertDialogCancel.vue";
 import AlertDialogContent from "./AlertDialogContent.vue";
 import AlertDialogDescription from "./AlertDialogDescription.vue";
 import AlertDialogFooter from "./AlertDialogFooter.vue";
-import AlertDialogHeader from "./AlertDialogHeader.vue";
 import AlertDialogTitle from "./AlertDialogTitle.vue";
 
 const components = {

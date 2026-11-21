@@ -3,11 +3,8 @@ import { ProgressRoot } from "reka-ui";
 
 import { progress, type ProgressSize, type ProgressVariant } from "./progress.recipe";
 import { provideProgress } from "./progress-context";
-import ProgressHeader from "./ProgressHeader.vue";
 import ProgressIndicator from "./ProgressIndicator.vue";
-import ProgressLabel from "./ProgressLabel.vue";
-import ProgressTrack from "./ProgressTrack.vue";
-import ProgressValue from "./ProgressValue.vue";
+import { ProgressHeader, ProgressLabel, ProgressTrack, ProgressValue } from "./parts";
 
 defineOptions({ name: "RaftProgress", inheritAttrs: false });
 

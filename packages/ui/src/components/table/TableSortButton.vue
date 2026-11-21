@@ -9,9 +9,8 @@ const props = withDefaults(
     sort?: "ascending" | "descending";
     firstSort?: "ascending" | "descending";
     align?: TableAlign;
-    asChild?: boolean;
   }>(),
-  { sort: undefined, firstSort: "ascending", align: "left", asChild: false },
+  { sort: undefined, firstSort: "ascending", align: "left" },
 );
 
 const emit = defineEmits<{ sortChange: [sort: "ascending" | "descending"] }>();

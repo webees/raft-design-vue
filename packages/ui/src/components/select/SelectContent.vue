@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SelectContent } from "reka-ui";
-import SelectPortal from "./SelectPortal.vue";
+import { SelectPortal } from "./SelectPortal";
 import { select } from "./select.variants";
 import { useFrameCollisionPadding } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";

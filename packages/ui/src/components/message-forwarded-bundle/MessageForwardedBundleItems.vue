@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from "vue";
-import MessageEmbedContent from "../message-embed/MessageEmbedContent.vue";
+import { MessageEmbedContent } from "../message-embed/parts";
 import { messageForwardedBundle } from "./message-forwarded-bundle.recipes";
 import { useForwardedBundleFold } from "./message-forwarded-bundle-fold";
 

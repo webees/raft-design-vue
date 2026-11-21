@@ -12,7 +12,7 @@ export {
   MessageAttachmentSummary,
   MessageAttachmentTitle,
 } from "./message-attachment-parts";
-export { default as MessageImageGallery } from "./MessageImageGallery.vue";
+export { MessageImageGallery, MessageVideoPreview } from "./parts";
 export { default as MessageImageGalleryRow } from "./MessageImageGalleryRow.vue";
 export { default as MessageImageGalleryItem } from "./MessageImageGalleryItem.vue";
 export {
@@ -21,7 +21,6 @@ export {
   MessageImageGalleryOverlay,
   MessageImageGalleryPreview,
 } from "./message-image-gallery-parts";
-export { default as MessageVideoPreview } from "./MessageVideoPreview.vue";
 export {
   MessageVideoPreviewAction,
   MessageVideoPreviewFailureAction,

@@ -4,6 +4,7 @@ import PopoverArrow from "./PopoverArrow.vue";
 import PopoverPopup from "./PopoverPopup.vue";
 import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
+import { omitAttrs } from "../../lib/attrs";
 import { providePopoverSize } from "./popover-context";
 import { popover, type PopoverSize } from "./popover.variants";
 
@@ -44,10 +45,7 @@ const collision = computed(() =>
 );
 const collisionBoundary = computed(() => collision.value.collisionBoundary as Element | undefined);
 const positionerClass = computed(() => popover().positioner());
-const positionerAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const positionerAttrs = computed(() => omitAttrs(attrs, "class"));
 
 providePopoverSize(() => props.size);
 </script>

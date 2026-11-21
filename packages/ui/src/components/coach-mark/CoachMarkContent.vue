@@ -2,6 +2,7 @@
 import { PopoverContent, PopoverPortal } from "reka-ui";
 
 import { cn } from "../../lib/cn";
+import { omitAttrs } from "../../lib/attrs";
 import { frameCollision, readFrameInsets } from "../../lib/frame-insets";
 import { useSheetPopupBoundary } from "../../lib/popup-boundary";
 import { popover } from "../popover/popover.variants";
@@ -39,10 +40,7 @@ const classes = computed(() =>
     attrs.class as string | undefined,
   ),
 );
-const popupAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const popupAttrs = computed(() => omitAttrs(attrs, "class"));
 
 function setPopup(element: unknown) {
   popupRef.value = element instanceof HTMLElement ? element : null;

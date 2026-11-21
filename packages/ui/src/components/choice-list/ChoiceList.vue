@@ -3,6 +3,7 @@ import type { VNodeChild } from "vue";
 import { Search, X } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";
+import { omitAttrs } from "../../lib/attrs";
 import { toElement } from "../../lib/dom";
 import { isTextEntry } from "../../lib/tap-activation";
 import { useOverflowTitle } from "../../lib/use-overflow-title";
@@ -137,10 +138,7 @@ const headingClass = computed(() => slots.value.heading());
 const noteClass = computed(() => slots.value.note());
 const footerClass = computed(() => slots.value.footer());
 const searchInputClass = computed(() => slots.value.searchInput());
-const restAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const restAttrs = computed(() => omitAttrs(attrs, "class"));
 
 function commit(next: string | readonly string[] | null) {
   if (props.value === undefined) uncontrolledValue.value = next;

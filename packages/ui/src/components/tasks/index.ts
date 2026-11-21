@@ -14,7 +14,7 @@ export type { TaskChipSize, TaskChipVariant } from "./task-chip.variants";
 export { taskStatusSoft, taskStatusStrong } from "./task-status.variants";
 export { TASK_STATUS_IDS } from "../../lib/task-status";
 export type { TaskStatusId } from "../../lib/task-status";
-export { default as TasksPanelRoot } from "./TasksPanelRoot.vue";
+export { TaskLoadingRow, TasksPanelRoot } from "./parts";
 export {
   TasksPanelEmpty,
   TasksPanelToolbar,
@@ -26,6 +26,5 @@ export {
 } from "./tasks-panel-parts";
 export { default as TasksPanelViewport } from "./TasksPanelViewport.vue";
 export { default as TaskLoadingList } from "./TaskLoadingList.vue";
-export { default as TaskLoadingRow } from "./TaskLoadingRow.vue";
 export { tasksPanel } from "./tasks-panel.variants";
 export { taskLoading } from "./task-loading.variants";

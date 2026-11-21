@@ -35,27 +35,27 @@ bun run verify
 Order: `check:parity → check:audit → check:docs-links → lint → typecheck →
 check:api → check:props → test → build → check:consumer-types`.
 
-Measured on 2026-11-19 with Bun 1.4.4 / Node 22:
+Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 
 |             |                                      |
 | ----------- | ------------------------------------ |
-| Test files  | 104                                  |
-| Tests       | 377                                  |
+| Test files  | 105                                  |
+| Tests       | 378                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 2001.5 kB raw, 293.2 kB gzip         |
-| Docs bundle | 4159.6 kB total, 1606.5 kB gzip      |
+| Library     | 1930.7 kB raw, 290.8 kB gzip         |
+| Docs bundle | 4151.8 kB total, 1607.1 kB gzip      |
 
 ### Source baseline
 
-Source size and duplication floor for `packages/ui/src` (`.ts` + `.vue`),
-measured on 2026-11-19:
+Source size and duplication floor for `packages/ui/src` (`.ts` + `.vue`, tests
+excluded), measured on 2026-11-22:
 
 | Metric                                         | Value  |
 | ---------------------------------------------- | ------ |
-| Source lines                                   | 55,133 |
-| `components/` lines                            | 50,055 |
-| `lib/` lines                                   | 3,945  |
+| Source lines                                   | 46,719 |
+| `components/` lines                            | 42,798 |
+| `lib/` lines                                   | 3,724  |
 | Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0     |
 | Duplicated lines / tokens                      | 0.00% / 0.00% |
 | Unused locals and parameters (`vue-tsc`)       | 0      |

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PopoverClose } from "reka-ui";
 import { popover } from "./popover.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftPopoverClose", inheritAttrs: false });
 
@@ -15,10 +16,7 @@ withDefaults(
 
 const attrs = useAttrs();
 const closeClass = computed(() => popover().close({ class: attrs.class as string | undefined }));
-const closeAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const closeAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

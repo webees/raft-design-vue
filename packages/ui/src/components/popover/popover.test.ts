@@ -1,13 +1,11 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it } from "vitest";
+import { PopoverBody, PopoverHeader, PopoverTitle } from "./parts";
 import Popover from "./Popover.vue";
 import PopoverActions from "./PopoverActions.vue";
-import PopoverBody from "./PopoverBody.vue";
 import PopoverContent from "./PopoverContent.vue";
 import PopoverDescription from "./PopoverDescription.vue";
-import PopoverHeader from "./PopoverHeader.vue";
 import PopoverSeparator from "./PopoverSeparator.vue";
-import PopoverTitle from "./PopoverTitle.vue";
 import PopoverTrigger from "./PopoverTrigger.vue";
 
 afterEach(() => {

@@ -16,7 +16,7 @@ import {
 import { cn } from "../../lib/cn";
 import { useKeyboardPlatform, type KeyboardPlatform } from "../../lib/use-platform";
 import Kbd from "./Kbd.vue";
-import KbdGroup from "./KbdGroup.vue";
+import { KbdGroup } from "./parts";
 import { resolveKbdKeys, type KbdKeyIcon, type KbdKeyName } from "./kbd-keys";
 
 defineOptions({ name: "RaftKbdShortcut", inheritAttrs: false });

@@ -2,6 +2,7 @@
 import { DropdownMenuItem } from "reka-ui";
 import DropdownMenuItemIndicator from "./DropdownMenuItemIndicator.vue";
 import { dropdownMenu } from "./dropdown-menu.variants";
+import { omitAttrs } from "../../lib/attrs";
 
 defineOptions({ name: "RaftDropdownMenuLinkItem", inheritAttrs: false });
 
@@ -19,10 +20,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const styles = dropdownMenu();
 const itemClass = computed(() => styles.radioItem({ class: attrs.class as string | undefined }));
-const linkAttrs = computed(() => {
-  const { class: _class, ...rest } = attrs;
-  return rest;
-});
+const linkAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 
 <template>

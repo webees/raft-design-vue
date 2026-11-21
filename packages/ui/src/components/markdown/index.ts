@@ -1,19 +1,21 @@
+export {
+  MarkdownCell,
+  MarkdownImage,
+  MarkdownLink,
+  MarkdownList,
+  MarkdownListItem,
+  MarkdownMark,
+  MarkdownOrderedList,
+  MarkdownParagraph,
+  MarkdownRule,
+  MarkdownTable,
+  MarkdownTableRow,
+} from "./parts";
 export { default as MarkdownBlockquote } from "./MarkdownBlockquote.vue";
-export { default as MarkdownCell } from "./MarkdownCell.vue";
 export { default as MarkdownCheckbox } from "./MarkdownCheckbox.vue";
 export { default as MarkdownHeaderCell } from "./MarkdownHeaderCell.vue";
 export { default as MarkdownHeading } from "./MarkdownHeading.vue";
-export { default as MarkdownImage } from "./MarkdownImage.vue";
 export { default as MarkdownInlineCode } from "./MarkdownInlineCode.vue";
-export { default as MarkdownLink } from "./MarkdownLink.vue";
-export { default as MarkdownList } from "./MarkdownList.vue";
-export { default as MarkdownListItem } from "./MarkdownListItem.vue";
-export { default as MarkdownMark } from "./MarkdownMark.vue";
-export { default as MarkdownOrderedList } from "./MarkdownOrderedList.vue";
-export { default as MarkdownParagraph } from "./MarkdownParagraph.vue";
-export { default as MarkdownRule } from "./MarkdownRule.vue";
-export { default as MarkdownTable } from "./MarkdownTable.vue";
-export { default as MarkdownTableRow } from "./MarkdownTableRow.vue";
 export { default as MarkdownTableScroll } from "./MarkdownTableScroll.vue";
 export { markdown } from "./markdown.variants";
 export type { MarkdownHeadingLevel } from "./markdown.variants";

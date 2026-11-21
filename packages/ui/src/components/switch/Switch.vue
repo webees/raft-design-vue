@@ -2,7 +2,7 @@
 import { SwitchRoot } from "reka-ui";
 
 import { switchRecipe } from "./switch.recipe";
-import SwitchThumb from "./SwitchThumb.vue";
+import { SwitchThumb } from "./parts";
 
 defineOptions({ name: "RaftSwitch", inheritAttrs: false });
 
