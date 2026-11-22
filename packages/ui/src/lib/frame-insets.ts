@@ -310,7 +310,7 @@ export function elementOf(value: Element | ComponentPublicInstance | null): Elem
   return element instanceof Element ? element : null;
 }
 
-export function usePopupCollision(
+function usePopupCollision(
   collisionPadding: MaybeRefOrGetter<CollisionPadding | undefined> | undefined,
   collisionBoundary: MaybeRefOrGetter<PopupCollisionBoundary | undefined>,
   defaultPadding: MaybeRefOrGetter<CollisionPadding>,

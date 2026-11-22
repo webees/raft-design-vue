@@ -9,7 +9,7 @@ import { holdEscape, releaseEscape } from "./drag-escape";
 
 export type DragId = string | number;
 export type DragPoint = { x: number; y: number };
-export type DragPlacement = "before" | "after";
+type DragPlacement = "before" | "after";
 
 export type DragData = Record<string, unknown>;
 
