@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import IconTile from "./IconTile.vue";
+import { IconTile } from "./parts";
 
 describe("IconTile", () => {
   it("renders a decorative neutral tile by default", () => {

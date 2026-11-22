@@ -42,8 +42,8 @@ check:api → check:props → test → build → check:consumer-types`。
 | 测试用例 | 413                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 1929.6 kB 原始，294.1 kB gzip        |
-| 文档产物 | 4152.2 kB 总计，1603.8 kB gzip       |
+| 库产物   | 1806.8 kB 原始，286.0 kB gzip        |
+| 文档产物 | 4121.8 kB 总计，1602.5 kB gzip       |
 
 ### 源码基线
 
@@ -51,9 +51,9 @@ check:api → check:props → test → build → check:consumer-types`。
 
 | 指标                                    | 数值              |
 | --------------------------------------- | ----------------- |
-| 源码行数                                | 46,859            |
-| `components/` 行数                      | 42,648            |
-| `lib/` 行数                             | 4,027             |
+| 源码行数                                | 44,357            |
+| `components/` 行数                      | 40,021            |
+| `lib/` 行数                             | 4,152             |
 | 复制粘贴克隆（jscpd，10 行 / 70 token） | 0                 |
 | 复制粘贴克隆（jscpd，6 行 / 40 token）  | 0                 |
 | 重复行 / token 占比（6 行 / 40 token）  | 0.00% / 0.00%     |

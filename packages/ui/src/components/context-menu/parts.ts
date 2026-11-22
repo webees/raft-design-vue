@@ -1,8 +1,10 @@
 import { ContextMenuRadioGroup as RekaContextMenuRadioGroup } from "reka-ui";
 
 import { createRekaRadioGroup } from "../../lib/reka-radio-group";
-import { recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { contextMenu } from "./context-menu.variants";
+
+const part = fixedPartFactory(contextMenu);
 
 export const ContextMenuRadioGroup = createRekaRadioGroup({
   name: "RaftContextMenuRadioGroup",
@@ -10,17 +12,9 @@ export const ContextMenuRadioGroup = createRekaRadioGroup({
   dataSlot: "context-menu-radio-group",
   classes: (className) => contextMenu().radioGroup({ className }),
 });
-
-export const ContextMenuFooter = recipePart(
-  "RaftContextMenuFooter",
-  "div",
-  "context-menu-footer",
-  (className) => contextMenu().footer({ class: className }),
-);
-
-export const ContextMenuPopup = recipePart(
-  "RaftContextMenuPopup",
-  "div",
-  "context-menu-content",
-  (className) => contextMenu().content({ class: className }),
-);
+export const ContextMenuFooter = part("ContextMenuFooter", "footer");
+export const ContextMenuItemLabel = part("ContextMenuItemLabel", "itemLabel", "span");
+export const ContextMenuPopup = part("ContextMenuPopup", "content", "div", {
+  dataSlot: "context-menu-content",
+});
+export const ContextMenuShortcut = part("ContextMenuShortcut", "shortcut", "span");

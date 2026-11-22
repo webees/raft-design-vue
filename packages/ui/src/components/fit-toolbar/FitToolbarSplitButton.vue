@@ -3,8 +3,7 @@ import { Plus } from "lucide-vue-next";
 
 import { cn } from "../../lib/cn";
 import ButtonSplit from "../button/ButtonSplit.vue";
-import ButtonSplitMain from "../button/ButtonSplitMain.vue";
-import ButtonSplitMenu from "../button/ButtonSplitMenu.vue";
+import { ButtonSplitMain, ButtonSplitMenu } from "../button/parts";
 import Tooltip from "../tooltip/Tooltip.vue";
 import TooltipContent from "../tooltip/TooltipContent.vue";
 import TooltipTrigger from "../tooltip/TooltipTrigger.vue";

@@ -1,16 +1,7 @@
-import { recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { messageEmbed } from "./message-embed.variants";
 
-export const MessageEmbedContent = recipePart(
-  "RaftMessageEmbedContent",
-  "div",
-  "message-embed-content",
-  (className) => messageEmbed().content({ className }),
-);
+const part = fixedPartFactory(messageEmbed);
 
-export const MessageEmbedHeader = recipePart(
-  "RaftMessageEmbedHeader",
-  "div",
-  "message-embed-header",
-  (className) => messageEmbed().header({ className }),
-);
+export const MessageEmbedContent = part("MessageEmbedContent", "content");
+export const MessageEmbedHeader = part("MessageEmbedHeader", "header");

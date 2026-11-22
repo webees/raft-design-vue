@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TabsTrigger, injectTabsRootContext } from "reka-ui";
 import type { ItemProps } from "../../lib/item-props";
-import { useTapActivation } from "../../lib/tap-activation";
+import { useItemBindings } from "../../lib/item-bindings";
 import { tabs } from "./tabs.variants";
 import { useTabsUi } from "./tabs-context";
 import DropPlaceholder from "../drag/DropPlaceholder.vue";
@@ -18,15 +18,11 @@ const props = withDefaults(
   { disabled: false, asChild: false, dropPlace: false },
 );
 
-const attrs = useAttrs();
-const tapRef = useTapActivation();
 const ui = useTabsUi();
 const root = injectTabsRootContext();
 const active = computed(() => root.modelValue.value === props.value);
-const tabClass = computed(() =>
-  tabs({ variant: ui.variant, placement: ui.placement }).tab({
-    className: attrs.class as string,
-  }),
+const { tapRef, rootAttrs } = useItemBindings(props, (className) =>
+  tabs({ variant: ui.variant, placement: ui.placement }).tab({ className }),
 );
 const contentClass = computed(() =>
   tabs({ variant: ui.variant, placement: ui.placement }).content({
@@ -38,14 +34,9 @@ const contentClass = computed(() =>
 <template>
   <TabsTrigger
     :ref="tapRef"
-    v-bind="{ ...attrs, class: undefined }"
-    :value="value"
-    :disabled="disabled"
-    :as="as"
-    :as-child="asChild"
+    v-bind="rootAttrs"
     data-slot="tabs-tab"
     :data-active="active ? '' : undefined"
-    :class="tabClass"
   >
     <span data-slot="tabs-tab-content" :class="contentClass"><slot /></span>
     <DropPlaceholder v-if="dropPlace" class="absolute inset-0 z-raised rounded-control" />

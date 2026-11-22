@@ -1,30 +1,32 @@
 export { default as Panel } from "./Panel.vue";
-export { default as PanelHeaderRoot } from "./PanelHeaderRoot.vue";
-export { default as PanelHeader } from "./PanelHeader.vue";
-export { default as PanelSectionHeader } from "./PanelSectionHeader.vue";
 export { default as PanelHeaderIcon } from "./PanelHeaderIcon.vue";
-export { default as PanelHeaderContent } from "./PanelHeaderContent.vue";
-export { default as PanelHeading } from "./PanelHeading.vue";
-export { default as PanelTitle } from "./PanelTitle.vue";
 export { default as PanelMeta } from "./PanelMeta.vue";
-export { default as PanelStatus } from "./PanelStatus.vue";
-export { default as PanelActivity } from "./PanelActivity.vue";
-export { default as PanelActions } from "./PanelActions.vue";
 export { default as PanelAction } from "./PanelAction.vue";
-export { PanelToggleAction } from "./PanelToggleAction";
 export { default as PanelSplitAction } from "./PanelSplitAction.vue";
 export { default as PanelSplitActionMain } from "./PanelSplitActionMain.vue";
-export { PanelSplitActionToggle } from "./PanelSplitActionToggle";
 export { default as PanelSplitActionMenu } from "./PanelSplitActionMenu.vue";
 export { default as PanelTitleTrigger } from "./PanelTitleTrigger.vue";
 export { default as PanelNotice } from "./PanelNotice.vue";
 export { default as PanelNoticeContent } from "./PanelNoticeContent.vue";
 export { default as PanelNoticeActions } from "./PanelNoticeActions.vue";
-export { default as PanelBody } from "./PanelBody.vue";
 export { default as PanelScrollViewport } from "./PanelScrollViewport.vue";
-export { default as PanelNativeScrollViewport } from "./PanelNativeScrollViewport.vue";
-export { default as PanelScrollContent } from "./PanelScrollContent.vue";
-export { default as PanelSection } from "./PanelSection.vue";
-export { default as PanelFooter } from "./PanelFooter.vue";
+export {
+  PanelActions,
+  PanelActivity,
+  PanelBody,
+  PanelFooter,
+  PanelHeader,
+  PanelHeaderContent,
+  PanelHeaderRoot,
+  PanelHeading,
+  PanelNativeScrollViewport,
+  PanelScrollContent,
+  PanelSection,
+  PanelSectionHeader,
+  PanelStatus,
+  PanelTitle,
+} from "./parts";
+export { PanelToggleAction } from "./PanelToggleAction";
+export { PanelSplitActionToggle } from "./PanelSplitActionToggle";
 export { PANEL_TITLE_TRIGGER_EXTRA_WIDTH, type PanelNoticeStatus } from "./panel.variants";
 export type PanelEdge = "attached" | "inset";

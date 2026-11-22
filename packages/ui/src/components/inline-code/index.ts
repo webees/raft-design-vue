@@ -1,2 +1,2 @@
-export { default as InlineCode } from "./InlineCode.vue";
+export { InlineCode } from "./parts";
 export { inlineCode } from "./inline-code.variants";

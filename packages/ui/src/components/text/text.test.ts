@@ -1,8 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import TextHeading from "./TextHeading.vue";
-import TextSans from "./TextSans.vue";
-import TextMono from "./TextMono.vue";
+import { TextHeading, TextMono, TextSans } from "./parts";
 
 describe("Text", () => {
   it("renders headings at the matching level", () => {
