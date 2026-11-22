@@ -76,6 +76,8 @@ the diff, port anything new, then commit. Never hand-edit synced files;
 - `main` is protected: no deletion, no force-push, pull request required
   (repository admins keep a bypass for releases).
 - Releases are cut from `main` by the release workflow after a green verify.
+- The `changeset-release/main` pull request is version-only; its CI job is
+  skipped because the branch is deleted right after the admin merge.
 
 ## Code style
 
