@@ -36,7 +36,6 @@ const props = withDefaults(
     viewportClassName?: string;
     viewportPlacement?: ToastPlacement;
     viewportStrategy?: ToastStrategy;
-    class?: string;
   }>(),
   {
     limit: 1,

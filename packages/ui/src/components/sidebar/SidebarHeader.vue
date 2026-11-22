@@ -4,9 +4,9 @@ import { sidebarRecipe } from "./sidebar.recipe";
 defineOptions({ name: "RaftSidebarHeader", inheritAttrs: false });
 
 const attrs = useAttrs();
-const styles = computed(() => sidebarRecipe());
+const styles = sidebarRecipe();
 const rootClass = computed(() =>
-  styles.value.sidebarHeader({ class: attrs.class as string | undefined }),
+  styles.sidebarHeader({ class: attrs.class as string | undefined }),
 );
 </script>
 

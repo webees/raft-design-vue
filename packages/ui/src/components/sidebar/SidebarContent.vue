@@ -7,12 +7,12 @@ defineOptions({ name: "RaftSidebarContent", inheritAttrs: false });
 
 const attrs = useAttrs();
 const isMobile = useMobileViewport();
-const styles = computed(() => sidebarRecipe());
+const styles = sidebarRecipe();
 const rootClass = computed(() =>
-  styles.value.sidebarContent({ class: attrs.class as string | undefined }),
+  styles.sidebarContent({ class: attrs.class as string | undefined }),
 );
 const innerClass = computed(() =>
-  styles.value.sidebarContentInner({ class: attrs.class as string | undefined }),
+  styles.sidebarContentInner({ class: attrs.class as string | undefined }),
 );
 </script>
 

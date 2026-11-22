@@ -6,13 +6,10 @@ import { toast as toastStyles } from "./toast.recipe";
 
 defineOptions({ name: "RaftToastPositioner", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    toast: ToastObject;
-    class?: string;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  toast: ToastObject;
+  class?: string;
+}>();
 
 const attrs = useAttrs();
 const classes = computed(() => toastStyles().positioner({ class: props.class }));

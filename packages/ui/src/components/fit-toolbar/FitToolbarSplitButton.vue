@@ -13,22 +13,19 @@ import { useFitItem } from "./use-fit-item";
 
 defineOptions({ name: "RaftFitToolbarSplitButton", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    /** Its label ("Create agent"), the accessible name of the pair. */
-    label?: string;
-    /** The pair's accessible name, when the label alone doesn't say it. */
-    groupLabel?: string;
-    /** The menu part's accessible name and tooltip ("More ways to create an agent"). */
-    menuLabel?: string;
-    /** When its label gives way (the `label` step); needs an `icon`. */
-    labelOrder?: number;
-    /** When it shows as + alone (the `plus` step). */
-    plusOrder?: number;
-    disabled?: boolean;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  /** Its label ("Create agent"), the accessible name of the pair. */
+  label?: string;
+  /** The pair's accessible name, when the label alone doesn't say it. */
+  groupLabel?: string;
+  /** The menu part's accessible name and tooltip ("More ways to create an agent"). */
+  menuLabel?: string;
+  /** When its label gives way (the `label` step); needs an `icon`. */
+  labelOrder?: number;
+  /** When it shows as + alone (the `plus` step). */
+  plusOrder?: number;
+  disabled?: boolean;
+}>();
 
 const emit = defineEmits<{ menu: [event: MouseEvent] }>();
 

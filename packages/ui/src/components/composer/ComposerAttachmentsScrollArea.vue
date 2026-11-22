@@ -14,11 +14,11 @@ const viewportRef = ref<ComponentPublicInstance | null>(null);
 const canPrev = ref(false);
 const canNext = ref(false);
 
-const recipe = computed(() => composerAttachment());
-const rootClass = computed(() => recipe.value.attachmentsScrollArea({ class: props.class }));
-const prevNavClass = computed(() => composerAttachment({ side: "prev" }).attachmentsNav());
-const nextNavClass = computed(() => composerAttachment({ side: "next" }).attachmentsNav());
-const rowClass = computed(() => recipe.value.attachmentsRow());
+const recipe = composerAttachment();
+const rootClass = computed(() => recipe.attachmentsScrollArea({ class: props.class }));
+const prevNavClass = composerAttachment({ side: "prev" }).attachmentsNav();
+const nextNavClass = composerAttachment({ side: "next" }).attachmentsNav();
+const rowClass = recipe.attachmentsRow();
 
 const viewport = () => (viewportRef.value?.$el as HTMLElement | null) ?? null;
 

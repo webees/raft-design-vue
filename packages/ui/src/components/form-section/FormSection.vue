@@ -13,12 +13,13 @@ const props = defineProps<{
 }>();
 
 const slots = formSection();
+const attrs = useAttrs();
 
 const rootClass = computed(() => cn(slots.root(), props.class));
 </script>
 
 <template>
-  <section data-slot="form-section" :class="rootClass">
+  <section v-bind="attrs" data-slot="form-section" :class="rootClass">
     <div data-slot="form-section-head" :class="slots.head()">
       <div :class="slots.titleRow()">
         <h3 data-slot="form-section-title" :class="slots.title()">

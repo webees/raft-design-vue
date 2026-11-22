@@ -35,7 +35,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const { bindings, ref: setPositioner } = useContentCollision(props);
-const positionerClass = computed(() => popover().positioner());
+const positionerClass = popover().positioner();
 const positionerAttrs = computed(() => omitAttrs(attrs, "class"));
 
 providePopoverSize(() => props.size);

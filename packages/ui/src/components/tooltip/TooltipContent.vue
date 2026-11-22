@@ -98,8 +98,8 @@ const bodyClass = computed(() =>
     class: attrs.bodyClass as string | undefined,
   }),
 );
-const bodyIconClass = computed(() => tooltip().bodyIcon());
-const bodyTextClass = computed(() => tooltip().bodyText());
+const bodyIconClass = tooltip().bodyIcon();
+const bodyTextClass = tooltip().bodyText();
 const contentAttrs = computed(() => omitAttrs(attrs, "class", "bodyClass"));
 </script>
 

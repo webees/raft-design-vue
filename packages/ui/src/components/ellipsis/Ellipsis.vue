@@ -70,9 +70,9 @@ const textClass = computed(() =>
     clickable: clickable.value,
   }).text({ class: hasTooltip.value ? "select-auto" : undefined }),
 );
-const contentClass = computed(() => ellipsis().content());
-const spacerClass = computed(() => ellipsis().spacer());
-const afterClass = computed(() => ellipsis().after());
+const contentClass = ellipsis().content();
+const spacerClass = ellipsis().spacer();
+const afterClass = ellipsis().after();
 const rootStyle = computed(() => ({
   ...(attrs.style as Record<string, string> | undefined),
   "--ellipsis-lines": String(props.lines),

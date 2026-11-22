@@ -18,7 +18,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const classes = computed(() => lightbox().thumbnail({ class: props.class }));
-const overlayClasses = computed(() => lightbox().thumbnailOverlay());
+const overlayClasses = lightbox().thumbnailOverlay();
 </script>
 
 <template>

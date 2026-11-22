@@ -38,7 +38,7 @@ const attrs = useAttrs();
 const { bindings, ref: setPositioner } = useContentCollision(props, {
   defaultPadding: 8,
 });
-const positionerClass = computed(() => contextMenu().positioner());
+const positionerClass = contextMenu().positioner();
 const contentClass = computed(() =>
   contextMenu().content({ class: attrs.class as string | undefined }),
 );

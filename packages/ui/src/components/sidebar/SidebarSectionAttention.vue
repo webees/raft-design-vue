@@ -8,7 +8,7 @@ defineOptions({ name: "RaftSidebarSectionAttention", inheritAttrs: false });
 const props = withDefaults(defineProps<StatusStyleProps>(), { size: "md", variant: "accent" });
 
 const attrs = useAttrs();
-const rootClass = computed(() => sidebarSectionRecipe().sidebarSectionAttention());
+const rootClass = sidebarSectionRecipe().sidebarSectionAttention();
 const statusClass = computed(() => attrs.class as string | undefined);
 </script>
 
