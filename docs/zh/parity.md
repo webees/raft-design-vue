@@ -38,12 +38,12 @@ check:api → check:props → test → build → check:consumer-types`。
 
 |          |                                      |
 | -------- | ------------------------------------ |
-| 测试文件 | 105                                  |
-| 测试用例 | 393                                  |
+| 测试文件 | 106                                  |
+| 测试用例 | 395                                  |
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
-| 库产物   | 1925.9 kB 原始，290.9 kB gzip        |
-| 文档产物 | 4151.8 kB 总计，1603.6 kB gzip       |
+| 库产物   | 1928.6 kB 原始，294.0 kB gzip        |
+| 文档产物 | 4152.1 kB 总计，1603.8 kB gzip       |
 
 ### 源码基线
 
@@ -51,9 +51,9 @@ check:api → check:props → test → build → check:consumer-types`。
 
 | 指标                                    | 数值              |
 | --------------------------------------- | ----------------- |
-| 源码行数                                | 46,742            |
-| `components/` 行数                      | 42,565            |
-| `lib/` 行数                             | 3,993             |
+| 源码行数                                | 46,819            |
+| `components/` 行数                      | 42,608            |
+| `lib/` 行数                             | 4,027             |
 | 复制粘贴克隆（jscpd，10 行 / 70 token） | 0                 |
 | 复制粘贴克隆（jscpd，6 行 / 40 token）  | 0                 |
 | 重复行 / token 占比（6 行 / 40 token）  | 0.00% / 0.00%     |
@@ -67,7 +67,8 @@ find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) \
   ! -name '*.test.ts' ! -name '*.generated.ts' ! -name 'auto-imports.d.ts' \
   ! -path '*/test/*' | xargs wc -l
 bunx jscpd packages/ui/src --min-lines 6 --min-tokens 40 \
-  --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
+  --ignore '**/*.test.ts' --ignore '**/*.generated.ts' \
+  --ignore '**/*.css' --ignore '**/*.json'
 cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
   -p tsconfig.json --noUnusedLocals --noUnusedParameters
 ```

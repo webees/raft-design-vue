@@ -57,6 +57,10 @@ intentional differences from drift.
 - `DialogNav` maps upstream's `render` prop to `ScrollArea`'s `as`.
 - Drag placeholders use `DropPlaceholder` (`SortableTabs`, `DraggedSlot`)
   instead of upstream's `PLACE_STYLE`, so animation frames differ slightly.
+- Drag uses a local pointer/keyboard engine instead of dnd-kit. The overlay
+  still settles with the shared `DRAG_SETTLE` token (160 ms) by transitioning
+  `left`/`top` to the droppable (drop) or origin (cancel), and skips the glide
+  under `prefers-reduced-motion`.
 - Reka portals expose `--reka-*` variables; `Popover`, `Tooltip`,
   `PreviewCard`, `Select` and `Combobox` alias them to upstream's
   `--available-width/-height`, `--anchor-width` and `--transform-origin`.

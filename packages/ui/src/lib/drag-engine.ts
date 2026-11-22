@@ -1,5 +1,6 @@
 import {
   DRAG_AUTO_SCROLL_ZONE_PX,
+  DRAG_SETTLE,
   MOUSE_DRAG_DISTANCE_PX,
   TOUCH_DRAG_DISTANCE_PX,
   TOUCH_DRAG_HOLD_MS,
@@ -46,6 +47,16 @@ export interface DragSession {
 }
 
 export type DragEndReason = "drop" | "cancel";
+
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+
+function reducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia(REDUCED_MOTION).matches
+  );
+}
 
 /** The lifecycle callbacks every drag host accepts. */
 export interface DragLifecycleProps {
@@ -98,6 +109,9 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     touchTolerance: options.activation?.touchTolerance ?? TOUCH_DRAG_TOLERANCE_PX,
   };
   const active = shallowRef<DragSession | null>(null);
+  /** Survives the drop so the lift can glide home before it unmounts. */
+  const settling = shallowRef<{ reason: DragEndReason; session: DragSession } | null>(null);
+  let settleTimer: ReturnType<typeof setTimeout> | null = null;
   let measureObserver: ResizeObserver | null = null;
   const message = ref("");
 
@@ -133,16 +147,19 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     const candidates = droppablesList();
     if (candidates.length === 0) return null;
 
+    const accepts = (entry: DroppableRegistration) =>
+      entry.accept?.(session.data) !== false &&
+      (options.canDrop?.(session.data, entry.data) ?? true);
     let target: DroppableRegistration | undefined;
     const hit = document.elementFromPoint(session.pointer.x, session.pointer.y);
     const closest = hit?.closest<HTMLElement>("[data-drag-droppable]");
     if (closest) target = droppables.get(closest);
 
-    if (!target || target.disabled || target.accept?.(session.data) === false) {
+    if (!target || target.disabled || !accepts(target)) {
       const pointer = session.pointer;
       let best = Infinity;
       for (const entry of candidates) {
-        if (entry.accept && entry.accept(session.data) === false) continue;
+        if (!accepts(entry)) continue;
         const rect = entry.element.getBoundingClientRect();
         const center = rectCenter(rect);
         const score = distance(pointer, center) - rect.width * 0.0001;
@@ -154,7 +171,7 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     }
 
     if (!target) return null;
-    if (target.accept && target.accept(session.data) === false) return null;
+    if (!accepts(target)) return null;
 
     const rect = target.element.getBoundingClientRect();
     const placement: DragPlacement =
@@ -238,6 +255,9 @@ export function createDragEngine(options: DragEngineOptions = {}) {
 
   function begin() {
     if (!start) return;
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = null;
+    settling.value = null;
     started = true;
     const { registration } = start;
     const session = sessionFor(registration, false, start.point);
@@ -273,8 +293,22 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     document.body.style.userSelect = "";
     document.documentElement.style.cursor = "";
     if (!session) return;
+    finish(session, reason);
+  }
+
+  function finish(session: DragSession, reason: DragEndReason) {
+    if (!reducedMotion()) settle(session, reason);
     if (reason === "drop" && session.over) options.onDragEnd?.(session, "drop");
     else options.onDragCancel?.(session);
+  }
+
+  function settle(session: DragSession, reason: DragEndReason) {
+    if (settleTimer) clearTimeout(settleTimer);
+    settling.value = { reason, session };
+    settleTimer = setTimeout(() => {
+      settling.value = null;
+      settleTimer = null;
+    }, DRAG_SETTLE.duration + 32);
   }
 
   function cancel() {
@@ -391,8 +425,7 @@ export function createDragEngine(options: DragEngineOptions = {}) {
       if (!session?.keyboard) return;
       dropEscape();
       active.value = null;
-      if (session.over) options.onDragEnd?.(session, "drop");
-      else options.onDragCancel?.(session);
+      finish(session, session.over ? "drop" : "cancel");
     },
     cancel,
   };
@@ -436,6 +469,7 @@ export function createDragEngine(options: DragEngineOptions = {}) {
     message,
     registerDraggable,
     registerDroppable,
+    settling,
     startPointer,
   };
 }

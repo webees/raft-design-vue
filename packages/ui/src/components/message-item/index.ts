@@ -34,7 +34,6 @@ export {
   MessageItemSavedIndicator,
 } from "./message-footer-parts";
 export {
-  MessageReference,
   MessageReferenceChip,
   MessageReferenceIcon,
   MessageReferenceIndicator,
