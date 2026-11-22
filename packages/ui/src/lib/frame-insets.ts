@@ -282,13 +282,13 @@ export interface PopupCollision {
 }
 
 /** A template ref on a positioner: an element, or a component wrapping one. */
-export type PositionerRef = (value: Element | ComponentPublicInstance | null) => void;
+type PositionerRef = (value: Element | ComponentPublicInstance | null) => void;
 
 /** The boundary a positioner prop accepts; the frame and sheet rects are internal. */
-export type PopupCollisionBoundary = Element | Element[];
+type PopupCollisionBoundary = Element | Element[];
 
-export type PopupSide = "top" | "right" | "bottom" | "left";
-export type PopupAlign = "start" | "center" | "end";
+type PopupSide = "top" | "right" | "bottom" | "left";
+type PopupAlign = "start" | "center" | "end";
 
 /** Props shared by every popup positioner: where it goes and how it avoids the frame. */
 export interface PopupPositionerProps {
@@ -310,7 +310,7 @@ export function elementOf(value: Element | ComponentPublicInstance | null): Elem
   return element instanceof Element ? element : null;
 }
 
-export function usePopupCollision(
+function usePopupCollision(
   collisionPadding: MaybeRefOrGetter<CollisionPadding | undefined> | undefined,
   collisionBoundary: MaybeRefOrGetter<PopupCollisionBoundary | undefined>,
   defaultPadding: MaybeRefOrGetter<CollisionPadding>,

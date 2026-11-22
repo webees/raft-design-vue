@@ -250,13 +250,6 @@ export function useSheetPopupBoundary(
   });
 }
 
-export type SheetPopupBoundaryProps = {
-  /** The sheet's head: popups stay under its bottom edge. */
-  head: MaybeRefOrGetter<Element | null | undefined>;
-  /** The sheet's surface: popups stay above its bottom edge. Defaults to the head's parent. */
-  surface?: MaybeRefOrGetter<Element | null | undefined>;
-};
-
 /** Renders no element; gives every popup opened under it the sheet's boundary. */
 export const SheetPopupBoundary = defineComponent({
   name: "RaftSheetPopupBoundary",

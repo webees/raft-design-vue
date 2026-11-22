@@ -43,7 +43,7 @@ Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 | Tests       | 391                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 1925.6 kB raw, 293.1 kB gzip         |
+| Library     | 1926.2 kB raw, 290.9 kB gzip         |
 | Docs bundle | 4151.6 kB total, 1607.2 kB gzip      |
 
 ### Source baseline
@@ -53,7 +53,7 @@ excluded), measured on 2026-11-22:
 
 | Metric                                          | Value             |
 | ----------------------------------------------- | ----------------- |
-| Source lines                                    | 46,769            |
+| Source lines                                    | 46,762            |
 | `components/` lines                             | 42,585            |
 | `lib/` lines                                    | 4,000             |
 | Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0                 |

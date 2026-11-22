@@ -1,5 +1,5 @@
-export type ObservedResizeEntry = ResizeObserverEntry & { target: HTMLElement };
-export type ObservedResizeCallback = (entry: ObservedResizeEntry) => void;
+type ObservedResizeEntry = ResizeObserverEntry & { target: HTMLElement };
+type ObservedResizeCallback = (entry: ObservedResizeEntry) => void;
 
 class ResizeObserverDelegate {
   observer: ResizeObserver | null | undefined = undefined;
