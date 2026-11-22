@@ -54,6 +54,9 @@ bun run check:audit      # 对照快照审计 recipe、类名与 props
 - `DialogNav` 把上游 `render` prop 映射为 `ScrollArea` 的 `as`。
 - 拖拽占位使用 `DropPlaceholder`（`SortableTabs`、`DraggedSlot`）而非上游
   `PLACE_STYLE`，动画首尾帧略有差异。
+- 拖拽由本地指针/键盘引擎驱动而非 dnd-kit；浮层仍按共享 `DRAG_SETTLE`
+  token（160 ms）过渡 `left`/`top` 到目标落点（drop）或原位（cancel），
+  在 `prefers-reduced-motion` 下跳过滑落动画。
 - Reka portal 暴露 `--reka-*` 变量；`Popover`、`Tooltip`、`PreviewCard`、
   `Select`、`Combobox` 将其别名为上游的 `--available-width/-height`、
   `--anchor-width` 与 `--transform-origin`。

@@ -118,13 +118,11 @@ export const MessageReferenceReadMark = referencePart({
   readMark: true,
 });
 
-export const MessageReference = referencePart({
-  name: "RaftMessageReference",
+export const MessageReferenceChip = referencePart({
+  name: "RaftMessageReferenceChip",
   variant: "muted",
   capped: true,
 });
-
-export const MessageReferenceChip = MessageReference;
 
 export const MessageReferenceText = referencePart({
   name: "RaftMessageReferenceText",

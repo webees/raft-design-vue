@@ -19,13 +19,13 @@ const props = withDefaults(
 
 const engine = createDragEngine({
   activation: props.sensors ? dragSensorsActivation(props.sensors) : undefined,
-  canDrop: props.canDrop,
+  canDrop: (active, over) => props.canDrop?.(active, over) ?? true,
   disabled: () => props.disabled,
-  onDragCancel: props.onDragCancel,
-  onDragEnd: props.onDragEnd,
-  onDragMove: props.onDragMove,
-  onDragOver: props.onDragOver,
-  onDragStart: props.onDragStart,
+  onDragCancel: (session) => props.onDragCancel?.(session),
+  onDragEnd: (session, reason) => props.onDragEnd?.(session, reason),
+  onDragMove: (session) => props.onDragMove?.(session),
+  onDragOver: (session) => props.onDragOver?.(session),
+  onDragStart: (session) => props.onDragStart?.(session),
 });
 
 provideDragEngine(engine);

@@ -39,12 +39,12 @@ Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 
 |             |                                      |
 | ----------- | ------------------------------------ |
-| Test files  | 105                                  |
-| Tests       | 393                                  |
+| Test files  | 106                                  |
+| Tests       | 395                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
-| Library     | 1925.9 kB raw, 290.9 kB gzip         |
-| Docs bundle | 4151.8 kB total, 1603.6 kB gzip      |
+| Library     | 1928.6 kB raw, 294.0 kB gzip         |
+| Docs bundle | 4152.1 kB total, 1603.8 kB gzip      |
 
 ### Source baseline
 
@@ -53,9 +53,9 @@ excluded), measured on 2026-11-22:
 
 | Metric                                          | Value             |
 | ----------------------------------------------- | ----------------- |
-| Source lines                                    | 46,742            |
-| `components/` lines                             | 42,565            |
-| `lib/` lines                                    | 3,993             |
+| Source lines                                    | 46,819            |
+| `components/` lines                             | 42,608            |
+| `lib/` lines                                    | 4,027             |
 | Copy-paste clones (jscpd, 10 lines / 70 tokens) | 0                 |
 | Copy-paste clones (jscpd, 6 lines / 40 tokens)  | 0                 |
 | Duplicated lines / tokens (6/40)                | 0.00% / 0.00%     |
@@ -69,7 +69,8 @@ find packages/ui/src \( -name '*.ts' -o -name '*.vue' \) \
   ! -name '*.test.ts' ! -name '*.generated.ts' ! -name 'auto-imports.d.ts' \
   ! -path '*/test/*' | xargs wc -l
 bunx jscpd packages/ui/src --min-lines 6 --min-tokens 40 \
-  --ignore "**/*.test.ts,**/*.generated.ts,**/*.css,**/*.json"
+  --ignore '**/*.test.ts' --ignore '**/*.generated.ts' \
+  --ignore '**/*.css' --ignore '**/*.json'
 cd packages/ui && ./node_modules/.bin/vue-tsc --noEmit \
   -p tsconfig.json --noUnusedLocals --noUnusedParameters
 ```

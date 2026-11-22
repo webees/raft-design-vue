@@ -1,5 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
+import { createDragEngine } from "../../lib/drag-engine";
 import { createDragAnnouncements } from "./drag-announcements";
 import { moveBetweenLists, placeInList } from "./drag-lists";
 import { listKeyboardCoordinates } from "./drag-sensors";
@@ -12,6 +13,31 @@ const rect = (top: number, left = 0, width = 100, height = 40) => ({
 });
 
 describe("drag", () => {
+  it("keeps a settling snapshot after a drop, then clears it", () => {
+    vi.useFakeTimers();
+    const engine = createDragEngine();
+    const element = document.createElement("div");
+    document.body.append(element);
+    const session = {
+      data: {},
+      delta: { x: 0, y: 0 },
+      id: "a",
+      keyboard: false,
+      over: null,
+      pointer: { x: 0, y: 0 },
+      rect: element.getBoundingClientRect(),
+    };
+
+    engine.active.value = session;
+    engine.cancel();
+    expect(engine.settling.value).toEqual({ reason: "cancel", session });
+
+    vi.advanceTimersByTime(200);
+    expect(engine.settling.value).toBeNull();
+    vi.useRealTimers();
+    element.remove();
+  });
+
   it("finds the next place by keyboard in each direction", () => {
     const a = { id: "a", rect: rect(0) };
     const b = { id: "b", rect: rect(100) };
