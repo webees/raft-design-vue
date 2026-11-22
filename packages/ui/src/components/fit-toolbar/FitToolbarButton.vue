@@ -55,6 +55,25 @@ const content = computed(() => {
   if (slots.default) return undefined;
   return props.label;
 });
+
+/** The icon pair, rendered identically inside and outside the plus wrapper. */
+const Icons = () => {
+  const collapsed = slots["collapsed-icon"];
+  if (!collapsed) return slots.icon?.() ?? null;
+  return [
+    slots.icon &&
+      h(
+        "span",
+        { "data-slot": "fit-toolbar-button-full-icon", class: styles.fullIcon() },
+        slots.icon(),
+      ),
+    h(
+      "span",
+      { "data-slot": "fit-toolbar-button-collapsed-icon", class: styles.collapsedIcon() },
+      collapsed(),
+    ),
+  ];
+};
 </script>
 
 <template>
@@ -76,37 +95,11 @@ const content = computed(() => {
       >
         <template v-if="props.plusOrder !== undefined">
           <span data-slot="fit-toolbar-button-icon" :class="styles.icon()">
-            <template v-if="slots['collapsed-icon']">
-              <span
-                v-if="slots.icon"
-                data-slot="fit-toolbar-button-full-icon"
-                :class="styles.fullIcon()"
-              >
-                <slot name="icon" />
-              </span>
-              <span data-slot="fit-toolbar-button-collapsed-icon" :class="styles.collapsedIcon()">
-                <slot name="collapsed-icon" />
-              </span>
-            </template>
-            <slot v-else name="icon" />
+            <Icons />
           </span>
           <Plus data-slot="fit-toolbar-button-plus" aria-hidden :class="styles.plus()" />
         </template>
-        <template v-else>
-          <template v-if="slots['collapsed-icon']">
-            <span
-              v-if="slots.icon"
-              data-slot="fit-toolbar-button-full-icon"
-              :class="styles.fullIcon()"
-            >
-              <slot name="icon" />
-            </span>
-            <span data-slot="fit-toolbar-button-collapsed-icon" :class="styles.collapsedIcon()">
-              <slot name="collapsed-icon" />
-            </span>
-          </template>
-          <slot v-else name="icon" />
-        </template>
+        <Icons v-else />
         <span data-slot="fit-toolbar-button-label" :class="styles.label()">
           <slot>{{ content }}</slot>
         </span>

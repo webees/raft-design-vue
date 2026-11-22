@@ -129,13 +129,7 @@ onBeforeUnmount(reset);
 </script>
 
 <template>
-  <DragScope
-    :sensors="sensors"
-    :on-drag-start="onDragStart"
-    :on-drag-over="onDragOver"
-    :on-drag-end="onDragEnd"
-    :on-drag-cancel="reset"
-  >
+  <DragScope v-bind="{ sensors, onDragStart, onDragOver, onDragEnd, onDragCancel: reset }">
     <DragLiveRegion :message="announcement" />
     <div
       ref="listRef"
