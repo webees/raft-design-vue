@@ -32,7 +32,7 @@ const area = useScrollAreaContainer({
   actionsRef: props.actionsRef ?? undefined,
   fade: props.fade,
   hideDelay: props.hideDelay,
-  onEdgeChange: props.onEdgeChange,
+  onEdgeChange: (edges) => props.onEdgeChange?.(edges),
   orientation: props.orientation,
   overscroll: props.overscroll,
   railInset: props.railInset,
