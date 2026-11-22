@@ -4,7 +4,8 @@ import docs from "../generated/design-docs.json";
 
 // Upstream Markdown is rendered read-only; raw HTML stays disabled.
 const md = new MarkdownIt({ html: false, linkify: true });
-md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
+let headingIds = new Map<string, number>();
+md.renderer.rules.heading_open = (tokens, idx, options, _env, self) => {
   const text = (tokens[idx + 1]?.children ?? [])
     .map((token) => (token.type === "text" || token.type === "code_inline" ? token.content : ""))
     .join("");
@@ -13,12 +14,14 @@ md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
       .toLowerCase()
       .replace(/[^\p{L}\p{N}\s_-]/gu, "")
       .replace(/ /g, "-") || "section";
-  env.headingIds ??= new Map<string, number>();
-  const seen = env.headingIds;
-  const count = seen.get(slug) ?? 0;
-  seen.set(slug, count + 1);
+  const count = headingIds.get(slug) ?? 0;
+  headingIds.set(slug, count + 1);
   tokens[idx]!.attrSet("id", count ? `${slug}-${count}` : slug);
   return self.renderToken(tokens, idx, options);
+};
+const renderMarkdown = (body: string) => {
+  headingIds = new Map();
+  return md.render(body);
 };
 const query = ref("");
 const activeId = ref(docs[0]?.id ?? "");
@@ -45,7 +48,7 @@ const groups = computed(() => {
 });
 
 const active = computed(() => docs.find((doc) => doc.id === activeId.value));
-const rendered = computed(() => (active.value ? md.render(active.value.body) : ""));
+const rendered = computed(() => (active.value ? renderMarkdown(active.value.body) : ""));
 
 const scrollToHash = (hash: string) => {
   if (!hash) return;
