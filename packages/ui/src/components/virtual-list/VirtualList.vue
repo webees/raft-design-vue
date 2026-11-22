@@ -5,7 +5,7 @@ import type { CSSProperties, VNodeChild } from "vue";
 import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
 import { FenwickTree } from "./fenwick-tree";
-import { getAlignedScrollTop, SCROLL_ALIGN_STEPS } from "./virtual-list-align";
+import { getAlignedScrollTop, getVisibleScrollTop, SCROLL_ALIGN_STEPS } from "./virtual-list-align";
 import {
   ITEM_KEY_ATTR,
   NON_VIRTUAL_VISIBLE_ITEMS_STYLE,
@@ -760,7 +760,7 @@ const ios = useIosMomentumCompensation({
 function settleScroll(
   index: number,
   behavior: ScrollBehavior,
-  align: "start" | "center" | "end",
+  align: "start" | "center" | "end" | null,
   scrollMarginTop: number,
   scrollMarginBottom: number,
   step = 0,
@@ -777,15 +777,28 @@ function settleScroll(
     0,
     tree.value.sum(items.value.length) + leadingMargin.value - listEl.clientHeight,
   );
-  const target = getAlignedScrollTop({
-    itemTop: itemTop + leadingMargin.value,
-    itemSize,
-    viewportHeight: listEl.clientHeight,
-    align,
-    scrollMarginTop,
-    scrollMarginBottom,
-    maxScrollTop: maxTop,
-  });
+  const top = itemTop + leadingMargin.value;
+  const viewportHeight = listEl.clientHeight;
+  const target =
+    align === null
+      ? getVisibleScrollTop({
+          itemTop: top,
+          itemSize,
+          viewportHeight,
+          scrollTop: listEl.scrollTop,
+          scrollMarginTop,
+          scrollMarginBottom,
+          maxScrollTop: maxTop,
+        })
+      : getAlignedScrollTop({
+          itemTop: top,
+          itemSize,
+          viewportHeight,
+          align,
+          scrollMarginTop,
+          scrollMarginBottom,
+          maxScrollTop: maxTop,
+        });
   if (Math.abs(listEl.scrollTop - target) > 0.5) {
     if (behavior === "instant") {
       listEl.scrollTop = target;
@@ -865,12 +878,13 @@ function scrollTo(options: VirtualListScrollToOptions | number, topIfNumber?: nu
   if (index < 0 || index >= items.value.length) {
     return;
   }
+  const align = opts.align ?? (opts.debounce === false ? "start" : null);
   settleScroll(
     index,
     opts.behavior ?? "instant",
-    opts.align ?? "start",
-    opts.scrollMarginTop ?? 0,
-    opts.scrollMarginBottom ?? 0,
+    align,
+    align === "start" && opts.align === undefined ? 0 : (opts.scrollMarginTop ?? 0),
+    align === "start" && opts.align === undefined ? 0 : (opts.scrollMarginBottom ?? 0),
   );
 }
 

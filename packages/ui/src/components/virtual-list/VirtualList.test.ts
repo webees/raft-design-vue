@@ -65,6 +65,30 @@ describe("VirtualList", () => {
     expect(labels).toContain("Row 150");
   });
 
+  it("debounces the jump to the smallest scroll that reveals the row", async () => {
+    stubViewport();
+    const wrapper = mount(VirtualList, {
+      props: {
+        items,
+        getKey,
+        itemEstimatedSize: 40,
+        itemMinSize: 40,
+        children: renderRow,
+      },
+    });
+    await nextTick();
+    const api = wrapper.vm as unknown as {
+      scrollTo: (options: { index: number; debounce?: boolean; behavior: "instant" }) => void;
+    };
+    const list = wrapper.get('[data-slot="virtual-list"]').element as HTMLElement;
+
+    api.scrollTo({ index: 1, behavior: "instant" });
+    expect(list.scrollTop).toBe(0);
+
+    api.scrollTo({ index: 1, debounce: false, behavior: "instant" });
+    expect(list.scrollTop).toBe(40);
+  });
+
   it("renders every row when virtualization is off", async () => {
     stubViewport();
     const wrapper = mount(VirtualList, {
