@@ -93,13 +93,7 @@ const liftContentClass = computed(() => tabs(ui).content());
 </script>
 
 <template>
-  <DragScope
-    :sensors="sensors"
-    :on-drag-start="onDragStart"
-    :on-drag-over="onDragOver"
-    :on-drag-end="onDragEnd"
-    :on-drag-cancel="reset"
-  >
+  <DragScope v-bind="{ sensors, onDragStart, onDragOver, onDragEnd, onDragCancel: reset }">
     <TabsList
       :aria-label="ariaLabel"
       :as="as"
