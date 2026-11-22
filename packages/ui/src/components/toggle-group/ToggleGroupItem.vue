@@ -1,28 +1,23 @@
 <script setup lang="ts">
 import { ToggleGroupItem } from "reka-ui";
 import type { ItemProps } from "../../lib/item-props";
-import { useTapActivation } from "../../lib/tap-activation";
+import { useItemBindings } from "../../lib/item-bindings";
 import { toggleGroup } from "./toggle-group.variants";
 
 defineOptions({ name: "RaftToggleGroupItem", inheritAttrs: false });
 
-withDefaults(defineProps<ItemProps>(), { disabled: false, asChild: false });
+const props = withDefaults(defineProps<ItemProps>(), { disabled: false, asChild: false });
 
-const attrs = useAttrs();
-const tapRef = useTapActivation();
-const itemClass = computed(() => toggleGroup().item({ className: attrs.class as string }));
+const { tapRef, rootAttrs } = useItemBindings(props, (className) =>
+  toggleGroup().item({ className }),
+);
 </script>
 
 <template>
   <ToggleGroupItem
     :ref="tapRef"
-    v-bind="{ ...attrs, class: undefined }"
-    :value="value"
-    :disabled="disabled"
-    :as="as"
-    :as-child="asChild"
+    v-bind="rootAttrs"
     data-slot="toggle-group-item"
-    :class="itemClass"
   >
     <slot />
   </ToggleGroupItem>

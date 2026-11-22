@@ -1,7 +1,6 @@
 export { AppRailRoot } from "./AppRailRoot";
 export { AppRailHeader } from "./AppRailHeader";
-export { default as AppRailNav } from "./AppRailNav.vue";
-export { default as AppRailItem } from "./AppRailItem.vue";
+export { AppRailItem, AppRailNav } from "./parts";
 export { AppRailItemIcon } from "./AppRailItemIcon";
 export { AppRailItemLabel } from "./AppRailItemLabel";
 export { AppRailItemBadge } from "./AppRailItemBadge";

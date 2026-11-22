@@ -1,6 +1,4 @@
-import { recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { avatarVariants } from "./avatar.variants";
 
-export const AvatarGroup = recipePart("RaftAvatarGroup", "div", "avatar-group", (className) =>
-  avatarVariants().group({ className }),
-);
+export const AvatarGroup = fixedPartFactory(avatarVariants)("AvatarGroup", "group");

@@ -1,3 +1,3 @@
 export { default as WorkspaceButton } from "./WorkspaceButton.vue";
-export { default as WorkspaceButtonName } from "./WorkspaceButtonName.vue";
+export { WorkspaceButtonName } from "./parts";
 export { workspaceButton } from "./workspace-button.variants";

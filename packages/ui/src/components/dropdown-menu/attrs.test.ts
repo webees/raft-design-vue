@@ -1,8 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 
-import DropdownMenuFooter from "./DropdownMenuFooter.vue";
-import DropdownMenuShortcut from "./DropdownMenuShortcut.vue";
+import { DropdownMenuFooter, DropdownMenuShortcut } from "./parts";
 
 function occurrences(value: string, token: string) {
   return value.split(/\s+/).filter((name) => name === token).length;

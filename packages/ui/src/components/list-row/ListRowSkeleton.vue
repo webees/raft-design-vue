@@ -2,12 +2,14 @@
 import { cn } from "../../lib/cn";
 import Skeleton from "../skeleton/Skeleton.vue";
 import ListRow from "./ListRow.vue";
-import ListRowBody from "./ListRowBody.vue";
-import ListRowBottom from "./ListRowBottom.vue";
-import ListRowDescription from "./ListRowDescription.vue";
-import ListRowMeta from "./ListRowMeta.vue";
-import ListRowTitle from "./ListRowTitle.vue";
-import ListRowTop from "./ListRowTop.vue";
+import {
+  ListRowBody,
+  ListRowBottom,
+  ListRowDescription,
+  ListRowMeta,
+  ListRowTitle,
+  ListRowTop,
+} from "./parts";
 import { listRowSkeleton } from "./list-row-skeleton.variants";
 import type { ListRowVariant } from "./list-row.variants";
 

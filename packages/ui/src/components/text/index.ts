@@ -1,6 +1,4 @@
-import TextHeading from "./TextHeading.vue";
-import TextSans from "./TextSans.vue";
-import TextMono from "./TextMono.vue";
+import { TextHeading, TextMono, TextSans } from "./parts";
 
 export const Text = { Heading: TextHeading, Sans: TextSans, Mono: TextMono };
 export { TextHeading, TextSans, TextMono };

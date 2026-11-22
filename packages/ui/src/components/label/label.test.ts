@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import Label from "./Label.vue";
+import { Label } from "./parts";
 import LabelOptional from "./LabelOptional.vue";
 
 describe("Label", () => {

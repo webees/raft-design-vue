@@ -2,10 +2,16 @@ import { Primitive } from "reka-ui";
 import { computed, defineComponent, h, inject, mergeProps } from "vue";
 
 import { omitAttrs } from "../../lib/attrs";
+import { recipePartFactory } from "../../lib/slot-part";
 import { meterContextKey } from "./meter-context";
 import { meter } from "./meter.variants";
 
 type MeterSlot = "indicator" | "label" | "value";
+
+const simple = recipePartFactory(meter);
+
+export const MeterHeader = simple("MeterHeader", "header");
+export const MeterTrack = simple("MeterTrack", "track");
 
 const part = (name: string, slot: MeterSlot, tag: string, dataSlot: string) =>
   defineComponent({

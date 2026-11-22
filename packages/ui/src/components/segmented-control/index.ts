@@ -1,9 +1,8 @@
 import type { SegmentedControlIconsOnlyPreset } from "./segmented-control.variants";
 
 export { default as SegmentedControl } from "./SegmentedControl.vue";
-export { default as SegmentedControlCount } from "./SegmentedControlCount.vue";
+export { SegmentedControlCount, SegmentedControlLabel } from "./parts";
 export { default as SegmentedControlItem } from "./SegmentedControlItem.vue";
-export { default as SegmentedControlLabel } from "./SegmentedControlLabel.vue";
 
 export type {
   SegmentedControlIconsOnlyPreset,

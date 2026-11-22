@@ -1,23 +1,16 @@
-import { createSlotComponent } from "../../lib/create-slot-component";
+import { recipePartFactory } from "../../lib/slot-part";
 import { composerDropOverlay } from "./composer-drop-overlay.recipe";
 
-export const ComposerDropOverlayLabel = createSlotComponent({
-  name: "RaftComposerDropOverlayLabel",
-  tag: "span",
-  dataSlot: "composer-drop-overlay-label",
-  classes: (className) => composerDropOverlay().dropOverlayLabel({ class: className }),
-});
+const part = recipePartFactory(composerDropOverlay);
 
-export const ComposerDropOverlayIconCluster = createSlotComponent({
-  name: "RaftComposerDropOverlayIconCluster",
-  tag: "span",
-  dataSlot: "composer-drop-overlay-icon-cluster",
-  classes: (className) => composerDropOverlay().dropOverlayIconCluster({ class: className }),
-});
-
-export const ComposerDropOverlayIcon = createSlotComponent({
-  name: "RaftComposerDropOverlayIcon",
-  tag: "span",
-  dataSlot: "composer-drop-overlay-icon",
-  classes: (className) => composerDropOverlay().dropOverlayIcon({ class: className }),
-});
+export const ComposerDropOverlayLabel = part(
+  "ComposerDropOverlayLabel",
+  "dropOverlayLabel",
+  "span",
+);
+export const ComposerDropOverlayIconCluster = part(
+  "ComposerDropOverlayIconCluster",
+  "dropOverlayIconCluster",
+  "span",
+);
+export const ComposerDropOverlayIcon = part("ComposerDropOverlayIcon", "dropOverlayIcon", "span");

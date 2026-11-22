@@ -1,9 +1,8 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import CodeBlock from "./CodeBlock.vue";
-import CodeBlockAction from "./CodeBlockAction.vue";
+import { CodeBlock, CodeBlockAction } from "./parts";
 import CodeBlockBody from "./CodeBlockBody.vue";
-import CodeBlockHeader from "./CodeBlockHeader.vue";
+import { CodeBlockHeader } from "./parts";
 import CodeBlockPre from "./CodeBlockPre.vue";
 
 describe("CodeBlock", () => {

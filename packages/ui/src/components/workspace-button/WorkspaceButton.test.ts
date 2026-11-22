@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import WorkspaceButton from "./WorkspaceButton.vue";
-import WorkspaceButtonName from "./WorkspaceButtonName.vue";
+import { WorkspaceButtonName } from "./parts";
 
 describe("WorkspaceButton", () => {
   it("renders a labelled workspace switcher", () => {

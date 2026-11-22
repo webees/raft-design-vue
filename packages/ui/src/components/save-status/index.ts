@@ -1,8 +1,8 @@
-import SaveStatusRoot from "./SaveStatus.vue";
 import SaveStatusErrorRoot from "./SaveStatusError.vue";
 import { SaveStatusSaved } from "./SaveStatusSaved";
+import { SaveStatus } from "./parts";
 
-export const SaveStatus = SaveStatusRoot;
+export { SaveStatus };
 export const SaveStatusError = SaveStatusErrorRoot;
 export { SaveStatusSaved };
 export { saveStatus } from "./save-status.variants";

@@ -66,31 +66,31 @@ function exportedTypes(source) {
 
 function exportedComponents(source) {
   const components = new Map();
-  for (const match of source.matchAll(
-    /export\s*\{\s*default\s+as\s+(\w+)\s*\}\s*from\s+"([^"]+)"/g,
-  )) {
-    components.set(match[1], { path: match[2] });
-  }
   const imports = new Map();
   for (const match of source.matchAll(/import\s+(\w+)\s+from\s+"([^"]+\.vue)"/g)) {
     imports.set(match[1], match[2]);
   }
-  for (const match of source.matchAll(/export\s*\{([^}]*)\}/g)) {
+  for (const match of source.matchAll(/export\s*\{([^}]*)\}\s*(?:from\s+"([^"]+)")?/g)) {
+    const from = match[2];
     for (const part of match[1].split(",")) {
-      const name = part
-        .trim()
-        .split(/\s+as\s+/)
-        .pop()
-        ?.trim();
-      if (name && imports.has(name)) components.set(name, { path: imports.get(name) });
+      const specifier = part.trim();
+      if (specifier.startsWith("type ")) continue;
+      const [local, exported] = specifier.split(/\s+as\s+/).map((value) => value?.trim());
+      const name = exported || local;
+      if (!name || !local) continue;
+      if (local === "default" && from) components.set(name, { path: from });
+      else {
+        const path = imports.get(local) ?? from;
+        if (path) components.set(name, { path, named: path.endsWith(".vue") ? undefined : local });
+      }
     }
   }
   return components;
 }
 
-const folders = (await readdir(LOCAL, { withFileTypes: true })).filter((entry) =>
-  entry.isDirectory(),
-);
+const folders = (await readdir(LOCAL, { withFileTypes: true }))
+  .filter((entry) => entry.isDirectory())
+  .sort((a, b) => (a.name < b.name ? -1 : 1));
 const localTypes = new Set();
 const localComponents = new Map();
 
@@ -101,12 +101,15 @@ for (const folder of folders) {
   for (const name of exportedTypes(source)) localTypes.add(name);
   for (const [name, entry] of exportedComponents(source)) {
     localComponents.set(name, {
+      ...entry,
       path: join("components", folder.name, entry.path.replace(/^\.\//, "")),
     });
   }
   // Files are the source of truth: a component named `CardHeader` lives in
   // `CardHeader.vue` even when the barrel only exports it indirectly.
-  for (const file of await readdir(join(LOCAL, folder.name))) {
+  const entries = (await readdir(join(LOCAL, folder.name))).sort();
+
+  for (const file of entries) {
     if (!file.endsWith(".vue")) continue;
     const name = file.slice(0, -".vue".length);
     if (!localComponents.has(name)) {
@@ -115,7 +118,7 @@ for (const folder of folders) {
   }
   // Parts compiled through `createSlotComponent`/`defineComponent` live in
   // plain `.ts` modules instead of SFCs.
-  for (const file of await readdir(join(LOCAL, folder.name))) {
+  for (const file of entries) {
     if (!file.endsWith(".ts") || file.endsWith(".test.ts")) continue;
     const partSource = await readFile(join(LOCAL, folder.name, file), "utf8");
     for (const match of partSource.matchAll(/export\s+const\s+(\w+)\s*[=:]/g)) {

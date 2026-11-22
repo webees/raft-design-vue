@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import SaveStatus from "./SaveStatus.vue";
+import { SaveStatus } from "./parts";
 import SaveStatusError from "./SaveStatusError.vue";
 import { SaveStatusSaved } from "./SaveStatusSaved";
 

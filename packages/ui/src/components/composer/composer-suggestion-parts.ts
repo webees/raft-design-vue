@@ -1,44 +1,11 @@
-import { createSlotComponent } from "../../lib/create-slot-component";
+import { recipePartFactory } from "../../lib/slot-part";
 import { composerSuggestionList } from "./composer-suggestion.recipe";
 
-export const ComposerSuggestionGroupLabel = createSlotComponent({
-  name: "RaftComposerSuggestionGroupLabel",
-  tag: "div",
-  dataSlot: "composer-suggestion-group-label",
-  classes: (className) => composerSuggestionList().groupLabel({ class: className }),
-});
+const part = recipePartFactory(composerSuggestionList);
 
-export const ComposerSuggestionOption = createSlotComponent({
-  name: "RaftComposerSuggestionOption",
-  tag: "div",
-  dataSlot: "composer-suggestion-option",
-  classes: (className) => composerSuggestionList().item({ class: className }),
-});
-
-export const ComposerSuggestionContent = createSlotComponent({
-  name: "RaftComposerSuggestionContent",
-  tag: "span",
-  dataSlot: "composer-suggestion-content",
-  classes: (className) => composerSuggestionList().content({ class: className }),
-});
-
-export const ComposerSuggestionTitle = createSlotComponent({
-  name: "RaftComposerSuggestionTitle",
-  tag: "span",
-  dataSlot: "composer-suggestion-title",
-  classes: (className) => composerSuggestionList().title({ class: className }),
-});
-
-export const ComposerSuggestionAside = createSlotComponent({
-  name: "RaftComposerSuggestionAside",
-  tag: "span",
-  dataSlot: "composer-suggestion-aside",
-  classes: (className) => composerSuggestionList().aside({ class: className }),
-});
-
-export const ComposerSuggestionMeta = createSlotComponent({
-  name: "RaftComposerSuggestionMeta",
-  tag: "span",
-  dataSlot: "composer-suggestion-meta",
-  classes: (className) => composerSuggestionList().meta({ class: className }),
-});
+export const ComposerSuggestionGroupLabel = part("ComposerSuggestionGroupLabel", "groupLabel");
+export const ComposerSuggestionOption = part("ComposerSuggestionOption", "item");
+export const ComposerSuggestionContent = part("ComposerSuggestionContent", "content", "span");
+export const ComposerSuggestionTitle = part("ComposerSuggestionTitle", "title", "span");
+export const ComposerSuggestionAside = part("ComposerSuggestionAside", "aside", "span");
+export const ComposerSuggestionMeta = part("ComposerSuggestionMeta", "meta", "span");

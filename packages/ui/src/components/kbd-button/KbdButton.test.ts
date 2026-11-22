@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import KbdButton from "./KbdButton.vue";
 import KbdButtonCaret from "./KbdButtonCaret.vue";
-import KbdButtonPlaceholder from "./KbdButtonPlaceholder.vue";
+import { KbdButtonPlaceholder } from "./parts";
 
 describe("KbdButton", () => {
   it("is a native button that names its shortcut", () => {

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import Banner from "./Banner.vue";
 import BannerAction from "./BannerAction.vue";
 import BannerClose from "./BannerClose.vue";
-import BannerTitle from "./BannerTitle.vue";
+import { BannerTitle } from "./parts";
 
 describe("Banner", () => {
   it("renders status and size data attributes", () => {

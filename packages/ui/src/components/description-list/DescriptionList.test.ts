@@ -1,9 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import DescriptionList from "./DescriptionList.vue";
-import DescriptionItem from "./DescriptionItem.vue";
-import DescriptionTerm from "./DescriptionTerm.vue";
-import DescriptionDetails from "./DescriptionDetails.vue";
+import { DescriptionDetails, DescriptionItem, DescriptionTerm } from "./parts";
 
 describe("DescriptionList", () => {
   it("renders semantic term and details pairs", () => {

@@ -2,10 +2,12 @@ import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import MessageList from "./MessageList.vue";
-import MessageListJumpControls from "./MessageListJumpControls.vue";
-import MessageListJumpPill from "./MessageListJumpPill.vue";
-import MessageListJumpPillDismiss from "./MessageListJumpPillDismiss.vue";
-import MessageListNotice from "./MessageListNotice.vue";
+import {
+  MessageListJumpControls,
+  MessageListJumpPill,
+  MessageListJumpPillDismiss,
+  MessageListNotice,
+} from "./parts";
 
 function stubMatchMedia(matches: boolean) {
   const listeners = new Set<(event: MediaQueryListEvent) => void>();

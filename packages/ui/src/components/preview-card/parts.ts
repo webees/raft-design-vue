@@ -1,6 +1,30 @@
+import { createSlotComponent } from "../../lib/create-slot-component";
 import { recipePart } from "../../lib/slot-part";
 import { messageCard } from "../message-embed/message-embed.variants";
 import { previewCard } from "./preview-card.variants";
+
+export const PreviewCardDescription = recipePart(
+  "RaftPreviewCardDescription",
+  "p",
+  "preview-card-description",
+  (className) => previewCard().description({ className }),
+);
+
+export const PreviewCardSeparator = createSlotComponent({
+  name: "RaftPreviewCardSeparator",
+  tag: "div",
+  dataSlot: "preview-card-separator",
+  asChild: true,
+  classes: (className) => previewCard().separator({ className }),
+  staticAttrs: { role: "separator", "aria-orientation": "horizontal" },
+});
+
+export const PreviewCardActions = recipePart(
+  "RaftPreviewCardActions",
+  "div",
+  "preview-card-actions",
+  (className) => messageCard().actions({ className }),
+);
 
 export const PreviewCardBody = recipePart(
   "RaftPreviewCardBody",

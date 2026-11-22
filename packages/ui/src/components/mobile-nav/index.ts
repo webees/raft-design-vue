@@ -1,6 +1,6 @@
 export { default as MobileNavRoot } from "./MobileNavRoot.vue";
 export { default as MobileNavItem } from "./MobileNavItem.vue";
-export { default as MobileNavLabel } from "./MobileNavLabel.vue";
+export { MobileNavLabel } from "./parts";
 export { default as MobileNavServerPopover } from "./MobileNavServerPopover.vue";
 export { default as MobileNavServerItem } from "./MobileNavServerItem.vue";
 export { default as MobileNavServerPopoverContent } from "./MobileNavServerPopoverContent.vue";

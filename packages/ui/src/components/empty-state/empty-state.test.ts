@@ -1,10 +1,12 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import EmptyState from "./EmptyState.vue";
-import EmptyStateContent from "./EmptyStateContent.vue";
-import EmptyStateDescription from "./EmptyStateDescription.vue";
-import EmptyStateIcon from "./EmptyStateIcon.vue";
-import EmptyStateTitle from "./EmptyStateTitle.vue";
+import {
+  EmptyState,
+  EmptyStateContent,
+  EmptyStateDescription,
+  EmptyStateIcon,
+  EmptyStateTitle,
+} from "./parts";
 
 describe("EmptyState", () => {
   it("renders a composed empty state", () => {

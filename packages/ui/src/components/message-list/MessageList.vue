@@ -3,7 +3,7 @@ import type { StyleValue } from "vue";
 
 import { toElement } from "../../lib/dom";
 import { useMobileViewport } from "../../lib/use-mobile-viewport";
-import PanelNativeScrollViewport from "../panel/PanelNativeScrollViewport.vue";
+import { PanelNativeScrollViewport } from "../panel/parts";
 import ScrollArea from "../scroll-area/ScrollArea.vue";
 import { messageList } from "./message-list.recipe";
 

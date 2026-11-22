@@ -1,12 +1,8 @@
 import MeterRoot from "./Meter.vue";
-import MeterHeaderRoot from "./MeterHeader.vue";
-import MeterTrackRoot from "./MeterTrack.vue";
-import { MeterIndicator, MeterLabel, MeterValue } from "./parts";
+import { MeterHeader, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "./parts";
 
 export const Meter = MeterRoot;
-export const MeterHeader = MeterHeaderRoot;
-export const MeterTrack = MeterTrackRoot;
-export { MeterIndicator, MeterLabel, MeterValue };
+export { MeterHeader, MeterIndicator, MeterLabel, MeterTrack, MeterValue };
 
 export { meter } from "./meter.variants";
 export type { MeterLevel, MeterSize } from "./meter.variants";

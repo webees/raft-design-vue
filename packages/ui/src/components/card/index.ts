@@ -1,11 +1,13 @@
 import CardRoot from "./Card.vue";
-import CardHeader from "./CardHeader.vue";
-import CardTitle from "./CardTitle.vue";
-import CardLeading from "./CardLeading.vue";
-import CardDescription from "./CardDescription.vue";
-import CardTrailing from "./CardTrailing.vue";
-import CardContent from "./CardContent.vue";
-import CardFooter from "./CardFooter.vue";
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardLeading,
+  CardTitle,
+  CardTrailing,
+} from "./parts";
 
 export const Card = Object.assign(CardRoot, {
   Header: CardHeader,

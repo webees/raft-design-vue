@@ -1,13 +1,15 @@
-export { default as FilesPanel } from "./FilesPanel.vue";
 export { default as FilesViewport } from "./FilesViewport.vue";
-export { default as FilesList } from "./FilesList.vue";
-export { default as FileRow } from "./FileRow.vue";
-export { default as FileRowOpen } from "./FileRowOpen.vue";
-export { default as FileThumbnail } from "./FileThumbnail.vue";
-export { default as FileImage } from "./FileImage.vue";
-export { default as FileContent } from "./FileContent.vue";
-export { default as FileName } from "./FileName.vue";
-export { default as FileMeta } from "./FileMeta.vue";
-export { default as FileMetaItem } from "./FileMetaItem.vue";
-export { default as FileActions } from "./FileActions.vue";
+export {
+  FileActions,
+  FileContent,
+  FileImage,
+  FileMeta,
+  FileMetaItem,
+  FileName,
+  FileRow,
+  FileRowOpen,
+  FilesList,
+  FilesPanel,
+  FileThumbnail,
+} from "./parts";
 export { default as FileAction } from "./FileAction.vue";

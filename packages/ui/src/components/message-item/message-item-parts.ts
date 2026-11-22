@@ -12,28 +12,15 @@ import { Primitive } from "reka-ui";
 
 import { toElement } from "../../lib/dom";
 import { primitivePartProps } from "../../lib/part-props";
-import { createSlotPart, recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { useMessageItemLabelId } from "./message-item-context";
 import { observeTrailing, stampTrailingSlot } from "./message-item-trailing";
 import { messageItem } from "./message-item.recipe";
 
-type MessageItemSlots = ReturnType<typeof messageItem>;
+const part = fixedPartFactory(messageItem);
 
-const part = (name: string, tag: string, dataSlot: string, slotName: keyof MessageItemSlots) =>
-  recipePart(name, tag, dataSlot, (className) => messageItem()[slotName]({ className }));
-
-export const MessageItemGutter = part(
-  "RaftMessageItemGutter",
-  "div",
-  "message-item-gutter",
-  "gutter",
-);
-export const MessageItemAvatarSlot = part(
-  "RaftMessageItemAvatarSlot",
-  "div",
-  "message-item-avatar-slot",
-  "avatarSlot",
-);
+export const MessageItemGutter = part("MessageItemGutter", "gutter");
+export const MessageItemAvatarSlot = part("MessageItemAvatarSlot", "avatarSlot");
 export const MessageItemContinuationTime = labelledPart(
   "RaftMessageItemContinuationTime",
   "time",
@@ -41,29 +28,14 @@ export const MessageItemContinuationTime = labelledPart(
   "continuationTime",
   "time",
 );
-export const MessageItemContent = part(
-  "RaftMessageItemContent",
-  "div",
-  "message-item-content",
-  "content",
-);
-export const MessageItemHeader = part(
-  "RaftMessageItemHeader",
-  "div",
-  "message-item-header",
-  "header",
-);
-export const MessageItemSenderGroup = part(
-  "RaftMessageItemSenderGroup",
-  "span",
-  "message-item-sender-group",
-  "senderGroup",
-);
+export const MessageItemContent = part("MessageItemContent", "content");
+export const MessageItemHeader = part("MessageItemHeader", "header");
+export const MessageItemSenderGroup = part("MessageItemSenderGroup", "senderGroup", "span");
 function labelledPart(
   name: string,
   tag: string,
   dataSlot: string,
-  slotName: keyof MessageItemSlots,
+  slotName: keyof ReturnType<typeof messageItem>,
   part: "sender" | "time",
   type?: "button",
 ) {
@@ -109,13 +81,8 @@ export const MessageItemSenderButton = labelledPart(
   "sender",
   "button",
 );
-export const MessageItemSenderBadges = part(
-  "RaftMessageItemSenderBadges",
-  "span",
-  "message-item-sender-badges",
-  "senderBadges",
-);
-export const MessageItemMeta = part("RaftMessageItemMeta", "span", "message-item-meta", "meta");
+export const MessageItemSenderBadges = part("MessageItemSenderBadges", "senderBadges", "span");
+export const MessageItemMeta = part("MessageItemMeta", "meta", "span");
 export const MessageItemTime = labelledPart(
   "RaftMessageItemTime",
   "time",
@@ -123,56 +90,24 @@ export const MessageItemTime = labelledPart(
   "time",
   "time",
 );
-export const MessageItemInlineStatus = part(
-  "RaftMessageItemInlineStatus",
-  "span",
-  "message-item-inline-status",
-  "inlineStatus",
-);
-export const MessageItemDelegatedBy = part(
-  "RaftMessageItemDelegatedBy",
-  "span",
-  "message-item-delegated-by",
-  "delegatedBy",
-);
+export const MessageItemInlineStatus = part("MessageItemInlineStatus", "inlineStatus", "span");
+export const MessageItemDelegatedBy = part("MessageItemDelegatedBy", "delegatedBy", "span");
 export const MessageItemDelegatedByName = part(
-  "RaftMessageItemDelegatedByName",
-  "span",
-  "message-item-delegated-by-name",
+  "MessageItemDelegatedByName",
   "delegatedByName",
-);
-export const MessageItemDelegatedByButton = createSlotPart({
-  name: "RaftMessageItemDelegatedByButton",
-  tag: "button",
-  dataSlot: "message-item-delegated-by-button",
-  type: "button",
-  className: (className) => messageItem().delegatedByButton({ className }),
-});
-export const MessageItemBody = part("RaftMessageItemBody", "div", "message-item-body", "body");
-export const MessageItemAttachments = part(
-  "RaftMessageItemAttachments",
-  "div",
-  "message-item-attachments",
-  "attachments",
-);
-export const MessageItemEmbedded = part(
-  "RaftMessageItemEmbedded",
-  "div",
-  "message-item-embedded",
-  "embedded",
-);
-export const MessageItemEdited = part(
-  "RaftMessageItemEdited",
   "span",
-  "message-item-edited",
-  "edited",
 );
-export const MessageItemSearchMatch = part(
-  "RaftMessageItemSearchMatch",
-  "mark",
-  "message-item-search-match",
-  "searchMatch",
+export const MessageItemDelegatedByButton = part(
+  "MessageItemDelegatedByButton",
+  "delegatedByButton",
+  "button",
+  { defaultType: "button" },
 );
+export const MessageItemBody = part("MessageItemBody", "body");
+export const MessageItemAttachments = part("MessageItemAttachments", "attachments");
+export const MessageItemEmbedded = part("MessageItemEmbedded", "embedded");
+export const MessageItemEdited = part("MessageItemEdited", "edited", "span");
+export const MessageItemSearchMatch = part("MessageItemSearchMatch", "searchMatch", "mark");
 export const MessageItemTrailing = defineComponent({
   name: "RaftMessageItemTrailing",
   inheritAttrs: false,
@@ -219,18 +154,10 @@ export const MessageItemTrailing = defineComponent({
       );
   },
 });
-export const MessageItemFooter = part(
-  "RaftMessageItemFooter",
-  "div",
-  "message-item-footer",
-  "footer",
-);
-export const MessageItemToolbarSlot = part(
-  "RaftMessageItemToolbarSlot",
-  "div",
-  "message-item-toolbar",
-  "toolbar",
-);
+export const MessageItemFooter = part("MessageItemFooter", "footer");
+export const MessageItemToolbarSlot = part("MessageItemToolbarSlot", "toolbar", "div", {
+  dataSlot: "message-item-toolbar",
+});
 export const MessageItemToolbarButton = defineComponent({
   name: "RaftMessageItemToolbarButton",
   inheritAttrs: false,

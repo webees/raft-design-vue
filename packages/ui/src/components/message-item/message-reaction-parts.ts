@@ -12,47 +12,16 @@ import {
 
 import TooltipContent from "../tooltip/TooltipContent.vue";
 import DropdownMenuContent from "../dropdown-menu/DropdownMenuContent.vue";
-import { createSlotPart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import {
   messageReaction,
   reactionCountKeyframes,
   reactionCountTiming,
 } from "./message-extras.recipe";
 
-function reactionPart(
-  name: string,
-  tag: string,
-  dataSlot: string,
-  slot:
-    | "glyph"
-    | "count"
-    | "errorIndicator"
-    | "quickRow"
-    | "pickerContent"
-    | "pickerStatic"
-    | "tooltip"
-    | "tooltipNames"
-    | "tooltipName"
-    | "tooltipNameText"
-    | "tooltipSeparator"
-    | "tooltipMeta",
-  defaults: Record<string, unknown> = {},
-) {
-  return createSlotPart({
-    name,
-    tag,
-    dataSlot,
-    className: (className) => messageReaction()[slot]({ className }),
-    rootProps: () => defaults,
-  });
-}
+const reactionPart = fixedPartFactory(messageReaction);
 
-export const MessageReactionGlyph = reactionPart(
-  "RaftMessageReactionGlyph",
-  "span",
-  "message-reaction-glyph",
-  "glyph",
-);
+export const MessageReactionGlyph = reactionPart("MessageReactionGlyph", "glyph", "span");
 export const MessageReactionCount = defineComponent({
   name: "RaftMessageReactionCount",
   inheritAttrs: false,
@@ -108,18 +77,12 @@ export const MessageReactionCount = defineComponent({
   },
 });
 export const MessageReactionErrorIndicator = reactionPart(
-  "RaftMessageReactionErrorIndicator",
-  "span",
-  "message-reaction-error-indicator",
+  "MessageReactionErrorIndicator",
   "errorIndicator",
-  { role: "status" },
+  "span",
+  { rootProps: () => ({ role: "status" }) },
 );
-export const MessageReactionQuickRow = reactionPart(
-  "RaftMessageReactionQuickRow",
-  "div",
-  "message-reaction-quick-row",
-  "quickRow",
-);
+export const MessageReactionQuickRow = reactionPart("MessageReactionQuickRow", "quickRow");
 export const MessageReactionPickerContent = defineComponent({
   name: "RaftMessageReactionPickerContent",
   inheritAttrs: false,
@@ -137,9 +100,7 @@ export const MessageReactionPickerContent = defineComponent({
   },
 });
 export const MessageReactionPickerStatic = reactionPart(
-  "RaftMessageReactionPickerStatic",
-  "div",
-  "message-reaction-picker-static",
+  "MessageReactionPickerStatic",
   "pickerStatic",
 );
 export const MessageReactionTooltipContent = defineComponent({
@@ -155,34 +116,29 @@ export const MessageReactionTooltipContent = defineComponent({
   },
 });
 export const MessageReactionTooltipNames = reactionPart(
-  "RaftMessageReactionTooltipNames",
-  "span",
-  "message-reaction-tooltip-names",
+  "MessageReactionTooltipNames",
   "tooltipNames",
+  "span",
 );
 export const MessageReactionTooltipName = reactionPart(
-  "RaftMessageReactionTooltipName",
-  "span",
-  "message-reaction-tooltip-name",
+  "MessageReactionTooltipName",
   "tooltipName",
+  "span",
 );
 export const MessageReactionTooltipNameText = reactionPart(
-  "RaftMessageReactionTooltipNameText",
-  "span",
-  "message-reaction-tooltip-name-text",
+  "MessageReactionTooltipNameText",
   "tooltipNameText",
+  "span",
 );
 export const MessageReactionTooltipSeparator = reactionPart(
-  "RaftMessageReactionTooltipSeparator",
-  "span",
-  "message-reaction-tooltip-separator",
+  "MessageReactionTooltipSeparator",
   "tooltipSeparator",
+  "span",
 );
 export const MessageReactionTooltipMeta = reactionPart(
-  "RaftMessageReactionTooltipMeta",
-  "span",
-  "message-reaction-tooltip-meta",
+  "MessageReactionTooltipMeta",
   "tooltipMeta",
+  "span",
 );
 
 export const MessageReactionChip = defineComponent({

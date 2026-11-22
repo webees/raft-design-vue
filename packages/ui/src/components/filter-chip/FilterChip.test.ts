@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import FilterChip from "./FilterChip.vue";
-import FilterChipLabel from "./FilterChipLabel.vue";
+import { FilterChip, FilterChipLabel } from "./parts";
 import FilterChipRemove from "./FilterChipRemove.vue";
 
 describe("FilterChip", () => {

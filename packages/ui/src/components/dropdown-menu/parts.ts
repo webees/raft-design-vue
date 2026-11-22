@@ -4,7 +4,7 @@ import {
 } from "reka-ui";
 
 import { createRekaRadioGroup } from "../../lib/reka-radio-group";
-import { recipePart, rekaPart } from "../../lib/slot-part";
+import { fixedPartFactory, rekaPart } from "../../lib/slot-part";
 import { dropdownMenu } from "./dropdown-menu.variants";
 
 export const DropdownMenuRadioGroup = createRekaRadioGroup({
@@ -13,13 +13,21 @@ export const DropdownMenuRadioGroup = createRekaRadioGroup({
   dataSlot: "dropdown-menu-radio-group",
   classes: (className) => dropdownMenu().radioGroup({ class: className }),
 });
+const part = fixedPartFactory(dropdownMenu);
 
-export const DropdownMenuLabel = recipePart(
-  "RaftDropdownMenuLabel",
-  "div",
-  "dropdown-menu-label",
-  (className) => dropdownMenu().label({ class: className }),
+export const DropdownMenuLabel = part("DropdownMenuLabel", "label");
+export const DropdownMenuFooter = part("DropdownMenuFooter", "footer");
+export const DropdownMenuItemCount = part("DropdownMenuItemCount", "itemCount", "span");
+export const DropdownMenuItemDescription = part(
+  "DropdownMenuItemDescription",
+  "itemDescription",
+  "span",
 );
+export const DropdownMenuItemIcon = part("DropdownMenuItemIcon", "itemIcon", "span", {
+  rootProps: () => ({ "aria-hidden": "true" }),
+});
+export const DropdownMenuItemLabel = part("DropdownMenuItemLabel", "itemLabel", "span");
+export const DropdownMenuShortcut = part("DropdownMenuShortcut", "shortcut", "span");
 
 export const DropdownMenuSeparator = rekaPart(
   "RaftDropdownMenuSeparator",

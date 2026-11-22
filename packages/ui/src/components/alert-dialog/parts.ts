@@ -1,16 +1,7 @@
-import { recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { alertDialog } from "./alert-dialog.variants";
 
-export const AlertDialogBody = recipePart(
-  "RaftAlertDialogBody",
-  "div",
-  "alert-dialog-body",
-  (className) => alertDialog().body({ className }),
-);
+const part = fixedPartFactory(alertDialog);
 
-export const AlertDialogHeader = recipePart(
-  "RaftAlertDialogHeader",
-  "div",
-  "alert-dialog-header",
-  (className) => alertDialog().header({ className }),
-);
+export const AlertDialogBody = part("AlertDialogBody", "body");
+export const AlertDialogHeader = part("AlertDialogHeader", "header");

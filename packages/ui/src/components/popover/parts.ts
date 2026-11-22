@@ -1,21 +1,9 @@
-import { recipePart } from "../../lib/slot-part";
+import { fixedPartFactory } from "../../lib/slot-part";
 import { popover } from "./popover.variants";
 
-export const PopoverBackdrop = recipePart(
-  "RaftPopoverBackdrop",
-  "div",
-  "popover-backdrop",
-  (className) => popover().backdrop({ className }),
-);
+const part = fixedPartFactory(popover);
 
-export const PopoverBody = recipePart("RaftPopoverBody", "div", "popover-body", (className) =>
-  popover().body({ class: className }),
-);
-
-export const PopoverHeader = recipePart("RaftPopoverHeader", "div", "popover-header", (className) =>
-  popover().header({ class: className }),
-);
-
-export const PopoverTitle = recipePart("RaftPopoverTitle", "h2", "popover-title", (className) =>
-  popover().title({ class: className }),
-);
+export const PopoverBackdrop = part("PopoverBackdrop", "backdrop");
+export const PopoverBody = part("PopoverBody", "body");
+export const PopoverHeader = part("PopoverHeader", "header");
+export const PopoverTitle = part("PopoverTitle", "title", "h2");

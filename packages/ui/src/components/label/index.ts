@@ -1,4 +1,4 @@
-import LabelRoot from "./Label.vue";
+import { Label as LabelRoot } from "./parts";
 import LabelAsterisk from "./LabelAsterisk.vue";
 import LabelOptional from "./LabelOptional.vue";
 import { LabelSub } from "./parts";

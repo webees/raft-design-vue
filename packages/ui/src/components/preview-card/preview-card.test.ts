@@ -9,9 +9,7 @@ import {
   PreviewCardTitle,
 } from "./parts";
 import PreviewCard from "./PreviewCard.vue";
-import PreviewCardActions from "./PreviewCardActions.vue";
-import PreviewCardDescription from "./PreviewCardDescription.vue";
-import PreviewCardSeparator from "./PreviewCardSeparator.vue";
+import { PreviewCardActions, PreviewCardDescription, PreviewCardSeparator } from "./parts";
 
 describe("preview-card", () => {
   it("roots a hover card and renders its slot", () => {

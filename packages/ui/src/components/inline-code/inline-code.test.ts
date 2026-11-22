@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import InlineCode from "./InlineCode.vue";
+import { InlineCode } from "./parts";
 
 describe("InlineCode", () => {
   it("renders code with the inline recipe", () => {
