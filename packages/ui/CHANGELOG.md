@@ -1,5 +1,12 @@
 # @webees/raft-design-vue
 
+## 0.1.4
+
+### Patch Changes
+
+- f4ab1f6: Remove `attrs.class` reads that were always `undefined` because `class` is a declared prop. Fixes `AppLinkCardBadge` dropping caller classes when no fill is set.
+- 5f869ac: Trim internal-only type exports and drop the unused `SheetPopupBoundaryProps` alias; no runtime change.
+
 ## 0.1.3
 
 ### Patch Changes
