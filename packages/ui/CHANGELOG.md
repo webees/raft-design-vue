@@ -1,5 +1,13 @@
 # @webees/raft-design-vue
 
+## 0.1.7
+
+### Patch Changes
+
+- f5eb918: `VirtualList.scrollTo` honours its documented `debounce` flag again: by default
+  it scrolls only as far as needed to reveal the row, and `debounce: false` jumps
+  to the aligned position. Fixes the option being declared but never read.
+
 ## 0.1.6
 
 ### Patch Changes
