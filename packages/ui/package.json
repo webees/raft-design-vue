@@ -1,6 +1,6 @@
 {
   "name": "@webees/raft-design-vue",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Vue 3 port of the Raft Design System, built with Bun, Rslib and Tailwind CSS v4.",
   "keywords": [
     "design-system",
