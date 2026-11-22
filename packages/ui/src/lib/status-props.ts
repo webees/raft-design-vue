@@ -21,8 +21,8 @@ export const STATUS_VARIANT_COLORS = {
   danger: "[--status-color:var(--danger)]",
 } as const;
 
-export type StatusSize = keyof typeof STATUS_SIZE_CLASSES;
-export type StatusVariant = keyof typeof STATUS_VARIANT_COLORS;
+type StatusSize = keyof typeof STATUS_SIZE_CLASSES;
+type StatusVariant = keyof typeof STATUS_VARIANT_COLORS;
 
 /** Props shared by anything that renders a status dot. */
 export interface StatusStyleProps {
