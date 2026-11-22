@@ -4,6 +4,13 @@ on:
   push:
     branches: [main]
   pull_request:
+    # A changesets release PR only edits the version, changelog and changeset
+    # files; GitHub also holds bot-authored PR runs at "action required", so
+    # don't create one. The push run on main verifies the same tree.
+    paths-ignore:
+      - "packages/ui/package.json"
+      - "packages/ui/CHANGELOG.md"
+      - ".changeset/**"
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -14,10 +21,8 @@ permissions:
 
 jobs:
   verify:
-    # Changesets only bumps version/changelog on this branch. The branch is
-    # deleted right after the admin merge, which left a queued run with zero
-    # jobs and a permanent red cross. A skipped job still satisfies the
-    # required check, and main's push run verifies the merged commit.
+    # Fallback if a run is still created for the bot branch: the branch is
+    # deleted right after the admin merge, so the job would never finish.
     if: github.event_name != 'pull_request' || github.head_ref != 'changeset-release/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
