@@ -72,8 +72,9 @@ bun run sync:upstream --ref main
 - 发布由 release 工作流在 verify 通过后从 `main` 切出。工作流仅在配置了
   `NPM_TOKEN` 时执行 npm 发布；未配置时仍会打版本并开 release PR，但跳过
   发布并以 warning 提示，不再判定为失败。
-- `changeset-release/main` 的 PR 只改版本号与 changelog；合并后分支会立即删除，
-  因此其 CI job 直接跳过（push 到 `main` 的那次运行会验证同一提交）。
+- `changeset-release/main` 的 PR 只改版本号与 changelog，因此不会触发 CI
+  （push 到 `main` 的那次运行会验证同一提交）；若 GitHub 仍创建了 bot 运行，
+  该 job 也会跳过。
 
 ## 代码风格
 
