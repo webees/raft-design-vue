@@ -39,8 +39,8 @@ Measured on 2026-11-22 with Bun 1.4.4 / Node 22:
 
 |             |                                      |
 | ----------- | ------------------------------------ |
-| Test files  | 107                                  |
-| Tests       | 409                                  |
+| Test files  | 109                                  |
+| Tests       | 413                                  |
 | Type check  | clean (`vue-tsc --noEmit`)           |
 | API surface | 960 / 960                            |
 | Library     | 1929.6 kB raw, 294.1 kB gzip         |

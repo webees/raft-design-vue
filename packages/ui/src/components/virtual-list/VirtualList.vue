@@ -879,12 +879,13 @@ function scrollTo(options: VirtualListScrollToOptions | number, topIfNumber?: nu
     return;
   }
   const align = opts.align ?? (opts.debounce === false ? "start" : null);
+  const unaligned = opts.align === undefined && opts.debounce === false;
   settleScroll(
     index,
     opts.behavior ?? "instant",
     align,
-    align === "start" && opts.align === undefined ? 0 : (opts.scrollMarginTop ?? 0),
-    align === "start" && opts.align === undefined ? 0 : (opts.scrollMarginBottom ?? 0),
+    unaligned ? 0 : (opts.scrollMarginTop ?? 0),
+    unaligned ? 0 : (opts.scrollMarginBottom ?? 0),
   );
 }
 
