@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Primitive } from "reka-ui";
 
-import { cn } from "../../lib/cn";
 import { useDragElement } from "./drag-context";
 import type { DragElementProps } from "./drag-element-props";
 
@@ -26,7 +25,6 @@ const over = computed(() => {
   const session = engine?.active.value;
   return session?.over?.id === props.id ? session.over : null;
 });
-const classes = computed(() => cn(attrs.class as string | undefined, props.class));
 </script>
 
 <template>
@@ -34,7 +32,7 @@ const classes = computed(() => cn(attrs.class as string | undefined, props.class
     :as="props.as"
     :ref="setRoot"
     v-bind="attrs"
-    :class="classes"
+    :class="props.class"
     :data-drop-id="props.id"
     :data-over="over ? '' : undefined"
     :data-placement="over?.placement"

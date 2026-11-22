@@ -16,9 +16,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const classes = computed(() =>
-  comment().marker({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => comment().marker({ class: props.class }));
 </script>
 
 <template>

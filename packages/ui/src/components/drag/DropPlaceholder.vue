@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{ class?: string; opaque?: boolean }>(), 
 const attrs = useAttrs();
 const classes = computed(() =>
   drag({ opaque: props.opaque }).placeholder({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

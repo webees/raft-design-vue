@@ -15,7 +15,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const classes = computed(() =>
   composerSuggestionList({ iconVariant: props.variant }).icon({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{ size?: InputGroupSize; class?: string }
 
 const attrs = useAttrs();
 const styles = computed(() => inputGroup({ size: props.size }));
-const rootClass = computed(() => cn(styles.value.root(), props.class, attrs.class as string));
+const rootClass = computed(() => cn(styles.value.root(), props.class));
 </script>
 
 <template>

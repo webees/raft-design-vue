@@ -23,7 +23,7 @@ const chrome = useSelectChrome();
 const value = new SelectAction(() => props.action?.(), props.close);
 const actionClass = computed(() =>
   select({ chrome: chrome.value }).actionItem({
-    className: cn(props.class, attrs.class as string),
+    className: props.class,
   }),
 );
 </script>

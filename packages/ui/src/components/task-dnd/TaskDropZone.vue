@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { cn } from "../../lib/cn";
 import { useTaskDnd, useTaskDropState, type TaskDropData } from "./task-dnd-context";
 
 defineOptions({ name: "RaftTaskDropZone", inheritAttrs: false });
@@ -22,8 +21,6 @@ const root = ref<HTMLElement | null>(null);
 
 const dropState = useTaskDropState(() => props.id, { data: () => props.data });
 
-const classes = computed(() => cn(attrs.class as string | undefined, props.class));
-
 let unregister: (() => void) | null = null;
 
 onMounted(() => {
@@ -45,7 +42,7 @@ onBeforeUnmount(() => unregister?.());
     :is="props.as"
     ref="root"
     v-bind="attrs"
-    :class="classes"
+    :class="props.class"
     :data-drag-into="props.dragInto && dropState === 'allowed' ? '' : undefined"
     :data-drop-state="dropState"
     data-slot="task-drop-zone"

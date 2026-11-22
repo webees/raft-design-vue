@@ -60,9 +60,7 @@ const tabBarAnchor = computed<HTMLElement | undefined>(() => {
   );
 });
 
-const contentClass = computed(() =>
-  mobileNavServer().content({ class: [props.class, attrs.class as string | undefined] }),
-);
+const contentClass = computed(() => mobileNavServer().content({ class: props.class }));
 const scrollClass = computed(() => mobileNavServer().scroll());
 
 const LIST_SLOT = "mobile-nav-server-popover-list";

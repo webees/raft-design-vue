@@ -32,9 +32,7 @@ const active = computed(() => engine?.active.value ?? null);
 const dir = computed(() =>
   typeof document === "undefined" ? undefined : document.documentElement.dir || undefined,
 );
-const classes = computed(() =>
-  drag().lift({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => drag().lift({ class: props.class }));
 const style = computed(() => {
   const session = active.value;
   if (!session) return {};

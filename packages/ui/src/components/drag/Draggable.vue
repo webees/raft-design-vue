@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Primitive } from "reka-ui";
 
-import { cn } from "../../lib/cn";
 import { toElement } from "../../lib/dom";
 import { useDragElement } from "./drag-context";
 import type { DragElementProps } from "./drag-element-props";
@@ -25,7 +24,6 @@ const { engine, root, setRoot } = useDragElement((engine, element) =>
 );
 
 const dragging = computed(() => engine?.active.value?.id === props.id);
-const classes = computed(() => cn(attrs.class as string | undefined, props.class));
 
 function onPointerDown(event: PointerEvent) {
   const node = toElement<HTMLElement>(root.value);
@@ -79,7 +77,7 @@ function onKeydown(event: KeyboardEvent) {
     :as="props.as"
     :ref="setRoot"
     v-bind="attrs"
-    :class="classes"
+    :class="props.class"
     :data-drag-id="props.id"
     :data-dragging="dragging ? '' : undefined"
     data-drag-draggable=""

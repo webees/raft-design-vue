@@ -7,9 +7,7 @@ defineOptions({ name: "RaftCoachMarkCount", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  cn(coachMark().count(), props.class, attrs.class as string | undefined),
-);
+const classes = computed(() => cn(coachMark().count(), props.class));
 const countAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 

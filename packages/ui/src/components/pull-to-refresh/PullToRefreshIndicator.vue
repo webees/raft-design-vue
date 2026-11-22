@@ -84,10 +84,7 @@ const finishing = computed(
   () => android.value && props.pull.state === "idle" && exitKind.value !== "cancel",
 );
 const rootClass = computed(() =>
-  cn(
-    indicator({ platform: props.pull.platform }).root({ class: props.class }),
-    attrs.class as string | undefined,
-  ),
+  cn(indicator({ platform: props.pull.platform }).root({ class: props.class })),
 );
 const styleVars = computed(() => ({
   ...(props.style ?? {}),

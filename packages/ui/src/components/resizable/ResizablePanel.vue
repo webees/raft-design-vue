@@ -31,7 +31,7 @@ defineEmits<{ collapse: []; expand: []; resize: [size: number] }>();
 
 const attrs = useAttrs();
 const styles = resizable();
-const panelClass = computed(() => cn(styles.panel(), props.class, attrs.class as string));
+const panelClass = computed(() => cn(styles.panel(), props.class));
 </script>
 
 <template>

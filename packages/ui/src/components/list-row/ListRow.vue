@@ -38,7 +38,6 @@ const rowClass = computed(() =>
       wrap: props.wrap,
     }),
     props.class,
-    attrs.class as string,
   ),
 );
 const tag = computed(() => (props.interactive ? "button" : "div"));

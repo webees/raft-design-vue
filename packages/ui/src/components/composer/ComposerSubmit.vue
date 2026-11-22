@@ -14,7 +14,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const classes = computed(() =>
   composer({ icon: props.size?.startsWith("icon") ?? false }).submit({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

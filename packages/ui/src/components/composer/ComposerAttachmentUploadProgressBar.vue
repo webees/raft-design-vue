@@ -9,7 +9,7 @@ const attrs = useAttrs();
 const progress = computed(() => Math.max(4, Math.min(props.value, 100)));
 const classes = computed(() =>
   composerAttachment().attachmentUploadProgressBar({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 const indicatorClasses = computed(() =>

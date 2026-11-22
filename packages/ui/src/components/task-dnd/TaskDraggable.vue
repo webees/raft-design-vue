@@ -24,9 +24,7 @@ const root = ref<HTMLElement | null>(null);
 const dragging = computed(() => context?.activeId() === props.id);
 const lifted = computed(() => dragging.value && context?.overlay());
 const isDropOver = computed(() => context?.over().overId === (props.dropId ?? props.id));
-const classes = computed(() =>
-  taskDnd().draggable({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => taskDnd().draggable({ class: props.class }));
 const dragStyle = computed(() => {
   const session = context?.engine.active.value;
   if (!dragging.value || lifted.value || !session) return undefined;

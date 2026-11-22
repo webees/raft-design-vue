@@ -7,9 +7,7 @@ defineOptions({ name: "RaftComposerSuggestionList", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  composerSuggestionList().root({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => composerSuggestionList().root({ class: props.class }));
 </script>
 
 <template>

@@ -21,7 +21,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const triggerClass = computed(() => cn(pickerTriggerButton(), props.class, attrs.class as string));
+const triggerClass = computed(() => cn(pickerTriggerButton(), props.class));
 </script>
 
 <template>

@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const attrs = useAttrs();
 const styles = workspaceButton();
-const rootClass = computed(() => cn(styles.root(), props.class, attrs.class as string));
+const rootClass = computed(() => cn(styles.root(), props.class));
 </script>
 
 <template>

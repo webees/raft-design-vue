@@ -56,4 +56,13 @@ describe("AppLinkCard", () => {
     const wrapper = mount(AppLinkCardBadge, { props: { fill: "#3366ff" } });
     expect(wrapper.attributes("style")).toContain("--badge-fill: #3366ff");
   });
+
+  it("keeps the caller class on the badge with and without a fill", () => {
+    for (const fill of [undefined, "#3366ff"]) {
+      const wrapper = mount(AppLinkCardBadge, { props: { fill, class: "badge-extra" } });
+      const classes = wrapper.attributes("class")?.split(/\s+/);
+      expect(classes).toContain("badge-extra");
+      expect(classes?.filter((name) => name === "badge-extra")).toHaveLength(1);
+    }
+  });
 });

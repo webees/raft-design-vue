@@ -6,7 +6,7 @@ defineOptions({ name: "RaftListRowIcon", inheritAttrs: false });
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const styles = listRow();
-const iconClass = computed(() => cn(styles.icon(), props.class, attrs.class as string));
+const iconClass = computed(() => cn(styles.icon(), props.class));
 </script>
 
 <template>

@@ -6,9 +6,7 @@ defineOptions({ name: "RaftDescriptionDetails", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const detailsClass = computed(() =>
-  cn(descriptionList().value(), props.class, attrs.class as string),
-);
+const detailsClass = computed(() => cn(descriptionList().value(), props.class));
 </script>
 
 <template>

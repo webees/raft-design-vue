@@ -7,9 +7,7 @@ defineOptions({ name: "RaftComposerInput", inheritAttrs: false });
 
 const props = defineProps<{ class?: string; frameClass?: string; rows?: number }>();
 const attrs = useAttrs();
-const inputClass = computed(() =>
-  composer().input({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const inputClass = computed(() => composer().input({ class: props.class }));
 const frameClass = computed(() => composer().inputFrame({ class: props.frameClass }));
 </script>
 
