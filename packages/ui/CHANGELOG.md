@@ -1,5 +1,12 @@
 # @webees/raft-design-vue
 
+## 0.1.5
+
+### Patch Changes
+
+- e2ff63a: Forward caller attributes on `FormSection` and `WorkspaceButtonName`, drop dead props (`ToastProvider.class`, empty `withDefaults` wrappers), and align the Release workflow with `changesets/action@v2` input names so publishing runs again.
+- 875a410: Run the test suite on the threads pool with bounded workers and a 20s timeout so jsdom-heavy files no longer flake on loaded machines.
+
 ## 0.1.4
 
 ### Patch Changes
