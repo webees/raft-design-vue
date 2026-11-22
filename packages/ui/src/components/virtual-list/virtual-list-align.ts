@@ -40,3 +40,29 @@ export function getAlignedScrollTop({
   }
   return Math.max(0, Math.min(top, Math.max(0, maxScrollTop)));
 }
+
+/** Nudge the viewport just enough to reveal the row, leaving it alone when it already is. */
+export function getVisibleScrollTop({
+  itemTop,
+  itemSize,
+  viewportHeight,
+  scrollTop,
+  scrollMarginTop,
+  scrollMarginBottom,
+  maxScrollTop,
+}: {
+  itemTop: number;
+  itemSize: number;
+  viewportHeight: number;
+  scrollTop: number;
+  scrollMarginTop: number;
+  scrollMarginBottom: number;
+  maxScrollTop: number;
+}): number {
+  const top = itemTop - scrollMarginTop;
+  const bottom = itemTop + itemSize + scrollMarginBottom;
+  let next = scrollTop;
+  if (top < scrollTop) next = top;
+  else if (bottom > scrollTop + viewportHeight) next = bottom - viewportHeight;
+  return Math.max(0, Math.min(next, Math.max(0, maxScrollTop)));
+}
