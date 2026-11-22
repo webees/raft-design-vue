@@ -38,7 +38,7 @@ const area = useScrollAreaContainer({
   fade: false,
   guttersPosition: "absolute",
   hideDelay: props.hideDelay,
-  onEdgeChange: props.onEdgeChange,
+  onEdgeChange: (edges) => props.onEdgeChange?.(edges),
   overscroll: props.overscroll,
   size: props.size,
   trigger: props.trigger,

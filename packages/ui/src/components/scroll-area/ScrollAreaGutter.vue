@@ -15,7 +15,7 @@ const props = defineProps<{
 const { dragging, railHandlers, thumbHandlers } = useRailPointer({
   axis: props.axis,
   containerRef: props.containerRef,
-  onDraggingChange: props.onDraggingChange,
+  onDraggingChange: (dragging) => props.onDraggingChange(dragging),
 });
 
 const vertical = computed(() => props.axis === "y");
