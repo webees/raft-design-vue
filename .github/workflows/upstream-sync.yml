@@ -37,7 +37,7 @@ jobs:
           bun run --cwd packages/ui generate:props
       - name: Open pull request
         if: steps.drift.outputs.status != '0'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/upstream-sync
           title: "chore: sync upstream raft-design"
