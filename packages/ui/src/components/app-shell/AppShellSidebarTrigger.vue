@@ -24,13 +24,7 @@ const emit = defineEmits<{ click: [event: MouseEvent] }>();
 const sidebar = useOptionalAppShellSidebar();
 
 const label = computed(() => (sidebar?.open ? "Collapse sidebar" : "Expand sidebar"));
-const rootClass = computed(() =>
-  cn(
-    "group/app-shell-sidebar-trigger max-md:hidden",
-    props.class,
-    attrs.class as string | undefined,
-  ),
-);
+const rootClass = computed(() => cn("group/app-shell-sidebar-trigger max-md:hidden", props.class));
 
 const handleClick = (event: MouseEvent) => {
   emit("click", event);

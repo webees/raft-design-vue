@@ -11,7 +11,6 @@ const classes = computed(() =>
     "min-h-8 md:pointer-fine:min-h-(--bar-button-size) gap-2",
     "font-sans text-callout font-semibold text-foreground",
     "has-data-[disabled]:cursor-not-allowed has-data-[disabled]:text-foreground-disabled",
-    attrs.class as string | undefined,
     props.class,
   ),
 );

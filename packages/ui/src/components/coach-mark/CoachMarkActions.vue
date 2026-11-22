@@ -7,9 +7,7 @@ defineOptions({ name: "RaftCoachMarkActions", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  cn(coachMark().actions(), props.class, attrs.class as string | undefined),
-);
+const classes = computed(() => cn(coachMark().actions(), props.class));
 const actionsAttrs = computed(() => omitAttrs(attrs, "class"));
 </script>
 

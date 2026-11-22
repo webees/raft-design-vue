@@ -15,11 +15,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const addonClass = computed(() =>
-  cn(
-    inputGroup({ align: props.align, variant: props.variant }).addon(),
-    props.class,
-    attrs.class as string,
-  ),
+  cn(inputGroup({ align: props.align, variant: props.variant }).addon(), props.class),
 );
 </script>
 

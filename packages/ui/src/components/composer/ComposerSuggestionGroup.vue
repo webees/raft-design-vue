@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<{ class?: string; separated?: boolean }>(
 const attrs = useAttrs();
 const classes = computed(() =>
   composerSuggestionList({ separated: props.separated }).group({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

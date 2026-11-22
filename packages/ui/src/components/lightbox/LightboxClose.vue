@@ -18,9 +18,7 @@ const props = withDefaults(
 );
 
 const attrs = useAttrs();
-const classes = computed(() =>
-  lightbox().close({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => lightbox().close({ class: props.class }));
 </script>
 
 <template>

@@ -21,9 +21,7 @@ useLabelValueFit(list, () => props.direction === "horizontal", {
   value: ":scope > [data-slot=description-item] > [data-slot=description-details]",
 });
 
-const rootClass = computed(() =>
-  cn(styles.value.root(), "group/description-list", props.class, attrs.class as string),
-);
+const rootClass = computed(() => cn(styles.value.root(), "group/description-list", props.class));
 </script>
 
 <template>

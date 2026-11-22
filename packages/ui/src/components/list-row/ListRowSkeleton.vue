@@ -43,7 +43,7 @@ const description = computed(() => props.description ?? props.variant === "defau
     :variant="props.variant"
     :class="
       styles.row({
-        class: cn(props.class as string | undefined, attrs.class as string | undefined),
+        class: props.class,
       })
     "
   >

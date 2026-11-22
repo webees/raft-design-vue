@@ -26,7 +26,7 @@ const styles = resizable();
 
 provide(RESIZABLE_ORIENTATION_KEY, toRef(props, "orientation"));
 
-const groupClass = computed(() => cn(styles.group(), props.class, attrs.class as string));
+const groupClass = computed(() => cn(styles.group(), props.class));
 </script>
 
 <template>

@@ -55,11 +55,7 @@ const fillVars = computed<CSSProperties | null>(() => {
 
 const mergedStyle = computed(() => (fillVars.value ? fillVars.value : props.style));
 const badgeClass = computed(() =>
-  fillVars.value
-    ? appLinkCard().badgeFill({
-        className: [props.class, attrs.class as string].filter(Boolean).join(" "),
-      })
-    : (attrs.class as string),
+  fillVars.value ? appLinkCard().badgeFill({ className: props.class }) : props.class,
 );
 </script>
 

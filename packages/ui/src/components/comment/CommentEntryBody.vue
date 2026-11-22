@@ -16,7 +16,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const classes = computed(() =>
   comment({ clamp: props.clamp }).entryBody({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

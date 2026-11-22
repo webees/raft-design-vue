@@ -6,7 +6,7 @@ defineOptions({ name: "RaftListRowTitle", inheritAttrs: false });
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const styles = listRow();
-const titleClass = computed(() => cn(styles.title(), props.class, attrs.class as string));
+const titleClass = computed(() => cn(styles.title(), props.class));
 </script>
 
 <template>

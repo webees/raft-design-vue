@@ -6,9 +6,7 @@ defineOptions({ name: "RaftComposer", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  composer().root({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => composer().root({ class: props.class }));
 </script>
 
 <template>

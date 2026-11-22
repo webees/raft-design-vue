@@ -28,7 +28,7 @@ const groupOrientation = inject<Ref<ResizableOrientation>>(
 const handleOrientation = computed<ResizableOrientation>(() =>
   groupOrientation.value === "horizontal" ? "vertical" : "horizontal",
 );
-const handleClass = computed(() => cn(styles.handle(), props.class, attrs.class as string));
+const handleClass = computed(() => cn(styles.handle(), props.class));
 </script>
 
 <template>

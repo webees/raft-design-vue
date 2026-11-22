@@ -12,10 +12,9 @@ const props = defineProps<{
   class?: string;
 }>();
 
-const attrs = useAttrs();
 const slots = formSection();
 
-const rootClass = computed(() => cn(slots.root(), props.class, attrs.class as string));
+const rootClass = computed(() => cn(slots.root(), props.class));
 </script>
 
 <template>

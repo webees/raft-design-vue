@@ -11,11 +11,8 @@ const props = defineProps<{
   container?: Element | DocumentFragment | null;
 }>();
 
-const attrs = useAttrs();
 const context = useTaskDnd();
-const classes = computed(() =>
-  taskDnd().overlay({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => taskDnd().overlay({ class: props.class }));
 const radiusClass = computed(() => "rounded-container");
 
 onMounted(() => context?.setOverlay(true));

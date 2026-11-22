@@ -15,9 +15,7 @@ const canPrev = ref(false);
 const canNext = ref(false);
 
 const recipe = computed(() => composerAttachment());
-const rootClass = computed(() =>
-  recipe.value.attachmentsScrollArea({ class: cn(attrs.class as string, props.class) }),
-);
+const rootClass = computed(() => recipe.value.attachmentsScrollArea({ class: props.class }));
 const prevNavClass = computed(() => composerAttachment({ side: "prev" }).attachmentsNav());
 const nextNavClass = computed(() => composerAttachment({ side: "next" }).attachmentsNav());
 const rowClass = computed(() => recipe.value.attachmentsRow());

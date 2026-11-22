@@ -15,12 +15,7 @@ const props = withDefaults(
 
 const attrs = useAttrs();
 const controlClass = computed(() =>
-  cn(
-    inputGroup().control(),
-    props.suppressPasswordManager && "keeper-ignore",
-    props.class,
-    attrs.class as string,
-  ),
+  cn(inputGroup().control(), props.suppressPasswordManager && "keeper-ignore", props.class),
 );
 </script>
 

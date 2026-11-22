@@ -24,9 +24,7 @@ const element = ref<HTMLElement | null>(null);
 const id = useId();
 
 const resolved = computed(() => margin?.topOf(id) ?? Math.max(props.top, 0));
-const classes = computed(() =>
-  comment().marginItem({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => comment().marginItem({ class: props.class }));
 const itemStyle = computed(() => [props.style, { transform: `translateY(${resolved.value}px)` }]);
 
 watch(

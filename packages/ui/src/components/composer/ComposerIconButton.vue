@@ -7,9 +7,7 @@ defineOptions({ name: "RaftComposerIconButton", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
-const classes = computed(() =>
-  composer().iconButton({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => composer().iconButton({ class: props.class }));
 </script>
 
 <template>

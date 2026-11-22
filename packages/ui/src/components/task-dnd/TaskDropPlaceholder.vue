@@ -22,7 +22,7 @@ const dropState = useTaskDropState(() => props.id, { placement: () => props.plac
 
 const classes = computed(() =>
   drag().placeholder({
-    class: taskDnd().placeholder({ class: cn(attrs.class as string | undefined, props.class) }),
+    class: taskDnd().placeholder({ class: props.class }),
   }),
 );
 const placeholderStyle = computed(() => [

@@ -21,7 +21,7 @@ const attrs = useAttrs();
 const sideClass = computed(() => (props.direction === "previous" ? "left-8" : "right-8"));
 const classes = computed(() =>
   lightbox().navigationButton({
-    class: cn(sideClass.value, attrs.class as string | undefined, props.class),
+    class: cn(sideClass.value, props.class),
   }),
 );
 

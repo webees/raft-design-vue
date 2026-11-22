@@ -14,9 +14,7 @@ const props = defineProps<{
 }>();
 
 const attrs = useAttrs();
-const bodyClass = computed(() =>
-  lightbox().body({ class: cn(attrs.class as string | undefined, props.class) }),
-);
+const bodyClass = computed(() => lightbox().body({ class: props.class }));
 const bodyContentClass = computed(() => lightbox().bodyContent());
 </script>
 

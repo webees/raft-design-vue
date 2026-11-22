@@ -8,7 +8,7 @@ const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const classes = computed(() =>
   composerDropOverlay().dropOverlay({
-    class: cn(attrs.class as string | undefined, props.class),
+    class: props.class,
   }),
 );
 </script>

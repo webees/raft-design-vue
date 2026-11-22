@@ -25,9 +25,7 @@ const engine = useDragEngine();
 const dragging = computed(() => engine?.active.value ?? null);
 const announcement = computed(() => engine?.message.value ?? "");
 const chip = ref<HTMLElement | null>(null);
-const classes = computed(() =>
-  drag().hint({ className: cn(attrs.class as string | undefined, props.class) }),
-);
+const classes = computed(() => drag().hint({ className: props.class }));
 
 let frame = 0;
 let observer: ResizeObserver | null = null;

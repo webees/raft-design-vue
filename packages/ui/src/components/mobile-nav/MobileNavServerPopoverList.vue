@@ -65,7 +65,7 @@ onBeforeUnmount(() => stop?.());
     data-slot="mobile-nav-server-popover-list"
     overscroll="contain"
     :tabindex="-1"
-    :class="mobileNavServer().list({ class: [props.class, attrs.class as string | undefined] })"
+    :class="mobileNavServer().list({ class: props.class })"
   >
     <slot />
   </ScrollArea>

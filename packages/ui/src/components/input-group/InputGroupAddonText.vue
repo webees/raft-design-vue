@@ -19,7 +19,7 @@ const props = withDefaults(
 const attrs = useAttrs();
 const element = ref<HTMLElement | null>(null);
 const styles = computed(() => inputGroup({ align: props.align, variant: props.variant }));
-const textClass = computed(() => cn(styles.value.text(), props.class, attrs.class as string));
+const textClass = computed(() => cn(styles.value.text(), props.class));
 const innerClass = computed(() => cn(styles.value.textInner(), props.innerClass));
 
 useOverflowTitle(element, () => props.title);

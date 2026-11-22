@@ -74,11 +74,7 @@ const item = useFitItem({
 const labelTaken = computed(() => item.taken("label"));
 const buttonClass = computed(() =>
   styles.value.action({
-    class: [
-      attrs.class as string | undefined,
-      props.class,
-      item.taken("more") ? "hidden" : undefined,
-    ],
+    class: [props.class, item.taken("more") ? "hidden" : undefined],
   }),
 );
 </script>

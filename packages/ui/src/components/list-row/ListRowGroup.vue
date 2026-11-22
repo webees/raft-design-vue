@@ -7,7 +7,7 @@ defineOptions({ name: "RaftListRowGroup", inheritAttrs: false });
 const props = defineProps<{ class?: string }>();
 const attrs = useAttrs();
 const styles = listRow();
-const groupClass = computed(() => cn(styles.group(), props.class, attrs.class as string));
+const groupClass = computed(() => cn(styles.group(), props.class));
 </script>
 
 <template>

@@ -8,9 +8,7 @@ defineOptions({ name: "RaftDrawerOverlay", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
 const { attrs, config, recipe: variants } = useDrawerPart();
-const classes = computed(() =>
-  variants.value.overlay({ class: [props.class, attrs.class as string | undefined] }),
-);
+const classes = computed(() => variants.value.overlay({ class: props.class }));
 
 const overlay = ref<Element | null>(null);
 const root = injectDrawerRootContext(null);
