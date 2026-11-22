@@ -43,7 +43,7 @@ check:api → check:props → test → build → check:consumer-types`。
 | 类型检查 | 通过（`vue-tsc --noEmit`）           |
 | API 面   | 960 / 960                            |
 | 库产物   | 1926.2 kB 原始，290.9 kB gzip        |
-| 文档产物 | 4151.6 kB 总计，1607.2 kB gzip       |
+| 文档产物 | 4146.3 kB 总计，1601.8 kB gzip       |
 
 ### 源码基线
 
