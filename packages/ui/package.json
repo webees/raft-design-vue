@@ -49,8 +49,8 @@
     "dev": "rslib build --watch",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "check:api": "node scripts/check-api-surface.mjs",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
