@@ -8,16 +8,13 @@ import ToastNode from "./ToastNode";
 
 defineOptions({ name: "RaftToastAction", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    class?: string;
-    loading?: boolean;
-    loadingLabel?: string;
-    disabled?: boolean;
-    altText?: string;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  class?: string;
+  loading?: boolean;
+  loadingLabel?: string;
+  disabled?: boolean;
+  altText?: string;
+}>();
 
 const attrs = useAttrs();
 const item = inject(TOAST_ITEM_CONTEXT_KEY, null);

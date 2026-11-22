@@ -19,7 +19,6 @@
     "@rsbuild/core": "^2.3.3",
     "@rsbuild/plugin-vue": "^2.0.1",
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/markdown-it": "14.2.0",
     "typescript": "^5.9.3",
     "unplugin-auto-import": "21.1.0",
     "vue-tsc": "^3.2.4"

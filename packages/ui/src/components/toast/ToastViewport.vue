@@ -10,14 +10,11 @@ import {
 
 defineOptions({ name: "RaftToastViewport", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    placement?: ToastPlacement;
-    strategy?: ToastStrategy;
-    class?: string;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  placement?: ToastPlacement;
+  strategy?: ToastStrategy;
+  class?: string;
+}>();
 
 const attrs = useAttrs();
 const config = inject(TOAST_PROVIDER_CONFIG_KEY, null);

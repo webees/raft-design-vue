@@ -5,7 +5,7 @@ defineOptions({ name: "RaftAnnouncementDialogLabel", inheritAttrs: false });
 
 const attrs = useAttrs();
 const labelClass = computed(() => announcement().label({ className: attrs.class as string }));
-const dotClass = computed(() => announcement().dot());
+const dotClass = announcement().dot();
 </script>
 
 <template>

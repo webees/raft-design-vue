@@ -21,7 +21,7 @@ const attrs = useAttrs();
 const { copied: copiedRef, copyValue } = useCopyableCode("CopyableCodeAction");
 const copied = computed(() => copiedRef.value);
 const actionClass = computed(() => copyableCode().action({ className: props.class }));
-const iconSwapClass = computed(() => copyableCode().iconSwap());
+const iconSwapClass = copyableCode().iconSwap();
 
 const accessibleLabel = computed(() => props.label ?? (copied.value ? "Copied code" : "Copy code"));
 

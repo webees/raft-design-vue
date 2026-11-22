@@ -45,10 +45,10 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: changesets/action@v2
         with:
-          publish: ${{ steps.npm.outputs.command }}
-          version: bunx changeset version
-          commit: "chore: release"
-          title: "chore: release"
+          publish-script: ${{ steps.npm.outputs.command }}
+          version-script: bunx changeset version
+          commit-message: "chore: release"
+          pr-title: "chore: release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

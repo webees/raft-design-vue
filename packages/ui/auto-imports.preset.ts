@@ -1,4 +1,4 @@
-export const VUE_AUTO_IMPORTS = [
+const VUE_AUTO_IMPORTS = [
   "EffectScope",
   "computed",
   "createApp",

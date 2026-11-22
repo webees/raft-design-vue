@@ -8,15 +8,12 @@ import type { PullToRefresh } from "./use-pull-to-refresh";
 
 defineOptions({ name: "RaftPullToRefreshIndicator", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    pull: PullToRefresh;
-    label: string;
-    class?: string;
-    style?: Record<string, string | number>;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  pull: PullToRefresh;
+  label: string;
+  class?: string;
+  style?: Record<string, string | number>;
+}>();
 
 const attrs = useAttrs();
 

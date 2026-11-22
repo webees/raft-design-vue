@@ -12,15 +12,12 @@ import ToastClose from "./ToastClose.vue";
 import ToastAction from "./ToastAction.vue";
 import ToastProgress from "./ToastProgress.vue";
 
-defineOptions({ name: "RaftToastDefaultItem", inheritAttrs: false });
+defineOptions({ name: "RaftToastDefaultItem" });
 
-const props = withDefaults(
-  defineProps<{
-    toast: ToastObject<ToastData>;
-    limited?: boolean;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  toast: ToastObject<ToastData>;
+  limited?: boolean;
+}>();
 
 const config = inject(TOAST_PROVIDER_CONFIG_KEY, null);
 const data = computed(() => props.toast.data);

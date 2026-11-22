@@ -20,7 +20,7 @@ const buttonClass = computed(() =>
     className: attrs.class as string,
   }),
 );
-const arrowClass = computed(() => table().sortArrow());
+const arrowClass = table().sortArrow();
 const nextSort = computed<TableSortDirection>(() => {
   if (!props.sort) return props.firstSort;
   return props.sort === "ascending" ? "descending" : "ascending";

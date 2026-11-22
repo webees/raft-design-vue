@@ -5,9 +5,10 @@ import { workspaceButton } from "./workspace-button.variants";
 defineOptions({ name: "RaftWorkspaceButtonName", inheritAttrs: false });
 
 const props = defineProps<{ class?: string }>();
+const attrs = useAttrs();
 const nameClass = computed(() => cn(workspaceButton().name(), props.class));
 </script>
 
 <template>
-  <span data-slot="workspace-button-name" :class="nameClass"><slot /></span>
+  <span v-bind="attrs" data-slot="workspace-button-name" :class="nameClass"><slot /></span>
 </template>

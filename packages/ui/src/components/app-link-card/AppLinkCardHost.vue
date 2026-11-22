@@ -5,7 +5,7 @@ defineOptions({ name: "RaftAppLinkCardHost", inheritAttrs: false });
 
 const attrs = useAttrs();
 const hostClass = computed(() => messageCard().sourceHost({ className: attrs.class as string }));
-const textClass = computed(() => messageCard().sourceHostText());
+const textClass = messageCard().sourceHostText();
 </script>
 
 <template>

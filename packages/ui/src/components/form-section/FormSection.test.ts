@@ -20,4 +20,16 @@ describe("FormSection", () => {
     const wrapper = mount(FormSection, { props: { title: "Details" } });
     expect(wrapper.find("[data-slot='form-section-head'] p").exists()).toBe(false);
   });
+
+  it("forwards extra attributes to the section element", () => {
+    const wrapper = mount(FormSection, {
+      props: { title: "Details" },
+      attrs: { id: "profile-section", "data-testid": "section" },
+    });
+    const section = wrapper.get("section");
+
+    expect(section.attributes("id")).toBe("profile-section");
+    expect(section.attributes("data-testid")).toBe("section");
+    expect(section.attributes("data-slot")).toBe("form-section");
+  });
 });

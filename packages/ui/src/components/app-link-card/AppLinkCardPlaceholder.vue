@@ -8,13 +8,13 @@ defineOptions({ name: "RaftAppLinkCardPlaceholder", inheritAttrs: false });
 
 const attrs = useAttrs();
 const frameClass = computed(() => appLinkCardFrame(attrs.class as string));
-const body = computed(() => messageCard().body());
-const eyebrow = computed(() => messageCard().eyebrow());
-const title = computed(() => messageCard().title({ className: "line-clamp-none" }));
-const meta = computed(() => messageCard().meta());
-const actions = computed(() => messageCard().actions());
-const line = computed(() => appLinkCard().placeholderLine());
-const button = computed(() => appLinkCard().placeholderButton());
+const body = messageCard().body();
+const eyebrow = messageCard().eyebrow();
+const title = messageCard().title({ className: "line-clamp-none" });
+const meta = messageCard().meta();
+const actions = messageCard().actions();
+const line = appLinkCard().placeholderLine();
+const button = appLinkCard().placeholderButton();
 </script>
 
 <template>

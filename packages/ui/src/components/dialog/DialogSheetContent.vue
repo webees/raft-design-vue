@@ -7,13 +7,10 @@ import { DialogSheetProvider, dialogSheet, dialogSheetSurfaceKey } from "./dialo
 
 defineOptions({ name: "RaftDialogSheetContent", inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<{
-    /** Draw as a sheet even on a desktop (tests, a tablet app). Defaults to the phone breakpoint. */
-    sheet?: boolean;
-  }>(),
-  {},
-);
+const props = defineProps<{
+  /** Draw as a sheet even on a desktop (tests, a tablet app). Defaults to the phone breakpoint. */
+  sheet?: boolean;
+}>();
 
 const phone = useMobileViewport();
 const sheet = computed(() => props.sheet ?? phone.value);
