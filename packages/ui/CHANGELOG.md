@@ -1,5 +1,15 @@
 # @webees/raft-design-vue
 
+## 0.1.9
+
+### Patch Changes
+
+- 8489325: Skip the CI job on pull requests from `changeset-release/main`. The branch is
+  deleted moments after the admin merge, so the queued run finished with zero
+  jobs and a "workflow file issue" failure on every release. A skipped job still
+  satisfies the required check, and the push run on `main` verifies the merged
+  commit.
+
 ## 0.1.8
 
 ### Patch Changes
