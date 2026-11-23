@@ -31,7 +31,7 @@ How far an action reaches decides whether it is confirmed, offered with Undo or 
 - Apply a change to others that can be changed back, such as a role, when it is picked, and offer Undo. Confirm it only when people demote themselves, since they may lose the right to change it back, or turn off something others depend on, such as an AI provider their agents use; the dialog lists who is affected.
 - Confirm before showing something to a wider audience, and say who will see it: "Anyone with the link can view it." Widening within the same server applies at once. Narrowing who can see something and unpublishing it share one confirmation, which lists who loses access, whichever route starts it.
 - Confirm with a dialog any action that stops an agent's work, takes someone out of a place, or archives or deletes something, because none of these can be put back from where it happened: Stop agent, Restart or Reset, Archive agent, Leave channel, Remove member, Delete server ([Dialog](../components/dialog.md)). The confirm button says the action's verb, and keeps the object when it can't be undone: Stop, Delete server ([Writing](../content/writing.md#actions-and-their-dialogs)).
-- In a dialog that confirms something that cannot be undone, put the message in a red banner and make the confirm button red. Don't color the action in the menu that opens it: the warning belongs where the person commits, not in a list of choices. A danger zone, the actions set apart at the end of a page or a details panel, is the exception: its actions are colored by risk before the click, and still confirmed ([Forms](forms.md#danger-zone)).
+- In a dialog that confirms something that cannot be undone, put the message in a red banner and make the confirm button red. Don't color the action in the menu that opens it: the warning belongs where the person commits, not in a list of choices. A danger zone, the actions set apart at the end of a page or a details panel, is the exception: its one action that can't be undone is red before the click, and the others warn in their confirmation; all are still confirmed ([Forms](forms.md#danger-zone), [ListRow › An action's risk](../components/list-row.md#an-actions-risk)).
 
 ### Empty, loading and failed
 
@@ -39,7 +39,7 @@ Keep these three apart:
 
 | Situation | Show |
 | --- | --- |
-| There is nothing here | An empty state ([EmptyState](../components/empty-state.md)): a gray icon, a title, one sentence that says how something gets here, and at most one button |
+| There is nothing here | An empty state ([EmptyState](../components/empty-state.md)): a gray icon, a title, at most one helper sentence (a way out, or a consequence the title doesn't say), and at most one button |
 | It is loading | A skeleton with the layout of the content, such as task cards or conversation rows ([Skeleton](../components/skeleton.md)); the other indicators are in [Choosing a component](../components/overview.md#waiting) |
 | It failed to load | An orange banner where the content would be, which says what happened and offers Retry ([Banner](../components/banner.md)) |
 

@@ -1,6 +1,6 @@
 ---
 title: EmptyState
-summary: What a view shows when it has no content — a gray icon, a title, one sentence on why it is empty and what to do, and at most one button.
+summary: What a view shows when it has no content — a gray icon, a title, a helper sentence only when there is a way out or a consequence to say, and at most one button.
 status: stable
 aliases: [Empty, Blank slate]
 layer: core
@@ -10,7 +10,7 @@ related: [skeleton, button, search]
 
 # EmptyState
 
-An empty state tells people why a view has no content and what to do next. It has one look everywhere: a gray icon with no frame, a gray title, one sentence, and at most one button. It is a conclusion ("there is nothing here"), so it never stands in for loading or a failure.
+An empty state tells people a view has no content. It has one look everywhere: a gray icon with no frame, a gray title, a helper sentence only when there is a way out or a consequence the title doesn't say, and at most one button. It is a conclusion ("there is nothing here"), so it never stands in for loading or a failure.
 
 ```example
 empty-state/compositions/default
@@ -31,7 +31,7 @@ empty-state/compositions/default
 - `EmptyStateContent`: groups the icon, title and description. Required.
 - `EmptyStateIcon`: a Lucide icon, at 36px in `foreground-hint`. Required.
 - `EmptyStateTitle`: the title, in `foreground-muted`. Required.
-- `EmptyStateDescription`: one sentence, in `foreground-hint`. A link in it is 600 with no underline at rest and underlines in ink on hover ([Clickable text](../foundations/states.md#clickable-text)): the weight is what sets it apart from the grey sentence.
+- `EmptyStateDescription`: one helper sentence, in `foreground-hint`. It takes only a `HelperText`, made with `helperText(content, { why, about })`, and renders its `why` and `about` as `data-why` and `data-about`, and is only for a consequence (`consequence`), who sees it or whom it affects (`audience`), or how to recover (`recovery`) ([Writing › Helper text](../content/writing.md#helper-text)). A link in it is 600 with no underline at rest and underlines in ink on hover ([Clickable text](../foundations/states.md#clickable-text)): the weight is what sets it apart from the grey sentence.
 - `EmptyStateActions`: at most one button.
 
 ```example
@@ -41,7 +41,7 @@ empty-state/compositions/activity-inbox
 ## Content
 
 - Write the title in sentence case and state the fact: "No tasks yet", "No tasks match these filters" ([Writing](../content/writing.md#voice)).
-- For a view with nothing yet, say in the description how something gets here.
+- Give the view a description only when there is a way out of it ("Try another query or remove one of the active filters", `recovery`) or a consequence the title doesn't say. A view with nothing yet takes the title alone: how something gets here ("Conversations you start will show up here") is cut.
 - For filters or a search with no results, name the conditions that are active, and label the button Clear all.
 
 ## Accessibility

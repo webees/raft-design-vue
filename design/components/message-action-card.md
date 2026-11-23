@@ -31,16 +31,16 @@ message-action-card/compositions/action-card-interactive
 - `MessageActionCard`: the card, inside the body of the agent's message: an item card, at most 400px wide and the message's width on a phone ([Cards in messages](../patterns/cards-in-messages.md#two-widths)). Required.
 - `MessageActionCardHeader`: the top row. Required.
   - `MessageActionCardHeaderIcon`: the kind of action, in a neutral tile like an `sm` [IconTile](icon-tile.md).
-  - `MessageActionCardHeaderTitle`: what will be done. `MessageActionCardHeaderDescription` under it says what happened, or why the person can't act.
-  - `MessageActionCardHeaderMeta`: the time the card records, in Space Mono at the hint tier. At the end of the description it closes that line ("Approved by Martin · 10:51"); directly in the title, alone, it is a line of its own under the title. It stays in view while the card is folded.
+  - `MessageActionCardHeaderTitle`: what will be done. `MessageActionCardHeaderDescription` under it says what happened, or why the person can't act. It takes only a `HelperText` (`helperText(content, { why, about })`, rendered with `data-why` and `data-about`): who acted is `audience`, "Nothing was changed" is `consequence`, "Join this channel to act" is `recovery` ([Writing › Helper text](../content/writing.md#helper-text)).
+  - `MessageActionCardHeaderMeta`: the time the card records, in Space Mono at the hint tier. At the end of the description, inside its `HelperText`'s content, it closes that line ("Approved by Martin · 10:51"); directly in the title, alone, it is a line of its own under the title. It stays in view while the card is folded.
   - `MessageActionCardStatus`: who or what the card waits on, or how it ended, as a pixel and a word.
   - `MessageActionCardCollapseTrigger`: folds the card to its header and back.
 - `MessageActionCardContent`: everything under the header; it folds.
   - `MessageActionCardNotice`: a standing note from Raft about consequences or permissions. At most one.
   - `MessageActionCardProperties`, `MessageActionCardProperty`, `MessageActionCardPropertyLabel`, `MessageActionCardPropertyValue`: the values the person checks, as a description list ([DescriptionList](description-list.md)): the label beside its value, and above it only when a value doesn't fit beside its label, at any width, as in a DescriptionList ([Labels go above only when a value doesn't fit](description-list.md#labels-go-above-only-when-a-value-doesnt-fit)).
-  - `MessageActionCardHintLabel`, `MessageActionCardHint`: the agent's own note, such as its reason or what it filled in.
-  - `MessageActionCardScopeList`, `MessageActionCardScopeListLabel`, `MessageActionCardScopeListViewport`, `MessageActionCardScope`, `MessageActionCardScopeName`, `MessageActionCardScopeDescription`: the permissions an app asks for.
-  - `MessageActionCardActions`: the buttons, with `MessageActionCardActionsNote` before them, on a line of its own above them: beside two buttons in a 400px card a note had about 150px and pushed the confirm button onto a line of its own.
+  - `MessageActionCardHintLabel`, `MessageActionCardHint`: the agent's own note, such as its reason or what it filled in. `MessageActionCardHint` takes only a `HelperText` (`helperText(content, { why, about })`, rendered with `data-why` and `data-about`).
+  - `MessageActionCardScopeList`, `MessageActionCardScopeListLabel`, `MessageActionCardScopeListViewport`, `MessageActionCardScope`, `MessageActionCardScopeName`, `MessageActionCardScopeDescription`: the permissions an app asks for. `MessageActionCardScopeDescription` takes only a `HelperText` (`helperText(content, { why, about })`, rendered with `data-why` and `data-about`): what the permission lets the app see or do is `audience`.
+  - `MessageActionCardActions`: the buttons, with `MessageActionCardActionsNote` (a `HelperText` (`helperText(content, { why, about })`, rendered with `data-why` and `data-about`)) before them, on a line of its own above them: beside two buttons in a 400px card a note had about 150px and pushed the confirm button onto a line of its own.
   - `MessageActionCardCompletion`: the record of who did it and when.
 
 ```example
@@ -53,15 +53,19 @@ message-action-card/compositions/integration-actions
 
 ## States
 
-| State         | The card                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------- |
-| Waiting       | Open, with its buttons. The status says whom it waits on, with a pink pixel: Needs an admin |
-| Paused        | Open; the note before the buttons says why, and the buttons are disabled                    |
-| Confirm again | Open; something changed since the agent prepared it, and the note says what                 |
-| Done          | Folded to its header; the description says who did it and when                              |
-| Declined      | Folded; the description says who declined it and that nothing changed                       |
-| Expired       | Folded; the description says no one acted in time and that nothing changed                  |
-| View only     | Folded; the description says why the person can't act. No buttons                           |
+| State                  | The card                                                                                             |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- |
+| Waiting on you         | Open, with its buttons, and no status                                                                |
+| Waiting on someone     | Open, with no buttons. The neutral status says whom it waits on: Waiting on Martin                   |
+| Members changing       | Open; its buttons stay, disabled, until a channel's members settle                                   |
+| Needs confirming again | Open, warning; something changed in who will see it, the note says what, and one button says Confirm |
+| Done                   | Folded to its header, lime; the description says who did it and when                                 |
+| Denied, Declined       | Folded, neutral; the description says who decided and when, and for Declined that nothing changed    |
+| Expired, Withdrawn     | Folded, neutral; the description says when, and who withdrew it                                      |
+| Failed                 | Open or folded as its kind sets, orange; what failed and the next step                               |
+| Unavailable            | Folded, warning; what it depends on is not available now                                             |
+
+Each state's words, tone and record line are in [Cards in messages](../patterns/cards-in-messages.md#a-card-that-asks-for-something). There is no View only: a card the person can't act on stays open and says whom it waits on.
 
 - When the action fails, show a toast and leave the card as it was, so the person can try again ([Toast](toast.md)).
 
@@ -71,7 +75,7 @@ message-action-card/compositions/resolution-states
 
 ## Behavior
 
-- The card is open by default. Fold a resolved or view-only card with `defaultOpen={false}`; the collapse trigger opens it again.
+- The card is open by default. Fold a settled card with `defaultOpen={false}`; a card waiting on someone else stays open; the collapse trigger opens it again.
 - A long list of permissions scrolls inside its own area, at most 136px tall, so the card doesn't grow with it. The cap cuts through a line of text, so the cut reads as more below: through the third permission's name when the descriptions take one line, through the last line of the second when they take two. A cap that ends between two rows, or under the last pixels of a line, reads as the end of the list.
 
 ## Content

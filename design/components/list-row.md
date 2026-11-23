@@ -30,7 +30,7 @@ list-row/compositions/conversations
 ## Anatomy
 
 - `ListRow`: the row. A `button` by default; render a link for a row that goes somewhere.
-- Leading block: an [Avatar](avatar.md), a channel tile ([IconTile](icon-tile.md)) or a 20px `ListRowIcon` (18px on an action row: [An action's risk](#an-actions-risk)). Optional.
+- Leading block: an [Avatar](avatar.md), a channel tile ([IconTile](icon-tile.md)) or a 20px `ListRowIcon` (18px on an `action` row: [An action's risk](#an-actions-risk)). Optional.
 - `ListRowBody`: the text column. Required.
   - `ListRowTop`: `ListRowTitle`, then the time in `ListRowMeta`.
   - `ListRowSubtitle`: data about the row's subject, under the title: an agent's description, a person's role, a channel's topic, an app's byline. Optional.
@@ -102,19 +102,17 @@ list-row/compositions/tones
 
 ### An action's risk
 
-A row can be an action rather than a place: the actions at the end of a details page or panel, such as Archive channel, Leave channel and Delete channel at the end of a channel's details. These are the page's danger zone ([Forms](../patterns/forms.md#danger-zone)), and `tone` says what the action risks, with Button's names and meanings ([Which color](button.md#which-color)):
+A row can be an action rather than a place: the actions at the end of a details page or panel, such as Archive channel, Leave channel and Delete channel at the end of a channel's details. These are the page's danger zone ([Forms](../patterns/forms.md#danger-zone)). Only an action that cannot be undone takes a color: `tone="danger"`, the title and the leading icon in `danger-strong`, red (Delete channel, Delete server, Archive agent). Every other action, including those that interrupt but can be undone (Archive channel, Leave channel, Stop agent, Restart / Reset), is in ink, as a place's row is.
 
-| Tone             | Use for                                                                                                 | Examples                                        |
-| ---------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `tone="warning"` | An action that interrupts but can be undone: the title and the leading icon in `warning-strong`, orange | Archive channel, Leave channel, Stop all agents |
-| `tone="danger"`  | An action that cannot be undone: the title and the leading icon in `danger-strong`, red                 | Delete channel, Delete server                   |
+- A color warns only while it is rare. Archive, Leave and Stop all agents in orange made a channel's actions three brown rows out of four: none stood out, and orange beside ink in one card read as a mix-up, not a ranking (cindyz, 2026-11-19, #triage:f2e107f7). Red on the one action that can't be taken back is the warning people need before the click; the others warn in their confirmation, whose button stays orange ([Confirming](../patterns/feedback.md#confirming)). System settings do the same: on iOS and macOS only a destructive action is red.
+- `tone="warning"` (`warning-strong`, orange) is still in the API, and still meets the contrast below, but a danger zone doesn't use it.
 
-- The leading `ListRowIcon` is 18px, not a list row's 20px. A row that does one thing is a button with a label at `lg` ([Sizes](button.md#sizes)), and it takes that button's icon: at 20px, Leave channel's icon was the largest thing beside any label on the page, a size up from the 16px of the sidebar and the 18px of every large button (cindyz/Jasper, 2026-11-16, #triage:925e747a). It stays 18px when the row is disabled, so nothing shifts.
+- Pass `action` on every row of the danger zone, colored or not. Its leading `ListRowIcon` is 18px, not a list row's 20px. A row that does one thing is a button with a label at `lg` ([Sizes](button.md#sizes)), and it takes that button's icon: at 20px, Leave channel's icon was the largest thing beside any label on the page, a size up from the 16px of the sidebar and the 18px of every large button (cindyz/Jasper, 2026-11-16, #triage:925e747a). It stays 18px when the row is disabled, so nothing shifts. A risk tone implies `action`, but the size belongs to being an action, not to the color: when the ink actions lost their orange, Stop agent and Restart / Reset went back to 20px above an 18px Archive agent in the same card (cindyz, 2026-11-22, #proj-raft-ui:305ded79).
 - Only the title and the leading `ListRowIcon` take the color. A description, a value, the chevron and the hover and press fills stay as on any row: the color names the risky action, and a red fill or a red explanation would read as an error ([Feedback](../patterns/feedback.md)).
 - The color is the strong one text can take, never the sticker `warning` or `danger`, which are fills under ink type and 2:1 to 3:1 on paper. `warning-strong` and `danger-strong` keep at least 4.5:1 on the canvas, a card, a popover and the sidebar, at rest, hovered and pressed, in both modes and every theme (`list-row.risk-contrast.test.ts`).
 - A risk tone needs an interactive row (a `button`, or the link you pass with `render`). A display-only row (`interactive={false}`) ignores it: only an action has a risk, and orange or red on a row that does nothing is color without a consequence ([Color](../foundations/color.md#meanings-of-color)). A disabled row ignores it too, as it does every tone: everything is `foreground-disabled`.
 - A row is a place or an action, so the two kinds of tone never meet on one row, and `tone` takes either.
-- The row still opens its confirmation ([Confirming](../patterns/feedback.md#confirming)): the color warns before the click, and the dialog, with its orange or red button, is where the person commits.
+- The row still opens its confirmation ([Confirming](../patterns/feedback.md#confirming)): red warns before the click, and the dialog, with its orange or red button, is where the person commits.
 - Don't color an action in a menu ([DropdownMenu](dropdown-menu.md#rules)). A menu is a short-lived list of choices people scan; a danger zone is a fixed place at the end of a page, set apart from the settings people change often, where the color tells them what each action costs before they reach for it.
 
 Why: slock's channel details panel puts its actions in a card of rows, and colored the titles itself (`text-warning-strong` and `text-danger-strong` on the row and `text-current` on the title and icon), so the color, its contrast and the disabled state were each product's to get right (slock channel details, stdrc/Jasper, 2026-11-10, #proj-raft-ui:dae8db07).
@@ -152,7 +150,7 @@ A row's text is data (what the row is there to show) or an explanation you write
 
 - Put data about the row's subject in `ListRowSubtitle`: an agent's or a channel's description, a channel's topic, a person's role, an app's byline ("Developer tools · by Linear"). It is primary data, so it is in the title's ink at weight 400 and a size down (`text-footnote`): size and weight set it apart from the title, and a third difference, colour, would be one too many ([Notes on deeper surfaces](../foundations/typography.md#notes-on-deeper-surfaces)). It follows a place's tone and the disabled state with the title, and is cut to one line. A risk tone colors the title alone ([An action's risk](#an-actions-risk)).
 - Put a time, a date or a gray count in `ListRowMeta`: the row's secondary data, at the hint tier in Space Mono. A row has no other grey part for data, so a fact that isn't one of these goes in `ListRowSubtitle`, never in a grey class of your own.
-- Put a sentence you write to explain a setting in `ListRowDescription`: what turning it on does, who can see it, what is lost. Don't put data there: the description is the row's explanation part.
+- Put a sentence you write to explain a setting in `ListRowDescription`: what turning it on does, who can see it, what is lost. Don't put data there: the description is the row's explanation part, held to the same three reasons as a helper text ([Writing › Helper text](../content/writing.md#helper-text)). Unlike `FieldDescription`, it takes any content, not a `HelperText`, since it also holds a conversation's preview.
 - A conversation's preview stays in `ListRowDescription`, in `ListRowBottom` with its badge: its ink is how `tone="unread"` marks the row.
 
 ```example
@@ -182,4 +180,4 @@ raft-ui has no exported heading part for these lists yet.
 ## Rules
 
 - Don't add an ink border or a shadow to a row or a group: a list is content, and an ink border means a control ([Color](../foundations/color.md#lines)).
-- Don't color a row's text with a class of your own: an action's risk is `tone="warning"` or `tone="danger"`, which colors the title and the leading icon, keeps their contrast and greys them when the row is disabled ([An action's risk](#an-actions-risk)).
+- Don't color a row's text with a class of your own: an action that can't be undone is `tone="danger"`, which colors the title and the leading icon, keeps their contrast and greys them when the row is disabled ([An action's risk](#an-actions-risk)).

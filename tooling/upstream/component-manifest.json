@@ -1,7 +1,7 @@
 {
   "repository": "botiverse/raft-design",
-  "commit": "c7045d63f72c5c7cac06685415323948e5a32f15",
-  "generatedAt": "2026-11-19T03:58:23.970Z",
+  "commit": "e0e643af00c1f578f78a3812e5e68a1fbf9c98c2",
+  "generatedAt": "2026-11-23T10:50:30.990Z",
   "components": {
     "activity-inbox": {
       "status": "ported",
@@ -512,6 +512,10 @@
       "status": "ported",
       "upstreamPath": "packages/ui/src/components/workspace-button",
       "localPath": "packages/ui/src/components/workspace-button"
+    },
+    "page-loading-line": {
+      "status": "planned",
+      "upstreamPath": "packages/ui/src/components/page-loading-line"
     }
   }
 }

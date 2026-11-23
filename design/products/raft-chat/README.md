@@ -143,6 +143,10 @@ The desktop app's title bar is the web top bar, at every width, with what [Page 
 - A "Find a conversation…" field sits above the Chat sidebar's list.
 - A layer that covers the whole window (a file or image preview, the share preview, a diagram in full screen, the feedback preview) makes its own header the window's title bar while it is open: its empty area drags the window, its controls opt out, and it keeps clear of the traffic lights and the caption buttons. It stays draggable unless a layer opened from it (a menu) is above it. A layer that doesn't span the window's width, such as a side panel or a dialog, starts below the title bar instead. People move the window by its top edge whatever is open; before, a preview opened from a dialog or a side panel, and the share preview always, left no edge to drag (stdrc, 2026-11-10, #triage:dbfc9fd4; slock #14128).
 
+#### An object in its own window
+
+An object opened in its own window (an Artifact, from "Open in new window") has two layers, as the main window does: a title bar on the frame, in the server's theme, holding only the object's icon, its title and the system's buttons; and the object's toolbar below it on the canvas, with what the panel header holds in the main window. The rules, sizes and platform differences are in [Title bars](../../patterns/title-bars.md#an-object-in-its-own-window). The first version put the panel header itself in the title bar's place, and the window's controls and the object's controls ended up in one split row (xxchan, 2026-11-20, #proj-workspace:c3673fa1).
+
 ### Where working agents appear
 
 The shared rules are in [Working agents](../../people-and-agents/working-agents.md#where-working-shows). In Raft Chat:
