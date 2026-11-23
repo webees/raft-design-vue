@@ -1,6 +1,6 @@
 /*
  * Vendored from botiverse/raft-design packages/ui/src/styles.css.
- * Upstream commit: c7045d63f72c5c7cac06685415323948e5a32f15
+ * Upstream commit: e0e643af00c1f578f78a3812e5e68a1fbf9c98c2
  * MIT licensed. Do not edit by hand: run `bun run sync:upstream`.
  * React component @import lines are removed; equivalent Vue components
  * live in packages/ui/src/components.
@@ -455,6 +455,36 @@
      MessageAttachment. */
   --spacing-control-embedded: var(--control-embedded-size);
   --spacing-embedded-inset: var(--control-embedded-inset);
+  /* ─── Component sizes shared with the apps ─────────────────────────────────
+     Utilities for the component tokens (design/foundations/tokens.md#component-tokens).
+     A recipe that reads one adds no breakpoint of its own for that property,
+     except on a line under a `// web-only: <reason>` comment
+     (size-tokens.test.ts checks both).
+
+     `control-small` (32 / 34 on a desktop): Button md and icon-md,
+     PickerTriggerButton, FilterChip, Tabs, ToggleGroup, InputGroup md,
+     Combobox, AppLinkCard, TasksPanel's view switch. */
+  --spacing-control-small: var(--control-height-small);
+  /* `row-action` (28px; the bar button's 28px on a desktop): Button icon-sm,
+     an icon-only action on a line of a row or a card. */
+  --spacing-row-action: var(--row-action-size);
+  /* A row with an avatar and a preview: at least `list-row` (56px; no floor
+     with a mouse), `list-row-inset` (8px) above and below its content.
+     Consumers: ListRow default, InboxItem, SearchEntity. */
+  --spacing-list-row: var(--list-row-min-height);
+  --spacing-list-row-inset: var(--list-row-inset);
+  /* The 35px column a message's or a list row's avatar sits in, and its
+     12px gap to the text. Consumers: MessageItem, ListRow's and InboxItem's
+     skeletons, InboxItem's leading slot. */
+  --spacing-avatar-column: var(--avatar-column-size);
+  --spacing-avatar-column-gap: var(--avatar-column-gap);
+  /* The toolbar over a list: at least `list-toolbar` (49px with its seam on
+     a phone and a touch screen; the 44px header on a desktop),
+     `list-toolbar-air` (8px) above and below its small controls.
+     Consumers: TasksPanel's toolbar, Activity's controls, ConversationPanel's
+     tab row. */
+  --spacing-list-toolbar: var(--list-toolbar-height);
+  --spacing-list-toolbar-air: var(--list-toolbar-air);
   /* ─── Timeline rhythm ───────────────────────────────────────────────────────
      Two steps between the lines of a conversation, measured from text to text
      (design/foundations/spacing.md#timeline-rhythm): `timeline-message` (16px)
@@ -705,7 +735,8 @@ textarea:-webkit-autofill:disabled {
    mask-fade-t / mask-fade-b fade the top or bottom edge over fade-content
    (48px), where content is cut: a fold, a glimpse. mask-fade-x fades the
    sides of a strip that scrolls sideways over fade-edge (24px), on the side
-   its data-overflow names (start, end or both) and nowhere without it.
+   its data-overflow names (start, end or both; logical, so mirrored in
+   right-to-left) and nowhere without it.
    mask-fade-t-edge / mask-fade-b-edge take the edge length instead, for a
    fold too short to give 48px to the fade. */
 @utility mask-fade-t {
@@ -730,6 +761,13 @@ textarea:-webkit-autofill:disabled {
   }
   &[data-overflow="end"] {
     mask-image: linear-gradient(to left, transparent, oklch(0 0 0) var(--fade-edge));
+  }
+  /* start and end are logical: in right-to-left the start is the right side. */
+  &[data-overflow="start"]:dir(rtl) {
+    mask-image: linear-gradient(to left, transparent, oklch(0 0 0) var(--fade-edge));
+  }
+  &[data-overflow="end"]:dir(rtl) {
+    mask-image: linear-gradient(to right, transparent, oklch(0 0 0) var(--fade-edge));
   }
   &[data-overflow="both"] {
     mask-image: linear-gradient(
@@ -821,8 +859,8 @@ textarea:-webkit-autofill:disabled {
    cards) and a row whose menu is open.
    overlay-medium: hover on small controls and press on everything; on a colour
    sticker overlay-sticker-medium, on the frame overlay-frame-medium.
-   Use the bg-fill-* colours instead on a transparent control whose fill fades
-   in with transition-colors. */
+   Use the bg-fill-* colours instead on a transparent control. Neither fades:
+   hover and press change at once (design/foundations/motion.md). */
 /* Theme decorations on the frame (themes.css): the theme's sprites on the top
    bar's right and above the rail's foot; none without a decorated theme. */
 /* The top bar's strip (190px) ends --frame-decor-top-end (72px if unset)

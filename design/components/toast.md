@@ -32,12 +32,12 @@ Never put anything in a toast that would confuse people if they missed it ([Choo
 ## Anatomy
 
 - `ToastProvider`: holds the toast manager and, by default, renders the viewport. Mount it once near the root: the default manager (`toast.*`) takes its timing (`timeout`, `actionTimeout`) from the one provider that uses it, so two providers on the default manager would overwrite each other's. Give a second provider its own `toastManager`.
-- `toast`: the command API (`toast.success`, `toast.error`, …) for the default manager.
+- `toast`: the command API (`toast.success`, `toast.error`, …) for the default manager. `useToast()` returns the same commands for the nearest `ToastProvider`'s manager ([Toasts in another window](#toasts-in-another-window)).
 - `ToastViewport`: where toasts appear on screen. `ToastPositioner` and `ToastArrow` anchor a toast to an element instead.
 - `ToastRoot` and `ToastContent`: one toast and its layout.
 - `ToastIcon`: optional. Who did it (an avatar), or the intent's icon when there is no "who". Never a status light for the toast's intent: a status light never says what kind of notice this is (success, info, warning, error). A status light keeps its own meanings, whether an agent, a person or a computer is working or online, a task's status, and the square attention dot that marks something waiting or unread; a notice about one of those things may still show that thing's light inside it ([Status](status.md#sizes)).
 - `ToastBody`, holding `ToastTitle` (required) and an optional `ToastDescription`, both in `text-callout` ([Typography](../foundations/typography.md#type-scale)): 14/20 on a phone, 14/22 on a desktop, like a banner. `ToastIcon` is one line of that text tall, so the icon stays on the title's line: a 16px icon, centered in a 20px column 12px before the title, as is an avatar ([A mark that leads text](../foundations/alignment.md#a-mark-that-leads-text)).
-- `ToastActions`: optional, holding one `ToastAction`. `ToastClose` (Dismiss) is there for a toast that doesn't close by itself, which Raft doesn't use; the command API shows it only with `dismissible: true`.
+- `ToastActions`: optional, holding one `ToastAction`. `ToastClose` (Dismiss) is there for a toast that doesn't close by itself, which Raft doesn't use; the command API shows it only with `dismissible: true`. Text Dismiss comes before the action, as in a banner; a × (`ToastClose` holding anything but text, such as an icon) always ends the row, after the action, where a dialog's or a banner's × sits, so people find the close in one place on every surface (Artea, 2026-11-21, #proj-desk). `ToastClose` places itself by what it holds; don't reorder it.
 - `ToastProgress`: an optional line that shows the time left before it closes.
 
 Leave out a part you don't need instead of rendering it empty.
@@ -65,7 +65,7 @@ toast/compositions/person
 - People can swipe a toast away or press Esc while it has focus (F6 moves focus to the toasts). There is no Dismiss: every toast closes by itself, and a second text action beside Undo would read as a second choice.
 - Pressing the toast's action closes the toast, and focus must not go with it: pressed from the keyboard (F6, then Enter), focus would be left on nothing. Move it to what the action brought back: Undo after a deletion focuses the item made again, at the place it is drawn. Where the item isn't drawn yet, focus waits on the region that will hold it and moves to the item once it appears; where nothing on screen draws it, focus stays on that region. Move it the same way when the action is pressed with a pointer, since the toast's button took focus and goes with it; the ring shows only after keyboard input, so a pointer press shows none. Never leave focus on the body or on the toast's old place, and once the person has moved focus themselves, leave it where they put it (Kirby, 2026-11-06, #proj-workspace:#200). The region shows a focus ring after keyboard input, inside its edge as an item's is ([States](../foundations/states.md#focus)); on a region whose children have backgrounds, draw it as a 2px outline offset inward (`keyboard:focus-visible:outline-2 keyboard:focus-visible:outline-solid keyboard:focus-visible:-outline-offset-2`), since the children would cover an inset shadow. Name `outline-solid`: a region that sets `outline-none` at rest has its outline style at none, and `outline-2` alone keeps it so, drawing nothing (slock #13342).
 - One toast shows at a time (`limit`, 1 by default). A new toast replaces the one on screen at once, and the replaced one is closed, not queued: it doesn't come back when the new one goes.
-- An anchored toast opens next to the control that caused it (`ToastPositioner`).
+- An anchored toast opens next to the control that caused it (`ToastPositioner`), keeps clear of host frame insets, and hides while its anchor is out of view.
 
 ### Where it appears
 
@@ -99,9 +99,38 @@ A toast swipes away the way it came: down or right from the bottom, up from the 
 
 While a modal dialog, sheet or lightbox is open, show only the toasts it causes and that leave it open, without an action. Toasts draw above dialogs, lightboxes and their scrims ([Layer order](../foundations/elevation.md#layer-order)).
 
+### Toasts in another window
+
+A part of the app drawn in a second window (an Electron window opened with `window.open`, under [`PortalContainerProvider`](popover.md#rendering-in-another-window)) shows the toasts raised there in that window. It mounts a second `ToastProvider` inside its subtree, with a manager of its own, and raises them with `useToast()`:
+
+```tsx
+function SecondWindow({ container }: { container: HTMLElement }) {
+  const [manager] = useState(() => createToastManager());
+  return (
+    <PortalContainerProvider container={container}>
+      <ToastProvider toastManager={manager}>
+        <SecondWindowContent />
+      </ToastProvider>
+    </PortalContainerProvider>
+  );
+}
+
+function SaveButton() {
+  const toast = useToast();
+  return <Button onClick={() => toast.success("Saved")}>Save</Button>;
+}
+```
+
+- The provider's viewport renders in the window: its `portalContainer` falls back to the `PortalContainerProvider`'s container.
+- `useToast()` gives the command API (`success`, `error`, `action`, `actionTimeout` and the rest, as `toast.*`) bound to the nearest provider's manager: inside the subtree that is the window's provider. `useToastManager()` reaches the same provider with Base UI's raw options.
+- `toast.*` stays bound to the default manager and so to the main window's provider. A call made outside any component (a store, a request's callback) can't know which window it is for: pass it the window's commands, or call `toast.*` for the main window.
+- Give the second provider its own `toastManager`: two providers on the default manager both show every `toast.*` toast, one in each window.
+
+The toast follows the provider it is raised through, not the document the press came from. A toast is often raised after an `await`, from a store or a request's callback, where the press and its document are gone, and focus may have moved to the other window by then; the provider the code runs under is known wherever it runs.
+
 ## Content
 
-- Write one sentence: who, what they did, and the result. Put anything more in `ToastDescription`, in `foreground-on-hud-muted`.
+- Write one sentence: who, what they did, and the result. Put anything more in `ToastDescription`, in `foreground-on-hud-muted`. It is not one of the explanation slots that take only a `HelperText`: it takes any content. On an error, the caller writes the recovery there ("Check your connection, then try again").
 - Label the action View or Undo, or another verb in sentence case.
 - Set IDs, counts and times in Space Mono ([Typography](../foundations/typography.md)).
 
